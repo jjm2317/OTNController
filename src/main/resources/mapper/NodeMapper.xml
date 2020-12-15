@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.woorinet.plugin.demo.Mapper.NodeMapper" >
+    <select id="selectNode" resultType="com.woorinet.plugin.demo.DTO.Node">
+        SELECT
+            *
+        FROM
+            TL1.NODE
+    </select>
+    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.Node">
+        REPLACE INTO
+            TL1.NODE(
+                TID_ID,
+                TID,
+                NODE_TYPE,
+                IP_ADDR,
+                MANUFACTURE,
+                HARDWARE,
+                SOFTWARE,
+                SERIAL_NUMBER,
+                NODE_STATUS,
+                SUBNET,
+                SUBNET_ID,
+                SYSTEM_TYPE
+            ) VALUES (
+                #{TID_ID},
+                #{TID},
+                #{NODE_TYPE},
+                #{IP_ADDR},
+                #{MANUFACTURE},
+                #{HARDWARE},
+                #{SOFTWARE},
+                #{SERIAL_NUMBER},
+                #{NODE_STATUS},
+                #{SUBNET},
+                #{SUBNET_ID},
+                #{SYSTEM_TYPE}
+            )
+    </select>
+    <select id="initDatabase">
+        CREATE DATABASE IF NOT EXISTS TL1
+    </select>
+    <select id="initTable">
+            CREATE TABLE IF NOT EXISTS TL1.NODE (
+                TID_ID varchar(100) default '',
+                TID varchar(100) default '',
+                NODE_TYPE varchar(100) default '',
+                IP_ADDR varchar(100) default '',
+                MANUFACTURE varchar(100) default '',
+                HARDWARE varchar(100) default '',
+                SOFTWARE varchar(100) default '',
+                SERIAL_NUMBER varchar(100) default '',
+                NODE_STATUS varchar(100) default '',
+                SUBNET varchar(100) default '',
+                SUBNET_ID varchar(100) default '',
+                SYSTEM_TYPE varchar(100) default '',
+                PRIMARY KEY (TID_ID)
+            )
+    </select>
+</mapper>
