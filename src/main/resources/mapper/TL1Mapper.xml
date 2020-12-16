@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.woorinet.plugin.demo.Mapper.TL1Mapper" >
+
+    <!--    SETTINHG    -->
+
+    <select id="initDatabase">
+        CREATE DATABASE IF NOT EXISTS TL1
+    </select>
+
+    <select id="initNodeTable">
+        CREATE TABLE IF NOT EXISTS TL1.NODE (
+            TID_ID varchar(100) default '',
+            TID varchar(100) default '',
+            NODE_TYPE varchar(100) default '',
+            IP_ADDR varchar(100) default '',
+            MANUFACTURE varchar(100) default '',
+            HARDWARE varchar(100) default '',
+            SOFTWARE varchar(100) default '',
+            SERIAL_NUMBER varchar(100) default '',
+            NODE_STATUS varchar(100) default '',
+            SUBNET varchar(100) default '',
+            SUBNET_ID varchar(100) default '',
+            SYSTEM_TYPE varchar(100) default '',
+            PRIMARY KEY (TID_ID)
+        )
+    </select>
+
+    <select id="initSystemInfoTable">
+        CREATE TABLE IF NOT EXISTS TL1.SYSTEM_INFO (
+            TID varchar(100) default '',
+            UID varchar(100) default '',
+            LOCATION varchar(100) default '',
+            VENDOR varchar(100) default '',
+            PWOAM varchar(100) default '',
+            BOOT_TIME varchar(100) default '',
+            RESET_REASON varchar(100) default '',
+            PRIMARY KEY (TID)
+        )
+    </select>
+
+    <select id="initSlotTable">
+        CREATE TABLE IF NOT EXISTS TL1.SLOT (
+            TID varchar(100) default '',
+            SLOT_PRV_UNIT varchar(100) default '',
+            EQ_UNIT varchar(100) default '',
+            EQ_STATE varchar(100) default '',
+            ADMIN_STATE varchar(100) default '',
+            INIT_OK varchar(100) default '',
+            BP_STATE varchar(100) default '',
+            IPC_STATE varchar(100) default '',
+            FAIL_STATE varchar(100) default '',
+            HW_VER varchar(100) default '',
+            SW_VER varchar(100) default '',
+            FPGA_VER varchar(100) default '',
+            FPGA_DATE varchar(100) default '',
+            PRIMARY KEY (TID, SLOT_PRV_UNIT)
+        )
+    </select>
+
+    <select id="initEthPortTable">
+        CREATE TABLE IF NOT EXISTS TL1.ETH_PORT (
+            `TID` varchar(100) default '',
+            `AID` varchar(100) default '',
+            `NAME` varchar(100) default '',
+            `DESCR` varchar(100) default '',
+            `STATE` varchar(100) default '',
+            `SPEED` varchar(100) default '',
+            `DUPLEX` varchar(100) default '',
+            `AUTO_NEGO` varchar(100) default '',
+            `TX_FX` varchar(100) default '',
+            `PAUSE_TX` varchar(100) default '',
+            `PAUSE_RX` varchar(100) default '',
+            `MAX_FRAME` varchar(100) default '',
+            `LOOPBACK` varchar(100) default '',
+            `MAX_LEARNING_MAC` varchar(100) default '',
+            `ETH_PTM` varchar(100) default '',
+            `PORT_SHUTDOWN` varchar(100) default '',
+            `TPID_PROF_ID` varchar(100) default '',
+            `LINK_STATUS` varchar(100) default '',
+            `STP_STATE` varchar(100) default '',
+            `TX_STATUS` varchar(100) default '',
+            `COUNTER` varchar(100) default '',
+            `POLL_RATE` varchar(100) default '',
+            `PREPORT_PM` varchar(100) default '',
+            `MOUNITE_NO_PKT` varchar(100) default '',
+            `SD_ENABLE` varchar(100) default '',
+            `SD_TH_COUNT` varchar(100) default '',
+            PRIMARY KEY (TID, AID)
+        )
+    </select>
+
+    <select id="initNodeConnectorTable">
+        CREATE TABLE IF NOT EXISTS TL1.NODE_CONNECTOR (
+            `TID_ID` varchar(100) default '',
+            `TID` varchar(100) default '',
+            `AID` varchar(100) default '',
+            `SUBNET_ID` varchar(100) default '',
+            `SUBNET` varchar(100) default '',
+            `LOCAL_ID` varchar(100) default '',
+            `REQUEST_ID` varchar(100) default '',
+            `NAME` varchar(100) default '',
+            `NUMBER` varchar(100) default '',
+            `PORT_TYPE` varchar(100) default '',
+            `PORT_ROLE` varchar(100) default '',
+            `PORT_STATUS` varchar(100) default '',
+            `SHELF_TYPE` varchar(100) default '',
+            `SHELF_INDEX` varchar(100) default '',
+            `SLOT_TYPE` varchar(100) default '',
+            `SLOT_INDEX` varchar(100) default '',
+            `SUB_SLOT_TYPE` varchar(100) default '',
+            `SUB_SLOT_INDEX` varchar(100) default '',
+            `PORT_TYPE2` varchar(100) default '',
+            `PORT_INDEX` varchar(100) default '',
+            `MAC_ADDR` varchar(100) default '',
+            `SLOT_SERVICE` varchar(100) default '',
+            PRIMARY KEY (TID_ID, TID, AID)
+        )
+    </select>
+
+    <select id="initCesNodeConnectorTable">
+        CREATE TABLE IF NOT EXISTS TL1.CES_NODE_CONNECTOR (
+            `TID_ID` varchar(100) default '',
+            `TID` varchar(100) default '',
+            `AID` varchar(100) default '',
+            `SUBNET_ID` varchar(100) default '',
+            `SUBNET` varchar(100) default '',
+            `LOCAL_ID` varchar(100) default '',
+            `REQUEST_ID` varchar(100) default '',
+            `NAME` varchar(100) default '',
+            `NUMBER` varchar(100) default '',
+            `PORT_TYPE` varchar(100) default '',
+            `PORT_ROLE` varchar(100) default '',
+            `PORT_STATUS` varchar(100) default '',
+            `SHELF_TYPE` varchar(100) default '',
+            `SHELF_INDEX` varchar(100) default '',
+            `SLOT_TYPE` varchar(100) default '',
+            `SLOT_INDEX` varchar(100) default '',
+            `SUB_SLOT_TYPE` varchar(100) default '',
+            `SUB_SLOT_INDEX` varchar(100) default '',
+            `PORT_TYPE2` varchar(100) default '',
+            `PORT_INDEX` varchar(100) default '',
+            `MAC_ADDR` varchar(100) default '',
+            `CES_NAME` varchar(100) default '',
+            `CES_DESCR` varchar(100) default '',
+            `CES_SD` varchar(100) default '',
+            `CES_PORT_SUTDOWN` varchar(100) default '',
+            `SLOT_SERVICE` varchar(100) default '',
+            PRIMARY KEY (TID_ID, TID, AID)
+            )
+    </select>
+
+    <select id="initOduNodeConnectorTable">
+        CREATE TABLE IF NOT EXISTS TL1.ODU_NODE_CONNECTOR (
+            `TID_ID` varchar(100) default '',
+            `TID` varchar(100) default '',
+            `AID` varchar(100) default '',
+            `SUBNET_ID` varchar(100) default '',
+            `SUBNET` varchar(100) default '',
+            `LOCAL_ID` varchar(100) default '',
+            `REQUEST_ID` varchar(100) default '',
+            `NAME` varchar(100) default '',
+            `NUMBER` varchar(100) default '',
+            `PORT_TYPE` varchar(100) default '',
+            `PORT_ROLE` varchar(100) default '',
+            `PORT_STATUS` varchar(100) default '',
+            `SHELF_TYPE` varchar(100) default '',
+            `SHELF_INDEX` varchar(100) default '',
+            `SLOT_TYPE` varchar(100) default '',
+            `SLOT_INDEX` varchar(100) default '',
+            `SUB_SLOT_TYPE` varchar(100) default '',
+            `SUB_SLOT_INDEX` varchar(100) default '',
+            `PORT_TYPE2` varchar(100) default '',
+            `PORT_INDEX` varchar(100) default '',
+            `MAC_ADDR` varchar(100) default '',
+            `SLOT_SERVICE` varchar(100) default '',
+            `MAX_BW` varchar(100) default '',
+            `RES_BW` varchar(100) default '',
+            PRIMARY KEY (TID_ID, TID, AID)
+            )
+    </select>
+
+    <select id="initMplsIfTable">
+        CREATE TABLE IF NOT EXISTS TL1.MPLS_IF (
+            `TID_ID` varchar(100) default '',
+            `TID` varchar(100) default '',
+            `SUBNET_ID` varchar(100) default '',
+            `SUBNET` varchar(100) default '',
+            `MPLS_TP_ID` varchar(100) default '',
+            `BP` varchar(100) default '',
+            `LOCAL_ID` varchar(100) default '',
+            `REQUEST_ID` varchar(100) default '',
+            `NAME` varchar(100) default '',
+            `SRC_SUBNET` varchar(100) default '',
+            `SRC_TID_ID` varchar(100) default '',
+            `SRC_TID` varchar(100) default '',
+            `SRC_PORT` varchar(100) default '',
+            `DST_SUBNET` varchar(100) default '',
+            `DST_TID_ID` varchar(100) default '',
+            `DST_TID` varchar(100) default '',
+            `DST_PORT` varchar(100) default '',
+            `OPERATION_STATUS` varchar(100) default '',
+            `CONFIGURATION_ACTION` varchar(100) default '',
+            `CONFIGURATION_RESULT` varchar(100) default '',
+            `CIR` varchar(100) default '',
+            `PIR` varchar(100) default '',
+            `DEP_ENABLER` varchar(100) default '',
+            `DEP_STATUS` varchar(100) default '',
+            `CONSTRAINT_ID` varchar(100) default '',
+            `CONSTRAINT_NAME` varchar(100) default '',
+            `CONSTRAINT_VALUE` varchar(100) default '',
+            `CONSTRAINT_OPERATOR` varchar(100) default '',
+            `PORT_CONSTRAINT_TYPE` varchar(100) default '',
+            `MAXIMUM_BANDWIDTH` varchar(100) default '',
+            `AVAILABLE_BANDWIDTH` varchar(100) default '',
+            `LINK_TYPE` varchar(100) default '',
+            `IS_VENDOR` varchar(100) default '',
+            `REMOTE_NODEID` varchar(100) default '',
+            `REMOTE_NODE_CONNECTOR` varchar(100) default '',
+            `REMOTE_TOPOLOGYID` varchar(100) default '',
+            `REMOTE_MPLSIF` varchar(100) default '',
+            `PEER_MAC_ADDRESS` varchar(100) default '',
+            `MPLSIF_TYPE` varchar(100) default '',
+            PRIMARY KEY (TID_ID, TID, MPLS_TP_ID)
+        )
+    </select>
+
+    <select id="initOduMplsIfTable">
+        CREATE TABLE IF NOT EXISTS TL1.ODU_MPLS_IF (
+            `TID_ID` varchar(100) default '',
+            `TID` varchar(100) default '',
+            `SUBNET_ID` varchar(100) default '',
+            `SUBNET` varchar(100) default '',
+            `MPLS_TP_ID` varchar(100) default '',
+            `LOCAL_ID` varchar(100) default '',
+            `REQUEST_ID` varchar(100) default '',
+            `NAME` varchar(100) default '',
+            `SRC_SUBNET` varchar(100) default '',
+            `SRC_TID_ID` varchar(100) default '',
+            `SRC_TID` varchar(100) default '',
+            `SRC_PORT` varchar(100) default '',
+            `DST_SUBNET` varchar(100) default '',
+            `DST_TID_ID` varchar(100) default '',
+            `DST_TID` varchar(100) default '',
+            `DST_PORT` varchar(100) default '',
+            `OPERATION_STATUS` varchar(100) default '',
+            `CONFIGURATION_ACTION` varchar(100) default '',
+            `CONFIGURATION_RESULT` varchar(100) default '',
+            `CIR` varchar(100) default '',
+            `PIR` varchar(100) default '',
+            `DEP_ENABLER` varchar(100) default '',
+            `DEP_STATUS` varchar(100) default '',
+            `CONSTRAINT_ID` varchar(100) default '',
+            `CONSTRAINT_NAME` varchar(100) default '',
+            `CONSTRAINT_VALUE` varchar(100) default '',
+            `CONSTRAINT_OPERATOR` varchar(100) default '',
+            `PORT_CONSTRAINT_TYPE` varchar(100) default '',
+            `MAXIMUM_BANDWIDTH` varchar(100) default '',
+            `AVAILABLE_BANDWIDTH` varchar(100) default '',
+            `LINK_TYPE` varchar(100) default '',
+            `IS_VENDOR` varchar(100) default '',
+            `REMOTE_NODEID` varchar(100) default '',
+            `REMOTE_NODE_CONNECTOR` varchar(100) default '',
+            `REMOTE_TOPOLOGYID` varchar(100) default '',
+            `REMOTE_MPLSIF` varchar(100) default '',
+            `PEER_MAC_ADDRESS` varchar(100) default '',
+            `MPLSIF_TYPE` varchar(100) default '',
+            PRIMARY KEY (TID_ID, TID, MPLS_TP_ID)
+        )
+    </select>
+
+
+
+
+
+
+    <!--    SELECT    -->
+    <select id="selectNode" resultType="com.woorinet.plugin.demo.DTO.NODE">
+        SELECT
+            *
+        FROM
+            TL1.NODE
+    </select>
+
+    <select id="selectSystemInfo" resultType="com.woorinet.plugin.demo.DTO.SYSTEM_INFO">
+        SELECT
+            *
+        FROM
+            TL1.SYSTEM_INFO
+    </select>
+
+    <select id="selectSlot" resultType="com.woorinet.plugin.demo.DTO.SLOT">
+        SELECT
+            *
+        FROM
+            TL1.SLOT
+    </select>
+
+    <select id="selectEthPort" resultType="com.woorinet.plugin.demo.DTO.ETH_PORT">
+        SELECT
+            *
+        FROM
+            TL1.ETH_PORT
+    </select>
+
+    <select id="selectNodeConnector" resultType="com.woorinet.plugin.demo.DTO.NODECONNECTOR">
+        SELECT
+            *
+        FROM
+            TL1.NODE_CONNECTOR
+    </select>
+
+    <select id="selectCesNodeConnector" resultType="com.woorinet.plugin.demo.DTO.CES_NODE_CONNECTOR">
+        SELECT
+            *
+        FROM
+            TL1.CES_NODE_CONNECTOR
+    </select>
+
+    <select id="selectOduNodeConnector" resultType="com.woorinet.plugin.demo.DTO.ODU_NODE_CONNECTOR">
+        SELECT
+            *
+        FROM
+            TL1.ODU_NODE_CONNECTOR
+    </select>
+
+    <select id="selectMplsIf" resultType="com.woorinet.plugin.demo.DTO.MPLS_IF">
+        SELECT
+            *
+        FROM
+            TL1.MFLS_IF
+    </select>
+
+    <select id="selectOduMplsIf" resultType="com.woorinet.plugin.demo.DTO.ODU_MPLS_IF">
+        SELECT
+            *
+        FROM
+            TL1.ODU_MFLS_IF
+    </select>
+
+
+
+
+
+
+    <!--    INSERT    -->
+
+    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.NODE">
+        REPLACE INTO
+            TL1.NODE(
+                TID_ID,
+                TID,
+                NODE_TYPE,
+                IP_ADDR,
+                MANUFACTURE,
+                HARDWARE,
+                SOFTWARE,
+                SERIAL_NUMBER,
+                NODE_STATUS,
+                SUBNET,
+                SUBNET_ID,
+                SYSTEM_TYPE
+            ) VALUES (
+                #{TID_ID},
+                #{TID},
+                #{NODE_TYPE},
+                #{IP_ADDR},
+                #{MANUFACTURE},
+                #{HARDWARE},
+                #{SOFTWARE},
+                #{SERIAL_NUMBER},
+                #{NODE_STATUS},
+                #{SUBNET},
+                #{SUBNET_ID},
+                #{SYSTEM_TYPE}
+            )
+    </select>
+
+    <select id="insertSystemInfo" parameterType="com.woorinet.plugin.demo.DTO.SYSTEM_INFO">
+        REPLACE INTO
+            TL1.SYSTEM_INFO(
+                TID,
+                UID,
+                LOCATION,
+                VENDOR,
+                PWOAM,
+                BOOT_TIME,
+                RESET_REASON
+            ) VALUES (
+                #{TID},
+                #{UID},
+                #{LOCATION},
+                #{VENDOR},
+                #{PWOAM},
+                #{BOOT_TIME},
+                #{RESET_REASON}
+            )
+    </select>
+
+    <select id="insertSlot" parameterType="com.woorinet.plugin.demo.DTO.SLOT">
+        REPLACE INTO
+            TL1.SLOT(
+                TID,
+                SLOT_PRV_UNIT,
+                EQ_UNIT,
+                EQ_STATE,
+                ADMIN_STATE,
+                INIT_OK,
+                BP_STATE,
+                IPC_STATE,
+                FAIL_STATE,
+                HW_VER,
+                SW_VER,
+                FPGA_VER,
+                FPGA_DATE
+            ) VALUES (
+                #{TID},
+                #{SLOT_PRV_UNIT},
+                #{EQ_UNIT},
+                #{EQ_STATE},
+                #{ADMIN_STATE},
+                #{INIT_OK},
+                #{BP_STATE},
+                #{IPC_STATE},
+                #{FAIL_STATE},
+                #{HW_VER},
+                #{SW_VER},
+                #{FPGA_VER},
+                #{FPGA_DATE}
+            )
+    </select>
+
+    <select id="insertEthPort" parameterType="com.woorinet.plugin.demo.DTO.ETH_PORT">
+        REPLACE INTO
+            TL1.ETH_PORT(
+                `TID`,
+                `AID`,
+                `NAME`,
+                `DESCR`,
+                `STATE`,
+                `SPEED`,
+                `DUPLEX`,
+                `AUTO_NEGO`,
+                `TX_FX`,
+                `PAUSE_TX`,
+                `PAUSE_RX`,
+                `MAX_FRAME`,
+                `LOOPBACK`,
+                `MAX_LEARNING_MAC`,
+                `ETH_PTM`,
+                `PORT_SHUTDOWN`,
+                `TPID_PROF_ID`,
+                `LINK_STATUS`,
+                `STP_STATE`,
+                `TX_STATUS`,
+                `COUNTER`,
+                `POLL_RATE`,
+                `PREPORT_PM`,
+                `MOUNITE_NO_PKT`,
+                `SD_ENABLE`,
+                `SD_TH_COUNT`
+            ) VALUES (
+                #{TID},
+                #{AID},
+                #{NAME},
+                #{DESCR},
+                #{STATE},
+                #{SPEED},
+                #{DUPLEX},
+                #{AUTO_NEGO},
+                #{TX_FX},
+                #{PAUSE_TX},
+                #{PAUSE_RX},
+                #{MAX_FRAME},
+                #{LOOPBACK},
+                #{MAX_LEARNING_MAC},
+                #{ETH_PTM},
+                #{PORT_SHUTDOWN},
+                #{TPID_PROF_ID},
+                #{LINK_STATUS},
+                #{STP_STATE},
+                #{TX_STATUS},
+                #{COUNTER},
+                #{POLL_RATE},
+                #{PREPORT_PM},
+                #{MOUNITE_NO_PKT},
+                #{SD_ENABLE},
+                #{SD_TH_COUNT}
+            )
+    </select>
+
+    <select id="insertNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.NODECONNECTOR">
+        REPLACE INTO
+            TL1.NODE_CONNECTOR(
+                `TID_ID`,
+                `TID`,
+                `AID`,
+                `SUBNET_ID`,
+                `SUBNET`,
+                `LOCAL_ID`,
+                `REQUEST_ID`,
+                `NAME`,
+                `NUMBER`,
+                `PORT_TYPE`,
+                `PORT_ROLE`,
+                `PORT_STATUS`,
+                `SHELF_TYPE`,
+                `SHELF_INDEX`,
+                `SLOT_TYPE`,
+                `SLOT_INDEX`,
+                `SUB_SLOT_TYPE`,
+                `SUB_SLOT_INDEX`,
+                `PORT_TYPE2`,
+                `PORT_INDEX`,
+                `MAC_ADDR`,
+                `SLOT_SERVICE`
+            ) VALUES (
+                #{TID_ID},
+                #{TID},
+                #{AID},
+                #{SUBNET_ID},
+                #{SUBNET},
+                #{LOCAL_ID},
+                #{REQUEST_ID},
+                #{NAME},
+                #{NUMBER},
+                #{PORT_TYPE},
+                #{PORT_ROLE},
+                #{PORT_STATUS},
+                #{SHELF_TYPE},
+                #{SHELF_INDEX},
+                #{SLOT_TYPE},
+                #{SLOT_INDEX},
+                #{SUB_SLOT_TYPE},
+                #{SUB_SLOT_INDEX},
+                #{PORT_TYPE2},
+                #{PORT_INDEX},
+                #{MAC_ADDR},
+                #{SLOT_SERVICE}
+            )
+    </select>
+
+    <select id="insertCesNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.CES_NODE_CONNECTOR">
+        REPLACE INTO
+            TL1.CES_NODE_CONNECTOR(
+                `TID_ID`,
+                `TID`,
+                `AID`,
+                `SUBNET_ID`,
+                `SUBNET`,
+                `LOCAL_ID`,
+                `REQUEST_ID`,
+                `NAME`,
+                `NUMBER`,
+                `PORT_TYPE`,
+                `PORT_ROLE`,
+                `PORT_STATUS`,
+                `SHELF_TYPE`,
+                `SHELF_INDEX`,
+                `SLOT_TYPE`,
+                `SLOT_INDEX`,
+                `SUB_SLOT_TYPE`,
+                `SUB_SLOT_INDEX`,
+                `PORT_TYPE2`,
+                `PORT_INDEX`,
+                `MAC_ADDR`,
+                `CES_NAME`,
+                `CES_DESCR`,
+                `CES_SD`,
+                `CES_PORT_SUTDOWN`,
+                `SLOT_SERVICE`
+            ) VALUES (
+                #{TID_ID},
+                #{TID},
+                #{AID},
+                #{SUBNET_ID},
+                #{SUBNET},
+                #{LOCAL_ID},
+                #{REQUEST_ID},
+                #{NAME},
+                #{NUMBER},
+                #{PORT_TYPE},
+                #{PORT_ROLE},
+                #{PORT_STATUS},
+                #{SHELF_TYPE},
+                #{SHELF_INDEX},
+                #{SLOT_TYPE},
+                #{SLOT_INDEX},
+                #{SUB_SLOT_TYPE},
+                #{SUB_SLOT_INDEX},
+                #{PORT_TYPE2},
+                #{PORT_INDEX},
+                #{MAC_ADDR},
+                #{CES_NAME},
+                #{CES_DESCR},
+                #{CES_SD},
+                #{CES_PORT_SUTDOWN},
+                #{SLOT_SERVICE}
+            )
+    </select>
+
+    <select id="insertOduNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.ODU_NODE_CONNECTOR">
+        REPLACE INTO
+            TL1.ODU_NODE_CONNECTOR(
+                `TID_ID`,
+                `TID`,
+                `AID`,
+                `SUBNET_ID`,
+                `SUBNET`,
+                `LOCAL_ID`,
+                `REQUEST_ID`,
+                `NAME`,
+                `NUMBER`,
+                `PORT_TYPE`,
+                `PORT_ROLE`,
+                `PORT_STATUS`,
+                `SHELF_TYPE`,
+                `SHELF_INDEX`,
+                `SLOT_TYPE`,
+                `SLOT_INDEX`,
+                `SUB_SLOT_TYPE`,
+                `SUB_SLOT_INDEX`,
+                `PORT_TYPE2`,
+                `PORT_INDEX`,
+                `MAC_ADDR`,
+                `SLOT_SERVICE`,
+                `MAX_BW`,
+                `RES_BW`
+            ) VALUES (
+                #{TID_ID},
+                #{TID},
+                #{AID},
+                #{SUBNET_ID},
+                #{SUBNET},
+                #{LOCAL_ID},
+                #{REQUEST_ID},
+                #{NAME},
+                #{NUMBER},
+                #{PORT_TYPE},
+                #{PORT_ROLE},
+                #{PORT_STATUS},
+                #{SHELF_TYPE},
+                #{SHELF_INDEX},
+                #{SLOT_TYPE},
+                #{SLOT_INDEX},
+                #{SUB_SLOT_TYPE},
+                #{SUB_SLOT_INDEX},
+                #{PORT_TYPE2},
+                #{PORT_INDEX},
+                #{MAC_ADDR},
+                #{SLOT_SERVICE},
+                #{MAX_BW},
+                #{RES_BW}
+            )
+    </select>
+
+    <select id="insertMplsIf" parameterType="com.woorinet.plugin.demo.DTO.MPLS_IF">
+        REPLACE INTO
+            TL1.MPLS_IF(
+                `TID_ID`,
+                `TID`,
+                `SUBNET_ID`,
+                `SUBNET`,
+                `MPLS_TP_ID`,
+                `BP`,
+                `LOCAL_ID`,
+                `REQUEST_ID`,
+                `NAME`,
+                `SRC_SUBNET`,
+                `SRC_TID_ID`,
+                `SRC_TID`,
+                `SRC_PORT`,
+                `DST_SUBNET`,
+                `DST_TID_ID`,
+                `DST_TID`,
+                `DST_PORT`,
+                `OPERATION_STATUS`,
+                `CONFIGURATION_ACTION`,
+                `CONFIGURATION_RESULT`,
+                `CIR`,
+                `PIR`,
+                `DEP_ENABLER`,
+                `DEP_STATUS`,
+                `CONSTRAINT_ID`,
+                `CONSTRAINT_NAME`,
+                `CONSTRAINT_VALUE`,
+                `CONSTRAINT_OPERATOR`,
+                `PORT_CONSTRAINT_TYPE`,
+                `MAXIMUM_BANDWIDTH`,
+                `AVAILABLE_BANDWIDTH`,
+                `LINK_TYPE`,
+                `IS_VENDOR`,
+                `REMOTE_NODEID`,
+                `REMOTE_NODE_CONNECTOR`,
+                `REMOTE_TOPOLOGYID`,
+                `REMOTE_MPLSIF`,
+                `PEER_MAC_ADDRESS`,
+                `MPLSIF_TYPE`
+            ) VALUES (
+                #{TID_ID},
+                #{TID},
+                #{SUBNET_ID},
+                #{SUBNET},
+                #{MPLS_TP_ID},
+                #{BP},
+                #{LOCAL_ID},
+                #{REQUEST_ID},
+                #{NAME},
+                #{SRC_SUBNET},
+                #{SRC_TID_ID},
+                #{SRC_TID},
+                #{SRC_PORT},
+                #{DST_SUBNET},
+                #{DST_TID_ID},
+                #{DST_TID},
+                #{DST_PORT},
+                #{OPERATION_STATUS},
+                #{CONFIGURATION_ACTION},
+                #{CONFIGURATION_RESULT},
+                #{CIR},
+                #{PIR},
+                #{DEP_ENABLER},
+                #{DEP_STATUS},
+                #{CONSTRAINT_ID},
+                #{CONSTRAINT_NAME},
+                #{CONSTRAINT_VALUE},
+                #{CONSTRAINT_OPERATOR},
+                #{PORT_CONSTRAINT_TYPE},
+                #{MAXIMUM_BANDWIDTH},
+                #{AVAILABLE_BANDWIDTH},
+                #{LINK_TYPE},
+                #{IS_VENDOR},
+                #{REMOTE_NODEID},
+                #{REMOTE_NODE_CONNECTOR},
+                #{REMOTE_TOPOLOGYID},
+                #{REMOTE_MPLSIF},
+                #{PEER_MAC_ADDRESS},
+                #{MPLSIF_TYPE}
+            )
+    </select>
+
+    <select id="insertOduMplsIf" parameterType="com.woorinet.plugin.demo.DTO.ODU_MPLS_IF">
+        REPLACE INTO
+            TL1.ODU_MPLS_IF(
+                `TID_ID`,
+                `TID`,
+                `SUBNET_ID`,
+                `SUBNET`,
+                `MPLS_TP_ID`,
+                `LOCAL_ID`,
+                `REQUEST_ID`,
+                `NAME`,
+                `SRC_SUBNET`,
+                `SRC_TID_ID`,
+                `SRC_TID`,
+                `SRC_PORT`,
+                `DST_SUBNET`,
+                `DST_TID_ID`,
+                `DST_TID`,
+                `DST_PORT`,
+                `OPERATION_STATUS`,
+                `CONFIGURATION_ACTION`,
+                `CONFIGURATION_RESULT`,
+                `CIR`,
+                `PIR`,
+                `DEP_ENABLER`,
+                `DEP_STATUS`,
+                `CONSTRAINT_ID`,
+                `CONSTRAINT_NAME`,
+                `CONSTRAINT_VALUE`,
+                `CONSTRAINT_OPERATOR`,
+                `PORT_CONSTRAINT_TYPE`,
+                `MAXIMUM_BANDWIDTH`,
+                `AVAILABLE_BANDWIDTH`,
+                `LINK_TYPE`,
+                `IS_VENDOR`,
+                `REMOTE_NODEID`,
+                `REMOTE_NODE_CONNECTOR`,
+                `REMOTE_TOPOLOGYID`,
+                `REMOTE_MPLSIF`,
+                `PEER_MAC_ADDRESS`,
+                `MPLSIF_TYPE`
+            ) VALUES (
+                #{TID_ID},
+                #{TID},
+                #{SUBNET_ID},
+                #{SUBNET},
+                #{MPLS_TP_ID},
+                #{LOCAL_ID},
+                #{REQUEST_ID},
+                #{NAME},
+                #{SRC_SUBNET},
+                #{SRC_TID_ID},
+                #{SRC_TID},
+                #{SRC_PORT},
+                #{DST_SUBNET},
+                #{DST_TID_ID},
+                #{DST_TID},
+                #{DST_PORT},
+                #{OPERATION_STATUS},
+                #{CONFIGURATION_ACTION},
+                #{CONFIGURATION_RESULT},
+                #{CIR},
+                #{PIR},
+                #{DEP_ENABLER},
+                #{DEP_STATUS},
+                #{CONSTRAINT_ID},
+                #{CONSTRAINT_NAME},
+                #{CONSTRAINT_VALUE},
+                #{CONSTRAINT_OPERATOR},
+                #{PORT_CONSTRAINT_TYPE},
+                #{MAXIMUM_BANDWIDTH},
+                #{AVAILABLE_BANDWIDTH},
+                #{LINK_TYPE},
+                #{IS_VENDOR},
+                #{REMOTE_NODEID},
+                #{REMOTE_NODE_CONNECTOR},
+                #{REMOTE_TOPOLOGYID},
+                #{REMOTE_MPLSIF},
+                #{PEER_MAC_ADDRESS},
+                #{MPLSIF_TYPE}
+            )
+    </select>
+
+
+
+
+
+
+</mapper>

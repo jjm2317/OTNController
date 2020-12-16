@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Node {
+public class NODE {
     String TID_ID;
     String TID;
     String NODE_TYPE;
@@ -20,7 +20,7 @@ public class Node {
     String SUBNET_ID;
     String SYSTEM_TYPE;
 
-    public Node(String TID_ID, String TID, String NODE_TYPE, String IP_ADDR, String MANUFACTURE, String HARDWARE, String SOFTWARE, String SERIAL_NUMBER, String NODE_STATUS, String SUBNET, String SUBNET_ID, String SYSTEM_TYPE) {
+    public NODE(String TID_ID, String TID, String NODE_TYPE, String IP_ADDR, String MANUFACTURE, String HARDWARE, String SOFTWARE, String SERIAL_NUMBER, String NODE_STATUS, String SUBNET, String SUBNET_ID, String SYSTEM_TYPE) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.NODE_TYPE = NODE_TYPE;
@@ -35,7 +35,7 @@ public class Node {
         this.SYSTEM_TYPE = SYSTEM_TYPE;
     }
 
-    public Node(String[] fields) {
+    public NODE(String[] fields) {
         TID_ID = fields[0];
         TID = fields[1];
         NODE_TYPE = fields[2];
