@@ -47,19 +47,18 @@ public class Manager {
         tl1Mapper.initSystemInfoTable();
         Map<String, String> fields = ConvertResponse2(ExecuteCmd(cmd));
         SYSTEM_INFO info = new SYSTEM_INFO(
-                fields.get("TID"),
-                fields.get("UID"),
-                fields.get("LOCATION"),
-                fields.get("VENDOR"),
-                fields.get("PWOAM"),
-                fields.get("BOOT-TIME"),
-                fields.get("RESET-REASON")
-        );
+                fields.get("TID") == null ? "" : fields.get("TID"),
+                fields.get("UID") == null ? "" : fields.get("UID"),
+                fields.get("LOCATION") == null ? "" : fields.get("LOCATION"),
+                fields.get("VENDOR") == null ? "" : fields.get("VENDOR"),
+                fields.get("PWOAM") == null ? "" : fields.get("PWOAM"),
+                fields.get("BOOT-TIME") == null ? "" : fields.get("BOOT-TIME"),
+                fields.get("RESET-REASON") == null ? "" : fields.get("RESET-REASON"));
         tl1Mapper.insertSystemInfo(info);
     }
 
     public void Tl1SyncSlot(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-SLOT:" + TID + "::[" + CTAG + "];";
+        String cmd = "RTRV-SLOT:" + TID + "::" + CTAG + ";";
         tl1Mapper.initDatabase();
         tl1Mapper.initSlotTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
@@ -69,7 +68,7 @@ public class Manager {
     }
 
     public void Tl1SyncEthPort(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ETH-PORT:" + TID + "::[" + CTAG + "];";
+        String cmd = "RTRV-ETH-PORT:" + TID + "::" + CTAG + ";";
         tl1Mapper.initDatabase();
         tl1Mapper.initEthPortTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
@@ -79,7 +78,7 @@ public class Manager {
     }
 
     public void Tl1SyncNodeConnector(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-NODE-CONNECTOR:" + TID + "::[" + CTAG + "];";
+        String cmd = "RTRV-NODE-CONNECTOR:" + TID + "::" + CTAG + ";";
         tl1Mapper.initDatabase();
         tl1Mapper.initNodeConnectorTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
@@ -89,7 +88,7 @@ public class Manager {
     }
 
     public void Tl1SyncCesNodeConnector(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-CES-NODE-CONNECTOR:" + TID + "::[" + CTAG + "];";
+        String cmd = "RTRV-CES-NODE-CONNECTOR:" + TID + "::" + CTAG + ";";
         tl1Mapper.initDatabase();
         tl1Mapper.initCesNodeConnectorTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
@@ -99,7 +98,7 @@ public class Manager {
     }
 
     public void Tl1SyncOduNodeConnector(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ODU-NODE-CONNECTOR:" + TID + "::[" + CTAG + "];";
+        String cmd = "RTRV-ODU-NODE-CONNECTOR:" + TID + "::" + CTAG + ";";
         tl1Mapper.initDatabase();
         tl1Mapper.initOduNodeConnectorTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
@@ -109,7 +108,7 @@ public class Manager {
     }
 
     public void Tl1SyncMplsIf(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-MPLS-IF:" + TID + "::[" + CTAG + "];";
+        String cmd = "RTRV-MPLS-IF:" + TID + "::" + CTAG + ";";
         tl1Mapper.initDatabase();
         tl1Mapper.initMplsIfTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
@@ -119,7 +118,7 @@ public class Manager {
     }
 
     public void Tl1SyncOduMplsIf(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ODU-MPLS-IF:" + TID + "::[" + CTAG + "];";
+        String cmd = "RTRV-ODU-MPLS-IF:" + TID + "::" + CTAG + ";";
         tl1Mapper.initDatabase();
         tl1Mapper.initOduMplsIfTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
@@ -127,6 +126,168 @@ public class Manager {
             tl1Mapper.insertOduMplsIf(new ODU_MPLS_IF(fields));
         }
     }
+
+    public void Tl1SyncSTunnel(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-STUNNEL:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initSTunnelTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertSTunnel(new STUNNEL(fields));
+        }
+    }
+
+    public void Tl1SyncSTunnelExt(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-STUNNEL-EXT:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initSTunnelExtTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertSTunnelExt(new STUNNEL_EXT(fields));
+        }
+    }
+
+    public void Tl1SyncSTunnelTransit(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-STUNNEL-TRANSIT:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initSTunnelTransitTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertSTunnelTransit(new STUNNEL_TRANSIT(fields));
+        }
+    }
+
+    public void Tl1SyncTunnelProt(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-TUNNEL-PROT:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initTunnelProtTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertTunnelProt(new TUNNEL_PROT(fields));
+        }
+    }
+
+    public void Tl1SyncSpw(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-SPW:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initSpwTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertSpw(new SPW(fields));
+        }
+    }
+
+    public void Tl1SyncMSpw(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-MSPW:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initMSpwTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertMSpw(new MSPW(fields));
+        }
+    }
+
+    public void Tl1SyncMplsAc(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-MPLS-AC:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initMplsAcTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertMplsAc(new MPLS_AC(fields));
+        }
+    }
+
+    public void Tl1SyncAccessIf(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-ACCESS-IF:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initAccessIfTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertAccessIf(new ACCESS_IF(fields));
+        }
+    }
+
+    public void Tl1SyncService(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-SERVICE:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initServiceTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertService(new SERVICE(fields));
+        }
+    }
+
+    public void Tl1SyncServiceExt(int CTAG, String TID, String serviceName, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-SERVICE-EXT:" + TID + "::" + CTAG + ":serv-name=" + serviceName + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initServiceExtTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertServiceExt(new SERVICE_EXT(fields));
+        }
+    }
+
+    public void Tl1SyncServiceTunnel(int CTAG, String TID, String serviceName, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-SERVICE-TUNNEL:" + TID + "::" + CTAG + ":serv-name=" + serviceName + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initServiceTunnelTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertServiceTunnel(new SERVICE_TUNNEL(fields));
+        }
+    }
+
+    public void Tl1SyncServiceMspw(int CTAG, String TID, String serviceName, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-SERVICE-MSPW:" + TID + "::" + CTAG + ":serv-name=" + serviceName + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initServiceMspwTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertServiceMspw(new SERVICE_MSPW(fields));
+        }
+    }
+
+    public void Tl1SyncOdu(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-ODU:" + TID + "::" + CTAG + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initOduTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertOdu(new ODU(fields));
+        }
+    }
+
+    public void Tl1SyncCesPort(String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-CES-PORT:" + TID + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initCesPortTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertCesPort(new CES_PORT(fields));
+        }
+    }
+
+    public void Tl1SyncCesPw(String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-CES-PW:" + TID + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initCesPwTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertCesPw(new CES_PW(fields));
+        }
+    }
+
+    public void Tl1SyncL2Lacp(String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-L2-LACP:" + TID + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initL2LacpTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            tl1Mapper.insertL2Lacp(new L2_LACP(fields));
+        }
+    }
+
+
 
     public String ExecuteCmd(String cmd) throws IOException {
         ByteBuffer byteBuffer;
