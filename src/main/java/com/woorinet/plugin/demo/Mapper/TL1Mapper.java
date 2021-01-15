@@ -1,6 +1,6 @@
 package com.woorinet.plugin.demo.Mapper;
 
-import com.woorinet.plugin.demo.DTO.*;
+import com.woorinet.plugin.demo.DTO.TL1.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

@@ -1,16 +1,27 @@
 package com.woorinet.plugin.demo;
 
 import com.google.gson.Gson;
-import com.woorinet.plugin.demo.DTO.*;
+import com.woorinet.plugin.demo.DTO.TL1.*;
+import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Mapper.TL1Mapper;
-import com.woorinet.plugin.demo.Tl1.Manager;
+import com.woorinet.plugin.demo.QNET.QNETManager;
+import com.woorinet.plugin.demo.Tl1.TL1Manager;
+import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.client.HttpClient;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @SpringBootApplication
@@ -18,6 +29,9 @@ public class DemoApplication {
 
 	@Autowired
 	private TL1Mapper tl1Mapper;
+
+	@Autowired
+	private QNETMapper qnetMapper;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -32,7 +46,7 @@ public class DemoApplication {
 	String synchronization() {
 		int CTAG = 100;
 		try {
-			Manager manager = new Manager("222.117.54.175", 19011);
+			TL1Manager manager = new TL1Manager("222.117.54.175", 19011);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
 
@@ -179,6 +193,56 @@ public class DemoApplication {
 		}
 
 		return "synchronization";
+	}
+
+	@RequestMapping("/synchronization_anapi")
+	String synchronizationQNAPI() {
+		WebClient client1 = WebClient
+				.builder()
+				.baseUrl("https://1.226.250.42/v1/admin")
+				.defaultHeaders( httpHeaders -> {
+					httpHeaders.add(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46QWRtaW4=");
+					httpHeaders.add(HttpHeaders.ACCEPT, "text/plain");
+				})
+				.clientConnector(
+						new ReactorClientHttpConnector(
+								HttpClient.create()
+									.secure(
+											ThrowingConsumer.unchecked(
+													sslContextSpec -> sslContextSpec.sslContext(
+															SslContextBuilder.forClient()
+															.trustManager(InsecureTrustManagerFactory.INSTANCE)
+															.build()
+													)
+											)
+									)
+						)
+				)
+				.build();
+
+		WebClient.RequestBodySpec uri1 = client1
+				.method(HttpMethod.GET)
+				.uri("/node?consumers=true&providers=true&links=true");
+
+		QNETManager qnetManager = new QNETManager();
+
+		String response = uri1.retrieve()
+				.bodyToMono(Map.class)
+				.map(map -> (Map) map.get("configuration"))
+				.map(map -> {
+					qnetManager.QNETSyncKMSGroups((List) map.get("groups"));
+					qnetManager.QNETSyncKMSNodes((List) map.get("nodes"));
+					qnetManager.QNETSyncKMSNodeLinks((List) map.get("nodeLinks"));
+					qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"));
+					qnetManager.QNETSyncKMSProviderLinks((List) map.get("providerLinks"));
+					qnetManager.QNETSyncKMSPaths((List) map.get("paths"));
+					return "ok";
+				})
+				.block();
+
+		System.out.println("response: " + response);
+
+		return "ok";
 	}
 
 

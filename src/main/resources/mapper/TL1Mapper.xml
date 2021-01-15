@@ -937,175 +937,175 @@
 
     <!--    SELECT    -->
 
-    <select id="selectNode" resultType="com.woorinet.plugin.demo.DTO.NODE">
+    <select id="selectNode" resultType="com.woorinet.plugin.demo.DTO.TL1.NODE">
         SELECT
             *
         FROM
             TL1.NODE
     </select>
 
-    <select id="selectSystemInfo" resultType="com.woorinet.plugin.demo.DTO.SYSTEM_INFO">
+    <select id="selectSystemInfo" resultType="com.woorinet.plugin.demo.DTO.TL1.SYSTEM_INFO">
         SELECT
             *
         FROM
             TL1.SYSTEM_INFO
     </select>
 
-    <select id="selectSlot" resultType="com.woorinet.plugin.demo.DTO.SLOT">
+    <select id="selectSlot" resultType="com.woorinet.plugin.demo.DTO.TL1.SLOT">
         SELECT
             *
         FROM
             TL1.SLOT
     </select>
 
-    <select id="selectEthPort" resultType="com.woorinet.plugin.demo.DTO.ETH_PORT">
+    <select id="selectEthPort" resultType="com.woorinet.plugin.demo.DTO.TL1.ETH_PORT">
         SELECT
             *
         FROM
             TL1.ETH_PORT
     </select>
 
-    <select id="selectNodeConnector" resultType="com.woorinet.plugin.demo.DTO.NODECONNECTOR">
+    <select id="selectNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.NODECONNECTOR">
         SELECT
             *
         FROM
             TL1.NODE_CONNECTOR
     </select>
 
-    <select id="selectCesNodeConnector" resultType="com.woorinet.plugin.demo.DTO.CES_NODE_CONNECTOR">
+    <select id="selectCesNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.CES_NODE_CONNECTOR">
         SELECT
             *
         FROM
             TL1.CES_NODE_CONNECTOR
     </select>
 
-    <select id="selectOduNodeConnector" resultType="com.woorinet.plugin.demo.DTO.ODU_NODE_CONNECTOR">
+    <select id="selectOduNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.ODU_NODE_CONNECTOR">
         SELECT
             *
         FROM
             TL1.ODU_NODE_CONNECTOR
     </select>
 
-    <select id="selectMplsIf" resultType="com.woorinet.plugin.demo.DTO.MPLS_IF">
+    <select id="selectMplsIf" resultType="com.woorinet.plugin.demo.DTO.TL1.MPLS_IF">
         SELECT
             *
         FROM
             TL1.MFLS_IF
     </select>
 
-    <select id="selectOduMplsIf" resultType="com.woorinet.plugin.demo.DTO.ODU_MPLS_IF">
+    <select id="selectOduMplsIf" resultType="com.woorinet.plugin.demo.DTO.TL1.ODU_MPLS_IF">
         SELECT
             *
         FROM
             TL1.ODU_MFLS_IF
     </select>
 
-    <select id="selectSTunnel" resultType="com.woorinet.plugin.demo.DTO.STUNNEL">
+    <select id="selectSTunnel" resultType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL">
         SELECT
             *
         FROM
             TL1.STUNNEL
     </select>
 
-    <select id="selectSTunnelExt" resultType="com.woorinet.plugin.demo.DTO.STUNNEL_EXT">
+    <select id="selectSTunnelExt" resultType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL_EXT">
         SELECT
             *
         FROM
             TL1.STUNNEL_EXT
     </select>
 
-    <select id="selectSTunnelTransit" resultType="com.woorinet.plugin.demo.DTO.STUNNEL_TRANSIT">
+    <select id="selectSTunnelTransit" resultType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL_TRANSIT">
         SELECT
             *
         FROM
             TL1.STUNNEL_TRANSIT
     </select>
 
-    <select id="selectTunnelProt" resultType="com.woorinet.plugin.demo.DTO.TUNNEL_PROT">
+    <select id="selectTunnelProt" resultType="com.woorinet.plugin.demo.DTO.TL1.TUNNEL_PROT">
         SELECT
             *
         FROM
             TL1.TUNNEL_PROT
     </select>
 
-    <select id="selectSpw" resultType="com.woorinet.plugin.demo.DTO.SPW">
+    <select id="selectSpw" resultType="com.woorinet.plugin.demo.DTO.TL1.SPW">
         SELECT
             *
         FROM
             TL1.SPW
     </select>
 
-    <select id="selectMSpw" resultType="com.woorinet.plugin.demo.DTO.MSPW">
+    <select id="selectMSpw" resultType="com.woorinet.plugin.demo.DTO.TL1.MSPW">
         SELECT
             *
         FROM
             TL1.MSPW
     </select>
 
-    <select id="selectMplsAc" resultType="com.woorinet.plugin.demo.DTO.MPLS_AC">
+    <select id="selectMplsAc" resultType="com.woorinet.plugin.demo.DTO.TL1.MPLS_AC">
         SELECT
             *
         FROM
             TL1.MPLS_AC
     </select>
 
-    <select id="selectAccessIf" resultType="com.woorinet.plugin.demo.DTO.ACCESS_IF">
+    <select id="selectAccessIf" resultType="com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF">
         SELECT
             *
         FROM
             TL1.ACCESS_IF
     </select>
 
-    <select id="selectService" resultType="com.woorinet.plugin.demo.DTO.SERVICE">
+    <select id="selectService" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE">
         SELECT
             *
         FROM
             TL1.SERVICE
     </select>
 
-    <select id="selectServiceExt" resultType="com.woorinet.plugin.demo.DTO.SERVICE_EXT">
+    <select id="selectServiceExt" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_EXT">
         SELECT
             *
         FROM
             TL1.SERVICE_EXT
     </select>
 
-    <select id="selectServiceTunnel" resultType="com.woorinet.plugin.demo.DTO.SERVICE_TUNNEL">
+    <select id="selectServiceTunnel" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_TUNNEL">
         SELECT
             *
         FROM
             TL1.SERVICE_TUNNEL
     </select>
 
-    <select id="selectServiceMspw" resultType="com.woorinet.plugin.demo.DTO.SERVICE_MSPW">
+    <select id="selectServiceMspw" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_MSPW">
         SELECT
             *
         FROM
             TL1.SERVICE_MSPW
     </select>
 
-    <select id="selectOdu" resultType="com.woorinet.plugin.demo.DTO.ODU">
+    <select id="selectOdu" resultType="com.woorinet.plugin.demo.DTO.TL1.ODU">
         SELECT
             *
         FROM
             TL1.ODU
     </select>
 
-    <select id="selectCesPort" resultType="com.woorinet.plugin.demo.DTO.CES_PORT">
+    <select id="selectCesPort" resultType="com.woorinet.plugin.demo.DTO.TL1.CES_PORT">
         SELECT
             *
         FROM
             TL1.CES_PORT
     </select>
 
-    <select id="selectCesPw" resultType="com.woorinet.plugin.demo.DTO.CES_PW">
+    <select id="selectCesPw" resultType="com.woorinet.plugin.demo.DTO.TL1.CES_PW">
         SELECT
             *
         FROM
             TL1.CES_PW
     </select>
 
-    <select id="selectL2Lacp" resultType="com.woorinet.plugin.demo.DTO.L2_LACP">
+    <select id="selectL2Lacp" resultType="com.woorinet.plugin.demo.DTO.TL1.L2_LACP">
         SELECT
             *
         FROM
@@ -1119,7 +1119,7 @@
 
     <!--    INSERT    -->
 
-    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.NODE">
+    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.TL1.NODE">
         REPLACE INTO
             TL1.NODE(
                 TID_ID,
@@ -1150,7 +1150,7 @@
             )
     </select>
 
-    <select id="insertSystemInfo" parameterType="com.woorinet.plugin.demo.DTO.SYSTEM_INFO">
+    <select id="insertSystemInfo" parameterType="com.woorinet.plugin.demo.DTO.TL1.SYSTEM_INFO">
         REPLACE INTO
             TL1.SYSTEM_INFO(
                 TID,
@@ -1171,7 +1171,7 @@
             )
     </select>
 
-    <select id="insertSlot" parameterType="com.woorinet.plugin.demo.DTO.SLOT">
+    <select id="insertSlot" parameterType="com.woorinet.plugin.demo.DTO.TL1.SLOT">
         REPLACE INTO
             TL1.SLOT(
                 TID,
@@ -1204,7 +1204,7 @@
             )
     </select>
 
-    <select id="insertEthPort" parameterType="com.woorinet.plugin.demo.DTO.ETH_PORT">
+    <select id="insertEthPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.ETH_PORT">
         REPLACE INTO
             TL1.ETH_PORT(
                 `TID`,
@@ -1263,7 +1263,7 @@
             )
     </select>
 
-    <select id="insertNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.NODECONNECTOR">
+    <select id="insertNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.NODECONNECTOR">
         REPLACE INTO
             TL1.NODE_CONNECTOR(
                 `TID_ID`,
@@ -1314,7 +1314,7 @@
             )
     </select>
 
-    <select id="insertCesNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.CES_NODE_CONNECTOR">
+    <select id="insertCesNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.CES_NODE_CONNECTOR">
         REPLACE INTO
             TL1.CES_NODE_CONNECTOR(
                 `TID_ID`,
@@ -1373,7 +1373,7 @@
             )
     </select>
 
-    <select id="insertOduNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.ODU_NODE_CONNECTOR">
+    <select id="insertOduNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.ODU_NODE_CONNECTOR">
         REPLACE INTO
             TL1.ODU_NODE_CONNECTOR(
                 `TID_ID`,
@@ -1428,7 +1428,7 @@
             )
     </select>
 
-    <select id="insertMplsIf" parameterType="com.woorinet.plugin.demo.DTO.MPLS_IF">
+    <select id="insertMplsIf" parameterType="com.woorinet.plugin.demo.DTO.TL1.MPLS_IF">
         REPLACE INTO
             TL1.MPLS_IF(
                 `TID_ID`,
@@ -1513,7 +1513,7 @@
             )
     </select>
 
-    <select id="insertOduMplsIf" parameterType="com.woorinet.plugin.demo.DTO.ODU_MPLS_IF">
+    <select id="insertOduMplsIf" parameterType="com.woorinet.plugin.demo.DTO.TL1.ODU_MPLS_IF">
         REPLACE INTO
             TL1.ODU_MPLS_IF(
                 `TID_ID`,
@@ -1596,7 +1596,7 @@
             )
     </select>
 
-    <select id="insertSTunnel" parameterType="com.woorinet.plugin.demo.DTO.STUNNEL">
+    <select id="insertSTunnel" parameterType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL">
         REPLACE INTO
             TL1.STUNNEL(
                 `TID_ID`,
@@ -1689,7 +1689,7 @@
             )
     </select>
 
-    <select id="insertSTunnelExt" parameterType="com.woorinet.plugin.demo.DTO.STUNNEL_EXT">
+    <select id="insertSTunnelExt" parameterType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL_EXT">
         REPLACE INTO
             TL1.STUNNEL_EXT(
                 `TID_ID`,
@@ -1814,7 +1814,7 @@
             )
     </select>
 
-    <select id="insertSTunnelTransit" parameterType="com.woorinet.plugin.demo.DTO.STUNNEL_TRANSIT">
+    <select id="insertSTunnelTransit" parameterType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL_TRANSIT">
         REPLACE INTO
             TL1.STUNNEL_TRANSIT(
                 `TID_ID`,
@@ -1893,7 +1893,7 @@
             )
     </select>
 
-    <select id="insertTunnelProt" parameterType="com.woorinet.plugin.demo.DTO.TUNNEL_PROT">
+    <select id="insertTunnelProt" parameterType="com.woorinet.plugin.demo.DTO.TL1.TUNNEL_PROT">
         REPLACE INTO
             TL1.TUNNEL_PROT(
                 `TID`,
@@ -1942,7 +1942,7 @@
             )
     </select>
 
-    <select id="insertSpw" parameterType="com.woorinet.plugin.demo.DTO.SPW">
+    <select id="insertSpw" parameterType="com.woorinet.plugin.demo.DTO.TL1.SPW">
         REPLACE INTO
             TL1.SPW(
                 `TID_ID`,
@@ -2045,7 +2045,7 @@
             )
     </select>
 
-    <select id="insertMSpw" parameterType="com.woorinet.plugin.demo.DTO.MSPW">
+    <select id="insertMSpw" parameterType="com.woorinet.plugin.demo.DTO.TL1.MSPW">
         REPLACE INTO
             TL1.MSPW(
                 `TID_ID`,
@@ -2154,7 +2154,7 @@
             )
     </select>
 
-    <select id="insertMplsAc" parameterType="com.woorinet.plugin.demo.DTO.MPLS_AC">
+    <select id="insertMplsAc" parameterType="com.woorinet.plugin.demo.DTO.TL1.MPLS_AC">
         REPLACE INTO
             TL1.MPLS_AC(
                 `TID_ID`,
@@ -2215,7 +2215,7 @@
             )
     </select>
 
-    <select id="insertAccessIf" parameterType="com.woorinet.plugin.demo.DTO.ACCESS_IF">
+    <select id="insertAccessIf" parameterType="com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF">
         REPLACE INTO
             TL1.ACCESS_IF(
                 `TID_ID`,
@@ -2268,7 +2268,7 @@
             )
     </select>
 
-    <select id="insertService" parameterType="com.woorinet.plugin.demo.DTO.SERVICE">
+    <select id="insertService" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE">
         REPLACE INTO
             TL1.SERVICE(
                 `TID_ID`,
@@ -2329,7 +2329,7 @@
             )
     </select>
 
-    <select id="insertServiceExt" parameterType="com.woorinet.plugin.demo.DTO.SERVICE_EXT">
+    <select id="insertServiceExt" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_EXT">
         REPLACE INTO
             TL1.SERVICE_EXT(
                 `TID_ID`,
@@ -2442,7 +2442,7 @@
             )
     </select>
 
-    <select id="insertServiceTunnel" parameterType="com.woorinet.plugin.demo.DTO.SERVICE_TUNNEL">
+    <select id="insertServiceTunnel" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_TUNNEL">
         REPLACE INTO
             TL1.SERVICE_TUNNEL(
                 `TID_ID`,
@@ -2517,7 +2517,7 @@
             )
     </select>
 
-    <select id="insertServiceMspw" parameterType="com.woorinet.plugin.demo.DTO.SERVICE_MSPW">
+    <select id="insertServiceMspw" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_MSPW">
         REPLACE INTO
             TL1.SERVICE_MSPW(
                 `TID_ID`,
@@ -2626,7 +2626,7 @@
             )
     </select>
 
-    <select id="insertOdu" parameterType="com.woorinet.plugin.demo.DTO.ODU">
+    <select id="insertOdu" parameterType="com.woorinet.plugin.demo.DTO.TL1.ODU">
         REPLACE INTO
             TL1.ODU(
                 `TID_ID`,
@@ -2731,7 +2731,7 @@
             )
     </select>
 
-    <select id="insertCesPort" parameterType="com.woorinet.plugin.demo.DTO.CES_PORT">
+    <select id="insertCesPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.CES_PORT">
         REPLACE INTO
             TL1.CES_PORT(
                 `TID`,
@@ -2762,7 +2762,7 @@
             )
     </select>
 
-    <select id="insertCesPw" parameterType="com.woorinet.plugin.demo.DTO.CES_PW">
+    <select id="insertCesPw" parameterType="com.woorinet.plugin.demo.DTO.TL1.CES_PW">
         REPLACE INTO
             TL1.CES_PW(
                 `TID`,
@@ -2815,7 +2815,7 @@
             )
     </select>
 
-    <select id="insertL2Lacp" parameterType="com.woorinet.plugin.demo.DTO.L2_LACP">
+    <select id="insertL2Lacp" parameterType="com.woorinet.plugin.demo.DTO.TL1.L2_LACP">
         REPLACE INTO
             TL1.L2_LACP(
                 `TID`,
