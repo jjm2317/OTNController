@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QNETMapper {
     void initDatabase() throws Exception;
+    void initNodeTable() throws Exception;
 }

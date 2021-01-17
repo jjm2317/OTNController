@@ -22,6 +22,8 @@ public class QNETManager {
             while (nodesIterator.hasNext()){
                 Map<String, Object> node = (Map) nodesIterator.next();
                 System.out.println(node.toString());
+
+
             }
         }
     }

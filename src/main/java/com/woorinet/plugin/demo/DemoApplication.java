@@ -197,6 +197,14 @@ public class DemoApplication {
 
 	@RequestMapping("/synchronization_anapi")
 	String synchronizationQNAPI() {
+
+		try {
+			qnetMapper.initDatabase();
+			qnetMapper.initNodeTable();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		WebClient client1 = WebClient
 				.builder()
 				.baseUrl("https://1.226.250.42/v1/admin")

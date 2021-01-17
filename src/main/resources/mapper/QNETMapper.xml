@@ -9,4 +9,29 @@
         CREATE DATABASE IF NOT EXISTS QNET
     </select>
 
+    <select id="initNodeTable">
+        CREATE TABLE IF NOT EXISTS QNET.NODE (
+            `ID` varchar(100) default '',
+            `UID` varchar(100) default '',
+            `NAME` varchar(100) default '',
+            `ENABLED` varchar(100) default '',
+            `DESCRIPTION` varchar(100) default '',
+            `GROUPID` varchar(100) default '',
+            `GROUP` varchar(100) default '',
+            `UNIQUEID` varchar(100) default '',
+            `QNCWEBAPIURL` varchar(100) default '',
+            `QNCWEBAPIAUTH` varchar(100) default '',
+            `CERT` varchar(100) default '',
+            `KEMS_CERT` varchar(100) default '',
+            `NETWORK` varchar(100) default '',
+            `CONSUMERS` varchar(100) default '',
+            `PROVIDERS` varchar(100) default '',
+            `LOCX` varchar(100) default '',
+            `LOCY` varchar(100) default '',
+            `LAT` varchar(100) default '',
+            `LON` varchar(100) default '',
+            PRIMARY KEY (ID)
+        )
+    </select>
+
 </mapper>
