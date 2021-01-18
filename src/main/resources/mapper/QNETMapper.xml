@@ -23,7 +23,7 @@
             `QNCWEBAPIAUTH` varchar(100) default '',
             `CERT` varchar(100) default '',
             `KEMS_CERT` varchar(100) default '',
-            `NETWORK` varchar(1000) default '',
+            `NETWORK` TEXT,
             `CONSUMERS` TEXT ,
             `PROVIDERS` TEXT ,
             `LOCX` varchar(100) default '',
