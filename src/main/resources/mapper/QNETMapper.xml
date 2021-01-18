@@ -76,6 +76,19 @@
         )
     </select>
 
+    <select id="initPathTable">
+        CREATE TABLE IF NOT EXISTS QNET.PATH (
+        `ID` varchar(100) default '',
+        `FAILBACKMODE` varchar(100) default '',
+        `FAILBACKPERIOD` varchar(100) default '',
+        `CONSUMERLINK` TEXT,
+        `PRIMARYSTR` TEXT,
+        `SECONDARY` TEXT,
+        `REMARK` varchar(100) default '',
+        PRIMARY KEY (ID)
+        )
+    </select>
+
     <!--    INSERT    -->
     <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.QNET.NODE">
         REPLACE INTO
@@ -185,6 +198,27 @@
         #{SOURCE},
         #{DESTINATION},
         #{QKEYSTORE}
+        )
+    </select>
+
+    <select id="insertPath" parameterType="com.woorinet.plugin.demo.DTO.QNET.PATH">
+        REPLACE INTO
+        QNET.Path(
+        ID,
+        FAILBACKMODE,
+        FAILBACKPERIOD,
+        CONSUMERLINK,
+        PRIMARYSTR,
+        SECONDARY,
+        REMARK
+        ) VALUES (
+        #{ID},
+        #{FAILBACKMODE},
+        #{FAILBACKPERIOD},
+        #{CONSUMERLINK},
+        #{PRIMARYSTR},
+        #{SECONDARY},
+        #{REMARK}
         )
     </select>
 

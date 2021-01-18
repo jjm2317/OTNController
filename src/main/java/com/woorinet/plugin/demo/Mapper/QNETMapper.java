@@ -13,9 +13,11 @@ public interface QNETMapper {
     void initNodeLinkTable() throws Exception;
     void initConsumerLinkTable() throws Exception;
     void initProviderLinkTable() throws Exception;
+    void initPathTable() throws Exception;
 
     void insertNode(NODE node)  throws Exception;
     void insertNodeLink(NODELINK nodeLink) throws Exception;
     void insertConsumerLink(CONSUMERLINK consumerlink) throws Exception;
     void insertProviderLink(PROVIDERLINK providerlink)  throws Exception;
+    void insertPath(PATH path) throws Exception;
 }

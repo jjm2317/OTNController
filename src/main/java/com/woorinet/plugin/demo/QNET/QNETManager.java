@@ -1,9 +1,6 @@
 package com.woorinet.plugin.demo.QNET;
 
-import com.woorinet.plugin.demo.DTO.QNET.CONSUMERLINK;
-import com.woorinet.plugin.demo.DTO.QNET.NODE;
-import com.woorinet.plugin.demo.DTO.QNET.NODELINK;
-import com.woorinet.plugin.demo.DTO.QNET.PROVIDERLINK;
+import com.woorinet.plugin.demo.DTO.QNET.*;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
 
 import java.util.Iterator;
@@ -128,11 +125,22 @@ public class QNETManager {
         }
     }
 
-    public void QNETSyncKMSPaths(List paths) {
+    public void QNETSyncKMSPaths(List paths, QNETMapper qnetMapper) throws Exception{
         if (paths != null) {
             Iterator pathsIterator = paths.iterator();
             while (pathsIterator.hasNext()){
                 Map<String, Object> path = (Map) pathsIterator.next();
+
+                String[] fields = new String[8];
+                fields[0] =  path.get("id") == null ? "" : path.get("id").toString();
+                fields[1] =  path.get("failbackMode") == null ? "" :path.get("failbackMode").toString();
+                fields[2] =  path.get("failbackPeriod") == null ? "" :path.get("failbackPeriod").toString();
+                fields[3] = path.get("consumerLink") == null ? "" :path.get("consumerLink").toString();
+                fields[4] =  path.get("primary") == null ? "" :path.get("primary").toString();
+                fields[5] =  path.get("secondary") == null ? "" :path.get("secondary").toString();
+                fields[7] =  path.get("remark") == null ? "" :path.get("remark").toString();
+
+                qnetMapper.insertPath(new PATH(fields));
                 System.out.println(path.toString());
             }
         }
