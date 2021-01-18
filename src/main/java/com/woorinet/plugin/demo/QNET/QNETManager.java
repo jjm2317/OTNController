@@ -1,5 +1,6 @@
 package com.woorinet.plugin.demo.QNET;
 
+import com.woorinet.plugin.demo.DTO.QNET.CONSUMERLINK;
 import com.woorinet.plugin.demo.DTO.QNET.NODE;
 import com.woorinet.plugin.demo.DTO.QNET.NODELINK;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
@@ -49,6 +50,7 @@ public class QNETManager {
                 fields[18] = node.get("long") == null ? "" :node.get("long").toString();
 
                 qnetMapper.insertNode(new NODE(fields));
+                System.out.println(node.toString());
 
 
 
@@ -59,11 +61,10 @@ public class QNETManager {
     public void QNETSyncKMSNodeLinks(List nodeLinks, QNETMapper qnetMapper) throws Exception{
         if (nodeLinks != null) {
             Iterator nodeLinksIterator = nodeLinks.iterator();
-            System.out.println("test11");
             while (nodeLinksIterator.hasNext()){
                 Map<String, Object> nodeLink = (Map) nodeLinksIterator.next();
 
-                String[] fields = new String[19];
+                String[] fields = new String[9];
                 fields[0] =  nodeLink.get("id") == null ? "" : nodeLink.get("id").toString();
                 fields[1] =  nodeLink.get("name") == null ? "" :nodeLink.get("name").toString();
                 fields[2] =  nodeLink.get("uid") == null ? "" :nodeLink.get("uid").toString();
@@ -79,15 +80,26 @@ public class QNETManager {
 
 
             }
-            System.out.println("test11");
         }
     }
 
-    public void QNETSyncKMSConsumerLinks(List consumerLinks) {
+    public void QNETSyncKMSConsumerLinks(List consumerLinks,QNETMapper qnetMapper) throws Exception{
         if (consumerLinks != null) {
             Iterator consumerLinksIterator = consumerLinks.iterator();
             while (consumerLinksIterator.hasNext()){
                 Map<String, Object> consumerLink = (Map) consumerLinksIterator.next();
+
+                String[] fields = new String[8];
+                fields[0] =  consumerLink.get("id") == null ? "" : consumerLink.get("id").toString();
+                fields[1] =  consumerLink.get("uid") == null ? "" :consumerLink.get("uid").toString();
+                fields[2] =  consumerLink.get("name") == null ? "" :consumerLink.get("name").toString();
+                fields[3] = consumerLink.get("operMode") == null ? "" :consumerLink.get("operMode").toString();
+                fields[4] =  consumerLink.get("source") == null ? "" :consumerLink.get("source").toString();
+                fields[5] =  consumerLink.get("dest") == null ? "" :consumerLink.get("dest").toString();
+                fields[6] =  consumerLink.get("presharedKey") == null ? "" :consumerLink.get("presharedKey").toString();
+                fields[7] =  consumerLink.get("qkeyStore") == null ? "" :consumerLink.get("qkeyStore").toString();
+
+                qnetMapper.insertConsumerLink(new CONSUMERLINK(fields));
                 System.out.println(consumerLink.toString());
             }
         }

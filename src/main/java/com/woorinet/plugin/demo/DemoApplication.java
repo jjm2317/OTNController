@@ -202,6 +202,7 @@ public class DemoApplication {
 			qnetMapper.initDatabase();
 			qnetMapper.initNodeTable();
 			qnetMapper.initNodeLinkTable();
+			qnetMapper.initConsumerLinkTable();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -242,11 +243,10 @@ public class DemoApplication {
 						try {
 							qnetManager.QNETSyncKMSNodes((List) map.get("nodes"), qnetMapper);
 							qnetManager.QNETSyncKMSNodeLinks((List) map.get("nodeLinks"),qnetMapper);
+							qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"),qnetMapper);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-
-						qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"));
 						qnetManager.QNETSyncKMSProviderLinks((List) map.get("providerLinks"));
 						qnetManager.QNETSyncKMSPaths((List) map.get("paths"));
 						return "ok";
