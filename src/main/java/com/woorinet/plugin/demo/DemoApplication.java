@@ -233,20 +233,23 @@ public class DemoApplication {
 				.uri("/node?consumers=true&providers=true&links=true");
 
 		QNETManager qnetManager = new QNETManager();
-
 		String response = uri1.retrieve()
-				.bodyToMono(Map.class)
-				.map(map -> (Map) map.get("configuration"))
-				.map(map -> {
-					qnetManager.QNETSyncKMSGroups((List) map.get("groups"));
-					qnetManager.QNETSyncKMSNodes((List) map.get("nodes"));
-					qnetManager.QNETSyncKMSNodeLinks((List) map.get("nodeLinks"));
-					qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"));
-					qnetManager.QNETSyncKMSProviderLinks((List) map.get("providerLinks"));
-					qnetManager.QNETSyncKMSPaths((List) map.get("paths"));
-					return "ok";
-				})
-				.block();
+					.bodyToMono(Map.class)
+					.map(map -> (Map) map.get("configuration"))
+					.map(map -> {
+						qnetManager.QNETSyncKMSGroups((List) map.get("groups"));
+						try {
+							qnetManager.QNETSyncKMSNodes((List) map.get("nodes"), qnetMapper);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						qnetManager.QNETSyncKMSNodeLinks((List) map.get("nodeLinks"));
+						qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"));
+						qnetManager.QNETSyncKMSProviderLinks((List) map.get("providerLinks"));
+						qnetManager.QNETSyncKMSPaths((List) map.get("paths"));
+						return "ok";
+					})
+					.block();
 
 		System.out.println("response: " + response);
 

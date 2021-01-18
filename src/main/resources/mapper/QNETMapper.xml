@@ -17,20 +17,66 @@
             `ENABLED` varchar(100) default '',
             `DESCRIPTION` varchar(100) default '',
             `GROUPID` varchar(100) default '',
-            `GROUP` varchar(100) default '',
+            `GROUPSTR` varchar(100) default '',
             `UNIQUEID` varchar(100) default '',
             `QNCWEBAPIURL` varchar(100) default '',
             `QNCWEBAPIAUTH` varchar(100) default '',
             `CERT` varchar(100) default '',
             `KEMS_CERT` varchar(100) default '',
-            `NETWORK` varchar(100) default '',
-            `CONSUMERS` varchar(100) default '',
-            `PROVIDERS` varchar(100) default '',
+            `NETWORK` varchar(1000) default '',
+            `CONSUMERS` TEXT ,
+            `PROVIDERS` TEXT ,
             `LOCX` varchar(100) default '',
             `LOCY` varchar(100) default '',
             `LAT` varchar(100) default '',
             `LON` varchar(100) default '',
             PRIMARY KEY (ID)
+        )
+    </select>
+
+    <!--    INSERT    -->
+    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.QNET.NODE">
+        REPLACE INTO
+        QNET.NODE(
+        ID,
+        UID,
+        NAME,
+        ENABLED,
+        DESCRIPTION,
+        GROUPID,
+        GROUPSTR,
+        UNIQUEID,
+        QNCWEBAPIURL,
+        QNCWEBAPIAUTH,
+        CERT,
+        KEMS_CERT,
+        NETWORK,
+        CONSUMERS,
+        PROVIDERS,
+        LOCX,
+        LOCY,
+        LAT,
+        LON
+        ) VALUES (
+        #{ID},
+        #{UID},
+        #{NAME},
+        #{ENABLED},
+        #{DESCRIPTION},
+        #{GROUPID},
+        #{GROUPSTR},
+        #{UNIQUEID},
+        #{QNCWEBAPIURL},
+        #{QNCWEBAPIAUTH},
+        #{CERT},
+        #{KEMS_CERT},
+        #{NETWORK},
+        #{CONSUMERS},
+        #{PROVIDERS},
+        #{LOCX},
+        #{LOCY},
+        #{LAT},
+        #{LON}
         )
     </select>
 

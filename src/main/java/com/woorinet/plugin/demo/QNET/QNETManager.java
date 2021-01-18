@@ -1,5 +1,8 @@
 package com.woorinet.plugin.demo.QNET;
 
+import com.woorinet.plugin.demo.DTO.QNET.NODE;
+import com.woorinet.plugin.demo.Mapper.QNETMapper;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +19,36 @@ public class QNETManager {
         }
     }
 
-    public void QNETSyncKMSNodes(List nodes) {
+    public void QNETSyncKMSNodes(List nodes, QNETMapper qnetMapper) throws Exception{
+
         if (nodes != null) {
             Iterator nodesIterator = nodes.iterator();
             while (nodesIterator.hasNext()){
                 Map<String, Object> node = (Map) nodesIterator.next();
-                System.out.println(node.toString());
+
+                String[] fields = new String[19];
+                fields[0] =  node.get("id") == null ? "" : node.get("id").toString();
+                fields[1] =  node.get("uid") == null ? "" :node.get("uid").toString();
+                fields[2] =  node.get("name") == null ? "" :node.get("name").toString();
+                fields[3] = node.get("enabled") == null ? "" :node.get("enabled").toString();
+                fields[4] =  node.get("description") == null ? "" :node.get("description").toString();
+                fields[5] =  node.get("groupId") == null ? "" :node.get("groupId").toString();
+                fields[6] =  node.get("group") == null ? "" :node.get("group").toString();
+                fields[7] =  node.get("uniqueId") == null ? "" :node.get("uniqueId").toString();
+                fields[8] =  node.get("qncWebApiUrl") == null ? "" :node.get("qncWebApiUrl").toString();
+                fields[9] =  node.get("qncWebApiAuth") == null ? "" :node.get("qncWebApiAuth").toString();
+                fields[10] =  node.get("cert") == null ? "" :node.get("cert").toString();
+                fields[11] =  node.get("kems-cert") == null ? "" :node.get("kems-cert").toString();
+                fields[12] = node.get("network") == null ? "" :node.get("network").toString().toString();
+                fields[13] = node.get("consumers") == null ? "" :node.get("consumers").toString();
+                fields[14] = node.get("providers") == null ? "" :node.get("providers").toString();
+                fields[15] = node.get("locX") == null ? "" :node.get("locX").toString();
+                fields[16] = node.get("locY") == null ? "" :node.get("locY").toString();
+                fields[17] = node.get("lat") == null ? "" :node.get("lat").toString();
+                fields[18] = node.get("long") == null ? "" :node.get("long").toString();
+
+                qnetMapper.insertNode(new NODE(fields));
+
 
 
             }
