@@ -34,6 +34,22 @@
         )
     </select>
 
+    <select id="initNodeLinkTable">
+        CREATE TABLE IF NOT EXISTS QNET.NODELINK (
+        `ID` varchar(100) default '',
+        `NAME` varchar(100) default '',
+        `UID` varchar(100) default '',
+        `TYPE` varchar(100) default '',
+        `ALGORITHM` varchar(100) default '',
+        `WEIGHT` varchar(100) default '',
+        `PSK` varchar(100) default '',
+        `SOURCE` varchar(100) default '',
+        `DEST` varchar(100) default '',
+        PRIMARY KEY (ID)
+        )
+    </select>
+
+
     <!--    INSERT    -->
     <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.QNET.NODE">
         REPLACE INTO
@@ -77,6 +93,30 @@
         #{LOCY},
         #{LAT},
         #{LON}
+        )
+    </select>
+    <select id="insertNodeLink" parameterType="com.woorinet.plugin.demo.DTO.QNET.NODELINK">
+        REPLACE INTO
+        QNET.NODELINK(
+        ID,
+        NAME,
+        UID,
+        TYPE,
+        ALGORITHM,
+        WEIGHT,
+        PSK,
+        SOURCE,
+        DEST
+        ) VALUES (
+        #{ID},
+        #{NAME},
+        #{UID},
+        #{TYPE},
+        #{ALGORITHM},
+        #{WEIGHT},
+        #{PSK},
+        #{SOURCE},
+        #{DEST}
         )
     </select>
 

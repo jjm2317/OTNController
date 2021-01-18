@@ -10,6 +10,8 @@ public interface QNETMapper {
 
     void initDatabase() throws Exception;
     void initNodeTable() throws Exception;
+    void initNodeLinkTable() throws Exception;
 
     void insertNode(NODE node)  throws Exception;
+    void insertNodeLink(NODELINK nodeLink) throws Exception;
 }

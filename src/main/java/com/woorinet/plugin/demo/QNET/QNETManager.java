@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.QNET;
 
 import com.woorinet.plugin.demo.DTO.QNET.NODE;
+import com.woorinet.plugin.demo.DTO.QNET.NODELINK;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
 
 import java.util.Iterator;
@@ -55,13 +56,30 @@ public class QNETManager {
         }
     }
 
-    public void QNETSyncKMSNodeLinks(List nodeLinks) {
+    public void QNETSyncKMSNodeLinks(List nodeLinks, QNETMapper qnetMapper) throws Exception{
         if (nodeLinks != null) {
             Iterator nodeLinksIterator = nodeLinks.iterator();
+            System.out.println("test11");
             while (nodeLinksIterator.hasNext()){
                 Map<String, Object> nodeLink = (Map) nodeLinksIterator.next();
+
+                String[] fields = new String[19];
+                fields[0] =  nodeLink.get("id") == null ? "" : nodeLink.get("id").toString();
+                fields[1] =  nodeLink.get("name") == null ? "" :nodeLink.get("name").toString();
+                fields[2] =  nodeLink.get("uid") == null ? "" :nodeLink.get("uid").toString();
+                fields[3] = nodeLink.get("type") == null ? "" :nodeLink.get("type").toString();
+                fields[4] =  nodeLink.get("algorithm") == null ? "" :nodeLink.get("algorithm").toString();
+                fields[5] =  nodeLink.get("weight") == null ? "" :nodeLink.get("weight").toString();
+                fields[6] =  nodeLink.get("psk") == null ? "" :nodeLink.get("psk").toString();
+                fields[7] =  nodeLink.get("source") == null ? "" :nodeLink.get("source").toString();
+                fields[8] =  nodeLink.get("dest") == null ? "" :nodeLink.get("dest").toString();
+
+                qnetMapper.insertNodeLink(new NODELINK(fields));
                 System.out.println(nodeLink.toString());
+
+
             }
+            System.out.println("test11");
         }
     }
 
