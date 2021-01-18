@@ -3,6 +3,7 @@ package com.woorinet.plugin.demo.QNET;
 import com.woorinet.plugin.demo.DTO.QNET.CONSUMERLINK;
 import com.woorinet.plugin.demo.DTO.QNET.NODE;
 import com.woorinet.plugin.demo.DTO.QNET.NODELINK;
+import com.woorinet.plugin.demo.DTO.QNET.PROVIDERLINK;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
 
 import java.util.Iterator;
@@ -105,11 +106,23 @@ public class QNETManager {
         }
     }
 
-    public void QNETSyncKMSProviderLinks(List providerLinks) {
+    public void QNETSyncKMSProviderLinks(List providerLinks,QNETMapper qnetMapper) throws Exception{
         if (providerLinks != null) {
             Iterator providerLinksIterator = providerLinks.iterator();
             while (providerLinksIterator.hasNext()){
                 Map<String, Object> providerLink = (Map) providerLinksIterator.next();
+
+                String[] fields = new String[8];
+                fields[0] =  providerLink.get("id") == null ? "" : providerLink.get("id").toString();
+                fields[1] =  providerLink.get("uid") == null ? "" :providerLink.get("uid").toString();
+                fields[2] =  providerLink.get("name") == null ? "" :providerLink.get("name").toString();
+                fields[3] = providerLink.get("mode") == null ? "" :providerLink.get("mode").toString();
+                fields[4] =  providerLink.get("source") == null ? "" :providerLink.get("source").toString();
+                fields[5] =  providerLink.get("destination") == null ? "" :providerLink.get("destination").toString();
+                fields[7] =  providerLink.get("qkeyStore") == null ? "" :providerLink.get("qkeyStore").toString();
+
+                qnetMapper.insertProviderLink(new PROVIDERLINK(fields));
+
                 System.out.println(providerLink.toString());
             }
         }

@@ -63,6 +63,18 @@
         )
     </select>
 
+    <select id="initProviderLinkTable">
+        CREATE TABLE IF NOT EXISTS QNET.PROVIDERLINK (
+        `ID` varchar(100) default '',
+        `UID` varchar(100) default '',
+        `NAME` varchar(100) default '',
+        `MODE` varchar(100) default '',
+        `SOURCE` TEXT ,
+        `DESTINATION` TEXT ,
+        `QKEYSTORE` TEXT,
+        PRIMARY KEY (ID)
+        )
+    </select>
 
     <!--    INSERT    -->
     <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.QNET.NODE">
@@ -152,6 +164,26 @@
         #{SOURCE},
         #{DEST},
         #{PRESHAREDKEY},
+        #{QKEYSTORE}
+        )
+    </select>
+    <select id="insertProviderLink" parameterType="com.woorinet.plugin.demo.DTO.QNET.PROVIDERLINK">
+        REPLACE INTO
+        QNET.PROVIDERLINK(
+        ID,
+        UID,
+        NAME,
+        MODE,
+        SOURCE,
+        DESTINATION,
+        QKEYSTORE
+        ) VALUES (
+        #{ID},
+        #{UID},
+        #{NAME},
+        #{MODE},
+        #{SOURCE},
+        #{DESTINATION},
         #{QKEYSTORE}
         )
     </select>
