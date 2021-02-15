@@ -38,6 +38,15 @@
         slot_id varchar(100) default '',
         subslot_id varchar(100) default '',
         port_id varchar(100) default '',
+        connect_status varchar(100) default '',
+        connect_role varchar(100) default '',
+        connect_idle varchar(100) default '',
+        connect_llcf varchar(100) default '',
+        connect_lambda varchar(100) default '',
+        module_name varchar(100) default '',
+        connect_pec varchar(100) default '',
+        connect_serial varchar(100) default '',
+        unit_type varchar(100) default '',
         PRIMARY KEY (connect_id)
         )
 
@@ -71,6 +80,51 @@
         #{vendor},
         #{serial_num},
         #{sys_type}
+        )
+    </select>
+
+    <select id="insertConnector" parameterType="com.woorinet.plugin.demo.DTO.SDN.CONNECTOR">
+        REPLACE INTO
+        SDN.Connector(
+        ems_id,
+        connect_id,
+        connect_type,
+        ne_id,
+        ne_name,
+        rack_id,
+        shelf_id,
+        slot_id,
+        subslot_id,
+        port_id,
+        connect_status,
+        connect_role,
+        connect_idle,
+        connect_llcf,
+        connect_lambda,
+        module_name,
+        connect_pec,
+        connect_serial,
+        unit_type
+        ) VALUES (
+        #{ems_id},
+        #{connect_id},
+        #{connect_type},
+        #{ne_id},
+        #{ne_name},
+        #{rack_id},
+        #{shelf_id},
+        #{slot_id},
+        #{subslot_id},
+        #{port_id},
+        #{connect_status},
+        #{connect_role},
+        #{connect_idle},
+        #{connect_llcf},
+        #{connect_lambda},
+        #{module_name},
+        #{connect_pec},
+        #{connect_serial},
+        #{unit_type}
         )
     </select>
 
