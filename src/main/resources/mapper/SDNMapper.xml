@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.woorinet.plugin.demo.Mapper.SDNMapper" >
+
+    <!--    SETTINHG    -->
+
+    <select id="initDatabase">
+        CREATE DATABASE IF NOT EXISTS SDN
+    </select>
+
+    <select id="initNodeTable">
+        CREATE TABLE IF NOT EXISTS SDN.NODE (
+        ems_id int,
+        ne_id varchar(100) default '',
+        ne_name varchar(100) default '',
+        ne_type varchar(100) default '',
+        ne_model varchar(100) default '',
+        ne_status varchar(100) default '',
+        sw_ver varchar(100) default '',
+        ip_addr varchar(100) default '',
+        vendor varchar(100) default '',
+        serial_num varchar(100) default '',
+        sys_type varchar(100) default '',
+        PRIMARY KEY (ne_id)
+        )
+    </select>
+
+    <!--    INSERT    -->
+
+    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.TL1.NODE">
+        REPLACE INTO
+        SDN.NODE(
+        TID_ID,
+        TID,
+        NODE_TYPE,
+        IP_ADDR,
+        MANUFACTURE,
+        HARDWARE,
+        SOFTWARE,
+        SERIAL_NUMBER,
+        NODE_STATUS,
+        SUBNET,
+        SUBNET_ID,
+        SYSTEM_TYPE
+        ) VALUES (
+        #{TID_ID},
+        #{TID},
+        #{NODE_TYPE},
+        #{IP_ADDR},
+        #{MANUFACTURE},
+        #{HARDWARE},
+        #{SOFTWARE},
+        #{SERIAL_NUMBER},
+        #{NODE_STATUS},
+        #{SUBNET},
+        #{SUBNET_ID},
+        #{SYSTEM_TYPE}
+        )
+    </select>
+
+</mapper>

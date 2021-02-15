@@ -3,8 +3,10 @@ package com.woorinet.plugin.demo;
 import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
+import com.woorinet.plugin.demo.Mapper.SDNMapper;
 import com.woorinet.plugin.demo.Mapper.TL1Mapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
+import com.woorinet.plugin.demo.SDN.SDNManager;
 import com.woorinet.plugin.demo.Tl1.TL1Manager;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
 import io.netty.handler.ssl.SslContextBuilder;
@@ -33,6 +35,9 @@ public class DemoApplication {
 	@Autowired
 	private QNETMapper qnetMapper;
 
+	@Autowired
+	private SDNMapper sdnMapper;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
@@ -40,6 +45,24 @@ public class DemoApplication {
 	@RequestMapping("/")
 	String home() {
 		return "Hello World!";
+	}
+
+	@RequestMapping("/convertTL1")
+	String convertTL1() {
+		try {
+			SDNManager manager = new SDNManager(sdnMapper);
+
+			// Node 조회
+			List<NODE> nodes = tl1Mapper.selectNode();
+			// SYSTEM_INFO 조회
+			List<SYSTEM_INFO> system_infos = tl1Mapper.selectSystemInfo();
+			// Node 테이블 정리
+			manager.SDNSyncNodeList(nodes, system_infos);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "convert complete";
 	}
 
 	@RequestMapping("/synchronization")
