@@ -27,34 +27,32 @@
 
     <!--    INSERT    -->
 
-    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.TL1.NODE">
+    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.SDN.NODE">
         REPLACE INTO
         SDN.NODE(
-        TID_ID,
-        TID,
-        NODE_TYPE,
-        IP_ADDR,
-        MANUFACTURE,
-        HARDWARE,
-        SOFTWARE,
-        SERIAL_NUMBER,
-        NODE_STATUS,
-        SUBNET,
-        SUBNET_ID,
-        SYSTEM_TYPE
+        ems_id,
+        ne_id,
+        ne_name,
+        ne_type,
+        ne_model,
+        ne_status,
+        sw_ver,
+        ip_addr,
+        vendor,
+        serial_num,
+        sys_type
         ) VALUES (
-        #{TID_ID},
-        #{TID},
-        #{NODE_TYPE},
-        #{IP_ADDR},
-        #{MANUFACTURE},
-        #{HARDWARE},
-        #{SOFTWARE},
-        #{SERIAL_NUMBER},
-        #{NODE_STATUS},
-        #{SUBNET},
-        #{SUBNET_ID},
-        #{SYSTEM_TYPE}
+        #{ems_id},
+        #{ne_id},
+        #{ne_name},
+        #{ne_type},
+        #{ne_model},
+        #{ne_status},
+        #{sw_ver},
+        #{ip_addr},
+        #{vendor},
+        #{serial_num},
+        #{sys_type}
         )
     </select>
 

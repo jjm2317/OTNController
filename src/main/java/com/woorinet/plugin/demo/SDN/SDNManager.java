@@ -35,7 +35,7 @@ public class SDNManager {
             sdnNode.setSerial_num("");
             sdnNode.setSys_type(node.getSYSTEM_TYPE());
 
-            System.out.println(sdnNode);
+            sdnMapper.insertNode(sdnNode);
         }
 
     }
