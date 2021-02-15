@@ -27,7 +27,7 @@ public class SDNManager {
             sdnNode.setNe_id(system_info.getVENDOR()+"_"+node.getSYSTEM_TYPE()+"_"+node.getTID());
             sdnNode.setNe_name(node.getTID());
             sdnNode.setNe_type("");
-            //sdnNode.setNe_model();
+            sdnNode.setNe_model(node.getSYSTEM_TYPE());
             if (node.getNODE_STATUS().equals("normal")) {
                 sdnNode.setNe_status(node.getNODE_STATUS());
             } else {
@@ -37,7 +37,7 @@ public class SDNManager {
             sdnNode.setIp_addr(node.getIP_ADDR());
             sdnNode.setVendor(system_info.getVENDOR());
             sdnNode.setSerial_num("");
-            sdnNode.setSys_type(node.getSYSTEM_TYPE());
+            sdnNode.setSys_type("ROTN");
 
             sdnMapper.insertNode(sdnNode);
         }
