@@ -28,7 +28,11 @@ public class SDNManager {
             sdnNode.setNe_name(node.getTID());
             sdnNode.setNe_type("");
             //sdnNode.setNe_model();
-            sdnNode.setNe_status(node.getNODE_STATUS());
+            if (node.getNODE_STATUS().equals("normal")) {
+                sdnNode.setNe_status(node.getNODE_STATUS());
+            } else {
+                sdnNode.setNe_status("broken");
+            }
             sdnNode.setSw_ver(node.getSOFTWARE());
             sdnNode.setIp_addr(node.getIP_ADDR());
             sdnNode.setVendor(system_info.getVENDOR());

@@ -9,7 +9,7 @@
     </select>
 
     <select id="initNodeTable">
-        CREATE TABLE IF NOT EXISTS SDN.NODE (
+        CREATE TABLE IF NOT EXISTS SDN.Node (
         ems_id int,
         ne_id varchar(100) default '',
         ne_name varchar(100) default '',
@@ -25,11 +25,29 @@
         )
     </select>
 
+    <select id="initNodeConnector">
+        CREATE TABLE IF NOT EXISTS SDN.Connector (
+        ems_id int,
+        connect_id varchar(100) default '',
+        connect_name varchar(100) default '',
+        connect_type varchar(100) default '',
+        ne_id varchar(100) default '',
+        ne_name varchar(100) default '',
+        rack_id varchar(100) default '',
+        shelf_id varchar(100) default '',
+        slot_id varchar(100) default '',
+        subslot_id varchar(100) default '',
+        port_id varchar(100) default '',
+        PRIMARY KEY (ne_id)
+        )
+
+    </select>
+
     <!--    INSERT    -->
 
     <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.SDN.NODE">
         REPLACE INTO
-        SDN.NODE(
+        SDN.Node(
         ems_id,
         ne_id,
         ne_name,
