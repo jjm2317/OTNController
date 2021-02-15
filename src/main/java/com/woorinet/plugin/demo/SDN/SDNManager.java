@@ -8,8 +8,10 @@ import java.util.List;
 
 public class SDNManager {
     SDNMapper sdnMapper;
+    String separator;
     public SDNManager(SDNMapper sdnMapper) throws Exception{
         this.sdnMapper = sdnMapper;
+        this.separator = "_";
         sdnMapper.initDatabase();
     }
 
@@ -24,7 +26,7 @@ public class SDNManager {
 
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = new com.woorinet.plugin.demo.DTO.SDN.NODE();
             sdnNode.setEms_id(200009);
-            sdnNode.setNe_id(system_info.getVENDOR()+"_"+node.getSYSTEM_TYPE()+"_"+node.getTID());
+            sdnNode.setNe_id(system_info.getVENDOR()+separator+node.getNODE_TYPE()+separator+node.getTID());
             sdnNode.setNe_name(node.getTID());
             sdnNode.setNe_type("");
             sdnNode.setNe_model(node.getSYSTEM_TYPE());
@@ -37,7 +39,7 @@ public class SDNManager {
             sdnNode.setIp_addr(node.getIP_ADDR());
             sdnNode.setVendor(system_info.getVENDOR());
             sdnNode.setSerial_num("");
-            sdnNode.setSys_type("ROTN");
+            sdnNode.setSys_type(node.getNODE_TYPE());
 
             sdnMapper.insertNode(sdnNode);
         }

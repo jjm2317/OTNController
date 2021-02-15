@@ -38,7 +38,7 @@
         slot_id varchar(100) default '',
         subslot_id varchar(100) default '',
         port_id varchar(100) default '',
-        PRIMARY KEY (ne_id)
+        PRIMARY KEY (connect_id)
         )
 
     </select>
