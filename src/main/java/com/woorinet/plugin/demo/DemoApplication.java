@@ -50,14 +50,19 @@ public class DemoApplication {
 	@RequestMapping("/convertTL1")
 	String convertTL1() {
 		try {
-			SDNManager manager = new SDNManager(sdnMapper);
-
 			// Node 조회
 			List<NODE> nodes = tl1Mapper.selectNode();
 			// SYSTEM_INFO 조회
 			List<SYSTEM_INFO> system_infos = tl1Mapper.selectSystemInfo();
-			// Node 테이블 정리
-			manager.SDNSyncNodeList(nodes, system_infos);
+			// ODU_NODE_CONNECTOR 조회
+			List<ODU_NODE_CONNECTOR> odu_node_connectors = tl1Mapper.selectOduNodeConnector();
+
+			SDNManager manager = new SDNManager(sdnMapper, nodes, system_infos,odu_node_connectors);
+
+			// Node 테이블 생성
+			manager.SDNSyncNodeList();
+			// Connector 테이블 생성
+			manager.SDNSyncConnectorList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
