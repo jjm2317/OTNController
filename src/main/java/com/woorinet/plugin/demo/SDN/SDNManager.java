@@ -131,7 +131,13 @@ public class SDNManager {
                 connector.setConnect_serial("");
                 connector.setUnit_type("");
             } else {
-                connector.setConnect_type(optic_power.getPART_NUMBER()); // 구글링 해야됨
+                if(optic_power.getPART_NUMBER().equals("TR-PX13L-NG2") ) {
+                    connector.setConnect_type("sfp+");
+                } else if (optic_power.getPART_NUMBER().equals("TR-PX13L-NG2") || optic_power.getPART_NUMBER().equals("EOLP-1396-10") || optic_power.getPART_NUMBER().equals("FTLX1471D3BNL") ) {
+                    connector.setConnect_type("sfp");
+                } else {
+                    connector.setConnect_type(optic_power.getPART_NUMBER()); // 구글링 해야됨
+                }
                 connector.setConnect_idle("occupied");
                 connector.setConnect_llcf("");
                 connector.setConnect_lambda(optic_power.getTX_WAVELENGTH());
