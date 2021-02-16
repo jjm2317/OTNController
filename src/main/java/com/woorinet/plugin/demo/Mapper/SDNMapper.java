@@ -1,11 +1,7 @@
 package com.woorinet.plugin.demo.Mapper;
 
 
-import com.woorinet.plugin.demo.DTO.QNET.PATH;
-import com.woorinet.plugin.demo.DTO.SDN.CONNECTOR;
-import com.woorinet.plugin.demo.DTO.SDN.NODE;
-import com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF;
-import com.woorinet.plugin.demo.DTO.TL1.SERVICE;
+import com.woorinet.plugin.demo.DTO.SDN.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -23,10 +19,10 @@ public interface SDNMapper {
     void initPath() throws Exception;
     void insertNode(NODE node) throws Exception;
     void insertConnector(CONNECTOR connector) throws Exception;
-//    void insertLink(LINK link) throws Exception;
+    void insertLink(LINK link) throws Exception;
     void insertService(SERVICE service) throws Exception;
-//    void insertTunnel(TUNNEL tunnel) throws Exception;
+    void insertTunnel(TUNNEL tunnel) throws Exception;
     void insertAccessIf(ACCESS_IF accessIf) throws Exception;
-//    void insertConstraint(CONSTRAINT constraint) throws Exception;
+    void insertConstraint(CONSTRAINT constraint) throws Exception;
     void insertPath(PATH path) throws Exception;
 }

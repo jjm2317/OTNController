@@ -36,7 +36,6 @@ public class NODE {
         this.sys_type = sys_type;
     }
 
-
     @Override
     public String toString() {
         return "NODE{" +
