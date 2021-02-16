@@ -287,6 +287,17 @@ public class TL1Manager {
         }
     }
 
+    public void Tl1SyncOPTICPOWER(String TID, TL1Mapper tl1Mapper) throws Exception {
+        String cmd = "RTRV-OPTIC-POWER:" + TID + ";";
+        tl1Mapper.initDatabase();
+        tl1Mapper.initOpticPowerTable();
+        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+        for (String[] fields: fieldsList) {
+            System.out.println(fields);
+            tl1Mapper.insertOpticPower(new OPTIC_POWER(fields));
+        }
+    }
+
 
 
     public String ExecuteCmd(String cmd) throws IOException {

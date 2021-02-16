@@ -212,6 +212,10 @@ public class DemoApplication {
 				manager.Tl1SyncL2Lacp(node.getTID(), tl1Mapper);
 			}
 
+			//OPTIC-POWER DB연동
+			for (NODE node: nodes) {
+				manager.Tl1SyncOPTICPOWER(node.getTID(), tl1Mapper);
+			}
 
 			//TL1 로그아웃
 			manager.Tl1Logout("admin");
