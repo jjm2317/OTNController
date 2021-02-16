@@ -34,7 +34,11 @@ public class SDNManager {
 
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = new com.woorinet.plugin.demo.DTO.SDN.NODE();
             sdnNode.setEms_id(200009);
-            sdnNode.setNe_id(system_info.getVENDOR()+separator+node.getNODE_TYPE()+separator+node.getTID());
+            if (system_info != null) {
+                sdnNode.setNe_id(system_info.getVENDOR() + separator + node.getNODE_TYPE() + separator + node.getTID());
+            } else {
+                sdnNode.setNe_id("");
+            }
             sdnNode.setNe_name(node.getTID());
             sdnNode.setNe_type("");
             sdnNode.setNe_model(node.getSYSTEM_TYPE());
