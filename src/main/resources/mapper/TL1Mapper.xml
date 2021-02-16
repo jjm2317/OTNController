@@ -929,6 +929,34 @@
         )
     </select>
 
+    <select id="initOpticPowerTable">
+        CREATE TABLE IF NOT EXISTS TL1.OPTIC_POWER (
+        `TID` varchar(100) default '',
+        `AID` varchar(100) default '',
+        `UNIT_TYPE` varchar(100) default '',
+        `MODULE_EQUIP` varchar(100) default '',
+        `CORE` varchar(100) default '',
+        `LCORSC` varchar(100) default '',
+        `UPCORAPC` varchar(100) default '',
+        `SUPPORT_SIGNAL` varchar(100) default '',
+        `MODULE_TYPE` varchar(100) default '',
+        `TX_CHANNEL` varchar(100) default '',
+        `TX_WAVELENGTH` varchar(100) default '',
+        `RX_CHANNEL` varchar(100) default '',
+        `RX_WAVELENGTH` varchar(100) default '',
+        `DISTANCE` varchar(100) default '',
+        `TX_POWER` varchar(100) default '',
+        `RX_POWER` varchar(100) default '',
+        `TX_BIAS_CURRENT` varchar(100) default '',
+        `FAULT_NUMBER` varchar(100) default '',
+        `FAULT_DISTANCE` varchar(100) default '',
+        `VENDOR` varchar(100) default '',
+        `PART_NUMBER` varchar(100) default '',
+        `SERIAL` varchar(100) default '',
+        PRIMARY KEY (`TID`, `AID`)
+        )
+    </select>
+
 
 
 
@@ -1110,6 +1138,13 @@
             *
         FROM
             TL1.L2_LACP
+    </select>
+
+    <select id="selectOpticPower" resultType="com.woorinet.plugin.demo.DTO.TL1.OPTIC_POWER">
+        SELECT
+        *
+        FROM
+        TL1.OPTIC_POWER
     </select>
 
 
@@ -2834,6 +2869,57 @@
                 #{PARTNER_SYS_ID},
                 #{LINK_SYNC}
             )
+    </select>
+
+    <select id="insertOpticPower" parameterType="com.woorinet.plugin.demo.DTO.TL1.OPTIC_POWER">
+        REPLACE INTO
+        TL1.OPTIC_POWER(
+        `TID`,
+        `AID`,
+        `UNIT_TYPE`,
+        `MODULE_EQUIP`,
+        `CORE`,
+        `LCORSC`,
+        `UPCORAPC`,
+        `SUPPORT_SIGNAL`,
+        `MODULE_TYPE`,
+        `TX_CHANNEL`,
+        `TX_WAVELENGTH`,
+        `RX_CHANNEL`,
+        `RX_WAVELENGTH`,
+        `DISTANCE`,
+        `TX_POWER`,
+        `RX_POWER`,
+        `TX_BIAS_CURRENT`,
+        `FAULT_NUMBER`,
+        `FAULT_DISTANCE`,
+        `VENDOR`,
+        `PART_NUMBER`,
+        `SERIAL`
+        ) VALUES (
+        #{TID},
+        #{AID},
+        #{UNIT_TYPE},
+        #{MODULE_EQUIP},
+        #{CORE},
+        #{LCORSC},
+        #{UPCORAPC},
+        #{SUPPORT_SIGNAL},
+        #{MODULE_TYPE},
+        #{TX_CHANNEL},
+        #{TX_WAVELENGTH},
+        #{RX_CHANNEL},
+        #{RX_WAVELENGTH},
+        #{DISTANCE},
+        #{TX_POWER},
+        #{RX_POWER},
+        #{TX_BIAS_CURRENT},
+        #{FAULT_NUMBER},
+        #{FAULT_DISTANCE},
+        #{VENDOR},
+        #{PART_NUMBER},
+        #{SERIAL}
+        )
     </select>
 
 

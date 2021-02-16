@@ -35,6 +35,7 @@ public interface TL1Mapper {
     void initCesPortTable() throws Exception;
     void initCesPwTable() throws Exception;
     void initL2LacpTable() throws Exception;
+    void initOpticPowerTable() throws Exception;
 
 
     List<NODE> selectNode() throws Exception;
@@ -62,6 +63,7 @@ public interface TL1Mapper {
     List<CES_PORT> selectCesPort() throws Exception;
     List<CES_PW> selectCesPw() throws Exception;
     List<L2_LACP> selectL2Lacp() throws Exception;
+    List<OPTIC_POWER> selectOpticPower() throws Exception;
 
     void insertNode(NODE node) throws Exception;
     void insertSystemInfo(SYSTEM_INFO systemInfo) throws Exception;
@@ -88,4 +90,5 @@ public interface TL1Mapper {
     void insertCesPort(CES_PORT cesPort) throws Exception;
     void insertCesPw(CES_PW cesPw) throws Exception;
     void insertL2Lacp(L2_LACP l2Lacp) throws Exception;
+    void insertOpticPower(OPTIC_POWER optic_power) throws Exception;
 }
