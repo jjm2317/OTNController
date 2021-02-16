@@ -9,6 +9,7 @@ import lombok.Setter;
 public class CONNECTOR {
     int ems_id;
     String connect_id;
+    String connect_name;
     String connect_type;
     String ne_id;
     String ne_name;
@@ -31,9 +32,10 @@ public class CONNECTOR {
 
     }
 
-    public CONNECTOR(int ems_id, String connect_id, String connect_type, String ne_id, String ne_name, String rack_id, String shelf_id, String slot_id, String subslot_id, String port_id, String connect_status, String connect_role, String connect_idle, String connect_llcf, String connect_lambda, String module_name, String connect_pec, String connect_serial, String unit_type) {
+    public CONNECTOR(int ems_id, String connect_id,String connect_name, String connect_type, String ne_id, String ne_name, String rack_id, String shelf_id, String slot_id, String subslot_id, String port_id, String connect_status, String connect_role, String connect_idle, String connect_llcf, String connect_lambda, String module_name, String connect_pec, String connect_serial, String unit_type) {
         this.ems_id = ems_id;
         this.connect_id = connect_id;
+        this.connect_name = connect_name;
         this.connect_type = connect_type;
         this.ne_id = ne_id;
         this.ne_name = ne_name;
@@ -58,6 +60,7 @@ public class CONNECTOR {
         return "CONNECTOR{" +
                 "ems_id=" + ems_id +
                 ", connect_id='" + connect_id + '\'' +
+                ", connect_name='" + connect_name + '\'' +
                 ", connect_type='" + connect_type + '\'' +
                 ", ne_id='" + ne_id + '\'' +
                 ", ne_name='" + ne_name + '\'' +

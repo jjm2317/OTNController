@@ -56,8 +56,10 @@ public class DemoApplication {
 			List<SYSTEM_INFO> system_infos = tl1Mapper.selectSystemInfo();
 			// ODU_NODE_CONNECTOR 조회
 			List<ODU_NODE_CONNECTOR> odu_node_connectors = tl1Mapper.selectOduNodeConnector();
+			// OPTIC_POWER 조회
+			List<OPTIC_POWER> optic_powers = tl1Mapper.selectOpticPower();
 
-			SDNManager manager = new SDNManager(sdnMapper, nodes, system_infos,odu_node_connectors);
+			SDNManager manager = new SDNManager(sdnMapper, nodes, system_infos,odu_node_connectors,optic_powers);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();

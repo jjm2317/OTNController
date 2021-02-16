@@ -1,5 +1,10 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class OPTIC_POWER {
     String TID;
     String AID;
