@@ -1,10 +1,8 @@
 package com.woorinet.plugin.demo.SDN;
 
 import com.woorinet.plugin.demo.DTO.SDN.CONNECTOR;
-import com.woorinet.plugin.demo.DTO.TL1.NODE;
-import com.woorinet.plugin.demo.DTO.TL1.ODU_NODE_CONNECTOR;
-import com.woorinet.plugin.demo.DTO.TL1.OPTIC_POWER;
-import com.woorinet.plugin.demo.DTO.TL1.SYSTEM_INFO;
+import com.woorinet.plugin.demo.DTO.SDN.LINK;
+import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Mapper.SDNMapper;
 
 import java.util.HashMap;
@@ -17,19 +15,26 @@ public class SDNManager {
     List<SYSTEM_INFO> system_infos;
     List<ODU_NODE_CONNECTOR> odu_node_connectors;
     List<OPTIC_POWER> optic_powers;
+    List<ODU> odus;
+    List<ODU_MPLS_IF> odu_mpls_ifs;
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, SYSTEM_INFO> system_infoHashMap = new HashMap<>();
     HashMap<String, OPTIC_POWER> optic_powerHashMap = new HashMap<>();
+    HashMap<String, ODU_NODE_CONNECTOR> odu_node_connectorHashMap = new HashMap<>();
+    HashMap<String, ODU> oduHashMap = new HashMap<>();
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
-    public SDNManager(SDNMapper sdnMapper, List<NODE> nodes, List<SYSTEM_INFO> system_infos,  List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers) throws Exception{
+    HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
+    public SDNManager(SDNMapper sdnMapper, List<NODE> nodes, List<SYSTEM_INFO> system_infos,  List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception{
         this.sdnMapper = sdnMapper;
         this.separator = "_";
         this.nodes = nodes;
         this.system_infos = system_infos;
         this.odu_node_connectors = odu_node_connectors;
         this.optic_powers = optic_powers;
+        this.odus = odus;
+        this.odu_mpls_ifs = odu_mpls_ifs;
 
         sdnMapper.initDatabase();
         makeHashMap();
@@ -44,6 +49,12 @@ public class SDNManager {
         }
         for(OPTIC_POWER optic_power : optic_powers) {
             optic_powerHashMap.put(optic_power.getTID()+"/"+optic_power.getAID(), optic_power);
+        }
+        for(ODU odu : odus) {
+            oduHashMap.put(odu.getTID(), odu);
+        }
+        for(ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
+            odu_node_connectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), odu_node_connector);
         }
 
     }
@@ -133,8 +144,69 @@ public class SDNManager {
 
 
             sdnMapper.insertConnector(connector);
+            sdnConnectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), connector);
         }
 
+    }
+
+    public void SDNSyncLinkList ( ) throws Exception {
+        sdnMapper.initLink();
+
+        for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
+            LINK link = new LINK();
+
+//
+            SYSTEM_INFO src_system_info = system_infoHashMap.get(odu_mpls_if.getSRC_TID());
+            SYSTEM_INFO dst_system_info = system_infoHashMap.get(odu_mpls_if.getDST_TID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE src_sdnNode = sdnNodeHashMap.get(odu_mpls_if.getSRC_TID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE dst_sdnNode = sdnNodeHashMap.get(odu_mpls_if.getDST_TID());
+            CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(odu_mpls_if.getSRC_TID()+ '/' + odu_mpls_if.getSRC_PORT());
+            CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(odu_mpls_if.getDST_TID()+ '/' + odu_mpls_if.getDST_PORT());
+            OPTIC_POWER optic_power = optic_powerHashMap.get(odu_mpls_if.getTID() + '/' + odu_mpls_if.getMPLS_TP_ID());
+            ODU odu = oduHashMap.get(odu_mpls_if.getTID());
+
+            link.setEms_id(200009);
+            link.setDst_ems_id(200009);
+            link.setLink_id(src_system_info.getVENDOR() + separator + src_sdnNode.getSys_type() + separator + src_sdnNode.getNe_name() + separator +
+                    src_sdnConnector.getShelf_id() + separator + src_sdnConnector.getSlot_id() + separator + src_sdnConnector.getPort_id()
+                    + '-' + dst_system_info.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
+                    dst_sdnConnector.getShelf_id() + separator + dst_sdnConnector.getSlot_id() + separator + dst_sdnConnector.getPort_id());
+            link.setLink_nm(odu_mpls_if.getNAME());
+            link.setSrc_ne_id(src_sdnNode.getNe_id());
+            link.setSrc_ne_name(src_sdnNode.getNe_name());
+            link.setSrc_node_connector_id(src_sdnConnector.getConnect_id());
+            link.setDst_ne_id(dst_sdnNode.getNe_id());
+            link.setDst_ne_name(dst_sdnNode.getNe_name());
+            link.setDst_node_connector_id(dst_sdnConnector.getConnect_id());
+            link.setLink_type(odu_mpls_if.getLINK_TYPE());
+            link.setLink_status(odu_mpls_if.getOPERATION_STATUS());
+            link.setLink_category("");
+            link.setHigh_order_tunnel("");
+            link.setLatency("");
+            link.setDistance(optic_power.getDISTANCE());
+            link.setSrlg("");
+            link.setOvpn("");
+            link.setTimeslot(odu.getTSMAP());
+            link.setLambda(optic_power.getTX_WAVELENGTH());
+            link.setMaximum_odu0s(Integer.parseInt(odu_mpls_if.getMAXIMUM_BANDWIDTH()));
+            link.setMaximum_odu1s(-1);
+            link.setMaximum_odu2s(-1);
+            link.setMaximum_odu2es(-1);
+            link.setMaximum_odu3s(-1);
+            link.setMaximum_odu4s(-1);
+            link.setMaximum_odu4cns(-1);
+            link.setMaximum_oduflexs(-1);
+            link.setAvailable_odu0s(Integer.parseInt(odu_mpls_if.getAVAILABLE_BANDWIDTH()));
+            link.setAvailable_odu1s(-1);
+            link.setAvailable_odu2s(-1);
+            link.setAvailable_odu2es(-1);
+            link.setAvailable_odu3s(-1);
+            link.setAvailable_odu4s(-1);
+            link.setAvailable_odu4cns(-1);
+            link.setAvailable_oduflexs(-1);
+
+            sdnMapper.insertLink(link);
+        }
     }
 
 

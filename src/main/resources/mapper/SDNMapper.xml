@@ -53,7 +53,7 @@
     </select>
 
     <select id="initLink">
-        CREATE TABLE IF NOT EXISTS SDN.Link (
+        CREATE TABLE IF NOT EXISTS SDN.LINK (
         ems_id int,
         dst_ems_id int,
         link_id varchar(100) default '',
@@ -64,8 +64,8 @@
         dst_ne_id varchar(100) default '',
         dst_ne_name varchar(100) default '',
         dst_node_connector_id varchar(100) default '',
-        link_ype varchar(100) default '',
-        link_stats varchar(100) default '',
+        link_type varchar(100) default '',
+        link_status varchar(100) default '',
         link_category varchar(100) default '',
         high_order_tunnel varchar(100) default '',
         latency varchar(100) default '',
@@ -81,7 +81,7 @@
         maximum_odu3s int,
         maximum_odu4s int,
         maximum_odu4cns int,
-        maximum_odu4flexs int,
+        maximum_oduflexs int,
         available_odu0s int,
         available_odu1s int,
         available_odu2s int,
@@ -95,7 +95,7 @@
     </select>
 
     <select id="initService">
-        CREATE TABLE IF NOT EXISTS SDN.Service (
+        CREATE TABLE IF NOT EXISTS SDN.SERVICE (
         ems_id int,
         service_id varchar(100) default '',
         src_ne_id varchar(100) default '',
@@ -121,7 +121,7 @@
     </select>
 
     <select id="initTunnel">
-        CREATE TABLE IF NOT EXISTS SDN.Tunnel (
+        CREATE TABLE IF NOT EXISTS SDN.TUNNEL (
         ems_id int,
         tunnel_id varchar(100) default '',
         src_ne_id varchar(100) default '',
@@ -155,7 +155,7 @@
     </select>
 
     <select id="initAccessIf">
-        CREATE TABLE IF NOT EXISTS SDN.AccessIf (
+        CREATE TABLE IF NOT EXISTS SDN.ACCESSIF (
         ems_id int,
         accessif_id varchar(100) default '',
         accessif_name varchar(100) default '',
@@ -170,7 +170,7 @@
     </select>
 
     <select id="initConstraint">
-        CREATE TABLE IF NOT EXISTS SDN.Constraint (
+        CREATE TABLE IF NOT EXISTS SDN.CONSTRAINT (
         ems_id int,
         service_id varchar(100) default '',
         const_id varchar(100) default '',
@@ -182,7 +182,7 @@
     </select>
 
     <select id="initPath">
-        CREATE TABLE IF NOT EXISTS SDN.Path (
+        CREATE TABLE IF NOT EXISTS SDN.PATH (
         ems_id int,
         service_id varchar(100) default '',
         path_type varchar(100) default '',
@@ -277,26 +277,78 @@
         REPLACE INTO
         SDN.Link(
         ems_id,
-        service_id,
-        path_type,
-        connection_idx,
-        connection_type,
-        direction_type,
-        tp_type,
-        instance_type,
-        instance_ref,
-        ref_type
+        dst_ems_id,
+        link_id,
+        link_nm,
+        src_ne_id,
+        src_ne_name,
+        src_node_connector_id,
+        dst_ne_id,
+        dst_ne_name,
+        dst_node_connector_id,
+        link_type,
+        link_status,
+        link_category,
+        high_order_tunnel,
+        latency,
+        distance,
+        srlg,
+        ovpn,
+        timeslot,
+        lambda,
+        maximum_odu0s,
+        maximum_odu1s,
+        maximum_odu2s,
+        maximum_odu2es,
+        maximum_odu3s,
+        maximum_odu4s,
+        maximum_odu4cns,
+        maximum_oduflexs,
+        available_odu0s,
+        available_odu1s,
+        available_odu2s,
+        available_odu2es,
+        available_odu3s,
+        available_odu4s,
+        available_odu4cns,
+        available_oduflexs
         ) VALUES (
         #{ems_id},
-        #{service_id},
-        #{path_type},
-        #{connection_idx},
-        #{connection_type},
-        #{direction_type},
-        #{tp_type},
-        #{instance_type},
-        #{instance_ref},
-        #{ref_type}
+        #{dst_ems_id},
+        #{link_id},
+        #{link_nm},
+        #{src_ne_id},
+        #{src_ne_name},
+        #{src_node_connector_id},
+        #{dst_ne_id},
+        #{dst_ne_name},
+        #{dst_node_connector_id},
+        #{link_type},
+        #{link_status},
+        #{link_category},
+        #{high_order_tunnel},
+        #{latency},
+        #{distance},
+        #{srlg},
+        #{ovpn},
+        #{timeslot},
+        #{lambda},
+        #{maximum_odu0s},
+        #{maximum_odu1s},
+        #{maximum_odu2s},
+        #{maximum_odu2es},
+        #{maximum_odu3s},
+        #{maximum_odu4s},
+        #{maximum_odu4cns},
+        #{maximum_oduflexs},
+        #{available_odu0s},
+        #{available_odu1s},
+        #{available_odu2s},
+        #{available_odu2es},
+        #{available_odu3s},
+        #{available_odu4s},
+        #{available_odu4cns},
+        #{available_oduflexs}
         )
     </select>
 

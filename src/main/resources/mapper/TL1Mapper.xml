@@ -1018,14 +1018,14 @@
         SELECT
             *
         FROM
-            TL1.MFLS_IF
+            TL1.MPLS_IF
     </select>
 
     <select id="selectOduMplsIf" resultType="com.woorinet.plugin.demo.DTO.TL1.ODU_MPLS_IF">
         SELECT
             *
         FROM
-            TL1.ODU_MFLS_IF
+            TL1.ODU_MPLS_IF
     </select>
 
     <select id="selectSTunnel" resultType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL">

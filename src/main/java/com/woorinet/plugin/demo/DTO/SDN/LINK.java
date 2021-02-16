@@ -17,8 +17,8 @@ public class LINK {
     String dst_ne_id;
     String dst_ne_name;
     String dst_node_connector_id;
-    String link_ype;
-    String link_stats;
+    String link_type;
+    String link_status;
     String link_category;
     String high_order_tunnel;
     String latency;
@@ -34,7 +34,7 @@ public class LINK {
     int maximum_odu3s;
     int maximum_odu4s;
     int maximum_odu4cns;
-    int maximum_odu4flexs;
+    int maximum_oduflexs;
     int available_odu0s;
     int available_odu1s;
     int available_odu2s;
@@ -58,8 +58,8 @@ public class LINK {
         this.dst_ne_id = dst_ne_id;
         this.dst_ne_name = dst_ne_name;
         this.dst_node_connector_id = dst_node_connector_id;
-        this.link_ype = link_ype;
-        this.link_stats = link_stats;
+        this.link_type = link_type;
+        this.link_status = link_status;
         this.link_category = link_category;
         this.high_order_tunnel = high_order_tunnel;
         this.latency = latency;
@@ -75,7 +75,7 @@ public class LINK {
         this.maximum_odu3s = maximum_odu3s;
         this.maximum_odu4s = maximum_odu4s;
         this.maximum_odu4cns = maximum_odu4cns;
-        this.maximum_odu4flexs = maximum_odu4flexs;
+        this.maximum_oduflexs = maximum_oduflexs;
         this.available_odu0s = available_odu0s;
         this.available_odu1s = available_odu1s;
         this.available_odu2s = available_odu2s;
@@ -99,8 +99,8 @@ public class LINK {
                 ", dst_ne_id='" + dst_ne_id + '\'' +
                 ", dst_ne_name='" + dst_ne_name + '\'' +
                 ", dst_node_connector_id='" + dst_node_connector_id + '\'' +
-                ", link_ype='" + link_ype + '\'' +
-                ", link_stats='" + link_stats + '\'' +
+                ", link_type='" + link_type + '\'' +
+                ", link_status='" + link_status + '\'' +
                 ", link_category='" + link_category + '\'' +
                 ", high_order_tunnel='" + high_order_tunnel + '\'' +
                 ", latency='" + latency + '\'' +
@@ -116,7 +116,7 @@ public class LINK {
                 ", maximum_odu3s=" + maximum_odu3s +
                 ", maximum_odu4s=" + maximum_odu4s +
                 ", maximum_odu4cns=" + maximum_odu4cns +
-                ", maximum_odu4flexs=" + maximum_odu4flexs +
+                ", maximum_oduflexs=" + maximum_oduflexs +
                 ", available_odu0s=" + available_odu0s +
                 ", available_odu1s=" + available_odu1s +
                 ", available_odu2s=" + available_odu2s +
