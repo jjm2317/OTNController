@@ -273,7 +273,7 @@
         )
     </select>
 
-    <select id="insertLink" parameterType="com.woorinet.plugin.demo.DTO.SDN.Link">
+    <select id="insertLink" parameterType="com.woorinet.plugin.demo.DTO.SDN.LINK">
         REPLACE INTO
         SDN.Link(
         ems_id,
@@ -300,7 +300,7 @@
         )
     </select>
 
-    <select id="insertService" parameterType="com.woorinet.plugin.demo.DTO.SDN.Service">
+    <select id="insertService" parameterType="com.woorinet.plugin.demo.DTO.SDN.SERVICE">
         REPLACE INTO
         SDN.Service(
         ems_id,
@@ -347,7 +347,7 @@
         )
     </select>
 
-    <select id="insertTunnel" parameterType="com.woorinet.plugin.demo.DTO.SDN.Tunnel">
+    <select id="insertTunnel" parameterType="com.woorinet.plugin.demo.DTO.SDN.TUNNEL">
         REPLACE INTO
         SDN.Tunnel(
         ems_id,
@@ -410,7 +410,7 @@
         )
     </select>
 
-    <select id="insertAccessIf" parameterType="com.woorinet.plugin.demo.DTO.SDN.AccessIf">
+    <select id="insertAccessIf" parameterType="com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF">
         REPLACE INTO
         SDN.AccessIf(
         ems_id,
@@ -435,7 +435,7 @@
         )
     </select>
 
-    <select id="insertConstraint" parameterType="com.woorinet.plugin.demo.DTO.SDN.Constraint">
+    <select id="insertConstraint" parameterType="com.woorinet.plugin.demo.DTO.SDN.CONSTRAINT">
         REPLACE INTO
         SDN.Constraint(
         ems_id,
@@ -456,7 +456,7 @@
         )
     </select>
 
-    <select id="insertPath" parameterType="com.woorinet.plugin.demo.DTO.SDN.Path">
+    <select id="insertPath" parameterType="com.woorinet.plugin.demo.DTO.SDN.PATH">
         REPLACE INTO
         SDN.Path(
         ems_id,
