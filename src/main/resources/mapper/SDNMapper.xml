@@ -52,7 +52,7 @@
 
     </select>
 
-    <select id="initNodeLink">
+    <select id="initLink">
         CREATE TABLE IF NOT EXISTS SDN.Link (
         ems_id int,
         dst_ems_id int,
@@ -94,7 +94,7 @@
         )
     </select>
 
-    <select id="initNodeService">
+    <select id="initService">
         CREATE TABLE IF NOT EXISTS SDN.Service (
         ems_id int,
         service_id varchar(100) default '',
@@ -120,7 +120,7 @@
         )
     </select>
 
-    <select id="initNodeTunnel">
+    <select id="initTunnel">
         CREATE TABLE IF NOT EXISTS SDN.Tunnel (
         ems_id int,
         tunnel_id varchar(100) default '',
@@ -154,7 +154,7 @@
         )
     </select>
 
-    <select id="initNodeAccessIf">
+    <select id="initAccessIf">
         CREATE TABLE IF NOT EXISTS SDN.AccessIf (
         ems_id int,
         accessif_id varchar(100) default '',
@@ -169,7 +169,7 @@
         )
     </select>
 
-    <select id="initNodeConstraint">
+    <select id="initConstraint">
         CREATE TABLE IF NOT EXISTS SDN.Constraint (
         ems_id int,
         service_id varchar(100) default '',
@@ -181,7 +181,7 @@
         )
     </select>
 
-    <select id="initNodePath">
+    <select id="initPath">
         CREATE TABLE IF NOT EXISTS SDN.Path (
         ems_id int,
         service_id varchar(100) default '',
