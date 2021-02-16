@@ -1,6 +1,8 @@
 package com.woorinet.plugin.demo.SDN;
 
+import com.woorinet.plugin.demo.DTO.SDN.CONNECTOR;
 import com.woorinet.plugin.demo.DTO.TL1.NODE;
+import com.woorinet.plugin.demo.DTO.TL1.ODU_NODE_CONNECTOR;
 import com.woorinet.plugin.demo.DTO.TL1.SYSTEM_INFO;
 import com.woorinet.plugin.demo.Mapper.SDNMapper;
 
@@ -9,14 +11,20 @@ import java.util.List;
 public class SDNManager {
     SDNMapper sdnMapper;
     String separator;
-    public SDNManager(SDNMapper sdnMapper) throws Exception{
+    List<NODE> nodes;
+    List<SYSTEM_INFO> system_infos;
+    List<ODU_NODE_CONNECTOR> odu_node_connectors;
+    public SDNManager(SDNMapper sdnMapper, List<NODE> nodes, List<SYSTEM_INFO> system_infos,  List<ODU_NODE_CONNECTOR> odu_node_connectors) throws Exception{
         this.sdnMapper = sdnMapper;
         this.separator = "_";
+        this.nodes = nodes;
+        this.system_infos = system_infos;
+        this.odu_node_connectors = odu_node_connectors;
         sdnMapper.initDatabase();
     }
 
 
-    public void SDNSyncNodeList(List<NODE> nodes, List<SYSTEM_INFO> system_infos) throws Exception {
+    public void SDNSyncNodeList() throws Exception {
         sdnMapper.initNodeTable();
 
         for (NODE node: nodes) {
@@ -42,6 +50,15 @@ public class SDNManager {
             sdnNode.setSys_type(node.getNODE_TYPE());
 
             sdnMapper.insertNode(sdnNode);
+        }
+
+    }
+
+    public void SDNSyncConnectorList( ) throws Exception {
+        sdnMapper.initConnector();
+
+        for(ODU_NODE_CONNECTOR odu_node_connector :  odu_node_connectors) {
+
         }
 
     }

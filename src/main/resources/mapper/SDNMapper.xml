@@ -25,7 +25,7 @@
         )
     </select>
 
-    <select id="initNodeConnector">
+    <select id="initConnector">
         CREATE TABLE IF NOT EXISTS SDN.Connector (
         ems_id int,
         connect_id varchar(100) default '',
