@@ -196,6 +196,7 @@
         PRIMARY KEY (service_id)
         )
     </select>
+
     <!--    INSERT    -->
 
     <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.SDN.NODE">
@@ -481,5 +482,6 @@
         #{ref_type}
         )
     </select>
+
 
 </mapper>
