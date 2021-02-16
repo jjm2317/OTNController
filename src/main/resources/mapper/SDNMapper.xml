@@ -52,6 +52,148 @@
 
     </select>
 
+    <select id="initNodeLink">
+        CREATE TABLE IF NOT EXISTS SDN.Link (
+        ems_id int,
+        dst_ems_id int,
+        link_id varchar(100) default '',
+        link_nm varchar(100) default '',
+        src_ne_id varchar(100) default '',
+        src_ne_name varchar(100) default '',
+        src_node_connector_id varchar(100) default '',
+        dst_ne_id varchar(100) default '',
+        dst_ne_name varchar(100) default '',
+        dst_node_connector_id varchar(100) default '',
+        link_ype varchar(100) default '',
+        link_stats varchar(100) default '',
+        link_category varchar(100) default '',
+        high_order_tunnel varchar(100) default '',
+        latency varchar(100) default '',
+        distance varchar(100) default '',
+        srlg varchar(100) default '',
+        ovpn varchar(100) default '',
+        timeslot varchar(100) default '',
+        lambda varchar(100) default '',
+        maximum_odu0s int,
+        maximum_odu1s int,
+        maximum_odu2s int,
+        maximum_odu2es int,
+        maximum_odu3s int,
+        maximum_odu4s int,
+        maximum_odu4cns int,
+        maximum_odu4flexs int,
+        available_odu0s int,
+        available_odu1s int,
+        available_odu2s int,
+        available_odu2es int,
+        available_odu3s int,
+        available_odu4s int,
+        available_odu4cns int,
+        available_oduflexs int,
+        PRIMARY KEY (link_id)
+        )
+    </select>
+
+    <select id="initNodeService">
+        CREATE TABLE IF NOT EXISTS SDN.Service (
+        ems_id int,
+        service_id varchar(100) default '',
+        src_ne_id varchar(100) default '',
+        src_ne_name varchar(100) default '',
+        src_connector_id varchar(100) default '',
+        src_accessif_type varchar(100) default '',
+        dst_ne_id varchar(100) default '',
+        dst_ne_name varchar(100) default '',
+        dst_connector_id varchar(100) default '',
+        dst_accessif_type varchar(100) default '',
+        service_type varchar(100) default '',
+        service_name varchar(100) default '',
+        network_type varchar(100) default '',
+        service_status varchar(100) default '',
+        rate_type varchar(100) default '',
+        service_rate varchar(100) default '',
+        latency varchar(100) default '',
+        wavelength varchar(100) default '',
+        active_path varchar(100) default '',
+        creation_date varchar(100) default '',
+        PRIMARY KEY (service_id)
+        )
+    </select>
+
+    <select id="initNodeTunnel">
+        CREATE TABLE IF NOT EXISTS SDN.Tunnel (
+        ems_id int,
+        tunnel_id varchar(100) default '',
+        src_ne_id varchar(100) default '',
+        src_ne_name varchar(100) default '',
+        dst_ne_id varchar(100) default '',
+        dst_ne_name varchar(100) default '',
+        rate_type varchar(100) default '',
+        multiple_rate varchar(100) default '',
+        local_id varchar(100) default '',
+        request_id varchar(100) default '',
+        tunnel_name varchar(100) default '',
+        tunnel_type varchar(100) default '',
+        tunnel_status varchar(100) default '',
+        configuration_action varchar(100) default '',
+        configuration_result_type varchar(100) default '',
+        tunnel_oam_enabler varchar(100) default '',
+        deployment_enabler varchar(100) default '',
+        deployment_status varchar(100) default '',
+        active_path varchar(100) default '',
+        src_node_ref varchar(100) default '',
+        dst_node_ref varchar(100) default '',
+        service_ref varchar(100) default '',
+        accessif_ref varchar(100) default '',
+        protection_type varchar(100) default '',
+        working_path varchar(100) default '',
+        protection_path varchar(100) default '',
+        service_mapping varchar(100) default '',
+        creation_date varchar(100) default '',
+        PRIMARY KEY (tunnel_id)
+        )
+    </select>
+
+    <select id="initNodeAccessIf">
+        CREATE TABLE IF NOT EXISTS SDN.AccessIf (
+        ems_id int,
+        accessif_id varchar(100) default '',
+        accessif_name varchar(100) default '',
+        ne_id varchar(100) default '',
+        connector_id varchar(100) default '',
+        accessif_type varchar(100) default '',
+        accessif_status varchar(100) default '',
+        service_ref varchar(100) default '',
+        node_connector_ref varchar(100) default '',
+        PRIMARY KEY (accessif_id)
+        )
+    </select>
+    <select id="initNodeConstraint">
+        CREATE TABLE IF NOT EXISTS SDN.Constraint (
+        ems_id int,
+        service_id varchar(100) default '',
+        const_id varchar(100) default '',
+        const_type varchar(100) default '',
+        const_name varchar(100) default '',
+        const_value varchar(100) default '',
+        const_operator varchar(100) default ''
+        )
+    </select>
+    <select id="initNodePath">
+        CREATE TABLE IF NOT EXISTS SDN.Path (
+        ems_id int,
+        service_id varchar(100) default '',
+        path_type varchar(100) default '',
+        connection_idx varchar(100) default '',
+        connection_type varchar(100) default '',
+        direction_type varchar(100) default '',
+        tp_type varchar(100) default '',
+        instance_type varchar(100) default '',
+        instance_ref varchar(100) default '',
+        ref_type varchar(100) default '',
+        PRIMARY KEY (service_id)
+        )
+    </select>
     <!--    INSERT    -->
 
     <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.SDN.NODE">
@@ -125,6 +267,215 @@
         #{connect_pec},
         #{connect_serial},
         #{unit_type}
+        )
+    </select>
+
+    <select id="insertLink" parameterType="com.woorinet.plugin.demo.DTO.SDN.Link">
+        REPLACE INTO
+        SDN.Link(
+        ems_id,
+        service_id,
+        path_type,
+        connection_idx,
+        connection_type,
+        direction_type,
+        tp_type,
+        instance_type,
+        instance_ref,
+        ref_type
+        ) VALUES (
+        #{ems_id},
+        #{service_id},
+        #{path_type},
+        #{connection_idx},
+        #{connection_type},
+        #{direction_type},
+        #{tp_type},
+        #{instance_type},
+        #{instance_ref},
+        #{ref_type}
+        )
+    </select>
+
+    <select id="insertService" parameterType="com.woorinet.plugin.demo.DTO.SDN.Service">
+        REPLACE INTO
+        SDN.Service(
+        ems_id,
+        service_id,
+        src_ne_id,
+        src_ne_name,
+        src_connector_id,
+        src_accessif_type,
+        dst_ne_id,
+        dst_ne_name,
+        dst_connector_id,
+        dst_accessif_type,
+        service_type,
+        service_name,
+        network_type,
+        service_status,
+        rate_type,
+        service_rate,
+        latency,
+        wavelength,
+        active_path,
+        creation_date
+        ) VALUES (
+        #{ems_id},
+        #{service_id},
+        #{src_ne_id},
+        #{src_ne_name},
+        #{src_connector_id},
+        #{src_accessif_type},
+        #{dst_ne_id},
+        #{dst_ne_name},
+        #{dst_connector_id},
+        #{dst_accessif_type},
+        #{service_type},
+        #{service_name},
+        #{network_type},
+        #{service_status},
+        #{rate_type},
+        #{service_rate},
+        #{latency},
+        #{wavelength},
+        #{active_path},
+        #{creation_date}
+        )
+    </select>
+
+    <select id="insertTunnel" parameterType="com.woorinet.plugin.demo.DTO.SDN.Tunnel">
+        REPLACE INTO
+        SDN.Tunnel(
+        ems_id,
+        tunnel_id,
+        src_ne_id,
+        src_ne_name,
+        dst_ne_id,
+        dst_ne_name,
+        rate_type,
+        multiple_rate,
+        local_id,
+        request_id,
+        tunnel_name,
+        tunnel_type,
+        tunnel_status,
+        configuration_action,
+        configuration_result_type,
+        tunnel_oam_enabler,
+        deployment_enabler,
+        deployment_status,
+        active_path,
+        src_node_ref,
+        dst_node_ref,
+        service_ref,
+        accessif_ref,
+        protection_type,
+        working_path,
+        protection_path,
+        service_mapping,
+        creation_date
+        ) VALUES (
+        #{ems_id},
+        #{tunnel_id},
+        #{src_ne_id},
+        #{src_ne_name},
+        #{dst_ne_id},
+        #{dst_ne_name},
+        #{rate_type},
+        #{multiple_rate},
+        #{local_id},
+        #{request_id},
+        #{tunnel_name},
+        #{tunnel_type},
+        #{tunnel_status},
+        #{configuration_action},
+        #{configuration_result_type},
+        #{tunnel_oam_enabler},
+        #{deployment_enabler},
+        #{deployment_status},
+        #{active_path},
+        #{src_node_ref},
+        #{dst_node_ref},
+        #{service_ref},
+        #{accessif_ref},
+        #{protection_type},
+        #{working_path},
+        #{protection_path},
+        #{service_mapping},
+        #{creation_date}
+        )
+    </select>
+    <select id="insertAccessIf" parameterType="com.woorinet.plugin.demo.DTO.SDN.AccessIf">
+        REPLACE INTO
+        SDN.AccessIf(
+        ems_id,
+        accessif_id,
+        accessif_name,
+        ne_id,
+        connector_id,
+        accessif_type,
+        accessif_status,
+        service_ref,
+        node_connector_ref
+        ) VALUES (
+        #{ems_id},
+        #{accessif_id},
+        #{accessif_name},
+        #{ne_id},
+        #{connector_id},
+        #{accessif_type},
+        #{accessif_status},
+        #{service_ref},
+        #{node_connector_ref}
+        )
+    </select>
+
+    <select id="insertConstraint" parameterType="com.woorinet.plugin.demo.DTO.SDN.Constraint">
+        REPLACE INTO
+        SDN.Constraint(
+        ems_id,
+        service_id,
+        const_id,
+        const_type,
+        const_name,
+        const_value,
+        const_operator
+        ) VALUES (
+        #{ems_id},
+        #{service_id},
+        #{const_id},
+        #{const_type},
+        #{const_name},
+        #{const_value},
+        #{const_operator}
+        )
+    </select>
+
+    <select id="insertPath" parameterType="com.woorinet.plugin.demo.DTO.SDN.Path">
+        REPLACE INTO
+        SDN.Path(
+        ems_id,
+        service_id,
+        path_type,
+        connection_idx,
+        connection_type,
+        direction_type,
+        tp_type,
+        instance_type,
+        instance_ref,
+        ref_type
+        ) VALUES (
+        #{ems_id},
+        #{service_id},
+        #{path_type},
+        #{connection_idx},
+        #{connection_type},
+        #{direction_type},
+        #{tp_type},
+        #{instance_type},
+        #{instance_ref},
+        #{ref_type}
         )
     </select>
 
