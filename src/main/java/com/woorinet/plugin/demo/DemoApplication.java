@@ -71,6 +71,10 @@ public class DemoApplication {
 			manager.SDNSyncConnectorList();
 			// Link 테이블 생성
 			manager.SDNSyncLinkList();
+
+
+			// Constraint 테이블 생성
+			manager.SDNsyncConstraint();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
