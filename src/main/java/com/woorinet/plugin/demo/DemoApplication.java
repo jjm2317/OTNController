@@ -62,8 +62,11 @@ public class DemoApplication {
 			List<ODU_MPLS_IF> odu_mpls_ifs= tl1Mapper.selectOduMplsIf();
 			// OPTIC_POWER 조회
 			List<OPTIC_POWER> optic_powers = tl1Mapper.selectOpticPower();
-
-			SDNManager manager = new SDNManager(sdnMapper, nodes, system_infos,odu_node_connectors,optic_powers, odus, odu_mpls_ifs);
+			// SERVICE 조회
+			List<SERVICE> services = tl1Mapper.selectService();
+			// ACCESS_IF 조회
+			List<ACCESS_IF> access_ifs = tl1Mapper.selectAccessIf();
+			SDNManager manager = new SDNManager(sdnMapper, nodes, system_infos,odu_node_connectors,optic_powers, odus, odu_mpls_ifs, services, access_ifs);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -71,6 +74,8 @@ public class DemoApplication {
 			manager.SDNSyncConnectorList();
 			// Link 테이블 생성
 			manager.SDNSyncLinkList();
+			// Service 테이블 생성
+			manager.SDNSyncServiceList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

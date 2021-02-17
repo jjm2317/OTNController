@@ -1,5 +1,11 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ACCESS_IF {
     String TID_ID;
     String TID;
@@ -24,6 +30,36 @@ public class ACCESS_IF {
     String COMMON_CONSTRAINT_OPERATOR;
     String PORT_CONSTRAINT_TYPE;
     String AC2AC_TYPE;
+
+    public ACCESS_IF() {
+
+    }
+
+    public ACCESS_IF(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String ACCESS_IF_ID, String LOCAL_ID, String REQUEST_ID, String NAME, String ACCESS_IF_TYPE, String ACCESS_IF_OPERATIONAL_STATUS, String ACCESS_IF_CONFIGURATION_ACTION, String ACCESS_IF_CONFIGURATION_RESULT, String DEPLOYMENT_ENABLER, String DEPLOYMENT_STATUS, String CIR, String PIR, String SERVICE_TYPE, String CONSTRAINT_ID, String COMMON_CONSTRAINT_NAME, String COMMON_CONSTRAINT_VALUE, String COMMON_CONSTRAINT_OPERATOR, String PORT_CONSTRAINT_TYPE, String AC2AC_TYPE) {
+        this.TID_ID = TID_ID;
+        this.TID = TID;
+        this.SUBNET_ID = SUBNET_ID;
+        this.SUBNET = SUBNET;
+        this.ACCESS_IF_ID = ACCESS_IF_ID;
+        this.LOCAL_ID = LOCAL_ID;
+        this.REQUEST_ID = REQUEST_ID;
+        this.NAME = NAME;
+        this.ACCESS_IF_TYPE = ACCESS_IF_TYPE;
+        this.ACCESS_IF_OPERATIONAL_STATUS = ACCESS_IF_OPERATIONAL_STATUS;
+        this.ACCESS_IF_CONFIGURATION_ACTION = ACCESS_IF_CONFIGURATION_ACTION;
+        this.ACCESS_IF_CONFIGURATION_RESULT = ACCESS_IF_CONFIGURATION_RESULT;
+        this.DEPLOYMENT_ENABLER = DEPLOYMENT_ENABLER;
+        this.DEPLOYMENT_STATUS = DEPLOYMENT_STATUS;
+        this.CIR = CIR;
+        this.PIR = PIR;
+        this.SERVICE_TYPE = SERVICE_TYPE;
+        this.CONSTRAINT_ID = CONSTRAINT_ID;
+        this.COMMON_CONSTRAINT_NAME = COMMON_CONSTRAINT_NAME;
+        this.COMMON_CONSTRAINT_VALUE = COMMON_CONSTRAINT_VALUE;
+        this.COMMON_CONSTRAINT_OPERATOR = COMMON_CONSTRAINT_OPERATOR;
+        this.PORT_CONSTRAINT_TYPE = PORT_CONSTRAINT_TYPE;
+        this.AC2AC_TYPE = AC2AC_TYPE;
+    }
 
     public ACCESS_IF(String[] fields) {
         this.TID_ID = fields[0];

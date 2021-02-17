@@ -17,16 +17,19 @@ public class SDNManager {
     List<OPTIC_POWER> optic_powers;
     List<ODU> odus;
     List<ODU_MPLS_IF> odu_mpls_ifs;
+    List<SERVICE> services;
+    List<ACCESS_IF> access_ifs;
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, SYSTEM_INFO> system_infoHashMap = new HashMap<>();
     HashMap<String, OPTIC_POWER> optic_powerHashMap = new HashMap<>();
     HashMap<String, ODU_NODE_CONNECTOR> odu_node_connectorHashMap = new HashMap<>();
     HashMap<String, ODU> oduHashMap = new HashMap<>();
+    HashMap<String, ACCESS_IF> access_ifHashMap = new HashMap<>();
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
-    public SDNManager(SDNMapper sdnMapper, List<NODE> nodes, List<SYSTEM_INFO> system_infos,  List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception{
+    public SDNManager(SDNMapper sdnMapper, List<NODE> nodes, List<SYSTEM_INFO> system_infos,  List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<ACCESS_IF> access_ifs) throws Exception{
         this.sdnMapper = sdnMapper;
         this.separator = "_";
         this.nodes = nodes;
@@ -35,6 +38,8 @@ public class SDNManager {
         this.optic_powers = optic_powers;
         this.odus = odus;
         this.odu_mpls_ifs = odu_mpls_ifs;
+        this.services = services;
+        this.access_ifs = access_ifs;
 
         sdnMapper.initDatabase();
         makeHashMap();
@@ -55,6 +60,9 @@ public class SDNManager {
         }
         for(ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
             odu_node_connectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), odu_node_connector);
+        }
+        for(ACCESS_IF access_if : access_ifs) {
+            access_ifHashMap.put(access_if.getTID(), access_if);
         }
 
     }
@@ -212,6 +220,44 @@ public class SDNManager {
             link.setAvailable_oduflexs(-1);
 
             sdnMapper.insertLink(link);
+        }
+    }
+
+    public void SDNSyncServiceList( ) throws Exception {
+        sdnMapper.initService();
+
+        for (SERVICE service : services) {
+            NODE node = nodeHashMap.get(service.getTID());
+            if(!node.getNODE_TYPE().equals("otn")) continue;
+
+            com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = new com.woorinet.plugin.demo.DTO.SDN.SERVICE();
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(service.getTID());
+//            CONNECTOR connector = sdnConnectorHashMap.get(service.getTID(), service.)
+            ACCESS_IF access_if = access_ifHashMap.get(service.getTID());
+
+
+            sdnService.setEms_id(200009);
+            sdnService.setService_id(sdnNode.getVendor() + separator + sdnNode.getSys_type() + separator + service.getNAME());
+            sdnService.setSrc_ne_id(sdnNode.getNe_id());
+            sdnService.setSrc_ne_name(sdnNode.getNe_name());
+            sdnService.setSrc_connector_id("");//sdnConnector connect_id 들어가야됨
+            sdnService.setSrc_accessif_type(access_if.getACCESS_IF_TYPE());
+            sdnService.setDst_ne_id(sdnNode.getNe_id());
+            sdnService.setDst_ne_name(sdnNode.getNe_name());
+            sdnService.setDst_connector_id("");//sdnConnector connect_id 들어가야됨
+            sdnService.setDst_accessif_type(access_if.getACCESS_IF_TYPE());
+            sdnService.setService_type(service.getS_TYPE());
+            sdnService.setService_name(service.getNAME());
+            sdnService.setNetwork_type("");
+            sdnService.setService_status(service.getOPER_STATUS());
+            sdnService.setRate_type("");
+            sdnService.setService_rate("");
+            sdnService.setLatency("");
+            sdnService.setWavelength("");
+            sdnService.setActive_path("");
+            sdnService.setCreation_date("");
+
+            sdnMapper.insertService(sdnService);
         }
     }
 
