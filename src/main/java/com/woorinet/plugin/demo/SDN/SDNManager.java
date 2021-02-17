@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.SDN;
 
 import com.woorinet.plugin.demo.DTO.SDN.CONNECTOR;
+import com.woorinet.plugin.demo.DTO.SDN.CONSTRAINT;
 import com.woorinet.plugin.demo.DTO.SDN.LINK;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Mapper.SDNMapper;
@@ -215,6 +216,25 @@ public class SDNManager {
         }
     }
 
+
+    public void SDNsyncConstraint() throws Exception {
+        sdnMapper.initConstraint();
+
+        for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
+            CONSTRAINT constraint = new CONSTRAINT();
+
+            constraint.setEms_id(200009);
+            constraint.setService_id("");
+            constraint.setConst_id(odu_mpls_if.getCONSTRAINT_ID());
+            constraint.setConst_type("");
+            constraint.setConst_name(odu_mpls_if.getCONSTRAINT_NAME());
+            constraint.setConst_value(odu_mpls_if.getCONSTRAINT_VALUE());
+            constraint.setConst_operator("");
+
+            sdnMapper.insertConstraint(constraint);
+
+        }
+    }
 
 
 }
