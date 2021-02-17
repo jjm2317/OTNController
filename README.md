@@ -1,8 +1,8 @@
-# Database
+## Database
 - mysql (use jpa)
 
-# Language
+## Language
 - java
 
-# Framework
+## Framework
 - spring boot
