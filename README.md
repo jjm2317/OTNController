@@ -1,2 +1,8 @@
-# OTNController
-OTN Controller (Spring Boot)
+# Database
+- mysql (use jpa)
+
+# Language
+- java
+
+# Framework
+- spring boot
