@@ -194,7 +194,7 @@ public class SDNManager {
             link.setOvpn("");
             link.setTimeslot(odu.getTSMAP());
             link.setLambda(optic_power.getTX_WAVELENGTH());
-            link.setMaximum_odu0s(Integer.parseInt(odu_mpls_if.getMAXIMUM_BANDWIDTH()));
+            link.setMaximum_odu0s(-1);
             link.setMaximum_odu1s(-1);
             link.setMaximum_odu2s(-1);
             link.setMaximum_odu2es(-1);
@@ -202,7 +202,7 @@ public class SDNManager {
             link.setMaximum_odu4s(-1);
             link.setMaximum_odu4cns(-1);
             link.setMaximum_oduflexs(-1);
-            link.setAvailable_odu0s(Integer.parseInt(odu_mpls_if.getAVAILABLE_BANDWIDTH()));
+            link.setAvailable_odu0s(-1);
             link.setAvailable_odu1s(-1);
             link.setAvailable_odu2s(-1);
             link.setAvailable_odu2es(-1);
