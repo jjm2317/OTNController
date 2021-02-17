@@ -1,13 +1,22 @@
 package com.woorinet.plugin.demo.DTO.SDN;
 
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Getter
 @Setter
+@Entity
+@Data
 public class ACCESS_IF {
     int ems_id;
+    @Id
+    @Generated
     String accessif_id;
     String accessif_name;
     String ne_id;

@@ -4,13 +4,20 @@ import com.woorinet.plugin.demo.DTO.SDN.CONNECTOR;
 import com.woorinet.plugin.demo.DTO.SDN.CONSTRAINT;
 import com.woorinet.plugin.demo.DTO.SDN.LINK;
 import com.woorinet.plugin.demo.DTO.TL1.*;
-import com.woorinet.plugin.demo.Mapper.SDNMapper;
+import com.woorinet.plugin.demo.Repository.SDN.CONNECTORRepository;
+import com.woorinet.plugin.demo.Repository.SDN.CONSTRAINTRepository;
+import com.woorinet.plugin.demo.Repository.SDN.LINKRepository;
+import com.woorinet.plugin.demo.Repository.SDN.NODERepository;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class SDNManager {
-    SDNMapper sdnMapper;
+    NODERepository nodeRepository;
+    CONNECTORRepository connectorRepository;
+    LINKRepository linkRepository;
+    CONSTRAINTRepository constraintRepository;
+
     String separator;
     List<NODE> nodes;
     List<SYSTEM_INFO> system_infos;
@@ -27,8 +34,11 @@ public class SDNManager {
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
-    public SDNManager(SDNMapper sdnMapper, List<NODE> nodes, List<SYSTEM_INFO> system_infos,  List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception{
-        this.sdnMapper = sdnMapper;
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, CONSTRAINTRepository constraintRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception{
+        this.nodeRepository = nodeRepository;
+        this.connectorRepository = connectorRepository;
+        this.linkRepository = linkRepository;
+        this.constraintRepository = constraintRepository;
         this.separator = "_";
         this.nodes = nodes;
         this.system_infos = system_infos;
@@ -37,7 +47,6 @@ public class SDNManager {
         this.odus = odus;
         this.odu_mpls_ifs = odu_mpls_ifs;
 
-        sdnMapper.initDatabase();
         makeHashMap();
     }
 
@@ -61,7 +70,6 @@ public class SDNManager {
     }
 
     public void SDNSyncNodeList() throws Exception {
-        sdnMapper.initNodeTable();
 
         for (NODE node: nodes) {
             if(!node.getNODE_TYPE().equals("otn")) continue; // otn장비만
@@ -89,14 +97,14 @@ public class SDNManager {
             sdnNode.setSerial_num("");
             sdnNode.setSys_type(node.getNODE_TYPE());
 
-            sdnMapper.insertNode(sdnNode);
+            //sdnMapper.insertNode(sdnNode);
+            nodeRepository.save(sdnNode);
             sdnNodeHashMap.put(node.getTID(), sdnNode);
         }
 
     }
 
     public void SDNSyncConnectorList( ) throws Exception {
-        sdnMapper.initConnector();
 
         for(ODU_NODE_CONNECTOR odu_node_connector :  odu_node_connectors) {
             CONNECTOR connector = new CONNECTOR();
@@ -150,14 +158,13 @@ public class SDNManager {
 
 
 
-            sdnMapper.insertConnector(connector);
+            connectorRepository.save(connector);
             sdnConnectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), connector);
         }
 
     }
 
     public void SDNSyncLinkList ( ) throws Exception {
-        sdnMapper.initLink();
 
         for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
             LINK link = new LINK();
@@ -212,13 +219,12 @@ public class SDNManager {
             link.setAvailable_odu4cns(-1);
             link.setAvailable_oduflexs(-1);
 
-            sdnMapper.insertLink(link);
+            linkRepository.save(link);
         }
     }
 
 
     public void SDNsyncConstraint() throws Exception {
-        sdnMapper.initConstraint();
 
         for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
             CONSTRAINT constraint = new CONSTRAINT();
@@ -231,7 +237,7 @@ public class SDNManager {
             constraint.setConst_value(odu_mpls_if.getCONSTRAINT_VALUE());
             constraint.setConst_operator("");
 
-            sdnMapper.insertConstraint(constraint);
+            constraintRepository.save(constraint);
 
         }
     }
