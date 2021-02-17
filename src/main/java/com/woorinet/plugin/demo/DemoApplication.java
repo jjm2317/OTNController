@@ -3,9 +3,9 @@ package com.woorinet.plugin.demo;
 import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
-import com.woorinet.plugin.demo.Mapper.SDNMapper;
 import com.woorinet.plugin.demo.Mapper.TL1Mapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
+import com.woorinet.plugin.demo.Repository.SDN.*;
 import com.woorinet.plugin.demo.SDN.SDNManager;
 import com.woorinet.plugin.demo.Tl1.TL1Manager;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
@@ -35,8 +35,24 @@ public class DemoApplication {
 	@Autowired
 	private QNETMapper qnetMapper;
 
+
 	@Autowired
-	private SDNMapper sdnMapper;
+	private NODERepository nodeRepository;
+	@Autowired
+	private CONNECTORRepository connectorRepository;
+	@Autowired
+	private LINKRepository linkRepository;
+	@Autowired
+	private SERVICERepository serviceRepository;
+	@Autowired
+	private TUNNELRepository tunnelRepository;
+	@Autowired
+	private ACCESS_IFRepository access_ifRepository;
+	@Autowired
+	private CONSTRAINTRepository constraintRepository;
+	@Autowired
+	private PATHRepository pathRepository;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -66,7 +82,7 @@ public class DemoApplication {
 			List<SERVICE> services = tl1Mapper.selectService();
 			// ACCESS_IF 조회
 			List<ACCESS_IF> access_ifs = tl1Mapper.selectAccessIf();
-			SDNManager manager = new SDNManager(sdnMapper, nodes, system_infos,odu_node_connectors,optic_powers, odus, odu_mpls_ifs, services, access_ifs);
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository,constraintRepository, nodes, system_infos,odu_node_connectors,optic_powers, odus, odu_mpls_ifs,services,access_ifs);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -76,6 +92,8 @@ public class DemoApplication {
 			manager.SDNSyncLinkList();
 			// Service 테이블 생성
 			manager.SDNSyncServiceList();
+			// Constraint 테이블 생성
+			manager.SDNsyncConstraint();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,14 +1,23 @@
 package com.woorinet.plugin.demo.DTO.SDN;
 
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Getter
 @Setter
+@Entity
+@Data
 public class CONSTRAINT {
     int ems_id;
     String service_id;
+    @Id
+    @Generated
     String const_id;
     String const_type;
     String const_name;

@@ -1,14 +1,23 @@
 package com.woorinet.plugin.demo.DTO.SDN;
 
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Getter
 @Setter
+@Entity
+@Data
 public class LINK {
     int ems_id;
     int dst_ems_id;
+    @Id
+    @Generated
     String link_id;
     String link_nm;
     String src_ne_id;
