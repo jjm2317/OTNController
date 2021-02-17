@@ -1,9 +1,10 @@
 package com.woorinet.plugin.demo.SDN;
 
-import com.woorinet.plugin.demo.DTO.SDN.CONNECTOR;
-import com.woorinet.plugin.demo.DTO.SDN.CONSTRAINT;
-import com.woorinet.plugin.demo.DTO.SDN.LINK;
+import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
+import com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF;
+import com.woorinet.plugin.demo.DTO.TL1.NODE;
+import com.woorinet.plugin.demo.DTO.TL1.SERVICE;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 
 import java.util.HashMap;
@@ -267,6 +268,58 @@ public class SDNManager {
         }
     }
 
+    public void SDNSyncTunnelList( ) throws  Exception {
+
+        for (com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode : nodeRepository.findAll()) {
+
+
+//            tunnel.setEms_id();
+//            tunnel.setTunnel_id();
+//            tunnel.setSrc_ne_id();
+//            tunnel.setSrc_ne_name();
+//            tunnel.setDst_ne_id();
+//            tunnel.setDst_ne_name();
+//            tunnel.setRate_type();
+//            tunnel.setMultiple_rate();
+//            tunnel.setLocal_id();
+//            tunnel.setRequest_id();
+//            tunnel.setTunnel_name();
+//            tunnel.setTunnel_type();
+//            tunnel.setTunnel_status();
+//            tunnel.setConfiguration_action();
+//            tunnel.setConfiguration_result_type();
+//            tunnel.setTunnel_oam_enabler();
+//            tunnel.setDeployment_enabler();
+//            tunnel.setDeployment_status();
+//            tunnel.setActive_path();
+//            tunnel.setSrc_node_ref();
+//            tunnel.setDst_node_ref();
+//            tunnel.setService_ref();
+//            tunnel.setAccessif_ref();
+//            tunnel.setProtection_type();
+//            tunnel.setWorking_path();
+//            tunnel.setProtection_path();
+//            tunnel.setService_mapping();
+//            tunnel.setCreation_date();
+        }
+    }
+
+    public void SDNSyncPathList() throws  Exception {
+//        for() {
+//            PATH path = new PATH();
+//
+//            path.setEms_id();
+//            path.setService_id();
+//            path.setPath_type();
+//            path.setConnection_idx();
+//            path.setConnection_type();
+//            path.setDirection_type();
+//            path.setTp_type();
+//            path.setInstance_type();
+//            path.setInstance_ref();
+//            path.setRef_type();
+//        }
+    }
 
     public void SDNsyncConstraint() throws Exception {
 
