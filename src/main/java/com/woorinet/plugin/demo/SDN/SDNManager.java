@@ -15,6 +15,7 @@ public class SDNManager {
     CONNECTORRepository connectorRepository;
     LINKRepository linkRepository;
     SERVICERepository serviceRepository;
+    TUNNELRepository tunnelRepository;
     CONSTRAINTRepository constraintRepository;
 
     String separator;
@@ -36,11 +37,12 @@ public class SDNManager {
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository , CONSTRAINTRepository constraintRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs,List<SERVICE> services,List<ACCESS_IF> access_ifs ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, CONSTRAINTRepository constraintRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs,List<SERVICE> services,List<ACCESS_IF> access_ifs ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
         this.serviceRepository = serviceRepository;
+        this.tunnelRepository = tunnelRepository;
         this.constraintRepository = constraintRepository;
         this.separator = "_";
         this.nodes = nodes;
@@ -270,37 +272,45 @@ public class SDNManager {
 
     public void SDNSyncTunnelList( ) throws  Exception {
 
-        for (com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode : nodeRepository.findAll()) {
+        for (ODU odu : odus) {
+            TUNNEL tunnel = new TUNNEL();
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(odu.getTID());
 
+            tunnel.setEms_id(200009);
+            tunnel.setTunnel_id(sdnNode.getVendor() + separator + sdnNode.getSys_type() + separator + odu.getNAME());
+            tunnel.setSrc_ne_id(sdnNode.getNe_id());
+            tunnel.setSrc_ne_name(sdnNode.getNe_name());
+            tunnel.setDst_ne_id(sdnNode.getNe_id());
+            tunnel.setDst_ne_name(sdnNode.getNe_name());
+            tunnel.setRate_type(odu.getTYPE());
+            tunnel.setMultiple_rate("1");
+            tunnel.setLocal_id("");
+            tunnel.setRequest_id("");
+            tunnel.setTunnel_name(odu.getNAME());
+            if(odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
+                tunnel.setTunnel_type("otn");
+            }else {
+                tunnel.setTunnel_type(odu.getEMS_SERVICE());
+            }
+            tunnel.setTunnel_status("");
+            tunnel.setConfiguration_action("");
+            tunnel.setConfiguration_result_type("");
+            tunnel.setTunnel_oam_enabler("");
+            tunnel.setDeployment_enabler("");
+            tunnel.setDeployment_status("");
+            tunnel.setActive_path(odu.getACTIVE_PATH_STATUS());
+            tunnel.setSrc_node_ref("");
+            tunnel.setDst_node_ref("");
+            tunnel.setService_ref("");
+            tunnel.setAccessif_ref("");
+            tunnel.setProtection_type(odu.getPROT_TYPE());
+            tunnel.setWorking_path("");
+            tunnel.setProtection_path("");
+            tunnel.setService_mapping("");
+            tunnel.setCreation_date(odu.getCREATION_DATE());
 
-//            tunnel.setEms_id();
-//            tunnel.setTunnel_id();
-//            tunnel.setSrc_ne_id();
-//            tunnel.setSrc_ne_name();
-//            tunnel.setDst_ne_id();
-//            tunnel.setDst_ne_name();
-//            tunnel.setRate_type();
-//            tunnel.setMultiple_rate();
-//            tunnel.setLocal_id();
-//            tunnel.setRequest_id();
-//            tunnel.setTunnel_name();
-//            tunnel.setTunnel_type();
-//            tunnel.setTunnel_status();
-//            tunnel.setConfiguration_action();
-//            tunnel.setConfiguration_result_type();
-//            tunnel.setTunnel_oam_enabler();
-//            tunnel.setDeployment_enabler();
-//            tunnel.setDeployment_status();
-//            tunnel.setActive_path();
-//            tunnel.setSrc_node_ref();
-//            tunnel.setDst_node_ref();
-//            tunnel.setService_ref();
-//            tunnel.setAccessif_ref();
-//            tunnel.setProtection_type();
-//            tunnel.setWorking_path();
-//            tunnel.setProtection_path();
-//            tunnel.setService_mapping();
-//            tunnel.setCreation_date();
+            tunnelRepository.save(tunnel);
+
         }
     }
 
