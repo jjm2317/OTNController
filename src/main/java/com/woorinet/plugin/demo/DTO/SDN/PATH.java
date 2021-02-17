@@ -1,13 +1,22 @@
 package com.woorinet.plugin.demo.DTO.SDN;
 
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Getter
 @Setter
+@Entity
+@Data
 public class PATH {
     int ems_id;
+    @Id
+    @Generated
     String service_id;
     String path_type;
     String connection_idx;
