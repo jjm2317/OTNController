@@ -18,6 +18,7 @@ public class SDNManager {
     TUNNELRepository tunnelRepository;
     PATHRepository pathRepository;
     CONSTRAINTRepository constraintRepository;
+    ACCESS_IFRepository access_ifRepository;
 
     String separator;
     List<NODE> nodes;
@@ -39,7 +40,7 @@ public class SDNManager {
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository,PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs,List<SERVICE> services,List<ACCESS_IF> access_ifs, List<SERVICE_EXT> service_exts ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository,PATHRepository pathRepository, CONSTRAINTRepository constraintRepository,ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs,List<SERVICE> services,List<ACCESS_IF> access_ifs, List<SERVICE_EXT> service_exts ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -47,6 +48,7 @@ public class SDNManager {
         this.tunnelRepository = tunnelRepository;
         this.pathRepository = pathRepository;
         this.constraintRepository = constraintRepository;
+        this.access_ifRepository = access_ifRepository;
         this.separator = "_";
         this.nodes = nodes;
         this.system_infos = system_infos;
@@ -354,6 +356,33 @@ public class SDNManager {
             constraintRepository.save(constraint);
 
         }
+    }
+
+    public void SDNSyncAccess_if() throws Exception {
+
+        for(ACCESS_IF access_if : access_ifs) {
+            com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF sdnAccess_if = new com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF();
+
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(access_if.getTID());
+            CONNECTOR sdnConnector = sdnConnectorHashMap.get(access_if.getTID()+ '/' + access_if.getACCESS_IF_ID());
+
+            if(sdnNode == null || !sdnNode.getSys_type().equals("otn")) continue;
+
+            sdnAccess_if.setEms_id(200009);
+            sdnAccess_if.setAccessif_id(access_if.getACCESS_IF_ID());
+            sdnAccess_if.setAccessif_name("");
+            sdnAccess_if.setNe_id(sdnNode.getNe_id());
+            if (sdnConnector == null ) {
+                sdnAccess_if.setConnector_id("");
+            } else {
+                sdnAccess_if.setConnector_id(sdnConnector.getConnect_id());
+            }
+            sdnAccess_if.setAccessif_type(access_if.getACCESS_IF_TYPE());
+            sdnAccess_if.setAccessif_status(access_if.getACCESS_IF_OPERATIONAL_STATUS());
+
+            access_ifRepository.save(sdnAccess_if);
+        }
+
     }
 
 
