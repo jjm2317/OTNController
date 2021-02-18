@@ -351,25 +351,34 @@ public class SDNManager {
     }
 
     public void SDNSyncPathList() throws  Exception {
-        for(SERVICE_EXT service_ext : service_exts) {
-            /*
-            com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = serviceRepository.findByService_name(service_ext.getSERV_NAME());
-            PATH path = new PATH();
+        for (ODU odu :odu_list_for_service) {
 
+
+            PATH path = new PATH();
             path.setEms_id(200009);
-            path.setService_id(sdnService.getService_id());
-            path.setPath_type(service_ext.getSC_TYPE());
-            path.setConnection_idx("");
+            path.setService_id(odu.getNAME());
+            path.setPath_type(odu.getACTIVE_PATH_STATUS());
+            path.setConnection_idx("1");
             path.setConnection_type("");
-            path.setDirection_type("");
+            path.setDirection_type("egress");
             path.setTp_type("");
-            path.setInstance_type("");
+            path.setInstance_type("tunnel");
             path.setInstance_ref("");
             path.setRef_type("");
-
             pathRepository.save(path);
 
-             */
+            PATH path2 = new PATH();
+            path2.setEms_id(200009);
+            path2.setService_id(odu.getNAME());
+            path2.setPath_type(odu.getACTIVE_PATH_STATUS());
+            path2.setConnection_idx("2");
+            path2.setConnection_type("");
+            path2.setDirection_type("ingress");
+            path2.setTp_type("");
+            path2.setInstance_type("tunnel");
+            path2.setInstance_ref("");
+            path2.setRef_type("");
+            pathRepository.save(path2);
         }
     }
 
