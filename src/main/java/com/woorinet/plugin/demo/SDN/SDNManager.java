@@ -294,6 +294,7 @@ public class SDNManager {
             TUNNEL tunnel = new TUNNEL();
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(odu.getTID());
 
+
             tunnel.setEms_id(200009);
             tunnel.setTunnel_id(sdnNode.getVendor() + separator + sdnNode.getSys_type() + separator + odu.getNAME());
             tunnel.setSrc_ne_id(sdnNode.getNe_id());
@@ -352,11 +353,11 @@ public class SDNManager {
 
     public void SDNSyncPathList() throws  Exception {
         for (ODU odu :odu_list_for_service) {
-
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu.getEMS_SRC_LSR());
 
             PATH path = new PATH();
             path.setEms_id(200009);
-            path.setService_id(odu.getNAME());
+            path.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu.getNAME());
             path.setPath_type(odu.getACTIVE_PATH_STATUS());
             path.setConnection_idx("1");
             path.setConnection_type("");
