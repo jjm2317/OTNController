@@ -281,7 +281,6 @@ public class SDNManager {
         for (ODU odu : odus) {
             TUNNEL tunnel = new TUNNEL();
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(odu.getTID());
-            if (!odu.getEMS_SERVICE().equals("ODU_TUNNEL")) continue;
 
             tunnel.setEms_id(200009);
             tunnel.setTunnel_id(sdnNode.getVendor() + separator + sdnNode.getSys_type() + separator + odu.getNAME());
