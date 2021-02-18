@@ -1,12 +1,13 @@
 package com.woorinet.plugin.demo.SDN;
 
 import com.woorinet.plugin.demo.DTO.SDN.*;
-import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF;
 import com.woorinet.plugin.demo.DTO.TL1.NODE;
 import com.woorinet.plugin.demo.DTO.TL1.SERVICE;
+import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class SDNManager {
     List<SERVICE> services;
     List<ACCESS_IF> access_ifs;
     List<SERVICE_EXT> service_exts;
+    List<ODU> odu_list_for_service = new ArrayList<>();
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, SYSTEM_INFO> system_infoHashMap = new HashMap<>();
@@ -37,6 +39,8 @@ public class SDNManager {
     HashMap<String, ODU_NODE_CONNECTOR> odu_node_connectorHashMap = new HashMap<>();
     HashMap<String, ODU> oduHashMap = new HashMap<>();
     HashMap<String, ACCESS_IF> access_ifHashMap = new HashMap<>();
+    HashMap<String, ODU> oduNameTailHashMap = new HashMap<>();
+    HashMap<String, ODU> oduNameHeadHashMap = new HashMap<>();
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
@@ -241,30 +245,37 @@ public class SDNManager {
 
     public void SDNSyncServiceList( ) throws Exception {
 
-        for (SERVICE service : services) {
-            NODE node = nodeHashMap.get(service.getTID());
-            if(!node.getNODE_TYPE().equals("otn")) continue;
-
+        for (ODU odu :odu_list_for_service) {
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu.getEMS_SRC_LSR());
+            com.woorinet.plugin.demo.DTO.SDN.NODE dstSrcNode = sdnNodeHashMap.get(odu.getEMS_DST_LSR());
             com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = new com.woorinet.plugin.demo.DTO.SDN.SERVICE();
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(service.getTID());
-//            CONNECTOR connector = sdnConnectorHashMap.get(service.getTID(), service.)
-            ACCESS_IF access_if = access_ifHashMap.get(service.getTID());
-
+            ACCESS_IF srcAccess_if = access_ifHashMap.get(odu.getEMS_SRC_LSR());
+            ACCESS_IF dstAccess_if = access_ifHashMap.get(odu.getEMS_DST_LSR());
 
             sdnService.setEms_id(200009);
-            sdnService.setService_id(sdnNode.getVendor() + separator + sdnNode.getSys_type() + separator + service.getNAME());
-            sdnService.setSrc_ne_id(sdnNode.getNe_id());
-            sdnService.setSrc_ne_name(sdnNode.getNe_name());
+            sdnService.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu.getNAME());
+            sdnService.setSrc_ne_id(sdnSrcNode.getNe_id());
+            sdnService.setSrc_ne_name(sdnSrcNode.getNe_name());
             sdnService.setSrc_connector_id("");//sdnConnector connect_id 들어가야됨
-            sdnService.setSrc_accessif_type(access_if.getACCESS_IF_TYPE());
-            sdnService.setDst_ne_id(sdnNode.getNe_id());
-            sdnService.setDst_ne_name(sdnNode.getNe_name());
+            if(srcAccess_if != null) {
+                sdnService.setSrc_accessif_type(srcAccess_if.getACCESS_IF_TYPE());
+            } else {
+                sdnService.setSrc_accessif_type("");
+            }
+            sdnService.setDst_ne_id(dstSrcNode.getNe_id());
+            sdnService.setDst_ne_name(dstSrcNode.getNe_name());
             sdnService.setDst_connector_id("");//sdnConnector connect_id 들어가야됨
-            sdnService.setDst_accessif_type(access_if.getACCESS_IF_TYPE());
-            sdnService.setService_type(service.getS_TYPE());
-            sdnService.setService_name(service.getNAME());
+            if(dstAccess_if != null) {
+                sdnService.setDst_accessif_type(dstAccess_if.getACCESS_IF_TYPE());
+            } else {
+                sdnService.setDst_accessif_type("");
+            }
+            //sdnService.setService_type(service.getS_TYPE());
+            sdnService.setService_type("");
+            //sdnService.setService_name(service.getNAME());
+            sdnService.setService_name("");
             sdnService.setNetwork_type("");
-            sdnService.setService_status(service.getOPER_STATUS());
+            sdnService.setService_status("");
             sdnService.setRate_type("");
             sdnService.setService_rate("");
             sdnService.setLatency("");
@@ -274,6 +285,7 @@ public class SDNManager {
 
             serviceRepository.save(sdnService);
         }
+
     }
 
     public void SDNSyncTunnelList( ) throws  Exception {
@@ -281,7 +293,6 @@ public class SDNManager {
         for (ODU odu : odus) {
             TUNNEL tunnel = new TUNNEL();
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(odu.getTID());
-            if (!odu.getEMS_SERVICE().equals("ODU_TUNNEL")) continue;
 
             tunnel.setEms_id(200009);
             tunnel.setTunnel_id(sdnNode.getVendor() + separator + sdnNode.getSys_type() + separator + odu.getNAME());
@@ -318,11 +329,30 @@ public class SDNManager {
 
             tunnelRepository.save(tunnel);
 
+
+            if(!odu.getEMS_SERVICE().equals("PACKET_SERVICE")) {
+                if(odu.getROLE().equals("TAIL")) {
+                    oduNameTailHashMap.put(odu.getNAME(),odu);
+
+                    if(oduNameHeadHashMap.get(odu.getNAME()) != null){
+                        odu_list_for_service.add(odu);
+                    }
+                } else {
+                    oduNameHeadHashMap.put(odu.getNAME(),odu);
+
+                    if(oduNameTailHashMap.get(odu.getNAME()) != null) {
+                        odu_list_for_service.add(odu);
+                    }
+                }
+
+            }
+
         }
     }
 
     public void SDNSyncPathList() throws  Exception {
         for(SERVICE_EXT service_ext : service_exts) {
+            /*
             com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = serviceRepository.findByService_name(service_ext.getSERV_NAME());
             PATH path = new PATH();
 
@@ -338,6 +368,8 @@ public class SDNManager {
             path.setRef_type("");
 
             pathRepository.save(path);
+
+             */
         }
     }
 

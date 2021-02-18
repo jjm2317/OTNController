@@ -92,10 +92,10 @@ public class DemoApplication {
 			manager.SDNSyncConnectorList();
 			// Link 테이블 생성
 			manager.SDNSyncLinkList();
-			// Service 테이블 생성
-			manager.SDNSyncServiceList();
 			// Tunnel 테이블 생성
 			manager.SDNSyncTunnelList();
+			// Service 테이블 생성
+			manager.SDNSyncServiceList();
 			// Path 테이블 생성
 			manager.SDNSyncPathList();
 			// Constraint 테이블 생성
