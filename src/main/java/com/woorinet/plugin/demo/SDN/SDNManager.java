@@ -53,7 +53,7 @@ public class SDNManager {
         this.pathRepository = pathRepository;
         this.constraintRepository = constraintRepository;
         this.access_ifRepository = access_ifRepository;
-        this.separator = "_";
+        this.separator = ".";
         this.nodes = nodes;
         this.system_infos = system_infos;
         this.odu_node_connectors = odu_node_connectors;
@@ -114,10 +114,9 @@ public class SDNManager {
             sdnNode.setSw_ver(node.getSOFTWARE());
             sdnNode.setIp_addr(node.getIP_ADDR());
             sdnNode.setVendor(system_info.getVENDOR());
-            sdnNode.setSerial_num("");
+            sdnNode.setSerial_num(""); // INVENTORY 에서 가져와야됨
             sdnNode.setSys_type(node.getNODE_TYPE());
 
-            //sdnMapper.insertNode(sdnNode);
             nodeRepository.save(sdnNode);
             sdnNodeHashMap.put(node.getTID(), sdnNode);
         }
@@ -203,7 +202,7 @@ public class SDNManager {
             link.setDst_ems_id(200009);
             link.setLink_id(src_system_info.getVENDOR() + separator + src_sdnNode.getSys_type() + separator + src_sdnNode.getNe_name() + separator +
                     src_sdnConnector.getShelf_id() + separator + src_sdnConnector.getSlot_id() + separator + src_sdnConnector.getPort_id()
-                    + '-' + dst_system_info.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
+                    + "--" + dst_system_info.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
                     dst_sdnConnector.getShelf_id() + separator + dst_sdnConnector.getSlot_id() + separator + dst_sdnConnector.getPort_id());
             link.setLink_nm(odu_mpls_if.getNAME());
             link.setSrc_ne_id(src_sdnNode.getNe_id());
