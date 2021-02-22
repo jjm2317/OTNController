@@ -10,6 +10,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TL1Manager {
@@ -298,6 +299,22 @@ public class TL1Manager {
         }
     }
 
+    public void Tl1SyncPmPort(int CTAG, List<NODECONNECTOR> node_connectors) throws Exception {
+
+        for (NODECONNECTOR node_connector : node_connectors) {
+            String cmd = "RTRV-PM-PORT:" + node_connector.getTID() +":" + node_connector.getAID() +":"+ CTAG +":pm-time=1D;";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+
+            }
+
+
+
+
+
+        }
+    }
 
 
     public String ExecuteCmd(String cmd) throws IOException {

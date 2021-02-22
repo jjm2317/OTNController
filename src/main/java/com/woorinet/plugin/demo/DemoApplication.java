@@ -224,6 +224,9 @@ public class DemoApplication {
 			for (NODE node: nodes) {
 				manager.Tl1SyncOPTICPOWER(node.getTID(), tl1Mapper);
 			}
+			List<NODECONNECTOR> node_connectors = tl1Mapper.selectNodeConnector();
+			//PM-PORT DB연동
+			manager.Tl1SyncPmPort(CTAG, node_connectors);
 
 			//TL1 로그아웃
 			manager.Tl1Logout("admin");
