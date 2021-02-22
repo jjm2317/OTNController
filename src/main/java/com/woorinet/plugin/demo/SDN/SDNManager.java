@@ -114,10 +114,9 @@ public class SDNManager {
             sdnNode.setSw_ver(node.getSOFTWARE());
             sdnNode.setIp_addr(node.getIP_ADDR());
             sdnNode.setVendor(system_info.getVENDOR());
-            sdnNode.setSerial_num("");
+            sdnNode.setSerial_num(""); // INVENTORY 에서 가져와야됨
             sdnNode.setSys_type(node.getNODE_TYPE());
 
-            //sdnMapper.insertNode(sdnNode);
             nodeRepository.save(sdnNode);
             sdnNodeHashMap.put(node.getTID(), sdnNode);
         }
