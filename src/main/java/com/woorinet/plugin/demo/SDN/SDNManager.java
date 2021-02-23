@@ -198,6 +198,9 @@ public class SDNManager {
             OPTIC_POWER optic_power = optic_powerHashMap.get(odu_mpls_if.getTID() + '/' + odu_mpls_if.getMPLS_TP_ID());
             ODU odu = oduHashMap.get(odu_mpls_if.getTID());
 
+            int maximum_bandwidth = Integer.parseInt(odu_mpls_if.getMAXIMUM_BANDWIDTH());
+            int available_bandwidth = Integer.parseInt(odu_mpls_if.getAVAILABLE_BANDWIDTH());
+
             link.setEms_id(200009);
             link.setDst_ems_id(200009);
             link.setLink_id(src_system_info.getVENDOR() + separator + src_sdnNode.getSys_type() + separator + src_sdnNode.getNe_name() + separator +
@@ -221,22 +224,22 @@ public class SDNManager {
             link.setOvpn("");
             link.setTimeslot(odu.getTSMAP());
             link.setLambda(optic_power.getTX_WAVELENGTH());
-            link.setMaximum_odu0s(-1);
-            link.setMaximum_odu1s(-1);
-            link.setMaximum_odu2s(-1);
-            link.setMaximum_odu2es(-1);
-            link.setMaximum_odu3s(-1);
-            link.setMaximum_odu4s(-1);
-            link.setMaximum_odu4cns(-1);
-            link.setMaximum_oduflexs(-1);
-            link.setAvailable_odu0s(-1);
-            link.setAvailable_odu1s(-1);
-            link.setAvailable_odu2s(-1);
-            link.setAvailable_odu2es(-1);
-            link.setAvailable_odu3s(-1);
-            link.setAvailable_odu4s(-1);
-            link.setAvailable_odu4cns(-1);
-            link.setAvailable_oduflexs(-1);
+            link.setMaximum_odu0s(maximum_bandwidth);
+            link.setMaximum_odu1s(maximum_bandwidth/2);
+            link.setMaximum_odu2s(maximum_bandwidth/8);
+            link.setMaximum_odu2es(maximum_bandwidth/8);
+            link.setMaximum_odu3s(0);
+            link.setMaximum_odu4s(0);
+            link.setMaximum_odu4cns(0);
+            link.setMaximum_oduflexs(0);
+            link.setAvailable_odu0s(available_bandwidth);
+            link.setAvailable_odu1s(available_bandwidth/2);
+            link.setAvailable_odu2s(available_bandwidth/8);
+            link.setAvailable_odu2es(available_bandwidth/8);
+            link.setAvailable_odu3s(0);
+            link.setAvailable_odu4s(0);
+            link.setAvailable_odu4cns(0);
+            link.setAvailable_oduflexs(0);
 
             linkRepository.save(link);
         }
