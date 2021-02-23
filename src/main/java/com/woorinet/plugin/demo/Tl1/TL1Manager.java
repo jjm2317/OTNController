@@ -351,26 +351,17 @@ public class TL1Manager {
         socketChannel.write(byteBuffer);
         System.out.println("Send Data: " + cmd);
         byteBuffer.flip();
-        System.out.println(1);
         byteBuffer = ByteBuffer.allocate(1024);
-        System.out.println(2);
         String bufferStr = "";
         String result = "";
 
         while (!bufferStr.contains(";")) {
-            System.out.println(3);
             byteBuffer.clear();
-            System.out.println(4);
             socketChannel.read(byteBuffer);
-            System.out.println(5);
             byteBuffer.flip();
-            System.out.println(6);
             bufferStr = charset.decode(byteBuffer).toString();
-            System.out.println(7);
             result += bufferStr;
-            System.out.println(8);
         }
-        System.out.println(result);
         return result;
     }
 

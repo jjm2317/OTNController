@@ -132,8 +132,7 @@ public class DemoApplication {
 
 			//Node 조회
 			List<NODE> nodes = tl1Mapper.selectNode();
-			manager.TL1SyncInventory(nodes);
-			if(true) throw new Exception();
+
 			//SystemInfo DB연동
 			for (NODE node: nodes) {
 				manager.Tl1SyncSystemInfo(CTAG, node.getTID(), tl1Mapper);
@@ -271,7 +270,8 @@ public class DemoApplication {
 			//PM-PORT DB연동
 			manager.Tl1SyncPmPort(CTAG, node_connectors);
 
-
+			//INVENTORY DB연동
+			manager.TL1SyncInventory(nodes);
 
 			//TL1 로그아웃
 			manager.Tl1Logout("admin");
