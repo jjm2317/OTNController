@@ -2,6 +2,7 @@ package com.woorinet.plugin.demo.Tl1;
 
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Mapper.TL1Mapper;
+import com.woorinet.plugin.demo.Repository.TL1.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,9 +15,21 @@ import java.util.List;
 import java.util.Map;
 
 public class TL1Manager {
-    SocketChannel socketChannel;
+    PM_PORTRepository pm_portRepository;
+    PM_ACRepositiory pm_acRepositiory;
+    PM_TUNNELRepository pm_tunnelRepository;
+    INVENTORYRepository inventoryRepository;
 
-    public TL1Manager(String ip, int port) throws IOException {
+    SocketChannel socketChannel;
+    List<ACCESS_IF> access_ifs;
+
+    HashMap<String, ACCESS_IF> accessIfHashMap = new HashMap<>();
+
+    public TL1Manager(String ip, int port, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository ) throws IOException {
+        this.pm_portRepository = pm_portRepository;
+        this.pm_acRepositiory = pm_acRepositiory;
+        this.pm_tunnelRepository = pm_tunnelRepository;
+        this.inventoryRepository = inventoryRepository;
         socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(true);
         socketChannel.connect(new InetSocketAddress(ip, port));
@@ -306,15 +319,28 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
+                pm_portRepository.save(new PM_PORT(fields));
 
             }
-
-
-
-
-
         }
     }
+
+//    public void TL1SyncPmAc(int CTAG, List<NODECONNECTOR> node_connectors) throws Exception {
+//
+//    }
+    public void TL1SyncInventory(List<NODE> nodes) throws  Exception {
+        for (NODE node : nodes) {
+            String cmd = "RTRV-INVENTORY:" + node.getTID() +";";
+            System.out.println(cmd);
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                inventoryRepository.save(new INVENTORY(fields));
+            }
+        }
+    }
+
+
 
 
     public String ExecuteCmd(String cmd) throws IOException {
@@ -325,20 +351,26 @@ public class TL1Manager {
         socketChannel.write(byteBuffer);
         System.out.println("Send Data: " + cmd);
         byteBuffer.flip();
-
+        System.out.println(1);
         byteBuffer = ByteBuffer.allocate(1024);
-
+        System.out.println(2);
         String bufferStr = "";
         String result = "";
 
         while (!bufferStr.contains(";")) {
+            System.out.println(3);
             byteBuffer.clear();
+            System.out.println(4);
             socketChannel.read(byteBuffer);
+            System.out.println(5);
             byteBuffer.flip();
+            System.out.println(6);
             bufferStr = charset.decode(byteBuffer).toString();
+            System.out.println(7);
             result += bufferStr;
+            System.out.println(8);
         }
-
+        System.out.println(result);
         return result;
     }
 

@@ -6,6 +6,7 @@ import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Mapper.SDNMapper;
 import com.woorinet.plugin.demo.Mapper.TL1Mapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
+import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.SDN.SDNManager;
 import com.woorinet.plugin.demo.Tl1.TL1Manager;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
@@ -37,6 +38,15 @@ public class DemoApplication {
 
 	@Autowired
 	private SDNMapper sdnMapper;
+
+	@Autowired
+	private PM_PORTRepository pm_portRepository;
+	@Autowired
+	private PM_ACRepositiory pm_acRepositiory;
+	@Autowired
+	private PM_TUNNELRepository pm_tunnelRepository;
+	@Autowired
+	private INVENTORYRepository inventoryRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -82,7 +92,7 @@ public class DemoApplication {
 	String synchronization() {
 		int CTAG = 100;
 		try {
-			TL1Manager manager = new TL1Manager("222.117.54.175", 19011);
+			TL1Manager manager = new TL1Manager("222.117.54.175", 19011, pm_portRepository, pm_acRepositiory, pm_tunnelRepository, inventoryRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
 
@@ -91,6 +101,7 @@ public class DemoApplication {
 
 			//Node 조회
 			List<NODE> nodes = tl1Mapper.selectNode();
+			manager.TL1SyncInventory(nodes);
 
 			//SystemInfo DB연동
 			for (NODE node: nodes) {
@@ -224,9 +235,17 @@ public class DemoApplication {
 			for (NODE node: nodes) {
 				manager.Tl1SyncOPTICPOWER(node.getTID(), tl1Mapper);
 			}
+
 			List<NODECONNECTOR> node_connectors = tl1Mapper.selectNodeConnector();
+
 			//PM-PORT DB연동
 			manager.Tl1SyncPmPort(CTAG, node_connectors);
+
+			//PM-AC DB연동
+//			manager.TL1SyncPmAc(CTAG, node_connectors);
+
+			//INVENTORY DB연동
+//			manager.TL1SyncInventory(nodes);
 
 			//TL1 로그아웃
 			manager.Tl1Logout("admin");
