@@ -1,5 +1,11 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SERVICE_EXT {
     String TID_ID;
     String TID;
@@ -54,6 +60,62 @@ public class SERVICE_EXT {
     String DST_OUT_LABEL;
     String MS_TUNNEL_COUNT;
     String MS_PW_COUNT;
+
+    public SERVICE_EXT(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String SERV_NAME, String CIR, String PIR, String PW_ID, String SC_ID, String SCC_NAME, String SCC_VALUE, String SCC_OPERATOR, String SC_TYPE, String NODE_ROLE, String TID_ROLE, String SRC_PWID, String SRC_VSI_ID, String SRC_SUBNET, String SRC_TID, String SRC_TID_ID, String SRC_AID, String SRC_NODE_AIF_ID, String SRC_NODE_AIF_NAME, String SRC_NODE_AIF_TYPE, String SRC_PORT_CID, String SRC_PORT_CNAME, String SRC_PORT_CVALUE, String SRC_PORT_COPERATOR, String SRC_PORT_CTYPE, String SRC_ING_LSRID, String SRC_EGR_LSRID, String SRC_IN_LABEL, String SRC_OUT_LABEL, String DST_PWID, String DST_VSI_ID, String DST_SUBNET, String DST_TID, String DST_TID_ID, String DST_AID, String DST_NODE_AIF_ID, String DST_NODE_AIF_NAME, String DST_NODE_AIF_TYPE, String DST_PORT_CID, String DST_PORT_CNAME, String DST_PORT_CVALUE, String DST_PORT_COPERATOR, String DST_PORT_CTYPE, String DST_ING_LSRID, String DST_EGR_LSRID, String DST_IN_LABEL, String DST_OUT_LABEL, String MS_TUNNEL_COUNT, String MS_PW_COUNT) {
+        this.TID_ID = TID_ID;
+        this.TID = TID;
+        this.SUBNET_ID = SUBNET_ID;
+        this.SUBNET = SUBNET;
+        this.SERV_NAME = SERV_NAME;
+        this.CIR = CIR;
+        this.PIR = PIR;
+        this.PW_ID = PW_ID;
+        this.SC_ID = SC_ID;
+        this.SCC_NAME = SCC_NAME;
+        this.SCC_VALUE = SCC_VALUE;
+        this.SCC_OPERATOR = SCC_OPERATOR;
+        this.SC_TYPE = SC_TYPE;
+        this.NODE_ROLE = NODE_ROLE;
+        this.TID_ROLE = TID_ROLE;
+        this.SRC_PWID = SRC_PWID;
+        this.SRC_VSI_ID = SRC_VSI_ID;
+        this.SRC_SUBNET = SRC_SUBNET;
+        this.SRC_TID = SRC_TID;
+        this.SRC_TID_ID = SRC_TID_ID;
+        this.SRC_AID = SRC_AID;
+        this.SRC_NODE_AIF_ID = SRC_NODE_AIF_ID;
+        this.SRC_NODE_AIF_NAME = SRC_NODE_AIF_NAME;
+        this.SRC_NODE_AIF_TYPE = SRC_NODE_AIF_TYPE;
+        this.SRC_PORT_CID = SRC_PORT_CID;
+        this.SRC_PORT_CNAME = SRC_PORT_CNAME;
+        this.SRC_PORT_CVALUE = SRC_PORT_CVALUE;
+        this.SRC_PORT_COPERATOR = SRC_PORT_COPERATOR;
+        this.SRC_PORT_CTYPE = SRC_PORT_CTYPE;
+        this.SRC_ING_LSRID = SRC_ING_LSRID;
+        this.SRC_EGR_LSRID = SRC_EGR_LSRID;
+        this.SRC_IN_LABEL = SRC_IN_LABEL;
+        this.SRC_OUT_LABEL = SRC_OUT_LABEL;
+        this.DST_PWID = DST_PWID;
+        this.DST_VSI_ID = DST_VSI_ID;
+        this.DST_SUBNET = DST_SUBNET;
+        this.DST_TID = DST_TID;
+        this.DST_TID_ID = DST_TID_ID;
+        this.DST_AID = DST_AID;
+        this.DST_NODE_AIF_ID = DST_NODE_AIF_ID;
+        this.DST_NODE_AIF_NAME = DST_NODE_AIF_NAME;
+        this.DST_NODE_AIF_TYPE = DST_NODE_AIF_TYPE;
+        this.DST_PORT_CID = DST_PORT_CID;
+        this.DST_PORT_CNAME = DST_PORT_CNAME;
+        this.DST_PORT_CVALUE = DST_PORT_CVALUE;
+        this.DST_PORT_COPERATOR = DST_PORT_COPERATOR;
+        this.DST_PORT_CTYPE = DST_PORT_CTYPE;
+        this.DST_ING_LSRID = DST_ING_LSRID;
+        this.DST_EGR_LSRID = DST_EGR_LSRID;
+        this.DST_IN_LABEL = DST_IN_LABEL;
+        this.DST_OUT_LABEL = DST_OUT_LABEL;
+        this.MS_TUNNEL_COUNT = MS_TUNNEL_COUNT;
+        this.MS_PW_COUNT = MS_PW_COUNT;
+    }
 
     public SERVICE_EXT(String[] fields) {
         TID_ID = fields[0];

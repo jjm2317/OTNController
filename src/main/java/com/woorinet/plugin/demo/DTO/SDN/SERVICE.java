@@ -1,13 +1,22 @@
 package com.woorinet.plugin.demo.DTO.SDN;
 
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 @Getter
 @Setter
+@Entity
+@Table(name = "SERVICE")
+@Data
 public class SERVICE {
     int ems_id;
+    @Id
+    @Generated
     String service_id;
     String src_ne_id;
     String src_ne_name;

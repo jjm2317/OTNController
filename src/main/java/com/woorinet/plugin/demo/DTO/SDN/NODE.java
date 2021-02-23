@@ -1,12 +1,21 @@
 package com.woorinet.plugin.demo.DTO.SDN;
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @Getter
 @Setter
+@Entity
+@Data
 public class NODE {
     int ems_id;
+    @Id
+    @Generated
     String ne_id;
     String ne_name;
     String ne_type;
