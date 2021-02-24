@@ -80,6 +80,28 @@ public class SDNManager {
         }
         for(ODU odu : odus) {
             oduHashMap.put(odu.getTID(), odu);
+
+            if(odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
+                if (odu.getROLE().equals("TAIL")) {
+                    oduNameTailHashMap.put(odu.getNAME(), odu);
+
+                    if (oduNameHeadHashMap.get(odu.getNAME()) != null) {
+                        List<ODU> odu_list = new ArrayList<>();
+                        odu_list.add(oduNameHeadHashMap.get(odu.getNAME()));
+                        odu_list.add(odu);
+                        odu_list_for_service.add(odu_list);
+                    }
+                } else {
+                    oduNameHeadHashMap.put(odu.getNAME(), odu);
+
+                    if (oduNameTailHashMap.get(odu.getNAME()) != null) {
+                        List<ODU> odu_list = new ArrayList<>();
+                        odu_list.add(odu);
+                        odu_list.add(oduNameTailHashMap.get(odu.getNAME()));
+                        odu_list_for_service.add(odu_list);
+                    }
+                }
+            }
         }
         for(ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
             odu_node_connectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), odu_node_connector);
@@ -342,28 +364,7 @@ public class SDNManager {
             tunnelRepository.save(tunnel);
 
 
-            if(odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
-                if(odu.getROLE().equals("TAIL")) {
-                    oduNameTailHashMap.put(odu.getNAME(),odu);
 
-                    if(oduNameHeadHashMap.get(odu.getNAME()) != null){
-                        List<ODU> odu_list = new ArrayList<>();
-                        odu_list.add(oduNameHeadHashMap.get(odu.getNAME()));
-                        odu_list.add(odu);
-                        odu_list_for_service.add(odu_list);
-                    }
-                } else {
-                    oduNameHeadHashMap.put(odu.getNAME(),odu);
-
-                    if(oduNameTailHashMap.get(odu.getNAME()) != null) {
-                        List<ODU> odu_list = new ArrayList<>();
-                        odu_list.add(odu);
-                        odu_list.add(oduNameTailHashMap.get(odu.getNAME()));
-                        odu_list_for_service.add(odu_list);
-                    }
-                }
-
-            }
 
         }
     }
