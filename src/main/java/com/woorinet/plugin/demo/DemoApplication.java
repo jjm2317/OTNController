@@ -6,10 +6,7 @@ import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Mapper.TL1Mapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
 import com.woorinet.plugin.demo.Repository.SDN.*;
-import com.woorinet.plugin.demo.Repository.TL1.INVENTORYRepository;
-import com.woorinet.plugin.demo.Repository.TL1.PM_ACRepositiory;
-import com.woorinet.plugin.demo.Repository.TL1.PM_PORTRepository;
-import com.woorinet.plugin.demo.Repository.TL1.PM_TUNNELRepository;
+import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.SDN.SDNManager;
 import com.woorinet.plugin.demo.Tl1.TL1Manager;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
@@ -38,6 +35,10 @@ public class DemoApplication {
 
 	@Autowired
 	private QNETMapper qnetMapper;
+//	@Autowired
+//	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
+	@Autowired
+	private PMRepository pmRepository;
 	@Autowired
 	private PM_PORTRepository pm_portRepository;
 	@Autowired
@@ -70,6 +71,7 @@ public class DemoApplication {
 
 	@RequestMapping("/")
 	String home() {
+//		System.out.println(odu_mpls_ifRepository.findByTid("EMS_1000_C"));
 		return "Hello World!";
 	}
 
@@ -123,7 +125,7 @@ public class DemoApplication {
 	String synchronization() {
 		int CTAG = 100;
 		try {
-			TL1Manager manager = new TL1Manager("222.117.54.175", 19011, pm_portRepository,pm_acRepositiory, pm_tunnelRepository,inventoryRepository);
+			TL1Manager manager = new TL1Manager("222.117.54.175", 19011,pmRepository,  pm_portRepository,pm_acRepositiory, pm_tunnelRepository,inventoryRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
 
@@ -267,6 +269,9 @@ public class DemoApplication {
 			}
 
 			List<NODECONNECTOR> node_connectors = tl1Mapper.selectNodeConnector();
+			List<ODU_MPLS_IF> odu_mpls_ifs = tl1Mapper.selectOduMplsIf();
+			manager.TL1SyncPM(CTAG, node_connectors, odu_mpls_ifs);
+
 			//PM-PORT DB연동
 			manager.Tl1SyncPmPort(CTAG, node_connectors);
 

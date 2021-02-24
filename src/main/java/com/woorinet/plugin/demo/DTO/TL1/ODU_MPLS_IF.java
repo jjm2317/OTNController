@@ -6,6 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
+//@Entity
+//@Data
 public class ODU_MPLS_IF {
     String TID_ID;
     String TID;
