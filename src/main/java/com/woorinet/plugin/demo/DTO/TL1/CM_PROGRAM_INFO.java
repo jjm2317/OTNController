@@ -6,12 +6,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Setter
 @Getter
 @Entity
 @Data
 public class CM_PROGRAM_INFO {
+    @Id
     String CM_PROGRAM_INFO_ID;
     String TID;
     String SUBNETWORK;
