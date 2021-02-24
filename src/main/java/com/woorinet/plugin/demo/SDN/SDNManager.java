@@ -135,19 +135,12 @@ public class SDNManager {
 
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = new com.woorinet.plugin.demo.DTO.SDN.NODE();
             sdnNode.setEms_id(200009);
-            if (system_info != null) {
-                sdnNode.setNe_id(system_info.getVENDOR() + separator + node.getNODE_TYPE() + separator + node.getTID());
-            } else {
-                sdnNode.setNe_id("");
-            }
+            if (system_info != null) sdnNode.setNe_id(system_info.getVENDOR() + separator + node.getNODE_TYPE() + separator + node.getTID());
+            sdnNode.setNe_id("");
             sdnNode.setNe_name(node.getTID());
             sdnNode.setNe_type("");
             sdnNode.setNe_model(node.getSYSTEM_TYPE());
-            if (node.getNODE_STATUS().equals("normal")) {
-                sdnNode.setNe_status(node.getNODE_STATUS());
-            } else {
-                sdnNode.setNe_status("broken");
-            }
+            if (node.getNODE_STATUS().equals("normal")) sdnNode.setNe_status(node.getNODE_STATUS()); else sdnNode.setNe_status("broken");
             sdnNode.setSw_ver(node.getSOFTWARE());
             sdnNode.setIp_addr(node.getIP_ADDR());
             sdnNode.setVendor(system_info.getVENDOR());
