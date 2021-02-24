@@ -32,7 +32,7 @@ public class SDNManager {
     List<SERVICE> services;
     List<ACCESS_IF> access_ifs;
     List<SERVICE_EXT> service_exts;
-    List<ODU> odu_list_for_service = new ArrayList<>();
+    List<List<ODU>> odu_list_for_service = new ArrayList<>();
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, SYSTEM_INFO> system_infoHashMap = new HashMap<>();
@@ -42,6 +42,7 @@ public class SDNManager {
     HashMap<String, ACCESS_IF> access_ifHashMap = new HashMap<>();
     HashMap<String, ODU> oduNameTailHashMap = new HashMap<>();
     HashMap<String, ODU> oduNameHeadHashMap = new HashMap<>();
+    HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
@@ -80,12 +81,37 @@ public class SDNManager {
         }
         for(ODU odu : odus) {
             oduHashMap.put(odu.getTID(), odu);
+
+            if(odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
+                if (odu.getROLE().equals("TAIL")) {
+                    oduNameTailHashMap.put(odu.getNAME(), odu);
+
+                    if (oduNameHeadHashMap.get(odu.getNAME()) != null) {
+                        List<ODU> odu_list = new ArrayList<>();
+                        odu_list.add(oduNameHeadHashMap.get(odu.getNAME()));
+                        odu_list.add(odu);
+                        odu_list_for_service.add(odu_list);
+                    }
+                } else {
+                    oduNameHeadHashMap.put(odu.getNAME(), odu);
+
+                    if (oduNameTailHashMap.get(odu.getNAME()) != null) {
+                        List<ODU> odu_list = new ArrayList<>();
+                        odu_list.add(odu);
+                        odu_list.add(oduNameTailHashMap.get(odu.getNAME()));
+                        odu_list_for_service.add(odu_list);
+                    }
+                }
+            }
         }
         for(ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
             odu_node_connectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), odu_node_connector);
         }
         for(ACCESS_IF access_if : access_ifs) {
             access_ifHashMap.put(access_if.getTID(), access_if);
+        }
+        for(ODU_MPLS_IF odu_mpls_if: odu_mpls_ifs) {
+            odu_mpls_ifHashMap.put(odu_mpls_if.getTID()+'/'+odu_mpls_if.getMPLS_TP_ID(), odu_mpls_if);
         }
 
     }
@@ -199,11 +225,14 @@ public class SDNManager {
             OPTIC_POWER optic_power = optic_powerHashMap.get(odu_mpls_if.getTID() + '/' + odu_mpls_if.getMPLS_TP_ID());
             ODU odu = oduHashMap.get(odu_mpls_if.getTID());
 
+            int maximum_bandwidth = Integer.parseInt(odu_mpls_if.getMAXIMUM_BANDWIDTH());
+            int available_bandwidth = Integer.parseInt(odu_mpls_if.getAVAILABLE_BANDWIDTH());
+
             link.setEms_id(200009);
             link.setDst_ems_id(200009);
             link.setLink_id(src_system_info.getVENDOR() + separator + src_sdnNode.getSys_type() + separator + src_sdnNode.getNe_name() + separator +
                     src_sdnConnector.getShelf_id() + separator + src_sdnConnector.getSlot_id() + separator + src_sdnConnector.getPort_id()
-                    + "--" + dst_system_info.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
+                    + ":" + dst_system_info.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
                     dst_sdnConnector.getShelf_id() + separator + dst_sdnConnector.getSlot_id() + separator + dst_sdnConnector.getPort_id());
             link.setLink_nm(odu_mpls_if.getNAME());
             link.setSrc_ne_id(src_sdnNode.getNe_id());
@@ -222,22 +251,22 @@ public class SDNManager {
             link.setOvpn("");
             link.setTimeslot(odu.getTSMAP());
             link.setLambda(optic_power.getTX_WAVELENGTH());
-            link.setMaximum_odu0s(-1);
-            link.setMaximum_odu1s(-1);
-            link.setMaximum_odu2s(-1);
-            link.setMaximum_odu2es(-1);
-            link.setMaximum_odu3s(-1);
-            link.setMaximum_odu4s(-1);
-            link.setMaximum_odu4cns(-1);
-            link.setMaximum_oduflexs(-1);
-            link.setAvailable_odu0s(-1);
-            link.setAvailable_odu1s(-1);
-            link.setAvailable_odu2s(-1);
-            link.setAvailable_odu2es(-1);
-            link.setAvailable_odu3s(-1);
-            link.setAvailable_odu4s(-1);
-            link.setAvailable_odu4cns(-1);
-            link.setAvailable_oduflexs(-1);
+            link.setMaximum_odu0s(maximum_bandwidth);
+            link.setMaximum_odu1s(maximum_bandwidth/2);
+            link.setMaximum_odu2s(maximum_bandwidth/8);
+            link.setMaximum_odu2es(maximum_bandwidth/8);
+            link.setMaximum_odu3s(0);
+            link.setMaximum_odu4s(0);
+            link.setMaximum_odu4cns(0);
+            link.setMaximum_oduflexs(0);
+            link.setAvailable_odu0s(available_bandwidth);
+            link.setAvailable_odu1s(available_bandwidth/2);
+            link.setAvailable_odu2s(available_bandwidth/8);
+            link.setAvailable_odu2es(available_bandwidth/8);
+            link.setAvailable_odu3s(0);
+            link.setAvailable_odu4s(0);
+            link.setAvailable_odu4cns(0);
+            link.setAvailable_oduflexs(0);
 
             linkRepository.save(link);
         }
@@ -245,43 +274,48 @@ public class SDNManager {
 
     public void SDNSyncServiceList( ) throws Exception {
 
-        for (ODU odu :odu_list_for_service) {
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu.getEMS_SRC_LSR());
-            com.woorinet.plugin.demo.DTO.SDN.NODE dstSrcNode = sdnNodeHashMap.get(odu.getEMS_DST_LSR());
+        for (List<ODU> odu_list :odu_list_for_service) {
+            ODU odu_head = odu_list.get(0);
+            ODU odu_tail = odu_list.get(1);
+
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu_head.getTID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(odu_tail.getTID());
             com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = new com.woorinet.plugin.demo.DTO.SDN.SERVICE();
-            ACCESS_IF srcAccess_if = access_ifHashMap.get(odu.getEMS_SRC_LSR());
-            ACCESS_IF dstAccess_if = access_ifHashMap.get(odu.getEMS_DST_LSR());
+
+            CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(odu_head.getTID()+ '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
+            CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(odu_tail.getTID()+ '/' + odu_tail.getLOCAL_ID().split("-")[0] + "-" + odu_tail.getLOCAL_ID().split("-")[1]);
+
+            ODU_MPLS_IF odu_mpls_if = odu_mpls_ifHashMap.get(odu_head.getTID() + '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
+
+            OPTIC_POWER optic_power = optic_powerHashMap.get(odu_head.getTID() + '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
 
             sdnService.setEms_id(200009);
-            sdnService.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu.getNAME());
+            sdnService.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu_head.getNAME());
             sdnService.setSrc_ne_id(sdnSrcNode.getNe_id());
             sdnService.setSrc_ne_name(sdnSrcNode.getNe_name());
-            sdnService.setSrc_connector_id("");//sdnConnector connect_id 들어가야됨
-            if(srcAccess_if != null) {
-                sdnService.setSrc_accessif_type(srcAccess_if.getACCESS_IF_TYPE());
-            } else {
-                sdnService.setSrc_accessif_type("");
-            }
-            sdnService.setDst_ne_id(dstSrcNode.getNe_id());
-            sdnService.setDst_ne_name(dstSrcNode.getNe_name());
-            sdnService.setDst_connector_id("");//sdnConnector connect_id 들어가야됨
-            if(dstAccess_if != null) {
-                sdnService.setDst_accessif_type(dstAccess_if.getACCESS_IF_TYPE());
-            } else {
-                sdnService.setDst_accessif_type("");
-            }
-            //sdnService.setService_type(service.getS_TYPE());
+            sdnService.setSrc_connector_id(src_sdnConnector.getConnect_id());
+            sdnService.setSrc_accessif_type(odu_head.getSERVICE());
+            sdnService.setDst_ne_id(sdnDstNode.getNe_id());
+            sdnService.setDst_ne_name(sdnDstNode.getNe_name());
+            sdnService.setDst_connector_id(dst_sdnConnector.getConnect_id());
+            sdnService.setDst_accessif_type(odu_tail.getSERVICE());
             sdnService.setService_type("");
-            //sdnService.setService_name(service.getNAME());
-            sdnService.setService_name("");
+            sdnService.setService_name(odu_head.getNAME());
             sdnService.setNetwork_type("");
             sdnService.setService_status("");
-            sdnService.setRate_type("");
-            sdnService.setService_rate("");
+            sdnService.setRate_type(odu_head.getTYPE());
+
+            sdnService.setService_rate(odu_mpls_if.getLINK_TYPE());
+
             sdnService.setLatency("");
-            sdnService.setWavelength("");
-            sdnService.setActive_path("");
-            sdnService.setCreation_date("");
+
+            if(optic_power == null) {
+                sdnService.setWavelength(""); // OPTIC_POWER.TX_WAVELENGTH
+            } else {
+                sdnService.setWavelength(optic_power.getTX_WAVELENGTH());
+            }
+            sdnService.setActive_path(odu_head.getACTIVE_PATH_STATUS());
+            sdnService.setCreation_date(odu_head.getCREATION_DATE());
 
             serviceRepository.save(sdnService);
         }
@@ -331,34 +365,19 @@ public class SDNManager {
             tunnelRepository.save(tunnel);
 
 
-            if(!odu.getEMS_SERVICE().equals("PACKET_SERVICE")) {
-                if(odu.getROLE().equals("TAIL")) {
-                    oduNameTailHashMap.put(odu.getNAME(),odu);
 
-                    if(oduNameHeadHashMap.get(odu.getNAME()) != null){
-                        odu_list_for_service.add(odu);
-                    }
-                } else {
-                    oduNameHeadHashMap.put(odu.getNAME(),odu);
-
-                    if(oduNameTailHashMap.get(odu.getNAME()) != null) {
-                        odu_list_for_service.add(odu);
-                    }
-                }
-
-            }
 
         }
     }
 
     public void SDNSyncPathList() throws  Exception {
-        for (ODU odu :odu_list_for_service) {
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu.getEMS_SRC_LSR());
+        for (List<ODU> odu_list :odu_list_for_service) {
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu_list.get(0).getEMS_SRC_LSR());
 
             PATH path = new PATH();
             path.setEms_id(200009);
-            path.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu.getNAME());
-            path.setPath_type(odu.getACTIVE_PATH_STATUS());
+            //path.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu.getNAME());
+            //path.setPath_type(odu.getACTIVE_PATH_STATUS());
             path.setConnection_idx("1");
             path.setConnection_type("");
             path.setDirection_type("egress");
@@ -370,8 +389,8 @@ public class SDNManager {
 
             PATH path2 = new PATH();
             path2.setEms_id(200009);
-            path2.setService_id(odu.getNAME());
-            path2.setPath_type(odu.getACTIVE_PATH_STATUS());
+            //path2.setService_id(odu.getNAME());
+            //path2.setPath_type(odu.getACTIVE_PATH_STATUS());
             path2.setConnection_idx("2");
             path2.setConnection_type("");
             path2.setDirection_type("ingress");
