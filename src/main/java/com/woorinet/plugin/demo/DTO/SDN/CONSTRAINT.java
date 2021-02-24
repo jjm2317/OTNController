@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
@@ -14,10 +15,12 @@ import javax.persistence.Id;
 @Entity
 @Data
 public class CONSTRAINT {
+    @Id
+    @GeneratedValue
+    @Generated
+    int id;
     int ems_id;
     String service_id;
-    @Id
-    @Generated
     String const_id;
     String const_type;
     String const_name;
@@ -50,4 +53,5 @@ public class CONSTRAINT {
                 ", const_operator='" + const_operator + '\'' +
                 '}';
     }
+
 }
