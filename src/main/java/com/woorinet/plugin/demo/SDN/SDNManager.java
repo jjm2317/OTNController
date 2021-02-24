@@ -310,7 +310,7 @@ public class SDNManager {
             sdnService.setLatency("");
 
             if(optic_power == null) {
-                sdnService.setWavelength(""); // OPTIC_POWER.TX_WAVELENGTH
+                sdnService.setWavelength("");
             } else {
                 sdnService.setWavelength(optic_power.getTX_WAVELENGTH());
             }
@@ -326,15 +326,16 @@ public class SDNManager {
 
         for (ODU odu : odus) {
             TUNNEL tunnel = new TUNNEL();
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(odu.getTID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu.getEMS_SRC_LSR());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(odu.getEMS_DST_LSR());
 
 
             tunnel.setEms_id(200009);
-            tunnel.setTunnel_id(sdnNode.getVendor() + separator + sdnNode.getSys_type() + separator + odu.getNAME());
-            tunnel.setSrc_ne_id(sdnNode.getNe_id());
-            tunnel.setSrc_ne_name(sdnNode.getNe_name());
-            tunnel.setDst_ne_id(sdnNode.getNe_id());
-            tunnel.setDst_ne_name(sdnNode.getNe_name());
+            tunnel.setTunnel_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu.getNAME());
+            tunnel.setSrc_ne_id(sdnSrcNode.getNe_id());
+            tunnel.setSrc_ne_name(sdnSrcNode.getNe_name());
+            tunnel.setDst_ne_id(sdnDstNode.getNe_id());
+            tunnel.setDst_ne_name(sdnDstNode.getNe_name());
             tunnel.setRate_type(odu.getTYPE());
             tunnel.setMultiple_rate("1");
             tunnel.setLocal_id("");
@@ -402,18 +403,24 @@ public class SDNManager {
         }
     }
 
-    public void SDNsyncConstraint() throws Exception {
+    public void SDNSyncConstraint() throws Exception {
 
-        for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
+        for (List<ODU> odu_list :odu_list_for_service) {
+            ODU odu_head = odu_list.get(0);
+            ODU odu_tail = odu_list.get(1);
+
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu_head.getTID());
+
             CONSTRAINT constraint = new CONSTRAINT();
 
             constraint.setEms_id(200009);
-            constraint.setService_id("");
-            constraint.setConst_id(odu_mpls_if.getCONSTRAINT_ID());
+            constraint.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu_head.getNAME());
+            constraint.setConst_id("protection type");
             constraint.setConst_type("");
-            constraint.setConst_name(odu_mpls_if.getCONSTRAINT_NAME());
-            constraint.setConst_value(odu_mpls_if.getCONSTRAINT_VALUE());
+            constraint.setConst_name("PROTECTION TYPE");
+            constraint.setConst_value(odu_head.getPROT_TYPE());
             constraint.setConst_operator("");
+
 
             constraintRepository.save(constraint);
 
