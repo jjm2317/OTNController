@@ -96,7 +96,9 @@ public class DemoApplication {
 			List<ACCESS_IF> access_ifs = tl1Mapper.selectAccessIf();
 			// SERVICE_EXT 조회
 			List<SERVICE_EXT> service_exts = tl1Mapper.selectServiceExt();
-			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, system_infos,odu_node_connectors,optic_powers, odus, odu_mpls_ifs,services,access_ifs, service_exts);
+			// MPLS_IF 조회
+			List<MPLS_IF> mpls_ifs = tl1Mapper.selectMplsIf();
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, system_infos,odu_node_connectors,optic_powers, odus, odu_mpls_ifs,services,access_ifs, service_exts,mpls_ifs);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
