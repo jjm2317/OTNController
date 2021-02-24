@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TL1Manager {
+//    ODU_MPLS_IFRepository odu_mpls_ifRepository;
+    PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
     PM_TUNNELRepository pm_tunnelRepository;
@@ -22,10 +24,14 @@ public class TL1Manager {
 
     SocketChannel socketChannel;
     List<ACCESS_IF> access_ifs;
+    List<ODU_MPLS_IF> odu_mpls_ifs;
 
     HashMap<String, ACCESS_IF> accessIfHashMap = new HashMap<>();
+    HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(String ip, int port, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository ) throws IOException {
+    public TL1Manager(String ip, int port,PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository ) throws IOException {
+//        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
+        this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
         this.pm_tunnelRepository = pm_tunnelRepository;
@@ -312,6 +318,21 @@ public class TL1Manager {
         }
     }
 
+    public void TL1SyncPM(int CTAG, List<NODECONNECTOR> node_connectors, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception {
+        for (NODECONNECTOR node_connector : node_connectors) {
+            String TID = node_connector.getTID();
+            String AID = node_connector.getAID();
+            String SIGNAL = SearchMITypeByTID(odu_mpls_ifs, TID);
+            String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
+
+            ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                pmRepository.save(new PM(fields));
+            }
+        }
+    }
+
     public void Tl1SyncPmPort(int CTAG, List<NODECONNECTOR> node_connectors) throws Exception {
 
         for (NODECONNECTOR node_connector : node_connectors) {
@@ -341,6 +362,17 @@ public class TL1Manager {
     }
 
 
+
+
+    public String SearchMITypeByTID(List<ODU_MPLS_IF> odu_mpls_ifs, String TID) {
+        String result = "";
+        for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
+            if (odu_mpls_if.getTID() != TID) continue;
+            result = odu_mpls_if.getMPLSIF_TYPE();
+            return result;
+        }
+        return result;
+    }
 
 
     public String ExecuteCmd(String cmd) throws IOException {

@@ -21,6 +21,7 @@ public class SDNManager {
     CONSTRAINTRepository constraintRepository;
     ACCESS_IFRepository access_ifRepository;
 
+
     String separator;
     List<NODE> nodes;
     List<SYSTEM_INFO> system_infos;
