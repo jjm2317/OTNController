@@ -440,7 +440,6 @@ public class SDNManager {
     public void SDNSyncAccess_if() throws Exception {
 
         for(MPLS_IF mpls_if : mpls_ifs) {
-            System.out.println("test"+mpls_if.getTID()+ '/' + mpls_if.getMPLS_TP_ID().split("-")[0] + "-" + mpls_if.getMPLS_TP_ID().split("-")[1]);
 
             SYSTEM_INFO system_info = system_infoHashMap.get(mpls_if.getTID());
 
