@@ -173,14 +173,11 @@ public class SDNManager {
             connector.setSlot_id(odu_node_connector.getSLOT_INDEX());
             connector.setSubslot_id("");
             connector.setPort_id(odu_node_connector.getPORT_INDEX());
-            if (odu_node_connector.getPORT_STATUS().equals("ACT")) {
-                connector.setConnect_status("up");
-            } else if (odu_node_connector.getPORT_STATUS().equals("DEACT")) {
-                connector.setConnect_status("down");
-            }
+            if (odu_node_connector.getPORT_STATUS().equals("ACT")) connector.setConnect_status("up");
+            else if (odu_node_connector.getPORT_STATUS().equals("DEACT")) connector.setConnect_status("down");
             connector.setConnect_role(odu_node_connector.getPORT_ROLE());
             if(optic_power == null) {
-                connector.setConnect_type(""); // 구글링 해야됨
+                connector.setConnect_type("");
                 connector.setConnect_idle("idle");
                 connector.setConnect_llcf("");
                 connector.setConnect_lambda("");
@@ -189,13 +186,9 @@ public class SDNManager {
                 connector.setConnect_serial("");
                 connector.setUnit_type("");
             } else {
-                if(optic_power.getPART_NUMBER().equals("TR-PX13L-NG2") ) {
-                    connector.setConnect_type("sfp+");
-                } else if (optic_power.getPART_NUMBER().equals("TR-PX13L-NG2") || optic_power.getPART_NUMBER().equals("EOLP-1396-10") || optic_power.getPART_NUMBER().equals("FTLX1471D3BNL") ) {
-                    connector.setConnect_type("sfp");
-                } else {
-                    connector.setConnect_type(optic_power.getPART_NUMBER()); // 구글링 해야됨
-                }
+                if(optic_power.getPART_NUMBER().equals("TR-PX13L-NG2") ) connector.setConnect_type("sfp+");
+                else if (optic_power.getPART_NUMBER().equals("TR-PX13L-NG2") || optic_power.getPART_NUMBER().equals("EOLP-1396-10") || optic_power.getPART_NUMBER().equals("FTLX1471D3BNL") ) connector.setConnect_type("sfp");
+                else connector.setConnect_type(optic_power.getPART_NUMBER()); // 구글링 해야됨
                 connector.setConnect_idle("occupied");
                 connector.setConnect_llcf("");
                 connector.setConnect_lambda(optic_power.getTX_WAVELENGTH());
@@ -204,8 +197,6 @@ public class SDNManager {
                 connector.setConnect_serial(optic_power.getSERIAL());
                 connector.setUnit_type(optic_power.getUNIT_TYPE());
             }
-
-
 
             connectorRepository.save(connector);
             sdnConnectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), connector);
