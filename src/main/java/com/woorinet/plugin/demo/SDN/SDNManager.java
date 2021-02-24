@@ -402,7 +402,7 @@ public class SDNManager {
         }
     }
 
-    public void SDNsyncConstraint() throws Exception {
+    public void SDNSyncConstraint() throws Exception {
 
         for (List<ODU> odu_list :odu_list_for_service) {
             ODU odu_head = odu_list.get(0);

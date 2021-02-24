@@ -109,7 +109,7 @@ public class DemoApplication {
 			// Path 테이블 생성
 			manager.SDNSyncPathList();
 			// Constraint 테이블 생성
-			manager.SDNsyncConstraint();
+			manager.SDNSyncConstraint();
 			// AccessIf 테이블 생성
 			manager.SDNSyncAccess_if();
 		} catch (Exception e) {
