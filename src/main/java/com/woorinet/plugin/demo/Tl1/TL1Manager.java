@@ -21,6 +21,13 @@ public class TL1Manager {
     PM_ACRepositiory pm_acRepositiory;
     PM_TUNNELRepository pm_tunnelRepository;
     INVENTORYRepository inventoryRepository;
+    SESS_STATERepository sess_stateRepository;
+    KEY_STATERepository key_stateRepository;
+    MODULE_INFORepository module_infoRepository;
+    CM_PORTRepository cm_portRepository;
+    BYPASS_INFORepository bypass_infoRepository;
+    CRYPTO_MODERepository crypto_modeRepository;
+    CM_PROGRAM_INFORepository cm_program_infoRepository;
 
     SocketChannel socketChannel;
     List<ACCESS_IF> access_ifs;
@@ -29,7 +36,7 @@ public class TL1Manager {
     HashMap<String, ACCESS_IF> accessIfHashMap = new HashMap<>();
     HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(String ip, int port,PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository ) throws IOException {
+    public TL1Manager(String ip, int port,PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
 //        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -322,7 +329,7 @@ public class TL1Manager {
         for (NODECONNECTOR node_connector : node_connectors) {
             String TID = node_connector.getTID();
             String AID = node_connector.getAID();
-            String SIGNAL = SearchMITypeByTID(odu_mpls_ifs, TID);
+            String SIGNAL = getMITypeByTID(odu_mpls_ifs, TID);
             String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
 
             ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
@@ -361,10 +368,33 @@ public class TL1Manager {
         }
     }
 
+    public void TL1SyncSessState(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+        for (NODE node : nodes) {
+            if(node.getNODE_TYPE() != "otn") continue;
+            String TID = node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
+            String cmd = "RTRV-SESS-STATE:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                sess_stateRepository.save(new SESS_STATE(fields));
+            }
+        }
+    }
 
 
+    public String getSlotIndexByTID(List<NODECONNECTOR> node_connectors, String TID) {
+        String result = "";
+        for(NODECONNECTOR node_connector : node_connectors) {
+            if(node_connector.getTID() != TID) continue;
+            if(node_connector.getSLOT_TYPE() != "O401CLU" && node_connector.getSLOT_TYPE() != "O401CLU") continue;
+            result = node_connector.getSLOT_INDEX();
+        }
+        return result;
+    }
 
-    public String SearchMITypeByTID(List<ODU_MPLS_IF> odu_mpls_ifs, String TID) {
+    public String getMITypeByTID(List<ODU_MPLS_IF> odu_mpls_ifs, String TID) {
         String result = "";
         for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
             if (odu_mpls_if.getTID() != TID) continue;

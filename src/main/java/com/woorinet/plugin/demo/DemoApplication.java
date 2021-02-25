@@ -141,7 +141,7 @@ public class DemoApplication {
 	String synchronization() {
 		int CTAG = 100;
 		try {
-			TL1Manager manager = new TL1Manager("222.117.54.175", 19011,pmRepository,  pm_portRepository,pm_acRepositiory, pm_tunnelRepository,inventoryRepository);
+			TL1Manager manager = new TL1Manager("222.117.54.175", 19011,pmRepository,  pm_portRepository,pm_acRepositiory, pm_tunnelRepository,inventoryRepository,sess_stateRepository,key_stateRepository, module_infoRepository, cm_portRepository, bypass_infoRepository, crypto_modeRepository, cm_program_infoRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
 
@@ -293,6 +293,9 @@ public class DemoApplication {
 
 			//INVENTORY DB연동
 			manager.TL1SyncInventory(nodes);
+
+			//SESS-STATE DB연동
+			manager.TL1SyncSessState(nodes, node_connectors);
 
 			//TL1 로그아웃
 			manager.Tl1Logout("admin");
