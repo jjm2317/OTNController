@@ -280,7 +280,6 @@ public class SDNManager {
             CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(odu_tail.getTID()+ '/' + odu_tail.getLOCAL_ID().split("-")[0] + "-" + odu_tail.getLOCAL_ID().split("-")[1]);
 
             ODU_MPLS_IF odu_mpls_if = odu_mpls_ifHashMap.get(odu_head.getTID() + '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
-
             OPTIC_POWER optic_power = optic_powerHashMap.get(odu_head.getTID() + '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
 
             sdnService.setEms_id(200009);
@@ -298,9 +297,7 @@ public class SDNManager {
             sdnService.setNetwork_type("");
             sdnService.setService_status("");
             sdnService.setRate_type(odu_head.getTYPE());
-
             sdnService.setService_rate(odu_mpls_if.getLINK_TYPE());
-
             sdnService.setLatency("");
 
             if(optic_power == null) {
