@@ -289,7 +289,7 @@ public class DemoApplication {
 			manager.TL1SyncPM(CTAG, node_connectors, odu_mpls_ifs);
 
 			//PM-PORT DB연동
-			manager.Tl1SyncPmPort(CTAG, node_connectors);
+//			manager.Tl1SyncPmPort(CTAG, node_connectors);
 
 			//INVENTORY DB연동
 			manager.TL1SyncInventory(nodes);

@@ -2,11 +2,11 @@ package com.woorinet.plugin.demo.DTO.TL1;
 
 
 import lombok.Data;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
@@ -15,8 +15,8 @@ import javax.persistence.Id;
 @Entity
 public class CRYPTO_MODE {
     @Id
-    @Generated
-    String CRYPTO_MODE_ID;
+    @GeneratedValue
+    int CRYPTO_MODE_ID;
     String TID;
     String SUBNETWORK;
     String AID;

@@ -43,6 +43,14 @@ public class TL1Manager {
         this.pm_acRepositiory = pm_acRepositiory;
         this.pm_tunnelRepository = pm_tunnelRepository;
         this.inventoryRepository = inventoryRepository;
+        this.sess_stateRepository = sess_stateRepository;
+        this.key_stateRepository = key_stateRepository;
+        this.module_infoRepository = module_infoRepository;
+        this.cm_portRepository = cm_portRepository;
+        this.bypass_infoRepository = bypass_infoRepository;
+        this.crypto_modeRepository = crypto_modeRepository;
+        this.cm_program_infoRepository = cm_program_infoRepository;
+
         socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(true);
         socketChannel.connect(new InetSocketAddress(ip, port));
@@ -370,7 +378,7 @@ public class TL1Manager {
 
     public void TL1SyncSessState(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
         for (NODE node : nodes) {
-            if(node.getNODE_TYPE() != "otn") continue;
+            if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
             String cmd = "RTRV-SESS-STATE:" + TID + ":" + SLOT_INDEX + ";";
@@ -385,7 +393,7 @@ public class TL1Manager {
 
     public void TL1SyncKeyState(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
         for (NODE node : nodes) {
-            if(node.getNODE_TYPE() != "otn") continue;
+            if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
             String cmd = "RTRV-KEY-STATE:" + TID + ":" + SLOT_INDEX + ";";
@@ -400,7 +408,7 @@ public class TL1Manager {
 
     public void TL1SyncModuleInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
         for (NODE node : nodes) {
-            if(node.getNODE_TYPE() != "otn") continue;
+            if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
             String cmd = "RTRV-MODULE-INFO:" + TID + ":" + SLOT_INDEX + ";";
@@ -415,7 +423,7 @@ public class TL1Manager {
 
     public void TL1SyncCmPort(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
         for (NODE node : nodes) {
-            if(node.getNODE_TYPE() != "otn") continue;
+            if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
             String cmd = "RTRV-CM-PORT:" + TID + ":" + SLOT_INDEX + ";";
@@ -430,7 +438,7 @@ public class TL1Manager {
 
     public void TL1SyncBypassInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
         for (NODE node : nodes) {
-            if(node.getNODE_TYPE() != "otn") continue;
+            if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
             String cmd = "RTRV-BYPASS-INFO:" + TID + ":" + SLOT_INDEX + ";";
@@ -445,10 +453,10 @@ public class TL1Manager {
 
     public void TL1SyncCryptoMode(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
         for (NODE node : nodes) {
-            if(node.getNODE_TYPE() != "otn") continue;
+            if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
-            String cmd = "RTRV-CM-PORT:" + TID + ":" + SLOT_INDEX + ";";
+            String cmd = "RTRV-CRYPTO-MODE:" + TID + ":" + SLOT_INDEX + ";";
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
@@ -460,7 +468,7 @@ public class TL1Manager {
 
     public void TL1SyncCmProgramInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
         for (NODE node : nodes) {
-            if(node.getNODE_TYPE() != "otn") continue;
+            if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
             String cmd = "RTRV-CM-PROGRAM-INFO:" + TID + ":" + SLOT_INDEX + ";";
@@ -476,9 +484,10 @@ public class TL1Manager {
     public String getSlotIndexByTID(List<NODECONNECTOR> node_connectors, String TID) {
         String result = "";
         for(NODECONNECTOR node_connector : node_connectors) {
-            if(node_connector.getTID() != TID) continue;
-            if(node_connector.getSLOT_TYPE() != "O401CLU" && node_connector.getSLOT_TYPE() != "O401CLU") continue;
+            if(!node_connector.getTID().equals(TID)) continue;
+            if(!node_connector.getSLOT_TYPE().equals("O208CLU") && !node_connector.getSLOT_TYPE().equals("O401CLU")) continue;
             result = node_connector.getSLOT_INDEX();
+            return result;
         }
         return result;
     }
@@ -486,7 +495,7 @@ public class TL1Manager {
     public String getMITypeByTID(List<ODU_MPLS_IF> odu_mpls_ifs, String TID) {
         String result = "";
         for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
-            if (odu_mpls_if.getTID() != TID) continue;
+            if (!odu_mpls_if.getTID().equals(TID)) continue;
             result = odu_mpls_if.getMPLSIF_TYPE();
             return result;
         }

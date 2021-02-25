@@ -2,11 +2,11 @@ package com.woorinet.plugin.demo.DTO.TL1;
 
 
 import lombok.Data;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Setter
@@ -15,8 +15,8 @@ import javax.persistence.Id;
 @Entity
 public class KEY_STATE {
     @Id
-    @Generated
-    String KEY_STATE_ID;
+    @GeneratedValue
+    int KEY_STATE_ID;
     String TID;
     String SUBNETWORK;
     String AID;

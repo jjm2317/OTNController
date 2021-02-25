@@ -1,11 +1,11 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 import lombok.Data;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Setter
@@ -16,8 +16,8 @@ import javax.persistence.Id;
 public class PM {
     /* TID,AID,UNIT-TYPE,SIGNAL,INTERVAL,PM-TYPE,BIP,ES,SES,UAS,BEI */
     @Id
-    @Generated
-    String PM_ID;
+    @GeneratedValue
+    int PM_ID;
     String TID;
     String AID;
     String UNIT_TYPE;
