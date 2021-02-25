@@ -294,8 +294,26 @@ public class DemoApplication {
 			//INVENTORY DB연동
 			manager.TL1SyncInventory(nodes);
 
-			//SESS-STATE DB연동
+			//SESS_STATE DB연동
 			manager.TL1SyncSessState(nodes, node_connectors);
+
+			//KEY_STATE DB연동
+			manager.TL1SyncKeyState(nodes, node_connectors);
+
+			//MODULE_INFO DB연동
+			manager.TL1SyncModuleInfo(nodes, node_connectors);
+
+			//CM_PORT DB연동
+			manager.TL1SyncCmPort(nodes, node_connectors);
+
+			//BYPASS_INFO DB연동
+			manager.TL1SyncBypassInfo(nodes, node_connectors);
+
+			//CRYPTO_MODE DB연동
+			manager.TL1SyncCryptoMode(nodes, node_connectors);
+
+			//CM_PROGRAM_INFO DB연동
+			manager.TL1SyncCmProgramInfo(nodes, node_connectors);
 
 			//TL1 로그아웃
 			manager.Tl1Logout("admin");

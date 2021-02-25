@@ -36,6 +36,15 @@ public class CM_PORT {
         this.VLAN_ID = VLAN_ID;
     }
 
+    public CM_PORT(String[] fields) {
+        this.TID = fields[0];
+        this.SUBNETWORK = fields[1];
+        this.AID = fields[2];
+        this.UNIT_TYPE = fields[3];
+        this.SIGNAL = fields[4];
+        this.VLAN_ID = fields[5];
+    }
+
     @Override
     public String toString() {
         return "CM_PORT{" +

@@ -52,6 +52,24 @@ public class CM_PROGRAM_INFO {
         this.HW_VERSION = HW_VERSION;
     }
 
+    public CM_PROGRAM_INFO(String[] fields) {
+        this.TID = fields[0];
+        this.SUBNETWORK = fields[1];
+        this.AID = fields[2];
+        this.UNIT_TYPE = fields[3];
+        this.PKG_VERSION = fields[4];
+        this.PKG_FILENAME = fields[5];
+        this.PKG_VERSION_DATE = fields[6];
+        this.PKG_SIZE = fields[7];
+        this.FPGA_VERSION = fields[8];
+        this.FPGA_VERSION_DATE = fields[9];
+        this.FPGA_SIZE = fields[10];
+        this.CPLD_VERSION = fields[11];
+        this.CPLD_VERSION_DATE = fields[12];
+        this.CPLD_SIZE = fields[13];
+        this.HW_VERSION = fields[14];
+    }
+
     @Override
     public String toString() {
         return "CM_PROGRAM_INFO{" +

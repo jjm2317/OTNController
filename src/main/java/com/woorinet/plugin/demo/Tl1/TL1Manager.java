@@ -383,6 +383,95 @@ public class TL1Manager {
         }
     }
 
+    public void TL1SyncKeyState(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+        for (NODE node : nodes) {
+            if(node.getNODE_TYPE() != "otn") continue;
+            String TID = node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
+            String cmd = "RTRV-KEY-STATE:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                key_stateRepository.save(new KEY_STATE(fields));
+            }
+        }
+    }
+
+    public void TL1SyncModuleInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+        for (NODE node : nodes) {
+            if(node.getNODE_TYPE() != "otn") continue;
+            String TID = node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
+            String cmd = "RTRV-MODULE-INFO:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                module_infoRepository.save(new MODULE_INFO(fields));
+            }
+        }
+    }
+
+    public void TL1SyncCmPort(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+        for (NODE node : nodes) {
+            if(node.getNODE_TYPE() != "otn") continue;
+            String TID = node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
+            String cmd = "RTRV-CM-PORT:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                cm_portRepository.save(new CM_PORT(fields));
+            }
+        }
+    }
+
+    public void TL1SyncBypassInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+        for (NODE node : nodes) {
+            if(node.getNODE_TYPE() != "otn") continue;
+            String TID = node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
+            String cmd = "RTRV-BYPASS-INFO:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                bypass_infoRepository.save(new BYPASS_INFO(fields));
+            }
+        }
+    }
+
+    public void TL1SyncCryptoMode(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+        for (NODE node : nodes) {
+            if(node.getNODE_TYPE() != "otn") continue;
+            String TID = node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
+            String cmd = "RTRV-CM-PORT:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                cm_portRepository.save(new CM_PORT(fields));
+            }
+        }
+    }
+
+    public void TL1SyncCmProgramInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+        for (NODE node : nodes) {
+            if(node.getNODE_TYPE() != "otn") continue;
+            String TID = node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(node_connectors, TID);
+            String cmd = "RTRV-CM-PROGRAM-INFO:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                cm_program_infoRepository.save(new CM_PROGRAM_INFO(fields));
+            }
+        }
+    }
 
     public String getSlotIndexByTID(List<NODECONNECTOR> node_connectors, String TID) {
         String result = "";
