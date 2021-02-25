@@ -38,6 +38,16 @@ public class KEY_STATE {
         this.RX_KEY_BANK_STATE = RX_KEY_BANK_STATE;
     }
 
+    public KEY_STATE(String[] fields) {
+        this.TID = fields[0];
+        this.SUBNETWORK = fields[1];
+        this.AID = fields[2];
+        this.TX_KEY_STATE = fields[3];
+        this.TX_KEY_BANK_STAT = fields[4];
+        this.RX_KEY_STATE = fields[5];
+        this.RX_KEY_BANK_STATE = fields[6];
+    }
+
     @Override
     public String toString() {
         return "KEY_STATE{" +

@@ -1,4 +1,7 @@
 package com.woorinet.plugin.demo.Repository.TL1;
 
-public interface KEY_STATERepository {
+import com.woorinet.plugin.demo.DTO.TL1.KEY_STATE;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface KEY_STATERepository extends JpaRepository<KEY_STATE, String> {
 }

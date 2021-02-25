@@ -47,6 +47,20 @@ public class DemoApplication {
 	private PM_TUNNELRepository pm_tunnelRepository;
 	@Autowired
 	private INVENTORYRepository inventoryRepository;
+	@Autowired
+	private SESS_STATERepository sess_stateRepository;
+	@Autowired
+	private KEY_STATERepository key_stateRepository;
+	@Autowired
+	private MODULE_INFORepository module_infoRepository;
+	@Autowired
+	private CM_PORTRepository cm_portRepository;
+	@Autowired
+	private BYPASS_INFORepository bypass_infoRepository;
+	@Autowired
+	private CRYPTO_MODERepository crypto_modeRepository;
+	@Autowired
+	private CM_PROGRAM_INFORepository cm_program_infoRepository;
 
 	@Autowired
 	private NODERepository nodeRepository;
