@@ -333,10 +333,10 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncPM(int CTAG, List<NODECONNECTOR> node_connectors, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception {
-        for (NODECONNECTOR node_connector : node_connectors) {
-            String TID = node_connector.getTID();
-            String AID = node_connector.getAID();
+    public void TL1SyncPM(int CTAG, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception {
+        for (ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
+            String TID = odu_node_connector.getTID();
+            String AID = odu_node_connector.getAID();
             String SIGNAL = getMITypeByTID(odu_mpls_ifs, TID);
             String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
 

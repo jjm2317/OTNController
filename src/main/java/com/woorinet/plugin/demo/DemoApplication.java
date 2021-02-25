@@ -286,7 +286,8 @@ public class DemoApplication {
 
 			List<NODECONNECTOR> node_connectors = tl1Mapper.selectNodeConnector();
 			List<ODU_MPLS_IF> odu_mpls_ifs = tl1Mapper.selectOduMplsIf();
-			manager.TL1SyncPM(CTAG, node_connectors, odu_mpls_ifs);
+			List<ODU_NODE_CONNECTOR> odu_node_connectors = tl1Mapper.selectOduNodeConnector();
+			manager.TL1SyncPM(CTAG, odu_node_connectors, odu_mpls_ifs);
 
 			//PM-PORT DB연동
 //			manager.Tl1SyncPmPort(CTAG, node_connectors);
