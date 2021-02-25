@@ -461,7 +461,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                cm_portRepository.save(new CM_PORT(fields));
+                crypto_modeRepository.save(new CRYPTO_MODE(fields));
             }
         }
     }
