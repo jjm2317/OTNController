@@ -35,6 +35,7 @@ public class SDNManager {
     List<SERVICE_EXT> service_exts;
     List<MPLS_IF> mpls_ifs;
     List<List<ODU>> odu_list_for_service = new ArrayList<>();
+    List<INVENTORY> inventories;
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, SYSTEM_INFO> system_infoHashMap = new HashMap<>();
@@ -53,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository,PATHRepository pathRepository, CONSTRAINTRepository constraintRepository,ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs,List<SERVICE> services,List<ACCESS_IF> access_ifs, List<SERVICE_EXT> service_exts,List<MPLS_IF> mpls_ifs ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository,PATHRepository pathRepository, CONSTRAINTRepository constraintRepository,ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs,List<SERVICE> services,List<ACCESS_IF> access_ifs, List<SERVICE_EXT> service_exts,List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -73,6 +74,7 @@ public class SDNManager {
         this.access_ifs = access_ifs;
         this.service_exts = service_exts;
         this.mpls_ifs = mpls_ifs;
+        this.inventories = inventories;
 
         makeHashMap();
 
