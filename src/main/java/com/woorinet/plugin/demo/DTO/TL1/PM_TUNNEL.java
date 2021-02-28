@@ -26,18 +26,18 @@ public class PM_TUNNEL {
     String TYPE;
     String DATE;
     String TIME;
-    int ING_PKT;
-    int ING_BYTE;
-    int ING_RATE;
-    int EGR_PKT;
-    int EGR_BYTE;
-    int EGR_RATE;
+    String ING_PKT;
+    String ING_BYTE;
+    String ING_RATE;
+    String EGR_PKT;
+    String EGR_BYTE;
+    String EGR_RATE;
     String LM_COUNTER;
 
     public PM_TUNNEL() {
     }
 
-    public PM_TUNNEL(String TID, String TUNNEL_NAME, String TUNNEL_ID, String LSP_ID, String ING_LSRID, String EGR_LSRID, String TYPE, String DATE, String TIME, int ING_PKT, int ING_BYTE, int ING_RATE, int EGR_PKT, int EGR_BYTE, int EGR_RATE, String LM_COUNTER) {
+    public PM_TUNNEL(String TID, String TUNNEL_NAME, String TUNNEL_ID, String LSP_ID, String ING_LSRID, String EGR_LSRID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE, String LM_COUNTER) {
         this.TID = TID;
         this.TUNNEL_NAME = TUNNEL_NAME;
         this.TUNNEL_ID = TUNNEL_ID;
@@ -54,6 +54,25 @@ public class PM_TUNNEL {
         this.EGR_BYTE = EGR_BYTE;
         this.EGR_RATE = EGR_RATE;
         this.LM_COUNTER = LM_COUNTER;
+    }
+
+    public PM_TUNNEL(String[] fields) {
+        this.TID = fields[0];
+        this.TUNNEL_NAME = fields[1];
+        this.TUNNEL_ID = fields[2];
+        this.LSP_ID = fields[3];
+        this.ING_LSRID = fields[4];
+        this.EGR_LSRID = fields[5];
+        this.TYPE = fields[6];
+        this.DATE = fields[7];
+        this.TIME = fields[8];
+        this.ING_PKT = fields[9];
+        this.ING_BYTE = fields[10];
+        this.ING_RATE = fields[11];
+        this.EGR_PKT = fields[12];
+        this.EGR_BYTE = fields[13];
+        this.EGR_RATE = fields[14];
+        this.LM_COUNTER = fields[15];
     }
 
     @Override
