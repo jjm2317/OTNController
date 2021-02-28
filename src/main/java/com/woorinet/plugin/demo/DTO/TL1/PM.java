@@ -7,12 +7,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Setter
 @Getter
 @Data
 @Entity
-
+@Table(name = "TL1_PM")
 public class PM {
     /* TID,AID,UNIT-TYPE,SIGNAL,INTERVAL,PM-TYPE,BIP,ES,SES,UAS,BEI */
     @Id

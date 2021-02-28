@@ -8,11 +8,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Setter
 @Getter
 @Data
 @Entity
+@Table(name = "TL1_KEY_STATE")
 public class KEY_STATE {
     @Id
     @GeneratedValue

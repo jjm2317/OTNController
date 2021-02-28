@@ -8,11 +8,13 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
 @Setter
 @Getter
+@Table(name = "TL1_PM_TUNNEL")
 public class PM_TUNNEL {
 
     String TID;

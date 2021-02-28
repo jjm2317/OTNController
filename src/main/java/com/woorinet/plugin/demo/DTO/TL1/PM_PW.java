@@ -8,12 +8,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
 @Setter
 @Getter
-
+@Table(name = "TL1_PM_PW")
 public class PM_PW {
     @Id
     @GeneratedValue

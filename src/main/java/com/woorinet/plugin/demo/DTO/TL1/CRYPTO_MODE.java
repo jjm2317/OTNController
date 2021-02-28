@@ -8,11 +8,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Data
 @Entity
+@Table(name = "TL1_CRYPTO_MODE")
 public class CRYPTO_MODE {
     @Id
     @GeneratedValue
