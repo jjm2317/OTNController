@@ -348,10 +348,10 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncPmPort(int CTAG, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void Tl1SyncPmPort(int CTAG, List<ODU_NODE_CONNECTOR> odu_node_connectors) throws Exception {
 
-        for (NODECONNECTOR node_connector : node_connectors) {
-            String cmd = "RTRV-PM-PORT:" + node_connector.getTID() +":" + node_connector.getAID() +":"+ CTAG +":pm-time=1D;";
+        for (ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
+            String cmd = "RTRV-PM-PORT:" + odu_node_connector.getTID() +":" + odu_node_connector.getAID() +":"+ CTAG +":pm-time=1D;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);

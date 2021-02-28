@@ -157,13 +157,7 @@ public class DemoApplication {
 			for (NODE node: nodes) {
 				manager.Tl1SyncSystemInfo(CTAG, node.getTID(), tl1Mapper);
 			}
-			for (NODE node: nodes) {
-				manager.Tl1SyncNodeConnector(CTAG, node.getTID(), tl1Mapper);
-			}
-			List<NODECONNECTOR> node_connectors = tl1Mapper.selectNodeConnector();
 
-			//PM-PORT DB연동
-			manager.Tl1SyncPmPort(CTAG, node_connectors);
 			//Slot DB연동
 			for (NODE node: nodes) {
 				manager.Tl1SyncSlot(CTAG, node.getTID(), tl1Mapper);
@@ -175,7 +169,9 @@ public class DemoApplication {
 			}
 
 			//NodeConnector DB연동
-
+			for (NODE node: nodes) {
+				manager.Tl1SyncNodeConnector(CTAG, node.getTID(), tl1Mapper);
+			}
 
 			//CesNodeConnector DB연동
 			for (NODE node: nodes) {
@@ -290,10 +286,15 @@ public class DemoApplication {
 				manager.Tl1SyncOPTICPOWER(node.getTID(), tl1Mapper);
 			}
 
+			List<NODECONNECTOR> node_connectors = tl1Mapper.selectNodeConnector();
 			List<ODU_MPLS_IF> odu_mpls_ifs = tl1Mapper.selectOduMplsIf();
 			List<ODU_NODE_CONNECTOR> odu_node_connectors = tl1Mapper.selectOduNodeConnector();
+
+			//PM DB연동
 			manager.TL1SyncPM(CTAG, odu_node_connectors, odu_mpls_ifs);
 
+			//PM-PORT DB연동
+			manager.Tl1SyncPmPort(CTAG, odu_node_connectors);
 
 			//INVENTORY DB연동
 			manager.TL1SyncInventory(nodes);
