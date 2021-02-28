@@ -8,11 +8,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Setter
 @Getter
 @Entity
 @Data
+@Table(name = "TL1_CM_PROGRAM_INFO")
 public class CM_PROGRAM_INFO {
     @Id
     @GeneratedValue

@@ -8,11 +8,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Setter
 @Getter
 @Data
 @Entity
+@Table(name="TL1_BYPASS_INFO")
 public class BYPASS_INFO {
     @Id
     @GeneratedValue
