@@ -1,5 +1,11 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class MPLS_AC {
     String TID_ID;
     String TID;

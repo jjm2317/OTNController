@@ -19,6 +19,7 @@ public class TL1Manager {
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
+    PM_PWRepository pmPwRepository;
     PM_TUNNELRepository pm_tunnelRepository;
     INVENTORYRepository inventoryRepository;
     SESS_STATERepository sess_stateRepository;
@@ -36,7 +37,7 @@ public class TL1Manager {
     HashMap<String, ACCESS_IF> accessIfHashMap = new HashMap<>();
     HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(String ip, int port,PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
+    public TL1Manager(String ip, int port,PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory,PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
 //        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -351,7 +352,7 @@ public class TL1Manager {
     public void Tl1SyncPmPort(int CTAG, List<ODU_NODE_CONNECTOR> odu_node_connectors) throws Exception {
 
         for (ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
-            String cmd = "RTRV-PM-PORT:" + odu_node_connector.getTID() +":" + odu_node_connector.getAID() +":"+ CTAG +":pm-time=1D;";
+            String cmd = "RTRV-PM-PORT:" + odu_node_connector.getTID() +":" + odu_node_connector.getAID() +":"+ CTAG +":pm-time=15MIN;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
@@ -361,9 +362,42 @@ public class TL1Manager {
         }
     }
 
-//    public void TL1SyncPmAc(int CTAG, List<NODECONNECTOR> node_connectors) throws Exception {
-//
-//    }
+    public void TL1SyncPmAc(int CTAG, List<MPLS_AC> mplsAcs) throws Exception {
+        for (MPLS_AC mplsAc : mplsAcs) {
+            String cmd = "RTRV-PM-AC:20B_11::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                System.out.println(fields);
+                pm_acRepositiory.save(new PM_AC(fields));
+            }
+        }
+
+    }
+
+    public void TL1SyncPmPw(int CTAG, List<NODE> nodes) throws Exception {
+        for (NODE node : nodes) {
+            String cmd = "RTRV-PM-PW:" + node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                System.out.println(fields);
+                pmPwRepository.save(new PM_PW(fields));
+            }
+        }
+
+    }
+
+    public void TL1SyncPmTunnel(int CTAG, List<NODE> nodes) throws Exception {
+        for (NODE node : nodes) {
+            String cmd = "RTRV-PM-TUNNEL:" + node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
+            ArrayList<String[]> fieldList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldList) {
+                System.out.println(fields);
+                pm_tunnelRepository.save(new PM_TUNNEL(fields));
+            }
+        }
+
+    }
+
     public void TL1SyncInventory(List<NODE> nodes) throws  Exception {
         for (NODE node : nodes) {
             String cmd = "RTRV-INVENTORY:" + node.getTID() +";";
