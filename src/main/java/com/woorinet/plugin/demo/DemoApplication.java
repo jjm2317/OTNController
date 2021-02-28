@@ -337,6 +337,7 @@ public class DemoApplication {
 			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "TL1 접속 실패";
 		}
 
 		return "synchronization";
