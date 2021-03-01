@@ -16,6 +16,7 @@ import java.util.Map;
 
 public class TL1Manager {
 //    ODU_MPLS_IFRepository odu_mpls_ifRepository;
+    Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -31,14 +32,15 @@ public class TL1Manager {
     CM_PROGRAM_INFORepository cm_program_infoRepository;
 
     SocketChannel socketChannel;
-    List<ACCESS_IF> access_ifs;
+    List<Tl1AccessIf> Tl1AccessIfs;
     List<ODU_MPLS_IF> odu_mpls_ifs;
 
-    HashMap<String, ACCESS_IF> accessIfHashMap = new HashMap<>();
+    HashMap<String, Tl1AccessIf> accessIfHashMap = new HashMap<>();
     HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(String ip, int port,PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory,PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
+    public TL1Manager(String ip, int port, Tl1AccessIfRepository tl1AccessIfRepository, PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
 //        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
+        this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
@@ -235,11 +237,9 @@ public class TL1Manager {
 
     public void Tl1SyncAccessIf(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
         String cmd = "RTRV-ACCESS-IF:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initAccessIfTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
         for (String[] fields: fieldsList) {
-            tl1Mapper.insertAccessIf(new ACCESS_IF(fields));
+            tl1AccessIfRepository.save(new Tl1AccessIf(fields));
         }
     }
 

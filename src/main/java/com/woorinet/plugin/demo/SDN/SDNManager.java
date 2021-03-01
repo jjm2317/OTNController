@@ -1,7 +1,7 @@
 package com.woorinet.plugin.demo.SDN;
 
 import com.woorinet.plugin.demo.DTO.SDN.*;
-import com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF;
+import com.woorinet.plugin.demo.DTO.TL1.Tl1AccessIf;
 import com.woorinet.plugin.demo.DTO.TL1.NODE;
 import com.woorinet.plugin.demo.DTO.TL1.SERVICE;
 import com.woorinet.plugin.demo.DTO.TL1.*;
@@ -31,7 +31,7 @@ public class SDNManager {
     List<ODU> odus;
     List<ODU_MPLS_IF> odu_mpls_ifs;
     List<SERVICE> services;
-    List<ACCESS_IF> access_ifs;
+    List<Tl1AccessIf> Tl1AccessIfs;
     List<SERVICE_EXT> service_exts;
     List<MPLS_IF> mpls_ifs;
     List<List<ODU>> odu_list_for_service = new ArrayList<>();
@@ -43,7 +43,7 @@ public class SDNManager {
     HashMap<String, ODU_NODE_CONNECTOR> odu_node_connectorHashMap = new HashMap<>();
     HashMap<String, ODU> oduHashMapForODUTUNNEL = new HashMap<>();
     HashMap<String, ODU> oduHashMapForMPLSTP = new HashMap<>();
-    HashMap<String, ACCESS_IF> access_ifHashMap = new HashMap<>();
+    HashMap<String, Tl1AccessIf> access_ifHashMap = new HashMap<>();
     HashMap<String, ODU> oduNameTailHashMapForODUTUNNEL = new HashMap<>();
     HashMap<String, ODU> oduNameHeadHashMapForODUTUNNEL = new HashMap<>();
     HashMap<String, ODU> oduMapInMPLSTPByLocalId = new HashMap<>();
@@ -54,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository,PATHRepository pathRepository, CONSTRAINTRepository constraintRepository,ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs,List<SERVICE> services,List<ACCESS_IF> access_ifs, List<SERVICE_EXT> service_exts,List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -71,7 +71,7 @@ public class SDNManager {
         this.odus = odus;
         this.odu_mpls_ifs = odu_mpls_ifs;
         this.services = services;
-        this.access_ifs = access_ifs;
+        this.Tl1AccessIfs = Tl1AccessIfs;
         this.service_exts = service_exts;
         this.mpls_ifs = mpls_ifs;
         this.inventories = inventories;
@@ -133,8 +133,8 @@ public class SDNManager {
         for(ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
             odu_node_connectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), odu_node_connector);
         }
-        for(ACCESS_IF access_if : access_ifs) {
-            access_ifHashMap.put(access_if.getTID(), access_if);
+        for(Tl1AccessIf Tl1AccessIf : Tl1AccessIfs) {
+            access_ifHashMap.put(Tl1AccessIf.getTID(), Tl1AccessIf);
         }
         for(ODU_MPLS_IF odu_mpls_if: odu_mpls_ifs) {
             odu_mpls_ifHashMap.put(odu_mpls_if.getTID()+'/'+odu_mpls_if.getMPLS_TP_ID(), odu_mpls_if);

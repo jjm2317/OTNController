@@ -1,16 +1,27 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class ACCESS_IF {
+@Data
+@Entity
+@Table(name = "tl1_access_if")
+public class Tl1AccessIf {
     String TID_ID;
     String TID;
     String SUBNET_ID;
     String SUBNET;
+    @Id
+    @Generated
     String ACCESS_IF_ID;
     String LOCAL_ID;
     String REQUEST_ID;
@@ -31,11 +42,11 @@ public class ACCESS_IF {
     String PORT_CONSTRAINT_TYPE;
     String AC2AC_TYPE;
 
-    public ACCESS_IF() {
+    public Tl1AccessIf() {
 
     }
 
-    public ACCESS_IF(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String ACCESS_IF_ID, String LOCAL_ID, String REQUEST_ID, String NAME, String ACCESS_IF_TYPE, String ACCESS_IF_OPERATIONAL_STATUS, String ACCESS_IF_CONFIGURATION_ACTION, String ACCESS_IF_CONFIGURATION_RESULT, String DEPLOYMENT_ENABLER, String DEPLOYMENT_STATUS, String CIR, String PIR, String SERVICE_TYPE, String CONSTRAINT_ID, String COMMON_CONSTRAINT_NAME, String COMMON_CONSTRAINT_VALUE, String COMMON_CONSTRAINT_OPERATOR, String PORT_CONSTRAINT_TYPE, String AC2AC_TYPE) {
+    public Tl1AccessIf(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String ACCESS_IF_ID, String LOCAL_ID, String REQUEST_ID, String NAME, String ACCESS_IF_TYPE, String ACCESS_IF_OPERATIONAL_STATUS, String ACCESS_IF_CONFIGURATION_ACTION, String ACCESS_IF_CONFIGURATION_RESULT, String DEPLOYMENT_ENABLER, String DEPLOYMENT_STATUS, String CIR, String PIR, String SERVICE_TYPE, String CONSTRAINT_ID, String COMMON_CONSTRAINT_NAME, String COMMON_CONSTRAINT_VALUE, String COMMON_CONSTRAINT_OPERATOR, String PORT_CONSTRAINT_TYPE, String AC2AC_TYPE) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.SUBNET_ID = SUBNET_ID;
@@ -61,7 +72,7 @@ public class ACCESS_IF {
         this.AC2AC_TYPE = AC2AC_TYPE;
     }
 
-    public ACCESS_IF(String[] fields) {
+    public Tl1AccessIf(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];

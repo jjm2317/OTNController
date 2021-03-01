@@ -596,35 +596,6 @@
         )
     </select>
 
-    <select id="initAccessIfTable">
-        CREATE TABLE IF NOT EXISTS TL1.ACCESS_IF (
-            `TID_ID` varchar(100) default '',
-            `TID` varchar(100) default '',
-            `SUBNET_ID` varchar(100) default '',
-            `SUBNET` varchar(100) default '',
-            `ACCESS_IF_ID` varchar(100) default '',
-            `LOCAL_ID` varchar(100) default '',
-            `REQUEST_ID` varchar(100) default '',
-            `NAME` varchar(100) default '',
-            `ACCESS_IF_TYPE` varchar(100) default '',
-            `ACCESS_IF_OPERATIONAL_STATUS` varchar(100) default '',
-            `ACCESS_IF_CONFIGURATION_ACTION` varchar(100) default '',
-            `ACCESS_IF_CONFIGURATION_RESULT` varchar(100) default '',
-            `DEPLOYMENT_ENABLER` varchar(100) default '',
-            `DEPLOYMENT_STATUS` varchar(100) default '',
-            `CIR` varchar(100) default '',
-            `PIR` varchar(100) default '',
-            `SERVICE_TYPE` varchar(100) default '',
-            `CONSTRAINT_ID` varchar(100) default '',
-            `COMMON_CONSTRAINT_NAME` varchar(100) default '',
-            `COMMON_CONSTRAINT_VALUE` varchar(100) default '',
-            `COMMON_CONSTRAINT_OPERATOR` varchar(100) default '',
-            `PORT_CONSTRAINT_TYPE` varchar(100) default '',
-            `AC2AC_TYPE` varchar(100) default '',
-            PRIMARY KEY (`TID_ID`, `TID`, `NAME`)
-        )
-    </select>
-
     <select id="initServiceTable">
         CREATE TABLE IF NOT EXISTS TL1.SERVICE (
             `TID_ID` varchar(100) default '',
@@ -1075,13 +1046,6 @@
             *
         FROM
             TL1.MPLS_AC
-    </select>
-
-    <select id="selectAccessIf" resultType="com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF">
-        SELECT
-            *
-        FROM
-            TL1.ACCESS_IF
     </select>
 
     <select id="selectService" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE">
@@ -2247,59 +2211,6 @@
                 #{NO_PACKET},
                 #{CREATION_DATE},
                 #{MODIFIED_DATE}
-            )
-    </select>
-
-    <select id="insertAccessIf" parameterType="com.woorinet.plugin.demo.DTO.TL1.ACCESS_IF">
-        REPLACE INTO
-            TL1.ACCESS_IF(
-                `TID_ID`,
-                `TID`,
-                `SUBNET_ID`,
-                `SUBNET`,
-                `ACCESS_IF_ID`,
-                `LOCAL_ID`,
-                `REQUEST_ID`,
-                `NAME`,
-                `ACCESS_IF_TYPE`,
-                `ACCESS_IF_OPERATIONAL_STATUS`,
-                `ACCESS_IF_CONFIGURATION_ACTION`,
-                `ACCESS_IF_CONFIGURATION_RESULT`,
-                `DEPLOYMENT_ENABLER`,
-                `DEPLOYMENT_STATUS`,
-                `CIR`,
-                `PIR`,
-                `SERVICE_TYPE`,
-                `CONSTRAINT_ID`,
-                `COMMON_CONSTRAINT_NAME`,
-                `COMMON_CONSTRAINT_VALUE`,
-                `COMMON_CONSTRAINT_OPERATOR`,
-                `PORT_CONSTRAINT_TYPE`,
-                `AC2AC_TYPE`
-            ) VALUES (
-                #{TID_ID},
-                #{TID},
-                #{SUBNET_ID},
-                #{SUBNET},
-                #{ACCESS_IF_ID},
-                #{LOCAL_ID},
-                #{REQUEST_ID},
-                #{NAME},
-                #{ACCESS_IF_TYPE},
-                #{ACCESS_IF_OPERATIONAL_STATUS},
-                #{ACCESS_IF_CONFIGURATION_ACTION},
-                #{ACCESS_IF_CONFIGURATION_RESULT},
-                #{DEPLOYMENT_ENABLER},
-                #{DEPLOYMENT_STATUS},
-                #{CIR},
-                #{PIR},
-                #{SERVICE_TYPE},
-                #{CONSTRAINT_ID},
-                #{COMMON_CONSTRAINT_NAME},
-                #{COMMON_CONSTRAINT_VALUE},
-                #{COMMON_CONSTRAINT_OPERATOR},
-                #{PORT_CONSTRAINT_TYPE},
-                #{AC2AC_TYPE}
             )
     </select>
 
