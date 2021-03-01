@@ -149,7 +149,7 @@ public class DemoApplication {
 	String synchronization() {
 		int CTAG = 100;
 		try {
-			TL1Manager manager = new TL1Manager("222.117.54.175", 19011, tl1AccessIfRepository,pmRepository,  pm_portRepository,pm_acRepositiory, pmPwRepository, pm_tunnelRepository,inventoryRepository,sess_stateRepository,key_stateRepository, module_infoRepository, cm_portRepository, bypass_infoRepository, crypto_modeRepository, cm_program_infoRepository);
+			TL1Manager manager = new TL1Manager(CTAG,"222.117.54.175", 19011, tl1AccessIfRepository,pmRepository,  pm_portRepository,pm_acRepositiory, pmPwRepository, pm_tunnelRepository,inventoryRepository,sess_stateRepository,key_stateRepository, module_infoRepository, cm_portRepository, bypass_infoRepository, crypto_modeRepository, cm_program_infoRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
 
@@ -241,9 +241,7 @@ public class DemoApplication {
 			}
 
 			//ACCESS_IF DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncAccessIf(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncAccessIf();
 
 			//SERVICE DB연동
 			for (NODE node: nodes) {

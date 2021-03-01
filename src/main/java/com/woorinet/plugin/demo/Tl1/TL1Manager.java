@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 public class TL1Manager {
+    int CTAG;
+
+    List<NODE> nodeList;
 //    ODU_MPLS_IFRepository odu_mpls_ifRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
@@ -38,7 +41,9 @@ public class TL1Manager {
     HashMap<String, Tl1AccessIf> accessIfHashMap = new HashMap<>();
     HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(String ip, int port, Tl1AccessIfRepository tl1AccessIfRepository, PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
+    public TL1Manager(int CTAG,String ip, int port, Tl1AccessIfRepository tl1AccessIfRepository, PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
+        this.CTAG = CTAG;
+        this.nodeList = new ArrayList<>();
 //        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
@@ -76,6 +81,7 @@ public class TL1Manager {
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
         for (String[] fields: fieldsList) {
             tl1Mapper.insertNode(new NODE(fields));
+            nodeList.add(new NODE(fields));
         }
     }
 
@@ -235,11 +241,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncAccessIf(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ACCESS-IF:" + TID + "::" + CTAG + ";";
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1AccessIfRepository.save(new Tl1AccessIf(fields));
+    public void Tl1SyncAccessIf() throws Exception {
+        for(NODE node:nodeList) {
+            String cmd = "RTRV-ACCESS-IF:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1AccessIfRepository.save(new Tl1AccessIf(fields));
+            }
         }
     }
 
