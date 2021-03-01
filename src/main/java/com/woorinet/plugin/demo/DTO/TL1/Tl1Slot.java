@@ -1,11 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class SLOT {
+@Data
+@Entity
+@Table(name = "tl1_slot")
+public class Tl1Slot {
+    @GeneratedValue
+    @Id
+    int slot_id;
     String TID;
     String SLOT_PRV_UNIT;
     String EQ_UNIT;
@@ -21,7 +33,7 @@ public class SLOT {
     String FPGA_DATE;
 
 
-    public SLOT(String TID, String SLOT_PRV_UNIT, String EQ_UNIT, String EQ_STATE, String ADMIN_STATE, String INIT_OK, String BP_STATE, String IPC_STATE, String FAIL_STATE, String HW_VER, String SW_VER, String FPGA_VER, String FPGA_DATE) {
+    public Tl1Slot(String TID, String SLOT_PRV_UNIT, String EQ_UNIT, String EQ_STATE, String ADMIN_STATE, String INIT_OK, String BP_STATE, String IPC_STATE, String FAIL_STATE, String HW_VER, String SW_VER, String FPGA_VER, String FPGA_DATE) {
         this.TID = TID;
         this.SLOT_PRV_UNIT = SLOT_PRV_UNIT;
         this.EQ_UNIT = EQ_UNIT;
@@ -37,7 +49,7 @@ public class SLOT {
         this.FPGA_DATE = FPGA_DATE;
     }
 
-    public SLOT(String[] fields) {
+    public Tl1Slot(String[] fields) {
         this.TID = fields[0];
         this.SLOT_PRV_UNIT = fields[1];
         this.EQ_UNIT = fields[2];

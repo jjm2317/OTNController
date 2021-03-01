@@ -950,7 +950,7 @@
             TL1.SYSTEM_INFO
     </select>
 
-    <select id="selectSlot" resultType="com.woorinet.plugin.demo.DTO.TL1.SLOT">
+    <select id="selectSlot" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1Slot">
         SELECT
             *
         FROM
@@ -1170,7 +1170,7 @@
             )
     </select>
 
-    <select id="insertSlot" parameterType="com.woorinet.plugin.demo.DTO.TL1.SLOT">
+    <select id="insertSlot" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1Slot">
         REPLACE INTO
             TL1.SLOT(
                 TID,
