@@ -1,11 +1,22 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class SYSTEM_INFO {
+@Data
+@Entity
+@Table(name = "tl1_system_info")
+public class Tl1SystemInfo {
+    @Id
+    @Generated
     String TID;
     String UID;
     String LOCATION;
@@ -14,7 +25,7 @@ public class SYSTEM_INFO {
     String BOOT_TIME;
     String RESET_REASON;
 
-    public SYSTEM_INFO(String TID, String UID, String LOCATION, String VENDOR, String PWOAM, String BOOT_TIME, String RESET_REASON) {
+    public Tl1SystemInfo(String TID, String UID, String LOCATION, String VENDOR, String PWOAM, String BOOT_TIME, String RESET_REASON) {
         this.TID = TID;
         this.UID = UID;
         this.LOCATION = LOCATION;
