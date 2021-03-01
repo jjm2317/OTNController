@@ -25,7 +25,7 @@ public class SDNManager {
 
     String separator;
     List<NODE> nodes;
-    List<SYSTEM_INFO> system_infos;
+    List<Tl1SystemInfo> tl1SystemInfos;
     List<ODU_NODE_CONNECTOR> odu_node_connectors;
     List<OPTIC_POWER> optic_powers;
     List<ODU> odus;
@@ -38,7 +38,7 @@ public class SDNManager {
     List<INVENTORY> inventories;
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
-    HashMap<String, SYSTEM_INFO> system_infoHashMap = new HashMap<>();
+    HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
     HashMap<String, OPTIC_POWER> optic_powerHashMap = new HashMap<>();
     HashMap<String, ODU_NODE_CONNECTOR> odu_node_connectorHashMap = new HashMap<>();
     HashMap<String, ODU> oduHashMapForODUTUNNEL = new HashMap<>();
@@ -54,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<SYSTEM_INFO> system_infos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -65,7 +65,7 @@ public class SDNManager {
         this.access_ifRepository = access_ifRepository;
         this.separator = ".";
         this.nodes = nodes;
-        this.system_infos = system_infos;
+        this.tl1SystemInfos = tl1SystemInfos;
         this.odu_node_connectors = odu_node_connectors;
         this.optic_powers = optic_powers;
         this.odus = odus;
@@ -84,8 +84,8 @@ public class SDNManager {
         for(NODE node : nodes) {
             nodeHashMap.put(node.getTID(), node);
         }
-        for(SYSTEM_INFO system_info: system_infos) {
-            system_infoHashMap.put(system_info.getTID(), system_info);
+        for(Tl1SystemInfo tl1SystemInfo : tl1SystemInfos) {
+            system_infoHashMap.put(tl1SystemInfo.getTID(), tl1SystemInfo);
         }
         for(OPTIC_POWER optic_power : optic_powers) {
             optic_powerHashMap.put(optic_power.getTID()+"/"+optic_power.getAID(), optic_power);
@@ -148,11 +148,11 @@ public class SDNManager {
         for (NODE node: nodes) {
             if(!node.getNODE_TYPE().equals("otn")) continue; // otn장비만
 
-            SYSTEM_INFO system_info = system_infoHashMap.get(node.getTID());
+            Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(node.getTID());
 
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = new com.woorinet.plugin.demo.DTO.SDN.NODE();
             sdnNode.setEms_id(200009);
-            if (system_info != null) sdnNode.setNe_id(system_info.getVENDOR() + separator + node.getNODE_TYPE() + separator + node.getTID());
+            if (tl1SystemInfo != null) sdnNode.setNe_id(tl1SystemInfo.getVENDOR() + separator + node.getNODE_TYPE() + separator + node.getTID());
             sdnNode.setNe_id("");
             sdnNode.setNe_name(node.getTID());
             sdnNode.setNe_type("");
@@ -160,7 +160,7 @@ public class SDNManager {
             if (node.getNODE_STATUS().equals("normal")) sdnNode.setNe_status(node.getNODE_STATUS()); else sdnNode.setNe_status("broken");
             sdnNode.setSw_ver(node.getSOFTWARE());
             sdnNode.setIp_addr(node.getIP_ADDR());
-            sdnNode.setVendor(system_info.getVENDOR());
+            sdnNode.setVendor(tl1SystemInfo.getVENDOR());
             sdnNode.setSerial_num(""); // INVENTORY 에서 가져와야됨
             sdnNode.setSys_type(node.getNODE_TYPE());
 
@@ -178,10 +178,10 @@ public class SDNManager {
             NODE node = nodeHashMap.get(odu_node_connector.getTID());
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(odu_node_connector.getTID());
             OPTIC_POWER optic_power = optic_powerHashMap.get(odu_node_connector.getTID()+"/"+odu_node_connector.getAID());
-            SYSTEM_INFO system_info = system_infoHashMap.get(node.getTID());
+            Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(node.getTID());
 
             connector.setEms_id(200009);
-            connector.setConnect_id(system_info.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_name() + separator + odu_node_connector.getSHELF_INDEX() + separator + odu_node_connector.getSLOT_INDEX() + separator + odu_node_connector.getPORT_INDEX());
+            connector.setConnect_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_name() + separator + odu_node_connector.getSHELF_INDEX() + separator + odu_node_connector.getSLOT_INDEX() + separator + odu_node_connector.getPORT_INDEX());
             connector.setConnect_name("");
             connector.setNe_id(sdnNode.getNe_id());
             connector.setNe_name(sdnNode.getNe_name());
@@ -227,8 +227,8 @@ public class SDNManager {
             LINK link = new LINK();
 
 //
-            SYSTEM_INFO src_system_info = system_infoHashMap.get(odu_mpls_if.getSRC_TID());
-            SYSTEM_INFO dst_system_info = system_infoHashMap.get(odu_mpls_if.getDST_TID());
+            Tl1SystemInfo src_tl1SystemInfo = system_infoHashMap.get(odu_mpls_if.getSRC_TID());
+            Tl1SystemInfo dst_tl1SystemInfo = system_infoHashMap.get(odu_mpls_if.getDST_TID());
             com.woorinet.plugin.demo.DTO.SDN.NODE src_sdnNode = sdnNodeHashMap.get(odu_mpls_if.getSRC_TID());
             com.woorinet.plugin.demo.DTO.SDN.NODE dst_sdnNode = sdnNodeHashMap.get(odu_mpls_if.getDST_TID());
             CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(odu_mpls_if.getSRC_TID()+ '/' + odu_mpls_if.getSRC_PORT());
@@ -241,9 +241,9 @@ public class SDNManager {
 
             link.setEms_id(200009);
             link.setDst_ems_id(200009);
-            link.setLink_id(src_system_info.getVENDOR() + separator + src_sdnNode.getSys_type() + separator + src_sdnNode.getNe_name() + separator +
+            link.setLink_id(src_tl1SystemInfo.getVENDOR() + separator + src_sdnNode.getSys_type() + separator + src_sdnNode.getNe_name() + separator +
                     src_sdnConnector.getShelf_id() + separator + src_sdnConnector.getSlot_id() + separator + src_sdnConnector.getPort_id()
-                    + ":" + dst_system_info.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
+                    + ":" + dst_tl1SystemInfo.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
                     dst_sdnConnector.getShelf_id() + separator + dst_sdnConnector.getSlot_id() + separator + dst_sdnConnector.getPort_id());
             link.setLink_nm(odu_mpls_if.getNAME());
             link.setSrc_ne_id(src_sdnNode.getNe_id());
@@ -522,7 +522,7 @@ public class SDNManager {
 
         for(MPLS_IF mpls_if : mpls_ifs) {
 
-            SYSTEM_INFO system_info = system_infoHashMap.get(mpls_if.getTID());
+            Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(mpls_if.getTID());
 
             com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF sdnAccess_if = new com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF();
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(mpls_if.getTID());
@@ -531,7 +531,7 @@ public class SDNManager {
             if(odu == null) continue;
 
             sdnAccess_if.setEms_id(200009);
-            sdnAccess_if.setAccessif_id(system_info.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id()); // 조합
+            sdnAccess_if.setAccessif_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id()); // 조합
             sdnAccess_if.setAccessif_name("");
             sdnAccess_if.setNe_id(sdnNode.getNe_id());
             sdnAccess_if.setConnector_id(sdnConnector.getConnect_id());

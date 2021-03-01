@@ -943,7 +943,7 @@
             TL1.NODE
     </select>
 
-    <select id="selectSystemInfo" resultType="com.woorinet.plugin.demo.DTO.TL1.SYSTEM_INFO">
+    <select id="selectSystemInfo" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1SystemInfo">
         SELECT
             *
         FROM
@@ -1149,7 +1149,7 @@
             )
     </select>
 
-    <select id="insertSystemInfo" parameterType="com.woorinet.plugin.demo.DTO.TL1.SYSTEM_INFO">
+    <select id="insertSystemInfo" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1SystemInfo">
         REPLACE INTO
             TL1.SYSTEM_INFO(
                 TID,

@@ -39,7 +39,7 @@ public interface TL1Mapper {
 
 
     List<NODE> selectNode() throws Exception;
-    List<SYSTEM_INFO> selectSystemInfo() throws Exception;
+    List<Tl1SystemInfo> selectSystemInfo() throws Exception;
     List<SLOT> selectSlot() throws Exception;
     List<ETH_PORT> selectEthPort() throws Exception;
     List<NODECONNECTOR> selectNodeConnector() throws Exception;
@@ -66,7 +66,7 @@ public interface TL1Mapper {
     List<OPTIC_POWER> selectOpticPower() throws Exception;
 
     void insertNode(NODE node) throws Exception;
-    void insertSystemInfo(SYSTEM_INFO systemInfo) throws Exception;
+    void insertSystemInfo(Tl1SystemInfo systemInfo) throws Exception;
     void insertSlot(SLOT slot) throws Exception;
     void insertEthPort(ETH_PORT ethPort) throws Exception;
     void insertNodeConnector(NODECONNECTOR nodeConnector) throws Exception;
