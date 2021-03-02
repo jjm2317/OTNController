@@ -59,7 +59,7 @@ public class TL1Manager {
     Tl1KeyStateRepository tl1KeyStateRepository;
     Tl1ModuleInfoRepository tl1ModuleInfoRepository;
     Tl1CmPortRepository tl1CmPortRepository;
-    BYPASS_INFORepository bypass_infoRepository;
+    Tl1BypassInfoRepository tl1BypassInfoRepository;
     CRYPTO_MODERepository crypto_modeRepository;
     CM_PROGRAM_INFORepository cm_program_infoRepository;
 
@@ -108,7 +108,7 @@ public class TL1Manager {
                       Tl1KeyStateRepository tl1KeyStateRepository,
                       Tl1ModuleInfoRepository tl1ModuleInfoRepository,
                       Tl1CmPortRepository tl1CmPortRepository,
-                      BYPASS_INFORepository bypass_infoRepository,
+                      Tl1BypassInfoRepository tl1BypassInfoRepository,
                       CRYPTO_MODERepository crypto_modeRepository,
                       CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
         this.CTAG = CTAG;
@@ -155,7 +155,7 @@ public class TL1Manager {
         this.tl1KeyStateRepository = tl1KeyStateRepository;
         this.tl1ModuleInfoRepository = tl1ModuleInfoRepository;
         this.tl1CmPortRepository = tl1CmPortRepository;
-        this.bypass_infoRepository = bypass_infoRepository;
+        this.tl1BypassInfoRepository = tl1BypassInfoRepository;
         this.crypto_modeRepository = crypto_modeRepository;
         this.cm_program_infoRepository = cm_program_infoRepository;
 
@@ -588,8 +588,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncBypassInfo(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncBypassInfo() throws Exception {
+        for (NODE node : nodeList) {
             if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
@@ -598,7 +598,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                bypass_infoRepository.save(new BYPASS_INFO(fields));
+                tl1BypassInfoRepository.save(new Tl1BypassInfo(fields));
             }
         }
     }

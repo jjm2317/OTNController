@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="TL1_BYPASS_INFO")
-public class BYPASS_INFO {
+@Table(name="tl1_bypass_info")
+public class Tl1BypassInfo {
     @Id
     @GeneratedValue
     int BYPASS_INFO_ID;
@@ -29,10 +29,10 @@ public class BYPASS_INFO {
     String PEER_ACTION;
     String PEER_CURRENT_ACTION;
 
-    public BYPASS_INFO() {
+    public Tl1BypassInfo() {
     }
 
-    public BYPASS_INFO(String TID, String SUBNETWORK, String AID, String MODE, String ACTION, String CURRENT_ACTION, String PEER_MODE, String PEER_ACTION, String PEER_CURRENT_ACTION) {
+    public Tl1BypassInfo(String TID, String SUBNETWORK, String AID, String MODE, String ACTION, String CURRENT_ACTION, String PEER_MODE, String PEER_ACTION, String PEER_CURRENT_ACTION) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
@@ -44,7 +44,7 @@ public class BYPASS_INFO {
         this.PEER_CURRENT_ACTION = PEER_CURRENT_ACTION;
     }
 
-    public BYPASS_INFO(String[] fields) {
+    public Tl1BypassInfo(String[] fields) {
         this.TID = fields[0];
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];

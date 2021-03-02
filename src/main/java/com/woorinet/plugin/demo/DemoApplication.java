@@ -108,7 +108,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1CmPortRepository tl1CmPortRepository;
 	@Autowired
-	private BYPASS_INFORepository bypass_infoRepository;
+	private Tl1BypassInfoRepository tl1BypassInfoRepository;
 	@Autowired
 	private CRYPTO_MODERepository crypto_modeRepository;
 	@Autowired
@@ -234,7 +234,7 @@ public class DemoApplication {
 					tl1KeyStateRepository,
 					tl1ModuleInfoRepository,
 					tl1CmPortRepository,
-					bypass_infoRepository,
+					tl1BypassInfoRepository,
 					crypto_modeRepository,
 					cm_program_infoRepository);
 			//TL1 로그인
@@ -354,7 +354,7 @@ public class DemoApplication {
 			manager.TL1SyncCmPort();
 
 			//BYPASS_INFO DB연동
-			manager.TL1SyncBypassInfo(nodes, node_connectors);
+			manager.TL1SyncBypassInfo();
 
 			//CRYPTO_MODE DB연동
 			manager.TL1SyncCryptoMode(nodes, node_connectors);
