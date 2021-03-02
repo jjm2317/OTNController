@@ -1,12 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class NODECONNECTOR {
+@Data
+@Entity
+@Table(name = "tl1_node_connector")
+public class Tl1NodeConnector {
+    @Id
+    @GeneratedValue
+    int NODE_CONNECTOR_ID;
     String TID_ID;
     String TID;
     String AID;
@@ -30,7 +42,11 @@ public class NODECONNECTOR {
     String MAC_ADDR;
     String SLOT_SERVICE;
 
-    public NODECONNECTOR(String TID_ID, String TID, String AID, String SUBNET_ID, String SUBNET, String LOCAL_ID, String REQUEST_ID, String NAME, String NUMBER, String PORT_TYPE, String PORT_ROLE, String PORT_STATUS, String SHELF_TYPE, String SHELF_INDEX, String SLOT_TYPE, String SLOT_INDEX, String SUB_SLOT_TYPE, String SUB_SLOT_INDEX, String PORT_TYPE2, String PORT_INDEX, String MAC_ADDR, String SLOT_SERVICE) {
+    public Tl1NodeConnector() {
+
+    }
+
+    public Tl1NodeConnector(String TID_ID, String TID, String AID, String SUBNET_ID, String SUBNET, String LOCAL_ID, String REQUEST_ID, String NAME, String NUMBER, String PORT_TYPE, String PORT_ROLE, String PORT_STATUS, String SHELF_TYPE, String SHELF_INDEX, String SLOT_TYPE, String SLOT_INDEX, String SUB_SLOT_TYPE, String SUB_SLOT_INDEX, String PORT_TYPE2, String PORT_INDEX, String MAC_ADDR, String SLOT_SERVICE) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.AID = AID;
@@ -55,7 +71,7 @@ public class NODECONNECTOR {
         this.SLOT_SERVICE = SLOT_SERVICE;
     }
 
-    public NODECONNECTOR(String[] fields) {
+    public Tl1NodeConnector(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.AID = fields[2];

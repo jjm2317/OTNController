@@ -964,7 +964,7 @@
             TL1.ETH_PORT
     </select>
 
-    <select id="selectNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.NODECONNECTOR">
+    <select id="selectNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1NodeConnector">
         SELECT
             *
         FROM
@@ -1262,7 +1262,7 @@
             )
     </select>
 
-    <select id="insertNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.NODECONNECTOR">
+    <select id="insertNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1NodeConnector">
         REPLACE INTO
             TL1.NODE_CONNECTOR(
                 `TID_ID`,

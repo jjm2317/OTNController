@@ -22,6 +22,7 @@ public class TL1Manager {
     Tl1SystemInfoRepository tl1SystemInfoRepository;
     Tl1SlotRepository tl1SlotRepository;
     Tl1EthPortRepository tl1EthPortRepository;
+    Tl1NodeConnectorRepository tl1NodeConnectorRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -44,14 +45,35 @@ public class TL1Manager {
     HashMap<String, Tl1AccessIf> accessIfHashMap = new HashMap<>();
     HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(int CTAG,String ip, int port,Tl1SystemInfoRepository tl1SystemInfoRepository,Tl1SlotRepository tl1SlotRepository,Tl1EthPortRepository tl1EthPortRepository,Tl1AccessIfRepository tl1AccessIfRepository, PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
+    public TL1Manager(int CTAG,
+                      String ip,
+                      int port,
+                      Tl1SystemInfoRepository tl1SystemInfoRepository,
+                      Tl1SlotRepository tl1SlotRepository,
+                      Tl1EthPortRepository tl1EthPortRepository,
+                      Tl1NodeConnectorRepository tl1NodeConnectorRepository,
+                      Tl1AccessIfRepository tl1AccessIfRepository,
+                      PMRepository pmRepository,
+                      PM_PORTRepository pm_portRepository,
+                      PM_ACRepositiory pm_acRepositiory,
+                      PM_PWRepository pmPwRepository,
+                      PM_TUNNELRepository pm_tunnelRepository,
+                      INVENTORYRepository inventoryRepository,
+                      SESS_STATERepository sess_stateRepository,
+                      KEY_STATERepository key_stateRepository,
+                      MODULE_INFORepository module_infoRepository,
+                      CM_PORTRepository cm_portRepository,
+                      BYPASS_INFORepository bypass_infoRepository,
+                      CRYPTO_MODERepository crypto_modeRepository,
+                      CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
         this.CTAG = CTAG;
         this.nodeList = new ArrayList<>();
 //        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
-        this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.tl1SystemInfoRepository = tl1SystemInfoRepository;
         this.tl1SlotRepository = tl1SlotRepository;
         this.tl1EthPortRepository = tl1EthPortRepository;
+        this.tl1NodeConnectorRepository = tl1NodeConnectorRepository;
+        this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
@@ -127,13 +149,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncNodeConnector(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-NODE-CONNECTOR:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initNodeConnectorTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertNodeConnector(new NODECONNECTOR(fields));
+    public void Tl1SyncNodeConnector() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-NODE-CONNECTOR:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1NodeConnectorRepository.save(new Tl1NodeConnector(fields));
+            }
         }
     }
 
@@ -424,7 +446,7 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncSessState(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void TL1SyncSessState(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
         for (NODE node : nodes) {
             if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
@@ -439,7 +461,7 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncKeyState(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void TL1SyncKeyState(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
         for (NODE node : nodes) {
             if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
@@ -454,7 +476,7 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncModuleInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void TL1SyncModuleInfo(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
         for (NODE node : nodes) {
             if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
@@ -469,7 +491,7 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncCmPort(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void TL1SyncCmPort(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
         for (NODE node : nodes) {
             if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
@@ -484,7 +506,7 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncBypassInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void TL1SyncBypassInfo(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
         for (NODE node : nodes) {
             if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
@@ -499,7 +521,7 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncCryptoMode(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void TL1SyncCryptoMode(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
         for (NODE node : nodes) {
             if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
@@ -514,7 +536,7 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncCmProgramInfo(List<NODE> nodes, List<NODECONNECTOR> node_connectors) throws Exception {
+    public void TL1SyncCmProgramInfo(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
         for (NODE node : nodes) {
             if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
@@ -529,9 +551,9 @@ public class TL1Manager {
         }
     }
 
-    public String getSlotIndexByTID(List<NODECONNECTOR> node_connectors, String TID) {
+    public String getSlotIndexByTID(List<Tl1NodeConnector> node_connectors, String TID) {
         String result = "";
-        for(NODECONNECTOR node_connector : node_connectors) {
+        for(Tl1NodeConnector node_connector : node_connectors) {
             if(!node_connector.getTID().equals(TID)) continue;
             if(!node_connector.getSLOT_TYPE().equals("O208CLU") && !node_connector.getSLOT_TYPE().equals("O401CLU")) continue;
             result = node_connector.getSLOT_INDEX();

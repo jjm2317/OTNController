@@ -38,13 +38,15 @@ public class DemoApplication {
 	private QNETMapper qnetMapper;
 
 	@Autowired
-	private Tl1AccessIfRepository tl1AccessIfRepository;
-	@Autowired
 	private Tl1SystemInfoRepository tl1SystemInfoRepository;
 	@Autowired
 	private Tl1SlotRepository tl1SlotRepository;
 	@Autowired
 	private Tl1EthPortRepository tl1EthPortRepository;
+	@Autowired
+	private Tl1NodeConnectorRepository tl1NodeConnectorRepository;
+	@Autowired
+	private Tl1AccessIfRepository tl1AccessIfRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -155,7 +157,28 @@ public class DemoApplication {
 	String synchronization() {
 		int CTAG = 100;
 		try {
-			TL1Manager manager = new TL1Manager(CTAG,"222.117.54.175", 19011,tl1SystemInfoRepository,tl1SlotRepository,tl1EthPortRepository, tl1AccessIfRepository,pmRepository,  pm_portRepository,pm_acRepositiory, pmPwRepository, pm_tunnelRepository,inventoryRepository,sess_stateRepository,key_stateRepository, module_infoRepository, cm_portRepository, bypass_infoRepository, crypto_modeRepository, cm_program_infoRepository);
+			TL1Manager manager = new TL1Manager(
+					CTAG,
+					"222.117.54.175",
+					19011,
+					tl1SystemInfoRepository,
+					tl1SlotRepository,
+					tl1EthPortRepository,
+					tl1NodeConnectorRepository,
+					tl1AccessIfRepository,
+					pmRepository,
+					pm_portRepository,
+					pm_acRepositiory,
+					pmPwRepository,
+					pm_tunnelRepository,
+					inventoryRepository,
+					sess_stateRepository,
+					key_stateRepository,
+					module_infoRepository,
+					cm_portRepository,
+					bypass_infoRepository,
+					crypto_modeRepository,
+					cm_program_infoRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
 
@@ -175,9 +198,7 @@ public class DemoApplication {
 			manager.Tl1SyncEthPort();
 
 			//NodeConnector DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncNodeConnector(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncNodeConnector();
 
 			//CesNodeConnector DB연동
 			for (NODE node: nodes) {
@@ -290,7 +311,7 @@ public class DemoApplication {
 				manager.Tl1SyncOPTICPOWER(node.getTID(), tl1Mapper);
 			}
 
-			List<NODECONNECTOR> node_connectors = tl1Mapper.selectNodeConnector();
+			List<Tl1NodeConnector> node_connectors = tl1Mapper.selectNodeConnector();
 			List<ODU_MPLS_IF> odu_mpls_ifs = tl1Mapper.selectOduMplsIf();
 			List<ODU_NODE_CONNECTOR> odu_node_connectors = tl1Mapper.selectOduNodeConnector();
 			List<MPLS_AC> mplsAcs = tl1Mapper.selectMplsAc();
