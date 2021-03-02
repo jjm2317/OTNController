@@ -1,7 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-public class ETH_PORT {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Getter
+@Setter
+@Data
+@Entity
+@Table(name = "tl1_eth_port")
+public class Tl1EthPort {
+    @Id
+    @GeneratedValue
+    int ETH_PORT_ID;
     String TID;
     String AID;
     String NAME;
@@ -29,7 +45,11 @@ public class ETH_PORT {
     String SD_ENABLE;
     String SD_TH_COUNT;
 
-    public ETH_PORT(String TID, String AID, String NAME, String DESCR, String STATE, String SPEED, String DUPLEX, String AUTO_NEGO, String TX_FX, String PAUSE_TX, String PAUSE_RX, String MAX_FRAME, String LOOPBACK, String MAX_LEARNING_MAC, String ETH_PTM, String PORT_SHUTDOWN, String TPID_PROF_ID, String LINK_STATUS, String STP_STATE, String TX_STATUS, String COUNTER, String POLL_RATE, String PREPORT_PM, String MOUNITE_NO_PKT, String SD_ENABLE, String SD_TH_COUNT) {
+    public Tl1EthPort() {
+
+    }
+
+    public Tl1EthPort(String TID, String AID, String NAME, String DESCR, String STATE, String SPEED, String DUPLEX, String AUTO_NEGO, String TX_FX, String PAUSE_TX, String PAUSE_RX, String MAX_FRAME, String LOOPBACK, String MAX_LEARNING_MAC, String ETH_PTM, String PORT_SHUTDOWN, String TPID_PROF_ID, String LINK_STATUS, String STP_STATE, String TX_STATUS, String COUNTER, String POLL_RATE, String PREPORT_PM, String MOUNITE_NO_PKT, String SD_ENABLE, String SD_TH_COUNT) {
         this.TID = TID;
         this.AID = AID;
         this.NAME = NAME;
@@ -58,7 +78,7 @@ public class ETH_PORT {
         this.SD_TH_COUNT = SD_TH_COUNT;
     }
 
-    public ETH_PORT(String[] fields) {
+    public Tl1EthPort(String[] fields) {
         this.TID = fields[0];
         this.AID = fields[1];
         this.NAME = fields[2];
