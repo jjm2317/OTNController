@@ -39,6 +39,7 @@ public class TL1Manager {
     Tl1ServiceRepository tl1ServiceRepository;
     Tl1ServiceExtRepository tl1ServiceExtRepository;
     Tl1ServiceTunnelRepository tl1ServiceTunnelRepository;
+    Tl1ServiceMspwRepository tl1ServiceMspwRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -82,6 +83,7 @@ public class TL1Manager {
                       Tl1ServiceRepository tl1ServiceRepository,
                       Tl1ServiceExtRepository tl1ServiceExtRepository,
                       Tl1ServiceTunnelRepository tl1ServiceTunnelRepository,
+                      Tl1ServiceMspwRepository tl1ServiceMspwRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -118,6 +120,7 @@ public class TL1Manager {
         this.tl1ServiceRepository = tl1ServiceRepository;
         this.tl1ServiceExtRepository = tl1ServiceExtRepository;
         this.tl1ServiceTunnelRepository = tl1ServiceTunnelRepository;
+        this.tl1ServiceMspwRepository = tl1ServiceMspwRepository;
 
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -358,13 +361,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncServiceMspw(int CTAG, String TID, String serviceName, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-SERVICE-MSPW:" + TID + "::" + CTAG + ":serv-name=" + serviceName + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initServiceMspwTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertServiceMspw(new SERVICE_MSPW(fields));
+    public void Tl1SyncServiceMspw() throws Exception {
+        for(Tl1Service tl1Service : serviceList) {
+            String cmd = "RTRV-SERVICE-MSPW:" + tl1Service.getTID() + "::" + CTAG + ":serv-name=" + tl1Service.getNAME() + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1ServiceMspwRepository.save(new Tl1ServiceMspw(fields));
+            }
         }
     }
 

@@ -1069,7 +1069,7 @@
             TL1.SERVICE_TUNNEL
     </select>
 
-    <select id="selectServiceMspw" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_MSPW">
+    <select id="selectServiceMspw" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1ServiceMspw">
         SELECT
             *
         FROM
@@ -2463,7 +2463,7 @@
             )
     </select>
 
-    <select id="insertServiceMspw" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_MSPW">
+    <select id="insertServiceMspw" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1ServiceMspw">
         REPLACE INTO
             TL1.SERVICE_MSPW(
                 `TID_ID`,

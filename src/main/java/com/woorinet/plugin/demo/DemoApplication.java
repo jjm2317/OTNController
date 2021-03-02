@@ -75,6 +75,8 @@ public class DemoApplication {
 	private Tl1ServiceExtRepository tl1ServiceExtRepository;
 	@Autowired
 	private Tl1ServiceTunnelRepository tl1ServiceTunnelRepository;
+	@Autowired
+	private Tl1ServiceMspwRepository tl1ServiceMspwRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -208,6 +210,7 @@ public class DemoApplication {
 					tl1ServiceRepository,
 					tl1ServiceExtRepository,
 					tl1ServiceTunnelRepository,
+					tl1ServiceMspwRepository,
 					pmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
@@ -290,9 +293,7 @@ public class DemoApplication {
 			manager.Tl1SyncServiceTunnel();
 
 			//SERVICE_MSPW DB연동
-			for (Tl1Service tl1Service : tl1Services) {
-				manager.Tl1SyncServiceMspw(CTAG, tl1Service.getTID(), tl1Service.getNAME(), tl1Mapper);
-			}
+			manager.Tl1SyncServiceMspw();
 
 			//ODU DB연동
 			for (NODE node: nodes) {
