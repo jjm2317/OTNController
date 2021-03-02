@@ -999,7 +999,7 @@
             TL1.ODU_MPLS_IF
     </select>
 
-    <select id="selectSTunnel" resultType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL">
+    <select id="selectSTunnel" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1Stunnel">
         SELECT
             *
         FROM
@@ -1595,7 +1595,7 @@
             )
     </select>
 
-    <select id="insertSTunnel" parameterType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL">
+    <select id="insertSTunnel" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1Stunnel">
         REPLACE INTO
             TL1.STUNNEL(
                 `TID_ID`,

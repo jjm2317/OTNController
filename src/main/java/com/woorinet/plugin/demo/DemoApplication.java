@@ -54,6 +54,8 @@ public class DemoApplication {
 	@Autowired
 	private Tl1OduMplsIfRepository tl1OduMplsIfRepository;
 	@Autowired
+	private Tl1StunnelRepository tl1StunnelRepository;
+	@Autowired
 	private Tl1AccessIfRepository tl1AccessIfRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
@@ -177,6 +179,7 @@ public class DemoApplication {
 					tl1OduNodeConnectorRepository,
 					tl1MplsIfRepository,
 					tl1OduMplsIfRepository,
+					tl1StunnelRepository,
 					tl1AccessIfRepository,
 					pmRepository,
 					pm_portRepository,
@@ -225,9 +228,7 @@ public class DemoApplication {
 			manager.Tl1SyncOduMplsIf();
 
 			//STUNNEL DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncSTunnel(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncSTunnel();
 
 			//STUNNEL_EXT DB연동
 			for (NODE node: nodes) {

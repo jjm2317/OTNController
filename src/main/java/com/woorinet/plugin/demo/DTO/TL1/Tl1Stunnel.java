@@ -1,12 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class STUNNEL {
+@Data
+@Entity
+@Table(name = "tl1_stunnel")
+public class Tl1Stunnel {
+    @Id
+    @GeneratedValue
+    int STUNNEL_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -51,7 +63,7 @@ public class STUNNEL {
     String ING_LSR;
     String ENG_LSR;
 
-    public STUNNEL(String[] fields) {
+    public Tl1Stunnel(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];
