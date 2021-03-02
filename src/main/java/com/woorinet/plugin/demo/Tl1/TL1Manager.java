@@ -44,6 +44,7 @@ public class TL1Manager {
     Tl1CesPortRepository tl1CesPortRepository;
     Tl1CesPwRepository tl1CesPwRepository;
     Tl1L2LacpRepository tl1L2LacpRepository;
+    Tl1OpticPowerRepository tl1OpticPowerRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -92,6 +93,7 @@ public class TL1Manager {
                       Tl1CesPortRepository tl1CesPortRepository,
                       Tl1CesPwRepository tl1CesPwRepository,
                       Tl1L2LacpRepository tl1L2LacpRepository,
+                      Tl1OpticPowerRepository tl1OpticPowerRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -133,6 +135,7 @@ public class TL1Manager {
         this.tl1CesPortRepository = tl1CesPortRepository;
         this.tl1CesPwRepository = tl1CesPwRepository;
         this.tl1L2LacpRepository = tl1L2LacpRepository;
+        this.tl1OpticPowerRepository = tl1OpticPowerRepository;
 
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -423,14 +426,14 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncOPTICPOWER(String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-OPTIC-POWER:" + TID + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initOpticPowerTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            System.out.println(fields);
-            tl1Mapper.insertOpticPower(new OPTIC_POWER(fields));
+    public void Tl1SyncOPTICPOWER() throws Exception {
+        for(NODE node : nodeList) {
+            String cmd = "RTRV-OPTIC-POWER:" + node.getTID() + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                System.out.println(fields);
+                tl1OpticPowerRepository.save(new Tl1OpticPower(fields));
+            }
         }
     }
 

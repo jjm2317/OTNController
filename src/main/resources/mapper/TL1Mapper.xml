@@ -1104,7 +1104,7 @@
             TL1.L2_LACP
     </select>
 
-    <select id="selectOpticPower" resultType="com.woorinet.plugin.demo.DTO.TL1.OPTIC_POWER">
+    <select id="selectOpticPower" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1OpticPower">
         SELECT
         *
         FROM
@@ -2782,7 +2782,7 @@
             )
     </select>
 
-    <select id="insertOpticPower" parameterType="com.woorinet.plugin.demo.DTO.TL1.OPTIC_POWER">
+    <select id="insertOpticPower" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1OpticPower">
         REPLACE INTO
         TL1.OPTIC_POWER(
         `TID`,

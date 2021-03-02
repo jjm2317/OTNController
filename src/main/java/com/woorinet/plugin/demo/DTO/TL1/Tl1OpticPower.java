@@ -1,11 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class OPTIC_POWER {
+@Data
+@Entity
+@Table(name = "tl1_optic_power")
+public class Tl1OpticPower {
+    @Id
+    @GeneratedValue
+    int OPTIC_POWER_ID;
     String TID;
     String AID;
     String UNIT_TYPE;
@@ -29,7 +41,11 @@ public class OPTIC_POWER {
     String PART_NUMBER;
     String SERIAL;
 
-    public OPTIC_POWER(String TID, String AID, String UNIT_TYPE, String MODULE_EQUIP, String CORE, String LCORSC, String UPCORAPC, String SUPPORT_SIGNAL, String MODULE_TYPE, String TX_CHANNEL, String TX_WAVELENGTH, String RX_CHANNEL, String RX_WAVELENGTH, String DISTANCE, String TX_POWER, String RX_POWER, String TX_BIAS_CURRENT, String FAULT_NUMBER, String FAULT_DISTANCE, String VENDOR, String PART_NUMBER, String SERIAL) {
+    public Tl1OpticPower() {
+
+    }
+
+    public Tl1OpticPower(String TID, String AID, String UNIT_TYPE, String MODULE_EQUIP, String CORE, String LCORSC, String UPCORAPC, String SUPPORT_SIGNAL, String MODULE_TYPE, String TX_CHANNEL, String TX_WAVELENGTH, String RX_CHANNEL, String RX_WAVELENGTH, String DISTANCE, String TX_POWER, String RX_POWER, String TX_BIAS_CURRENT, String FAULT_NUMBER, String FAULT_DISTANCE, String VENDOR, String PART_NUMBER, String SERIAL) {
         this.TID = TID;
         this.AID = AID;
         this.UNIT_TYPE = UNIT_TYPE;
@@ -53,7 +69,7 @@ public class OPTIC_POWER {
         this.PART_NUMBER = PART_NUMBER;
         this.SERIAL = SERIAL;
     }
-    public OPTIC_POWER(String[] fields) {
+    public Tl1OpticPower(String[] fields) {
         this.TID = fields[0];
         this.AID = fields[1];
         this.UNIT_TYPE = fields[2];

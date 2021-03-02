@@ -85,6 +85,8 @@ public class DemoApplication {
 	private Tl1CesPwRepository tl1CesPwRepository;
 	@Autowired
 	private Tl1L2LacpRepository tl1L2LacpRepository;
+	@Autowired
+	private Tl1OpticPowerRepository tl1OpticPowerRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -155,7 +157,7 @@ public class DemoApplication {
 			// ODU_MPLS_IF 조회
 			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1Mapper.selectOduMplsIf();
 			// OPTIC_POWER 조회
-			List<OPTIC_POWER> optic_powers = tl1Mapper.selectOpticPower();
+			List<Tl1OpticPower> tl1OpticPowers = tl1Mapper.selectOpticPower();
 			// SERVICE 조회
 			List<Tl1Service> tl1Services = tl1Mapper.selectService();
 			// ACCESS_IF 조회
@@ -166,7 +168,7 @@ public class DemoApplication {
 			List<Tl1MplsIf> tl1MplsIfs = tl1Mapper.selectMplsIf();
 			// INVENTORY 조회
 			List<INVENTORY> inventories = inventoryRepository.findAll();
-			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -223,6 +225,7 @@ public class DemoApplication {
 					tl1CesPortRepository,
 					tl1CesPwRepository,
 					tl1L2LacpRepository,
+					tl1OpticPowerRepository,
 					pmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
@@ -318,9 +321,8 @@ public class DemoApplication {
 			manager.Tl1SyncL2Lacp();
 
 			//OPTIC-POWER DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncOPTICPOWER(node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncOPTICPOWER();
+
 
 			List<Tl1NodeConnector> node_connectors = tl1Mapper.selectNodeConnector();
 			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1Mapper.selectOduMplsIf();
