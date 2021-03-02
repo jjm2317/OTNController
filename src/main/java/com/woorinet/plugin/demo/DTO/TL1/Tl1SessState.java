@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name = "TL1_SESS_STATE")
-public class SESS_STATE {
+@Table(name = "tl1_sess_state")
+public class Tl1SessState {
     @Id
     @GeneratedValue
     int SESS_STATE_ID;
@@ -36,7 +36,7 @@ public class SESS_STATE {
     String CURRENT_RX_KEY_SRC_MODE;
 
 
-    public SESS_STATE(String TID, String SUBNETWORK, String AID, String LOCAL_IP, String REMOTE_IP, String KSP_MODE, String DEAD_TIME, String KEY_LIFE_TIME, String KEY_SRC_MODE, String KEY_FAILOVER, String RETRY_REQ_INTERVAL, String SESSION_STATE, String DST_LID, String CURRENT_TX_KEY_SRC_MODE, String CURRENT_RX_KEY_SRC_MODE) {
+    public Tl1SessState(String TID, String SUBNETWORK, String AID, String LOCAL_IP, String REMOTE_IP, String KSP_MODE, String DEAD_TIME, String KEY_LIFE_TIME, String KEY_SRC_MODE, String KEY_FAILOVER, String RETRY_REQ_INTERVAL, String SESSION_STATE, String DST_LID, String CURRENT_TX_KEY_SRC_MODE, String CURRENT_RX_KEY_SRC_MODE) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
@@ -54,7 +54,7 @@ public class SESS_STATE {
         this.CURRENT_RX_KEY_SRC_MODE = CURRENT_RX_KEY_SRC_MODE;
     }
 
-    public SESS_STATE(String[] fields) {
+    public Tl1SessState(String[] fields) {
         this.TID = fields[0];
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];
@@ -71,6 +71,6 @@ public class SESS_STATE {
         this.CURRENT_TX_KEY_SRC_MODE = fields[13];
         this.CURRENT_RX_KEY_SRC_MODE = fields[14];
     }
-    public SESS_STATE() {
+    public Tl1SessState() {
     }
 }

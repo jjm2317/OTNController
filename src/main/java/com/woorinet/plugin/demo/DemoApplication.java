@@ -100,7 +100,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1InventoryRepository tl1InventoryRepository;
 	@Autowired
-	private SESS_STATERepository sess_stateRepository;
+	private Tl1SessStateRepository tl1SessStateRepository;
 	@Autowired
 	private KEY_STATERepository key_stateRepository;
 	@Autowired
@@ -230,7 +230,7 @@ public class DemoApplication {
 					pmPwRepository,
 					tl1PmTunnelRepository,
 					tl1InventoryRepository,
-					sess_stateRepository,
+					tl1SessStateRepository,
 					key_stateRepository,
 					module_infoRepository,
 					cm_portRepository,
@@ -342,7 +342,7 @@ public class DemoApplication {
 			manager.TL1SyncInventory();
 
 			//SESS_STATE DB연동
-			manager.TL1SyncSessState(nodes, node_connectors);
+			manager.TL1SyncSessState();
 
 			//KEY_STATE DB연동
 			manager.TL1SyncKeyState(nodes, node_connectors);
