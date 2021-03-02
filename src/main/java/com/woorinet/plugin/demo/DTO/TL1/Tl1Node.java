@@ -1,12 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Getter
+
 @Setter
-public class NODE {
+@Getter
+@Data
+@Entity
+@Table(name="tl1_bypass_info")
+public class Tl1Node {
+    @Id
+    @GeneratedValue
+    int NODE_ID;
     String TID_ID;
     String TID;
     String NODE_TYPE;
@@ -20,7 +32,7 @@ public class NODE {
     String SUBNET_ID;
     String SYSTEM_TYPE;
 
-    public NODE(String TID_ID, String TID, String NODE_TYPE, String IP_ADDR, String MANUFACTURE, String HARDWARE, String SOFTWARE, String SERIAL_NUMBER, String NODE_STATUS, String SUBNET, String SUBNET_ID, String SYSTEM_TYPE) {
+    public Tl1Node(String TID_ID, String TID, String NODE_TYPE, String IP_ADDR, String MANUFACTURE, String HARDWARE, String SOFTWARE, String SERIAL_NUMBER, String NODE_STATUS, String SUBNET, String SUBNET_ID, String SYSTEM_TYPE) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.NODE_TYPE = NODE_TYPE;
@@ -35,7 +47,7 @@ public class NODE {
         this.SYSTEM_TYPE = SYSTEM_TYPE;
     }
 
-    public NODE(String[] fields) {
+    public Tl1Node(String[] fields) {
         TID_ID = fields[0];
         TID = fields[1];
         NODE_TYPE = fields[2];

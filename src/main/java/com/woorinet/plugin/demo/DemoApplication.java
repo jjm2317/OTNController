@@ -38,6 +38,8 @@ public class DemoApplication {
 	private QNETMapper qnetMapper;
 
 	@Autowired
+	private Tl1NodeRepository tl1NodeRepository;
+	@Autowired
 	private Tl1SystemInfoRepository tl1SystemInfoRepository;
 	@Autowired
 	private Tl1SlotRepository tl1SlotRepository;
@@ -145,7 +147,7 @@ public class DemoApplication {
 	String convertTL1() {
 		try {
 			// Node 조회
-			List<NODE> nodes = tl1Mapper.selectNode();
+			List<Tl1Node> tl1Nodes = tl1Mapper.selectNode();
 			// SYSTEM_INFO 조회
 			List<Tl1SystemInfo> tl1SystemInfos = tl1Mapper.selectSystemInfo();
 			// ODU_NODE_CONNECTOR 조회
@@ -166,7 +168,7 @@ public class DemoApplication {
 			List<Tl1MplsIf> tl1MplsIfs = tl1Mapper.selectMplsIf();
 			// INVENTORY 조회
 			List<Tl1Inventory> inventories = tl1InventoryRepository.findAll();
-			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, tl1Nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -199,6 +201,7 @@ public class DemoApplication {
 					CTAG,
 					"222.117.54.175",
 					19011,
+					tl1NodeRepository,
 					tl1SystemInfoRepository,
 					tl1SlotRepository,
 					tl1EthPortRepository,
@@ -239,129 +242,84 @@ public class DemoApplication {
 					tl1CmProgramInfoRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
-
 			//Node DB연동
-			manager.Tl1SyncNodeList(CTAG, tl1Mapper);
-
-			//Node 조회
-			List<NODE> nodes = tl1Mapper.selectNode();
-
+			manager.Tl1SyncNodeList();
 			//SystemInfo DB연동
 			manager.Tl1SyncSystemInfo();
-
 			//Slot DB연동
 			manager.Tl1SyncSlot();
-
 			//EthPort DB연동
 			manager.Tl1SyncEthPort();
-
 			//NodeConnector DB연동
 			manager.Tl1SyncNodeConnector();
-
 			//CesNodeConnector DB연동
 			manager.Tl1SyncCesNodeConnector();
-
 			//OduNodeConnector DB연동
 			manager.Tl1SyncOduNodeConnector();
-
 			//MPLS_IF DB연동
 			manager.Tl1SyncMplsIf();
-
 			//ODU_MPLS_IF DB연동
 			manager.Tl1SyncOduMplsIf();
-
 			//STUNNEL DB연동
 			manager.Tl1SyncSTunnel();
-
 			//STUNNEL_EXT DB연동
 			manager.Tl1SyncSTunnelExt();
-
 			//STUNNEL_TRANSIT DB연동
 			manager.Tl1SyncSTunnelTransit();
-
 			//TUNNEL_PROT DB연동
 			manager.Tl1SyncTunnelProt();
-
 			//SPW DB연동
 			manager.Tl1SyncSpw();
-
 			//MSPW DB연동
 			manager.Tl1SyncMSpw();
-
 			//MPLS_AC DB연동
 			manager.Tl1SyncMplsAc();
-
 			//ACCESS_IF DB연동
 			manager.Tl1SyncAccessIf();
-
 			//SERVICE DB연동
 			manager.Tl1SyncService();
-
 			//SERVICE_EXT DB연동
 			manager.Tl1SyncServiceExt();
-
 			//SERVICE_TUNNEL DB연동
 			manager.Tl1SyncServiceTunnel();
-
 			//SERVICE_MSPW DB연동
 			manager.Tl1SyncServiceMspw();
-
 			//ODU DB연동
 			manager.Tl1SyncOdu();
-
 			//CES_PORT DB연동
 			manager.Tl1SyncCesPort();
-
 			//CES_PW DB연동
 			manager.Tl1SyncCesPw();
-
 			//L2Lacp DB연동
 			manager.Tl1SyncL2Lacp();
-
 			//OPTIC-POWER DB연동
 			manager.Tl1SyncOPTICPOWER();
-
-			List<Tl1NodeConnector> node_connectors = tl1Mapper.selectNodeConnector();
-
 			//PM DB연동
 			manager.TL1SyncPM();
-
 			//PM-PORT DB연동
 			manager.Tl1SyncPmPort();
-
 			//PM-AC DB연동
 			manager.TL1SyncPmAc();
-
 			//PM-PW DB연동
 			manager.TL1SyncPmPw();
-
 			//PM-TUNNEL DB연동
 			manager.TL1SyncPmTunnel();
-
 			//INVENTORY DB연동
 			manager.TL1SyncInventory();
-
 			//SESS_STATE DB연동
 			manager.TL1SyncSessState();
-
 			//KEY_STATE DB연동
 			manager.TL1SyncKeyState();
-
 			//MODULE_INFO DB연동
 			manager.TL1SyncModuleInfo();
-
 			//CM_PORT DB연동
 			manager.TL1SyncCmPort();
-
 			//BYPASS_INFO DB연동
 			manager.TL1SyncBypassInfo();
-
 			//CRYPTO_MODE DB연동
 			manager.TL1SyncCryptoMode();
-
 			//CM_PROGRAM_INFO DB연동
 			manager.TL1SyncCmProgramInfo();
-
 			//TL1 로그아웃
 			manager.Tl1Logout("admin");
 			manager.close();
@@ -442,10 +400,10 @@ public class DemoApplication {
 
 	@RequestMapping("/select_node")
 	String selectNode() {
-		List<NODE> list = null;
+		List<Tl1Node> list = null;
 		try {
 			list = tl1Mapper.selectNode();
-			for (NODE item: list) {
+			for (Tl1Node item: list) {
 				System.out.println(item.toString());
 			}
 		} catch (Exception e) {

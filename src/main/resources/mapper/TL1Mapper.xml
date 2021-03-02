@@ -936,7 +936,7 @@
 
     <!--    SELECT    -->
 
-    <select id="selectNode" resultType="com.woorinet.plugin.demo.DTO.TL1.NODE">
+    <select id="selectNode" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1Node">
         SELECT
             *
         FROM
@@ -1118,7 +1118,7 @@
 
     <!--    INSERT    -->
 
-    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.TL1.NODE">
+    <select id="insertNode" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1Node">
         REPLACE INTO
             TL1.NODE(
                 TID_ID,

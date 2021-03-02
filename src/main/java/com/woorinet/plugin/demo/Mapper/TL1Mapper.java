@@ -38,7 +38,7 @@ public interface TL1Mapper {
     void initOpticPowerTable() throws Exception;
 
 
-    List<NODE> selectNode() throws Exception;
+    List<Tl1Node> selectNode() throws Exception;
     List<Tl1SystemInfo> selectSystemInfo() throws Exception;
     List<Tl1Slot> selectSlot() throws Exception;
     List<Tl1EthPort> selectEthPort() throws Exception;
@@ -65,7 +65,7 @@ public interface TL1Mapper {
     List<Tl1L2Lacp> selectL2Lacp() throws Exception;
     List<Tl1OpticPower> selectOpticPower() throws Exception;
 
-    void insertNode(NODE node) throws Exception;
+    void insertNode(Tl1Node tl1Node) throws Exception;
     void insertSystemInfo(Tl1SystemInfo systemInfo) throws Exception;
     void insertSlot(Tl1Slot tl1Slot) throws Exception;
     void insertEthPort(Tl1EthPort ethPort) throws Exception;
