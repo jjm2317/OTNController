@@ -22,6 +22,7 @@ public class TL1Manager {
     List<Tl1NodeConnector> tl1NodeConnectorList;
     List<Tl1OduMplsIf> tl1OduMplsIfList;
     List<Tl1OduNodeConnector> tl1OduNodeConnectorList;
+    List<Tl1MplsAc> tl1MplsAcList;
 
     Tl1SystemInfoRepository tl1SystemInfoRepository;
     Tl1SlotRepository tl1SlotRepository;
@@ -50,7 +51,7 @@ public class TL1Manager {
     Tl1OpticPowerRepository tl1OpticPowerRepository;
     Tl1PmRepository tl1PmRepository;
     Tl1PmPortRepository tl1PmPortRepository;
-    PM_ACRepositiory pm_acRepositiory;
+    Tl1PmAcRepository tl1PmAcRepository;
     PM_PWRepository pmPwRepository;
     PM_TUNNELRepository pm_tunnelRepository;
     INVENTORYRepository inventoryRepository;
@@ -99,7 +100,7 @@ public class TL1Manager {
                       Tl1OpticPowerRepository tl1OpticPowerRepository,
                       Tl1PmRepository tl1PmRepository,
                       Tl1PmPortRepository tl1PmPortRepository,
-                      PM_ACRepositiory pm_acRepositiory,
+                      Tl1PmAcRepository tl1PmAcRepository,
                       PM_PWRepository pmPwRepository,
                       PM_TUNNELRepository pm_tunnelRepository,
                       INVENTORYRepository inventoryRepository,
@@ -116,6 +117,7 @@ public class TL1Manager {
         this.tl1NodeConnectorList = new ArrayList<>();
         this.tl1OduMplsIfList = new ArrayList<>();
         this.tl1OduNodeConnectorList = new ArrayList<>();
+        this.tl1MplsAcList = new ArrayList<>();
 
         this.tl1SystemInfoRepository = tl1SystemInfoRepository;
         this.tl1SlotRepository = tl1SlotRepository;
@@ -145,7 +147,7 @@ public class TL1Manager {
 
         this.tl1PmRepository = tl1PmRepository;
         this.tl1PmPortRepository = tl1PmPortRepository;
-        this.pm_acRepositiory = pm_acRepositiory;
+        this.tl1PmAcRepository = tl1PmAcRepository;
         this.pmPwRepository = pmPwRepository;
         this.pm_tunnelRepository = pm_tunnelRepository;
         this.inventoryRepository = inventoryRepository;
@@ -341,7 +343,9 @@ public class TL1Manager {
             String cmd = "RTRV-MPLS-AC:" + node.getTID() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1MplsAcRepository.save(new Tl1MplsAc(fields));
+                Tl1MplsAc tl1MplsAc = new Tl1MplsAc(fields);
+                tl1MplsAcRepository.save(tl1MplsAc);
+                tl1MplsAcList.add(tl1MplsAc);
             }
         }
     }
@@ -476,13 +480,13 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncPmAc(int CTAG, List<Tl1MplsAc> mplsAcs) throws Exception {
-        for (Tl1MplsAc mplsAc : mplsAcs) {
+    public void TL1SyncPmAc() throws Exception {
+        for (Tl1MplsAc mplsAc : tl1MplsAcList) {
             String cmd = "RTRV-PM-AC:" + mplsAc.getTID() + "::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 System.out.println(fields);
-                pm_acRepositiory.save(new PM_AC(fields));
+                tl1PmAcRepository.save(new Tl1PmAc(fields));
             }
         }
 

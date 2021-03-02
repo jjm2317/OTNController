@@ -14,13 +14,13 @@ import javax.persistence.Table;
 @Data
 @Getter
 @Setter
-@Table(name = "TL1_PM_AC")
-public class PM_AC {
-
-    String TID;
-    String SERVICE_NAME;
+@Table(name = "tl1_pm_ac")
+public class Tl1PmAc {
     @Id
     @Generated
+    int PM_AC_ID;
+    String TID;
+    String SERVICE_NAME;
     String AC_ID;
     String TYPE;
     String DATE;
@@ -32,10 +32,10 @@ public class PM_AC {
     String EGR_BYTE;
     String EGR_RATE;
 
-    public PM_AC() {
+    public Tl1PmAc() {
     }
 
-    public PM_AC(String TID, String SERVICE_NAME, String AC_ID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE) {
+    public Tl1PmAc(String TID, String SERVICE_NAME, String AC_ID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE) {
         this.TID = TID;
         this.SERVICE_NAME = SERVICE_NAME;
         this.AC_ID = AC_ID;
@@ -50,7 +50,7 @@ public class PM_AC {
         this.EGR_RATE = EGR_RATE;
     }
 
-    public PM_AC(String[] fields) {
+    public Tl1PmAc(String[] fields) {
         this.TID = fields[0];
         this.SERVICE_NAME = fields[1];
         this.AC_ID = fields[2];

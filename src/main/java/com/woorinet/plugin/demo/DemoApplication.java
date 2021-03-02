@@ -93,7 +93,7 @@ public class DemoApplication {
 	private Tl1PmPortRepository tl1PmPortRepository;
 
 	@Autowired
-	private PM_ACRepositiory pm_acRepositiory;
+	private Tl1PmAcRepository tl1PmAcRepository;
 	@Autowired
 	private PM_PWRepository pmPwRepository;
 	@Autowired
@@ -227,7 +227,7 @@ public class DemoApplication {
 					tl1OpticPowerRepository,
 					tl1PmRepository,
 					tl1PmPortRepository,
-					pm_acRepositiory,
+					tl1PmAcRepository,
 					pmPwRepository,
 					pm_tunnelRepository,
 					inventoryRepository,
@@ -324,9 +324,6 @@ public class DemoApplication {
 
 
 			List<Tl1NodeConnector> node_connectors = tl1Mapper.selectNodeConnector();
-			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1Mapper.selectOduMplsIf();
-			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1Mapper.selectOduNodeConnector();
-			List<Tl1MplsAc> mplsAcs = tl1Mapper.selectMplsAc();
 
 			//PM DB연동
 			manager.TL1SyncPM();
@@ -335,7 +332,7 @@ public class DemoApplication {
 			manager.Tl1SyncPmPort();
 
 			//PM-AC DB연동
-			manager.TL1SyncPmAc(CTAG, mplsAcs);
+			manager.TL1SyncPmAc();
 
 			//PM-PW DB연동
 			manager.TL1SyncPmPw(CTAG, nodes);
