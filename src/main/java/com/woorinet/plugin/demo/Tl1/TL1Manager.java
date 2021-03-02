@@ -57,7 +57,7 @@ public class TL1Manager {
     Tl1InventoryRepository tl1InventoryRepository;
     Tl1SessStateRepository tl1SessStateRepository;
     Tl1KeyStateRepository tl1KeyStateRepository;
-    MODULE_INFORepository module_infoRepository;
+    Tl1ModuleInfoRepository tl1ModuleInfoRepository;
     CM_PORTRepository cm_portRepository;
     BYPASS_INFORepository bypass_infoRepository;
     CRYPTO_MODERepository crypto_modeRepository;
@@ -106,7 +106,7 @@ public class TL1Manager {
                       Tl1InventoryRepository tl1InventoryRepository,
                       Tl1SessStateRepository tl1SessStateRepository,
                       Tl1KeyStateRepository tl1KeyStateRepository,
-                      MODULE_INFORepository module_infoRepository,
+                      Tl1ModuleInfoRepository tl1ModuleInfoRepository,
                       CM_PORTRepository cm_portRepository,
                       BYPASS_INFORepository bypass_infoRepository,
                       CRYPTO_MODERepository crypto_modeRepository,
@@ -153,7 +153,7 @@ public class TL1Manager {
         this.tl1InventoryRepository = tl1InventoryRepository;
         this.tl1SessStateRepository = tl1SessStateRepository;
         this.tl1KeyStateRepository = tl1KeyStateRepository;
-        this.module_infoRepository = module_infoRepository;
+        this.tl1ModuleInfoRepository = tl1ModuleInfoRepository;
         this.cm_portRepository = cm_portRepository;
         this.bypass_infoRepository = bypass_infoRepository;
         this.crypto_modeRepository = crypto_modeRepository;
@@ -558,8 +558,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncModuleInfo(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncModuleInfo() throws Exception {
+        for (NODE node : nodeList) {
             if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
@@ -568,7 +568,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                module_infoRepository.save(new MODULE_INFO(fields));
+                tl1ModuleInfoRepository.save(new Tl1ModuleInfo(fields));
             }
         }
     }

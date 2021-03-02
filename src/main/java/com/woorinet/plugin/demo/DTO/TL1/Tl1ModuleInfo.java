@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Entity
 @Setter
 @Getter
-@Table(name = "TL1_MODULE_INFO")
-public class MODULE_INFO {
+@Table(name = "tl1_module_info")
+public class Tl1ModuleInfo {
     @Id
     @GeneratedValue
     int MODULE_INFO_ID;
@@ -30,10 +30,10 @@ public class MODULE_INFO {
     String OPERATION_STATE_REASON;
     String CRYPTO_MODE;
 
-    public MODULE_INFO() {
+    public Tl1ModuleInfo() {
     }
 
-    public MODULE_INFO(String TID, String SUBNETWORK, String AID, String MID, String MID_CONTEXT, String PMID, String PMID_CONTEXT, String OPERATION_STATE, String OPERATION_STATE_REASON, String CRYPTO_MODE) {
+    public Tl1ModuleInfo(String TID, String SUBNETWORK, String AID, String MID, String MID_CONTEXT, String PMID, String PMID_CONTEXT, String OPERATION_STATE, String OPERATION_STATE_REASON, String CRYPTO_MODE) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
@@ -46,7 +46,7 @@ public class MODULE_INFO {
         this.CRYPTO_MODE = CRYPTO_MODE;
     }
 
-    public MODULE_INFO(String[] fields) {
+    public Tl1ModuleInfo(String[] fields) {
         this.TID = fields[0];
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];

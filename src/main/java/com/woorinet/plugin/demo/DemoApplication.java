@@ -104,7 +104,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1KeyStateRepository tl1KeyStateRepository;
 	@Autowired
-	private MODULE_INFORepository module_infoRepository;
+	private Tl1ModuleInfoRepository tl1ModuleInfoRepository;
 	@Autowired
 	private CM_PORTRepository cm_portRepository;
 	@Autowired
@@ -232,7 +232,7 @@ public class DemoApplication {
 					tl1InventoryRepository,
 					tl1SessStateRepository,
 					tl1KeyStateRepository,
-					module_infoRepository,
+					tl1ModuleInfoRepository,
 					cm_portRepository,
 					bypass_infoRepository,
 					crypto_modeRepository,
@@ -348,7 +348,7 @@ public class DemoApplication {
 			manager.TL1SyncKeyState();
 
 			//MODULE_INFO DB연동
-			manager.TL1SyncModuleInfo(nodes, node_connectors);
+			manager.TL1SyncModuleInfo();
 
 			//CM_PORT DB연동
 			manager.TL1SyncCmPort(nodes, node_connectors);
