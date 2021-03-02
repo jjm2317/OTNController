@@ -52,7 +52,7 @@ public class TL1Manager {
     Tl1PmRepository tl1PmRepository;
     Tl1PmPortRepository tl1PmPortRepository;
     Tl1PmAcRepository tl1PmAcRepository;
-    PM_PWRepository pmPwRepository;
+    Tl1PmPwRepository pmPwRepository;
     PM_TUNNELRepository pm_tunnelRepository;
     INVENTORYRepository inventoryRepository;
     SESS_STATERepository sess_stateRepository;
@@ -101,7 +101,7 @@ public class TL1Manager {
                       Tl1PmRepository tl1PmRepository,
                       Tl1PmPortRepository tl1PmPortRepository,
                       Tl1PmAcRepository tl1PmAcRepository,
-                      PM_PWRepository pmPwRepository,
+                      Tl1PmPwRepository pmPwRepository,
                       PM_TUNNELRepository pm_tunnelRepository,
                       INVENTORYRepository inventoryRepository,
                       SESS_STATERepository sess_stateRepository,
@@ -492,13 +492,13 @@ public class TL1Manager {
 
     }
 
-    public void TL1SyncPmPw(int CTAG, List<NODE> nodes) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncPmPw() throws Exception {
+        for (NODE node : nodeList) {
             String cmd = "RTRV-PM-PW:" + node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 System.out.println(fields);
-                pmPwRepository.save(new PM_PW(fields));
+                pmPwRepository.save(new Tl1PmPw(fields));
             }
         }
 

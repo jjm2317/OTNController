@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Data
 @Setter
 @Getter
-@Table(name = "TL1_PM_PW")
-public class PM_PW {
+@Table(name = "tl1_pm_pw")
+public class Tl1PmPw {
     @Id
     @GeneratedValue
     int PM_PW_ID;
@@ -32,10 +32,10 @@ public class PM_PW {
     String EGR_BYTE;
     String EGR_RATE;
 
-    public PM_PW() {
+    public Tl1PmPw() {
     }
 
-    public PM_PW(String TID, String SERVICE_NAME, String AC_ID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE) {
+    public Tl1PmPw(String TID, String SERVICE_NAME, String AC_ID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE) {
         this.TID = TID;
         this.SERVICE_NAME = SERVICE_NAME;
         this.AC_ID = AC_ID;
@@ -50,7 +50,7 @@ public class PM_PW {
         this.EGR_RATE = EGR_RATE;
     }
 
-    public PM_PW(String[] fields) {
+    public Tl1PmPw(String[] fields) {
         this.TID = fields[0];
         this.SERVICE_NAME = fields[1];
         this.AC_ID = fields[2];

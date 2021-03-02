@@ -95,7 +95,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1PmAcRepository tl1PmAcRepository;
 	@Autowired
-	private PM_PWRepository pmPwRepository;
+	private Tl1PmPwRepository pmPwRepository;
 	@Autowired
 	private PM_TUNNELRepository pm_tunnelRepository;
 	@Autowired
@@ -322,7 +322,6 @@ public class DemoApplication {
 			//OPTIC-POWER DB연동
 			manager.Tl1SyncOPTICPOWER();
 
-
 			List<Tl1NodeConnector> node_connectors = tl1Mapper.selectNodeConnector();
 
 			//PM DB연동
@@ -335,7 +334,7 @@ public class DemoApplication {
 			manager.TL1SyncPmAc();
 
 			//PM-PW DB연동
-			manager.TL1SyncPmPw(CTAG, nodes);
+			manager.TL1SyncPmPw();
 
 			//PM-TUNNEL DB연동
 			manager.TL1SyncPmTunnel(CTAG, nodes);
