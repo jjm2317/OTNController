@@ -77,6 +77,8 @@ public class DemoApplication {
 	private Tl1ServiceTunnelRepository tl1ServiceTunnelRepository;
 	@Autowired
 	private Tl1ServiceMspwRepository tl1ServiceMspwRepository;
+	@Autowired
+	private Tl1OduRepository tl1OduRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -143,7 +145,7 @@ public class DemoApplication {
 			// ODU_NODE_CONNECTOR 조회
 			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1Mapper.selectOduNodeConnector();
 			// ODU 조회
-			List<ODU> odus = tl1Mapper.selectOdu();
+			List<Tl1Odu> oduses = tl1Mapper.selectOdu();
 			// ODU_MPLS_IF 조회
 			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1Mapper.selectOduMplsIf();
 			// OPTIC_POWER 조회
@@ -158,7 +160,7 @@ public class DemoApplication {
 			List<Tl1MplsIf> tl1MplsIfs = tl1Mapper.selectMplsIf();
 			// INVENTORY 조회
 			List<INVENTORY> inventories = inventoryRepository.findAll();
-			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, odus, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -211,6 +213,7 @@ public class DemoApplication {
 					tl1ServiceExtRepository,
 					tl1ServiceTunnelRepository,
 					tl1ServiceMspwRepository,
+					tl1OduRepository,
 					pmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
@@ -284,8 +287,6 @@ public class DemoApplication {
 			//SERVICE DB연동
 			manager.Tl1SyncService();
 
-			List<Tl1Service> tl1Services = tl1Mapper.selectService();
-
 			//SERVICE_EXT DB연동
 			manager.Tl1SyncServiceExt();
 
@@ -296,9 +297,7 @@ public class DemoApplication {
 			manager.Tl1SyncServiceMspw();
 
 			//ODU DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncOdu(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncOdu();
 
 			//CES_PORT DB연동
 			for (NODE node: nodes) {

@@ -28,33 +28,33 @@ public class SDNManager {
     List<Tl1SystemInfo> tl1SystemInfos;
     List<Tl1OduNodeConnector> tl1OduNodeConnectors;
     List<OPTIC_POWER> optic_powers;
-    List<ODU> odus;
+    List<Tl1Odu> oduses;
     List<Tl1OduMplsIf> tl1OduMplsIfs;
     List<Tl1Service> tl1Services;
     List<Tl1AccessIf> Tl1AccessIfs;
     List<Tl1ServiceExt> tl1ServiceExts;
     List<Tl1MplsIf> tl1MplsIfs;
-    List<List<ODU>> odu_list_for_service = new ArrayList<>();
+    List<List<Tl1Odu>> odu_list_for_service = new ArrayList<>();
     List<INVENTORY> inventories;
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
     HashMap<String, OPTIC_POWER> optic_powerHashMap = new HashMap<>();
     HashMap<String, Tl1OduNodeConnector> odu_node_connectorHashMap = new HashMap<>();
-    HashMap<String, ODU> oduHashMapForODUTUNNEL = new HashMap<>();
-    HashMap<String, ODU> oduHashMapForMPLSTP = new HashMap<>();
+    HashMap<String, Tl1Odu> oduHashMapForODUTUNNEL = new HashMap<>();
+    HashMap<String, Tl1Odu> oduHashMapForMPLSTP = new HashMap<>();
     HashMap<String, Tl1AccessIf> access_ifHashMap = new HashMap<>();
-    HashMap<String, ODU> oduNameTailHashMapForODUTUNNEL = new HashMap<>();
-    HashMap<String, ODU> oduNameHeadHashMapForODUTUNNEL = new HashMap<>();
-    HashMap<String, ODU> oduMapInMPLSTPByLocalId = new HashMap<>();
+    HashMap<String, Tl1Odu> oduNameTailHashMapForODUTUNNEL = new HashMap<>();
+    HashMap<String, Tl1Odu> oduNameHeadHashMapForODUTUNNEL = new HashMap<>();
+    HashMap<String, Tl1Odu> oduMapInMPLSTPByLocalId = new HashMap<>();
     HashMap<String, Tl1OduMplsIf> odu_mpls_ifHashMap = new HashMap<>();
-    HashMap<String, List<ODU>> odu_hashMapForPath = new HashMap<>();
+    HashMap<String, List<Tl1Odu>> odu_hashMapForPath = new HashMap<>();
 
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<INVENTORY> inventories ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<OPTIC_POWER> optic_powers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<INVENTORY> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -68,7 +68,7 @@ public class SDNManager {
         this.tl1SystemInfos = tl1SystemInfos;
         this.tl1OduNodeConnectors = tl1OduNodeConnectors;
         this.optic_powers = optic_powers;
-        this.odus = odus;
+        this.oduses = oduses;
         this.tl1OduMplsIfs = tl1OduMplsIfs;
         this.tl1Services = tl1Services;
         this.Tl1AccessIfs = Tl1AccessIfs;
@@ -90,41 +90,41 @@ public class SDNManager {
         for(OPTIC_POWER optic_power : optic_powers) {
             optic_powerHashMap.put(optic_power.getTID()+"/"+optic_power.getAID(), optic_power);
         }
-        for(ODU odu : odus) {
-            if(odu_hashMapForPath.get(odu.getNAME()) == null ) {
-                List<ODU> odu_list = new ArrayList<>();
-                odu_list.add(odu);
-                odu_hashMapForPath.put(odu.getNAME(), odu_list);
+        for(Tl1Odu tl1Odu : oduses) {
+            if(odu_hashMapForPath.get(tl1Odu.getNAME()) == null ) {
+                List<Tl1Odu> tl1Odu_list = new ArrayList<>();
+                tl1Odu_list.add(tl1Odu);
+                odu_hashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
             } else {
-                List<ODU> odu_list = odu_hashMapForPath.get(odu.getNAME());
-                odu_list.add(odu);
-                odu_hashMapForPath.put(odu.getNAME(), odu_list);
+                List<Tl1Odu> tl1Odu_list = odu_hashMapForPath.get(tl1Odu.getNAME());
+                tl1Odu_list.add(tl1Odu);
+                odu_hashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
             }
 
-            if(odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
-                oduHashMapForODUTUNNEL.put(odu.getTID() + '/' + odu.getLOCAL_ID().split("-")[0] +'-'+ odu.getLOCAL_ID().split("-")[1], odu);
-                if (odu.getROLE().equals("TAIL")) {
-                    oduNameTailHashMapForODUTUNNEL.put(odu.getNAME(), odu);
+            if(tl1Odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
+                oduHashMapForODUTUNNEL.put(tl1Odu.getTID() + '/' + tl1Odu.getLOCAL_ID().split("-")[0] +'-'+ tl1Odu.getLOCAL_ID().split("-")[1], tl1Odu);
+                if (tl1Odu.getROLE().equals("TAIL")) {
+                    oduNameTailHashMapForODUTUNNEL.put(tl1Odu.getNAME(), tl1Odu);
 
-                    if (oduNameHeadHashMapForODUTUNNEL.get(odu.getNAME()) != null) {
-                        List<ODU> odu_list = new ArrayList<>();
-                        odu_list.add(oduNameHeadHashMapForODUTUNNEL.get(odu.getNAME()));
-                        odu_list.add(odu);
-                        odu_list_for_service.add(odu_list);
+                    if (oduNameHeadHashMapForODUTUNNEL.get(tl1Odu.getNAME()) != null) {
+                        List<Tl1Odu> tl1Odu_list = new ArrayList<>();
+                        tl1Odu_list.add(oduNameHeadHashMapForODUTUNNEL.get(tl1Odu.getNAME()));
+                        tl1Odu_list.add(tl1Odu);
+                        odu_list_for_service.add(tl1Odu_list);
                     }
                 } else {
-                    oduNameHeadHashMapForODUTUNNEL.put(odu.getNAME(), odu);
+                    oduNameHeadHashMapForODUTUNNEL.put(tl1Odu.getNAME(), tl1Odu);
 
-                    if (oduNameTailHashMapForODUTUNNEL.get(odu.getNAME()) != null) {
-                        List<ODU> odu_list = new ArrayList<>();
-                        odu_list.add(odu);
-                        odu_list.add(oduNameTailHashMapForODUTUNNEL.get(odu.getNAME()));
-                        odu_list_for_service.add(odu_list);
+                    if (oduNameTailHashMapForODUTUNNEL.get(tl1Odu.getNAME()) != null) {
+                        List<Tl1Odu> tl1Odu_list = new ArrayList<>();
+                        tl1Odu_list.add(tl1Odu);
+                        tl1Odu_list.add(oduNameTailHashMapForODUTUNNEL.get(tl1Odu.getNAME()));
+                        odu_list_for_service.add(tl1Odu_list);
                     }
                 }
-            } else if (odu.getEMS_SERVICE().equals("MPLS_TP")) {
-                oduMapInMPLSTPByLocalId.put(odu.getTID()+'/'+odu.getLOCAL_ID(), odu);
-                oduHashMapForMPLSTP.put(odu.getTID()+ '/' + odu.getLOCAL_ID().split("-")[0] +'-'+ odu.getLOCAL_ID().split("-")[1], odu);
+            } else if (tl1Odu.getEMS_SERVICE().equals("MPLS_TP")) {
+                oduMapInMPLSTPByLocalId.put(tl1Odu.getTID()+'/'+ tl1Odu.getLOCAL_ID(), tl1Odu);
+                oduHashMapForMPLSTP.put(tl1Odu.getTID()+ '/' + tl1Odu.getLOCAL_ID().split("-")[0] +'-'+ tl1Odu.getLOCAL_ID().split("-")[1], tl1Odu);
             }
 
 
@@ -234,7 +234,7 @@ public class SDNManager {
             CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
             CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDST_TID()+ '/' + tl1OduMplsIf.getDST_PORT());
             OPTIC_POWER optic_power = optic_powerHashMap.get(tl1OduMplsIf.getTID() + '/' + tl1OduMplsIf.getMPLS_TP_ID());
-            ODU odu = oduHashMapForODUTUNNEL.get(tl1OduMplsIf.getTID()+ '/' + tl1OduMplsIf.getMPLS_TP_ID());
+            Tl1Odu tl1Odu = oduHashMapForODUTUNNEL.get(tl1OduMplsIf.getTID()+ '/' + tl1OduMplsIf.getMPLS_TP_ID());
 
             int maximum_bandwidth = Integer.parseInt(tl1OduMplsIf.getMAXIMUM_BANDWIDTH());
             int available_bandwidth = Integer.parseInt(tl1OduMplsIf.getAVAILABLE_BANDWIDTH());
@@ -260,7 +260,7 @@ public class SDNManager {
             link.setDistance(optic_power.getDISTANCE());
             link.setSrlg("");
             link.setOvpn("");
-            if(odu == null ) link.setTimeslot(""); else link.setTimeslot(odu.getTSMAP());
+            if(tl1Odu == null ) link.setTimeslot(""); else link.setTimeslot(tl1Odu.getTSMAP());
             link.setLambda(optic_power.getTX_WAVELENGTH());
             link.setMaximum_odu0s(maximum_bandwidth);
             link.setMaximum_odu1s(maximum_bandwidth/2);
@@ -286,35 +286,35 @@ public class SDNManager {
 
     public void SDNSyncServiceList( ) throws Exception {
 
-        for (List<ODU> odu_list :odu_list_for_service) {
-            ODU odu_head = odu_list.get(0);
-            ODU odu_tail = odu_list.get(1);
+        for (List<Tl1Odu> tl1Odu_list :odu_list_for_service) {
+            Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
+            Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
 
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu_head.getTID());
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(odu_tail.getTID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(tl1Odu_tail.getTID());
             com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = new com.woorinet.plugin.demo.DTO.SDN.SERVICE();
 
-            CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(odu_head.getTID()+ '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
-            CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(odu_tail.getTID()+ '/' + odu_tail.getLOCAL_ID().split("-")[0] + "-" + odu_tail.getLOCAL_ID().split("-")[1]);
+            CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(tl1Odu_head.getTID()+ '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
+            CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(tl1Odu_tail.getTID()+ '/' + tl1Odu_tail.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_tail.getLOCAL_ID().split("-")[1]);
 
-            Tl1OduMplsIf tl1OduMplsIf = odu_mpls_ifHashMap.get(odu_head.getTID() + '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
-            OPTIC_POWER optic_power = optic_powerHashMap.get(odu_head.getTID() + '/' + odu_head.getLOCAL_ID().split("-")[0] + "-" + odu_head.getLOCAL_ID().split("-")[1]);
+            Tl1OduMplsIf tl1OduMplsIf = odu_mpls_ifHashMap.get(tl1Odu_head.getTID() + '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
+            OPTIC_POWER optic_power = optic_powerHashMap.get(tl1Odu_head.getTID() + '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
 
             sdnService.setEms_id(200009);
-            sdnService.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu_head.getNAME());
+            sdnService.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + tl1Odu_head.getNAME());
             sdnService.setSrc_ne_id(sdnSrcNode.getNe_id());
             sdnService.setSrc_ne_name(sdnSrcNode.getNe_name());
             sdnService.setSrc_connector_id(src_sdnConnector.getConnect_id());
-            sdnService.setSrc_accessif_type(odu_head.getSERVICE());
+            sdnService.setSrc_accessif_type(tl1Odu_head.getSERVICE());
             sdnService.setDst_ne_id(sdnDstNode.getNe_id());
             sdnService.setDst_ne_name(sdnDstNode.getNe_name());
             sdnService.setDst_connector_id(dst_sdnConnector.getConnect_id());
-            sdnService.setDst_accessif_type(odu_tail.getSERVICE());
+            sdnService.setDst_accessif_type(tl1Odu_tail.getSERVICE());
             sdnService.setService_type("");
-            sdnService.setService_name(odu_head.getNAME());
+            sdnService.setService_name(tl1Odu_head.getNAME());
             sdnService.setNetwork_type("");
             sdnService.setService_status("");
-            sdnService.setRate_type(odu_head.getTYPE());
+            sdnService.setRate_type(tl1Odu_head.getTYPE());
             sdnService.setService_rate(tl1OduMplsIf.getLINK_TYPE());
             sdnService.setLatency("");
 
@@ -323,8 +323,8 @@ public class SDNManager {
             } else {
                 sdnService.setWavelength(optic_power.getTX_WAVELENGTH());
             }
-            sdnService.setActive_path(odu_head.getACTIVE_PATH_STATUS());
-            sdnService.setCreation_date(odu_head.getCREATION_DATE());
+            sdnService.setActive_path(tl1Odu_head.getACTIVE_PATH_STATUS());
+            sdnService.setCreation_date(tl1Odu_head.getCREATION_DATE());
 
             serviceRepository.save(sdnService);
             sdnServiceHashMapForPath.put(sdnService.getService_name(),sdnService);
@@ -334,27 +334,27 @@ public class SDNManager {
 
     public void SDNSyncTunnelList( ) throws  Exception {
 
-        for (ODU odu : odus) {
+        for (Tl1Odu tl1Odu : oduses) {
             TUNNEL tunnel = new TUNNEL();
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu.getEMS_SRC_LSR());
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(odu.getEMS_DST_LSR());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(tl1Odu.getEMS_SRC_LSR());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(tl1Odu.getEMS_DST_LSR());
 
 
             tunnel.setEms_id(200009);
-            tunnel.setTunnel_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu.getNAME());
+            tunnel.setTunnel_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + tl1Odu.getNAME());
             tunnel.setSrc_ne_id(sdnSrcNode.getNe_id());
             tunnel.setSrc_ne_name(sdnSrcNode.getNe_name());
             tunnel.setDst_ne_id(sdnDstNode.getNe_id());
             tunnel.setDst_ne_name(sdnDstNode.getNe_name());
-            tunnel.setRate_type(odu.getTYPE());
+            tunnel.setRate_type(tl1Odu.getTYPE());
             tunnel.setMultiple_rate("1");
             tunnel.setLocal_id("");
             tunnel.setRequest_id("");
-            tunnel.setTunnel_name(odu.getNAME());
-            if(odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
+            tunnel.setTunnel_name(tl1Odu.getNAME());
+            if(tl1Odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
                 tunnel.setTunnel_type("otn");
             }else {
-                tunnel.setTunnel_type(odu.getEMS_SERVICE());
+                tunnel.setTunnel_type(tl1Odu.getEMS_SERVICE());
             }
             tunnel.setTunnel_status("");
             tunnel.setConfiguration_action("");
@@ -362,16 +362,16 @@ public class SDNManager {
             tunnel.setTunnel_oam_enabler("");
             tunnel.setDeployment_enabler("");
             tunnel.setDeployment_status("");
-            tunnel.setActive_path(odu.getACTIVE_PATH_STATUS());
+            tunnel.setActive_path(tl1Odu.getACTIVE_PATH_STATUS());
             tunnel.setSrc_node_ref("");
             tunnel.setDst_node_ref("");
             tunnel.setService_ref("");
             tunnel.setAccessif_ref("");
-            tunnel.setProtection_type(odu.getPROT_TYPE());
+            tunnel.setProtection_type(tl1Odu.getPROT_TYPE());
             tunnel.setWorking_path("");
             tunnel.setProtection_path("");
             tunnel.setService_mapping("");
-            tunnel.setCreation_date(odu.getCREATION_DATE());
+            tunnel.setCreation_date(tl1Odu.getCREATION_DATE());
 
             tunnelRepository.save(tunnel);
 
@@ -382,34 +382,34 @@ public class SDNManager {
     }
 
     public void SDNSyncPathList() throws  Exception {
-        for (Map.Entry<String, List<ODU>> entry : odu_hashMapForPath.entrySet() ) {
-            List<ODU> odu_list = entry.getValue();
-            if(odu_list.size() != 4) continue;
+        for (Map.Entry<String, List<Tl1Odu>> entry : odu_hashMapForPath.entrySet() ) {
+            List<Tl1Odu> tl1Odu_list = entry.getValue();
+            if(tl1Odu_list.size() != 4) continue;
 
-            ODU odu_head = null;
-            ODU odu_tail = null;
-            ODU odu_transit_from = null;
-            ODU odu_transit_to = null;
-            for(ODU odu: odu_list) {
-                if (odu.getROLE().equals("TRANSIT_FROM")) odu_transit_from = odu;
-                else if(odu.getROLE().equals("TRANSIT_TO")) odu_transit_to = odu;
-                else if(odu.getROLE().equals("HEAD")) odu_head = odu;
-                else odu_tail = odu;
+            Tl1Odu tl1Odu_head = null;
+            Tl1Odu tl1Odu_tail = null;
+            Tl1Odu tl1Odu_transit_from = null;
+            Tl1Odu tl1Odu_transit_to = null;
+            for(Tl1Odu tl1Odu : tl1Odu_list) {
+                if (tl1Odu.getROLE().equals("TRANSIT_FROM")) tl1Odu_transit_from = tl1Odu;
+                else if(tl1Odu.getROLE().equals("TRANSIT_TO")) tl1Odu_transit_to = tl1Odu;
+                else if(tl1Odu.getROLE().equals("HEAD")) tl1Odu_head = tl1Odu;
+                else tl1Odu_tail = tl1Odu;
             }
 
-            odu_list.set(0, odu_head);
-            odu_list.set(1, odu_transit_from);
-            odu_list.set(2, odu_transit_to);
-            odu_list.set(3, odu_tail);
+            tl1Odu_list.set(0, tl1Odu_head);
+            tl1Odu_list.set(1, tl1Odu_transit_from);
+            tl1Odu_list.set(2, tl1Odu_transit_to);
+            tl1Odu_list.set(3, tl1Odu_tail);
 
 
             { // HEAD <--> TRANSIT_FROM
-                LINK link = sdnLinkHashMapForPath.get(odu_head.getTID() +'/'+odu_head.getLOCAL_ID().split("-")[0]+'-' +odu_head.getLOCAL_ID().split("-")[1] + '-' + odu_transit_from.getTID() +'/'+odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+odu_transit_from.getLOCAL_ID().split("-")[1] );
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(odu_head.getNAME());
+                LINK link = sdnLinkHashMapForPath.get(tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] );
+                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 PATH path = new PATH();
                 path.setEms_id(200009);
                 path.setService_id(sdnService.getService_id());
-                path.setPath_type(odu_head.getACTIVE_PATH_STATUS());
+                path.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
                 path.setConnection_idx("1");
                 path.setConnection_type("Forward");
                 path.setDirection_type("ingress");
@@ -420,12 +420,12 @@ public class SDNManager {
                 pathRepository.save(path);
             }
             { // TRANSIT_TO <--> TAIL
-                LINK link = sdnLinkHashMapForPath.get(odu_transit_to.getTID() +'/'+odu_transit_to.getLOCAL_ID().split("-")[0]+'-' +odu_transit_to.getLOCAL_ID().split("-")[1] + '-' + odu_tail.getTID() +'/'+odu_tail.getLOCAL_ID().split("-")[0]+'-'+odu_tail.getLOCAL_ID().split("-")[1] );
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(odu_head.getNAME());
+                LINK link = sdnLinkHashMapForPath.get(tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] );
+                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 PATH path = new PATH();
                 path.setEms_id(200009);
                 path.setService_id(sdnService.getService_id());
-                path.setPath_type(odu_transit_to.getACTIVE_PATH_STATUS());
+                path.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
                 path.setConnection_idx("2");
                 path.setConnection_type("Forward");
                 path.setDirection_type("ingress");
@@ -437,34 +437,34 @@ public class SDNManager {
             }
         }
 
-        for (Map.Entry<String, List<ODU>> entry : odu_hashMapForPath.entrySet() ) {
-            List<ODU> odu_list = entry.getValue();
-            if(odu_list.size() != 4) continue;
+        for (Map.Entry<String, List<Tl1Odu>> entry : odu_hashMapForPath.entrySet() ) {
+            List<Tl1Odu> tl1Odu_list = entry.getValue();
+            if(tl1Odu_list.size() != 4) continue;
 
-            ODU odu_head = null;
-            ODU odu_tail = null;
-            ODU odu_transit_from = null;
-            ODU odu_transit_to = null;
-            for(ODU odu: odu_list) {
-                if (odu.getROLE().equals("TRANSIT_FROM")) odu_transit_from = odu;
-                else if(odu.getROLE().equals("TRANSIT_TO")) odu_transit_to = odu;
-                else if(odu.getROLE().equals("HEAD")) odu_head = odu;
-                else odu_tail = odu;
+            Tl1Odu tl1Odu_head = null;
+            Tl1Odu tl1Odu_tail = null;
+            Tl1Odu tl1Odu_transit_from = null;
+            Tl1Odu tl1Odu_transit_to = null;
+            for(Tl1Odu tl1Odu : tl1Odu_list) {
+                if (tl1Odu.getROLE().equals("TRANSIT_FROM")) tl1Odu_transit_from = tl1Odu;
+                else if(tl1Odu.getROLE().equals("TRANSIT_TO")) tl1Odu_transit_to = tl1Odu;
+                else if(tl1Odu.getROLE().equals("HEAD")) tl1Odu_head = tl1Odu;
+                else tl1Odu_tail = tl1Odu;
             }
 
-            odu_list.set(0, odu_head);
-            odu_list.set(1, odu_transit_from);
-            odu_list.set(2, odu_transit_to);
-            odu_list.set(3, odu_tail);
+            tl1Odu_list.set(0, tl1Odu_head);
+            tl1Odu_list.set(1, tl1Odu_transit_from);
+            tl1Odu_list.set(2, tl1Odu_transit_to);
+            tl1Odu_list.set(3, tl1Odu_tail);
 
 
             { // HEAD <--> TRANSIT_FROM
-                LINK link = sdnLinkHashMapForPath.get(odu_transit_from.getTID() +'/'+odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+odu_transit_from.getLOCAL_ID().split("-")[1] + '-' +odu_head.getTID() +'/'+odu_head.getLOCAL_ID().split("-")[0]+'-' +odu_head.getLOCAL_ID().split("-")[1]);
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(odu_head.getNAME());
+                LINK link = sdnLinkHashMapForPath.get(tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1]);
+                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 PATH path = new PATH();
                 path.setEms_id(200009);
                 path.setService_id(sdnService.getService_id());
-                path.setPath_type(odu_head.getACTIVE_PATH_STATUS());
+                path.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
                 path.setConnection_idx("3");
                 path.setConnection_type("Forward");
                 path.setDirection_type("egress");
@@ -475,12 +475,12 @@ public class SDNManager {
                 pathRepository.save(path);
             }
             { // TRANSIT_TO <--> TAIL
-                LINK link = sdnLinkHashMapForPath.get(odu_tail.getTID() +'/'+odu_tail.getLOCAL_ID().split("-")[0]+'-'+odu_tail.getLOCAL_ID().split("-")[1] +'-'+odu_transit_to.getTID() +'/'+odu_transit_to.getLOCAL_ID().split("-")[0]+'-' +odu_transit_to.getLOCAL_ID().split("-")[1]);
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(odu_head.getNAME());
+                LINK link = sdnLinkHashMapForPath.get(tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] +'-'+ tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1]);
+                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 PATH path = new PATH();
                 path.setEms_id(200009);
                 path.setService_id(sdnService.getService_id());
-                path.setPath_type(odu_transit_to.getACTIVE_PATH_STATUS());
+                path.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
                 path.setConnection_idx("4");
                 path.setConnection_type("Forward");
                 path.setDirection_type("egress");
@@ -496,20 +496,20 @@ public class SDNManager {
 
     public void SDNSyncConstraint() throws Exception {
 
-        for (List<ODU> odu_list :odu_list_for_service) {
-            ODU odu_head = odu_list.get(0);
-            ODU odu_tail = odu_list.get(1);
+        for (List<Tl1Odu> tl1Odu_list :odu_list_for_service) {
+            Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
+            Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
 
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(odu_head.getTID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
 
             CONSTRAINT constraint = new CONSTRAINT();
 
             constraint.setEms_id(200009);
-            constraint.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + odu_head.getNAME());
+            constraint.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + tl1Odu_head.getNAME());
             constraint.setConst_id("protection type");
             constraint.setConst_type("");
             constraint.setConst_name("PROTECTION TYPE");
-            constraint.setConst_value(odu_head.getPROT_TYPE());
+            constraint.setConst_value(tl1Odu_head.getPROT_TYPE());
             constraint.setConst_operator("");
 
 
@@ -527,15 +527,15 @@ public class SDNManager {
             com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF sdnAccess_if = new com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF();
             com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
             CONNECTOR sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
-            ODU odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
-            if(odu == null) continue;
+            Tl1Odu tl1Odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
+            if(tl1Odu == null) continue;
 
             sdnAccess_if.setEms_id(200009);
             sdnAccess_if.setAccessif_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id()); // 조합
             sdnAccess_if.setAccessif_name("");
             sdnAccess_if.setNe_id(sdnNode.getNe_id());
             sdnAccess_if.setConnector_id(sdnConnector.getConnect_id());
-            sdnAccess_if.setAccessif_type(odu.getSERVICE());
+            sdnAccess_if.setAccessif_type(tl1Odu.getSERVICE());
             sdnAccess_if.setAccessif_status(tl1MplsIf.getOPERATION_STATUS());
             sdnAccess_if.setService_ref("");
             sdnAccess_if.setNode_connector_ref("");

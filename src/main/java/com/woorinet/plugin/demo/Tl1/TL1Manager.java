@@ -40,6 +40,7 @@ public class TL1Manager {
     Tl1ServiceExtRepository tl1ServiceExtRepository;
     Tl1ServiceTunnelRepository tl1ServiceTunnelRepository;
     Tl1ServiceMspwRepository tl1ServiceMspwRepository;
+    Tl1OduRepository tl1OduRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -84,6 +85,7 @@ public class TL1Manager {
                       Tl1ServiceExtRepository tl1ServiceExtRepository,
                       Tl1ServiceTunnelRepository tl1ServiceTunnelRepository,
                       Tl1ServiceMspwRepository tl1ServiceMspwRepository,
+                      Tl1OduRepository tl1OduRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -121,6 +123,7 @@ public class TL1Manager {
         this.tl1ServiceExtRepository = tl1ServiceExtRepository;
         this.tl1ServiceTunnelRepository = tl1ServiceTunnelRepository;
         this.tl1ServiceMspwRepository = tl1ServiceMspwRepository;
+        this.tl1OduRepository = tl1OduRepository;
 
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -371,13 +374,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncOdu(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ODU:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initOduTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertOdu(new ODU(fields));
+    public void Tl1SyncOdu() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-ODU:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1OduRepository.save(new Tl1Odu(fields));
+            }
         }
     }
 

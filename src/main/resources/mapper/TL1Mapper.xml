@@ -1076,7 +1076,7 @@
             TL1.SERVICE_MSPW
     </select>
 
-    <select id="selectOdu" resultType="com.woorinet.plugin.demo.DTO.TL1.ODU">
+    <select id="selectOdu" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1Odu">
         SELECT
             *
         FROM
@@ -2572,7 +2572,7 @@
             )
     </select>
 
-    <select id="insertOdu" parameterType="com.woorinet.plugin.demo.DTO.TL1.ODU">
+    <select id="insertOdu" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1Odu">
         REPLACE INTO
             TL1.ODU(
                 `TID_ID`,

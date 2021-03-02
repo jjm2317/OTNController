@@ -1,13 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class ODU {
+@Data
+@Entity
+@Table(name = "tl1_odu")
+public class Tl1Odu {
+    @Id
+    @GeneratedValue
+    int ODU_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -58,7 +68,11 @@ public class ODU {
     String MODIFIED_DATE;
     String TUNNEL_PORT;
 
-    public ODU(String[] fields) {
+    public Tl1Odu() {
+
+    }
+
+    public Tl1Odu(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];
