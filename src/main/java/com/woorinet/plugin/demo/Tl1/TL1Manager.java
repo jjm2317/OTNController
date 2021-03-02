@@ -56,7 +56,7 @@ public class TL1Manager {
     Tl1PmTunnelRepository tl1PmTunnelRepository;
     Tl1InventoryRepository tl1InventoryRepository;
     Tl1SessStateRepository tl1SessStateRepository;
-    KEY_STATERepository key_stateRepository;
+    Tl1KeyStateRepository tl1KeyStateRepository;
     MODULE_INFORepository module_infoRepository;
     CM_PORTRepository cm_portRepository;
     BYPASS_INFORepository bypass_infoRepository;
@@ -105,7 +105,7 @@ public class TL1Manager {
                       Tl1PmTunnelRepository tl1PmTunnelRepository,
                       Tl1InventoryRepository tl1InventoryRepository,
                       Tl1SessStateRepository tl1SessStateRepository,
-                      KEY_STATERepository key_stateRepository,
+                      Tl1KeyStateRepository tl1KeyStateRepository,
                       MODULE_INFORepository module_infoRepository,
                       CM_PORTRepository cm_portRepository,
                       BYPASS_INFORepository bypass_infoRepository,
@@ -152,7 +152,7 @@ public class TL1Manager {
         this.tl1PmTunnelRepository = tl1PmTunnelRepository;
         this.tl1InventoryRepository = tl1InventoryRepository;
         this.tl1SessStateRepository = tl1SessStateRepository;
-        this.key_stateRepository = key_stateRepository;
+        this.tl1KeyStateRepository = tl1KeyStateRepository;
         this.module_infoRepository = module_infoRepository;
         this.cm_portRepository = cm_portRepository;
         this.bypass_infoRepository = bypass_infoRepository;
@@ -543,8 +543,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncKeyState(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncKeyState() throws Exception {
+        for (NODE node : nodeList) {
             if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
@@ -553,7 +553,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                key_stateRepository.save(new KEY_STATE(fields));
+                tl1KeyStateRepository.save(new Tl1KeyState(fields));
             }
         }
     }

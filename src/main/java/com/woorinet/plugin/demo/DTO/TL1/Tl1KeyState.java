@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name = "TL1_KEY_STATE")
-public class KEY_STATE {
+@Table(name = "tl1_key_state")
+public class Tl1KeyState {
     @Id
     @GeneratedValue
     int KEY_STATE_ID;
@@ -27,10 +27,10 @@ public class KEY_STATE {
     String RX_KEY_STATE;
     String RX_KEY_BANK_STATE;
 
-    public KEY_STATE() {
+    public Tl1KeyState() {
     }
 
-    public KEY_STATE(String TID, String SUBNETWORK, String AID, String TX_KEY_STATE, String TX_KEY_BANK_STAT, String RX_KEY_STATE, String RX_KEY_BANK_STATE) {
+    public Tl1KeyState(String TID, String SUBNETWORK, String AID, String TX_KEY_STATE, String TX_KEY_BANK_STAT, String RX_KEY_STATE, String RX_KEY_BANK_STATE) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
@@ -40,7 +40,7 @@ public class KEY_STATE {
         this.RX_KEY_BANK_STATE = RX_KEY_BANK_STATE;
     }
 
-    public KEY_STATE(String[] fields) {
+    public Tl1KeyState(String[] fields) {
         this.TID = fields[0];
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];
