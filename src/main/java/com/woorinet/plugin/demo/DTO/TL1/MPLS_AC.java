@@ -65,6 +65,36 @@ public class MPLS_AC {
         this.MODIFIED_DATE = fields[26];
     }
 
+    public MPLS_AC(String TID_ID, String TID, String AID, String SERVICE_NAME, String DESCR, String UNIT_TYPE, String AC_ID, String VSI_ID, String TC_BY, String VLAN, String VLAN_INNER, String VLAN_PRI, String q_IN_Q, String PHBMAP_ID, String PHBMAP_TYPE, String AC_COUNT, String EXP, String PROT_PID, String POLICER_ID, String LAG_ID, String RG_ID, String COUNTER, String POLL_RATE, String REPORT, String NO_PACKET, String CREATION_DATE, String MODIFIED_DATE) {
+        this.TID_ID = TID_ID;
+        this.TID = TID;
+        this.AID = AID;
+        this.SERVICE_NAME = SERVICE_NAME;
+        this.DESCR = DESCR;
+        this.UNIT_TYPE = UNIT_TYPE;
+        this.AC_ID = AC_ID;
+        this.VSI_ID = VSI_ID;
+        this.TC_BY = TC_BY;
+        this.VLAN = VLAN;
+        this.VLAN_INNER = VLAN_INNER;
+        this.VLAN_PRI = VLAN_PRI;
+        Q_IN_Q = q_IN_Q;
+        this.PHBMAP_ID = PHBMAP_ID;
+        this.PHBMAP_TYPE = PHBMAP_TYPE;
+        this.AC_COUNT = AC_COUNT;
+        this.EXP = EXP;
+        this.PROT_PID = PROT_PID;
+        this.POLICER_ID = POLICER_ID;
+        this.LAG_ID = LAG_ID;
+        this.RG_ID = RG_ID;
+        this.COUNTER = COUNTER;
+        this.POLL_RATE = POLL_RATE;
+        this.REPORT = REPORT;
+        this.NO_PACKET = NO_PACKET;
+        this.CREATION_DATE = CREATION_DATE;
+        this.MODIFIED_DATE = MODIFIED_DATE;
+    }
+
     @Override
     public String toString() {
         return "MPLS_AC{" +

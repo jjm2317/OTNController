@@ -101,6 +101,7 @@ public class TL1Manager {
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
+        this.pmPwRepository = pmPwRepository;
         this.pm_tunnelRepository = pm_tunnelRepository;
         this.inventoryRepository = inventoryRepository;
         this.sess_stateRepository = sess_stateRepository;
@@ -424,7 +425,7 @@ public class TL1Manager {
 
     public void TL1SyncPmAc(int CTAG, List<MPLS_AC> mplsAcs) throws Exception {
         for (MPLS_AC mplsAc : mplsAcs) {
-            String cmd = "RTRV-PM-AC:20B_11::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
+            String cmd = "RTRV-PM-AC:" + mplsAc.getTID() + "::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 System.out.println(fields);
