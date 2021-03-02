@@ -1,10 +1,26 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-public class MSPW {
+import lombok.Data;
+import lombok.Generated;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Getter
+@Setter
+@Data
+@Entity
+@Table(name = "tl1_mspw")
+public class Tl1Mspw {
     String TID_ID;
     String TID;
     String SUBNET_ID;
     String SUBNET;
+    @Id
+    @Generated
     String MSPW_ID;
     String LOCAL_ID;
     String REQUEST_ID;
@@ -53,7 +69,7 @@ public class MSPW {
     String PROTECTION_TYPE;
     String PATH_TYPE;
 
-    public MSPW(String[] fields) {
+    public Tl1Mspw(String[] fields) {
         this.TID_ID  = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];

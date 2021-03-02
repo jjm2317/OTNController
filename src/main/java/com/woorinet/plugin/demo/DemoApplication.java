@@ -64,6 +64,8 @@ public class DemoApplication {
 	@Autowired
 	private Tl1SpwRepository tl1SpwRepository;
 	@Autowired
+	private Tl1MspwRepository tl1MspwRepository;
+	@Autowired
 	private Tl1AccessIfRepository tl1AccessIfRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
@@ -192,6 +194,7 @@ public class DemoApplication {
 					tl1StunnelTransitRepository,
 					tl1TunnelPortRepository,
 					tl1SpwRepository,
+					tl1MspwRepository,
 					tl1AccessIfRepository,
 					pmRepository,
 					pm_portRepository,
@@ -255,9 +258,7 @@ public class DemoApplication {
 			manager.Tl1SyncSpw();
 
 			//MSPW DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncMSpw(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncMSpw();
 
 			//MPLS_AC DB연동
 			for (NODE node: nodes) {

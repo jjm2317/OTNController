@@ -1034,7 +1034,7 @@
             TL1.SPW
     </select>
 
-    <select id="selectMSpw" resultType="com.woorinet.plugin.demo.DTO.TL1.MSPW">
+    <select id="selectMSpw" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1Mspw">
         SELECT
             *
         FROM
@@ -2044,7 +2044,7 @@
             )
     </select>
 
-    <select id="insertMSpw" parameterType="com.woorinet.plugin.demo.DTO.TL1.MSPW">
+    <select id="insertMSpw" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1Mspw">
         REPLACE INTO
             TL1.MSPW(
                 `TID_ID`,
