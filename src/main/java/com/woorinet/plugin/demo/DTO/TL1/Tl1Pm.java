@@ -13,8 +13,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name = "TL1_PM")
-public class PM {
+@Table(name = "tl1_pm")
+public class Tl1Pm {
     /* TID,AID,UNIT-TYPE,SIGNAL,INTERVAL,PM-TYPE,BIP,ES,SES,UAS,BEI */
     @Id
     @GeneratedValue
@@ -32,10 +32,10 @@ public class PM {
     String BEI;
 
 
-    public PM() {
+    public Tl1Pm() {
     }
 
-    public PM(String TID, String AID, String UNIT_TYPE, String SIGNAL, String INTERVAL, String PM_TYPE, String BIP, String ES, String SES, String UAS, String BEI) {
+    public Tl1Pm(String TID, String AID, String UNIT_TYPE, String SIGNAL, String INTERVAL, String PM_TYPE, String BIP, String ES, String SES, String UAS, String BEI) {
         this.TID = TID;
         this.AID = AID;
         this.UNIT_TYPE = UNIT_TYPE;
@@ -49,7 +49,7 @@ public class PM {
         this.BEI = BEI;
     }
 
-    public PM(String[] fields) {
+    public Tl1Pm(String[] fields) {
         this.TID = fields[0];
         this.AID = fields[1];
         this.UNIT_TYPE = fields[2];

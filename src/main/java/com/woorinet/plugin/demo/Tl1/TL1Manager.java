@@ -19,7 +19,10 @@ public class TL1Manager {
 
     List<NODE> nodeList;
     List<Tl1Service> serviceList;
-//    ODU_MPLS_IFRepository odu_mpls_ifRepository;
+    List<Tl1NodeConnector> tl1NodeConnectorList;
+    List<Tl1OduMplsIf> tl1OduMplsIfList;
+    List<Tl1OduNodeConnector> tl1OduNodeConnectorList;
+
     Tl1SystemInfoRepository tl1SystemInfoRepository;
     Tl1SlotRepository tl1SlotRepository;
     Tl1EthPortRepository tl1EthPortRepository;
@@ -45,7 +48,7 @@ public class TL1Manager {
     Tl1CesPwRepository tl1CesPwRepository;
     Tl1L2LacpRepository tl1L2LacpRepository;
     Tl1OpticPowerRepository tl1OpticPowerRepository;
-    PMRepository pmRepository;
+    Tl1PmRepository tl1PmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
     PM_PWRepository pmPwRepository;
@@ -94,7 +97,7 @@ public class TL1Manager {
                       Tl1CesPwRepository tl1CesPwRepository,
                       Tl1L2LacpRepository tl1L2LacpRepository,
                       Tl1OpticPowerRepository tl1OpticPowerRepository,
-                      PMRepository pmRepository,
+                      Tl1PmRepository tl1PmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
                       PM_PWRepository pmPwRepository,
@@ -110,7 +113,10 @@ public class TL1Manager {
         this.CTAG = CTAG;
         this.nodeList = new ArrayList<>();
         this.serviceList = new ArrayList<>();
-//        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
+        this.tl1NodeConnectorList = new ArrayList<>();
+        this.tl1OduMplsIfList = new ArrayList<>();
+        this.tl1OduNodeConnectorList = new ArrayList<>();
+
         this.tl1SystemInfoRepository = tl1SystemInfoRepository;
         this.tl1SlotRepository = tl1SlotRepository;
         this.tl1EthPortRepository = tl1EthPortRepository;
@@ -137,7 +143,7 @@ public class TL1Manager {
         this.tl1L2LacpRepository = tl1L2LacpRepository;
         this.tl1OpticPowerRepository = tl1OpticPowerRepository;
 
-        this.pmRepository = pmRepository;
+        this.tl1PmRepository = tl1PmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
         this.pmPwRepository = pmPwRepository;
@@ -219,7 +225,9 @@ public class TL1Manager {
             String cmd = "RTRV-NODE-CONNECTOR:" + node.getTID() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1NodeConnectorRepository.save(new Tl1NodeConnector(fields));
+                Tl1NodeConnector tl1NodeConnector = new Tl1NodeConnector(fields);
+                tl1NodeConnectorRepository.save(tl1NodeConnector);
+                tl1NodeConnectorList.add(tl1NodeConnector);
             }
         }
     }
@@ -239,7 +247,9 @@ public class TL1Manager {
             String cmd = "RTRV-ODU-NODE-CONNECTOR:" + node.getTID() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1OduNodeConnectorRepository.save(new Tl1OduNodeConnector(fields));
+                Tl1OduNodeConnector tl1OduNodeConnector = new Tl1OduNodeConnector(fields);
+                tl1OduNodeConnectorRepository.save(tl1OduNodeConnector);
+                tl1OduNodeConnectorList.add(tl1OduNodeConnector);
             }
         }
     }
@@ -259,7 +269,9 @@ public class TL1Manager {
             String cmd = "RTRV-ODU-MPLS-IF:" + node.getTID() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1OduMplsIfRepository.save(new Tl1OduMplsIf(fields));
+                Tl1OduMplsIf tl1OduMplsIf = new Tl1OduMplsIf(fields);
+                tl1OduMplsIfRepository.save(tl1OduMplsIf);
+                tl1OduMplsIfList.add(tl1OduMplsIf);
             }
         }
     }
@@ -437,8 +449,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncPM(int CTAG, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OduMplsIf> tl1OduMplsIfs) throws Exception {
-        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
+    public void TL1SyncPM() throws Exception {
+        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
             String TID = tl1OduNodeConnector.getTID();
             String AID = tl1OduNodeConnector.getAID();
             String SIGNAL = getMITypeByTID(tl1OduMplsIfs, TID);
@@ -447,7 +459,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                pmRepository.save(new PM(fields));
+                tl1PmRepository.save(new Tl1Pm(fields));
             }
         }
     }

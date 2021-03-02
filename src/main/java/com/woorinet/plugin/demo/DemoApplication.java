@@ -87,10 +87,9 @@ public class DemoApplication {
 	private Tl1L2LacpRepository tl1L2LacpRepository;
 	@Autowired
 	private Tl1OpticPowerRepository tl1OpticPowerRepository;
-//	@Autowired
-//	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
-	private PMRepository pmRepository;
+	private Tl1PmRepository tl1PmRepository;
+
 	@Autowired
 	private PM_PORTRepository pm_portRepository;
 	@Autowired
@@ -226,7 +225,7 @@ public class DemoApplication {
 					tl1CesPwRepository,
 					tl1L2LacpRepository,
 					tl1OpticPowerRepository,
-					pmRepository,
+					tl1PmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
 					pmPwRepository,
@@ -330,7 +329,7 @@ public class DemoApplication {
 			List<Tl1MplsAc> mplsAcs = tl1Mapper.selectMplsAc();
 
 			//PM DB연동
-			manager.TL1SyncPM(CTAG, tl1OduNodeConnectors, tl1OduMplsIfs);
+			manager.TL1SyncPM();
 
 			//PM-PORT DB연동
 			manager.Tl1SyncPmPort(CTAG, tl1OduNodeConnectors);
