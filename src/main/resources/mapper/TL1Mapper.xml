@@ -957,21 +957,21 @@
             TL1.SLOT
     </select>
 
-    <select id="selectEthPort" resultType="com.woorinet.plugin.demo.DTO.TL1.ETH_PORT">
+    <select id="selectEthPort" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1EthPort">
         SELECT
             *
         FROM
             TL1.ETH_PORT
     </select>
 
-    <select id="selectNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.NODECONNECTOR">
+    <select id="selectNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1NodeConnector">
         SELECT
             *
         FROM
             TL1.NODE_CONNECTOR
     </select>
 
-    <select id="selectCesNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.CES_NODE_CONNECTOR">
+    <select id="selectCesNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1CesNodeConnector">
         SELECT
             *
         FROM
@@ -1203,7 +1203,7 @@
             )
     </select>
 
-    <select id="insertEthPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.ETH_PORT">
+    <select id="insertEthPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1EthPort">
         REPLACE INTO
             TL1.ETH_PORT(
                 `TID`,
@@ -1262,7 +1262,7 @@
             )
     </select>
 
-    <select id="insertNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.NODECONNECTOR">
+    <select id="insertNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1NodeConnector">
         REPLACE INTO
             TL1.NODE_CONNECTOR(
                 `TID_ID`,
@@ -1313,7 +1313,7 @@
             )
     </select>
 
-    <select id="insertCesNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.CES_NODE_CONNECTOR">
+    <select id="insertCesNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1CesNodeConnector">
         REPLACE INTO
             TL1.CES_NODE_CONNECTOR(
                 `TID_ID`,

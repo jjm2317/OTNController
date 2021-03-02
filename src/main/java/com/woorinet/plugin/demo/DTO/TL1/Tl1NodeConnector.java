@@ -1,6 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-public class CES_NODE_CONNECTOR {
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Getter
+@Setter
+@Data
+@Entity
+@Table(name = "tl1_node_connector")
+public class Tl1NodeConnector {
+    @Id
+    @GeneratedValue
+    int NODE_CONNECTOR_ID;
     String TID_ID;
     String TID;
     String AID;
@@ -22,13 +40,13 @@ public class CES_NODE_CONNECTOR {
     String PORT_TYPE2;
     String PORT_INDEX;
     String MAC_ADDR;
-    String CES_NAME;
-    String CES_DESCR;
-    String CES_SD;
-    String CES_PORT_SUTDOWN;
     String SLOT_SERVICE;
 
-    public CES_NODE_CONNECTOR(String TID_ID, String TID, String AID, String SUBNET_ID, String SUBNET, String LOCAL_ID, String REQUEST_ID, String NAME, String NUMBER, String PORT_TYPE, String PORT_ROLE, String PORT_STATUS, String SHELF_TYPE, String SHELF_INDEX, String SLOT_TYPE, String SLOT_INDEX, String SUB_SLOT_TYPE, String SUB_SLOT_INDEX, String PORT_TYPE2, String PORT_INDEX, String MAC_ADDR, String CES_NAME, String CES_DESCR, String CES_SD, String CES_PORT_SUTDOWN, String SLOT_SERVICE) {
+    public Tl1NodeConnector() {
+
+    }
+
+    public Tl1NodeConnector(String TID_ID, String TID, String AID, String SUBNET_ID, String SUBNET, String LOCAL_ID, String REQUEST_ID, String NAME, String NUMBER, String PORT_TYPE, String PORT_ROLE, String PORT_STATUS, String SHELF_TYPE, String SHELF_INDEX, String SLOT_TYPE, String SLOT_INDEX, String SUB_SLOT_TYPE, String SUB_SLOT_INDEX, String PORT_TYPE2, String PORT_INDEX, String MAC_ADDR, String SLOT_SERVICE) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.AID = AID;
@@ -50,14 +68,10 @@ public class CES_NODE_CONNECTOR {
         this.PORT_TYPE2 = PORT_TYPE2;
         this.PORT_INDEX = PORT_INDEX;
         this.MAC_ADDR = MAC_ADDR;
-        this.CES_NAME = CES_NAME;
-        this.CES_DESCR = CES_DESCR;
-        this.CES_SD = CES_SD;
-        this.CES_PORT_SUTDOWN = CES_PORT_SUTDOWN;
         this.SLOT_SERVICE = SLOT_SERVICE;
     }
 
-    public CES_NODE_CONNECTOR(String[] fields) {
+    public Tl1NodeConnector(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.AID = fields[2];
@@ -79,16 +93,12 @@ public class CES_NODE_CONNECTOR {
         this.PORT_TYPE2 = fields[18];
         this.PORT_INDEX = fields[19];
         this.MAC_ADDR = fields[20];
-        this.CES_NAME = fields[21];
-        this.CES_DESCR = fields[22];
-        this.CES_SD = fields[23];
-        this.CES_PORT_SUTDOWN = fields[24];
-        this.SLOT_SERVICE = fields[25];
+        this.SLOT_SERVICE = fields[21];
     }
 
     @Override
     public String toString() {
-        return "CesNodeConnector{" +
+        return "NodeConnector{" +
                 "TID_ID='" + TID_ID + '\'' +
                 ", TID='" + TID + '\'' +
                 ", AID='" + AID + '\'' +
@@ -110,10 +120,6 @@ public class CES_NODE_CONNECTOR {
                 ", PORT_TYPE2='" + PORT_TYPE2 + '\'' +
                 ", PORT_INDEX='" + PORT_INDEX + '\'' +
                 ", MAC_ADDR='" + MAC_ADDR + '\'' +
-                ", CES_NAME='" + CES_NAME + '\'' +
-                ", CES_DESCR='" + CES_DESCR + '\'' +
-                ", CES_SD='" + CES_SD + '\'' +
-                ", CES_PORT_SUTDOWN='" + CES_PORT_SUTDOWN + '\'' +
                 ", SLOT_SERVICE='" + SLOT_SERVICE + '\'' +
                 '}';
     }
