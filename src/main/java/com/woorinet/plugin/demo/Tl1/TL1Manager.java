@@ -53,6 +53,7 @@ public class TL1Manager {
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
+        this.pmPwRepository = pmPwRepository;
         this.pm_tunnelRepository = pm_tunnelRepository;
         this.inventoryRepository = inventoryRepository;
         this.sess_stateRepository = sess_stateRepository;
