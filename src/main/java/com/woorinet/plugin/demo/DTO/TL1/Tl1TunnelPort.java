@@ -1,6 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-public class TUNNEL_PROT {
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Getter
+@Setter
+@Data
+@Entity
+@Table(name = "tl1_tunnel_port")
+public class Tl1TunnelPort {
+    @Id
+    @GeneratedValue
+    int TUNNEL_PORT_ID;
     String TID;
     String Prot_ID;
     String Tunnel_Name;
@@ -23,7 +40,11 @@ public class TUNNEL_PROT {
     String Creation_Date;
     String Modified_Date;
 
-    public TUNNEL_PROT(String[] fields) {
+    public Tl1TunnelPort() {
+
+    }
+
+    public Tl1TunnelPort(String[] fields) {
         this.TID = fields[0];
         this.Prot_ID = fields[1];
         this.Tunnel_Name = fields[2];

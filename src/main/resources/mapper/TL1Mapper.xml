@@ -1020,7 +1020,7 @@
             TL1.STUNNEL_TRANSIT
     </select>
 
-    <select id="selectTunnelProt" resultType="com.woorinet.plugin.demo.DTO.TL1.TUNNEL_PROT">
+    <select id="selectTunnelProt" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1TunnelPort">
         SELECT
             *
         FROM
@@ -1892,7 +1892,7 @@
             )
     </select>
 
-    <select id="insertTunnelProt" parameterType="com.woorinet.plugin.demo.DTO.TL1.TUNNEL_PROT">
+    <select id="insertTunnelProt" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1TunnelPort">
         REPLACE INTO
             TL1.TUNNEL_PROT(
                 `TID`,

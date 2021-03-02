@@ -30,6 +30,7 @@ public class TL1Manager {
     Tl1StunnelRepository tl1StunnelRepository;
     Tl1StunnelExtRepository tl1StunnelExtRepository;
     Tl1StunnelTransitRepository tl1StunnelTransitRepository;
+    Tl1TunnelPortRepository tl1TunnelPortRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -66,6 +67,7 @@ public class TL1Manager {
                       Tl1StunnelRepository tl1StunnelRepository,
                       Tl1StunnelExtRepository tl1StunnelExtRepository,
                       Tl1StunnelTransitRepository tl1StunnelTransitRepository,
+                      Tl1TunnelPortRepository tl1TunnelPortRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -94,6 +96,7 @@ public class TL1Manager {
         this.tl1StunnelRepository = tl1StunnelRepository;
         this.tl1StunnelExtRepository = tl1StunnelExtRepository;
         this.tl1StunnelTransitRepository = tl1StunnelTransitRepository;
+        this.tl1TunnelPortRepository = tl1TunnelPortRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -250,13 +253,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncTunnelProt(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-TUNNEL-PROT:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initTunnelProtTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertTunnelProt(new TUNNEL_PROT(fields));
+    public void Tl1SyncTunnelProt() throws Exception {
+        for(NODE node : nodeList) {
+            String cmd = "RTRV-TUNNEL-PROT:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1TunnelPortRepository.save(new Tl1TunnelPort(fields));
+            }
         }
     }
 
