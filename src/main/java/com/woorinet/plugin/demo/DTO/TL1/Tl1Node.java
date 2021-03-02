@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="tl1_bypass_info")
+@Table(name="tl1_node")
 public class Tl1Node {
     @Id
     @GeneratedValue
@@ -31,6 +31,10 @@ public class Tl1Node {
     String SUBNET;
     String SUBNET_ID;
     String SYSTEM_TYPE;
+
+    public Tl1Node() {
+
+    }
 
     public Tl1Node(String TID_ID, String TID, String NODE_TYPE, String IP_ADDR, String MANUFACTURE, String HARDWARE, String SOFTWARE, String SERIAL_NUMBER, String NODE_STATUS, String SUBNET, String SUBNET_ID, String SYSTEM_TYPE) {
         this.TID_ID = TID_ID;
