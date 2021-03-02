@@ -38,6 +38,7 @@ public class TL1Manager {
     Tl1AccessIfRepository tl1AccessIfRepository;
     Tl1ServiceRepository tl1ServiceRepository;
     Tl1ServiceExtRepository tl1ServiceExtRepository;
+    Tl1ServiceTunnelRepository tl1ServiceTunnelRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -80,6 +81,7 @@ public class TL1Manager {
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       Tl1ServiceRepository tl1ServiceRepository,
                       Tl1ServiceExtRepository tl1ServiceExtRepository,
+                      Tl1ServiceTunnelRepository tl1ServiceTunnelRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -115,6 +117,7 @@ public class TL1Manager {
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.tl1ServiceRepository = tl1ServiceRepository;
         this.tl1ServiceExtRepository = tl1ServiceExtRepository;
+        this.tl1ServiceTunnelRepository = tl1ServiceTunnelRepository;
 
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -345,13 +348,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncServiceTunnel(int CTAG, String TID, String serviceName, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-SERVICE-TUNNEL:" + TID + "::" + CTAG + ":serv-name=" + serviceName + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initServiceTunnelTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertServiceTunnel(new SERVICE_TUNNEL(fields));
+    public void Tl1SyncServiceTunnel() throws Exception {
+        for(Tl1Service tl1Service : serviceList) {
+            String cmd = "RTRV-SERVICE-TUNNEL:" + tl1Service.getTID() + "::" + CTAG + ":serv-name=" + tl1Service.getNAME() + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1ServiceTunnelRepository.save(new Tl1ServiceTunnel(fields));
+            }
         }
     }
 

@@ -1062,7 +1062,7 @@
             TL1.SERVICE_EXT
     </select>
 
-    <select id="selectServiceTunnel" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_TUNNEL">
+    <select id="selectServiceTunnel" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1ServiceTunnel">
         SELECT
             *
         FROM
@@ -2388,7 +2388,7 @@
             )
     </select>
 
-    <select id="insertServiceTunnel" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_TUNNEL">
+    <select id="insertServiceTunnel" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1ServiceTunnel">
         REPLACE INTO
             TL1.SERVICE_TUNNEL(
                 `TID_ID`,

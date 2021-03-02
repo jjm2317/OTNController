@@ -1,14 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@AllArgsConstructor
+
 @Getter
 @Setter
-public class SERVICE_TUNNEL {
+@Data
+@Entity
+@Table(name = "tl1_service_tunnel")
+public class Tl1ServiceTunnel {
+    @Id
+    @GeneratedValue
+    int SERVICE_TUNNEL_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -44,7 +54,11 @@ public class SERVICE_TUNNEL {
     String HLPCF;
     String PCP;
 
-    public SERVICE_TUNNEL(String[] fields) {
+    public Tl1ServiceTunnel() {
+
+    }
+
+    public Tl1ServiceTunnel(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];

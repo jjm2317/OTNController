@@ -57,7 +57,7 @@ public interface TL1Mapper {
     List<Tl1AccessIf> selectAccessIf() throws Exception;
     List<Tl1Service> selectService() throws Exception;
     List<Tl1ServiceExt> selectServiceExt() throws Exception;
-    List<SERVICE_TUNNEL> selectServiceTunnel() throws Exception;
+    List<Tl1ServiceTunnel> selectServiceTunnel() throws Exception;
     List<SERVICE_MSPW> selectServiceMspw() throws Exception;
     List<ODU> selectOdu() throws Exception;
     List<CES_PORT> selectCesPort() throws Exception;
@@ -84,7 +84,7 @@ public interface TL1Mapper {
     void insertAccessIf(Tl1AccessIf accessIf) throws Exception;
     void insertService(Tl1Service tl1Service) throws Exception;
     void insertServiceExt(Tl1ServiceExt serviceExt) throws Exception;
-    void insertServiceTunnel(SERVICE_TUNNEL serviceTunnel) throws Exception;
+    void insertServiceTunnel(Tl1ServiceTunnel serviceTunnel) throws Exception;
     void insertServiceMspw(SERVICE_MSPW serviceMspw) throws Exception;
     void insertOdu(ODU odu) throws Exception;
     void insertCesPort(CES_PORT cesPort) throws Exception;
