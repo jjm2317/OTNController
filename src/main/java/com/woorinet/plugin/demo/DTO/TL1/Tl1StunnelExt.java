@@ -1,6 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-public class STUNNEL_EXT {
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Getter
+@Setter
+@Data
+@Entity
+@Table(name = "tl1_stunnel_ext")
+public class Tl1StunnelExt {
+    @Id
+    @GeneratedValue
+    int STUNNEL_EXT_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -61,7 +78,7 @@ public class STUNNEL_EXT {
     String CREATE_DATE;
     String MODIFI_DATE;
 
-    public STUNNEL_EXT(String[] fields) {
+    public Tl1StunnelExt(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];

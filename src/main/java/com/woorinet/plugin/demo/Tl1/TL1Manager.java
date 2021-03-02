@@ -28,6 +28,7 @@ public class TL1Manager {
     Tl1MplsIfRepository tl1MplsIfRepository;
     Tl1OduMplsIfRepository tl1OduMplsIfRepository;
     Tl1StunnelRepository tl1StunnelRepository;
+    Tl1StunnelExtRepository tl1StunnelExtRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -62,6 +63,7 @@ public class TL1Manager {
                       Tl1MplsIfRepository tl1MplsIfRepository,
                       Tl1OduMplsIfRepository tl1OduMplsIfRepository,
                       Tl1StunnelRepository tl1StunnelRepository,
+                      Tl1StunnelExtRepository tl1StunnelExtRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -88,6 +90,7 @@ public class TL1Manager {
         this.tl1MplsIfRepository = tl1MplsIfRepository;
         this.tl1OduMplsIfRepository = tl1OduMplsIfRepository;
         this.tl1StunnelRepository = tl1StunnelRepository;
+        this.tl1StunnelExtRepository = tl1StunnelExtRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -224,13 +227,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncSTunnelExt(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-STUNNEL-EXT:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initSTunnelExtTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertSTunnelExt(new STUNNEL_EXT(fields));
+    public void Tl1SyncSTunnelExt() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-STUNNEL-EXT:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1StunnelExtRepository.save(new Tl1StunnelExt(fields));
+            }
         }
     }
 
