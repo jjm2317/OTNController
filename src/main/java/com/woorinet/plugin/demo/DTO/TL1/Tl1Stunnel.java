@@ -63,6 +63,10 @@ public class Tl1Stunnel {
     String ING_LSR;
     String ENG_LSR;
 
+    public Tl1Stunnel() {
+
+    }
+
     public Tl1Stunnel(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];

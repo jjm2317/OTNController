@@ -78,6 +78,10 @@ public class Tl1StunnelExt {
     String CREATE_DATE;
     String MODIFI_DATE;
 
+    public Tl1StunnelExt() {
+
+    }
+
     public Tl1StunnelExt(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];

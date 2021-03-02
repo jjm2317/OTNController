@@ -1013,7 +1013,7 @@
             TL1.STUNNEL_EXT
     </select>
 
-    <select id="selectSTunnelTransit" resultType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL_TRANSIT">
+    <select id="selectSTunnelTransit" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1StunnelTransit">
         SELECT
             *
         FROM
@@ -1813,7 +1813,7 @@
             )
     </select>
 
-    <select id="insertSTunnelTransit" parameterType="com.woorinet.plugin.demo.DTO.TL1.STUNNEL_TRANSIT">
+    <select id="insertSTunnelTransit" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1StunnelTransit">
         REPLACE INTO
             TL1.STUNNEL_TRANSIT(
                 `TID_ID`,

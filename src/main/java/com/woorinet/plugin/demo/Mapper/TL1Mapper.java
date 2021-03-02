@@ -49,7 +49,7 @@ public interface TL1Mapper {
     List<Tl1OduMplsIf> selectOduMplsIf() throws Exception;
     List<Tl1Stunnel> selectSTunnel() throws Exception;
     List<Tl1StunnelExt> selectSTunnelExt() throws Exception;
-    List<STUNNEL_TRANSIT> selectSTunnelTransit() throws Exception;
+    List<Tl1StunnelTransit> selectSTunnelTransit() throws Exception;
     List<TUNNEL_PROT> selectTunnelProt() throws Exception;
     List<SPW> selectSpw() throws Exception;
     List<MSPW> selectMSpw() throws Exception;
@@ -76,7 +76,7 @@ public interface TL1Mapper {
     void insertOduMplsIf(Tl1OduMplsIf oduMplsIf) throws Exception;
     void insertSTunnel(Tl1Stunnel tl1Stunnel) throws Exception;
     void insertSTunnelExt(Tl1StunnelExt stunnelExt) throws Exception;
-    void insertSTunnelTransit(STUNNEL_TRANSIT stunnelTransit) throws Exception;
+    void insertSTunnelTransit(Tl1StunnelTransit stunnelTransit) throws Exception;
     void insertTunnelProt(TUNNEL_PROT tunnelProt) throws Exception;
     void insertSpw(SPW spw) throws Exception;
     void insertMSpw(MSPW spw) throws Exception;

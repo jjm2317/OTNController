@@ -32,6 +32,9 @@ public class Tl1Slot {
     String FPGA_VER;
     String FPGA_DATE;
 
+    public Tl1Slot() {
+
+    }
 
     public Tl1Slot(String TID, String SLOT_PRV_UNIT, String EQ_UNIT, String EQ_STATE, String ADMIN_STATE, String INIT_OK, String BP_STATE, String IPC_STATE, String FAIL_STATE, String HW_VER, String SW_VER, String FPGA_VER, String FPGA_DATE) {
         this.TID = TID;
