@@ -1,14 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-//@Entity
-//@Data
-public class ODU_MPLS_IF {
+@Data
+@Entity
+@Table(name = "tl1_odu_mpls_if")
+public class Tl1OduMplsIf {
+    @Id
+    @GeneratedValue
+    int ODU_MPLS_IF_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -48,7 +58,11 @@ public class ODU_MPLS_IF {
     String PEER_MAC_ADDRESS;
     String MPLSIF_TYPE;
 
-    public ODU_MPLS_IF(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String MPLS_TP_ID, String LOCAL_ID, String REQUEST_ID, String NAME, String SRC_SUBNET, String SRC_TID_ID, String SRC_TID, String SRC_PORT, String DST_SUBNET, String DST_TID_ID, String DST_TID, String DST_PORT, String OPERATION_STATUS, String CONFIGURATION_ACTION, String CONFIGURATION_RESULT, String CIR, String PIR, String DEP_ENABLER, String DEP_STATUS, String CONSTRAINT_ID, String CONSTRAINT_NAME, String CONSTRAINT_VALUE, String CONSTRAINT_OPERATOR, String PORT_CONSTRAINT_TYPE, String MAXIMUM_BANDWIDTH, String AVAILABLE_BANDWIDTH, String LINK_TYPE, String IS_VENDOR, String REMOTE_NODEID, String REMOTE_NODE_CONNECTOR, String REMOTE_TOPOLOGYID, String REMOTE_MPLSIF, String PEER_MAC_ADDRESS, String MPLSIF_TYPE) {
+    public Tl1OduMplsIf() {
+
+    }
+
+    public Tl1OduMplsIf(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String MPLS_TP_ID, String LOCAL_ID, String REQUEST_ID, String NAME, String SRC_SUBNET, String SRC_TID_ID, String SRC_TID, String SRC_PORT, String DST_SUBNET, String DST_TID_ID, String DST_TID, String DST_PORT, String OPERATION_STATUS, String CONFIGURATION_ACTION, String CONFIGURATION_RESULT, String CIR, String PIR, String DEP_ENABLER, String DEP_STATUS, String CONSTRAINT_ID, String CONSTRAINT_NAME, String CONSTRAINT_VALUE, String CONSTRAINT_OPERATOR, String PORT_CONSTRAINT_TYPE, String MAXIMUM_BANDWIDTH, String AVAILABLE_BANDWIDTH, String LINK_TYPE, String IS_VENDOR, String REMOTE_NODEID, String REMOTE_NODE_CONNECTOR, String REMOTE_TOPOLOGYID, String REMOTE_MPLSIF, String PEER_MAC_ADDRESS, String MPLSIF_TYPE) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.SUBNET_ID = SUBNET_ID;
@@ -89,7 +103,7 @@ public class ODU_MPLS_IF {
         this.MPLSIF_TYPE = MPLSIF_TYPE;
     }
 
-    public ODU_MPLS_IF(String[] fields) {
+    public Tl1OduMplsIf(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];

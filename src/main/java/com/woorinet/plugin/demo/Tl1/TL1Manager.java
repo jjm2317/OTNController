@@ -26,6 +26,7 @@ public class TL1Manager {
     Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository;
     Tl1OduNodeConnectorRepository tl1OduNodeConnectorRepository;
     Tl1MplsIfRepository tl1MplsIfRepository;
+    Tl1OduMplsIfRepository tl1OduMplsIfRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -43,10 +44,10 @@ public class TL1Manager {
 
     SocketChannel socketChannel;
     List<Tl1AccessIf> Tl1AccessIfs;
-    List<ODU_MPLS_IF> odu_mpls_ifs;
+    List<Tl1OduMplsIf> tl1OduMplsIfs;
 
     HashMap<String, Tl1AccessIf> accessIfHashMap = new HashMap<>();
-    HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
+    HashMap<String, Tl1OduMplsIf> odu_mpls_ifHashMap = new HashMap<>();
 
     public TL1Manager(int CTAG,
                       String ip,
@@ -58,6 +59,7 @@ public class TL1Manager {
                       Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository,
                       Tl1OduNodeConnectorRepository tl1OduNodeConnectorRepository,
                       Tl1MplsIfRepository tl1MplsIfRepository,
+                      Tl1OduMplsIfRepository tl1OduMplsIfRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -198,13 +200,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncOduMplsIf(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ODU-MPLS-IF:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initOduMplsIfTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertOduMplsIf(new ODU_MPLS_IF(fields));
+    public void Tl1SyncOduMplsIf() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-ODU-MPLS-IF:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1OduMplsIfRepository.save(new Tl1OduMplsIf(fields));
+            }
         }
     }
 
@@ -379,11 +381,11 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncPM(int CTAG, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception {
+    public void TL1SyncPM(int CTAG, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OduMplsIf> tl1OduMplsIfs) throws Exception {
         for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
             String TID = tl1OduNodeConnector.getTID();
             String AID = tl1OduNodeConnector.getAID();
-            String SIGNAL = getMITypeByTID(odu_mpls_ifs, TID);
+            String SIGNAL = getMITypeByTID(tl1OduMplsIfs, TID);
             String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
 
             ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
@@ -571,11 +573,11 @@ public class TL1Manager {
         return result;
     }
 
-    public String getMITypeByTID(List<ODU_MPLS_IF> odu_mpls_ifs, String TID) {
+    public String getMITypeByTID(List<Tl1OduMplsIf> tl1OduMplsIfs, String TID) {
         String result = "";
-        for(ODU_MPLS_IF odu_mpls_if : odu_mpls_ifs) {
-            if (!odu_mpls_if.getTID().equals(TID)) continue;
-            result = odu_mpls_if.getMPLSIF_TYPE();
+        for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfs) {
+            if (!tl1OduMplsIf.getTID().equals(TID)) continue;
+            result = tl1OduMplsIf.getMPLSIF_TYPE();
             return result;
         }
         return result;

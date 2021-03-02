@@ -992,7 +992,7 @@
             TL1.MPLS_IF
     </select>
 
-    <select id="selectOduMplsIf" resultType="com.woorinet.plugin.demo.DTO.TL1.ODU_MPLS_IF">
+    <select id="selectOduMplsIf" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1OduMplsIf">
         SELECT
             *
         FROM
@@ -1512,7 +1512,7 @@
             )
     </select>
 
-    <select id="insertOduMplsIf" parameterType="com.woorinet.plugin.demo.DTO.TL1.ODU_MPLS_IF">
+    <select id="insertOduMplsIf" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1OduMplsIf">
         REPLACE INTO
             TL1.ODU_MPLS_IF(
                 `TID_ID`,
