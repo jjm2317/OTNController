@@ -110,7 +110,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1BypassInfoRepository tl1BypassInfoRepository;
 	@Autowired
-	private CRYPTO_MODERepository crypto_modeRepository;
+	private Tl1CryptoModeRepository tl1CryptoModeRepository;
 	@Autowired
 	private CM_PROGRAM_INFORepository cm_program_infoRepository;
 
@@ -235,7 +235,7 @@ public class DemoApplication {
 					tl1ModuleInfoRepository,
 					tl1CmPortRepository,
 					tl1BypassInfoRepository,
-					crypto_modeRepository,
+					tl1CryptoModeRepository,
 					cm_program_infoRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
@@ -357,7 +357,7 @@ public class DemoApplication {
 			manager.TL1SyncBypassInfo();
 
 			//CRYPTO_MODE DB연동
-			manager.TL1SyncCryptoMode(nodes, node_connectors);
+			manager.TL1SyncCryptoMode();
 
 			//CM_PROGRAM_INFO DB연동
 			manager.TL1SyncCmProgramInfo(nodes, node_connectors);

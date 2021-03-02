@@ -60,7 +60,7 @@ public class TL1Manager {
     Tl1ModuleInfoRepository tl1ModuleInfoRepository;
     Tl1CmPortRepository tl1CmPortRepository;
     Tl1BypassInfoRepository tl1BypassInfoRepository;
-    CRYPTO_MODERepository crypto_modeRepository;
+    Tl1CryptoModeRepository tl1CryptoModeRepository;
     CM_PROGRAM_INFORepository cm_program_infoRepository;
 
     SocketChannel socketChannel;
@@ -109,7 +109,7 @@ public class TL1Manager {
                       Tl1ModuleInfoRepository tl1ModuleInfoRepository,
                       Tl1CmPortRepository tl1CmPortRepository,
                       Tl1BypassInfoRepository tl1BypassInfoRepository,
-                      CRYPTO_MODERepository crypto_modeRepository,
+                      Tl1CryptoModeRepository tl1CryptoModeRepository,
                       CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
         this.CTAG = CTAG;
         this.nodeList = new ArrayList<>();
@@ -156,7 +156,7 @@ public class TL1Manager {
         this.tl1ModuleInfoRepository = tl1ModuleInfoRepository;
         this.tl1CmPortRepository = tl1CmPortRepository;
         this.tl1BypassInfoRepository = tl1BypassInfoRepository;
-        this.crypto_modeRepository = crypto_modeRepository;
+        this.tl1CryptoModeRepository = tl1CryptoModeRepository;
         this.cm_program_infoRepository = cm_program_infoRepository;
 
         socketChannel = SocketChannel.open();
@@ -603,8 +603,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncCryptoMode(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncCryptoMode() throws Exception {
+        for (NODE node : nodeList) {
             if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
@@ -613,7 +613,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                crypto_modeRepository.save(new CRYPTO_MODE(fields));
+                tl1CryptoModeRepository.save(new Tl1CryptoMode(fields));
             }
         }
     }

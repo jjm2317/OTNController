@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Setter
 @Data
 @Entity
-@Table(name = "TL1_CRYPTO_MODE")
-public class CRYPTO_MODE {
+@Table(name = "tl1_crypto_mode")
+public class Tl1CryptoMode {
     @Id
     @GeneratedValue
     int CRYPTO_MODE_ID;
@@ -25,10 +25,10 @@ public class CRYPTO_MODE {
     String UNIT_TYPE;
     String MODE;
 
-    public CRYPTO_MODE() {
+    public Tl1CryptoMode() {
     }
 
-    public CRYPTO_MODE(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String MODE) {
+    public Tl1CryptoMode(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String MODE) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
@@ -36,7 +36,7 @@ public class CRYPTO_MODE {
         this.MODE = MODE;
     }
 
-    public CRYPTO_MODE(String[] fields) {
+    public Tl1CryptoMode(String[] fields) {
         this.TID = fields[0];
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];
