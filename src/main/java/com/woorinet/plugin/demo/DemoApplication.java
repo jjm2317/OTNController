@@ -48,6 +48,8 @@ public class DemoApplication {
 	@Autowired
 	private Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository;
 	@Autowired
+	private Tl1OduNodeConnectorRepository tl1OduNodeConnectorRepository;
+	@Autowired
 	private Tl1AccessIfRepository tl1AccessIfRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
@@ -113,7 +115,7 @@ public class DemoApplication {
 			// SYSTEM_INFO 조회
 			List<Tl1SystemInfo> tl1SystemInfos = tl1Mapper.selectSystemInfo();
 			// ODU_NODE_CONNECTOR 조회
-			List<ODU_NODE_CONNECTOR> odu_node_connectors = tl1Mapper.selectOduNodeConnector();
+			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1Mapper.selectOduNodeConnector();
 			// ODU 조회
 			List<ODU> odus = tl1Mapper.selectOdu();
 			// ODU_MPLS_IF 조회
@@ -130,7 +132,7 @@ public class DemoApplication {
 			List<MPLS_IF> mpls_ifs = tl1Mapper.selectMplsIf();
 			// INVENTORY 조회
 			List<INVENTORY> inventories = inventoryRepository.findAll();
-			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos,odu_node_connectors,optic_powers, odus, odu_mpls_ifs,services, Tl1AccessIfs, service_exts,mpls_ifs, inventories);
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, odus, odu_mpls_ifs,services, Tl1AccessIfs, service_exts,mpls_ifs, inventories);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -168,6 +170,7 @@ public class DemoApplication {
 					tl1EthPortRepository,
 					tl1NodeConnectorRepository,
 					tl1CesNodeConnectorRepository,
+					tl1OduNodeConnectorRepository,
 					tl1AccessIfRepository,
 					pmRepository,
 					pm_portRepository,
@@ -207,9 +210,7 @@ public class DemoApplication {
 			manager.Tl1SyncCesNodeConnector();
 
 			//OduNodeConnector DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncOduNodeConnector(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncOduNodeConnector();
 
 			//MPLS_IF DB연동
 			for (NODE node: nodes) {
@@ -314,14 +315,14 @@ public class DemoApplication {
 
 			List<Tl1NodeConnector> node_connectors = tl1Mapper.selectNodeConnector();
 			List<ODU_MPLS_IF> odu_mpls_ifs = tl1Mapper.selectOduMplsIf();
-			List<ODU_NODE_CONNECTOR> odu_node_connectors = tl1Mapper.selectOduNodeConnector();
+			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1Mapper.selectOduNodeConnector();
 			List<MPLS_AC> mplsAcs = tl1Mapper.selectMplsAc();
 
 			//PM DB연동
-			manager.TL1SyncPM(CTAG, odu_node_connectors, odu_mpls_ifs);
+			manager.TL1SyncPM(CTAG, tl1OduNodeConnectors, odu_mpls_ifs);
 
 			//PM-PORT DB연동
-			manager.Tl1SyncPmPort(CTAG, odu_node_connectors);
+			manager.Tl1SyncPmPort(CTAG, tl1OduNodeConnectors);
 
 			//PM-AC DB연동
 			manager.TL1SyncPmAc(CTAG, mplsAcs);

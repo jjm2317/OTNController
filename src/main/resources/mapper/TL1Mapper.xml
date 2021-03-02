@@ -978,7 +978,7 @@
             TL1.CES_NODE_CONNECTOR
     </select>
 
-    <select id="selectOduNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.ODU_NODE_CONNECTOR">
+    <select id="selectOduNodeConnector" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1OduNodeConnector">
         SELECT
             *
         FROM
@@ -1372,7 +1372,7 @@
             )
     </select>
 
-    <select id="insertOduNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.ODU_NODE_CONNECTOR">
+    <select id="insertOduNodeConnector" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1OduNodeConnector">
         REPLACE INTO
             TL1.ODU_NODE_CONNECTOR(
                 `TID_ID`,

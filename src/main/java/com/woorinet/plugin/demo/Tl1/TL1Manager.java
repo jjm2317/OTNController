@@ -24,6 +24,7 @@ public class TL1Manager {
     Tl1EthPortRepository tl1EthPortRepository;
     Tl1NodeConnectorRepository tl1NodeConnectorRepository;
     Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository;
+    Tl1OduNodeConnectorRepository tl1OduNodeConnectorRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -54,6 +55,7 @@ public class TL1Manager {
                       Tl1EthPortRepository tl1EthPortRepository,
                       Tl1NodeConnectorRepository tl1NodeConnectorRepository,
                       Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository,
+                      Tl1OduNodeConnectorRepository tl1OduNodeConnectorRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -76,6 +78,7 @@ public class TL1Manager {
         this.tl1EthPortRepository = tl1EthPortRepository;
         this.tl1NodeConnectorRepository = tl1NodeConnectorRepository;
         this.tl1CesNodeConnectorRepository = tl1CesNodeConnectorRepository;
+        this.tl1OduNodeConnectorRepository = tl1OduNodeConnectorRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -172,13 +175,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncOduNodeConnector(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ODU-NODE-CONNECTOR:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initOduNodeConnectorTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertOduNodeConnector(new ODU_NODE_CONNECTOR(fields));
+    public void Tl1SyncOduNodeConnector() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-ODU-NODE-CONNECTOR:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1OduNodeConnectorRepository.save(new Tl1OduNodeConnector(fields));
+            }
         }
     }
 
@@ -373,10 +376,10 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncPM(int CTAG, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception {
-        for (ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
-            String TID = odu_node_connector.getTID();
-            String AID = odu_node_connector.getAID();
+    public void TL1SyncPM(int CTAG, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<ODU_MPLS_IF> odu_mpls_ifs) throws Exception {
+        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
+            String TID = tl1OduNodeConnector.getTID();
+            String AID = tl1OduNodeConnector.getAID();
             String SIGNAL = getMITypeByTID(odu_mpls_ifs, TID);
             String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
 
@@ -388,10 +391,10 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncPmPort(int CTAG, List<ODU_NODE_CONNECTOR> odu_node_connectors) throws Exception {
+    public void Tl1SyncPmPort(int CTAG, List<Tl1OduNodeConnector> tl1OduNodeConnectors) throws Exception {
 
-        for (ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
-            String cmd = "RTRV-PM-PORT:" + odu_node_connector.getTID() +":" + odu_node_connector.getAID() +":"+ CTAG +":pm-time=15MIN;";
+        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
+            String cmd = "RTRV-PM-PORT:" + tl1OduNodeConnector.getTID() +":" + tl1OduNodeConnector.getAID() +":"+ CTAG +":pm-time=15MIN;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);

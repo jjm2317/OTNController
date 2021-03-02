@@ -26,7 +26,7 @@ public class SDNManager {
     String separator;
     List<NODE> nodes;
     List<Tl1SystemInfo> tl1SystemInfos;
-    List<ODU_NODE_CONNECTOR> odu_node_connectors;
+    List<Tl1OduNodeConnector> tl1OduNodeConnectors;
     List<OPTIC_POWER> optic_powers;
     List<ODU> odus;
     List<ODU_MPLS_IF> odu_mpls_ifs;
@@ -40,7 +40,7 @@ public class SDNManager {
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
     HashMap<String, OPTIC_POWER> optic_powerHashMap = new HashMap<>();
-    HashMap<String, ODU_NODE_CONNECTOR> odu_node_connectorHashMap = new HashMap<>();
+    HashMap<String, Tl1OduNodeConnector> odu_node_connectorHashMap = new HashMap<>();
     HashMap<String, ODU> oduHashMapForODUTUNNEL = new HashMap<>();
     HashMap<String, ODU> oduHashMapForMPLSTP = new HashMap<>();
     HashMap<String, Tl1AccessIf> access_ifHashMap = new HashMap<>();
@@ -54,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<ODU_NODE_CONNECTOR> odu_node_connectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -66,7 +66,7 @@ public class SDNManager {
         this.separator = ".";
         this.nodes = nodes;
         this.tl1SystemInfos = tl1SystemInfos;
-        this.odu_node_connectors = odu_node_connectors;
+        this.tl1OduNodeConnectors = tl1OduNodeConnectors;
         this.optic_powers = optic_powers;
         this.odus = odus;
         this.odu_mpls_ifs = odu_mpls_ifs;
@@ -130,8 +130,8 @@ public class SDNManager {
 
 
         }
-        for(ODU_NODE_CONNECTOR odu_node_connector : odu_node_connectors) {
-            odu_node_connectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), odu_node_connector);
+        for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
+            odu_node_connectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), tl1OduNodeConnector);
         }
         for(Tl1AccessIf Tl1AccessIf : Tl1AccessIfs) {
             access_ifHashMap.put(Tl1AccessIf.getTID(), Tl1AccessIf);
@@ -172,27 +172,27 @@ public class SDNManager {
 
     public void SDNSyncConnectorList( ) throws Exception {
 
-        for(ODU_NODE_CONNECTOR odu_node_connector :  odu_node_connectors) {
+        for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
             CONNECTOR connector = new CONNECTOR();
 
-            NODE node = nodeHashMap.get(odu_node_connector.getTID());
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(odu_node_connector.getTID());
-            OPTIC_POWER optic_power = optic_powerHashMap.get(odu_node_connector.getTID()+"/"+odu_node_connector.getAID());
+            NODE node = nodeHashMap.get(tl1OduNodeConnector.getTID());
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTID());
+            OPTIC_POWER optic_power = optic_powerHashMap.get(tl1OduNodeConnector.getTID()+"/"+ tl1OduNodeConnector.getAID());
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(node.getTID());
 
             connector.setEms_id(200009);
-            connector.setConnect_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_name() + separator + odu_node_connector.getSHELF_INDEX() + separator + odu_node_connector.getSLOT_INDEX() + separator + odu_node_connector.getPORT_INDEX());
+            connector.setConnect_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_name() + separator + tl1OduNodeConnector.getSHELF_INDEX() + separator + tl1OduNodeConnector.getSLOT_INDEX() + separator + tl1OduNodeConnector.getPORT_INDEX());
             connector.setConnect_name("");
             connector.setNe_id(sdnNode.getNe_id());
             connector.setNe_name(sdnNode.getNe_name());
             connector.setRack_id("");
-            connector.setShelf_id(odu_node_connector.getSHELF_INDEX());
-            connector.setSlot_id(odu_node_connector.getSLOT_INDEX());
+            connector.setShelf_id(tl1OduNodeConnector.getSHELF_INDEX());
+            connector.setSlot_id(tl1OduNodeConnector.getSLOT_INDEX());
             connector.setSubslot_id("");
-            connector.setPort_id(odu_node_connector.getPORT_INDEX());
-            if (odu_node_connector.getPORT_STATUS().equals("ACT")) connector.setConnect_status("up");
-            else if (odu_node_connector.getPORT_STATUS().equals("DEACT")) connector.setConnect_status("down");
-            connector.setConnect_role(odu_node_connector.getPORT_ROLE());
+            connector.setPort_id(tl1OduNodeConnector.getPORT_INDEX());
+            if (tl1OduNodeConnector.getPORT_STATUS().equals("ACT")) connector.setConnect_status("up");
+            else if (tl1OduNodeConnector.getPORT_STATUS().equals("DEACT")) connector.setConnect_status("down");
+            connector.setConnect_role(tl1OduNodeConnector.getPORT_ROLE());
             if(optic_power == null) {
                 connector.setConnect_type("");
                 connector.setConnect_idle("idle");
@@ -216,7 +216,7 @@ public class SDNManager {
             }
 
             connectorRepository.save(connector);
-            sdnConnectorHashMap.put(odu_node_connector.getTID() + '/' + odu_node_connector.getAID(), connector);
+            sdnConnectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), connector);
         }
 
     }

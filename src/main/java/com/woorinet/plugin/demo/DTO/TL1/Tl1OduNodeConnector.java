@@ -1,11 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class ODU_NODE_CONNECTOR {
+@Data
+@Entity
+@Table(name = "tl1_odu_node_connector")
+public class Tl1OduNodeConnector {
+    @Id
+    @GeneratedValue
+    int ODU_NODE_CONNECTOR_ID;
     String TID_ID;
     String TID;
     String AID;
@@ -31,7 +43,11 @@ public class ODU_NODE_CONNECTOR {
     String MAX_BW;
     String RES_BW;
 
-    public ODU_NODE_CONNECTOR(String TID_ID, String TID, String AID, String SUBNET_ID, String SUBNET, String LOCAL_ID, String REQUEST_ID, String NAME, String NUMBER, String PORT_TYPE, String PORT_ROLE, String PORT_STATUS, String SHELF_TYPE, String SHELF_INDEX, String SLOT_TYPE, String SLOT_INDEX, String SUB_SLOT_TYPE, String SUB_SLOT_INDEX, String PORT_TYPE2, String PORT_INDEX, String MAC_ADDR, String SLOT_SERVICE, String MAX_BW, String RES_BW) {
+    public Tl1OduNodeConnector() {
+
+    }
+
+    public Tl1OduNodeConnector(String TID_ID, String TID, String AID, String SUBNET_ID, String SUBNET, String LOCAL_ID, String REQUEST_ID, String NAME, String NUMBER, String PORT_TYPE, String PORT_ROLE, String PORT_STATUS, String SHELF_TYPE, String SHELF_INDEX, String SLOT_TYPE, String SLOT_INDEX, String SUB_SLOT_TYPE, String SUB_SLOT_INDEX, String PORT_TYPE2, String PORT_INDEX, String MAC_ADDR, String SLOT_SERVICE, String MAX_BW, String RES_BW) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.AID = AID;
@@ -58,7 +74,7 @@ public class ODU_NODE_CONNECTOR {
         this.RES_BW = RES_BW;
     }
 
-    public ODU_NODE_CONNECTOR(String[] fields) {
+    public Tl1OduNodeConnector(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.AID = fields[2];
