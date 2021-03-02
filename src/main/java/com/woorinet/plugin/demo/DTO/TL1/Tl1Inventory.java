@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Entity
 @Data
-@Table(name = "TL1_INVENTORY")
-public class INVENTORY {
+@Table(name = "tl1_inventory")
+public class Tl1Inventory {
 
     @Id
     @Generated
@@ -25,10 +25,10 @@ public class INVENTORY {
     String DAT;
     String SERIAL_NU;
 
-    public INVENTORY() {
+    public Tl1Inventory() {
     }
 
-    public INVENTORY(String TID, String UNIT_TYPE, String VENDOR, String DAT, String SERIAL_NU) {
+    public Tl1Inventory(String TID, String UNIT_TYPE, String VENDOR, String DAT, String SERIAL_NU) {
         this.TID = TID;
         this.UNIT_TYPE = UNIT_TYPE;
         this.VENDOR = VENDOR;
@@ -36,7 +36,7 @@ public class INVENTORY {
         this.SERIAL_NU = SERIAL_NU;
     }
 
-    public INVENTORY(String[] fields) {
+    public Tl1Inventory(String[] fields) {
         this.TID = fields[0];
         this.UNIT_TYPE = fields[1];
         this.VENDOR = fields[2];

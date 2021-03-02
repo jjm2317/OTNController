@@ -98,7 +98,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1PmTunnelRepository tl1PmTunnelRepository;
 	@Autowired
-	private INVENTORYRepository inventoryRepository;
+	private Tl1InventoryRepository tl1InventoryRepository;
 	@Autowired
 	private SESS_STATERepository sess_stateRepository;
 	@Autowired
@@ -165,7 +165,7 @@ public class DemoApplication {
 			// MPLS_IF 조회
 			List<Tl1MplsIf> tl1MplsIfs = tl1Mapper.selectMplsIf();
 			// INVENTORY 조회
-			List<INVENTORY> inventories = inventoryRepository.findAll();
+			List<Tl1Inventory> inventories = tl1InventoryRepository.findAll();
 			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
 
 			// Node 테이블 생성
@@ -229,7 +229,7 @@ public class DemoApplication {
 					tl1PmAcRepository,
 					pmPwRepository,
 					tl1PmTunnelRepository,
-					inventoryRepository,
+					tl1InventoryRepository,
 					sess_stateRepository,
 					key_stateRepository,
 					module_infoRepository,
@@ -339,7 +339,7 @@ public class DemoApplication {
 			manager.TL1SyncPmTunnel();
 
 			//INVENTORY DB연동
-			manager.TL1SyncInventory(nodes);
+			manager.TL1SyncInventory();
 
 			//SESS_STATE DB연동
 			manager.TL1SyncSessState(nodes, node_connectors);

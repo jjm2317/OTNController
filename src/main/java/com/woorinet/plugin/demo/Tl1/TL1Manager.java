@@ -54,7 +54,7 @@ public class TL1Manager {
     Tl1PmAcRepository tl1PmAcRepository;
     Tl1PmPwRepository pmPwRepository;
     Tl1PmTunnelRepository tl1PmTunnelRepository;
-    INVENTORYRepository inventoryRepository;
+    Tl1InventoryRepository tl1InventoryRepository;
     SESS_STATERepository sess_stateRepository;
     KEY_STATERepository key_stateRepository;
     MODULE_INFORepository module_infoRepository;
@@ -103,7 +103,7 @@ public class TL1Manager {
                       Tl1PmAcRepository tl1PmAcRepository,
                       Tl1PmPwRepository pmPwRepository,
                       Tl1PmTunnelRepository tl1PmTunnelRepository,
-                      INVENTORYRepository inventoryRepository,
+                      Tl1InventoryRepository tl1InventoryRepository,
                       SESS_STATERepository sess_stateRepository,
                       KEY_STATERepository key_stateRepository,
                       MODULE_INFORepository module_infoRepository,
@@ -150,7 +150,7 @@ public class TL1Manager {
         this.tl1PmAcRepository = tl1PmAcRepository;
         this.pmPwRepository = pmPwRepository;
         this.tl1PmTunnelRepository = tl1PmTunnelRepository;
-        this.inventoryRepository = inventoryRepository;
+        this.tl1InventoryRepository = tl1InventoryRepository;
         this.sess_stateRepository = sess_stateRepository;
         this.key_stateRepository = key_stateRepository;
         this.module_infoRepository = module_infoRepository;
@@ -516,14 +516,14 @@ public class TL1Manager {
 
     }
 
-    public void TL1SyncInventory(List<NODE> nodes) throws  Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncInventory() throws  Exception {
+        for (NODE node : nodeList) {
             String cmd = "RTRV-INVENTORY:" + node.getTID() +";";
             System.out.println(cmd);
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                inventoryRepository.save(new INVENTORY(fields));
+                tl1InventoryRepository.save(new Tl1Inventory(fields));
             }
         }
     }

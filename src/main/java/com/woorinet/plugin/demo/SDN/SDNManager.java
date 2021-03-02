@@ -35,7 +35,7 @@ public class SDNManager {
     List<Tl1ServiceExt> tl1ServiceExts;
     List<Tl1MplsIf> tl1MplsIfs;
     List<List<Tl1Odu>> odu_list_for_service = new ArrayList<>();
-    List<INVENTORY> inventories;
+    List<Tl1Inventory> inventories;
 
     HashMap<String, NODE> nodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
@@ -54,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<INVENTORY> inventories ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
