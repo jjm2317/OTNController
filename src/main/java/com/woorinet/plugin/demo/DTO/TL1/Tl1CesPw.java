@@ -1,14 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@AllArgsConstructor
+
 @Getter
 @Setter
-public class CES_PW {
+@Data
+@Entity
+@Table(name = "tl1_ces_pw")
+public class Tl1CesPw {
+    @Id
+    @GeneratedValue
+    int CES_PW_ID;
     String TID;
     String SERVICE_NAME;
     String DESCRIPTION;
@@ -33,7 +43,11 @@ public class CES_PW {
     String TS_POS;
     String TS_LEN;
 
-    public CES_PW(String[] fields) {
+    public Tl1CesPw() {
+
+    }
+
+    public Tl1CesPw(String[] fields) {
         this.TID = fields[0];
         this.SERVICE_NAME = fields[1];
         this.DESCRIPTION = fields[2];

@@ -1090,7 +1090,7 @@
             TL1.CES_PORT
     </select>
 
-    <select id="selectCesPw" resultType="com.woorinet.plugin.demo.DTO.TL1.CES_PW">
+    <select id="selectCesPw" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1CesPw">
         SELECT
             *
         FROM
@@ -2708,7 +2708,7 @@
             )
     </select>
 
-    <select id="insertCesPw" parameterType="com.woorinet.plugin.demo.DTO.TL1.CES_PW">
+    <select id="insertCesPw" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1CesPw">
         REPLACE INTO
             TL1.CES_PW(
                 `TID`,
