@@ -957,7 +957,7 @@
             TL1.SLOT
     </select>
 
-    <select id="selectEthPort" resultType="com.woorinet.plugin.demo.DTO.TL1.ETH_PORT">
+    <select id="selectEthPort" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1EthPort">
         SELECT
             *
         FROM
@@ -1203,7 +1203,7 @@
             )
     </select>
 
-    <select id="insertEthPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.ETH_PORT">
+    <select id="insertEthPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1EthPort">
         REPLACE INTO
             TL1.ETH_PORT(
                 `TID`,

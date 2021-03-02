@@ -43,6 +43,8 @@ public class DemoApplication {
 	private Tl1SystemInfoRepository tl1SystemInfoRepository;
 	@Autowired
 	private Tl1SlotRepository tl1SlotRepository;
+	@Autowired
+	private Tl1EthPortRepository tl1EthPortRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -153,7 +155,7 @@ public class DemoApplication {
 	String synchronization() {
 		int CTAG = 100;
 		try {
-			TL1Manager manager = new TL1Manager(CTAG,"222.117.54.175", 19011,tl1SystemInfoRepository,tl1SlotRepository, tl1AccessIfRepository,pmRepository,  pm_portRepository,pm_acRepositiory, pmPwRepository, pm_tunnelRepository,inventoryRepository,sess_stateRepository,key_stateRepository, module_infoRepository, cm_portRepository, bypass_infoRepository, crypto_modeRepository, cm_program_infoRepository);
+			TL1Manager manager = new TL1Manager(CTAG,"222.117.54.175", 19011,tl1SystemInfoRepository,tl1SlotRepository,tl1EthPortRepository, tl1AccessIfRepository,pmRepository,  pm_portRepository,pm_acRepositiory, pmPwRepository, pm_tunnelRepository,inventoryRepository,sess_stateRepository,key_stateRepository, module_infoRepository, cm_portRepository, bypass_infoRepository, crypto_modeRepository, cm_program_infoRepository);
 			//TL1 로그인
 			manager.Tl1Login("admin", "admin");
 
@@ -170,9 +172,7 @@ public class DemoApplication {
 			manager.Tl1SyncSlot();
 
 			//EthPort DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncEthPort(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncEthPort();
 
 			//NodeConnector DB연동
 			for (NODE node: nodes) {
@@ -470,10 +470,10 @@ public class DemoApplication {
 
 	@RequestMapping("/eth_port")
 	String selectEthPort() {
-		List<ETH_PORT> list = null;
+		List<Tl1EthPort> list = null;
 		try {
 			list = tl1Mapper.selectEthPort();
-			for (ETH_PORT item: list) {
+			for (Tl1EthPort item: list) {
 				System.out.println(item.toString());
 			}
 		} catch (Exception e) {

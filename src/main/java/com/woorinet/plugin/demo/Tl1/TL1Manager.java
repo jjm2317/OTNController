@@ -19,9 +19,10 @@ public class TL1Manager {
 
     List<NODE> nodeList;
 //    ODU_MPLS_IFRepository odu_mpls_ifRepository;
-    Tl1AccessIfRepository tl1AccessIfRepository;
     Tl1SystemInfoRepository tl1SystemInfoRepository;
     Tl1SlotRepository tl1SlotRepository;
+    Tl1EthPortRepository tl1EthPortRepository;
+    Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -43,13 +44,14 @@ public class TL1Manager {
     HashMap<String, Tl1AccessIf> accessIfHashMap = new HashMap<>();
     HashMap<String, ODU_MPLS_IF> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(int CTAG,String ip, int port,Tl1SystemInfoRepository tl1SystemInfoRepository,Tl1SlotRepository tl1SlotRepository ,Tl1AccessIfRepository tl1AccessIfRepository, PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
+    public TL1Manager(int CTAG,String ip, int port,Tl1SystemInfoRepository tl1SystemInfoRepository,Tl1SlotRepository tl1SlotRepository,Tl1EthPortRepository tl1EthPortRepository,Tl1AccessIfRepository tl1AccessIfRepository, PMRepository pmRepository, PM_PORTRepository pm_portRepository, PM_ACRepositiory pm_acRepositiory, PM_PWRepository pmPwRepository, PM_TUNNELRepository pm_tunnelRepository, INVENTORYRepository inventoryRepository, SESS_STATERepository sess_stateRepository, KEY_STATERepository key_stateRepository, MODULE_INFORepository module_infoRepository, CM_PORTRepository cm_portRepository, BYPASS_INFORepository bypass_infoRepository, CRYPTO_MODERepository crypto_modeRepository, CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
         this.CTAG = CTAG;
         this.nodeList = new ArrayList<>();
 //        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.tl1SystemInfoRepository = tl1SystemInfoRepository;
         this.tl1SlotRepository = tl1SlotRepository;
+        this.tl1EthPortRepository = tl1EthPortRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
@@ -115,13 +117,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncEthPort(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-ETH-PORT:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initEthPortTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertEthPort(new ETH_PORT(fields));
+    public void Tl1SyncEthPort() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-ETH-PORT:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1EthPortRepository.save(new Tl1EthPort(fields));
+            }
         }
     }
 
