@@ -61,7 +61,7 @@ public class TL1Manager {
     Tl1CmPortRepository tl1CmPortRepository;
     Tl1BypassInfoRepository tl1BypassInfoRepository;
     Tl1CryptoModeRepository tl1CryptoModeRepository;
-    CM_PROGRAM_INFORepository cm_program_infoRepository;
+    Tl1CmProgramInfoRepository tl1CmProgramInfoRepository;
 
     SocketChannel socketChannel;
     List<Tl1AccessIf> Tl1AccessIfs;
@@ -110,7 +110,7 @@ public class TL1Manager {
                       Tl1CmPortRepository tl1CmPortRepository,
                       Tl1BypassInfoRepository tl1BypassInfoRepository,
                       Tl1CryptoModeRepository tl1CryptoModeRepository,
-                      CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
+                      Tl1CmProgramInfoRepository tl1CmProgramInfoRepository) throws IOException {
         this.CTAG = CTAG;
         this.nodeList = new ArrayList<>();
         this.serviceList = new ArrayList<>();
@@ -157,7 +157,7 @@ public class TL1Manager {
         this.tl1CmPortRepository = tl1CmPortRepository;
         this.tl1BypassInfoRepository = tl1BypassInfoRepository;
         this.tl1CryptoModeRepository = tl1CryptoModeRepository;
-        this.cm_program_infoRepository = cm_program_infoRepository;
+        this.tl1CmProgramInfoRepository = tl1CmProgramInfoRepository;
 
         socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(true);
@@ -618,8 +618,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncCmProgramInfo(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncCmProgramInfo() throws Exception {
+        for (NODE node : nodeList) {
             if(!node.getNODE_TYPE().equals("otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
@@ -628,7 +628,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                cm_program_infoRepository.save(new CM_PROGRAM_INFO(fields));
+                tl1CmProgramInfoRepository.save(new Tl1CmProgramInfo(fields));
             }
         }
     }

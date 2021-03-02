@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Entity
 @Data
-@Table(name = "TL1_CM_PROGRAM_INFO")
-public class CM_PROGRAM_INFO {
+@Table(name = "tl1_cm_program_info")
+public class Tl1CmProgramInfo {
     @Id
     @GeneratedValue
     int CM_PROGRAM_INFO_ID;
@@ -35,10 +35,10 @@ public class CM_PROGRAM_INFO {
     String CPLD_SIZE;
     String HW_VERSION;
 
-    public CM_PROGRAM_INFO() {
+    public Tl1CmProgramInfo() {
     }
 
-    public CM_PROGRAM_INFO(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String PKG_VERSION, String PKG_FILENAME, String PKG_VERSION_DATE, String PKG_SIZE, String FPGA_VERSION, String FPGA_VERSION_DATE, String FPGA_SIZE, String CPLD_VERSION, String CPLD_VERSION_DATE, String CPLD_SIZE, String HW_VERSION) {
+    public Tl1CmProgramInfo(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String PKG_VERSION, String PKG_FILENAME, String PKG_VERSION_DATE, String PKG_SIZE, String FPGA_VERSION, String FPGA_VERSION_DATE, String FPGA_SIZE, String CPLD_VERSION, String CPLD_VERSION_DATE, String CPLD_SIZE, String HW_VERSION) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
@@ -56,7 +56,7 @@ public class CM_PROGRAM_INFO {
         this.HW_VERSION = HW_VERSION;
     }
 
-    public CM_PROGRAM_INFO(String[] fields) {
+    public Tl1CmProgramInfo(String[] fields) {
         this.TID = fields[0];
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];
