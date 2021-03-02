@@ -45,7 +45,7 @@ public interface TL1Mapper {
     List<Tl1NodeConnector> selectNodeConnector() throws Exception;
     List<Tl1CesNodeConnector> selectCesNodeConnector() throws Exception;
     List<Tl1OduNodeConnector> selectOduNodeConnector() throws Exception;
-    List<MPLS_IF> selectMplsIf() throws Exception;
+    List<Tl1MplsIf> selectMplsIf() throws Exception;
     List<ODU_MPLS_IF> selectOduMplsIf() throws Exception;
     List<STUNNEL> selectSTunnel() throws Exception;
     List<STUNNEL_EXT> selectSTunnelExt() throws Exception;
@@ -72,7 +72,7 @@ public interface TL1Mapper {
     void insertNodeConnector(Tl1NodeConnector nodeConnector) throws Exception;
     void insertCesNodeConnector(Tl1CesNodeConnector cesNodeConnector) throws Exception;
     void insertOduNodeConnector(Tl1OduNodeConnector oduNodeConnector) throws Exception;
-    void insertMplsIf(MPLS_IF mplsIf) throws Exception;
+    void insertMplsIf(Tl1MplsIf mplsIf) throws Exception;
     void insertOduMplsIf(ODU_MPLS_IF oduMplsIf) throws Exception;
     void insertSTunnel(STUNNEL stunnel) throws Exception;
     void insertSTunnelExt(STUNNEL_EXT stunnelExt) throws Exception;

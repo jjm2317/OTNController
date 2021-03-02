@@ -25,6 +25,7 @@ public class TL1Manager {
     Tl1NodeConnectorRepository tl1NodeConnectorRepository;
     Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository;
     Tl1OduNodeConnectorRepository tl1OduNodeConnectorRepository;
+    Tl1MplsIfRepository tl1MplsIfRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -56,6 +57,7 @@ public class TL1Manager {
                       Tl1NodeConnectorRepository tl1NodeConnectorRepository,
                       Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository,
                       Tl1OduNodeConnectorRepository tl1OduNodeConnectorRepository,
+                      Tl1MplsIfRepository tl1MplsIfRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -79,6 +81,7 @@ public class TL1Manager {
         this.tl1NodeConnectorRepository = tl1NodeConnectorRepository;
         this.tl1CesNodeConnectorRepository = tl1CesNodeConnectorRepository;
         this.tl1OduNodeConnectorRepository = tl1OduNodeConnectorRepository;
+        this.tl1MplsIfRepository = tl1MplsIfRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -185,13 +188,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncMplsIf(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-MPLS-IF:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initMplsIfTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertMplsIf(new MPLS_IF(fields));
+    public void Tl1SyncMplsIf() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-MPLS-IF:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1MplsIfRepository.save(new Tl1MplsIf(fields));
+            }
         }
     }
 

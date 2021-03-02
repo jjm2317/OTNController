@@ -33,7 +33,7 @@ public class SDNManager {
     List<SERVICE> services;
     List<Tl1AccessIf> Tl1AccessIfs;
     List<SERVICE_EXT> service_exts;
-    List<MPLS_IF> mpls_ifs;
+    List<Tl1MplsIf> tl1MplsIfs;
     List<List<ODU>> odu_list_for_service = new ArrayList<>();
     List<INVENTORY> inventories;
 
@@ -54,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<MPLS_IF> mpls_ifs, List<INVENTORY> inventories ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<ODU_MPLS_IF> odu_mpls_ifs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<Tl1MplsIf> tl1MplsIfs, List<INVENTORY> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -73,7 +73,7 @@ public class SDNManager {
         this.services = services;
         this.Tl1AccessIfs = Tl1AccessIfs;
         this.service_exts = service_exts;
-        this.mpls_ifs = mpls_ifs;
+        this.tl1MplsIfs = tl1MplsIfs;
         this.inventories = inventories;
 
         makeHashMap();
@@ -520,14 +520,14 @@ public class SDNManager {
 
     public void SDNSyncAccess_if() throws Exception {
 
-        for(MPLS_IF mpls_if : mpls_ifs) {
+        for(Tl1MplsIf tl1MplsIf : tl1MplsIfs) {
 
-            Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(mpls_if.getTID());
+            Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1MplsIf.getTID());
 
             com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF sdnAccess_if = new com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF();
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(mpls_if.getTID());
-            CONNECTOR sdnConnector = sdnConnectorHashMap.get(mpls_if.getTID()+ '/' + mpls_if.getMPLS_TP_ID().split("-")[0] + "-" + mpls_if.getMPLS_TP_ID().split("-")[1]);
-            ODU odu = oduHashMapForMPLSTP.get(mpls_if.getTID()+ '/' + mpls_if.getMPLS_TP_ID().split("-")[0] + "-" + mpls_if.getMPLS_TP_ID().split("-")[1]);
+            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
+            CONNECTOR sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
+            ODU odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
             if(odu == null) continue;
 
             sdnAccess_if.setEms_id(200009);
@@ -536,7 +536,7 @@ public class SDNManager {
             sdnAccess_if.setNe_id(sdnNode.getNe_id());
             sdnAccess_if.setConnector_id(sdnConnector.getConnect_id());
             sdnAccess_if.setAccessif_type(odu.getSERVICE());
-            sdnAccess_if.setAccessif_status(mpls_if.getOPERATION_STATUS());
+            sdnAccess_if.setAccessif_status(tl1MplsIf.getOPERATION_STATUS());
             sdnAccess_if.setService_ref("");
             sdnAccess_if.setNode_connector_ref("");
 
