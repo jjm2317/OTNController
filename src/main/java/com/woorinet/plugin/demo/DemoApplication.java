@@ -91,13 +91,12 @@ public class DemoApplication {
 	private Tl1PmRepository tl1PmRepository;
 	@Autowired
 	private Tl1PmPortRepository tl1PmPortRepository;
-
 	@Autowired
 	private Tl1PmAcRepository tl1PmAcRepository;
 	@Autowired
 	private Tl1PmPwRepository pmPwRepository;
 	@Autowired
-	private PM_TUNNELRepository pm_tunnelRepository;
+	private Tl1PmTunnelRepository tl1PmTunnelRepository;
 	@Autowired
 	private INVENTORYRepository inventoryRepository;
 	@Autowired
@@ -229,7 +228,7 @@ public class DemoApplication {
 					tl1PmPortRepository,
 					tl1PmAcRepository,
 					pmPwRepository,
-					pm_tunnelRepository,
+					tl1PmTunnelRepository,
 					inventoryRepository,
 					sess_stateRepository,
 					key_stateRepository,
@@ -337,7 +336,7 @@ public class DemoApplication {
 			manager.TL1SyncPmPw();
 
 			//PM-TUNNEL DB연동
-			manager.TL1SyncPmTunnel(CTAG, nodes);
+			manager.TL1SyncPmTunnel();
 
 			//INVENTORY DB연동
 			manager.TL1SyncInventory(nodes);

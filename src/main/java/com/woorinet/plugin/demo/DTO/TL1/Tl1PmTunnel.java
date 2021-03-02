@@ -14,12 +14,12 @@ import javax.persistence.Table;
 @Data
 @Setter
 @Getter
-@Table(name = "TL1_PM_TUNNEL")
-public class PM_TUNNEL {
-
-    String TID;
+@Table(name = "tl1_pm_tunnel")
+public class Tl1PmTunnel {
     @Id
     @Generated
+    int PM_TUNNEL_ID;
+    String TID;
     String TUNNEL_NAME;
     String TUNNEL_ID;
     String LSP_ID;
@@ -36,10 +36,10 @@ public class PM_TUNNEL {
     String EGR_RATE;
     String LM_COUNTER;
 
-    public PM_TUNNEL() {
+    public Tl1PmTunnel() {
     }
 
-    public PM_TUNNEL(String TID, String TUNNEL_NAME, String TUNNEL_ID, String LSP_ID, String ING_LSRID, String EGR_LSRID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE, String LM_COUNTER) {
+    public Tl1PmTunnel(String TID, String TUNNEL_NAME, String TUNNEL_ID, String LSP_ID, String ING_LSRID, String EGR_LSRID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE, String LM_COUNTER) {
         this.TID = TID;
         this.TUNNEL_NAME = TUNNEL_NAME;
         this.TUNNEL_ID = TUNNEL_ID;
@@ -58,7 +58,7 @@ public class PM_TUNNEL {
         this.LM_COUNTER = LM_COUNTER;
     }
 
-    public PM_TUNNEL(String[] fields) {
+    public Tl1PmTunnel(String[] fields) {
         this.TID = fields[0];
         this.TUNNEL_NAME = fields[1];
         this.TUNNEL_ID = fields[2];

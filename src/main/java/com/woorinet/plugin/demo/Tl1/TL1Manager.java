@@ -53,7 +53,7 @@ public class TL1Manager {
     Tl1PmPortRepository tl1PmPortRepository;
     Tl1PmAcRepository tl1PmAcRepository;
     Tl1PmPwRepository pmPwRepository;
-    PM_TUNNELRepository pm_tunnelRepository;
+    Tl1PmTunnelRepository tl1PmTunnelRepository;
     INVENTORYRepository inventoryRepository;
     SESS_STATERepository sess_stateRepository;
     KEY_STATERepository key_stateRepository;
@@ -102,7 +102,7 @@ public class TL1Manager {
                       Tl1PmPortRepository tl1PmPortRepository,
                       Tl1PmAcRepository tl1PmAcRepository,
                       Tl1PmPwRepository pmPwRepository,
-                      PM_TUNNELRepository pm_tunnelRepository,
+                      Tl1PmTunnelRepository tl1PmTunnelRepository,
                       INVENTORYRepository inventoryRepository,
                       SESS_STATERepository sess_stateRepository,
                       KEY_STATERepository key_stateRepository,
@@ -149,7 +149,7 @@ public class TL1Manager {
         this.tl1PmPortRepository = tl1PmPortRepository;
         this.tl1PmAcRepository = tl1PmAcRepository;
         this.pmPwRepository = pmPwRepository;
-        this.pm_tunnelRepository = pm_tunnelRepository;
+        this.tl1PmTunnelRepository = tl1PmTunnelRepository;
         this.inventoryRepository = inventoryRepository;
         this.sess_stateRepository = sess_stateRepository;
         this.key_stateRepository = key_stateRepository;
@@ -504,13 +504,13 @@ public class TL1Manager {
 
     }
 
-    public void TL1SyncPmTunnel(int CTAG, List<NODE> nodes) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncPmTunnel() throws Exception {
+        for (NODE node : nodeList) {
             String cmd = "RTRV-PM-TUNNEL:" + node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
             ArrayList<String[]> fieldList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldList) {
                 System.out.println(fields);
-                pm_tunnelRepository.save(new PM_TUNNEL(fields));
+                tl1PmTunnelRepository.save(new Tl1PmTunnel(fields));
             }
         }
 
