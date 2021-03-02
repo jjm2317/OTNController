@@ -33,6 +33,7 @@ public class TL1Manager {
     Tl1TunnelPortRepository tl1TunnelPortRepository;
     Tl1SpwRepository tl1SpwRepository;
     Tl1MspwRepository tl1MspwRepository;
+    Tl1MplsAcRepository tl1MplsAcRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -72,6 +73,7 @@ public class TL1Manager {
                       Tl1TunnelPortRepository tl1TunnelPortRepository,
                       Tl1SpwRepository tl1SpwRepository,
                       Tl1MspwRepository tl1MspwRepository,
+                      Tl1MplsAcRepository tl1MplsAcRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -103,6 +105,7 @@ public class TL1Manager {
         this.tl1TunnelPortRepository = tl1TunnelPortRepository;
         this.tl1SpwRepository = tl1SpwRepository;
         this.tl1MspwRepository = tl1MspwRepository;
+        this.tl1MplsAcRepository = tl1MplsAcRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -290,13 +293,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncMplsAc(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-MPLS-AC:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initMplsAcTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertMplsAc(new MPLS_AC(fields));
+    public void Tl1SyncMplsAc() throws Exception {
+        for(NODE node : nodeList) {
+            String cmd = "RTRV-MPLS-AC:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1MplsAcRepository.save(new Tl1MplsAc(fields));
+            }
         }
     }
 
@@ -429,8 +432,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncPmAc(int CTAG, List<MPLS_AC> mplsAcs) throws Exception {
-        for (MPLS_AC mplsAc : mplsAcs) {
+    public void TL1SyncPmAc(int CTAG, List<Tl1MplsAc> mplsAcs) throws Exception {
+        for (Tl1MplsAc mplsAc : mplsAcs) {
             String cmd = "RTRV-PM-AC:" + mplsAc.getTID() + "::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {

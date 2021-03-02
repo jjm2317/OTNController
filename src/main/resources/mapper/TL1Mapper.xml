@@ -1041,7 +1041,7 @@
             TL1.MSPW
     </select>
 
-    <select id="selectMplsAc" resultType="com.woorinet.plugin.demo.DTO.TL1.MPLS_AC">
+    <select id="selectMplsAc" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1MplsAc">
         SELECT
             *
         FROM
@@ -2153,7 +2153,7 @@
             )
     </select>
 
-    <select id="insertMplsAc" parameterType="com.woorinet.plugin.demo.DTO.TL1.MPLS_AC">
+    <select id="insertMplsAc" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1MplsAc">
         REPLACE INTO
             TL1.MPLS_AC(
                 `TID_ID`,

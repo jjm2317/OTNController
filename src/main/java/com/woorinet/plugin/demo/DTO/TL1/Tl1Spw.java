@@ -67,6 +67,10 @@ public class Tl1Spw {
     String OAM_REMOTE_ID;
     String OAM_GROUP_NAME;
 
+    public Tl1Spw() {
+
+    }
+
     public Tl1Spw(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];

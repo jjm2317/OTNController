@@ -66,6 +66,8 @@ public class DemoApplication {
 	@Autowired
 	private Tl1MspwRepository tl1MspwRepository;
 	@Autowired
+	private Tl1MplsAcRepository tl1MplsAcRepository;
+	@Autowired
 	private Tl1AccessIfRepository tl1AccessIfRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
@@ -195,6 +197,7 @@ public class DemoApplication {
 					tl1TunnelPortRepository,
 					tl1SpwRepository,
 					tl1MspwRepository,
+					tl1MplsAcRepository,
 					tl1AccessIfRepository,
 					pmRepository,
 					pm_portRepository,
@@ -261,9 +264,7 @@ public class DemoApplication {
 			manager.Tl1SyncMSpw();
 
 			//MPLS_AC DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncMplsAc(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncMplsAc();
 
 			//ACCESS_IF DB연동
 			manager.Tl1SyncAccessIf();
@@ -318,7 +319,7 @@ public class DemoApplication {
 			List<Tl1NodeConnector> node_connectors = tl1Mapper.selectNodeConnector();
 			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1Mapper.selectOduMplsIf();
 			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1Mapper.selectOduNodeConnector();
-			List<MPLS_AC> mplsAcs = tl1Mapper.selectMplsAc();
+			List<Tl1MplsAc> mplsAcs = tl1Mapper.selectMplsAc();
 
 			//PM DB연동
 			manager.TL1SyncPM(CTAG, tl1OduNodeConnectors, tl1OduMplsIfs);
@@ -509,10 +510,10 @@ public class DemoApplication {
 
 	@RequestMapping("/mpls_ac")
 	String selectMplsAc() {
-		List<MPLS_AC> list = null;
+		List<Tl1MplsAc> list = null;
 		try {
 			list = tl1Mapper.selectMplsAc();
-			for (MPLS_AC item: list) {
+			for (Tl1MplsAc item: list) {
 				System.out.println(item.toString());
 			}
 		} catch (Exception e) {

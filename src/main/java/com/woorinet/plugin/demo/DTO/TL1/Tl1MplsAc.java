@@ -1,12 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
-public class MPLS_AC {
+@Setter
+@Data
+@Entity
+@Table(name = "tl1_mpls_ac")
+public class Tl1MplsAc {
+    @Id
+    @GeneratedValue
+    int MPLS_AC_ID;
     String TID_ID;
     String TID;
     String AID;
@@ -35,7 +47,11 @@ public class MPLS_AC {
     String CREATION_DATE;
     String MODIFIED_DATE;
 
-    public MPLS_AC(String[] fields) {
+    public Tl1MplsAc() {
+
+    }
+
+    public Tl1MplsAc(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.AID = fields[2];
@@ -65,7 +81,7 @@ public class MPLS_AC {
         this.MODIFIED_DATE = fields[26];
     }
 
-    public MPLS_AC(String TID_ID, String TID, String AID, String SERVICE_NAME, String DESCR, String UNIT_TYPE, String AC_ID, String VSI_ID, String TC_BY, String VLAN, String VLAN_INNER, String VLAN_PRI, String q_IN_Q, String PHBMAP_ID, String PHBMAP_TYPE, String AC_COUNT, String EXP, String PROT_PID, String POLICER_ID, String LAG_ID, String RG_ID, String COUNTER, String POLL_RATE, String REPORT, String NO_PACKET, String CREATION_DATE, String MODIFIED_DATE) {
+    public Tl1MplsAc(String TID_ID, String TID, String AID, String SERVICE_NAME, String DESCR, String UNIT_TYPE, String AC_ID, String VSI_ID, String TC_BY, String VLAN, String VLAN_INNER, String VLAN_PRI, String q_IN_Q, String PHBMAP_ID, String PHBMAP_TYPE, String AC_COUNT, String EXP, String PROT_PID, String POLICER_ID, String LAG_ID, String RG_ID, String COUNTER, String POLL_RATE, String REPORT, String NO_PACKET, String CREATION_DATE, String MODIFIED_DATE) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.AID = AID;

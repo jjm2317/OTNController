@@ -53,7 +53,7 @@ public interface TL1Mapper {
     List<Tl1TunnelPort> selectTunnelProt() throws Exception;
     List<Tl1Spw> selectSpw() throws Exception;
     List<Tl1Mspw> selectMSpw() throws Exception;
-    List<MPLS_AC> selectMplsAc() throws Exception;
+    List<Tl1MplsAc> selectMplsAc() throws Exception;
     List<Tl1AccessIf> selectAccessIf() throws Exception;
     List<SERVICE> selectService() throws Exception;
     List<SERVICE_EXT> selectServiceExt() throws Exception;
@@ -80,7 +80,7 @@ public interface TL1Mapper {
     void insertTunnelProt(Tl1TunnelPort tunnelProt) throws Exception;
     void insertSpw(Tl1Spw tl1Spw) throws Exception;
     void insertMSpw(Tl1Mspw spw) throws Exception;
-    void insertMplsAc(MPLS_AC mplsAc) throws Exception;
+    void insertMplsAc(Tl1MplsAc mplsAc) throws Exception;
     void insertAccessIf(Tl1AccessIf accessIf) throws Exception;
     void insertService(SERVICE service) throws Exception;
     void insertServiceExt(SERVICE_EXT serviceExt) throws Exception;

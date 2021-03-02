@@ -69,6 +69,10 @@ public class Tl1Mspw {
     String PROTECTION_TYPE;
     String PATH_TYPE;
 
+    public Tl1Mspw() {
+
+    }
+
     public Tl1Mspw(String[] fields) {
         this.TID_ID  = fields[0];
         this.TID = fields[1];
