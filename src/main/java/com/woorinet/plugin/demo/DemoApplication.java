@@ -79,6 +79,8 @@ public class DemoApplication {
 	private Tl1ServiceMspwRepository tl1ServiceMspwRepository;
 	@Autowired
 	private Tl1OduRepository tl1OduRepository;
+	@Autowired
+	private Tl1CesPortRepository tl1CesPortRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -214,6 +216,7 @@ public class DemoApplication {
 					tl1ServiceTunnelRepository,
 					tl1ServiceMspwRepository,
 					tl1OduRepository,
+					tl1CesPortRepository,
 					pmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
@@ -300,9 +303,7 @@ public class DemoApplication {
 			manager.Tl1SyncOdu();
 
 			//CES_PORT DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncCesPort(node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncCesPort();
 
 			//CES_PW DB연동
 			for (NODE node: nodes) {

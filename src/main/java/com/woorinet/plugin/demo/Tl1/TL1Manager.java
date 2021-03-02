@@ -41,6 +41,7 @@ public class TL1Manager {
     Tl1ServiceTunnelRepository tl1ServiceTunnelRepository;
     Tl1ServiceMspwRepository tl1ServiceMspwRepository;
     Tl1OduRepository tl1OduRepository;
+    Tl1CesPortRepository tl1CesPortRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -86,6 +87,7 @@ public class TL1Manager {
                       Tl1ServiceTunnelRepository tl1ServiceTunnelRepository,
                       Tl1ServiceMspwRepository tl1ServiceMspwRepository,
                       Tl1OduRepository tl1OduRepository,
+                      Tl1CesPortRepository tl1CesPortRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -124,6 +126,7 @@ public class TL1Manager {
         this.tl1ServiceTunnelRepository = tl1ServiceTunnelRepository;
         this.tl1ServiceMspwRepository = tl1ServiceMspwRepository;
         this.tl1OduRepository = tl1OduRepository;
+        this.tl1CesPortRepository = tl1CesPortRepository;
 
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -384,13 +387,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncCesPort(String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-CES-PORT:" + TID + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initCesPortTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertCesPort(new CES_PORT(fields));
+    public void Tl1SyncCesPort() throws Exception {
+        for(NODE node : nodeList) {
+            String cmd = "RTRV-CES-PORT:" + node.getTID() + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1CesPortRepository.save(new Tl1CesPort(fields));
+            }
         }
     }
 

@@ -60,7 +60,7 @@ public interface TL1Mapper {
     List<Tl1ServiceTunnel> selectServiceTunnel() throws Exception;
     List<Tl1ServiceMspw> selectServiceMspw() throws Exception;
     List<Tl1Odu> selectOdu() throws Exception;
-    List<CES_PORT> selectCesPort() throws Exception;
+    List<Tl1CesPort> selectCesPort() throws Exception;
     List<CES_PW> selectCesPw() throws Exception;
     List<L2_LACP> selectL2Lacp() throws Exception;
     List<OPTIC_POWER> selectOpticPower() throws Exception;
@@ -87,7 +87,7 @@ public interface TL1Mapper {
     void insertServiceTunnel(Tl1ServiceTunnel serviceTunnel) throws Exception;
     void insertServiceMspw(Tl1ServiceMspw serviceMspw) throws Exception;
     void insertOdu(Tl1Odu tl1Odu) throws Exception;
-    void insertCesPort(CES_PORT cesPort) throws Exception;
+    void insertCesPort(Tl1CesPort cesPort) throws Exception;
     void insertCesPw(CES_PW cesPw) throws Exception;
     void insertL2Lacp(L2_LACP l2Lacp) throws Exception;
     void insertOpticPower(OPTIC_POWER optic_power) throws Exception;

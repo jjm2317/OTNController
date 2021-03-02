@@ -1083,7 +1083,7 @@
             TL1.ODU
     </select>
 
-    <select id="selectCesPort" resultType="com.woorinet.plugin.demo.DTO.TL1.CES_PORT">
+    <select id="selectCesPort" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1CesPort">
         SELECT
             *
         FROM
@@ -2677,7 +2677,7 @@
             )
     </select>
 
-    <select id="insertCesPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.CES_PORT">
+    <select id="insertCesPort" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1CesPort">
         REPLACE INTO
             TL1.CES_PORT(
                 `TID`,

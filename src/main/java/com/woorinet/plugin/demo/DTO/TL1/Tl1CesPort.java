@@ -1,13 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class CES_PORT {
+@Data
+@Entity
+@Table(name = "tl1_ces_port")
+public class Tl1CesPort {
+    @Id
+    @GeneratedValue
+    int CES_PORT_ID;
     String TID;
     String AID;
     String UNIT_TYPE;
@@ -21,7 +31,11 @@ public class CES_PORT {
     String AU;
     String TUG;
 
-    public CES_PORT(String[] fields) {
+    public Tl1CesPort() {
+
+    }
+
+    public Tl1CesPort(String[] fields) {
         this.TID = fields[0];
         this.AID = fields[1];
         this.UNIT_TYPE = fields[2];
