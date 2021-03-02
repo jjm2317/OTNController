@@ -1055,7 +1055,7 @@
             TL1.SERVICE
     </select>
 
-    <select id="selectServiceExt" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_EXT">
+    <select id="selectServiceExt" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1ServiceExt">
         SELECT
             *
         FROM
@@ -2275,7 +2275,7 @@
             )
     </select>
 
-    <select id="insertServiceExt" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE_EXT">
+    <select id="insertServiceExt" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1ServiceExt">
         REPLACE INTO
             TL1.SERVICE_EXT(
                 `TID_ID`,

@@ -1,12 +1,24 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class SERVICE_EXT {
+@Data
+@Entity
+@Table(name = "tl1_service_ext")
+public class Tl1ServiceExt {
+    @Id
+    @GeneratedValue
+    int SERVICE_EXT_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -61,7 +73,11 @@ public class SERVICE_EXT {
     String MS_TUNNEL_COUNT;
     String MS_PW_COUNT;
 
-    public SERVICE_EXT(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String SERV_NAME, String CIR, String PIR, String PW_ID, String SC_ID, String SCC_NAME, String SCC_VALUE, String SCC_OPERATOR, String SC_TYPE, String NODE_ROLE, String TID_ROLE, String SRC_PWID, String SRC_VSI_ID, String SRC_SUBNET, String SRC_TID, String SRC_TID_ID, String SRC_AID, String SRC_NODE_AIF_ID, String SRC_NODE_AIF_NAME, String SRC_NODE_AIF_TYPE, String SRC_PORT_CID, String SRC_PORT_CNAME, String SRC_PORT_CVALUE, String SRC_PORT_COPERATOR, String SRC_PORT_CTYPE, String SRC_ING_LSRID, String SRC_EGR_LSRID, String SRC_IN_LABEL, String SRC_OUT_LABEL, String DST_PWID, String DST_VSI_ID, String DST_SUBNET, String DST_TID, String DST_TID_ID, String DST_AID, String DST_NODE_AIF_ID, String DST_NODE_AIF_NAME, String DST_NODE_AIF_TYPE, String DST_PORT_CID, String DST_PORT_CNAME, String DST_PORT_CVALUE, String DST_PORT_COPERATOR, String DST_PORT_CTYPE, String DST_ING_LSRID, String DST_EGR_LSRID, String DST_IN_LABEL, String DST_OUT_LABEL, String MS_TUNNEL_COUNT, String MS_PW_COUNT) {
+    public Tl1ServiceExt() {
+
+    }
+
+    public Tl1ServiceExt(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String SERV_NAME, String CIR, String PIR, String PW_ID, String SC_ID, String SCC_NAME, String SCC_VALUE, String SCC_OPERATOR, String SC_TYPE, String NODE_ROLE, String TID_ROLE, String SRC_PWID, String SRC_VSI_ID, String SRC_SUBNET, String SRC_TID, String SRC_TID_ID, String SRC_AID, String SRC_NODE_AIF_ID, String SRC_NODE_AIF_NAME, String SRC_NODE_AIF_TYPE, String SRC_PORT_CID, String SRC_PORT_CNAME, String SRC_PORT_CVALUE, String SRC_PORT_COPERATOR, String SRC_PORT_CTYPE, String SRC_ING_LSRID, String SRC_EGR_LSRID, String SRC_IN_LABEL, String SRC_OUT_LABEL, String DST_PWID, String DST_VSI_ID, String DST_SUBNET, String DST_TID, String DST_TID_ID, String DST_AID, String DST_NODE_AIF_ID, String DST_NODE_AIF_NAME, String DST_NODE_AIF_TYPE, String DST_PORT_CID, String DST_PORT_CNAME, String DST_PORT_CVALUE, String DST_PORT_COPERATOR, String DST_PORT_CTYPE, String DST_ING_LSRID, String DST_EGR_LSRID, String DST_IN_LABEL, String DST_OUT_LABEL, String MS_TUNNEL_COUNT, String MS_PW_COUNT) {
         this.TID_ID = TID_ID;
         this.TID = TID;
         this.SUBNET_ID = SUBNET_ID;
@@ -117,7 +133,7 @@ public class SERVICE_EXT {
         this.MS_PW_COUNT = MS_PW_COUNT;
     }
 
-    public SERVICE_EXT(String[] fields) {
+    public Tl1ServiceExt(String[] fields) {
         TID_ID = fields[0];
         TID = fields[1];
         SUBNET_ID = fields[2];

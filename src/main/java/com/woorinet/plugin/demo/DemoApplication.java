@@ -71,6 +71,8 @@ public class DemoApplication {
 	private Tl1AccessIfRepository tl1AccessIfRepository;
 	@Autowired
 	private Tl1ServiceRepository tl1ServiceRepository;
+	@Autowired
+	private Tl1ServiceExtRepository tl1ServiceExtRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -147,12 +149,12 @@ public class DemoApplication {
 			// ACCESS_IF 조회
 			List<Tl1AccessIf> Tl1AccessIfs = tl1Mapper.selectAccessIf();
 			// SERVICE_EXT 조회
-			List<SERVICE_EXT> service_exts = tl1Mapper.selectServiceExt();
+			List<Tl1ServiceExt> tl1ServiceExts = tl1Mapper.selectServiceExt();
 			// MPLS_IF 조회
 			List<Tl1MplsIf> tl1MplsIfs = tl1Mapper.selectMplsIf();
 			// INVENTORY 조회
 			List<INVENTORY> inventories = inventoryRepository.findAll();
-			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, odus, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, service_exts, tl1MplsIfs, inventories);
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, odus, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -202,6 +204,7 @@ public class DemoApplication {
 					tl1MplsAcRepository,
 					tl1AccessIfRepository,
 					tl1ServiceRepository,
+					tl1ServiceExtRepository,
 					pmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
@@ -278,9 +281,8 @@ public class DemoApplication {
 			List<Tl1Service> tl1Services = tl1Mapper.selectService();
 
 			//SERVICE_EXT DB연동
-			for (Tl1Service tl1Service : tl1Services) {
-				manager.Tl1SyncServiceExt(CTAG, tl1Service.getTID(), tl1Service.getNAME(), tl1Mapper);
-			}
+			manager.Tl1SyncServiceExt();
+
 
 			//SERVICE_TUNNEL DB연동
 			for (Tl1Service tl1Service : tl1Services) {

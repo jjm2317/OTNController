@@ -37,6 +37,7 @@ public class TL1Manager {
     Tl1MplsAcRepository tl1MplsAcRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     Tl1ServiceRepository tl1ServiceRepository;
+    Tl1ServiceExtRepository tl1ServiceExtRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -78,6 +79,7 @@ public class TL1Manager {
                       Tl1MplsAcRepository tl1MplsAcRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       Tl1ServiceRepository tl1ServiceRepository,
+                      Tl1ServiceExtRepository tl1ServiceExtRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -112,6 +114,8 @@ public class TL1Manager {
         this.tl1MplsAcRepository = tl1MplsAcRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.tl1ServiceRepository = tl1ServiceRepository;
+        this.tl1ServiceExtRepository = tl1ServiceExtRepository;
+
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
@@ -324,20 +328,20 @@ public class TL1Manager {
             String cmd = "RTRV-SERVICE:" + node.getTID() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                Tl1Service service = new Tl1Service(fields);
-                tl1ServiceRepository.save(service);
-                serviceList.add(service);
+                Tl1Service tl1Service = new Tl1Service(fields);
+                tl1ServiceRepository.save(tl1Service);
+                serviceList.add(tl1Service);
             }
         }
     }
 
-    public void Tl1SyncServiceExt(int CTAG, String TID, String serviceName, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-SERVICE-EXT:" + TID + "::" + CTAG + ":serv-name=" + serviceName + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initServiceExtTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertServiceExt(new SERVICE_EXT(fields));
+    public void Tl1SyncServiceExt() throws Exception {
+        for(Tl1Service tl1Service : serviceList) {
+            String cmd = "RTRV-SERVICE-EXT:" + tl1Service.getTID() + "::" + CTAG + ":serv-name=" + tl1Service.getNAME() + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1ServiceExtRepository.save(new Tl1ServiceExt(fields));
+            }
         }
     }
 
