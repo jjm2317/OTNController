@@ -43,6 +43,7 @@ public class TL1Manager {
     Tl1OduRepository tl1OduRepository;
     Tl1CesPortRepository tl1CesPortRepository;
     Tl1CesPwRepository tl1CesPwRepository;
+    Tl1L2LacpRepository tl1L2LacpRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -90,6 +91,7 @@ public class TL1Manager {
                       Tl1OduRepository tl1OduRepository,
                       Tl1CesPortRepository tl1CesPortRepository,
                       Tl1CesPwRepository tl1CesPwRepository,
+                      Tl1L2LacpRepository tl1L2LacpRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -130,6 +132,7 @@ public class TL1Manager {
         this.tl1OduRepository = tl1OduRepository;
         this.tl1CesPortRepository = tl1CesPortRepository;
         this.tl1CesPwRepository = tl1CesPwRepository;
+        this.tl1L2LacpRepository = tl1L2LacpRepository;
 
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -410,13 +413,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncL2Lacp(String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-L2-LACP:" + TID + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initL2LacpTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertL2Lacp(new L2_LACP(fields));
+    public void Tl1SyncL2Lacp() throws Exception {
+        for(NODE node : nodeList) {
+            String cmd = "RTRV-L2-LACP:" + node.getTID() + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1L2LacpRepository.save(new Tl1L2Lacp(fields));
+            }
         }
     }
 

@@ -1,13 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class L2_LACP {
+@Data
+@Entity
+@Table(name = "tl1_l2_lacp")
+public class Tl1L2Lacp {
+    @Id
+    @GeneratedValue
+    int L2_LACP_ID;
     String TID;
     String LAG_ID;
     String AID;
@@ -16,7 +26,11 @@ public class L2_LACP {
     String PARTNER_SYS_ID;
     String LINK_SYNC;
 
-    public L2_LACP(String[] fields) {
+    public Tl1L2Lacp() {
+
+    }
+
+    public Tl1L2Lacp(String[] fields) {
         this.TID = fields[0];
         this.LAG_ID = fields[1];
         this.AID = fields[2];

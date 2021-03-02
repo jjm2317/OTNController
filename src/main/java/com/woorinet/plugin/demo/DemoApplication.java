@@ -83,6 +83,8 @@ public class DemoApplication {
 	private Tl1CesPortRepository tl1CesPortRepository;
 	@Autowired
 	private Tl1CesPwRepository tl1CesPwRepository;
+	@Autowired
+	private Tl1L2LacpRepository tl1L2LacpRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -220,6 +222,7 @@ public class DemoApplication {
 					tl1OduRepository,
 					tl1CesPortRepository,
 					tl1CesPwRepository,
+					tl1L2LacpRepository,
 					pmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
@@ -311,10 +314,8 @@ public class DemoApplication {
 			//CES_PW DB연동
 			manager.Tl1SyncCesPw();
 
-			//CES_PW DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncL2Lacp(node.getTID(), tl1Mapper);
-			}
+			//L2Lacp DB연동
+			manager.Tl1SyncL2Lacp();
 
 			//OPTIC-POWER DB연동
 			for (NODE node: nodes) {

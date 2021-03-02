@@ -1097,7 +1097,7 @@
             TL1.CES_PW
     </select>
 
-    <select id="selectL2Lacp" resultType="com.woorinet.plugin.demo.DTO.TL1.L2_LACP">
+    <select id="selectL2Lacp" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1L2Lacp">
         SELECT
             *
         FROM
@@ -2761,7 +2761,7 @@
             )
     </select>
 
-    <select id="insertL2Lacp" parameterType="com.woorinet.plugin.demo.DTO.TL1.L2_LACP">
+    <select id="insertL2Lacp" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1L2Lacp">
         REPLACE INTO
             TL1.L2_LACP(
                 `TID`,
