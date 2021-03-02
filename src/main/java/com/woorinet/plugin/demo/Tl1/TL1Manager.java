@@ -58,7 +58,7 @@ public class TL1Manager {
     Tl1SessStateRepository tl1SessStateRepository;
     Tl1KeyStateRepository tl1KeyStateRepository;
     Tl1ModuleInfoRepository tl1ModuleInfoRepository;
-    CM_PORTRepository cm_portRepository;
+    Tl1CmPortRepository tl1CmPortRepository;
     BYPASS_INFORepository bypass_infoRepository;
     CRYPTO_MODERepository crypto_modeRepository;
     CM_PROGRAM_INFORepository cm_program_infoRepository;
@@ -107,7 +107,7 @@ public class TL1Manager {
                       Tl1SessStateRepository tl1SessStateRepository,
                       Tl1KeyStateRepository tl1KeyStateRepository,
                       Tl1ModuleInfoRepository tl1ModuleInfoRepository,
-                      CM_PORTRepository cm_portRepository,
+                      Tl1CmPortRepository tl1CmPortRepository,
                       BYPASS_INFORepository bypass_infoRepository,
                       CRYPTO_MODERepository crypto_modeRepository,
                       CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
@@ -154,7 +154,7 @@ public class TL1Manager {
         this.tl1SessStateRepository = tl1SessStateRepository;
         this.tl1KeyStateRepository = tl1KeyStateRepository;
         this.tl1ModuleInfoRepository = tl1ModuleInfoRepository;
-        this.cm_portRepository = cm_portRepository;
+        this.tl1CmPortRepository = tl1CmPortRepository;
         this.bypass_infoRepository = bypass_infoRepository;
         this.crypto_modeRepository = crypto_modeRepository;
         this.cm_program_infoRepository = cm_program_infoRepository;
@@ -573,8 +573,8 @@ public class TL1Manager {
         }
     }
 
-    public void TL1SyncCmPort(List<NODE> nodes, List<Tl1NodeConnector> node_connectors) throws Exception {
-        for (NODE node : nodes) {
+    public void TL1SyncCmPort() throws Exception {
+        for (NODE node : nodeList) {
             if(!node.getNODE_TYPE().equals( "otn")) continue;
             String TID = node.getTID();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
@@ -583,7 +583,7 @@ public class TL1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                cm_portRepository.save(new CM_PORT(fields));
+                tl1CmPortRepository.save(new Tl1CmPort(fields));
             }
         }
     }

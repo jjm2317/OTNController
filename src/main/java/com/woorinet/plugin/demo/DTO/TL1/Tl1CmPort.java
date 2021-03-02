@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name = "TL1_CM_PORT")
-public class CM_PORT {
+@Table(name = "tl1_cm_port")
+public class Tl1CmPort {
     @Id
     @GeneratedValue
     int CM_PORT_ID;
@@ -26,10 +26,10 @@ public class CM_PORT {
     String SIGNAL;
     String VLAN_ID;
 
-    public CM_PORT() {
+    public Tl1CmPort() {
     }
 
-    public CM_PORT(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String SIGNAL, String VLAN_ID) {
+    public Tl1CmPort(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String SIGNAL, String VLAN_ID) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
@@ -38,7 +38,7 @@ public class CM_PORT {
         this.VLAN_ID = VLAN_ID;
     }
 
-    public CM_PORT(String[] fields) {
+    public Tl1CmPort(String[] fields) {
         this.TID = fields[0];
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];
