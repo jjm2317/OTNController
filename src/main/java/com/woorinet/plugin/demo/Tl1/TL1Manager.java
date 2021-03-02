@@ -31,6 +31,7 @@ public class TL1Manager {
     Tl1StunnelExtRepository tl1StunnelExtRepository;
     Tl1StunnelTransitRepository tl1StunnelTransitRepository;
     Tl1TunnelPortRepository tl1TunnelPortRepository;
+    Tl1SpwRepository tl1SpwRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -68,6 +69,7 @@ public class TL1Manager {
                       Tl1StunnelExtRepository tl1StunnelExtRepository,
                       Tl1StunnelTransitRepository tl1StunnelTransitRepository,
                       Tl1TunnelPortRepository tl1TunnelPortRepository,
+                      Tl1SpwRepository tl1SpwRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -97,6 +99,7 @@ public class TL1Manager {
         this.tl1StunnelExtRepository = tl1StunnelExtRepository;
         this.tl1StunnelTransitRepository = tl1StunnelTransitRepository;
         this.tl1TunnelPortRepository = tl1TunnelPortRepository;
+        this.tl1SpwRepository = tl1SpwRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -264,13 +267,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncSpw(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-SPW:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initSpwTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertSpw(new SPW(fields));
+    public void Tl1SyncSpw() throws Exception {
+        for(NODE node : nodeList) {
+            String cmd = "RTRV-SPW:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1SpwRepository.save(new Tl1Spw(fields));
+            }
         }
     }
 

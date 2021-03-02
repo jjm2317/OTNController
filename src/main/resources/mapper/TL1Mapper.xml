@@ -1027,7 +1027,7 @@
             TL1.TUNNEL_PROT
     </select>
 
-    <select id="selectSpw" resultType="com.woorinet.plugin.demo.DTO.TL1.SPW">
+    <select id="selectSpw" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1Spw">
         SELECT
             *
         FROM
@@ -1941,7 +1941,7 @@
             )
     </select>
 
-    <select id="insertSpw" parameterType="com.woorinet.plugin.demo.DTO.TL1.SPW">
+    <select id="insertSpw" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1Spw">
         REPLACE INTO
             TL1.SPW(
                 `TID_ID`,

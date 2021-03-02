@@ -1,6 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-public class SPW {
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Getter
+@Setter
+@Data
+@Entity
+@Table(name = "tl1_spw")
+public class Tl1Spw {
+    @Id
+    @GeneratedValue
+    int SPW_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -50,7 +67,7 @@ public class SPW {
     String OAM_REMOTE_ID;
     String OAM_GROUP_NAME;
 
-    public SPW(String[] fields) {
+    public Tl1Spw(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];

@@ -62,6 +62,8 @@ public class DemoApplication {
 	@Autowired
 	private Tl1TunnelPortRepository tl1TunnelPortRepository;
 	@Autowired
+	private Tl1SpwRepository tl1SpwRepository;
+	@Autowired
 	private Tl1AccessIfRepository tl1AccessIfRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
@@ -189,6 +191,7 @@ public class DemoApplication {
 					tl1StunnelExtRepository,
 					tl1StunnelTransitRepository,
 					tl1TunnelPortRepository,
+					tl1SpwRepository,
 					tl1AccessIfRepository,
 					pmRepository,
 					pm_portRepository,
@@ -248,11 +251,8 @@ public class DemoApplication {
 			//TUNNEL_PROT DB연동
 			manager.Tl1SyncTunnelProt();
 
-
 			//SPW DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncSpw(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncSpw();
 
 			//MSPW DB연동
 			for (NODE node: nodes) {
