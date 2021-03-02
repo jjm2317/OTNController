@@ -235,6 +235,7 @@ public class SDNManager {
             CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDST_TID()+ '/' + tl1OduMplsIf.getDST_PORT());
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1OduMplsIf.getTID() + '/' + tl1OduMplsIf.getMPLS_TP_ID());
             Tl1Odu tl1Odu = oduHashMapForODUTUNNEL.get(tl1OduMplsIf.getTID()+ '/' + tl1OduMplsIf.getMPLS_TP_ID());
+            Tl1OduNodeConnector tl1OduNodeConnector = odu_node_connectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
 
             int maximum_bandwidth = Integer.parseInt(tl1OduMplsIf.getMAXIMUM_BANDWIDTH());
             int available_bandwidth = Integer.parseInt(tl1OduMplsIf.getAVAILABLE_BANDWIDTH());
@@ -252,7 +253,7 @@ public class SDNManager {
             link.setDst_ne_id(dst_sdnNode.getNe_id());
             link.setDst_ne_name(dst_sdnNode.getNe_name());
             link.setDst_node_connector_id(dst_sdnConnector.getConnect_id());
-            link.setLink_type(tl1OduMplsIf.getLINK_TYPE());
+            link.setLink_type(tl1OduNodeConnector.getPORT_TYPE());
             link.setLink_status(tl1OduMplsIf.getOPERATION_STATUS());
             link.setLink_category("");
             link.setHigh_order_tunnel("");
