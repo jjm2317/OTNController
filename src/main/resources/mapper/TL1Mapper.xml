@@ -1048,7 +1048,7 @@
             TL1.MPLS_AC
     </select>
 
-    <select id="selectService" resultType="com.woorinet.plugin.demo.DTO.TL1.SERVICE">
+    <select id="selectService" resultType="com.woorinet.plugin.demo.DTO.TL1.Tl1Service">
         SELECT
             *
         FROM
@@ -2214,7 +2214,7 @@
             )
     </select>
 
-    <select id="insertService" parameterType="com.woorinet.plugin.demo.DTO.TL1.SERVICE">
+    <select id="insertService" parameterType="com.woorinet.plugin.demo.DTO.TL1.Tl1Service">
         REPLACE INTO
             TL1.SERVICE(
                 `TID_ID`,

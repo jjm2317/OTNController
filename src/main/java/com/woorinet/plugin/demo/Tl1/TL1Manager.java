@@ -18,6 +18,7 @@ public class TL1Manager {
     int CTAG;
 
     List<NODE> nodeList;
+    List<Tl1Service> serviceList;
 //    ODU_MPLS_IFRepository odu_mpls_ifRepository;
     Tl1SystemInfoRepository tl1SystemInfoRepository;
     Tl1SlotRepository tl1SlotRepository;
@@ -35,6 +36,7 @@ public class TL1Manager {
     Tl1MspwRepository tl1MspwRepository;
     Tl1MplsAcRepository tl1MplsAcRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
+    Tl1ServiceRepository tl1ServiceRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
     PM_ACRepositiory pm_acRepositiory;
@@ -75,6 +77,7 @@ public class TL1Manager {
                       Tl1MspwRepository tl1MspwRepository,
                       Tl1MplsAcRepository tl1MplsAcRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
+                      Tl1ServiceRepository tl1ServiceRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
                       PM_ACRepositiory pm_acRepositiory,
@@ -90,6 +93,7 @@ public class TL1Manager {
                       CM_PROGRAM_INFORepository cm_program_infoRepository ) throws IOException {
         this.CTAG = CTAG;
         this.nodeList = new ArrayList<>();
+        this.serviceList = new ArrayList<>();
 //        this.odu_mpls_ifRepository = odu_mpls_ifRepository;
         this.tl1SystemInfoRepository = tl1SystemInfoRepository;
         this.tl1SlotRepository = tl1SlotRepository;
@@ -107,6 +111,7 @@ public class TL1Manager {
         this.tl1MspwRepository = tl1MspwRepository;
         this.tl1MplsAcRepository = tl1MplsAcRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
+        this.tl1ServiceRepository = tl1ServiceRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
         this.pm_acRepositiory = pm_acRepositiory;
@@ -142,8 +147,9 @@ public class TL1Manager {
         tl1Mapper.initNodeTable();
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
         for (String[] fields: fieldsList) {
-            tl1Mapper.insertNode(new NODE(fields));
-            nodeList.add(new NODE(fields));
+            NODE node = new NODE(fields);
+            tl1Mapper.insertNode(node);
+            nodeList.add(node);
         }
     }
 
@@ -313,13 +319,15 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncService(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-SERVICE:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initServiceTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertService(new SERVICE(fields));
+    public void Tl1SyncService() throws Exception {
+        for(NODE node : nodeList) {
+            String cmd = "RTRV-SERVICE:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                Tl1Service service = new Tl1Service(fields);
+                tl1ServiceRepository.save(service);
+                serviceList.add(service);
+            }
         }
     }
 

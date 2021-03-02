@@ -3,7 +3,7 @@ package com.woorinet.plugin.demo.SDN;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.Tl1AccessIf;
 import com.woorinet.plugin.demo.DTO.TL1.NODE;
-import com.woorinet.plugin.demo.DTO.TL1.SERVICE;
+import com.woorinet.plugin.demo.DTO.TL1.Tl1Service;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 
@@ -30,7 +30,7 @@ public class SDNManager {
     List<OPTIC_POWER> optic_powers;
     List<ODU> odus;
     List<Tl1OduMplsIf> tl1OduMplsIfs;
-    List<SERVICE> services;
+    List<Tl1Service> tl1Services;
     List<Tl1AccessIf> Tl1AccessIfs;
     List<SERVICE_EXT> service_exts;
     List<Tl1MplsIf> tl1MplsIfs;
@@ -54,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<Tl1OduMplsIf> tl1OduMplsIfs, List<SERVICE> services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<Tl1MplsIf> tl1MplsIfs, List<INVENTORY> inventories ) throws Exception{
+    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<NODE> nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<OPTIC_POWER> optic_powers, List<ODU> odus, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<SERVICE_EXT> service_exts, List<Tl1MplsIf> tl1MplsIfs, List<INVENTORY> inventories ) throws Exception{
         this.nodeRepository = nodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -70,7 +70,7 @@ public class SDNManager {
         this.optic_powers = optic_powers;
         this.odus = odus;
         this.tl1OduMplsIfs = tl1OduMplsIfs;
-        this.services = services;
+        this.tl1Services = tl1Services;
         this.Tl1AccessIfs = Tl1AccessIfs;
         this.service_exts = service_exts;
         this.tl1MplsIfs = tl1MplsIfs;

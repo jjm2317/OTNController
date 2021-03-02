@@ -69,6 +69,8 @@ public class DemoApplication {
 	private Tl1MplsAcRepository tl1MplsAcRepository;
 	@Autowired
 	private Tl1AccessIfRepository tl1AccessIfRepository;
+	@Autowired
+	private Tl1ServiceRepository tl1ServiceRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
 	@Autowired
@@ -141,7 +143,7 @@ public class DemoApplication {
 			// OPTIC_POWER 조회
 			List<OPTIC_POWER> optic_powers = tl1Mapper.selectOpticPower();
 			// SERVICE 조회
-			List<SERVICE> services = tl1Mapper.selectService();
+			List<Tl1Service> tl1Services = tl1Mapper.selectService();
 			// ACCESS_IF 조회
 			List<Tl1AccessIf> Tl1AccessIfs = tl1Mapper.selectAccessIf();
 			// SERVICE_EXT 조회
@@ -150,7 +152,7 @@ public class DemoApplication {
 			List<Tl1MplsIf> tl1MplsIfs = tl1Mapper.selectMplsIf();
 			// INVENTORY 조회
 			List<INVENTORY> inventories = inventoryRepository.findAll();
-			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, odus, tl1OduMplsIfs,services, Tl1AccessIfs, service_exts, tl1MplsIfs, inventories);
+			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, nodes, tl1SystemInfos, tl1OduNodeConnectors,optic_powers, odus, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, service_exts, tl1MplsIfs, inventories);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -199,6 +201,7 @@ public class DemoApplication {
 					tl1MspwRepository,
 					tl1MplsAcRepository,
 					tl1AccessIfRepository,
+					tl1ServiceRepository,
 					pmRepository,
 					pm_portRepository,
 					pm_acRepositiory,
@@ -270,25 +273,23 @@ public class DemoApplication {
 			manager.Tl1SyncAccessIf();
 
 			//SERVICE DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncService(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncService();
 
-			List<SERVICE> services = tl1Mapper.selectService();
+			List<Tl1Service> tl1Services = tl1Mapper.selectService();
 
 			//SERVICE_EXT DB연동
-			for (SERVICE service: services) {
-				manager.Tl1SyncServiceExt(CTAG, service.getTID(), service.getNAME(), tl1Mapper);
+			for (Tl1Service tl1Service : tl1Services) {
+				manager.Tl1SyncServiceExt(CTAG, tl1Service.getTID(), tl1Service.getNAME(), tl1Mapper);
 			}
 
 			//SERVICE_TUNNEL DB연동
-			for (SERVICE service: services) {
-				manager.Tl1SyncServiceTunnel(CTAG, service.getTID(), service.getNAME(), tl1Mapper);
+			for (Tl1Service tl1Service : tl1Services) {
+				manager.Tl1SyncServiceTunnel(CTAG, tl1Service.getTID(), tl1Service.getNAME(), tl1Mapper);
 			}
 
 			//SERVICE_MSPW DB연동
-			for (SERVICE service: services) {
-				manager.Tl1SyncServiceMspw(CTAG, service.getTID(), service.getNAME(), tl1Mapper);
+			for (Tl1Service tl1Service : tl1Services) {
+				manager.Tl1SyncServiceMspw(CTAG, tl1Service.getTID(), tl1Service.getNAME(), tl1Mapper);
 			}
 
 			//ODU DB연동

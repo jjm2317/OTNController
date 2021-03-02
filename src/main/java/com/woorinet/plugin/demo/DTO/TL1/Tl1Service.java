@@ -1,13 +1,23 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Getter
 @Setter
-public class SERVICE {
+@Data
+@Entity
+@Table(name = "tl1_service")
+public class Tl1Service {
+    @Id
+    @GeneratedValue
+    int SERVICE_ID;
     String TID_ID;
     String TID;
     String SUBNET_ID;
@@ -36,7 +46,11 @@ public class SERVICE {
     String PEER_TID;
     String PEER_TID_ID;
 
-    public SERVICE(String[] fields) {
+    public Tl1Service() {
+
+    }
+
+    public Tl1Service(String[] fields) {
         this.TID_ID = fields[0];
         this.TID = fields[1];
         this.SUBNET_ID = fields[2];
