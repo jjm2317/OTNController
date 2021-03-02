@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name = "TL1_PM_PORT")
-public class PM_PORT {
+@Table(name = "tl1_pm_port")
+public class Tl1PmPort {
     @Id
     @GeneratedValue
     int PM_PORT_ID;
@@ -58,11 +58,11 @@ public class PM_PORT {
     String IN_LOSS_RATIO;
     String OUT_LOSS_RATIO;
 
-    public PM_PORT() {
+    public Tl1PmPort() {
 
     }
 
-    public PM_PORT(String []fields) {
+    public Tl1PmPort(String []fields) {
         this.TID = fields[0];
         this.AID = fields[1];
         this.UNIT = fields[2];
@@ -103,7 +103,7 @@ public class PM_PORT {
         this.OUT_LOSS_RATIO = fields[37];
     }
 
-    public PM_PORT(String TID, String AID, String UNIT, String TYPE, String DATE, String TIME, String IN_OCTETS, String IN_OK_PACKETS, String IN_UNICAST_PACKETS, String IN_NON_UNICAST_PACKETS, String IN_DISCARD_PACKETS, String IN_ERROR_PACKETS, String IN_BROADCAST_PACKETS, String IN_MULTICAST_PACKETS, String IN_PACKETS_64_OCTETS, String IN_PACKETS_65_TO_127_OCTETS, String IN_PACKETS_128_TO_255_OCTETS, String IN_PACKETS_256_TO_511_OCTETS, String IN_PACKETS_512_TO_1023_OCTETS, String IN_PACKETS_1024_TO_1518_OCTETS, String IN_PACKETS_1519_TO_MAX_OCTETS, String IN_PAUSE_PACKETS, String IN_ALIGNMENT_ERRORS, String IN_FCS_ERRORS, String IN_SYMBOL_ERRORS, String OUT_OCTETS, String OUT_OK_PACKETS, String OUT_UNICAST_PACKETS, String OUT_NON_UNICAST_PACKETS, String OUT_DISCARD_PACKETS, String OUT_ERROR_PACKETS, String OUT_BROADCAST_PACKETS, String OUT_MULTICAST_PACKETS, String OUT_PAUSE_PACKETS, String IN_RATE, String OUT_RATE, String IN_LOSS_RATIO, String OUT_LOSS_RATIO) {
+    public Tl1PmPort(String TID, String AID, String UNIT, String TYPE, String DATE, String TIME, String IN_OCTETS, String IN_OK_PACKETS, String IN_UNICAST_PACKETS, String IN_NON_UNICAST_PACKETS, String IN_DISCARD_PACKETS, String IN_ERROR_PACKETS, String IN_BROADCAST_PACKETS, String IN_MULTICAST_PACKETS, String IN_PACKETS_64_OCTETS, String IN_PACKETS_65_TO_127_OCTETS, String IN_PACKETS_128_TO_255_OCTETS, String IN_PACKETS_256_TO_511_OCTETS, String IN_PACKETS_512_TO_1023_OCTETS, String IN_PACKETS_1024_TO_1518_OCTETS, String IN_PACKETS_1519_TO_MAX_OCTETS, String IN_PAUSE_PACKETS, String IN_ALIGNMENT_ERRORS, String IN_FCS_ERRORS, String IN_SYMBOL_ERRORS, String OUT_OCTETS, String OUT_OK_PACKETS, String OUT_UNICAST_PACKETS, String OUT_NON_UNICAST_PACKETS, String OUT_DISCARD_PACKETS, String OUT_ERROR_PACKETS, String OUT_BROADCAST_PACKETS, String OUT_MULTICAST_PACKETS, String OUT_PAUSE_PACKETS, String IN_RATE, String OUT_RATE, String IN_LOSS_RATIO, String OUT_LOSS_RATIO) {
         this.TID = TID;
         this.AID = AID;
         this.UNIT = UNIT;

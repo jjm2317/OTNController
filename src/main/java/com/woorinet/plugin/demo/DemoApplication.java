@@ -89,9 +89,9 @@ public class DemoApplication {
 	private Tl1OpticPowerRepository tl1OpticPowerRepository;
 	@Autowired
 	private Tl1PmRepository tl1PmRepository;
-
 	@Autowired
-	private PM_PORTRepository pm_portRepository;
+	private Tl1PmPortRepository tl1PmPortRepository;
+
 	@Autowired
 	private PM_ACRepositiory pm_acRepositiory;
 	@Autowired
@@ -226,7 +226,7 @@ public class DemoApplication {
 					tl1L2LacpRepository,
 					tl1OpticPowerRepository,
 					tl1PmRepository,
-					pm_portRepository,
+					tl1PmPortRepository,
 					pm_acRepositiory,
 					pmPwRepository,
 					pm_tunnelRepository,
@@ -332,7 +332,7 @@ public class DemoApplication {
 			manager.TL1SyncPM();
 
 			//PM-PORT DB연동
-			manager.Tl1SyncPmPort(CTAG, tl1OduNodeConnectors);
+			manager.Tl1SyncPmPort();
 
 			//PM-AC DB연동
 			manager.TL1SyncPmAc(CTAG, mplsAcs);

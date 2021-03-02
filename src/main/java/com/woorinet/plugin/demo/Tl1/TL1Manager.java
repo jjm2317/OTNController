@@ -49,7 +49,7 @@ public class TL1Manager {
     Tl1L2LacpRepository tl1L2LacpRepository;
     Tl1OpticPowerRepository tl1OpticPowerRepository;
     Tl1PmRepository tl1PmRepository;
-    PM_PORTRepository pm_portRepository;
+    Tl1PmPortRepository tl1PmPortRepository;
     PM_ACRepositiory pm_acRepositiory;
     PM_PWRepository pmPwRepository;
     PM_TUNNELRepository pm_tunnelRepository;
@@ -98,7 +98,7 @@ public class TL1Manager {
                       Tl1L2LacpRepository tl1L2LacpRepository,
                       Tl1OpticPowerRepository tl1OpticPowerRepository,
                       Tl1PmRepository tl1PmRepository,
-                      PM_PORTRepository pm_portRepository,
+                      Tl1PmPortRepository tl1PmPortRepository,
                       PM_ACRepositiory pm_acRepositiory,
                       PM_PWRepository pmPwRepository,
                       PM_TUNNELRepository pm_tunnelRepository,
@@ -144,7 +144,7 @@ public class TL1Manager {
         this.tl1OpticPowerRepository = tl1OpticPowerRepository;
 
         this.tl1PmRepository = tl1PmRepository;
-        this.pm_portRepository = pm_portRepository;
+        this.tl1PmPortRepository = tl1PmPortRepository;
         this.pm_acRepositiory = pm_acRepositiory;
         this.pmPwRepository = pmPwRepository;
         this.pm_tunnelRepository = pm_tunnelRepository;
@@ -464,15 +464,14 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncPmPort(int CTAG, List<Tl1OduNodeConnector> tl1OduNodeConnectors) throws Exception {
+    public void Tl1SyncPmPort() throws Exception {
 
-        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
+        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
             String cmd = "RTRV-PM-PORT:" + tl1OduNodeConnector.getTID() +":" + tl1OduNodeConnector.getAID() +":"+ CTAG +":pm-time=15MIN;";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                pm_portRepository.save(new PM_PORT(fields));
-
+                tl1PmPortRepository.save(new Tl1PmPort(fields));
             }
         }
     }
