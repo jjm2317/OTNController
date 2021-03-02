@@ -25,6 +25,9 @@ public class Tl1SystemInfo {
     String BOOT_TIME;
     String RESET_REASON;
 
+    public Tl1SystemInfo() {
+    }
+
     public Tl1SystemInfo(String TID, String UID, String LOCATION, String VENDOR, String PWOAM, String BOOT_TIME, String RESET_REASON) {
         this.TID = TID;
         this.UID = UID;
