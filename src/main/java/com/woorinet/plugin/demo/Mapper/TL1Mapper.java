@@ -43,7 +43,7 @@ public interface TL1Mapper {
     List<Tl1Slot> selectSlot() throws Exception;
     List<Tl1EthPort> selectEthPort() throws Exception;
     List<Tl1NodeConnector> selectNodeConnector() throws Exception;
-    List<CES_NODE_CONNECTOR> selectCesNodeConnector() throws Exception;
+    List<Tl1CesNodeConnector> selectCesNodeConnector() throws Exception;
     List<ODU_NODE_CONNECTOR> selectOduNodeConnector() throws Exception;
     List<MPLS_IF> selectMplsIf() throws Exception;
     List<ODU_MPLS_IF> selectOduMplsIf() throws Exception;
@@ -70,7 +70,7 @@ public interface TL1Mapper {
     void insertSlot(Tl1Slot tl1Slot) throws Exception;
     void insertEthPort(Tl1EthPort ethPort) throws Exception;
     void insertNodeConnector(Tl1NodeConnector nodeConnector) throws Exception;
-    void insertCesNodeConnector(CES_NODE_CONNECTOR cesNodeConnector) throws Exception;
+    void insertCesNodeConnector(Tl1CesNodeConnector cesNodeConnector) throws Exception;
     void insertOduNodeConnector(ODU_NODE_CONNECTOR oduNodeConnector) throws Exception;
     void insertMplsIf(MPLS_IF mplsIf) throws Exception;
     void insertOduMplsIf(ODU_MPLS_IF oduMplsIf) throws Exception;

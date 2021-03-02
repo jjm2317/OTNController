@@ -46,6 +46,8 @@ public class DemoApplication {
 	@Autowired
 	private Tl1NodeConnectorRepository tl1NodeConnectorRepository;
 	@Autowired
+	private Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository;
+	@Autowired
 	private Tl1AccessIfRepository tl1AccessIfRepository;
 //	@Autowired
 //	private ODU_MPLS_IFRepository odu_mpls_ifRepository;
@@ -165,6 +167,7 @@ public class DemoApplication {
 					tl1SlotRepository,
 					tl1EthPortRepository,
 					tl1NodeConnectorRepository,
+					tl1CesNodeConnectorRepository,
 					tl1AccessIfRepository,
 					pmRepository,
 					pm_portRepository,
@@ -201,9 +204,7 @@ public class DemoApplication {
 			manager.Tl1SyncNodeConnector();
 
 			//CesNodeConnector DB연동
-			for (NODE node: nodes) {
-				manager.Tl1SyncCesNodeConnector(CTAG, node.getTID(), tl1Mapper);
-			}
+			manager.Tl1SyncCesNodeConnector();
 
 			//OduNodeConnector DB연동
 			for (NODE node: nodes) {
@@ -477,10 +478,10 @@ public class DemoApplication {
 
 	@RequestMapping("/ces_node_connector")
 	String selectCesNodeConnector() {
-		List<CES_NODE_CONNECTOR> list = null;
+		List<Tl1CesNodeConnector> list = null;
 		try {
 			list = tl1Mapper.selectCesNodeConnector();
-			for (CES_NODE_CONNECTOR item: list) {
+			for (Tl1CesNodeConnector item: list) {
 				System.out.println(item.toString());
 			}
 		} catch (Exception e) {

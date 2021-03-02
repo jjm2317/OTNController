@@ -23,6 +23,7 @@ public class TL1Manager {
     Tl1SlotRepository tl1SlotRepository;
     Tl1EthPortRepository tl1EthPortRepository;
     Tl1NodeConnectorRepository tl1NodeConnectorRepository;
+    Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository;
     Tl1AccessIfRepository tl1AccessIfRepository;
     PMRepository pmRepository;
     PM_PORTRepository pm_portRepository;
@@ -52,6 +53,7 @@ public class TL1Manager {
                       Tl1SlotRepository tl1SlotRepository,
                       Tl1EthPortRepository tl1EthPortRepository,
                       Tl1NodeConnectorRepository tl1NodeConnectorRepository,
+                      Tl1CesNodeConnectorRepository tl1CesNodeConnectorRepository,
                       Tl1AccessIfRepository tl1AccessIfRepository,
                       PMRepository pmRepository,
                       PM_PORTRepository pm_portRepository,
@@ -73,6 +75,7 @@ public class TL1Manager {
         this.tl1SlotRepository = tl1SlotRepository;
         this.tl1EthPortRepository = tl1EthPortRepository;
         this.tl1NodeConnectorRepository = tl1NodeConnectorRepository;
+        this.tl1CesNodeConnectorRepository = tl1CesNodeConnectorRepository;
         this.tl1AccessIfRepository = tl1AccessIfRepository;
         this.pmRepository = pmRepository;
         this.pm_portRepository = pm_portRepository;
@@ -159,13 +162,13 @@ public class TL1Manager {
         }
     }
 
-    public void Tl1SyncCesNodeConnector(int CTAG, String TID, TL1Mapper tl1Mapper) throws Exception {
-        String cmd = "RTRV-CES-NODE-CONNECTOR:" + TID + "::" + CTAG + ";";
-        tl1Mapper.initDatabase();
-        tl1Mapper.initCesNodeConnectorTable();
-        ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-        for (String[] fields: fieldsList) {
-            tl1Mapper.insertCesNodeConnector(new CES_NODE_CONNECTOR(fields));
+    public void Tl1SyncCesNodeConnector() throws Exception {
+        for(NODE node: nodeList) {
+            String cmd = "RTRV-CES-NODE-CONNECTOR:" + node.getTID() + "::" + CTAG + ";";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                tl1CesNodeConnectorRepository.save(new Tl1CesNodeConnector(fields));
+            }
         }
     }
 
