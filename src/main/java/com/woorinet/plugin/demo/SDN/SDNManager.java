@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SDNManager {
-    NODERepository nodeRepository;
+    SdnNodeRepository sdnNodeRepository;
     CONNECTORRepository connectorRepository;
     LINKRepository linkRepository;
     SERVICERepository serviceRepository;
@@ -54,8 +54,8 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(NODERepository nodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
-        this.nodeRepository = nodeRepository;
+    public SDNManager(SdnNodeRepository sdnNodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+        this.sdnNodeRepository = sdnNodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
         this.serviceRepository = serviceRepository;
@@ -164,7 +164,7 @@ public class SDNManager {
             sdnNode.setSerial_num(""); // INVENTORY 에서 가져와야됨
             sdnNode.setSys_type(tl1Node.getNODE_TYPE());
 
-            nodeRepository.save(sdnNode);
+            sdnNodeRepository.save(sdnNode);
             sdnNodeHashMap.put(tl1Node.getTID(), sdnNode);
         }
 
