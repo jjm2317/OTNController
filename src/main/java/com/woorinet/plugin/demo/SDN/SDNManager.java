@@ -21,6 +21,7 @@ public class SDNManager {
     SdnPathRepository sdnPathRepository;
     SdnConstraintRepository sdnConstraintRepository;
     SdnAccessIfRepository sdnAccessIfRepository;
+    SdnCryptoModuleRepository sdnCryptoModuleRepository;
 
 
     String separator;
@@ -36,6 +37,12 @@ public class SDNManager {
     List<Tl1MplsIf> tl1MplsIfs;
     List<List<Tl1Odu>> odu_list_for_service = new ArrayList<>();
     List<Tl1Inventory> inventories;
+    List<Tl1CmPort> tl1CmPorts;
+    List<Tl1ModuleInfo> tl1ModuleInfos;
+    List<Tl1BypassInfo> tl1BypassInfos;
+    List<Tl1CmProgramInfo> tl1CmProgramInfos;
+    List<Tl1SessState> tl1SessStates;
+    List<Tl1KeyState> tl1KeyStates;
 
     HashMap<String, Tl1Node> nodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
@@ -54,7 +61,32 @@ public class SDNManager {
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, SdnLink> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, SdnService> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SdnServiceRepository sdnServiceRepository, SdnTunnelRepository sdnTunnelRepository, SdnPathRepository sdnPathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    public SDNManager(SdnNodeRepository sdnNodeRepository,
+                      SdnConnectorRepository sdnConnectorRepository,
+                      SdnLinkRepository sdnLinkRepository,
+                      SdnServiceRepository sdnServiceRepository,
+                      SdnTunnelRepository sdnTunnelRepository,
+                      SdnPathRepository sdnPathRepository,
+                      SdnConstraintRepository sdnConstraintRepository,
+                      SdnAccessIfRepository sdnAccessIfRepository,
+                      SdnCryptoModuleRepository sdnCryptoModuleRepository,
+                      List<Tl1Node> tl1Nodes,
+                      List<Tl1SystemInfo> tl1SystemInfos,
+                      List<Tl1OduNodeConnector> tl1OduNodeConnectors,
+                      List<Tl1OpticPower> tl1OpticPowers,
+                      List<Tl1Odu> oduses,
+                      List<Tl1OduMplsIf> tl1OduMplsIfs,
+                      List<Tl1Service> tl1Services,
+                      List<Tl1AccessIf> Tl1AccessIfs,
+                      List<Tl1ServiceExt> tl1ServiceExts,
+                      List<Tl1MplsIf> tl1MplsIfs,
+                      List<Tl1Inventory> inventories,
+                      List<Tl1CmPort> tl1CmPorts,
+                      List<Tl1ModuleInfo> tl1ModuleInfos,
+                      List<Tl1BypassInfo> tl1BypassInfos,
+                      List<Tl1CmProgramInfo> tl1CmProgramInfos,
+                      List<Tl1SessState> tl1SessStates,
+                      List<Tl1KeyState> tl1KeyStates) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.sdnLinkRepository = sdnLinkRepository;
@@ -63,6 +95,7 @@ public class SDNManager {
         this.sdnPathRepository = sdnPathRepository;
         this.sdnConstraintRepository = sdnConstraintRepository;
         this.sdnAccessIfRepository = sdnAccessIfRepository;
+        this.sdnCryptoModuleRepository = sdnCryptoModuleRepository;
         this.separator = ".";
         this.tl1Nodes = tl1Nodes;
         this.tl1SystemInfos = tl1SystemInfos;
@@ -75,6 +108,12 @@ public class SDNManager {
         this.tl1ServiceExts = tl1ServiceExts;
         this.tl1MplsIfs = tl1MplsIfs;
         this.inventories = inventories;
+        this.tl1CmPorts = tl1CmPorts;
+        this.tl1ModuleInfos = tl1ModuleInfos;
+        this.tl1BypassInfos = tl1BypassInfos;
+        this.tl1CmProgramInfos = tl1CmProgramInfos;
+        this.tl1SessStates = tl1SessStates;
+        this.tl1KeyStates = tl1KeyStates;
 
         makeHashMap();
 
@@ -546,6 +585,13 @@ public class SDNManager {
 
         }
 
+    }
+
+    public void SDNSyncCryptoModule() throws Exception {
+        for(Tl1ModuleInfo tl1ModuleInfo : tl1ModuleInfos) {
+
+
+        }
     }
 
 

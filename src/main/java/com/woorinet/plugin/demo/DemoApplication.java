@@ -126,6 +126,8 @@ public class DemoApplication {
 	private SdnConstraintRepository sdnConstraintRepository;
 	@Autowired
 	private SdnPathRepository sdnPathRepository;
+	@Autowired
+	private SdnCryptoModuleRepository sdnCryptoModuleRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -162,7 +164,44 @@ public class DemoApplication {
 			List<Tl1MplsIf> tl1MplsIfs = tl1MplsIfRepository.findAll();
 			// INVENTORY 조회
 			List<Tl1Inventory> inventories = tl1InventoryRepository.findAll();
-			SDNManager manager = new SDNManager(sdnNodeRepository, sdnConnectorRepository, sdnLinkRepository, sdnServiceRepository, sdnTunnelRepository, sdnPathRepository, sdnConstraintRepository, sdnAccessIfRepository, tl1Nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
+			// CM_PORT 조회
+			List<Tl1CmPort> tl1CmPorts = tl1CmPortRepository.findAll();
+			// MODULE_INFO 조회
+			List<Tl1ModuleInfo> tl1ModuleInfos = tl1ModuleInfoRepository.findAll();
+			// BYPASS_INFO 조회
+			List<Tl1BypassInfo> tl1BypassInfos = tl1BypassInfoRepository.findAll();
+			// CM_PROGRAM_INFO 조회
+			List<Tl1CmProgramInfo> tl1CmProgramInfos = tl1CmProgramInfoRepository.findAll();
+			// SESS_STATE 조회
+			List<Tl1SessState> tl1SessStates = tl1SessStateRepository.findAll();
+			// KEY_STATE 조회
+			List<Tl1KeyState> tl1KeyStates = tl1KeyStateRepository.findAll();
+			SDNManager manager = new SDNManager(sdnNodeRepository,
+					sdnConnectorRepository,
+					sdnLinkRepository,
+					sdnServiceRepository,
+					sdnTunnelRepository,
+					sdnPathRepository,
+					sdnConstraintRepository,
+					sdnAccessIfRepository,
+					sdnCryptoModuleRepository,
+					tl1Nodes,
+					tl1SystemInfos,
+					tl1OduNodeConnectors,
+					tl1OpticPowers,
+					oduses,
+					tl1OduMplsIfs,
+					tl1Services,
+					Tl1AccessIfs,
+					tl1ServiceExts,
+					tl1MplsIfs,
+					inventories,
+					tl1CmPorts,
+					tl1ModuleInfos,
+					tl1BypassInfos,
+					tl1CmProgramInfos,
+					tl1SessStates,
+					tl1KeyStates);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
