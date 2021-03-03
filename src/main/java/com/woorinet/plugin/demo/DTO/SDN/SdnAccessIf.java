@@ -8,12 +8,14 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Data
-public class ACCESS_IF {
+@Table(name="sdn_access_if")
+public class SdnAccessIf {
     int ems_id;
     @Id
     @Generated
@@ -26,11 +28,11 @@ public class ACCESS_IF {
     String service_ref;
     String node_connector_ref;
 
-    public ACCESS_IF() {
+    public SdnAccessIf() {
 
     }
 
-    public ACCESS_IF(int ems_id, String accessif_id, String accessif_name, String ne_id, String connector_id, String accessif_type, String accessif_status, String service_ref, String node_connector_ref) {
+    public SdnAccessIf(int ems_id, String accessif_id, String accessif_name, String ne_id, String connector_id, String accessif_type, String accessif_status, String service_ref, String node_connector_ref) {
         this.ems_id = ems_id;
         this.accessif_id = accessif_id;
         this.accessif_name = accessif_name;

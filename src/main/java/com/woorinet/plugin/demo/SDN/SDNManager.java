@@ -20,7 +20,7 @@ public class SDNManager {
     TUNNELRepository tunnelRepository;
     PATHRepository pathRepository;
     CONSTRAINTRepository constraintRepository;
-    ACCESS_IFRepository access_ifRepository;
+    SdnAccessIfRepository sdnAccessIfRepository;
 
 
     String separator;
@@ -54,7 +54,7 @@ public class SDNManager {
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, ACCESS_IFRepository access_ifRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    public SDNManager(SdnNodeRepository sdnNodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.connectorRepository = connectorRepository;
         this.linkRepository = linkRepository;
@@ -62,7 +62,7 @@ public class SDNManager {
         this.tunnelRepository = tunnelRepository;
         this.pathRepository = pathRepository;
         this.constraintRepository = constraintRepository;
-        this.access_ifRepository = access_ifRepository;
+        this.sdnAccessIfRepository = sdnAccessIfRepository;
         this.separator = ".";
         this.tl1Nodes = tl1Nodes;
         this.tl1SystemInfos = tl1SystemInfos;
@@ -525,23 +525,23 @@ public class SDNManager {
 
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1MplsIf.getTID());
 
-            com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF sdnAccess_if = new com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF();
+            SdnAccessIf sdnSdnAccessIf = new SdnAccessIf();
             SdnNode sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
             CONNECTOR sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
             Tl1Odu tl1Odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
             if(tl1Odu == null) continue;
 
-            sdnAccess_if.setEms_id(200009);
-            sdnAccess_if.setAccessif_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id()); // 조합
-            sdnAccess_if.setAccessif_name("");
-            sdnAccess_if.setNe_id(sdnNode.getNe_id());
-            sdnAccess_if.setConnector_id(sdnConnector.getConnect_id());
-            sdnAccess_if.setAccessif_type(tl1Odu.getSERVICE());
-            sdnAccess_if.setAccessif_status(tl1MplsIf.getOPERATION_STATUS());
-            sdnAccess_if.setService_ref("");
-            sdnAccess_if.setNode_connector_ref("");
+            sdnSdnAccessIf.setEms_id(200009);
+            sdnSdnAccessIf.setAccessif_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id()); // 조합
+            sdnSdnAccessIf.setAccessif_name("");
+            sdnSdnAccessIf.setNe_id(sdnNode.getNe_id());
+            sdnSdnAccessIf.setConnector_id(sdnConnector.getConnect_id());
+            sdnSdnAccessIf.setAccessif_type(tl1Odu.getSERVICE());
+            sdnSdnAccessIf.setAccessif_status(tl1MplsIf.getOPERATION_STATUS());
+            sdnSdnAccessIf.setService_ref("");
+            sdnSdnAccessIf.setNode_connector_ref("");
 
-            access_ifRepository.save(sdnAccess_if);
+            sdnAccessIfRepository.save(sdnSdnAccessIf);
 
 
         }
