@@ -3,11 +3,9 @@ package com.woorinet.plugin.demo;
 import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
-import com.woorinet.plugin.demo.Mapper.TL1Mapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
-import com.woorinet.plugin.demo.Repository.TL1.Tl1AccessIfRepository;
 import com.woorinet.plugin.demo.SDN.SDNManager;
 import com.woorinet.plugin.demo.Tl1.TL1Manager;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
@@ -30,10 +28,6 @@ import java.util.Map;
 @RestController
 @SpringBootApplication
 public class DemoApplication {
-
-	@Autowired
-	private TL1Mapper tl1Mapper;
-
 	@Autowired
 	private QNETMapper qnetMapper;
 
@@ -147,25 +141,25 @@ public class DemoApplication {
 	String convertTL1() {
 		try {
 			// Node 조회
-			List<Tl1Node> tl1Nodes = tl1Mapper.selectNode();
+			List<Tl1Node> tl1Nodes = tl1NodeRepository.findAll();
 			// SYSTEM_INFO 조회
-			List<Tl1SystemInfo> tl1SystemInfos = tl1Mapper.selectSystemInfo();
+			List<Tl1SystemInfo> tl1SystemInfos = tl1SystemInfoRepository.findAll();
 			// ODU_NODE_CONNECTOR 조회
-			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1Mapper.selectOduNodeConnector();
+			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1OduNodeConnectorRepository.findAll();
 			// ODU 조회
-			List<Tl1Odu> oduses = tl1Mapper.selectOdu();
+			List<Tl1Odu> oduses = tl1OduRepository.findAll();
 			// ODU_MPLS_IF 조회
-			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1Mapper.selectOduMplsIf();
+			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1OduMplsIfRepository.findAll();
 			// OPTIC_POWER 조회
-			List<Tl1OpticPower> tl1OpticPowers = tl1Mapper.selectOpticPower();
+			List<Tl1OpticPower> tl1OpticPowers = tl1OpticPowerRepository.findAll();
 			// SERVICE 조회
-			List<Tl1Service> tl1Services = tl1Mapper.selectService();
+			List<Tl1Service> tl1Services = tl1ServiceRepository.findAll();
 			// ACCESS_IF 조회
-			List<Tl1AccessIf> Tl1AccessIfs = tl1Mapper.selectAccessIf();
+			List<Tl1AccessIf> Tl1AccessIfs = tl1AccessIfRepository.findAll();
 			// SERVICE_EXT 조회
-			List<Tl1ServiceExt> tl1ServiceExts = tl1Mapper.selectServiceExt();
+			List<Tl1ServiceExt> tl1ServiceExts = tl1ServiceExtRepository.findAll();
 			// MPLS_IF 조회
-			List<Tl1MplsIf> tl1MplsIfs = tl1Mapper.selectMplsIf();
+			List<Tl1MplsIf> tl1MplsIfs = tl1MplsIfRepository.findAll();
 			// INVENTORY 조회
 			List<Tl1Inventory> inventories = tl1InventoryRepository.findAll();
 			SDNManager manager = new SDNManager(nodeRepository,connectorRepository,linkRepository,serviceRepository, tunnelRepository, pathRepository, constraintRepository, access_ifRepository, tl1Nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
@@ -402,7 +396,7 @@ public class DemoApplication {
 	String selectNode() {
 		List<Tl1Node> list = null;
 		try {
-			list = tl1Mapper.selectNode();
+			//list = tl1Mapper.selectNode();
 			for (Tl1Node item: list) {
 				System.out.println(item.toString());
 			}
@@ -416,7 +410,7 @@ public class DemoApplication {
 	String selectSystemInfo() {
 		List<Tl1SystemInfo> list = null;
 		try {
-			list = tl1Mapper.selectSystemInfo();
+			//list = tl1Mapper.selectSystemInfo();
 			for (Tl1SystemInfo item: list) {
 				System.out.println(item.toString());
 			}
@@ -430,7 +424,7 @@ public class DemoApplication {
 	String selectAccessIf() {
 		List<Tl1AccessIf> list = null;
 		try {
-			list = tl1Mapper.selectAccessIf();
+			//list = tl1Mapper.selectAccessIf();
 			for (Tl1AccessIf item: list) {
 				System.out.println(item.toString());
 			}
@@ -444,7 +438,7 @@ public class DemoApplication {
 	String selectCesNodeConnector() {
 		List<Tl1CesNodeConnector> list = null;
 		try {
-			list = tl1Mapper.selectCesNodeConnector();
+			//list = tl1Mapper.selectCesNodeConnector();
 			for (Tl1CesNodeConnector item: list) {
 				System.out.println(item.toString());
 			}
@@ -458,7 +452,7 @@ public class DemoApplication {
 	String selectEthPort() {
 		List<Tl1EthPort> list = null;
 		try {
-			list = tl1Mapper.selectEthPort();
+			//list = tl1Mapper.selectEthPort();
 			for (Tl1EthPort item: list) {
 				System.out.println(item.toString());
 			}
@@ -472,7 +466,7 @@ public class DemoApplication {
 	String selectMplsAc() {
 		List<Tl1MplsAc> list = null;
 		try {
-			list = tl1Mapper.selectMplsAc();
+			//list = tl1Mapper.selectMplsAc();
 			for (Tl1MplsAc item: list) {
 				System.out.println(item.toString());
 			}
@@ -486,7 +480,7 @@ public class DemoApplication {
 	String selectMplsIf() {
 		List<Tl1MplsIf> list = null;
 		try {
-			list = tl1Mapper.selectMplsIf();
+			//list = tl1Mapper.selectMplsIf();
 			for (Tl1MplsIf item: list) {
 				System.out.println(item.toString());
 			}
