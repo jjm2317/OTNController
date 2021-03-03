@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class SDNManager {
     SdnNodeRepository sdnNodeRepository;
-    CONNECTORRepository connectorRepository;
+    SdnConnectorRepository sdnConnectorRepository;
     LINKRepository linkRepository;
     SERVICERepository serviceRepository;
     TUNNELRepository tunnelRepository;
@@ -51,12 +51,12 @@ public class SDNManager {
     HashMap<String, List<Tl1Odu>> odu_hashMapForPath = new HashMap<>();
 
     HashMap<String, SdnNode> sdnNodeHashMap = new HashMap<>();
-    HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
+    HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, CONNECTORRepository connectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
-        this.connectorRepository = connectorRepository;
+        this.sdnConnectorRepository = sdnConnectorRepository;
         this.linkRepository = linkRepository;
         this.serviceRepository = serviceRepository;
         this.tunnelRepository = tunnelRepository;
@@ -173,50 +173,50 @@ public class SDNManager {
     public void SDNSyncConnectorList( ) throws Exception {
 
         for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
-            CONNECTOR connector = new CONNECTOR();
+            SdnConnector sdnConnector = new SdnConnector();
 
             Tl1Node tl1Node = nodeHashMap.get(tl1OduNodeConnector.getTID());
             SdnNode sdnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTID());
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1OduNodeConnector.getTID()+"/"+ tl1OduNodeConnector.getAID());
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1Node.getTID());
 
-            connector.setEms_id(200009);
-            connector.setConnect_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_name() + separator + tl1OduNodeConnector.getSHELF_INDEX() + separator + tl1OduNodeConnector.getSLOT_INDEX() + separator + tl1OduNodeConnector.getPORT_INDEX());
-            connector.setConnect_name("");
-            connector.setNe_id(sdnNode.getNe_id());
-            connector.setNe_name(sdnNode.getNe_name());
-            connector.setRack_id("");
-            connector.setShelf_id(tl1OduNodeConnector.getSHELF_INDEX());
-            connector.setSlot_id(tl1OduNodeConnector.getSLOT_INDEX());
-            connector.setSubslot_id("");
-            connector.setPort_id(tl1OduNodeConnector.getPORT_INDEX());
-            if (tl1OduNodeConnector.getPORT_STATUS().equals("ACT")) connector.setConnect_status("up");
-            else if (tl1OduNodeConnector.getPORT_STATUS().equals("DEACT")) connector.setConnect_status("down");
-            connector.setConnect_role(tl1OduNodeConnector.getPORT_ROLE());
+            sdnConnector.setEms_id(200009);
+            sdnConnector.setConnect_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_name() + separator + tl1OduNodeConnector.getSHELF_INDEX() + separator + tl1OduNodeConnector.getSLOT_INDEX() + separator + tl1OduNodeConnector.getPORT_INDEX());
+            sdnConnector.setConnect_name("");
+            sdnConnector.setNe_id(sdnNode.getNe_id());
+            sdnConnector.setNe_name(sdnNode.getNe_name());
+            sdnConnector.setRack_id("");
+            sdnConnector.setShelf_id(tl1OduNodeConnector.getSHELF_INDEX());
+            sdnConnector.setSlot_id(tl1OduNodeConnector.getSLOT_INDEX());
+            sdnConnector.setSubslot_id("");
+            sdnConnector.setPort_id(tl1OduNodeConnector.getPORT_INDEX());
+            if (tl1OduNodeConnector.getPORT_STATUS().equals("ACT")) sdnConnector.setConnect_status("up");
+            else if (tl1OduNodeConnector.getPORT_STATUS().equals("DEACT")) sdnConnector.setConnect_status("down");
+            sdnConnector.setConnect_role(tl1OduNodeConnector.getPORT_ROLE());
             if(tl1OpticPower == null) {
-                connector.setConnect_type("");
-                connector.setConnect_idle("idle");
-                connector.setConnect_llcf("");
-                connector.setConnect_lambda("");
-                connector.setModule_name("");
-                connector.setConnect_pec("");
-                connector.setConnect_serial("");
-                connector.setUnit_type("");
+                sdnConnector.setConnect_type("");
+                sdnConnector.setConnect_idle("idle");
+                sdnConnector.setConnect_llcf("");
+                sdnConnector.setConnect_lambda("");
+                sdnConnector.setModule_name("");
+                sdnConnector.setConnect_pec("");
+                sdnConnector.setConnect_serial("");
+                sdnConnector.setUnit_type("");
             } else {
-                if(tl1OpticPower.getPART_NUMBER().equals("TR-PX13L-NG2") ) connector.setConnect_type("sfp+");
-                else if (tl1OpticPower.getPART_NUMBER().equals("TR-PX13L-NG2") || tl1OpticPower.getPART_NUMBER().equals("EOLP-1396-10") || tl1OpticPower.getPART_NUMBER().equals("FTLX1471D3BNL") ) connector.setConnect_type("sfp");
-                else connector.setConnect_type(tl1OpticPower.getPART_NUMBER()); // 구글링 해야됨
-                connector.setConnect_idle("occupied");
-                connector.setConnect_llcf("");
-                connector.setConnect_lambda(tl1OpticPower.getTX_WAVELENGTH());
-                connector.setModule_name(tl1OpticPower.getPART_NUMBER());
-                connector.setConnect_pec("");
-                connector.setConnect_serial(tl1OpticPower.getSERIAL());
-                connector.setUnit_type(tl1OpticPower.getUNIT_TYPE());
+                if(tl1OpticPower.getPART_NUMBER().equals("TR-PX13L-NG2") ) sdnConnector.setConnect_type("sfp+");
+                else if (tl1OpticPower.getPART_NUMBER().equals("TR-PX13L-NG2") || tl1OpticPower.getPART_NUMBER().equals("EOLP-1396-10") || tl1OpticPower.getPART_NUMBER().equals("FTLX1471D3BNL") ) sdnConnector.setConnect_type("sfp");
+                else sdnConnector.setConnect_type(tl1OpticPower.getPART_NUMBER()); // 구글링 해야됨
+                sdnConnector.setConnect_idle("occupied");
+                sdnConnector.setConnect_llcf("");
+                sdnConnector.setConnect_lambda(tl1OpticPower.getTX_WAVELENGTH());
+                sdnConnector.setModule_name(tl1OpticPower.getPART_NUMBER());
+                sdnConnector.setConnect_pec("");
+                sdnConnector.setConnect_serial(tl1OpticPower.getSERIAL());
+                sdnConnector.setUnit_type(tl1OpticPower.getUNIT_TYPE());
             }
 
-            connectorRepository.save(connector);
-            sdnConnectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), connector);
+            sdnConnectorRepository.save(sdnConnector);
+            sdnConnectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), sdnConnector);
         }
 
     }
@@ -231,8 +231,8 @@ public class SDNManager {
             Tl1SystemInfo dst_tl1SystemInfo = system_infoHashMap.get(tl1OduMplsIf.getDST_TID());
             SdnNode src_sdnSdnNode = sdnNodeHashMap.get(tl1OduMplsIf.getSRC_TID());
             SdnNode dst_sdnSdnNode = sdnNodeHashMap.get(tl1OduMplsIf.getDST_TID());
-            CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
-            CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDST_TID()+ '/' + tl1OduMplsIf.getDST_PORT());
+            SdnConnector src_sdnSdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
+            SdnConnector dst_sdnSdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDST_TID()+ '/' + tl1OduMplsIf.getDST_PORT());
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1OduMplsIf.getTID() + '/' + tl1OduMplsIf.getMPLS_TP_ID());
             Tl1Odu tl1Odu = oduHashMapForODUTUNNEL.get(tl1OduMplsIf.getTID()+ '/' + tl1OduMplsIf.getMPLS_TP_ID());
             Tl1OduNodeConnector tl1OduNodeConnector = odu_node_connectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
@@ -243,16 +243,16 @@ public class SDNManager {
             link.setEms_id(200009);
             link.setDst_ems_id(200009);
             link.setLink_id(src_tl1SystemInfo.getVENDOR() + separator + src_sdnSdnNode.getSys_type() + separator + src_sdnSdnNode.getNe_name() + separator +
-                    src_sdnConnector.getShelf_id() + separator + src_sdnConnector.getSlot_id() + separator + src_sdnConnector.getPort_id()
+                    src_sdnSdnConnector.getShelf_id() + separator + src_sdnSdnConnector.getSlot_id() + separator + src_sdnSdnConnector.getPort_id()
                     + ":" + dst_tl1SystemInfo.getVENDOR() + separator + dst_sdnSdnNode.getSys_type() + separator + dst_sdnSdnNode.getNe_name() + separator +
-                    dst_sdnConnector.getShelf_id() + separator + dst_sdnConnector.getSlot_id() + separator + dst_sdnConnector.getPort_id());
+                    dst_sdnSdnConnector.getShelf_id() + separator + dst_sdnSdnConnector.getSlot_id() + separator + dst_sdnSdnConnector.getPort_id());
             link.setLink_nm(tl1OduMplsIf.getNAME());
             link.setSrc_ne_id(src_sdnSdnNode.getNe_id());
             link.setSrc_ne_name(src_sdnSdnNode.getNe_name());
-            link.setSrc_node_connector_id(src_sdnConnector.getConnect_id());
+            link.setSrc_node_connector_id(src_sdnSdnConnector.getConnect_id());
             link.setDst_ne_id(dst_sdnSdnNode.getNe_id());
             link.setDst_ne_name(dst_sdnSdnNode.getNe_name());
-            link.setDst_node_connector_id(dst_sdnConnector.getConnect_id());
+            link.setDst_node_connector_id(dst_sdnSdnConnector.getConnect_id());
             link.setLink_type(tl1OduNodeConnector.getPORT_TYPE());
             link.setLink_status(tl1OduMplsIf.getOPERATION_STATUS());
             link.setLink_category("");
@@ -295,8 +295,8 @@ public class SDNManager {
             SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu_tail.getTID());
             com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = new com.woorinet.plugin.demo.DTO.SDN.SERVICE();
 
-            CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(tl1Odu_head.getTID()+ '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
-            CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(tl1Odu_tail.getTID()+ '/' + tl1Odu_tail.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_tail.getLOCAL_ID().split("-")[1]);
+            SdnConnector src_sdnSdnConnector = sdnConnectorHashMap.get(tl1Odu_head.getTID()+ '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
+            SdnConnector dst_sdnSdnConnector = sdnConnectorHashMap.get(tl1Odu_tail.getTID()+ '/' + tl1Odu_tail.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_tail.getLOCAL_ID().split("-")[1]);
 
             Tl1OduMplsIf tl1OduMplsIf = odu_mpls_ifHashMap.get(tl1Odu_head.getTID() + '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1Odu_head.getTID() + '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
@@ -305,11 +305,11 @@ public class SDNManager {
             sdnService.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
             sdnService.setSrc_ne_id(sdnSrcSdnNode.getNe_id());
             sdnService.setSrc_ne_name(sdnSrcSdnNode.getNe_name());
-            sdnService.setSrc_connector_id(src_sdnConnector.getConnect_id());
+            sdnService.setSrc_connector_id(src_sdnSdnConnector.getConnect_id());
             sdnService.setSrc_accessif_type(tl1Odu_head.getSERVICE());
             sdnService.setDst_ne_id(sdnDstSdnNode.getNe_id());
             sdnService.setDst_ne_name(sdnDstSdnNode.getNe_name());
-            sdnService.setDst_connector_id(dst_sdnConnector.getConnect_id());
+            sdnService.setDst_connector_id(dst_sdnSdnConnector.getConnect_id());
             sdnService.setDst_accessif_type(tl1Odu_tail.getSERVICE());
             sdnService.setService_type("");
             sdnService.setService_name(tl1Odu_head.getNAME());
@@ -527,7 +527,7 @@ public class SDNManager {
 
             SdnAccessIf sdnSdnAccessIf = new SdnAccessIf();
             SdnNode sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
-            CONNECTOR sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
+            SdnConnector sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
             Tl1Odu tl1Odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
             if(tl1Odu == null) continue;
 

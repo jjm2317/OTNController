@@ -8,12 +8,14 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Data
-public class CONNECTOR {
+@Table(name="sdn_connector")
+public class SdnConnector {
     int ems_id;
     @Id
     @Generated
@@ -37,11 +39,11 @@ public class CONNECTOR {
     String connect_serial;
     String unit_type;
 
-    public CONNECTOR() {
+    public SdnConnector() {
 
     }
 
-    public CONNECTOR(int ems_id, String connect_id,String connect_name, String connect_type, String ne_id, String ne_name, String rack_id, String shelf_id, String slot_id, String subslot_id, String port_id, String connect_status, String connect_role, String connect_idle, String connect_llcf, String connect_lambda, String module_name, String connect_pec, String connect_serial, String unit_type) {
+    public SdnConnector(int ems_id, String connect_id, String connect_name, String connect_type, String ne_id, String ne_name, String rack_id, String shelf_id, String slot_id, String subslot_id, String port_id, String connect_status, String connect_role, String connect_idle, String connect_llcf, String connect_lambda, String module_name, String connect_pec, String connect_serial, String unit_type) {
         this.ems_id = ems_id;
         this.connect_id = connect_id;
         this.connect_name = connect_name;
