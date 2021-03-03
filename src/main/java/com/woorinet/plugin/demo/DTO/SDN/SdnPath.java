@@ -8,12 +8,14 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Data
-public class PATH {
+@Table(name="sdn_path")
+public class SdnPath {
     @GeneratedValue
     @Id
     int id;
@@ -28,11 +30,11 @@ public class PATH {
     String instance_ref;
     String ref_type;
 
-    public PATH() {
+    public SdnPath() {
 
     }
 
-    public PATH(int ems_id, String service_id, String path_type, String connection_idx, String connection_type, String direction_type, String tp_type, String instance_type, String instance_ref, String ref_type) {
+    public SdnPath(int ems_id, String service_id, String path_type, String connection_idx, String connection_type, String direction_type, String tp_type, String instance_type, String instance_ref, String ref_type) {
         this.ems_id = ems_id;
         this.service_id = service_id;
         this.path_type = path_type;

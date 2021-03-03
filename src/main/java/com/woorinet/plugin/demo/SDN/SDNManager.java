@@ -18,7 +18,7 @@ public class SDNManager {
     SdnLinkRepository sdnLinkRepository;
     SERVICERepository serviceRepository;
     TUNNELRepository tunnelRepository;
-    PATHRepository pathRepository;
+    SdnPathRepository sdnPathRepository;
     SdnConstraintRepository sdnConstraintRepository;
     SdnAccessIfRepository sdnAccessIfRepository;
 
@@ -54,13 +54,13 @@ public class SDNManager {
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, SdnLink> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, SdnPathRepository sdnPathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.sdnLinkRepository = sdnLinkRepository;
         this.serviceRepository = serviceRepository;
         this.tunnelRepository = tunnelRepository;
-        this.pathRepository = pathRepository;
+        this.sdnPathRepository = sdnPathRepository;
         this.sdnConstraintRepository = sdnConstraintRepository;
         this.sdnAccessIfRepository = sdnAccessIfRepository;
         this.separator = ".";
@@ -407,34 +407,34 @@ public class SDNManager {
             { // HEAD <--> TRANSIT_FROM
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] );
                 com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
-                PATH path = new PATH();
-                path.setEms_id(200009);
-                path.setService_id(sdnService.getService_id());
-                path.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
-                path.setConnection_idx("1");
-                path.setConnection_type("Forward");
-                path.setDirection_type("ingress");
-                path.setTp_type("");
-                path.setInstance_type("link");
-                path.setInstance_ref(sdnLink.getLink_id());
-                path.setRef_type("");
-                pathRepository.save(path);
+                SdnPath sdnPath = new SdnPath();
+                sdnPath.setEms_id(200009);
+                sdnPath.setService_id(sdnService.getService_id());
+                sdnPath.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
+                sdnPath.setConnection_idx("1");
+                sdnPath.setConnection_type("Forward");
+                sdnPath.setDirection_type("ingress");
+                sdnPath.setTp_type("");
+                sdnPath.setInstance_type("link");
+                sdnPath.setInstance_ref(sdnLink.getLink_id());
+                sdnPath.setRef_type("");
+                sdnPathRepository.save(sdnPath);
             }
             { // TRANSIT_TO <--> TAIL
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] );
                 com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
-                PATH path = new PATH();
-                path.setEms_id(200009);
-                path.setService_id(sdnService.getService_id());
-                path.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
-                path.setConnection_idx("2");
-                path.setConnection_type("Forward");
-                path.setDirection_type("ingress");
-                path.setTp_type("");
-                path.setInstance_type("link");
-                path.setInstance_ref(sdnLink.getLink_id());
-                path.setRef_type("");
-                pathRepository.save(path);
+                SdnPath sdnPath = new SdnPath();
+                sdnPath.setEms_id(200009);
+                sdnPath.setService_id(sdnService.getService_id());
+                sdnPath.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
+                sdnPath.setConnection_idx("2");
+                sdnPath.setConnection_type("Forward");
+                sdnPath.setDirection_type("ingress");
+                sdnPath.setTp_type("");
+                sdnPath.setInstance_type("link");
+                sdnPath.setInstance_ref(sdnLink.getLink_id());
+                sdnPath.setRef_type("");
+                sdnPathRepository.save(sdnPath);
             }
         }
 
@@ -462,34 +462,34 @@ public class SDNManager {
             { // HEAD <--> TRANSIT_FROM
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1]);
                 com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
-                PATH path = new PATH();
-                path.setEms_id(200009);
-                path.setService_id(sdnService.getService_id());
-                path.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
-                path.setConnection_idx("3");
-                path.setConnection_type("Forward");
-                path.setDirection_type("egress");
-                path.setTp_type("");
-                path.setInstance_type("link");
-                path.setInstance_ref(sdnLink.getLink_id());
-                path.setRef_type("");
-                pathRepository.save(path);
+                SdnPath sdnPath = new SdnPath();
+                sdnPath.setEms_id(200009);
+                sdnPath.setService_id(sdnService.getService_id());
+                sdnPath.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
+                sdnPath.setConnection_idx("3");
+                sdnPath.setConnection_type("Forward");
+                sdnPath.setDirection_type("egress");
+                sdnPath.setTp_type("");
+                sdnPath.setInstance_type("link");
+                sdnPath.setInstance_ref(sdnLink.getLink_id());
+                sdnPath.setRef_type("");
+                sdnPathRepository.save(sdnPath);
             }
             { // TRANSIT_TO <--> TAIL
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] +'-'+ tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1]);
                 com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
-                PATH path = new PATH();
-                path.setEms_id(200009);
-                path.setService_id(sdnService.getService_id());
-                path.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
-                path.setConnection_idx("4");
-                path.setConnection_type("Forward");
-                path.setDirection_type("egress");
-                path.setTp_type("");
-                path.setInstance_type("link");
-                path.setInstance_ref(sdnLink.getLink_id());
-                path.setRef_type("");
-                pathRepository.save(path);
+                SdnPath sdnPath = new SdnPath();
+                sdnPath.setEms_id(200009);
+                sdnPath.setService_id(sdnService.getService_id());
+                sdnPath.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
+                sdnPath.setConnection_idx("4");
+                sdnPath.setConnection_type("Forward");
+                sdnPath.setDirection_type("egress");
+                sdnPath.setTp_type("");
+                sdnPath.setInstance_type("link");
+                sdnPath.setInstance_ref(sdnLink.getLink_id());
+                sdnPath.setRef_type("");
+                sdnPathRepository.save(sdnPath);
             }
         }
 
