@@ -9,12 +9,14 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Data
-public class CONSTRAINT {
+@Table(name="sdn_constraint")
+public class SdnConstraint {
     @Id
     @GeneratedValue
     @Generated
@@ -27,11 +29,11 @@ public class CONSTRAINT {
     String const_value;
     String const_operator;
 
-    public CONSTRAINT() {
+    public SdnConstraint() {
 
     }
 
-    public CONSTRAINT(int ems_id, String service_id, String const_id, String const_type, String const_name, String const_value, String const_operator) {
+    public SdnConstraint(int ems_id, String service_id, String const_id, String const_type, String const_name, String const_value, String const_operator) {
         this.ems_id = ems_id;
         this.service_id = service_id;
         this.const_id = const_id;

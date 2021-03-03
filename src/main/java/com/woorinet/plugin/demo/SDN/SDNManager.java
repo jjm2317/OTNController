@@ -19,7 +19,7 @@ public class SDNManager {
     SERVICERepository serviceRepository;
     TUNNELRepository tunnelRepository;
     PATHRepository pathRepository;
-    CONSTRAINTRepository constraintRepository;
+    SdnConstraintRepository sdnConstraintRepository;
     SdnAccessIfRepository sdnAccessIfRepository;
 
 
@@ -54,14 +54,14 @@ public class SDNManager {
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, CONSTRAINTRepository constraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, LINKRepository linkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, PATHRepository pathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.linkRepository = linkRepository;
         this.serviceRepository = serviceRepository;
         this.tunnelRepository = tunnelRepository;
         this.pathRepository = pathRepository;
-        this.constraintRepository = constraintRepository;
+        this.sdnConstraintRepository = sdnConstraintRepository;
         this.sdnAccessIfRepository = sdnAccessIfRepository;
         this.separator = ".";
         this.tl1Nodes = tl1Nodes;
@@ -503,18 +503,18 @@ public class SDNManager {
 
             SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
 
-            CONSTRAINT constraint = new CONSTRAINT();
+            SdnConstraint sdnConstraint = new SdnConstraint();
 
-            constraint.setEms_id(200009);
-            constraint.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
-            constraint.setConst_id("protection type");
-            constraint.setConst_type("");
-            constraint.setConst_name("PROTECTION TYPE");
-            constraint.setConst_value(tl1Odu_head.getPROT_TYPE());
-            constraint.setConst_operator("");
+            sdnConstraint.setEms_id(200009);
+            sdnConstraint.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
+            sdnConstraint.setConst_id("protection type");
+            sdnConstraint.setConst_type("");
+            sdnConstraint.setConst_name("PROTECTION TYPE");
+            sdnConstraint.setConst_value(tl1Odu_head.getPROT_TYPE());
+            sdnConstraint.setConst_operator("");
 
 
-            constraintRepository.save(constraint);
+            sdnConstraintRepository.save(sdnConstraint);
 
         }
     }
