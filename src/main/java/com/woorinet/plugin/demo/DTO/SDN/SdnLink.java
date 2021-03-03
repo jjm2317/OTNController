@@ -8,12 +8,14 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Data
-public class LINK {
+@Table(name="sdn_link")
+public class SdnLink {
     int ems_id;
     int dst_ems_id;
     @Id
@@ -52,11 +54,11 @@ public class LINK {
     int available_odu4s;
     int available_odu4cns;
     int available_oduflexs;
-    public LINK() {
+    public SdnLink() {
 
     }
 
-    public LINK(int ems_id, int dst_ems_id, String link_id, String link_nm, String src_ne_id, String src_ne_name, String src_node_connector_id, String dst_ne_id, String dst_ne_name, String dst_node_connector_id, String link_ype, String link_stats, String link_category, String high_order_tunnel, String latency, String distance, String srlg, String ovpn, String timeslot, String lambda, int maximum_odu0s, int maximum_odu1s, int maximum_odu2s, int maximum_odu2es, int maximum_odu3s, int maximum_odu4s, int maximum_odu4cns, int maximum_odu4flexs, int available_odu0s, int available_odu1s, int available_odu2s, int available_odu2es, int available_odu3s, int available_odu4s, int available_odu4cns, int available_oduflexs) {
+    public SdnLink(int ems_id, int dst_ems_id, String link_id, String link_nm, String src_ne_id, String src_ne_name, String src_node_connector_id, String dst_ne_id, String dst_ne_name, String dst_node_connector_id, String link_ype, String link_stats, String link_category, String high_order_tunnel, String latency, String distance, String srlg, String ovpn, String timeslot, String lambda, int maximum_odu0s, int maximum_odu1s, int maximum_odu2s, int maximum_odu2es, int maximum_odu3s, int maximum_odu4s, int maximum_odu4cns, int maximum_odu4flexs, int available_odu0s, int available_odu1s, int available_odu2s, int available_odu2es, int available_odu3s, int available_odu4s, int available_odu4cns, int available_oduflexs) {
         this.ems_id = ems_id;
         this.dst_ems_id = dst_ems_id;
         this.link_id = link_id;
