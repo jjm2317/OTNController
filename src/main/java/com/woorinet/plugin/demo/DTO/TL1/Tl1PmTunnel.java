@@ -2,11 +2,11 @@ package com.woorinet.plugin.demo.DTO.TL1;
 
 
 import lombok.Data;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "tl1_pm_tunnel")
 public class Tl1PmTunnel {
     @Id
-    @Generated
+    @GeneratedValue
     int PM_TUNNEL_ID;
     String TID;
     String TUNNEL_NAME;
