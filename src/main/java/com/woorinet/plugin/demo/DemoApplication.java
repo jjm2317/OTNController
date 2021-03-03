@@ -119,7 +119,7 @@ public class DemoApplication {
 	@Autowired
 	private SdnServiceRepository sdnServiceRepository;
 	@Autowired
-	private TUNNELRepository tunnelRepository;
+	private SdnTunnelRepository sdnTunnelRepository;
 	@Autowired
 	private SdnAccessIfRepository sdnAccessIfRepository;
 	@Autowired
@@ -162,7 +162,7 @@ public class DemoApplication {
 			List<Tl1MplsIf> tl1MplsIfs = tl1MplsIfRepository.findAll();
 			// INVENTORY 조회
 			List<Tl1Inventory> inventories = tl1InventoryRepository.findAll();
-			SDNManager manager = new SDNManager(sdnNodeRepository, sdnConnectorRepository, sdnLinkRepository, sdnServiceRepository, tunnelRepository, sdnPathRepository, sdnConstraintRepository, sdnAccessIfRepository, tl1Nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
+			SDNManager manager = new SDNManager(sdnNodeRepository, sdnConnectorRepository, sdnLinkRepository, sdnServiceRepository, sdnTunnelRepository, sdnPathRepository, sdnConstraintRepository, sdnAccessIfRepository, tl1Nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();

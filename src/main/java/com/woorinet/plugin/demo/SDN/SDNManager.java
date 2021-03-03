@@ -17,7 +17,7 @@ public class SDNManager {
     SdnConnectorRepository sdnConnectorRepository;
     SdnLinkRepository sdnLinkRepository;
     SdnServiceRepository sdnServiceRepository;
-    TUNNELRepository tunnelRepository;
+    SdnTunnelRepository sdnTunnelRepository;
     SdnPathRepository sdnPathRepository;
     SdnConstraintRepository sdnConstraintRepository;
     SdnAccessIfRepository sdnAccessIfRepository;
@@ -54,12 +54,12 @@ public class SDNManager {
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, SdnLink> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, SdnService> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SdnServiceRepository sdnServiceRepository, TUNNELRepository tunnelRepository, SdnPathRepository sdnPathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SdnServiceRepository sdnServiceRepository, SdnTunnelRepository sdnTunnelRepository, SdnPathRepository sdnPathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.sdnLinkRepository = sdnLinkRepository;
         this.sdnServiceRepository = sdnServiceRepository;
-        this.tunnelRepository = tunnelRepository;
+        this.sdnTunnelRepository = sdnTunnelRepository;
         this.sdnPathRepository = sdnPathRepository;
         this.sdnConstraintRepository = sdnConstraintRepository;
         this.sdnAccessIfRepository = sdnAccessIfRepository;
@@ -336,45 +336,45 @@ public class SDNManager {
     public void SDNSyncTunnelList( ) throws  Exception {
 
         for (Tl1Odu tl1Odu : oduses) {
-            TUNNEL tunnel = new TUNNEL();
+            SdnTunnel sdnTunnel = new SdnTunnel();
             SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_SRC_LSR());
             SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_DST_LSR());
 
 
-            tunnel.setEms_id(200009);
-            tunnel.setTunnel_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu.getNAME());
-            tunnel.setSrc_ne_id(sdnSrcSdnNode.getNe_id());
-            tunnel.setSrc_ne_name(sdnSrcSdnNode.getNe_name());
-            tunnel.setDst_ne_id(sdnDstSdnNode.getNe_id());
-            tunnel.setDst_ne_name(sdnDstSdnNode.getNe_name());
-            tunnel.setRate_type(tl1Odu.getTYPE());
-            tunnel.setMultiple_rate("1");
-            tunnel.setLocal_id("");
-            tunnel.setRequest_id("");
-            tunnel.setTunnel_name(tl1Odu.getNAME());
+            sdnTunnel.setEms_id(200009);
+            sdnTunnel.setTunnel_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu.getNAME());
+            sdnTunnel.setSrc_ne_id(sdnSrcSdnNode.getNe_id());
+            sdnTunnel.setSrc_ne_name(sdnSrcSdnNode.getNe_name());
+            sdnTunnel.setDst_ne_id(sdnDstSdnNode.getNe_id());
+            sdnTunnel.setDst_ne_name(sdnDstSdnNode.getNe_name());
+            sdnTunnel.setRate_type(tl1Odu.getTYPE());
+            sdnTunnel.setMultiple_rate("1");
+            sdnTunnel.setLocal_id("");
+            sdnTunnel.setRequest_id("");
+            sdnTunnel.setTunnel_name(tl1Odu.getNAME());
             if(tl1Odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
-                tunnel.setTunnel_type("otn");
+                sdnTunnel.setTunnel_type("otn");
             }else {
-                tunnel.setTunnel_type(tl1Odu.getEMS_SERVICE());
+                sdnTunnel.setTunnel_type(tl1Odu.getEMS_SERVICE());
             }
-            tunnel.setTunnel_status("");
-            tunnel.setConfiguration_action("");
-            tunnel.setConfiguration_result_type("");
-            tunnel.setTunnel_oam_enabler("");
-            tunnel.setDeployment_enabler("");
-            tunnel.setDeployment_status("");
-            tunnel.setActive_path(tl1Odu.getACTIVE_PATH_STATUS());
-            tunnel.setSrc_node_ref("");
-            tunnel.setDst_node_ref("");
-            tunnel.setService_ref("");
-            tunnel.setAccessif_ref("");
-            tunnel.setProtection_type(tl1Odu.getPROT_TYPE());
-            tunnel.setWorking_path("");
-            tunnel.setProtection_path("");
-            tunnel.setService_mapping("");
-            tunnel.setCreation_date(tl1Odu.getCREATION_DATE());
+            sdnTunnel.setTunnel_status("");
+            sdnTunnel.setConfiguration_action("");
+            sdnTunnel.setConfiguration_result_type("");
+            sdnTunnel.setTunnel_oam_enabler("");
+            sdnTunnel.setDeployment_enabler("");
+            sdnTunnel.setDeployment_status("");
+            sdnTunnel.setActive_path(tl1Odu.getACTIVE_PATH_STATUS());
+            sdnTunnel.setSrc_node_ref("");
+            sdnTunnel.setDst_node_ref("");
+            sdnTunnel.setService_ref("");
+            sdnTunnel.setAccessif_ref("");
+            sdnTunnel.setProtection_type(tl1Odu.getPROT_TYPE());
+            sdnTunnel.setWorking_path("");
+            sdnTunnel.setProtection_path("");
+            sdnTunnel.setService_mapping("");
+            sdnTunnel.setCreation_date(tl1Odu.getCREATION_DATE());
 
-            tunnelRepository.save(tunnel);
+            sdnTunnelRepository.save(sdnTunnel);
 
 
 

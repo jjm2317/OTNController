@@ -8,12 +8,14 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Data
-public class TUNNEL {
+@Table(name="sdn_tunnel")
+public class SdnTunnel {
     int ems_id;
     @Id
     @Generated
@@ -45,10 +47,10 @@ public class TUNNEL {
     String service_mapping;
     String creation_date;
 
-    public TUNNEL() {
+    public SdnTunnel() {
     }
 
-    public TUNNEL(int ems_id, String tunnel_id, String src_ne_id, String src_ne_name, String dst_ne_id, String dst_ne_name, String rate_type, String multiple_rate, String local_id, String request_id, String tunnel_name, String tunnel_type, String tunnel_status, String configuration_action, String configuration_result_type, String tunnel_oam_enabler, String deployment_enabler, String deployment_status, String active_path, String src_node_ref, String dst_node_ref, String service_ref, String accessif_ref, String protection_type, String working_path, String protection_path, String service_mapping, String creation_date) {
+    public SdnTunnel(int ems_id, String tunnel_id, String src_ne_id, String src_ne_name, String dst_ne_id, String dst_ne_name, String rate_type, String multiple_rate, String local_id, String request_id, String tunnel_name, String tunnel_type, String tunnel_status, String configuration_action, String configuration_result_type, String tunnel_oam_enabler, String deployment_enabler, String deployment_status, String active_path, String src_node_ref, String dst_node_ref, String service_ref, String accessif_ref, String protection_type, String working_path, String protection_path, String service_mapping, String creation_date) {
         this.ems_id = ems_id;
         this.tunnel_id = tunnel_id;
         this.src_ne_id = src_ne_id;
