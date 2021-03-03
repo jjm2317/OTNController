@@ -50,7 +50,7 @@ public class SDNManager {
     HashMap<String, Tl1OduMplsIf> odu_mpls_ifHashMap = new HashMap<>();
     HashMap<String, List<Tl1Odu>> odu_hashMapForPath = new HashMap<>();
 
-    HashMap<String, com.woorinet.plugin.demo.DTO.SDN.NODE> sdnNodeHashMap = new HashMap<>();
+    HashMap<String, SdnNode> sdnNodeHashMap = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.CONNECTOR> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, LINK> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
@@ -150,7 +150,7 @@ public class SDNManager {
 
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1Node.getTID());
 
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = new com.woorinet.plugin.demo.DTO.SDN.NODE();
+            SdnNode sdnNode = new SdnNode();
             sdnNode.setEms_id(200009);
             if (tl1SystemInfo != null) sdnNode.setNe_id(tl1SystemInfo.getVENDOR() + separator + tl1Node.getNODE_TYPE() + separator + tl1Node.getTID());
             sdnNode.setNe_id("");
@@ -176,7 +176,7 @@ public class SDNManager {
             CONNECTOR connector = new CONNECTOR();
 
             Tl1Node tl1Node = nodeHashMap.get(tl1OduNodeConnector.getTID());
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTID());
+            SdnNode sdnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTID());
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1OduNodeConnector.getTID()+"/"+ tl1OduNodeConnector.getAID());
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1Node.getTID());
 
@@ -229,8 +229,8 @@ public class SDNManager {
 //
             Tl1SystemInfo src_tl1SystemInfo = system_infoHashMap.get(tl1OduMplsIf.getSRC_TID());
             Tl1SystemInfo dst_tl1SystemInfo = system_infoHashMap.get(tl1OduMplsIf.getDST_TID());
-            com.woorinet.plugin.demo.DTO.SDN.NODE src_sdnNode = sdnNodeHashMap.get(tl1OduMplsIf.getSRC_TID());
-            com.woorinet.plugin.demo.DTO.SDN.NODE dst_sdnNode = sdnNodeHashMap.get(tl1OduMplsIf.getDST_TID());
+            SdnNode src_sdnSdnNode = sdnNodeHashMap.get(tl1OduMplsIf.getSRC_TID());
+            SdnNode dst_sdnSdnNode = sdnNodeHashMap.get(tl1OduMplsIf.getDST_TID());
             CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
             CONNECTOR dst_sdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDST_TID()+ '/' + tl1OduMplsIf.getDST_PORT());
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1OduMplsIf.getTID() + '/' + tl1OduMplsIf.getMPLS_TP_ID());
@@ -242,16 +242,16 @@ public class SDNManager {
 
             link.setEms_id(200009);
             link.setDst_ems_id(200009);
-            link.setLink_id(src_tl1SystemInfo.getVENDOR() + separator + src_sdnNode.getSys_type() + separator + src_sdnNode.getNe_name() + separator +
+            link.setLink_id(src_tl1SystemInfo.getVENDOR() + separator + src_sdnSdnNode.getSys_type() + separator + src_sdnSdnNode.getNe_name() + separator +
                     src_sdnConnector.getShelf_id() + separator + src_sdnConnector.getSlot_id() + separator + src_sdnConnector.getPort_id()
-                    + ":" + dst_tl1SystemInfo.getVENDOR() + separator + dst_sdnNode.getSys_type() + separator + dst_sdnNode.getNe_name() + separator +
+                    + ":" + dst_tl1SystemInfo.getVENDOR() + separator + dst_sdnSdnNode.getSys_type() + separator + dst_sdnSdnNode.getNe_name() + separator +
                     dst_sdnConnector.getShelf_id() + separator + dst_sdnConnector.getSlot_id() + separator + dst_sdnConnector.getPort_id());
             link.setLink_nm(tl1OduMplsIf.getNAME());
-            link.setSrc_ne_id(src_sdnNode.getNe_id());
-            link.setSrc_ne_name(src_sdnNode.getNe_name());
+            link.setSrc_ne_id(src_sdnSdnNode.getNe_id());
+            link.setSrc_ne_name(src_sdnSdnNode.getNe_name());
             link.setSrc_node_connector_id(src_sdnConnector.getConnect_id());
-            link.setDst_ne_id(dst_sdnNode.getNe_id());
-            link.setDst_ne_name(dst_sdnNode.getNe_name());
+            link.setDst_ne_id(dst_sdnSdnNode.getNe_id());
+            link.setDst_ne_name(dst_sdnSdnNode.getNe_name());
             link.setDst_node_connector_id(dst_sdnConnector.getConnect_id());
             link.setLink_type(tl1OduNodeConnector.getPORT_TYPE());
             link.setLink_status(tl1OduMplsIf.getOPERATION_STATUS());
@@ -291,8 +291,8 @@ public class SDNManager {
             Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
             Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
 
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(tl1Odu_tail.getTID());
+            SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
+            SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu_tail.getTID());
             com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = new com.woorinet.plugin.demo.DTO.SDN.SERVICE();
 
             CONNECTOR src_sdnConnector = sdnConnectorHashMap.get(tl1Odu_head.getTID()+ '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
@@ -302,13 +302,13 @@ public class SDNManager {
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1Odu_head.getTID() + '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
 
             sdnService.setEms_id(200009);
-            sdnService.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + tl1Odu_head.getNAME());
-            sdnService.setSrc_ne_id(sdnSrcNode.getNe_id());
-            sdnService.setSrc_ne_name(sdnSrcNode.getNe_name());
+            sdnService.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
+            sdnService.setSrc_ne_id(sdnSrcSdnNode.getNe_id());
+            sdnService.setSrc_ne_name(sdnSrcSdnNode.getNe_name());
             sdnService.setSrc_connector_id(src_sdnConnector.getConnect_id());
             sdnService.setSrc_accessif_type(tl1Odu_head.getSERVICE());
-            sdnService.setDst_ne_id(sdnDstNode.getNe_id());
-            sdnService.setDst_ne_name(sdnDstNode.getNe_name());
+            sdnService.setDst_ne_id(sdnDstSdnNode.getNe_id());
+            sdnService.setDst_ne_name(sdnDstSdnNode.getNe_name());
             sdnService.setDst_connector_id(dst_sdnConnector.getConnect_id());
             sdnService.setDst_accessif_type(tl1Odu_tail.getSERVICE());
             sdnService.setService_type("");
@@ -337,16 +337,16 @@ public class SDNManager {
 
         for (Tl1Odu tl1Odu : oduses) {
             TUNNEL tunnel = new TUNNEL();
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(tl1Odu.getEMS_SRC_LSR());
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnDstNode = sdnNodeHashMap.get(tl1Odu.getEMS_DST_LSR());
+            SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_SRC_LSR());
+            SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_DST_LSR());
 
 
             tunnel.setEms_id(200009);
-            tunnel.setTunnel_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + tl1Odu.getNAME());
-            tunnel.setSrc_ne_id(sdnSrcNode.getNe_id());
-            tunnel.setSrc_ne_name(sdnSrcNode.getNe_name());
-            tunnel.setDst_ne_id(sdnDstNode.getNe_id());
-            tunnel.setDst_ne_name(sdnDstNode.getNe_name());
+            tunnel.setTunnel_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu.getNAME());
+            tunnel.setSrc_ne_id(sdnSrcSdnNode.getNe_id());
+            tunnel.setSrc_ne_name(sdnSrcSdnNode.getNe_name());
+            tunnel.setDst_ne_id(sdnDstSdnNode.getNe_id());
+            tunnel.setDst_ne_name(sdnDstSdnNode.getNe_name());
             tunnel.setRate_type(tl1Odu.getTYPE());
             tunnel.setMultiple_rate("1");
             tunnel.setLocal_id("");
@@ -501,12 +501,12 @@ public class SDNManager {
             Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
             Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
 
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnSrcNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
+            SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
 
             CONSTRAINT constraint = new CONSTRAINT();
 
             constraint.setEms_id(200009);
-            constraint.setService_id(sdnSrcNode.getVendor() + separator + sdnSrcNode.getSys_type() + separator + tl1Odu_head.getNAME());
+            constraint.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
             constraint.setConst_id("protection type");
             constraint.setConst_type("");
             constraint.setConst_name("PROTECTION TYPE");
@@ -526,7 +526,7 @@ public class SDNManager {
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1MplsIf.getTID());
 
             com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF sdnAccess_if = new com.woorinet.plugin.demo.DTO.SDN.ACCESS_IF();
-            com.woorinet.plugin.demo.DTO.SDN.NODE sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
+            SdnNode sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
             CONNECTOR sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
             Tl1Odu tl1Odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
             if(tl1Odu == null) continue;

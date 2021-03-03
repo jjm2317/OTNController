@@ -7,12 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
 @Entity
 @Data
-public class NODE {
+@Table(name="sdn_node")
+public class SdnNode {
     int ems_id;
     @Id
     @Generated
@@ -27,11 +29,11 @@ public class NODE {
     String serial_num;
     String sys_type;
 
-    public NODE() {
+    public SdnNode() {
 
     }
 
-    public NODE(int ems_id, String ne_id, String ne_name, String ne_type, String ne_model, String ne_status, String sw_ver, String ip_addr, String vendor, String serial_num, String sys_type) {
+    public SdnNode(int ems_id, String ne_id, String ne_name, String ne_type, String ne_model, String ne_status, String sw_ver, String ip_addr, String vendor, String serial_num, String sys_type) {
         this.ems_id = ems_id;
         this.ne_id = ne_id;
         this.ne_name = ne_name;
