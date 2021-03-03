@@ -457,7 +457,7 @@ public class TL1Manager {
         for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
             String TID = tl1OduNodeConnector.getTID();
             String AID = tl1OduNodeConnector.getAID();
-            String SIGNAL = getMITypeByTID(tl1OduMplsIfs, TID);
+            String SIGNAL = getMITypeByTID(tl1OduMplsIfList, TID);
             String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
 
             ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
