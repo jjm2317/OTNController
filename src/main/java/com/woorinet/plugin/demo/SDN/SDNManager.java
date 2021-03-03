@@ -16,7 +16,7 @@ public class SDNManager {
     SdnNodeRepository sdnNodeRepository;
     SdnConnectorRepository sdnConnectorRepository;
     SdnLinkRepository sdnLinkRepository;
-    SERVICERepository serviceRepository;
+    SdnServiceRepository sdnServiceRepository;
     TUNNELRepository tunnelRepository;
     SdnPathRepository sdnPathRepository;
     SdnConstraintRepository sdnConstraintRepository;
@@ -53,12 +53,12 @@ public class SDNManager {
     HashMap<String, SdnNode> sdnNodeHashMap = new HashMap<>();
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, SdnLink> sdnLinkHashMapForPath = new HashMap<>();
-    HashMap<String, com.woorinet.plugin.demo.DTO.SDN.SERVICE> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SERVICERepository serviceRepository, TUNNELRepository tunnelRepository, SdnPathRepository sdnPathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    HashMap<String, SdnService> sdnServiceHashMapForPath = new HashMap<>();
+    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SdnServiceRepository sdnServiceRepository, TUNNELRepository tunnelRepository, SdnPathRepository sdnPathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.sdnLinkRepository = sdnLinkRepository;
-        this.serviceRepository = serviceRepository;
+        this.sdnServiceRepository = sdnServiceRepository;
         this.tunnelRepository = tunnelRepository;
         this.sdnPathRepository = sdnPathRepository;
         this.sdnConstraintRepository = sdnConstraintRepository;
@@ -293,7 +293,7 @@ public class SDNManager {
 
             SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
             SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu_tail.getTID());
-            com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = new com.woorinet.plugin.demo.DTO.SDN.SERVICE();
+            SdnService sdnService = new SdnService();
 
             SdnConnector src_sdnSdnConnector = sdnConnectorHashMap.get(tl1Odu_head.getTID()+ '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
             SdnConnector dst_sdnSdnConnector = sdnConnectorHashMap.get(tl1Odu_tail.getTID()+ '/' + tl1Odu_tail.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_tail.getLOCAL_ID().split("-")[1]);
@@ -327,7 +327,7 @@ public class SDNManager {
             sdnService.setActive_path(tl1Odu_head.getACTIVE_PATH_STATUS());
             sdnService.setCreation_date(tl1Odu_head.getCREATION_DATE());
 
-            serviceRepository.save(sdnService);
+            sdnServiceRepository.save(sdnService);
             sdnServiceHashMapForPath.put(sdnService.getService_name(),sdnService);
         }
 
@@ -406,7 +406,7 @@ public class SDNManager {
 
             { // HEAD <--> TRANSIT_FROM
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] );
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
+                SdnService sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 SdnPath sdnPath = new SdnPath();
                 sdnPath.setEms_id(200009);
                 sdnPath.setService_id(sdnService.getService_id());
@@ -422,7 +422,7 @@ public class SDNManager {
             }
             { // TRANSIT_TO <--> TAIL
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] );
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
+                SdnService sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 SdnPath sdnPath = new SdnPath();
                 sdnPath.setEms_id(200009);
                 sdnPath.setService_id(sdnService.getService_id());
@@ -461,7 +461,7 @@ public class SDNManager {
 
             { // HEAD <--> TRANSIT_FROM
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1]);
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
+                SdnService sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 SdnPath sdnPath = new SdnPath();
                 sdnPath.setEms_id(200009);
                 sdnPath.setService_id(sdnService.getService_id());
@@ -477,7 +477,7 @@ public class SDNManager {
             }
             { // TRANSIT_TO <--> TAIL
                 SdnLink sdnLink = sdnLinkHashMapForPath.get(tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] +'-'+ tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1]);
-                com.woorinet.plugin.demo.DTO.SDN.SERVICE sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
+                SdnService sdnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 SdnPath sdnPath = new SdnPath();
                 sdnPath.setEms_id(200009);
                 sdnPath.setService_id(sdnService.getService_id());

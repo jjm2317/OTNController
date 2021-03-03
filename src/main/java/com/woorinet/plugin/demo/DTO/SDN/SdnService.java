@@ -11,9 +11,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "SERVICE")
+@Table(name = "sdn_service")
 @Data
-public class SERVICE {
+public class SdnService {
     int ems_id;
     @Id
     @Generated
@@ -37,10 +37,10 @@ public class SERVICE {
     String active_path;
     String creation_date;
 
-    public SERVICE() {
+    public SdnService() {
     }
 
-    public SERVICE(int ems_id, String service_id, String src_ne_id, String src_ne_name, String src_connector_id, String src_accessif_type, String dst_ne_id, String dst_ne_name, String dst_connector_id, String dst_accessif_type, String service_type, String service_name, String network_type, String service_status, String rate_type, String service_rate, String latency, String wavelength, String active_path, String creation_date) {
+    public SdnService(int ems_id, String service_id, String src_ne_id, String src_ne_name, String src_connector_id, String src_accessif_type, String dst_ne_id, String dst_ne_name, String dst_connector_id, String dst_accessif_type, String service_type, String service_name, String network_type, String service_status, String rate_type, String service_rate, String latency, String wavelength, String active_path, String creation_date) {
         this.ems_id = ems_id;
         this.service_id = service_id;
         this.src_ne_id = src_ne_id;
