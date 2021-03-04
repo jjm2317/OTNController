@@ -24,6 +24,7 @@ public class SDNManager {
     SdnAccessIfRepository sdnAccessIfRepository;
     SdnCryptoModuleRepository sdnCryptoModuleRepository;
     SdnCryptoSessionRepository sdnCryptoSessionRepository;
+    SdnPmPortRepository sdnPmPortRepository;
 
 
     String separator;
@@ -45,6 +46,7 @@ public class SDNManager {
     List<Tl1CmProgramInfo> tl1CmProgramInfos;
     List<Tl1SessState> tl1SessStates;
     List<Tl1KeyState> tl1KeyStates;
+    List<Tl1PmPort> tl1PmPorts;
 
     HashMap<String, Tl1Node> nodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
@@ -77,6 +79,7 @@ public class SDNManager {
                       SdnAccessIfRepository sdnAccessIfRepository,
                       SdnCryptoModuleRepository sdnCryptoModuleRepository,
                       SdnCryptoSessionRepository sdnCryptoSessionRepository,
+                      SdnPmPortRepository sdnPmPortRepository,
                       List<Tl1Node> tl1Nodes,
                       List<Tl1SystemInfo> tl1SystemInfos,
                       List<Tl1OduNodeConnector> tl1OduNodeConnectors,
@@ -93,7 +96,8 @@ public class SDNManager {
                       List<Tl1BypassInfo> tl1BypassInfos,
                       List<Tl1CmProgramInfo> tl1CmProgramInfos,
                       List<Tl1SessState> tl1SessStates,
-                      List<Tl1KeyState> tl1KeyStates) throws Exception{
+                      List<Tl1KeyState> tl1KeyStates,
+                      List<Tl1PmPort> tl1PmPorts) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.sdnLinkRepository = sdnLinkRepository;
@@ -104,6 +108,7 @@ public class SDNManager {
         this.sdnAccessIfRepository = sdnAccessIfRepository;
         this.sdnCryptoModuleRepository = sdnCryptoModuleRepository;
         this.sdnCryptoSessionRepository = sdnCryptoSessionRepository;
+        this.sdnPmPortRepository = sdnPmPortRepository;
         this.separator = ".";
         this.tl1Nodes = tl1Nodes;
         this.tl1SystemInfos = tl1SystemInfos;
@@ -122,6 +127,7 @@ public class SDNManager {
         this.tl1CmProgramInfos = tl1CmProgramInfos;
         this.tl1SessStates = tl1SessStates;
         this.tl1KeyStates = tl1KeyStates;
+        this.tl1PmPorts = tl1PmPorts;
 
         makeHashMap();
 
@@ -640,9 +646,10 @@ public class SDNManager {
     }
 
     public void SDNSyncCryptoSession() throws Exception {
-        Stream<Tl1SessState> tl1SessStateStream = tl1SessStates.stream();
 
-        Stream<SdnCryptoSession> sdnCryptoSessionStream = tl1SessStateStream.map(tl1SessState -> {
+
+        Stream<SdnCryptoSession> sdnCryptoSessionStream = tl1SessStates.stream()
+            .map(tl1SessState -> {
             Tl1KeyState tl1KeyState = tl1KeyStateHashMap.get(tl1SessState.getAID());
 
             SdnCryptoSession sdnCryptoSession = new SdnCryptoSession();
@@ -666,6 +673,45 @@ public class SDNManager {
         });
 
         sdnCryptoSessionStream.forEach(sdnCryptoSessionRepository::save);
+    }
+
+    public void SDNSyncPmPort() throws Exception {
+        Stream<SdnPmPort> sdnPmPortStream = tl1PmPorts.stream()
+        .map(tl1PmPort -> {
+            SdnPmPort sdnPmPort = new SdnPmPort();
+
+            sdnPmPort.setTID(tl1PmPort.getTID());
+            sdnPmPort.setAID(tl1PmPort.getAID());
+            sdnPmPort.setUNIT(tl1PmPort.getUNIT());
+            sdnPmPort.setDATE(tl1PmPort.getDATE());
+            sdnPmPort.setTIME(tl1PmPort.getTIME());
+            sdnPmPort.setIN_OCTETS(tl1PmPort.getIN_OCTETS());
+            sdnPmPort.setIN_OK_PACKETS(tl1PmPort.getIN_OK_PACKETS());
+            sdnPmPort.setIN_DISCARD_PACKETS(tl1PmPort.getIN_DISCARD_PACKETS());
+            sdnPmPort.setIN_ERROR_PACKETS(tl1PmPort.getIN_ERROR_PACKETS());
+            sdnPmPort.setIN_PAUSE_PACKETS(tl1PmPort.getIN_PAUSE_PACKETS());
+            sdnPmPort.setIN_ALIGNMENT_ERRORS(tl1PmPort.getIN_ALIGNMENT_ERRORS());
+            sdnPmPort.setIN_FCS_ERRORS(tl1PmPort.getIN_FCS_ERRORS());
+            sdnPmPort.setIN_SYMBOL_ERRORS(tl1PmPort.getIN_SYMBOL_ERRORS());
+            sdnPmPort.setOUT_OCTETS(tl1PmPort.getOUT_OCTETS());
+            sdnPmPort.setOUT_OK_PACKETS(tl1PmPort.getOUT_OK_PACKETS());
+            sdnPmPort.setOUT_UNICAST_PACKETS(tl1PmPort.getOUT_UNICAST_PACKETS());
+            sdnPmPort.setOUT_NON_UNICAST_PACKETS(tl1PmPort.getOUT_NON_UNICAST_PACKETS());
+            sdnPmPort.setOUT_DISCARD_PACKETS(tl1PmPort.getOUT_DISCARD_PACKETS());
+            sdnPmPort.setOUT_ERROR_PACKETS(tl1PmPort.getOUT_ERROR_PACKETS());
+            sdnPmPort.setOUT_BROADCAST_PACKETS(tl1PmPort.getOUT_BROADCAST_PACKETS());
+            sdnPmPort.setOUT_MULTICAST_PACKETS(tl1PmPort.getOUT_MULTICAST_PACKETS());
+            sdnPmPort.setOUT_PAUSE_PACKETS(tl1PmPort.getOUT_PAUSE_PACKETS());
+            sdnPmPort.setIN_RATE(tl1PmPort.getIN_RATE());
+            sdnPmPort.setOUT_RATE(tl1PmPort.getOUT_RATE());
+            sdnPmPort.setIN_LOSS_RATIO(tl1PmPort.getIN_LOSS_RATIO());
+            sdnPmPort.setOUT_LOSS_RATIO(tl1PmPort.getOUT_LOSS_RATIO());
+
+            return sdnPmPort;
+        });
+
+        sdnPmPortStream.forEach(sdnPmPortRepository::save);
+
     }
 
 

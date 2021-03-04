@@ -130,6 +130,8 @@ public class DemoApplication {
 	private SdnCryptoModuleRepository sdnCryptoModuleRepository;
 	@Autowired
 	private SdnCryptoSessionRepository sdnCryptoSessionRepository;
+	@Autowired
+	private SdnPmPortRepository sdnPmPortRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -178,6 +180,8 @@ public class DemoApplication {
 			List<Tl1SessState> tl1SessStates = tl1SessStateRepository.findAll();
 			// KEY_STATE 조회
 			List<Tl1KeyState> tl1KeyStates = tl1KeyStateRepository.findAll();
+			// PM_PORT 조회
+			List<Tl1PmPort> tl1PmPorts = tl1PmPortRepository.findAll();
 			SDNManager manager = new SDNManager(sdnNodeRepository,
 					sdnConnectorRepository,
 					sdnLinkRepository,
@@ -188,6 +192,7 @@ public class DemoApplication {
 					sdnAccessIfRepository,
 					sdnCryptoModuleRepository,
 					sdnCryptoSessionRepository,
+					sdnPmPortRepository,
 					tl1Nodes,
 					tl1SystemInfos,
 					tl1OduNodeConnectors,
@@ -204,7 +209,8 @@ public class DemoApplication {
 					tl1BypassInfos,
 					tl1CmProgramInfos,
 					tl1SessStates,
-					tl1KeyStates);
+					tl1KeyStates,
+					tl1PmPorts);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -226,6 +232,8 @@ public class DemoApplication {
 			manager.SDNSyncCryptoModule();
 			// CryptoSession 테이블 생성
 			manager.SDNSyncCryptoSession();
+			// PmPort 테이블 생성
+			manager.SDNSyncPmPort();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
