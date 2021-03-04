@@ -608,6 +608,7 @@ public class SDNManager {
             Tl1CmProgramInfo tl1CmProgramInfo = tl1CmProgramInfoHashMap.get(aidPieces[0] + "-" + aidPieces[1] + "-" + aidPieces[2]);
 
             SdnCryptoModule sdnCryptoModule = new SdnCryptoModule();
+            sdnCryptoModule.setAID(tl1ModuleInfo.getAID());
             sdnCryptoModule.setMODULE_ACT_TYPE(tl1CmPort.getUNIT_TYPE());
             sdnCryptoModule.setMID(tl1ModuleInfo.getMID());
             sdnCryptoModule.setPMID(tl1ModuleInfo.getPMID());
@@ -620,6 +621,7 @@ public class SDNManager {
             sdnCryptoModule.setCRYPTO_MODULE_CPLD_VERSION(tl1CmProgramInfo.getCPLD_VERSION());
             sdnCryptoModule.setCRYPTO_MODULE_HW_VERSION(tl1CmProgramInfo.getHW_VERSION());
 
+            System.out.println(sdnCryptoModule);
             sdnCryptoModuleRepository.save(sdnCryptoModule);
         }
     }
