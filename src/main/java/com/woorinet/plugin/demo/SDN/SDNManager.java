@@ -56,6 +56,9 @@ public class SDNManager {
     HashMap<String, Tl1Odu> oduMapInMPLSTPByLocalId = new HashMap<>();
     HashMap<String, Tl1OduMplsIf> odu_mpls_ifHashMap = new HashMap<>();
     HashMap<String, List<Tl1Odu>> odu_hashMapForPath = new HashMap<>();
+    HashMap<String, Tl1CmPort> tl1CmPortHashMap = new HashMap<>();
+    HashMap<String, Tl1BypassInfo> tl1BypassInfoHashMap = new HashMap<>();
+    HashMap<String, Tl1CmProgramInfo> tl1CmProgramInfoHashMap = new HashMap<>();
 
     HashMap<String, SdnNode> sdnNodeHashMap = new HashMap<>();
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
@@ -177,6 +180,15 @@ public class SDNManager {
         }
         for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfs) {
             odu_mpls_ifHashMap.put(tl1OduMplsIf.getTID()+'/'+ tl1OduMplsIf.getMPLS_TP_ID(), tl1OduMplsIf);
+        }
+        for(Tl1CmPort tl1CmPort : tl1CmPorts) {
+            tl1CmPortHashMap.put(tl1CmPort.getAID(), tl1CmPort);
+        }
+        for(Tl1BypassInfo tl1BypassInfo :tl1BypassInfos) {
+            tl1BypassInfoHashMap.put(tl1BypassInfo.getAID(), tl1BypassInfo);
+        }
+        for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfos) {
+            tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
         }
 
 
@@ -589,10 +601,29 @@ public class SDNManager {
 
     public void SDNSyncCryptoModule() throws Exception {
         for(Tl1ModuleInfo tl1ModuleInfo : tl1ModuleInfos) {
+            // aidPieces: [노드이름, 유니트 이름, 슬롯, 포트]
+            String[] aidPieces = tl1ModuleInfo.getAID().split("-");
+            Tl1CmPort tl1CmPort = tl1CmPortHashMap.get(tl1ModuleInfo.getAID());
+            Tl1BypassInfo tl1BypassInfo = tl1BypassInfoHashMap.get(aidPieces[2] + "-" + aidPieces[3]);
+            Tl1CmProgramInfo tl1CmProgramInfo = tl1CmProgramInfoHashMap.get(aidPieces[0] + "-" + aidPieces[1] + "-" + aidPieces[2]);
 
+            SdnCryptoModule sdnCryptoModule = new SdnCryptoModule();
+            sdnCryptoModule.setMODULE_ACT_TYPE(tl1CmPort.getUNIT_TYPE());
+            sdnCryptoModule.setMID(tl1ModuleInfo.getMID());
+            sdnCryptoModule.setPMID(tl1ModuleInfo.getPMID());
+            sdnCryptoModule.setMID_CONTEXT(tl1ModuleInfo.getMID_CONTEXT());
+            sdnCryptoModule.setPMID_CONTEXT(tl1ModuleInfo.getPMID_CONTEXT());
+            sdnCryptoModule.setBYPASS_MODE(tl1BypassInfo.getCURRENT_ACTION());
+            sdnCryptoModule.setCRYPTO_MODE(tl1ModuleInfo.getCRYPTO_MODE());
+            sdnCryptoModule.setCRYPTO_MODULE_PKG_VERSION(tl1CmProgramInfo.getPKG_VERSION());
+            sdnCryptoModule.setCRYPTO_MODULE_FPGA_VERSION(tl1CmProgramInfo.getFPGA_VERSION());
+            sdnCryptoModule.setCRYPTO_MODULE_CPLD_VERSION(tl1CmProgramInfo.getCPLD_VERSION());
+            sdnCryptoModule.setCRYPTO_MODULE_HW_VERSION(tl1CmProgramInfo.getHW_VERSION());
 
+            sdnCryptoModuleRepository.save(sdnCryptoModule);
         }
     }
+
 
 
 }

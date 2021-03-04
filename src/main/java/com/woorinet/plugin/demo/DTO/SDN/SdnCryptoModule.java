@@ -28,13 +28,13 @@ public class SdnCryptoModule {
     String CRYPTO_MODE;
     String CRYPTO_MODULE_PKG_VERSION;
     String CRYPTO_MODULE_FPGA_VERSION;
-    String CRYPTO_MODULE_CPID_VERSION;
+    String CRYPTO_MODULE_CPLD_VERSION;
     String CRYPTO_MODULE_HW_VERSION;
 
     public SdnCryptoModule() {
     }
 
-    public SdnCryptoModule(String MODULE_ACT_TYPE, String MID, String PMID, String MID_CONTEXT, String PMID_CONTEXT, String BYPASS_MODE, String CRYPTO_MODE, String CRYPTO_MODULE_PKG_VERSION, String CRYPTO_MODULE_FPGA_VERSION, String CRYPTO_MODULE_CPID_VERSION, String CRYPTO_MODULE_HW_VERSION) {
+    public SdnCryptoModule(String MODULE_ACT_TYPE, String MID, String PMID, String MID_CONTEXT, String PMID_CONTEXT, String BYPASS_MODE, String CRYPTO_MODE, String CRYPTO_MODULE_PKG_VERSION, String CRYPTO_MODULE_FPGA_VERSION, String CRYPTO_MODULE_CPLD_VERSION, String CRYPTO_MODULE_HW_VERSION) {
         this.MODULE_ACT_TYPE = MODULE_ACT_TYPE;
         this.MID = MID;
         this.PMID = PMID;
@@ -44,15 +44,14 @@ public class SdnCryptoModule {
         this.CRYPTO_MODE = CRYPTO_MODE;
         this.CRYPTO_MODULE_PKG_VERSION = CRYPTO_MODULE_PKG_VERSION;
         this.CRYPTO_MODULE_FPGA_VERSION = CRYPTO_MODULE_FPGA_VERSION;
-        this.CRYPTO_MODULE_CPID_VERSION = CRYPTO_MODULE_CPID_VERSION;
+        this.CRYPTO_MODULE_CPLD_VERSION = CRYPTO_MODULE_CPLD_VERSION;
         this.CRYPTO_MODULE_HW_VERSION = CRYPTO_MODULE_HW_VERSION;
     }
 
     @Override
     public String toString() {
         return "SdnCryptoModule{" +
-                "CRYPTO_MODULE_ID=" + CRYPTO_MODULE_ID +
-                ", MODULE_ACT_TYPE='" + MODULE_ACT_TYPE + '\'' +
+                "MODULE_ACT_TYPE='" + MODULE_ACT_TYPE + '\'' +
                 ", MID='" + MID + '\'' +
                 ", PMID='" + PMID + '\'' +
                 ", MID_CONTEXT='" + MID_CONTEXT + '\'' +
@@ -61,7 +60,7 @@ public class SdnCryptoModule {
                 ", CRYPTO_MODE='" + CRYPTO_MODE + '\'' +
                 ", CRYPTO_MODULE_PKG_VERSION='" + CRYPTO_MODULE_PKG_VERSION + '\'' +
                 ", CRYPTO_MODULE_FPGA_VERSION='" + CRYPTO_MODULE_FPGA_VERSION + '\'' +
-                ", CRYPTO_MODULE_CPID_VERSION='" + CRYPTO_MODULE_CPID_VERSION + '\'' +
+                ", CRYPTO_MODULE_CPLD_VERSION='" + CRYPTO_MODULE_CPLD_VERSION + '\'' +
                 ", CRYPTO_MODULE_HW_VERSION='" + CRYPTO_MODULE_HW_VERSION + '\'' +
                 '}';
     }

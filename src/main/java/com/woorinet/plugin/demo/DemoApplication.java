@@ -219,6 +219,8 @@ public class DemoApplication {
 			manager.SDNSyncConstraint();
 			// AccessIf 테이블 생성
 			manager.SDNSyncAccess_if();
+			// CryptoModule 테이블 생성
+			manager.SDNSyncCryptoModule();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
