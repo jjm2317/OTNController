@@ -128,6 +128,8 @@ public class DemoApplication {
 	private SdnPathRepository sdnPathRepository;
 	@Autowired
 	private SdnCryptoModuleRepository sdnCryptoModuleRepository;
+	@Autowired
+	private SdnCryptoSessionRepository sdnCryptoSessionRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -185,6 +187,7 @@ public class DemoApplication {
 					sdnConstraintRepository,
 					sdnAccessIfRepository,
 					sdnCryptoModuleRepository,
+					sdnCryptoSessionRepository,
 					tl1Nodes,
 					tl1SystemInfos,
 					tl1OduNodeConnectors,
@@ -221,6 +224,8 @@ public class DemoApplication {
 			manager.SDNSyncAccess_if();
 			// CryptoModule 테이블 생성
 			manager.SDNSyncCryptoModule();
+			// CryptoSession 테이블 생성
+			manager.SDNSyncCryptoSession();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

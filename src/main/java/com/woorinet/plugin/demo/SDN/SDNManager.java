@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class SDNManager {
     SdnNodeRepository sdnNodeRepository;
@@ -22,6 +23,7 @@ public class SDNManager {
     SdnConstraintRepository sdnConstraintRepository;
     SdnAccessIfRepository sdnAccessIfRepository;
     SdnCryptoModuleRepository sdnCryptoModuleRepository;
+    SdnCryptoSessionRepository sdnCryptoSessionRepository;
 
 
     String separator;
@@ -59,6 +61,7 @@ public class SDNManager {
     HashMap<String, Tl1CmPort> tl1CmPortHashMap = new HashMap<>();
     HashMap<String, Tl1BypassInfo> tl1BypassInfoHashMap = new HashMap<>();
     HashMap<String, Tl1CmProgramInfo> tl1CmProgramInfoHashMap = new HashMap<>();
+    HashMap<String, Tl1KeyState> tl1KeyStateHashMap = new HashMap<>();
 
     HashMap<String, SdnNode> sdnNodeHashMap = new HashMap<>();
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
@@ -73,6 +76,7 @@ public class SDNManager {
                       SdnConstraintRepository sdnConstraintRepository,
                       SdnAccessIfRepository sdnAccessIfRepository,
                       SdnCryptoModuleRepository sdnCryptoModuleRepository,
+                      SdnCryptoSessionRepository sdnCryptoSessionRepository,
                       List<Tl1Node> tl1Nodes,
                       List<Tl1SystemInfo> tl1SystemInfos,
                       List<Tl1OduNodeConnector> tl1OduNodeConnectors,
@@ -99,6 +103,7 @@ public class SDNManager {
         this.sdnConstraintRepository = sdnConstraintRepository;
         this.sdnAccessIfRepository = sdnAccessIfRepository;
         this.sdnCryptoModuleRepository = sdnCryptoModuleRepository;
+        this.sdnCryptoSessionRepository = sdnCryptoSessionRepository;
         this.separator = ".";
         this.tl1Nodes = tl1Nodes;
         this.tl1SystemInfos = tl1SystemInfos;
@@ -190,7 +195,8 @@ public class SDNManager {
         for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfos) {
             tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
         }
-
+        Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStates.stream();
+        tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAID(), keystate));
 
     }
 
@@ -624,6 +630,35 @@ public class SDNManager {
             System.out.println(sdnCryptoModule);
             sdnCryptoModuleRepository.save(sdnCryptoModule);
         }
+    }
+
+    public void SDNSyncCryptoSession() throws Exception {
+        Stream<Tl1SessState> tl1SessStateStream = tl1SessStates.stream();
+
+        Stream<SdnCryptoSession> sdnCryptoSessionStream = tl1SessStateStream.map(tl1SessState -> {
+            Tl1KeyState tl1KeyState = tl1KeyStateHashMap.get(tl1SessState.getAID());
+
+            SdnCryptoSession sdnCryptoSession = new SdnCryptoSession();
+
+            sdnCryptoSession.setAID(tl1SessState.getAID());
+            sdnCryptoSession.setLOCAL_IP(tl1SessState.getLOCAL_IP());
+            sdnCryptoSession.setREMOTE_IP(tl1SessState.getREMOTE_IP());
+            sdnCryptoSession.setKSP_MODE(tl1SessState.getKSP_MODE());
+            sdnCryptoSession.setDEAD_TIME(tl1SessState.getDEAD_TIME());
+            sdnCryptoSession.setRETRY_REQUEST_INTERVAL(tl1SessState.getRETRY_REQ_INTERVAL());
+            sdnCryptoSession.setDST_LID(tl1SessState.getDST_LID());
+            sdnCryptoSession.setKEY_SOURCE_MODE(tl1SessState.getKEY_SRC_MODE());
+            sdnCryptoSession.setKEY_FAILOVER_MODE(tl1SessState.getKEY_FAILOVER());
+            sdnCryptoSession.setKEY_LIFE_TIME(tl1SessState.getKEY_LIFE_TIME());
+            sdnCryptoSession.setTX_KEY_STATE(tl1KeyState.getTX_KEY_STATE());
+            sdnCryptoSession.setTX_KEY_BANK_STATE(tl1KeyState.getTX_KEY_BANK_STATE());
+            sdnCryptoSession.setRX_KEY_STATE(tl1KeyState.getRX_KEY_STATE());
+            sdnCryptoSession.setRX_KEY_BANK_STATE(tl1KeyState.getRX_KEY_BANK_STATE());
+
+            return sdnCryptoSession;
+        });
+
+        sdnCryptoSessionStream.forEach(sdnCryptoSessionRepository::save);
     }
 
 

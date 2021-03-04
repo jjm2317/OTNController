@@ -20,6 +20,7 @@ public class SdnCryptoSession {
     @Id
     @GeneratedValue
     int CRYPTO_SESSION_ID;
+    String AID;
     String LOCAL_IP;
     String REMOTE_IP;
     String KSP_MODE;
@@ -29,13 +30,17 @@ public class SdnCryptoSession {
     String KEY_SOURCE_MODE;
     String KEY_FAILOVER_MODE;
     String KEY_LIFE_TIME;
-    String KEY_STATUS;
+    String TX_KEY_STATE;
+    String TX_KEY_BANK_STATE;
+    String RX_KEY_STATE;
+    String RX_KEY_BANK_STATE;
 
     public SdnCryptoSession() {
 
     }
 
-    public SdnCryptoSession(String LOCAL_IP, String REMOTE_IP, String KSP_MODE, String DEAD_TIME, String RETRY_REQUEST_INTERVAL, String DST_LID, String KEY_SOURCE_MODE, String KEY_FAILOVER_MODE, String KEY_LIFE_TIME, String KEY_STATUS) {
+    public SdnCryptoSession(String AID,String LOCAL_IP, String REMOTE_IP, String KSP_MODE, String DEAD_TIME, String RETRY_REQUEST_INTERVAL, String DST_LID, String KEY_SOURCE_MODE, String KEY_FAILOVER_MODE, String KEY_LIFE_TIME, String TX_KEY_STATE, String TX_KEY_BANK_STATE, String RX_KEY_STATE, String RX_KEY_BANK_STATE) {
+        this.AID = AID;
         this.LOCAL_IP = LOCAL_IP;
         this.REMOTE_IP = REMOTE_IP;
         this.KSP_MODE = KSP_MODE;
@@ -45,13 +50,17 @@ public class SdnCryptoSession {
         this.KEY_SOURCE_MODE = KEY_SOURCE_MODE;
         this.KEY_FAILOVER_MODE = KEY_FAILOVER_MODE;
         this.KEY_LIFE_TIME = KEY_LIFE_TIME;
-        this.KEY_STATUS = KEY_STATUS;
+        this.TX_KEY_STATE = TX_KEY_STATE;
+        this.TX_KEY_BANK_STATE = TX_KEY_BANK_STATE;
+        this.RX_KEY_STATE = RX_KEY_STATE;
+        this.RX_KEY_BANK_STATE = RX_KEY_BANK_STATE;
     }
 
     @Override
     public String toString() {
         return "SdnCryptoSession{" +
-                "LOCAL_IP='" + LOCAL_IP + '\'' +
+                "AID='" + AID + '\'' +
+                ", LOCAL_IP='" + LOCAL_IP + '\'' +
                 ", REMOTE_IP='" + REMOTE_IP + '\'' +
                 ", KSP_MODE='" + KSP_MODE + '\'' +
                 ", DEAD_TIME='" + DEAD_TIME + '\'' +
@@ -60,7 +69,10 @@ public class SdnCryptoSession {
                 ", KEY_SOURCE_MODE='" + KEY_SOURCE_MODE + '\'' +
                 ", KEY_FAILOVER_MODE='" + KEY_FAILOVER_MODE + '\'' +
                 ", KEY_LIFE_TIME='" + KEY_LIFE_TIME + '\'' +
-                ", KEY_STATUS='" + KEY_STATUS + '\'' +
+                ", TX_KEY_STATE='" + TX_KEY_STATE + '\'' +
+                ", TX_KEY_BANK_STATE='" + TX_KEY_BANK_STATE + '\'' +
+                ", RX_KEY_STATE='" + RX_KEY_STATE + '\'' +
+                ", RX_KEY_BANK_STATE='" + RX_KEY_BANK_STATE + '\'' +
                 '}';
     }
 }
