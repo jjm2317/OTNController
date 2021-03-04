@@ -324,18 +324,18 @@ public class SDNManager {
             sdnLink.setMaximum_odu1s(maximum_bandwidth/2);
             sdnLink.setMaximum_odu2s(maximum_bandwidth/8);
             sdnLink.setMaximum_odu2es(maximum_bandwidth/8);
-            sdnLink.setMaximum_odu3s(0);
-            sdnLink.setMaximum_odu4s(0);
-            sdnLink.setMaximum_odu4cns(0);
-            sdnLink.setMaximum_oduflexs(0);
+            sdnLink.setMaximum_odu3s(maximum_bandwidth/32);
+            sdnLink.setMaximum_odu4s(maximum_bandwidth/80);
+            sdnLink.setMaximum_odu4cns(maximum_bandwidth/160);
+            sdnLink.setMaximum_oduflexs(-1);
             sdnLink.setAvailable_odu0s(available_bandwidth);
             sdnLink.setAvailable_odu1s(available_bandwidth/2);
             sdnLink.setAvailable_odu2s(available_bandwidth/8);
             sdnLink.setAvailable_odu2es(available_bandwidth/8);
-            sdnLink.setAvailable_odu3s(0);
-            sdnLink.setAvailable_odu4s(0);
-            sdnLink.setAvailable_odu4cns(0);
-            sdnLink.setAvailable_oduflexs(0);
+            sdnLink.setAvailable_odu3s(available_bandwidth/32);
+            sdnLink.setAvailable_odu4s(available_bandwidth/80);
+            sdnLink.setAvailable_odu4cns(available_bandwidth/160);
+            sdnLink.setAvailable_oduflexs(-1);
 
             sdnLinkRepository.save(sdnLink);
             sdnLinkHashMapForPath.put(tl1OduMplsIf.getSRC_TID() + '/' + tl1OduMplsIf.getSRC_PORT() + '-' + tl1OduMplsIf.getDST_TID() + '/' + tl1OduMplsIf.getDST_PORT(), sdnLink);
