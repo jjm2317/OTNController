@@ -217,7 +217,7 @@ public class SDNManager {
             SdnNode sdnNode = new SdnNode();
             sdnNode.setEms_id(200009);
             if (tl1SystemInfo != null) sdnNode.setNe_id(tl1SystemInfo.getVENDOR() + separator + tl1Node.getNODE_TYPE() + separator + tl1Node.getTID());
-            sdnNode.setNe_id("");
+            else sdnNode.setNe_id("");
             sdnNode.setNe_name(tl1Node.getTID());
             sdnNode.setNe_type("");
             sdnNode.setNe_model(tl1Node.getSYSTEM_TYPE());
