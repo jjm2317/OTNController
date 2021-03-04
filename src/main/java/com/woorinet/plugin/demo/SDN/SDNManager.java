@@ -195,9 +195,16 @@ public class SDNManager {
         for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfos) {
             tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
         }
+
+        for(Tl1KeyState tl1keyState: tl1KeyStates) {
+            System.out.println(tl1keyState+"test..");
+        }
         Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStates.stream();
         tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAID(), keystate));
-
+        System.out.println("test..." + tl1KeyStateHashMap.size());
+        for (Map.Entry<String, Tl1KeyState> entry : tl1KeyStateHashMap.entrySet()) {
+            System.out.println(entry.getKey()+" : "+entry.getValue());
+        }
     }
 
     public void SDNSyncNodeList() throws Exception {
