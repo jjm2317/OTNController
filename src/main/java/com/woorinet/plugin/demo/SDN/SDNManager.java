@@ -202,15 +202,36 @@ public class SDNManager {
             tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
         }
 
-        for(Tl1KeyState tl1keyState: tl1KeyStates) {
-            System.out.println(tl1keyState+"test..");
-        }
         Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStates.stream();
         tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAID(), keystate));
-        System.out.println("test..." + tl1KeyStateHashMap.size());
         for (Map.Entry<String, Tl1KeyState> entry : tl1KeyStateHashMap.entrySet()) {
             System.out.println(entry.getKey()+" : "+entry.getValue());
         }
+    }
+
+    public void SDNSyncStart() throws Exception {
+        // Node 테이블 생성
+        SDNSyncNodeList();
+        // Connector 테이블 생성
+        SDNSyncConnectorList();
+        // Link 테이블 생성
+        SDNSyncLinkList();
+        // Tunnel 테이블 생성
+        SDNSyncTunnelList();
+        // Service 테이블 생성
+        SDNSyncServiceList();
+        // Path 테이블 생성
+        SDNSyncPathList();
+        // Constraint 테이블 생성
+        SDNSyncConstraint();
+        // AccessIf 테이블 생성
+        SDNSyncAccess_if();
+        // CryptoModule 테이블 생성
+        SDNSyncCryptoModule();
+        // CryptoSession 테이블 생성
+        SDNSyncCryptoSession();
+        // PmPort 테이블 생성
+        SDNSyncPmPort();
     }
 
     public void SDNSyncNodeList() throws Exception {

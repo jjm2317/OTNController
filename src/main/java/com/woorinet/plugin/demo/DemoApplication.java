@@ -215,7 +215,8 @@ public class DemoApplication {
 			List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
 			// PM_PORT 조회
 			List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
-			SDNManager manager = new SDNManager(sdnNodeRepository,
+			SDNManager manager = new SDNManager(
+					sdnNodeRepository,
 					sdnConnectorRepository,
 					sdnLinkRepository,
 					sdnServiceRepository,
@@ -244,29 +245,8 @@ public class DemoApplication {
 					tl1SessStateList,
 					tl1KeyStateList,
 					tl1PmPortList);
-
-			// Node 테이블 생성
-			manager.SDNSyncNodeList();
-			// Connector 테이블 생성
-			manager.SDNSyncConnectorList();
-			// Link 테이블 생성
-			manager.SDNSyncLinkList();
-			// Tunnel 테이블 생성
-			manager.SDNSyncTunnelList();
-			// Service 테이블 생성
-			manager.SDNSyncServiceList();
-			// Path 테이블 생성
-			manager.SDNSyncPathList();
-			// Constraint 테이블 생성
-			manager.SDNSyncConstraint();
-			// AccessIf 테이블 생성
-			manager.SDNSyncAccess_if();
-			// CryptoModule 테이블 생성
-			manager.SDNSyncCryptoModule();
-			// CryptoSession 테이블 생성
-			manager.SDNSyncCryptoSession();
-			// PmPort 테이블 생성
-			manager.SDNSyncPmPort();
+			// Sync 시작
+			manager.SDNSyncStart();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
