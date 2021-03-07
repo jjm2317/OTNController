@@ -22,6 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
@@ -134,7 +138,36 @@ public class DemoApplication {
 	private SdnPmPortRepository sdnPmPortRepository;
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DemoApplication.class, args);
+		try {
+			String ip = "222.117.54.175";
+			int port = 19012;
+			SocketChannel socketChannel;
+			socketChannel = SocketChannel.open();
+			socketChannel.configureBlocking(true);
+			socketChannel.connect(new InetSocketAddress(ip, port));
+
+			while(true) {
+				ByteBuffer byteBuffer =  ByteBuffer.allocate(1024);
+				Charset charset = Charset.forName("UTF-8");
+				byteBuffer.flip();
+				String bufferStr = "";
+				String result = "";
+				while (!bufferStr.contains(";")) {
+					byteBuffer.clear();
+					socketChannel.read(byteBuffer);
+					byteBuffer.flip();
+					bufferStr = charset.decode(byteBuffer).toString();
+					result += bufferStr;
+				}
+				if(!result.equals("")) System.out.println(result);
+
+			}
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	@RequestMapping("/")
