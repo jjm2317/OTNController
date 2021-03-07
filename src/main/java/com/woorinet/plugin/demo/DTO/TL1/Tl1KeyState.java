@@ -23,19 +23,19 @@ public class Tl1KeyState {
     String SUBNETWORK;
     String AID;
     String TX_KEY_STATE;
-    String TX_KEY_BANK_STAT;
+    String TX_KEY_BANK_STATE;
     String RX_KEY_STATE;
     String RX_KEY_BANK_STATE;
 
     public Tl1KeyState() {
     }
 
-    public Tl1KeyState(String TID, String SUBNETWORK, String AID, String TX_KEY_STATE, String TX_KEY_BANK_STAT, String RX_KEY_STATE, String RX_KEY_BANK_STATE) {
+    public Tl1KeyState(String TID, String SUBNETWORK, String AID, String TX_KEY_STATE, String TX_KEY_BANK_STATE, String RX_KEY_STATE, String RX_KEY_BANK_STATE) {
         this.TID = TID;
         this.SUBNETWORK = SUBNETWORK;
         this.AID = AID;
         this.TX_KEY_STATE = TX_KEY_STATE;
-        this.TX_KEY_BANK_STAT = TX_KEY_BANK_STAT;
+        this.TX_KEY_BANK_STATE = TX_KEY_BANK_STATE;
         this.RX_KEY_STATE = RX_KEY_STATE;
         this.RX_KEY_BANK_STATE = RX_KEY_BANK_STATE;
     }
@@ -45,7 +45,7 @@ public class Tl1KeyState {
         this.SUBNETWORK = fields[1];
         this.AID = fields[2];
         this.TX_KEY_STATE = fields[3];
-        this.TX_KEY_BANK_STAT = fields[4];
+        this.TX_KEY_BANK_STATE = fields[4];
         this.RX_KEY_STATE = fields[5];
         this.RX_KEY_BANK_STATE = fields[6];
     }
@@ -57,7 +57,7 @@ public class Tl1KeyState {
                 ", SUBNETWORK='" + SUBNETWORK + '\'' +
                 ", AID='" + AID + '\'' +
                 ", TX_KEY_STATE='" + TX_KEY_STATE + '\'' +
-                ", TX_KEY_BANK_STAT='" + TX_KEY_BANK_STAT + '\'' +
+                ", TX_KEY_BANK_STATE='" + TX_KEY_BANK_STATE + '\'' +
                 ", RX_KEY_STATE='" + RX_KEY_STATE + '\'' +
                 ", RX_KEY_BANK_STATE='" + RX_KEY_BANK_STATE + '\'' +
                 '}';

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class SDNManager {
     SdnNodeRepository sdnNodeRepository;
@@ -21,6 +22,9 @@ public class SDNManager {
     SdnPathRepository sdnPathRepository;
     SdnConstraintRepository sdnConstraintRepository;
     SdnAccessIfRepository sdnAccessIfRepository;
+    SdnCryptoModuleRepository sdnCryptoModuleRepository;
+    SdnCryptoSessionRepository sdnCryptoSessionRepository;
+    SdnPmPortRepository sdnPmPortRepository;
 
 
     String separator;
@@ -36,6 +40,13 @@ public class SDNManager {
     List<Tl1MplsIf> tl1MplsIfs;
     List<List<Tl1Odu>> odu_list_for_service = new ArrayList<>();
     List<Tl1Inventory> inventories;
+    List<Tl1CmPort> tl1CmPorts;
+    List<Tl1ModuleInfo> tl1ModuleInfos;
+    List<Tl1BypassInfo> tl1BypassInfos;
+    List<Tl1CmProgramInfo> tl1CmProgramInfos;
+    List<Tl1SessState> tl1SessStates;
+    List<Tl1KeyState> tl1KeyStates;
+    List<Tl1PmPort> tl1PmPorts;
 
     HashMap<String, Tl1Node> nodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
@@ -49,12 +60,44 @@ public class SDNManager {
     HashMap<String, Tl1Odu> oduMapInMPLSTPByLocalId = new HashMap<>();
     HashMap<String, Tl1OduMplsIf> odu_mpls_ifHashMap = new HashMap<>();
     HashMap<String, List<Tl1Odu>> odu_hashMapForPath = new HashMap<>();
+    HashMap<String, Tl1CmPort> tl1CmPortHashMap = new HashMap<>();
+    HashMap<String, Tl1BypassInfo> tl1BypassInfoHashMap = new HashMap<>();
+    HashMap<String, Tl1CmProgramInfo> tl1CmProgramInfoHashMap = new HashMap<>();
+    HashMap<String, Tl1KeyState> tl1KeyStateHashMap = new HashMap<>();
 
     HashMap<String, SdnNode> sdnNodeHashMap = new HashMap<>();
     HashMap<String, SdnConnector> sdnConnectorHashMap = new HashMap<>();
     HashMap<String, SdnLink> sdnLinkHashMapForPath = new HashMap<>();
     HashMap<String, SdnService> sdnServiceHashMapForPath = new HashMap<>();
-    public SDNManager(SdnNodeRepository sdnNodeRepository, SdnConnectorRepository sdnConnectorRepository, SdnLinkRepository sdnLinkRepository, SdnServiceRepository sdnServiceRepository, SdnTunnelRepository sdnTunnelRepository, SdnPathRepository sdnPathRepository, SdnConstraintRepository sdnConstraintRepository, SdnAccessIfRepository sdnAccessIfRepository, List<Tl1Node> tl1Nodes, List<Tl1SystemInfo> tl1SystemInfos, List<Tl1OduNodeConnector> tl1OduNodeConnectors, List<Tl1OpticPower> tl1OpticPowers, List<Tl1Odu> oduses, List<Tl1OduMplsIf> tl1OduMplsIfs, List<Tl1Service> tl1Services, List<Tl1AccessIf> Tl1AccessIfs, List<Tl1ServiceExt> tl1ServiceExts, List<Tl1MplsIf> tl1MplsIfs, List<Tl1Inventory> inventories ) throws Exception{
+    public SDNManager(SdnNodeRepository sdnNodeRepository,
+                      SdnConnectorRepository sdnConnectorRepository,
+                      SdnLinkRepository sdnLinkRepository,
+                      SdnServiceRepository sdnServiceRepository,
+                      SdnTunnelRepository sdnTunnelRepository,
+                      SdnPathRepository sdnPathRepository,
+                      SdnConstraintRepository sdnConstraintRepository,
+                      SdnAccessIfRepository sdnAccessIfRepository,
+                      SdnCryptoModuleRepository sdnCryptoModuleRepository,
+                      SdnCryptoSessionRepository sdnCryptoSessionRepository,
+                      SdnPmPortRepository sdnPmPortRepository,
+                      List<Tl1Node> tl1Nodes,
+                      List<Tl1SystemInfo> tl1SystemInfos,
+                      List<Tl1OduNodeConnector> tl1OduNodeConnectors,
+                      List<Tl1OpticPower> tl1OpticPowers,
+                      List<Tl1Odu> oduses,
+                      List<Tl1OduMplsIf> tl1OduMplsIfs,
+                      List<Tl1Service> tl1Services,
+                      List<Tl1AccessIf> Tl1AccessIfs,
+                      List<Tl1ServiceExt> tl1ServiceExts,
+                      List<Tl1MplsIf> tl1MplsIfs,
+                      List<Tl1Inventory> inventories,
+                      List<Tl1CmPort> tl1CmPorts,
+                      List<Tl1ModuleInfo> tl1ModuleInfos,
+                      List<Tl1BypassInfo> tl1BypassInfos,
+                      List<Tl1CmProgramInfo> tl1CmProgramInfos,
+                      List<Tl1SessState> tl1SessStates,
+                      List<Tl1KeyState> tl1KeyStates,
+                      List<Tl1PmPort> tl1PmPorts) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.sdnLinkRepository = sdnLinkRepository;
@@ -63,6 +106,9 @@ public class SDNManager {
         this.sdnPathRepository = sdnPathRepository;
         this.sdnConstraintRepository = sdnConstraintRepository;
         this.sdnAccessIfRepository = sdnAccessIfRepository;
+        this.sdnCryptoModuleRepository = sdnCryptoModuleRepository;
+        this.sdnCryptoSessionRepository = sdnCryptoSessionRepository;
+        this.sdnPmPortRepository = sdnPmPortRepository;
         this.separator = ".";
         this.tl1Nodes = tl1Nodes;
         this.tl1SystemInfos = tl1SystemInfos;
@@ -75,6 +121,13 @@ public class SDNManager {
         this.tl1ServiceExts = tl1ServiceExts;
         this.tl1MplsIfs = tl1MplsIfs;
         this.inventories = inventories;
+        this.tl1CmPorts = tl1CmPorts;
+        this.tl1ModuleInfos = tl1ModuleInfos;
+        this.tl1BypassInfos = tl1BypassInfos;
+        this.tl1CmProgramInfos = tl1CmProgramInfos;
+        this.tl1SessStates = tl1SessStates;
+        this.tl1KeyStates = tl1KeyStates;
+        this.tl1PmPorts = tl1PmPorts;
 
         makeHashMap();
 
@@ -139,8 +192,25 @@ public class SDNManager {
         for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfs) {
             odu_mpls_ifHashMap.put(tl1OduMplsIf.getTID()+'/'+ tl1OduMplsIf.getMPLS_TP_ID(), tl1OduMplsIf);
         }
+        for(Tl1CmPort tl1CmPort : tl1CmPorts) {
+            tl1CmPortHashMap.put(tl1CmPort.getAID(), tl1CmPort);
+        }
+        for(Tl1BypassInfo tl1BypassInfo :tl1BypassInfos) {
+            tl1BypassInfoHashMap.put(tl1BypassInfo.getAID(), tl1BypassInfo);
+        }
+        for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfos) {
+            tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
+        }
 
-
+        for(Tl1KeyState tl1keyState: tl1KeyStates) {
+            System.out.println(tl1keyState+"test..");
+        }
+        Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStates.stream();
+        tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAID(), keystate));
+        System.out.println("test..." + tl1KeyStateHashMap.size());
+        for (Map.Entry<String, Tl1KeyState> entry : tl1KeyStateHashMap.entrySet()) {
+            System.out.println(entry.getKey()+" : "+entry.getValue());
+        }
     }
 
     public void SDNSyncNodeList() throws Exception {
@@ -153,7 +223,7 @@ public class SDNManager {
             SdnNode sdnNode = new SdnNode();
             sdnNode.setEms_id(200009);
             if (tl1SystemInfo != null) sdnNode.setNe_id(tl1SystemInfo.getVENDOR() + separator + tl1Node.getNODE_TYPE() + separator + tl1Node.getTID());
-            sdnNode.setNe_id("");
+            else sdnNode.setNe_id("");
             sdnNode.setNe_name(tl1Node.getTID());
             sdnNode.setNe_type("");
             sdnNode.setNe_model(tl1Node.getSYSTEM_TYPE());
@@ -267,18 +337,18 @@ public class SDNManager {
             sdnLink.setMaximum_odu1s(maximum_bandwidth/2);
             sdnLink.setMaximum_odu2s(maximum_bandwidth/8);
             sdnLink.setMaximum_odu2es(maximum_bandwidth/8);
-            sdnLink.setMaximum_odu3s(0);
-            sdnLink.setMaximum_odu4s(0);
-            sdnLink.setMaximum_odu4cns(0);
-            sdnLink.setMaximum_oduflexs(0);
+            sdnLink.setMaximum_odu3s(maximum_bandwidth/32);
+            sdnLink.setMaximum_odu4s(maximum_bandwidth/80);
+            sdnLink.setMaximum_odu4cns(maximum_bandwidth/160);
+            sdnLink.setMaximum_oduflexs(-1);
             sdnLink.setAvailable_odu0s(available_bandwidth);
             sdnLink.setAvailable_odu1s(available_bandwidth/2);
             sdnLink.setAvailable_odu2s(available_bandwidth/8);
             sdnLink.setAvailable_odu2es(available_bandwidth/8);
-            sdnLink.setAvailable_odu3s(0);
-            sdnLink.setAvailable_odu4s(0);
-            sdnLink.setAvailable_odu4cns(0);
-            sdnLink.setAvailable_oduflexs(0);
+            sdnLink.setAvailable_odu3s(available_bandwidth/32);
+            sdnLink.setAvailable_odu4s(available_bandwidth/80);
+            sdnLink.setAvailable_odu4cns(available_bandwidth/160);
+            sdnLink.setAvailable_oduflexs(-1);
 
             sdnLinkRepository.save(sdnLink);
             sdnLinkHashMapForPath.put(tl1OduMplsIf.getSRC_TID() + '/' + tl1OduMplsIf.getSRC_PORT() + '-' + tl1OduMplsIf.getDST_TID() + '/' + tl1OduMplsIf.getDST_PORT(), sdnLink);
@@ -547,6 +617,103 @@ public class SDNManager {
         }
 
     }
+
+    public void SDNSyncCryptoModule() throws Exception {
+        for(Tl1ModuleInfo tl1ModuleInfo : tl1ModuleInfos) {
+            // aidPieces: [노드이름, 유니트 이름, 슬롯, 포트]
+            String[] aidPieces = tl1ModuleInfo.getAID().split("-");
+            Tl1CmPort tl1CmPort = tl1CmPortHashMap.get(tl1ModuleInfo.getAID());
+            Tl1BypassInfo tl1BypassInfo = tl1BypassInfoHashMap.get(aidPieces[2] + "-" + aidPieces[3]);
+            Tl1CmProgramInfo tl1CmProgramInfo = tl1CmProgramInfoHashMap.get(aidPieces[0] + "-" + aidPieces[1] + "-" + aidPieces[2]);
+
+            SdnCryptoModule sdnCryptoModule = new SdnCryptoModule();
+            sdnCryptoModule.setAID(tl1ModuleInfo.getAID());
+            sdnCryptoModule.setMODULE_ACT_TYPE(tl1CmPort.getUNIT_TYPE());
+            sdnCryptoModule.setMID(tl1ModuleInfo.getMID());
+            sdnCryptoModule.setPMID(tl1ModuleInfo.getPMID());
+            sdnCryptoModule.setMID_CONTEXT(tl1ModuleInfo.getMID_CONTEXT());
+            sdnCryptoModule.setPMID_CONTEXT(tl1ModuleInfo.getPMID_CONTEXT());
+            sdnCryptoModule.setBYPASS_MODE(tl1BypassInfo.getCURRENT_ACTION());
+            sdnCryptoModule.setCRYPTO_MODE(tl1ModuleInfo.getCRYPTO_MODE());
+            sdnCryptoModule.setCRYPTO_MODULE_PKG_VERSION(tl1CmProgramInfo.getPKG_VERSION());
+            sdnCryptoModule.setCRYPTO_MODULE_FPGA_VERSION(tl1CmProgramInfo.getFPGA_VERSION());
+            sdnCryptoModule.setCRYPTO_MODULE_CPLD_VERSION(tl1CmProgramInfo.getCPLD_VERSION());
+            sdnCryptoModule.setCRYPTO_MODULE_HW_VERSION(tl1CmProgramInfo.getHW_VERSION());
+
+            System.out.println(sdnCryptoModule);
+            sdnCryptoModuleRepository.save(sdnCryptoModule);
+        }
+    }
+
+    public void SDNSyncCryptoSession() throws Exception {
+
+
+        Stream<SdnCryptoSession> sdnCryptoSessionStream = tl1SessStates.stream()
+            .map(tl1SessState -> {
+            Tl1KeyState tl1KeyState = tl1KeyStateHashMap.get(tl1SessState.getAID());
+
+            SdnCryptoSession sdnCryptoSession = new SdnCryptoSession();
+
+            sdnCryptoSession.setAID(tl1SessState.getAID());
+            sdnCryptoSession.setLOCAL_IP(tl1SessState.getLOCAL_IP());
+            sdnCryptoSession.setREMOTE_IP(tl1SessState.getREMOTE_IP());
+            sdnCryptoSession.setKSP_MODE(tl1SessState.getKSP_MODE());
+            sdnCryptoSession.setDEAD_TIME(tl1SessState.getDEAD_TIME());
+            sdnCryptoSession.setRETRY_REQUEST_INTERVAL(tl1SessState.getRETRY_REQ_INTERVAL());
+            sdnCryptoSession.setDST_LID(tl1SessState.getDST_LID());
+            sdnCryptoSession.setKEY_SOURCE_MODE(tl1SessState.getKEY_SRC_MODE());
+            sdnCryptoSession.setKEY_FAILOVER_MODE(tl1SessState.getKEY_FAILOVER());
+            sdnCryptoSession.setKEY_LIFE_TIME(tl1SessState.getKEY_LIFE_TIME());
+            sdnCryptoSession.setTX_KEY_STATE(tl1KeyState.getTX_KEY_STATE());
+            sdnCryptoSession.setTX_KEY_BANK_STATE(tl1KeyState.getTX_KEY_BANK_STATE());
+            sdnCryptoSession.setRX_KEY_STATE(tl1KeyState.getRX_KEY_STATE());
+            sdnCryptoSession.setRX_KEY_BANK_STATE(tl1KeyState.getRX_KEY_BANK_STATE());
+
+            return sdnCryptoSession;
+        });
+
+        sdnCryptoSessionStream.forEach(sdnCryptoSessionRepository::save);
+    }
+
+    public void SDNSyncPmPort() throws Exception {
+        Stream<SdnPmPort> sdnPmPortStream = tl1PmPorts.stream()
+        .map(tl1PmPort -> {
+            SdnPmPort sdnPmPort = new SdnPmPort();
+
+            sdnPmPort.setTID(tl1PmPort.getTID());
+            sdnPmPort.setAID(tl1PmPort.getAID());
+            sdnPmPort.setUNIT(tl1PmPort.getUNIT());
+            sdnPmPort.setDATE(tl1PmPort.getDATE());
+            sdnPmPort.setTIME(tl1PmPort.getTIME());
+            sdnPmPort.setIN_OCTETS(tl1PmPort.getIN_OCTETS());
+            sdnPmPort.setIN_OK_PACKETS(tl1PmPort.getIN_OK_PACKETS());
+            sdnPmPort.setIN_DISCARD_PACKETS(tl1PmPort.getIN_DISCARD_PACKETS());
+            sdnPmPort.setIN_ERROR_PACKETS(tl1PmPort.getIN_ERROR_PACKETS());
+            sdnPmPort.setIN_PAUSE_PACKETS(tl1PmPort.getIN_PAUSE_PACKETS());
+            sdnPmPort.setIN_ALIGNMENT_ERRORS(tl1PmPort.getIN_ALIGNMENT_ERRORS());
+            sdnPmPort.setIN_FCS_ERRORS(tl1PmPort.getIN_FCS_ERRORS());
+            sdnPmPort.setIN_SYMBOL_ERRORS(tl1PmPort.getIN_SYMBOL_ERRORS());
+            sdnPmPort.setOUT_OCTETS(tl1PmPort.getOUT_OCTETS());
+            sdnPmPort.setOUT_OK_PACKETS(tl1PmPort.getOUT_OK_PACKETS());
+            sdnPmPort.setOUT_UNICAST_PACKETS(tl1PmPort.getOUT_UNICAST_PACKETS());
+            sdnPmPort.setOUT_NON_UNICAST_PACKETS(tl1PmPort.getOUT_NON_UNICAST_PACKETS());
+            sdnPmPort.setOUT_DISCARD_PACKETS(tl1PmPort.getOUT_DISCARD_PACKETS());
+            sdnPmPort.setOUT_ERROR_PACKETS(tl1PmPort.getOUT_ERROR_PACKETS());
+            sdnPmPort.setOUT_BROADCAST_PACKETS(tl1PmPort.getOUT_BROADCAST_PACKETS());
+            sdnPmPort.setOUT_MULTICAST_PACKETS(tl1PmPort.getOUT_MULTICAST_PACKETS());
+            sdnPmPort.setOUT_PAUSE_PACKETS(tl1PmPort.getOUT_PAUSE_PACKETS());
+            sdnPmPort.setIN_RATE(tl1PmPort.getIN_RATE());
+            sdnPmPort.setOUT_RATE(tl1PmPort.getOUT_RATE());
+            sdnPmPort.setIN_LOSS_RATIO(tl1PmPort.getIN_LOSS_RATIO());
+            sdnPmPort.setOUT_LOSS_RATIO(tl1PmPort.getOUT_LOSS_RATIO());
+
+            return sdnPmPort;
+        });
+
+        sdnPmPortStream.forEach(sdnPmPortRepository::save);
+
+    }
+
 
 
 }

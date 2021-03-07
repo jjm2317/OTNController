@@ -22,6 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
@@ -90,7 +94,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1PmAcRepository tl1PmAcRepository;
 	@Autowired
-	private Tl1PmPwRepository pmPwRepository;
+	private Tl1PmPwRepository tl1PmPwRepository;
 	@Autowired
 	private Tl1PmTunnelRepository tl1PmTunnelRepository;
 	@Autowired
@@ -126,9 +130,44 @@ public class DemoApplication {
 	private SdnConstraintRepository sdnConstraintRepository;
 	@Autowired
 	private SdnPathRepository sdnPathRepository;
+	@Autowired
+	private SdnCryptoModuleRepository sdnCryptoModuleRepository;
+	@Autowired
+	private SdnCryptoSessionRepository sdnCryptoSessionRepository;
+	@Autowired
+	private SdnPmPortRepository sdnPmPortRepository;
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DemoApplication.class, args);
+		try {
+			String ip = "222.117.54.175";
+			int port = 19012;
+			SocketChannel socketChannel;
+			socketChannel = SocketChannel.open();
+			socketChannel.configureBlocking(true);
+			socketChannel.connect(new InetSocketAddress(ip, port));
+
+			while(true) {
+				ByteBuffer byteBuffer =  ByteBuffer.allocate(1024);
+				Charset charset = Charset.forName("UTF-8");
+				byteBuffer.flip();
+				String bufferStr = "";
+				String result = "";
+				while (!bufferStr.contains(";")) {
+					byteBuffer.clear();
+					socketChannel.read(byteBuffer);
+					byteBuffer.flip();
+					bufferStr = charset.decode(byteBuffer).toString();
+					result += bufferStr;
+				}
+				if(!result.equals("")) System.out.println(result);
+
+			}
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	@RequestMapping("/")
@@ -162,7 +201,49 @@ public class DemoApplication {
 			List<Tl1MplsIf> tl1MplsIfs = tl1MplsIfRepository.findAll();
 			// INVENTORY 조회
 			List<Tl1Inventory> inventories = tl1InventoryRepository.findAll();
-			SDNManager manager = new SDNManager(sdnNodeRepository, sdnConnectorRepository, sdnLinkRepository, sdnServiceRepository, sdnTunnelRepository, sdnPathRepository, sdnConstraintRepository, sdnAccessIfRepository, tl1Nodes, tl1SystemInfos, tl1OduNodeConnectors, tl1OpticPowers, oduses, tl1OduMplsIfs, tl1Services, Tl1AccessIfs, tl1ServiceExts, tl1MplsIfs, inventories);
+			// CM_PORT 조회
+			List<Tl1CmPort> tl1CmPorts = tl1CmPortRepository.findAll();
+			// MODULE_INFO 조회
+			List<Tl1ModuleInfo> tl1ModuleInfos = tl1ModuleInfoRepository.findAll();
+			// BYPASS_INFO 조회
+			List<Tl1BypassInfo> tl1BypassInfos = tl1BypassInfoRepository.findAll();
+			// CM_PROGRAM_INFO 조회
+			List<Tl1CmProgramInfo> tl1CmProgramInfos = tl1CmProgramInfoRepository.findAll();
+			// SESS_STATE 조회
+			List<Tl1SessState> tl1SessStates = tl1SessStateRepository.findAll();
+			// KEY_STATE 조회
+			List<Tl1KeyState> tl1KeyStates = tl1KeyStateRepository.findAll();
+			// PM_PORT 조회
+			List<Tl1PmPort> tl1PmPorts = tl1PmPortRepository.findAll();
+			SDNManager manager = new SDNManager(sdnNodeRepository,
+					sdnConnectorRepository,
+					sdnLinkRepository,
+					sdnServiceRepository,
+					sdnTunnelRepository,
+					sdnPathRepository,
+					sdnConstraintRepository,
+					sdnAccessIfRepository,
+					sdnCryptoModuleRepository,
+					sdnCryptoSessionRepository,
+					sdnPmPortRepository,
+					tl1Nodes,
+					tl1SystemInfos,
+					tl1OduNodeConnectors,
+					tl1OpticPowers,
+					oduses,
+					tl1OduMplsIfs,
+					tl1Services,
+					Tl1AccessIfs,
+					tl1ServiceExts,
+					tl1MplsIfs,
+					inventories,
+					tl1CmPorts,
+					tl1ModuleInfos,
+					tl1BypassInfos,
+					tl1CmProgramInfos,
+					tl1SessStates,
+					tl1KeyStates,
+					tl1PmPorts);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
@@ -180,6 +261,12 @@ public class DemoApplication {
 			manager.SDNSyncConstraint();
 			// AccessIf 테이블 생성
 			manager.SDNSyncAccess_if();
+			// CryptoModule 테이블 생성
+			manager.SDNSyncCryptoModule();
+			// CryptoSession 테이블 생성
+			manager.SDNSyncCryptoSession();
+			// PmPort 테이블 생성
+			manager.SDNSyncPmPort();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -224,7 +311,7 @@ public class DemoApplication {
 					tl1PmRepository,
 					tl1PmPortRepository,
 					tl1PmAcRepository,
-					pmPwRepository,
+					tl1PmPwRepository,
 					tl1PmTunnelRepository,
 					tl1InventoryRepository,
 					tl1SessStateRepository,
@@ -234,88 +321,7 @@ public class DemoApplication {
 					tl1BypassInfoRepository,
 					tl1CryptoModeRepository,
 					tl1CmProgramInfoRepository);
-			//TL1 로그인
-			manager.Tl1Login("admin", "admin");
-			//Node DB연동
-			manager.Tl1SyncNodeList();
-			//SystemInfo DB연동
-			manager.Tl1SyncSystemInfo();
-			//Slot DB연동
-			manager.Tl1SyncSlot();
-			//EthPort DB연동
-			manager.Tl1SyncEthPort();
-			//NodeConnector DB연동
-			manager.Tl1SyncNodeConnector();
-			//CesNodeConnector DB연동
-			manager.Tl1SyncCesNodeConnector();
-			//OduNodeConnector DB연동
-			manager.Tl1SyncOduNodeConnector();
-			//MPLS_IF DB연동
-			manager.Tl1SyncMplsIf();
-			//ODU_MPLS_IF DB연동
-			manager.Tl1SyncOduMplsIf();
-			//STUNNEL DB연동
-			manager.Tl1SyncSTunnel();
-			//STUNNEL_EXT DB연동
-			manager.Tl1SyncSTunnelExt();
-			//STUNNEL_TRANSIT DB연동
-			manager.Tl1SyncSTunnelTransit();
-			//TUNNEL_PROT DB연동
-			manager.Tl1SyncTunnelProt();
-			//SPW DB연동
-			manager.Tl1SyncSpw();
-			//MSPW DB연동
-			manager.Tl1SyncMSpw();
-			//MPLS_AC DB연동
-			manager.Tl1SyncMplsAc();
-			//ACCESS_IF DB연동
-			manager.Tl1SyncAccessIf();
-			//SERVICE DB연동
-			manager.Tl1SyncService();
-			//SERVICE_EXT DB연동
-			manager.Tl1SyncServiceExt();
-			//SERVICE_TUNNEL DB연동
-			manager.Tl1SyncServiceTunnel();
-			//SERVICE_MSPW DB연동
-			manager.Tl1SyncServiceMspw();
-			//ODU DB연동
-			manager.Tl1SyncOdu();
-			//CES_PORT DB연동
-			manager.Tl1SyncCesPort();
-			//CES_PW DB연동
-			manager.Tl1SyncCesPw();
-			//L2Lacp DB연동
-			manager.Tl1SyncL2Lacp();
-			//OPTIC-POWER DB연동
-			manager.Tl1SyncOPTICPOWER();
-			//PM DB연동
-			manager.TL1SyncPM();
-			//PM-PORT DB연동
-			manager.Tl1SyncPmPort();
-			//PM-AC DB연동
-			manager.TL1SyncPmAc();
-			//PM-PW DB연동
-			manager.TL1SyncPmPw();
-			//PM-TUNNEL DB연동
-			manager.TL1SyncPmTunnel();
-			//INVENTORY DB연동
-			manager.TL1SyncInventory();
-			//SESS_STATE DB연동
-			manager.TL1SyncSessState();
-			//KEY_STATE DB연동
-			manager.TL1SyncKeyState();
-			//MODULE_INFO DB연동
-			manager.TL1SyncModuleInfo();
-			//CM_PORT DB연동
-			manager.TL1SyncCmPort();
-			//BYPASS_INFO DB연동
-			manager.TL1SyncBypassInfo();
-			//CRYPTO_MODE DB연동
-			manager.TL1SyncCryptoMode();
-			//CM_PROGRAM_INFO DB연동
-			manager.TL1SyncCmProgramInfo();
-			//TL1 로그아웃
-			manager.Tl1Logout("admin");
+			manager.TL1SyncStart();
 			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
