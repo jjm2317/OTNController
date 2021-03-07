@@ -23,7 +23,7 @@ public class Tl1Inventory {
     String UNIT_TYPE;
     String VENDOR;
     String DAT;
-    String SERIAL_NU;
+    String SERIAL_NUM;
 
     public Tl1Inventory() {
     }
@@ -33,7 +33,7 @@ public class Tl1Inventory {
         this.UNIT_TYPE = UNIT_TYPE;
         this.VENDOR = VENDOR;
         this.DAT = DAT;
-        this.SERIAL_NU = SERIAL_NU;
+        this.SERIAL_NUM = SERIAL_NU;
     }
 
     public Tl1Inventory(String[] fields) {
@@ -41,7 +41,7 @@ public class Tl1Inventory {
         this.UNIT_TYPE = fields[1];
         this.VENDOR = fields[2];
         this.DAT = fields[3];
-        this.SERIAL_NU = fields[4];
+        this.SERIAL_NUM = fields[4];
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Tl1Inventory {
                 ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
                 ", VENDOR='" + VENDOR + '\'' +
                 ", DAT='" + DAT + '\'' +
-                ", SERIAL_NU='" + SERIAL_NU + '\'' +
+                ", SERIAL_NU='" + SERIAL_NUM + '\'' +
                 '}';
     }
 }
