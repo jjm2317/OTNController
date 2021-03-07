@@ -48,7 +48,7 @@ public class SDNManager {
     List<Tl1KeyState> tl1KeyStateList;
     List<Tl1PmPort> tl1PmPortList;
 
-    HashMap<String, Tl1Node> nodeHashMap = new HashMap<>();
+    HashMap<String, Tl1Node> tl1NodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> tl1SystemInfoHashMap = new HashMap<>();
     HashMap<String, Tl1Inventory> tl1InventoryHashMap = new HashMap<>();
     HashMap<String, Tl1OpticPower> optic_powerHashMap = new HashMap<>();
@@ -136,7 +136,7 @@ public class SDNManager {
 
     private void makeHashMap() {
         for(Tl1Node tl1Node : tl1NodeList) {
-            nodeHashMap.put(tl1Node.getTID(), tl1Node);
+            tl1NodeHashMap.put(tl1Node.getTID(), tl1Node);
         }
         for(Tl1SystemInfo tl1SystemInfo : tl1SystemInfoList) {
             tl1SystemInfoHashMap.put(tl1SystemInfo.getTID(), tl1SystemInfo);
@@ -214,7 +214,7 @@ public class SDNManager {
     }
 
     public void SDNSyncStart() throws Exception {
-        // Node 테이블 생성
+        // Node 데이터 업데이트
         SDNSyncNodeList();
         // Connector 테이블 생성
         SDNSyncConnectorList();
@@ -239,31 +239,31 @@ public class SDNManager {
     }
 
     private void SDNSyncNodeList() throws Exception {
+        Stream<SdnNode> sdnNodeStream = tl1NodeList
+            .stream()
+            .filter(tl1NodeState -> tl1NodeState.getNODE_TYPE().equals("otn"))
+            .map(tl1NodeState -> {
+                Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1NodeState.getTID());
+                Tl1Inventory tl1Inventory = tl1InventoryHashMap.get(tl1NodeState.getTID());
 
-        for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals("otn")) continue; // otn장비만
+                SdnNode sdnNode = new SdnNode(
+                        200009, // ems_id
+                        tl1SystemInfo.getVENDOR() + separator + tl1NodeState.getNODE_TYPE() + separator + tl1NodeState.getTID(), // ne_id
+                        tl1NodeState.getTID(), // ne_name
+                        "", //ne_type
+                        tl1NodeState.getSYSTEM_TYPE(), // ne_model
+                        tl1NodeState.getNODE_STATUS().equals("normal") ? tl1NodeState.getNODE_STATUS() : "broken", // ne_status
+                        tl1NodeState.getSOFTWARE(), // sw_ver
+                        tl1NodeState.getIP_ADDR(), // ip_addr
+                        tl1SystemInfo.getVENDOR(), // vendor
+                        tl1Inventory.getSERIAL_NUM().equals("---") ? "" : tl1Inventory.getSERIAL_NUM(), // serial_num
+                        tl1NodeState.getNODE_TYPE() // sys_type
+                );
 
-            Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1Node.getTID());
-            Tl1Inventory tl1Inventory = tl1InventoryHashMap.get(tl1Node.getTID());
-
-            SdnNode sdnNode = new SdnNode(
-                    200009, // ems_id
-                    tl1SystemInfo.getVENDOR() + separator + tl1Node.getNODE_TYPE() + separator + tl1Node.getTID(), // ne_id
-                    tl1Node.getTID(), // ne_name
-                    "", //ne_type
-                    tl1Node.getSYSTEM_TYPE(), // ne_model
-                    tl1Node.getNODE_STATUS().equals("normal") ? tl1Node.getNODE_STATUS(): "broken", // ne_status
-                    tl1Node.getSOFTWARE(), // sw_ver
-                    tl1Node.getIP_ADDR(), // ip_addr
-                    tl1SystemInfo.getVENDOR(), // vendor
-                    tl1Inventory.getSERIAL_NUM(), // serial_num
-                    tl1Node.getNODE_TYPE() // sys_type
-            );
-
-            sdnNodeRepository.save(sdnNode);
-            sdnNodeHashMap.put(tl1Node.getTID(), sdnNode);
-        }
-
+                sdnNodeHashMap.put(tl1NodeState.getTID(), sdnNode);
+                return sdnNode;
+            });
+        sdnNodeStream.forEach(sdnNodeRepository::save);
     }
 
     public void SDNSyncConnectorList( ) throws Exception {
@@ -271,7 +271,7 @@ public class SDNManager {
         for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
             SdnConnector sdnConnector = new SdnConnector();
 
-            Tl1Node tl1Node = nodeHashMap.get(tl1OduNodeConnector.getTID());
+            Tl1Node tl1Node = tl1NodeHashMap.get(tl1OduNodeConnector.getTID());
             SdnNode sdnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTID());
             Tl1OpticPower tl1OpticPower = optic_powerHashMap.get(tl1OduNodeConnector.getTID()+"/"+ tl1OduNodeConnector.getAID());
             Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1Node.getTID());
@@ -672,8 +672,6 @@ public class SDNManager {
     }
 
     public void SDNSyncCryptoSession() throws Exception {
-
-
         Stream<SdnCryptoSession> sdnCryptoSessionStream = tl1SessStateList.stream()
             .map(tl1SessState -> {
             Tl1KeyState tl1KeyState = tl1KeyStateHashMap.get(tl1SessState.getAID());
