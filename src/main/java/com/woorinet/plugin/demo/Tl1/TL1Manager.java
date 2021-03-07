@@ -165,6 +165,95 @@ public class TL1Manager {
         socketChannel.configureBlocking(true);
         socketChannel.connect(new InetSocketAddress(ip, port));
     }
+    public void TL1SyncStart() throws IOException {
+        try {
+            //TL1 로그인
+            Tl1Login("admin", "admin");
+            //Node DB연동
+            Tl1SyncNodeList();
+            //SystemInfo DB연동
+            Tl1SyncSystemInfo();
+            //Slot DB연동
+            Tl1SyncSlot();
+            //EthPort DB연동
+            Tl1SyncEthPort();
+            //NodeConnector DB연동
+            Tl1SyncNodeConnector();
+            //CesNodeConnector DB연동
+            Tl1SyncCesNodeConnector();
+            //OduNodeConnector DB연동
+            Tl1SyncOduNodeConnector();
+            //MPLS_IF DB연동
+            Tl1SyncMplsIf();
+            //ODU_MPLS_IF DB연동
+            Tl1SyncOduMplsIf();
+            //STUNNEL DB연동
+            Tl1SyncSTunnel();
+            //STUNNEL_EXT DB연동
+            Tl1SyncSTunnelExt();
+            //STUNNEL_TRANSIT DB연동
+            Tl1SyncSTunnelTransit();
+            //TUNNEL_PROT DB연동
+            Tl1SyncTunnelProt();
+            //SPW DB연동
+            Tl1SyncSpw();
+            //MSPW DB연동
+            Tl1SyncMSpw();
+            //MPLS_AC DB연동
+            Tl1SyncMplsAc();
+            //ACCESS_IF DB연동
+            Tl1SyncAccessIf();
+            //SERVICE DB연동
+            Tl1SyncService();
+            //SERVICE_EXT DB연동
+            Tl1SyncServiceExt();
+            //SERVICE_TUNNEL DB연동
+            Tl1SyncServiceTunnel();
+            //SERVICE_MSPW DB연동
+            Tl1SyncServiceMspw();
+            //ODU DB연동
+            Tl1SyncOdu();
+            //CES_PORT DB연동
+            Tl1SyncCesPort();
+            //CES_PW DB연동
+            Tl1SyncCesPw();
+            //L2Lacp DB연동
+            Tl1SyncL2Lacp();
+            //OPTIC-POWER DB연동
+            Tl1SyncOPTICPOWER();
+            //PM DB연동
+            TL1SyncPM();
+            //PM-PORT DB연동
+            Tl1SyncPmPort();
+            //PM-AC DB연동
+            TL1SyncPmAc();
+            //PM-PW DB연동
+            TL1SyncPmPw();
+            //PM-TUNNEL DB연동
+            TL1SyncPmTunnel();
+            //INVENTORY DB연동
+            TL1SyncInventory();
+            //SESS_STATE DB연동
+            TL1SyncSessState();
+            //KEY_STATE DB연동
+            TL1SyncKeyState();
+            //MODULE_INFO DB연동
+            TL1SyncModuleInfo();
+            //CM_PORT DB연동
+            TL1SyncCmPort();
+            //BYPASS_INFO DB연동
+            TL1SyncBypassInfo();
+            //CRYPTO_MODE DB연동
+            TL1SyncCryptoMode();
+            //CM_PROGRAM_INFO DB연동
+            TL1SyncCmProgramInfo();
+            //TL1 로그아웃
+            Tl1Logout("admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void Tl1Login(String id, String password) throws IOException {
         String cmd = "ACT-USER:::100:" + id + "," + password + ";";
