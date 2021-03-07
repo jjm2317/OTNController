@@ -180,41 +180,41 @@ public class DemoApplication {
 	String convertTL1() {
 		try {
 			// Node 조회
-			List<Tl1Node> tl1Nodes = tl1NodeRepository.findAll();
+			List<Tl1Node> tl1NodeList = tl1NodeRepository.findAll();
 			// SYSTEM_INFO 조회
-			List<Tl1SystemInfo> tl1SystemInfos = tl1SystemInfoRepository.findAll();
+			List<Tl1SystemInfo> tl1SystemInfoList = tl1SystemInfoRepository.findAll();
 			// ODU_NODE_CONNECTOR 조회
-			List<Tl1OduNodeConnector> tl1OduNodeConnectors = tl1OduNodeConnectorRepository.findAll();
+			List<Tl1OduNodeConnector> tl1OduNodeConnectorList = tl1OduNodeConnectorRepository.findAll();
 			// ODU 조회
-			List<Tl1Odu> oduses = tl1OduRepository.findAll();
+			List<Tl1Odu> tl1OduList = tl1OduRepository.findAll();
 			// ODU_MPLS_IF 조회
-			List<Tl1OduMplsIf> tl1OduMplsIfs = tl1OduMplsIfRepository.findAll();
+			List<Tl1OduMplsIf> tl1OduMplsIfList = tl1OduMplsIfRepository.findAll();
 			// OPTIC_POWER 조회
-			List<Tl1OpticPower> tl1OpticPowers = tl1OpticPowerRepository.findAll();
+			List<Tl1OpticPower> tl1OpticPowerList = tl1OpticPowerRepository.findAll();
 			// SERVICE 조회
-			List<Tl1Service> tl1Services = tl1ServiceRepository.findAll();
+			List<Tl1Service> tl1ServiceList = tl1ServiceRepository.findAll();
 			// ACCESS_IF 조회
-			List<Tl1AccessIf> Tl1AccessIfs = tl1AccessIfRepository.findAll();
+			List<Tl1AccessIf> tl1AccessIfList = tl1AccessIfRepository.findAll();
 			// SERVICE_EXT 조회
-			List<Tl1ServiceExt> tl1ServiceExts = tl1ServiceExtRepository.findAll();
+			List<Tl1ServiceExt> tl1ServiceExtList = tl1ServiceExtRepository.findAll();
 			// MPLS_IF 조회
-			List<Tl1MplsIf> tl1MplsIfs = tl1MplsIfRepository.findAll();
+			List<Tl1MplsIf> tl1MplsIfList = tl1MplsIfRepository.findAll();
 			// INVENTORY 조회
-			List<Tl1Inventory> inventories = tl1InventoryRepository.findAll();
+			List<Tl1Inventory> tl1InventorieList = tl1InventoryRepository.findAll();
 			// CM_PORT 조회
-			List<Tl1CmPort> tl1CmPorts = tl1CmPortRepository.findAll();
+			List<Tl1CmPort> tl1CmPortList = tl1CmPortRepository.findAll();
 			// MODULE_INFO 조회
-			List<Tl1ModuleInfo> tl1ModuleInfos = tl1ModuleInfoRepository.findAll();
+			List<Tl1ModuleInfo> tl1ModuleInfoList = tl1ModuleInfoRepository.findAll();
 			// BYPASS_INFO 조회
-			List<Tl1BypassInfo> tl1BypassInfos = tl1BypassInfoRepository.findAll();
+			List<Tl1BypassInfo> tl1BypassInfoList = tl1BypassInfoRepository.findAll();
 			// CM_PROGRAM_INFO 조회
-			List<Tl1CmProgramInfo> tl1CmProgramInfos = tl1CmProgramInfoRepository.findAll();
+			List<Tl1CmProgramInfo> tl1CmProgramInfoList = tl1CmProgramInfoRepository.findAll();
 			// SESS_STATE 조회
-			List<Tl1SessState> tl1SessStates = tl1SessStateRepository.findAll();
+			List<Tl1SessState> tl1SessStateList = tl1SessStateRepository.findAll();
 			// KEY_STATE 조회
-			List<Tl1KeyState> tl1KeyStates = tl1KeyStateRepository.findAll();
+			List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
 			// PM_PORT 조회
-			List<Tl1PmPort> tl1PmPorts = tl1PmPortRepository.findAll();
+			List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
 			SDNManager manager = new SDNManager(sdnNodeRepository,
 					sdnConnectorRepository,
 					sdnLinkRepository,
@@ -226,24 +226,24 @@ public class DemoApplication {
 					sdnCryptoModuleRepository,
 					sdnCryptoSessionRepository,
 					sdnPmPortRepository,
-					tl1Nodes,
-					tl1SystemInfos,
-					tl1OduNodeConnectors,
-					tl1OpticPowers,
-					oduses,
-					tl1OduMplsIfs,
-					tl1Services,
-					Tl1AccessIfs,
-					tl1ServiceExts,
-					tl1MplsIfs,
-					inventories,
-					tl1CmPorts,
-					tl1ModuleInfos,
-					tl1BypassInfos,
-					tl1CmProgramInfos,
-					tl1SessStates,
-					tl1KeyStates,
-					tl1PmPorts);
+					tl1NodeList,
+					tl1SystemInfoList,
+					tl1OduNodeConnectorList,
+					tl1OpticPowerList,
+					tl1OduList,
+					tl1OduMplsIfList,
+					tl1ServiceList,
+					tl1AccessIfList,
+					tl1ServiceExtList,
+					tl1MplsIfList,
+					tl1InventorieList,
+					tl1CmPortList,
+					tl1ModuleInfoList,
+					tl1BypassInfoList,
+					tl1CmProgramInfoList,
+					tl1SessStateList,
+					tl1KeyStateList,
+					tl1PmPortList);
 
 			// Node 테이블 생성
 			manager.SDNSyncNodeList();
