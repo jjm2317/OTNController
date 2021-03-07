@@ -28,25 +28,25 @@ public class SDNManager {
 
 
     String separator;
-    List<Tl1Node> tl1Nodes;
-    List<Tl1SystemInfo> tl1SystemInfos;
-    List<Tl1OduNodeConnector> tl1OduNodeConnectors;
-    List<Tl1OpticPower> tl1OpticPowers;
-    List<Tl1Odu> oduses;
-    List<Tl1OduMplsIf> tl1OduMplsIfs;
-    List<Tl1Service> tl1Services;
-    List<Tl1AccessIf> Tl1AccessIfs;
-    List<Tl1ServiceExt> tl1ServiceExts;
-    List<Tl1MplsIf> tl1MplsIfs;
+    List<Tl1Node> tl1NodeList;
+    List<Tl1SystemInfo> tl1SystemInfoList;
+    List<Tl1OduNodeConnector> tl1OduNodeConnectorList;
+    List<Tl1OpticPower> tl1OpticPowerList;
+    List<Tl1Odu> tl1OduList;
+    List<Tl1OduMplsIf> tl1OduMplsIfList;
+    List<Tl1Service> tl1ServiceList;
+    List<Tl1AccessIf> tl1AccessIfList;
+    List<Tl1ServiceExt> tl1ServiceExtList;
+    List<Tl1MplsIf> tl1MplsIfList;
     List<List<Tl1Odu>> odu_list_for_service = new ArrayList<>();
-    List<Tl1Inventory> inventories;
-    List<Tl1CmPort> tl1CmPorts;
-    List<Tl1ModuleInfo> tl1ModuleInfos;
-    List<Tl1BypassInfo> tl1BypassInfos;
-    List<Tl1CmProgramInfo> tl1CmProgramInfos;
-    List<Tl1SessState> tl1SessStates;
-    List<Tl1KeyState> tl1KeyStates;
-    List<Tl1PmPort> tl1PmPorts;
+    List<Tl1Inventory> tl1InventoryList;
+    List<Tl1CmPort> tl1CmPortList;
+    List<Tl1ModuleInfo> tl1ModuleInfoList;
+    List<Tl1BypassInfo> tl1BypassInfoList;
+    List<Tl1CmProgramInfo> tl1CmProgramInfoList;
+    List<Tl1SessState> tl1SessStateList;
+    List<Tl1KeyState> tl1KeyStateList;
+    List<Tl1PmPort> tl1PmPortList;
 
     HashMap<String, Tl1Node> nodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> system_infoHashMap = new HashMap<>();
@@ -80,24 +80,24 @@ public class SDNManager {
                       SdnCryptoModuleRepository sdnCryptoModuleRepository,
                       SdnCryptoSessionRepository sdnCryptoSessionRepository,
                       SdnPmPortRepository sdnPmPortRepository,
-                      List<Tl1Node> tl1Nodes,
-                      List<Tl1SystemInfo> tl1SystemInfos,
-                      List<Tl1OduNodeConnector> tl1OduNodeConnectors,
-                      List<Tl1OpticPower> tl1OpticPowers,
-                      List<Tl1Odu> oduses,
-                      List<Tl1OduMplsIf> tl1OduMplsIfs,
-                      List<Tl1Service> tl1Services,
-                      List<Tl1AccessIf> Tl1AccessIfs,
-                      List<Tl1ServiceExt> tl1ServiceExts,
-                      List<Tl1MplsIf> tl1MplsIfs,
-                      List<Tl1Inventory> inventories,
-                      List<Tl1CmPort> tl1CmPorts,
-                      List<Tl1ModuleInfo> tl1ModuleInfos,
-                      List<Tl1BypassInfo> tl1BypassInfos,
-                      List<Tl1CmProgramInfo> tl1CmProgramInfos,
-                      List<Tl1SessState> tl1SessStates,
-                      List<Tl1KeyState> tl1KeyStates,
-                      List<Tl1PmPort> tl1PmPorts) throws Exception{
+                      List<Tl1Node> tl1NodeList,
+                      List<Tl1SystemInfo> tl1SystemInfoList,
+                      List<Tl1OduNodeConnector> tl1OduNodeConnectorList,
+                      List<Tl1OpticPower> tl1OpticPowerList,
+                      List<Tl1Odu> tl1OduList,
+                      List<Tl1OduMplsIf> tl1OduMplsIfList,
+                      List<Tl1Service> tl1ServiceList,
+                      List<Tl1AccessIf> tl1AccessIfList,
+                      List<Tl1ServiceExt> tl1ServiceExtList,
+                      List<Tl1MplsIf> tl1MplsIfList,
+                      List<Tl1Inventory> tl1InventoryList,
+                      List<Tl1CmPort> tl1CmPortList,
+                      List<Tl1ModuleInfo> tl1ModuleInfoList,
+                      List<Tl1BypassInfo> tl1BypassInfoList,
+                      List<Tl1CmProgramInfo> tl1CmProgramInfoList,
+                      List<Tl1SessState> tl1SessStateList,
+                      List<Tl1KeyState> tl1KeyStateList,
+                      List<Tl1PmPort> tl1PmPortList) throws Exception{
         this.sdnNodeRepository = sdnNodeRepository;
         this.sdnConnectorRepository = sdnConnectorRepository;
         this.sdnLinkRepository = sdnLinkRepository;
@@ -110,40 +110,40 @@ public class SDNManager {
         this.sdnCryptoSessionRepository = sdnCryptoSessionRepository;
         this.sdnPmPortRepository = sdnPmPortRepository;
         this.separator = ".";
-        this.tl1Nodes = tl1Nodes;
-        this.tl1SystemInfos = tl1SystemInfos;
-        this.tl1OduNodeConnectors = tl1OduNodeConnectors;
-        this.tl1OpticPowers = tl1OpticPowers;
-        this.oduses = oduses;
-        this.tl1OduMplsIfs = tl1OduMplsIfs;
-        this.tl1Services = tl1Services;
-        this.Tl1AccessIfs = Tl1AccessIfs;
-        this.tl1ServiceExts = tl1ServiceExts;
-        this.tl1MplsIfs = tl1MplsIfs;
-        this.inventories = inventories;
-        this.tl1CmPorts = tl1CmPorts;
-        this.tl1ModuleInfos = tl1ModuleInfos;
-        this.tl1BypassInfos = tl1BypassInfos;
-        this.tl1CmProgramInfos = tl1CmProgramInfos;
-        this.tl1SessStates = tl1SessStates;
-        this.tl1KeyStates = tl1KeyStates;
-        this.tl1PmPorts = tl1PmPorts;
+        this.tl1NodeList = tl1NodeList;
+        this.tl1SystemInfoList = tl1SystemInfoList;
+        this.tl1OduNodeConnectorList = tl1OduNodeConnectorList;
+        this.tl1OpticPowerList = tl1OpticPowerList;
+        this.tl1OduList = tl1OduList;
+        this.tl1OduMplsIfList = tl1OduMplsIfList;
+        this.tl1ServiceList = tl1ServiceList;
+        this.tl1AccessIfList = tl1AccessIfList;
+        this.tl1ServiceExtList = tl1ServiceExtList;
+        this.tl1MplsIfList = tl1MplsIfList;
+        this.tl1InventoryList = tl1InventoryList;
+        this.tl1CmPortList = tl1CmPortList;
+        this.tl1ModuleInfoList = tl1ModuleInfoList;
+        this.tl1BypassInfoList = tl1BypassInfoList;
+        this.tl1CmProgramInfoList = tl1CmProgramInfoList;
+        this.tl1SessStateList = tl1SessStateList;
+        this.tl1KeyStateList = tl1KeyStateList;
+        this.tl1PmPortList = tl1PmPortList;
 
         makeHashMap();
 
     }
 
     private void makeHashMap() {
-        for(Tl1Node tl1Node : tl1Nodes) {
+        for(Tl1Node tl1Node : tl1NodeList) {
             nodeHashMap.put(tl1Node.getTID(), tl1Node);
         }
-        for(Tl1SystemInfo tl1SystemInfo : tl1SystemInfos) {
+        for(Tl1SystemInfo tl1SystemInfo : tl1SystemInfoList) {
             system_infoHashMap.put(tl1SystemInfo.getTID(), tl1SystemInfo);
         }
-        for(Tl1OpticPower tl1OpticPower : tl1OpticPowers) {
+        for(Tl1OpticPower tl1OpticPower : tl1OpticPowerList) {
             optic_powerHashMap.put(tl1OpticPower.getTID()+"/"+ tl1OpticPower.getAID(), tl1OpticPower);
         }
-        for(Tl1Odu tl1Odu : oduses) {
+        for(Tl1Odu tl1Odu : tl1OduList) {
             if(odu_hashMapForPath.get(tl1Odu.getNAME()) == null ) {
                 List<Tl1Odu> tl1Odu_list = new ArrayList<>();
                 tl1Odu_list.add(tl1Odu);
@@ -183,26 +183,26 @@ public class SDNManager {
 
 
         }
-        for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
+        for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
             odu_node_connectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), tl1OduNodeConnector);
         }
-        for(Tl1AccessIf Tl1AccessIf : Tl1AccessIfs) {
+        for(Tl1AccessIf Tl1AccessIf : tl1AccessIfList) {
             access_ifHashMap.put(Tl1AccessIf.getTID(), Tl1AccessIf);
         }
-        for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfs) {
+        for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfList) {
             odu_mpls_ifHashMap.put(tl1OduMplsIf.getTID()+'/'+ tl1OduMplsIf.getMPLS_TP_ID(), tl1OduMplsIf);
         }
-        for(Tl1CmPort tl1CmPort : tl1CmPorts) {
+        for(Tl1CmPort tl1CmPort : tl1CmPortList) {
             tl1CmPortHashMap.put(tl1CmPort.getAID(), tl1CmPort);
         }
-        for(Tl1BypassInfo tl1BypassInfo :tl1BypassInfos) {
+        for(Tl1BypassInfo tl1BypassInfo :tl1BypassInfoList) {
             tl1BypassInfoHashMap.put(tl1BypassInfo.getAID(), tl1BypassInfo);
         }
-        for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfos) {
+        for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfoList) {
             tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
         }
 
-        Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStates.stream();
+        Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStateList.stream();
         tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAID(), keystate));
         for (Map.Entry<String, Tl1KeyState> entry : tl1KeyStateHashMap.entrySet()) {
             System.out.println(entry.getKey()+" : "+entry.getValue());
@@ -236,7 +236,7 @@ public class SDNManager {
 
     public void SDNSyncNodeList() throws Exception {
 
-        for (Tl1Node tl1Node : tl1Nodes) {
+        for (Tl1Node tl1Node : tl1NodeList) {
             if(!tl1Node.getNODE_TYPE().equals("otn")) continue; // otn장비만
 
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1Node.getTID());
@@ -263,7 +263,7 @@ public class SDNManager {
 
     public void SDNSyncConnectorList( ) throws Exception {
 
-        for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectors) {
+        for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
             SdnConnector sdnConnector = new SdnConnector();
 
             Tl1Node tl1Node = nodeHashMap.get(tl1OduNodeConnector.getTID());
@@ -314,7 +314,7 @@ public class SDNManager {
 
     public void SDNSyncLinkList ( ) throws Exception {
 
-        for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfs) {
+        for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfList) {
             SdnLink sdnLink = new SdnLink();
 
 //
@@ -426,7 +426,7 @@ public class SDNManager {
 
     public void SDNSyncTunnelList( ) throws  Exception {
 
-        for (Tl1Odu tl1Odu : oduses) {
+        for (Tl1Odu tl1Odu : tl1OduList) {
             SdnTunnel sdnTunnel = new SdnTunnel();
             SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_SRC_LSR());
             SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_DST_LSR());
@@ -612,7 +612,7 @@ public class SDNManager {
 
     public void SDNSyncAccess_if() throws Exception {
 
-        for(Tl1MplsIf tl1MplsIf : tl1MplsIfs) {
+        for(Tl1MplsIf tl1MplsIf : tl1MplsIfList) {
 
             Tl1SystemInfo tl1SystemInfo = system_infoHashMap.get(tl1MplsIf.getTID());
 
@@ -640,7 +640,7 @@ public class SDNManager {
     }
 
     public void SDNSyncCryptoModule() throws Exception {
-        for(Tl1ModuleInfo tl1ModuleInfo : tl1ModuleInfos) {
+        for(Tl1ModuleInfo tl1ModuleInfo : tl1ModuleInfoList) {
             // aidPieces: [노드이름, 유니트 이름, 슬롯, 포트]
             String[] aidPieces = tl1ModuleInfo.getAID().split("-");
             Tl1CmPort tl1CmPort = tl1CmPortHashMap.get(tl1ModuleInfo.getAID());
@@ -669,7 +669,7 @@ public class SDNManager {
     public void SDNSyncCryptoSession() throws Exception {
 
 
-        Stream<SdnCryptoSession> sdnCryptoSessionStream = tl1SessStates.stream()
+        Stream<SdnCryptoSession> sdnCryptoSessionStream = tl1SessStateList.stream()
             .map(tl1SessState -> {
             Tl1KeyState tl1KeyState = tl1KeyStateHashMap.get(tl1SessState.getAID());
 
@@ -697,7 +697,7 @@ public class SDNManager {
     }
 
     public void SDNSyncPmPort() throws Exception {
-        Stream<SdnPmPort> sdnPmPortStream = tl1PmPorts.stream()
+        Stream<SdnPmPort> sdnPmPortStream = tl1PmPortList.stream()
         .map(tl1PmPort -> {
             SdnPmPort sdnPmPort = new SdnPmPort();
 
