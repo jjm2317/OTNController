@@ -94,7 +94,7 @@ public class DemoApplication {
 	@Autowired
 	private Tl1PmAcRepository tl1PmAcRepository;
 	@Autowired
-	private Tl1PmPwRepository pmPwRepository;
+	private Tl1PmPwRepository tl1PmPwRepository;
 	@Autowired
 	private Tl1PmTunnelRepository tl1PmTunnelRepository;
 	@Autowired
@@ -311,7 +311,7 @@ public class DemoApplication {
 					tl1PmRepository,
 					tl1PmPortRepository,
 					tl1PmAcRepository,
-					pmPwRepository,
+					tl1PmPwRepository,
 					tl1PmTunnelRepository,
 					tl1InventoryRepository,
 					tl1SessStateRepository,
