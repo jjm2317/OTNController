@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.Query;
 public interface SdnNodeRepository extends JpaRepository<SdnNode, String> {
     @Query("from SdnNode where ne_id= :neId" )
     SdnNode findSdnNodeByNeId(@Param("neId") String neId);
-
 }
