@@ -26,7 +26,7 @@ public class SwaggerConfig {
                 .apiInfo(getApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.woorinet.plugin.demo"))
-                .paths(PathSelectors.ant("/member/**"))
+                .paths(PathSelectors.ant("/sdn/**"))
                 .build();
     }
 
