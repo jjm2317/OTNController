@@ -28,6 +28,8 @@ public class SdnController {
     private SdnTunnelRepository sdnTunnelRepository;
     @Autowired
     private SdnServiceRepository sdnServiceRepository;
+    @Autowired
+    private SdnPathRepository sdnPathRepository;
 
     @ApiOperation(value = "get node list", notes = "전체 노드 조회")
     @GetMapping(value = "/node/list")
@@ -93,6 +95,18 @@ public class SdnController {
     @ResponseBody
     public ResponseEntity selectService(@RequestParam String service_id) {
         return ResponseEntity.ok(sdnServiceRepository.findSdnServiceByServiceId(service_id));
+    }
+
+    @ApiOperation(value = "get path list", notes = "전체 패스 조회")
+    @GetMapping(value = "/path/list")
+    @ResponseBody
+    public ResponseEntity selectPathList() {return ResponseEntity.ok(sdnPathRepository.findAll());}
+
+    @ApiOperation(value = "get path", notes = "패스 조회")
+    @GetMapping(value = "/path")
+    @ResponseBody
+    public ResponseEntity selectPath(@RequestParam int id) {
+        return ResponseEntity.ok(sdnPathRepository.findSdnPathById(id));
     }
 
 }
