@@ -26,6 +26,8 @@ public class SdnController {
     private SdnLinkRepository sdnLinkRepository;
     @Autowired
     private SdnTunnelRepository sdnTunnelRepository;
+    @Autowired
+    private SdnServiceRepository sdnServiceRepository;
 
     @ApiOperation(value = "get node list", notes = "전체 노드 조회")
     @GetMapping(value = "/node/list")
@@ -69,7 +71,7 @@ public class SdnController {
         return ResponseEntity.ok(sdnLinkRepository.findSdnLinkByLinkId(link_id));
     }
 
-    @ApiOperation(value = "get tunnel liset", notes = "전체 터널 조회")
+    @ApiOperation(value = "get tunnel list", notes = "전체 터널 조회")
     @GetMapping(value = "/tunnel/list")
     @ResponseBody
     public ResponseEntity selectTunnelList() {return ResponseEntity.ok(sdnTunnelRepository.findAll());}
@@ -79,6 +81,18 @@ public class SdnController {
     @ResponseBody
     public ResponseEntity selectTunnel(@RequestParam String tunnel_id) {
         return ResponseEntity.ok(sdnTunnelRepository.findSdnTunnelByTunnelId(tunnel_id));
+    }
+
+    @ApiOperation(value = "get service list", notes = "전체 서비스 조회")
+    @GetMapping(value = "/service/list")
+    @ResponseBody
+    public ResponseEntity selectServiceList() {return ResponseEntity.ok(sdnServiceRepository.findAll());}
+
+    @ApiOperation(value = "get service", notes = "서비스 조회")
+    @GetMapping(value = "/service")
+    @ResponseBody
+    public ResponseEntity selectService(@RequestParam String service_id) {
+        return ResponseEntity.ok(sdnServiceRepository.findSdnServiceByServiceId(service_id));
     }
 
 }
