@@ -9,4 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface SdnConstraintRepository extends JpaRepository<SdnConstraint, Integer> {
     @Query("from SdnConstraint where id= :id" )
     SdnConstraint findSdnConstraintById(@Param("id") int id);
+
+    @Query("from SdnPath where service_id= :serviceId")
+    SdnConstraint findSdnConstraintByServiceId(@Param("serviceId") String serviceId);
 }

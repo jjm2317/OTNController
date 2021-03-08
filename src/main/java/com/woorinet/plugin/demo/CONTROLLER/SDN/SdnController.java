@@ -123,8 +123,9 @@ public class SdnController {
     @ApiOperation(value = "get constraint", notes = "속성 조회")
     @GetMapping(value = "/constraint")
     @ResponseBody
-    public ResponseEntity selectConstraint(@RequestParam int id) {
-        return ResponseEntity.ok(sdnConstraintRepository.findSdnConstraintById(id));
+    public ResponseEntity selectConstraint(@RequestParam(required = false) int id, @RequestParam(required = false) String service_id) {
+        if(id != 0) return ResponseEntity.ok(sdnConstraintRepository.findSdnConstraintById(id));
+        else return ResponseEntity.ok(sdnConstraintRepository.findSdnConstraintByServiceId(service_id));
     }
 
     @ApiOperation(value = "get accessif list", notes = "전체 access interface 조회")
