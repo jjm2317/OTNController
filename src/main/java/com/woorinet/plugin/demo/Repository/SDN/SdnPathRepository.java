@@ -9,4 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface SdnPathRepository extends JpaRepository<SdnPath, String> {
     @Query("from SdnPath where id= :id" )
     SdnPath findSdnPathById(@Param("id") int id);
+
+    @Query("from SdnPath where service_id= :serviceId")
+    SdnPath findSdnPathByServiceId(@Param("serviceId") String serviceId);
 }
