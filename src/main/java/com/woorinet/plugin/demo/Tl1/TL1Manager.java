@@ -769,6 +769,7 @@ public class TL1Manager {
     public ArrayList<String[]> ConvertResponse(String data) throws Exception {
         String[] convData1 = data.split("\n");
 
+        ArrayList<String> keyList = new ArrayList<>();
         ArrayList<String[]> result = new ArrayList<>();
 
         for (String line: convData1) {
@@ -785,6 +786,7 @@ public class TL1Manager {
 
                 String[] columns = line.split(",");
                 for (String column: columns ) {
+                    keyList.add(column.trim());
                     System.out.println("column: " + column.trim());
                 }
             }else if (line.contains("\"")) {
@@ -800,8 +802,38 @@ public class TL1Manager {
                 result.add(fields);
             }
         }
+        //Fix result : num of key list  != num of value list (Date value)
+        for( int r=0 ;r< result.size(); r++ ) {
+            String []rowValue = result.get(r);
+            //Filter key value not containing Date Value
+            boolean hasDate = false;
+            for(String key : keyList) {
+                if(key.contains("DATE")) hasDate = true;
+            }
+            if(!hasDate) break;
+
+            //Filter exact value
+            if( rowValue.length == keyList.size()) continue;
+
+            String[] newValue = new String[keyList.size()];
+
+            for( int i = 0, k = 0 ; i < newValue.length; i ++, k ++) {
+                if(!keyList.get(i).contains("DATE")) {
+                    newValue[i] = rowValue[k];
+                    continue;
+                }
+                newValue[i] = rowValue[k] + "_" +  rowValue[k + 1];
+                k ++;
+            }
+
+            result.set(r,newValue);
+        }
         return result;
     }
+
+//    private void checkResult(ArrayList result) {
+//
+//    }
 
     public Map<String,String> ConvertResponse2(String data) {
         String[] convData1 = data.split("\n");
