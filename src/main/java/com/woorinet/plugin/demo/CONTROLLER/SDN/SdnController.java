@@ -110,8 +110,9 @@ public class SdnController {
     @ApiOperation(value = "get path", notes = "경로 조회")
     @GetMapping(value = "/path")
     @ResponseBody
-    public ResponseEntity selectPath(@RequestParam int id) {
-        return ResponseEntity.ok(sdnPathRepository.findSdnPathById(id));
+    public ResponseEntity selectPath(@RequestParam(required = false) int id, @RequestParam(required = false) String service_id) {
+        if (id != 0) return ResponseEntity.ok(sdnPathRepository.findSdnPathById(id));
+        else return ResponseEntity.ok(sdnPathRepository.findSdnPathByServiceId(service_id));
     }
 
     @ApiOperation(value = "get constraint list", notes = "전체 속성 조회")
