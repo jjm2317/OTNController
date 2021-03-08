@@ -2,6 +2,7 @@ package com.woorinet.plugin.demo.CONTROLLER.SDN;
 
 
 import com.woorinet.plugin.demo.Repository.SDN.SdnConnectorRepository;
+import com.woorinet.plugin.demo.Repository.SDN.SdnLinkRepository;
 import com.woorinet.plugin.demo.Repository.SDN.SdnNodeRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class SdnController {
     private SdnNodeRepository sdnNodeRepository;
     @Autowired
     private SdnConnectorRepository sdnConnectorRepository;
+    @Autowired
+    private SdnLinkRepository sdnLinkRepository;
 
     @ApiOperation(value = "get node list", notes = "전체 노드 조회")
     @GetMapping(value = "/node/list")
@@ -47,6 +50,20 @@ public class SdnController {
     @ResponseBody
     public ResponseEntity selectConnector(@RequestParam String connect_id) {
         return ResponseEntity.ok(sdnConnectorRepository.findSdnConnectorByConnectId(connect_id));
+    }
+
+    @ApiOperation(value = "get link list", notes = "전체 링크 조회")
+    @GetMapping(value = "/link/list")
+    @ResponseBody
+    public ResponseEntity selectLinkList() {
+        return ResponseEntity.ok(sdnLinkRepository.findAll());
+    }
+
+    @ApiOperation(value = "get link", notes = "링크 조회")
+    @GetMapping(value = "/link")
+    @ResponseBody
+    public ResponseEntity selectLink(@RequestParam String link_id) {
+        return ResponseEntity.ok(sdnLinkRepository.findSdnLinkByLinkId(link_id));
     }
 
 }
