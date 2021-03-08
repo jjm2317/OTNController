@@ -30,6 +30,11 @@ public class SdnController {
     private SdnServiceRepository sdnServiceRepository;
     @Autowired
     private SdnPathRepository sdnPathRepository;
+    @Autowired
+    private SdnConstraintRepository sdnConstraintRepository;
+    @Autowired
+    private SdnAccessIfRepository sdnAccessIfRepository;
+
 
     @ApiOperation(value = "get node list", notes = "전체 노드 조회")
     @GetMapping(value = "/node/list")
@@ -97,17 +102,40 @@ public class SdnController {
         return ResponseEntity.ok(sdnServiceRepository.findSdnServiceByServiceId(service_id));
     }
 
-    @ApiOperation(value = "get path list", notes = "전체 패스 조회")
+    @ApiOperation(value = "get path list", notes = "전체 경로 조회")
     @GetMapping(value = "/path/list")
     @ResponseBody
     public ResponseEntity selectPathList() {return ResponseEntity.ok(sdnPathRepository.findAll());}
 
-    @ApiOperation(value = "get path", notes = "패스 조회")
+    @ApiOperation(value = "get path", notes = "경로 조회")
     @GetMapping(value = "/path")
     @ResponseBody
     public ResponseEntity selectPath(@RequestParam int id) {
         return ResponseEntity.ok(sdnPathRepository.findSdnPathById(id));
     }
 
+    @ApiOperation(value = "get constraint list", notes = "전체 속성 조회")
+    @GetMapping(value = "/constraint/list")
+    @ResponseBody
+    public ResponseEntity selectConstraintList() {return ResponseEntity.ok(sdnConstraintRepository.findAll());}
+
+    @ApiOperation(value = "get constraint", notes = "속성 조회")
+    @GetMapping(value = "/constraint")
+    @ResponseBody
+    public ResponseEntity selectConstraint(@RequestParam int id) {
+        return ResponseEntity.ok(sdnConstraintRepository.findSdnConstraintById(id));
+    }
+
+    @ApiOperation(value = "get accessif list", notes = "전체 access interface 조회")
+    @GetMapping(value = "/accessif/list")
+    @ResponseBody
+    public ResponseEntity selectAccessIfList() {return ResponseEntity.ok(sdnAccessIfRepository.findAll());}
+
+    @ApiOperation(value = "get accessif", notes = "access interface 조회")
+    @GetMapping(value = "/accessif")
+    @ResponseBody
+    public ResponseEntity selectAccessIf(@RequestParam String accessif_id) {
+        return ResponseEntity.ok(sdnAccessIfRepository.findSdnAccessIfByAccessifId(accessif_id));
+    }
 }
 
