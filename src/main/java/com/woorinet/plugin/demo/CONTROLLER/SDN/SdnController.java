@@ -2,8 +2,9 @@ package com.woorinet.plugin.demo.CONTROLLER.SDN;
 
 
 import com.woorinet.plugin.demo.Repository.SDN.SdnConnectorRepository;
+
 import com.woorinet.plugin.demo.Repository.SDN.SdnLinkRepository;
-import com.woorinet.plugin.demo.Repository.SDN.SdnNodeRepository;
+import com.woorinet.plugin.demo.Repository.SDN.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class SdnController {
     private SdnConnectorRepository sdnConnectorRepository;
     @Autowired
     private SdnLinkRepository sdnLinkRepository;
+    @Autowired
+    private SdnTunnelRepository sdnTunnelRepository;
 
     @ApiOperation(value = "get node list", notes = "전체 노드 조회")
     @GetMapping(value = "/node/list")
@@ -64,6 +67,18 @@ public class SdnController {
     @ResponseBody
     public ResponseEntity selectLink(@RequestParam String link_id) {
         return ResponseEntity.ok(sdnLinkRepository.findSdnLinkByLinkId(link_id));
+    }
+
+    @ApiOperation(value = "get tunnel liset", notes = "전체 터널 조회")
+    @GetMapping(value = "/tunnel/list")
+    @ResponseBody
+    public ResponseEntity selectTunnelList() {return ResponseEntity.ok(sdnTunnelRepository.findAll());}
+
+    @ApiOperation(value = "get tunnel", notes = "터널 조회")
+    @GetMapping(value = "/tunnel")
+    @ResponseBody
+    public ResponseEntity selectTunnel(@RequestParam String tunnel_id) {
+        return ResponseEntity.ok(sdnTunnelRepository.findSdnTunnelByTunnelId(tunnel_id));
     }
 
 }
