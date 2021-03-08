@@ -171,6 +171,9 @@ public class TL1Manager {
             Tl1Login("admin", "admin");
             //Node DB연동
             Tl1SyncNodeList();
+            Tl1SyncOduNodeConnector();
+            TL1SyncCmProgramInfo();
+            if(true) throw new Exception();
             //SystemInfo DB연동
             Tl1SyncSystemInfo();
             //Slot DB연동
@@ -802,15 +805,18 @@ public class TL1Manager {
                 result.add(fields);
             }
         }
-        //Fix result : num of key list  != num of value list (Date value)
+
+        //Filter result not containing DATE value
+        boolean hasDate = false;
+        for(String key : keyList) {
+            if(key.contains("DATE")) hasDate = true;
+        }
+        if(!hasDate) return result;
+
+        //Fix result : num of key list  != num of value list (caused by DATE value)
+        System.out.println("datevalue start");
         for( int r=0 ;r< result.size(); r++ ) {
             String []rowValue = result.get(r);
-            //Filter key value not containing Date Value
-            boolean hasDate = false;
-            for(String key : keyList) {
-                if(key.contains("DATE")) hasDate = true;
-            }
-            if(!hasDate) break;
 
             //Filter exact value
             if( rowValue.length == keyList.size()) continue;
