@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class HOLAManager {
-    HolaSdnLineNumSheetRepository sdnLineNumSheetRepository;
+    HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
 
     List<SdnNode> sdnNodeList;
     List<SdnConnector> sdnConnectorList;
@@ -16,12 +16,12 @@ public class HOLAManager {
     List<SdnService> sdnServiceList;
 
 
-    public HOLAManager(HolaSdnLineNumSheetRepository sdnLineNumSheetRepository,
+    public HOLAManager(HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository,
                        List<SdnNode> sdnNodeList,
                        List<SdnConnector> sdnConnectorList,
                        List<SdnLink> sdnLinkList,
                        List<SdnService> sdnServiceList) throws Exception{
-        this.sdnLineNumSheetRepository = sdnLineNumSheetRepository;
+        this.holaSdnLineNumSheetRepository = holaSdnLineNumSheetRepository;
 
 
 
@@ -38,11 +38,12 @@ public class HOLAManager {
     }
 
     public void HOLASyncStart() throws Exception {
-
+        //선번장 테이블 생성
+        HolaSyncSdnLineNumSheet();
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
-        Stream<SdnService> sdnServiceStream = sdnServiceList
+        Stream<HolaSdnLineNumSheet> holaSdnLineNumSheetStream = sdnServiceList
             .stream()
             .map(sdnService -> {
                 HolaSdnLineNumSheet holaSdnLineNumSheet = new HolaSdnLineNumSheet(
@@ -57,8 +58,9 @@ public class HOLAManager {
                         "", //input_service_name, userinput
                         "", //service_type, userinput
                         "Woorinet", //vendor
+                        "", //constraint_id
                         "no protection", //protection_type, otn 장비는 보호타입이 no protection
-                        sdnService.getService_rate(), //service_rate
+                        sdnService.getService_rate(), //service_rate,
                         "", //service_status, 일반적으로 서비스 상태는 값이 나오는데 여긴 없음, 모비젠에 문의 해야됨
                         sdnService.getActive_path().contains("active") ? "주" : "예비", //active_path, 주의 기준??
                         "active", //traffic_status, 어디 있지??
@@ -71,16 +73,17 @@ public class HOLAManager {
                         "", //endpoint_client_start
                         "", //transmit_client_start
                         "", //link_start
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
+                        "", //roadm_mux_start
+                        "", //roadm_mux_end
+                        "", //link_end
+                        "", //transmit_client_end
+                        "", //endpoint_client_end
+                        "", //main_path
+                        "" //bypass_path
+                );
 
-
-
-                )
-            })
+                return holaSdnLineNumSheet;
+            });
+        holaSdnLineNumSheetStream.forEach(holaSdnLineNumSheetRepository::save);
     }
 }

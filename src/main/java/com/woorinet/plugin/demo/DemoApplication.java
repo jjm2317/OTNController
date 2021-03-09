@@ -1,9 +1,16 @@
 package com.woorinet.plugin.demo;
 
 import com.google.gson.Gson;
+import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLineNumSheet;
+import com.woorinet.plugin.demo.DTO.SDN.SdnConnector;
+import com.woorinet.plugin.demo.DTO.SDN.SdnLink;
+import com.woorinet.plugin.demo.DTO.SDN.SdnNode;
+import com.woorinet.plugin.demo.DTO.SDN.SdnService;
 import com.woorinet.plugin.demo.DTO.TL1.*;
+import com.woorinet.plugin.demo.HOLA.HOLAManager;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
+import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLineNumSheetRepository;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.SDN.SDNManager;
@@ -140,6 +147,9 @@ public class DemoApplication {
 	@Autowired
 	private SdnPmPortRepository sdnPmPortRepository;
 
+	@Autowired
+	private HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
@@ -177,6 +187,33 @@ public class DemoApplication {
 	String home() {
 //		System.out.println(odu_mpls_ifRepository.findByTid("EMS_1000_C"));
 		return "Hello World!";
+	}
+
+	@RequestMapping("/hola")
+	String syncronizeHola() {
+		try {
+			//SdnNode 조회
+			List<SdnNode> sdnNodeList = sdnNodeRepository.findAll();
+			//SdnConnector 조회
+			List<SdnConnector> sdnConnectorList = sdnConnectorRepository.findAll();
+			//SdnLink 조회
+			List<SdnLink> sdnLinkList = sdnLinkRepository.findAll();
+			//SdnService 조회
+			List<SdnService> sdnServiceList = sdnServiceRepository.findAll();
+
+			HOLAManager manager = new HOLAManager(holaSdnLineNumSheetRepository,
+					sdnNodeList,
+					sdnConnectorList,
+					sdnLinkList,
+					sdnServiceList
+			);
+
+			manager.HOLASyncStart();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "sync hola";
 	}
 
 	@RequestMapping("/convertTL1")
