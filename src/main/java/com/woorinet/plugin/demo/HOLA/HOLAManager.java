@@ -22,6 +22,9 @@ public class HOLAManager {
     List<SdnConnector> sdnConnectorList;
     List<SdnLink> sdnLinkList;
     List<SdnService> sdnServiceList;
+    List<SdnPath> sdnPathList;
+    List<SdnConstraint> sdnConstraintList;
+    List<SdnAccessIf> sdnAccessIfList;
 
 
     public HOLAManager(HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository,
@@ -33,7 +36,11 @@ public class HOLAManager {
                        List<SdnNode> sdnNodeList,
                        List<SdnConnector> sdnConnectorList,
                        List<SdnLink> sdnLinkList,
-                       List<SdnService> sdnServiceList) throws Exception{
+                       List<SdnService> sdnServiceList,
+                       List<SdnPath> sdnPathList,
+                       List<SdnConstraint> sdnConstraintList,
+                       List<SdnAccessIf> sdnAccessIfList
+                       ) throws Exception{
         this.holaSdnLineNumSheetRepository = holaSdnLineNumSheetRepository;
         this.holaSdnLinkMngRepository = holaSdnLinkMngRepository;
         this.holaSdnTrunkUsageRepository = holaSdnTrunkUsageRepository;
@@ -45,6 +52,9 @@ public class HOLAManager {
         this.sdnConnectorList = sdnConnectorList;
         this.sdnLinkList = sdnLinkList;
         this.sdnServiceList = sdnServiceList;
+        this.sdnPathList = sdnPathList;
+        this.sdnConstraintList = sdnConstraintList;
+        this.sdnAccessIfList = sdnAccessIfList;
 
         makeHashMap();
     }

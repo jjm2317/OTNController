@@ -2,10 +2,7 @@ package com.woorinet.plugin.demo;
 
 import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLineNumSheet;
-import com.woorinet.plugin.demo.DTO.SDN.SdnConnector;
-import com.woorinet.plugin.demo.DTO.SDN.SdnLink;
-import com.woorinet.plugin.demo.DTO.SDN.SdnNode;
-import com.woorinet.plugin.demo.DTO.SDN.SdnService;
+import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.HOLA.HOLAManager;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
@@ -210,6 +207,12 @@ public class DemoApplication {
 			List<SdnLink> sdnLinkList = sdnLinkRepository.findAll();
 			//SdnService 조회
 			List<SdnService> sdnServiceList = sdnServiceRepository.findAll();
+			//SdnPath 조회
+			List<SdnPath> sdnPathList = sdnPathRepository.findAll();
+			//SdnConstraint 조회
+			List<SdnConstraint> sdnConstraintList = sdnConstraintRepository.findAll();
+			//SdnAccessIf 조회
+			List<SdnAccessIf> sdnAccessIfList = sdnAccessIfRepository.findAll();
 
 			HOLAManager manager = new HOLAManager(holaSdnLineNumSheetRepository,
 					holaSdnLinkMngRepository,
@@ -220,7 +223,11 @@ public class DemoApplication {
 					sdnNodeList,
 					sdnConnectorList,
 					sdnLinkList,
-					sdnServiceList
+					sdnServiceList,
+					sdnPathList,
+					sdnConstraintList,
+					sdnAccessIfList
+
 			);
 
 			manager.HOLASyncStart();
