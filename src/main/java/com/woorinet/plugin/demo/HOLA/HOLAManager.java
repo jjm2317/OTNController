@@ -1,10 +1,11 @@
 package com.woorinet.plugin.demo.HOLA;
 
+import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnInventoryDetail;
 import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLineNumSheet;
 import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLinkMng;
+import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnTrunkUsage;
 import com.woorinet.plugin.demo.DTO.SDN.*;
-import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLineNumSheetRepository;
-import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLinkMngRepository;
+import com.woorinet.plugin.demo.Repository.HOLA.*;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -12,6 +13,11 @@ import java.util.stream.Stream;
 public class HOLAManager {
     HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
     HolaSdnLinkMngRepository holaSdnLinkMngRepository;
+    HolaSdnTrunkUsageRepository holaSdnTrunkUsageRepository;
+    HolaSdnInventroyDetailRepository holaSdnInventroyDetailRepository;
+    HolaSdnOtnNodeUsageRepository holaSdnOtnNodeUsageRepository;
+    HolaSdnOtnMaterialRepository holaSdnOtnMaterialRepository;
+
     List<SdnNode> sdnNodeList;
     List<SdnConnector> sdnConnectorList;
     List<SdnLink> sdnLinkList;
@@ -20,13 +26,20 @@ public class HOLAManager {
 
     public HOLAManager(HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository,
                        HolaSdnLinkMngRepository holaSdnLinkMngRepository,
+                       HolaSdnTrunkUsageRepository holaSdnTrunkUsageRepository,
+                       HolaSdnInventroyDetailRepository holaSdnInventroyDetailRepository,
+                       HolaSdnOtnNodeUsageRepository holaSdnOtnNodeUsageRepository,
+                       HolaSdnOtnMaterialRepository holaSdnOtnMaterialRepository,
                        List<SdnNode> sdnNodeList,
                        List<SdnConnector> sdnConnectorList,
                        List<SdnLink> sdnLinkList,
                        List<SdnService> sdnServiceList) throws Exception{
         this.holaSdnLineNumSheetRepository = holaSdnLineNumSheetRepository;
         this.holaSdnLinkMngRepository = holaSdnLinkMngRepository;
-
+        this.holaSdnTrunkUsageRepository = holaSdnTrunkUsageRepository;
+        this.holaSdnInventroyDetailRepository = holaSdnInventroyDetailRepository;
+        this.holaSdnOtnNodeUsageRepository = holaSdnOtnNodeUsageRepository;
+        this.holaSdnOtnMaterialRepository = holaSdnOtnMaterialRepository;
 
         this.sdnNodeList = sdnNodeList;
         this.sdnConnectorList = sdnConnectorList;

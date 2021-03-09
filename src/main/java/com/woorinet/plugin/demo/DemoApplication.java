@@ -10,8 +10,7 @@ import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.HOLA.HOLAManager;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
-import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLineNumSheetRepository;
-import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLinkMngRepository;
+import com.woorinet.plugin.demo.Repository.HOLA.*;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.SDN.SDNManager;
@@ -152,6 +151,14 @@ public class DemoApplication {
 	private HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
 	@Autowired
 	private HolaSdnLinkMngRepository holaSdnLinkMngRepository;
+	@Autowired
+	private HolaSdnTrunkUsageRepository holaSdnTrunkUsageRepository;
+	@Autowired
+	private HolaSdnInventroyDetailRepository holaSdnInventroyDetailRepository;
+	@Autowired
+	private HolaSdnOtnNodeUsageRepository holaSdnOtnNodeUsageRepository;
+	@Autowired
+	private HolaSdnOtnMaterialRepository holaSdnOtnMaterialRepository;
 
 	public static void main(String[] args) {
 
@@ -206,6 +213,10 @@ public class DemoApplication {
 
 			HOLAManager manager = new HOLAManager(holaSdnLineNumSheetRepository,
 					holaSdnLinkMngRepository,
+					holaSdnTrunkUsageRepository,
+					holaSdnInventroyDetailRepository,
+					holaSdnOtnNodeUsageRepository,
+					holaSdnOtnMaterialRepository,
 					sdnNodeList,
 					sdnConnectorList,
 					sdnLinkList,
