@@ -11,6 +11,7 @@ import com.woorinet.plugin.demo.HOLA.HOLAManager;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.QNET.QNETManager;
 import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLineNumSheetRepository;
+import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLinkMngRepository;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.SDN.SDNManager;
@@ -149,6 +150,8 @@ public class DemoApplication {
 
 	@Autowired
 	private HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
+	@Autowired
+	private HolaSdnLinkMngRepository holaSdnLinkMngRepository;
 
 	public static void main(String[] args) {
 
@@ -202,6 +205,7 @@ public class DemoApplication {
 			List<SdnService> sdnServiceList = sdnServiceRepository.findAll();
 
 			HOLAManager manager = new HOLAManager(holaSdnLineNumSheetRepository,
+					holaSdnLinkMngRepository,
 					sdnNodeList,
 					sdnConnectorList,
 					sdnLinkList,

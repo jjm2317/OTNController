@@ -1,15 +1,17 @@
 package com.woorinet.plugin.demo.HOLA;
 
 import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLineNumSheet;
+import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLinkMng;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLineNumSheetRepository;
+import com.woorinet.plugin.demo.Repository.HOLA.HolaSdnLinkMngRepository;
 
 import java.util.List;
 import java.util.stream.Stream;
 
 public class HOLAManager {
     HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
-
+    HolaSdnLinkMngRepository holaSdnLinkMngRepository;
     List<SdnNode> sdnNodeList;
     List<SdnConnector> sdnConnectorList;
     List<SdnLink> sdnLinkList;
@@ -17,12 +19,13 @@ public class HOLAManager {
 
 
     public HOLAManager(HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository,
+                       HolaSdnLinkMngRepository holaSdnLinkMngRepository,
                        List<SdnNode> sdnNodeList,
                        List<SdnConnector> sdnConnectorList,
                        List<SdnLink> sdnLinkList,
                        List<SdnService> sdnServiceList) throws Exception{
         this.holaSdnLineNumSheetRepository = holaSdnLineNumSheetRepository;
-
+        this.holaSdnLinkMngRepository = holaSdnLinkMngRepository;
 
 
         this.sdnNodeList = sdnNodeList;
@@ -40,6 +43,8 @@ public class HOLAManager {
     public void HOLASyncStart() throws Exception {
         //선번장 테이블 생성
         HolaSyncSdnLineNumSheet();
+        //LinkMng 테이블 생성
+        HolaSyncSdnLinkMng();
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
@@ -86,4 +91,33 @@ public class HOLAManager {
             });
         holaSdnLineNumSheetStream.forEach(holaSdnLineNumSheetRepository::save);
     }
+
+    private void HolaSyncSdnLinkMng() throws Exception {
+        Stream<HolaSdnLinkMng> holaSdnLinkMngStream = sdnLinkList
+            .stream()
+            .map(sdnLink -> {
+                HolaSdnLinkMng holaSdnLinkMng = new HolaSdnLinkMng(
+                        "Woorinet", //vendor
+                        "", // link
+                        "", // admin_weight, user input
+                        "", //maximum_usage_ratio, user input
+                        "", //memory
+                        "", //usage_ratio
+                        "", //all_memory
+                        "", //all_usage_ratio
+                        "", //distance, user input
+                        "", //srlg
+                        "", //roadm_path
+                        "" //remarks, user input
+
+
+                );
+
+                return holaSdnLinkMng;
+            });
+
+        holaSdnLinkMngStream.forEach(holaSdnLinkMngRepository::save);
+    }
+
+
 }
