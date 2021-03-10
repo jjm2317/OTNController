@@ -38,7 +38,7 @@ public class SDNManager {
     List<Tl1AccessIf> tl1AccessIfList;
     List<Tl1ServiceExt> tl1ServiceExtList;
     List<Tl1MplsIf> tl1MplsIfList;
-    List<List<Tl1Odu>> odu_list_for_service = new ArrayList<>();
+    List<List<Tl1Odu>> tl1OduListForService = new ArrayList<>();
     List<Tl1Inventory> tl1InventoryList;
     List<Tl1CmPort> tl1CmPortList;
     List<Tl1ModuleInfo> tl1ModuleInfoList;
@@ -167,7 +167,7 @@ public class SDNManager {
                         List<Tl1Odu> tl1Odu_list = new ArrayList<>();
                         tl1Odu_list.add(oduNameHeadHashMapForODUTUNNEL.get(tl1Odu.getNAME()));
                         tl1Odu_list.add(tl1Odu);
-                        odu_list_for_service.add(tl1Odu_list);
+                        tl1OduListForService.add(tl1Odu_list);
                     }
                 } else {
                     oduNameHeadHashMapForODUTUNNEL.put(tl1Odu.getNAME(), tl1Odu);
@@ -176,7 +176,7 @@ public class SDNManager {
                         List<Tl1Odu> tl1Odu_list = new ArrayList<>();
                         tl1Odu_list.add(tl1Odu);
                         tl1Odu_list.add(oduNameTailHashMapForODUTUNNEL.get(tl1Odu.getNAME()));
-                        odu_list_for_service.add(tl1Odu_list);
+                        tl1OduListForService.add(tl1Odu_list);
                     }
                 }
             } else if (tl1Odu.getEMS_SERVICE().equals("MPLS_TP")) {
@@ -216,25 +216,25 @@ public class SDNManager {
     public void SDNSyncStart() throws Exception {
         // Node 데이터 업데이트
         SDNSyncNodeList();
-        // Connector 테이블 생성
+        // Connector 데이터 업데이트
         SDNSyncConnectorList();
-        // Link 테이블 생성
+        // Link 데이터 업데이트
         SDNSyncLinkList();
-        // Tunnel 테이블 생성
+        // Tunnel 데이터 업데이트
         SDNSyncTunnelList();
-        // Service 테이블 생성
+        // Service 데이터 업데이트
         SDNSyncServiceList();
-        // Path 테이블 생성
+        // Path 데이터 업데이트
         SDNSyncPathList();
-        // Constraint 테이블 생성
+        // Constraint 데이터 업데이트
         SDNSyncConstraint();
-        // AccessIf 테이블 생성
+        // AccessIf 데이터 업데이트
         SDNSyncAccess_if();
-        // CryptoModule 테이블 생성
+        // CryptoModule 데이터 업데이트
         SDNSyncCryptoModule();
-        // CryptoSession 테이블 생성
+        // CryptoSession 데이터 업데이트
         SDNSyncCryptoSession();
-        // PmPort 테이블 생성
+        // PmPort 데이터 업데이트
         SDNSyncPmPort();
     }
 
@@ -392,50 +392,45 @@ public class SDNManager {
 
     public void SDNSyncServiceList( ) throws Exception {
 
-        for (List<Tl1Odu> tl1Odu_list :odu_list_for_service) {
-            Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
-            Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
+        Stream<SdnService> sdnServiceStream = tl1OduListForService
+            .stream()
+            .map(tl1OduList -> {
+                Tl1Odu tl1OduHead = tl1OduList.get(0);
+                Tl1Odu tl1OduTail = tl1OduList.get(1);
 
-            SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
-            SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu_tail.getTID());
-            SdnService sdnService = new SdnService();
+                SdnNode srcSdnNode = sdnNodeHashMap.get(tl1OduHead.getTID());
+                SdnNode dstSdnNode = sdnNodeHashMap.get(tl1OduTail.getTID());
+                SdnConnector srcSdnConnector = sdnConnectorHashMap.get(tl1OduHead.getTID()+ '/' + tl1OduHead.getLOCAL_ID().split("-")[0] + "-" + tl1OduHead.getLOCAL_ID().split("-")[1]);
+                SdnConnector dstSdnConnector = sdnConnectorHashMap.get(tl1OduTail.getTID()+ '/' + tl1OduTail.getLOCAL_ID().split("-")[0] + "-" + tl1OduTail.getLOCAL_ID().split("-")[1]);
+                Tl1OduMplsIf tl1OduMplsIf = tl1OduMplsIfHashMap.get(tl1OduHead.getTID() + '/' + tl1OduHead.getLOCAL_ID().split("-")[0] + "-" + tl1OduHead.getLOCAL_ID().split("-")[1]);
+                Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduHead.getTID() + '/' + tl1OduHead.getLOCAL_ID().split("-")[0] + "-" + tl1OduHead.getLOCAL_ID().split("-")[1]);
 
-            SdnConnector src_sdnSdnConnector = sdnConnectorHashMap.get(tl1Odu_head.getTID()+ '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
-            SdnConnector dst_sdnSdnConnector = sdnConnectorHashMap.get(tl1Odu_tail.getTID()+ '/' + tl1Odu_tail.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_tail.getLOCAL_ID().split("-")[1]);
-
-            Tl1OduMplsIf tl1OduMplsIf = tl1OduMplsIfHashMap.get(tl1Odu_head.getTID() + '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
-            Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1Odu_head.getTID() + '/' + tl1Odu_head.getLOCAL_ID().split("-")[0] + "-" + tl1Odu_head.getLOCAL_ID().split("-")[1]);
-
-            sdnService.setEms_id(200009);
-            sdnService.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
-            sdnService.setSrc_ne_id(sdnSrcSdnNode.getNe_id());
-            sdnService.setSrc_ne_name(sdnSrcSdnNode.getNe_name());
-            sdnService.setSrc_connector_id(src_sdnSdnConnector.getConnect_id());
-            sdnService.setSrc_accessif_type(tl1Odu_head.getSERVICE());
-            sdnService.setDst_ne_id(sdnDstSdnNode.getNe_id());
-            sdnService.setDst_ne_name(sdnDstSdnNode.getNe_name());
-            sdnService.setDst_connector_id(dst_sdnSdnConnector.getConnect_id());
-            sdnService.setDst_accessif_type(tl1Odu_tail.getSERVICE());
-            sdnService.setService_type("");
-            sdnService.setService_name(tl1Odu_head.getNAME());
-            sdnService.setNetwork_type("");
-            sdnService.setService_status("");
-            sdnService.setRate_type(tl1Odu_head.getTYPE());
-            sdnService.setService_rate(tl1OduMplsIf.getLINK_TYPE());
-            sdnService.setLatency("");
-
-            if(tl1OpticPower == null) {
-                sdnService.setWavelength("");
-            } else {
-                sdnService.setWavelength(tl1OpticPower.getTX_WAVELENGTH());
-            }
-            sdnService.setActive_path(tl1Odu_head.getACTIVE_PATH_STATUS());
-            sdnService.setCreation_date(tl1Odu_head.getCREATION_DATE());
-
-            sdnServiceRepository.save(sdnService);
-            sdnServiceHashMapForPath.put(sdnService.getService_name(),sdnService);
-        }
-
+                SdnService sdnService = new SdnService(
+                        200009, // ems_id
+                        srcSdnNode.getVendor() + separator + srcSdnNode.getSys_type() + separator + tl1OduHead.getNAME(), // service_id
+                        srcSdnNode.getNe_id(), // src_ne_id
+                        srcSdnNode.getNe_name(), // src_ne_name
+                        srcSdnConnector.getConnect_id(), // src_connect_id
+                        tl1OduHead.getSERVICE(), // src_accessif_type
+                        dstSdnNode.getNe_id(), // dst_ne_id
+                        dstSdnNode.getNe_name(), // dst_ne_name
+                        dstSdnConnector.getConnect_id(), // dst_connect_id
+                        tl1OduTail.getSERVICE(), // dst_accessif_type
+                        "", // service_type
+                        tl1OduHead.getNAME(), // service_name
+                        "", // network_type
+                        "", // service_status
+                        tl1OduHead.getTYPE(), // rate_type
+                        tl1OduMplsIf.getLINK_TYPE(), // service_rate
+                        "", // latency
+                        tl1OpticPower == null ? "" : tl1OpticPower.getTX_WAVELENGTH(), // wavelength
+                        tl1OduHead.getACTIVE_PATH_STATUS(), // active_path
+                        tl1OduHead.getCREATION_DATE() // creation_date
+                );
+                sdnServiceHashMapForPath.put(sdnService.getService_name(),sdnService);
+                return sdnService;
+            });
+        sdnServiceStream.forEach(sdnServiceRepository::save);
     }
 
     public void SDNSyncTunnelList( ) throws  Exception {
@@ -596,7 +591,7 @@ public class SDNManager {
 
     public void SDNSyncConstraint() throws Exception {
 
-        for (List<Tl1Odu> tl1Odu_list :odu_list_for_service) {
+        for (List<Tl1Odu> tl1Odu_list :tl1OduListForService) {
             Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
             Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
 
