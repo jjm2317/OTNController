@@ -216,25 +216,25 @@ public class SDNManager {
     public void SDNSyncStart() throws Exception {
         // Node 데이터 업데이트
         SDNSyncNodeList();
-        // Connector 테이블 생성
+        // Connector 데이터 업데이트
         SDNSyncConnectorList();
-        // Link 테이블 생성
+        // Link 데이터 업데이트
         SDNSyncLinkList();
-        // Tunnel 테이블 생성
+        // Tunnel 데이터 업데이트
         SDNSyncTunnelList();
-        // Service 테이블 생성
+        // Service 데이터 업데이트
         SDNSyncServiceList();
-        // Path 테이블 생성
+        // Path 데이터 업데이트
         SDNSyncPathList();
-        // Constraint 테이블 생성
+        // Constraint 데이터 업데이트
         SDNSyncConstraint();
-        // AccessIf 테이블 생성
+        // AccessIf 데이터 업데이트
         SDNSyncAccess_if();
-        // CryptoModule 테이블 생성
+        // CryptoModule 데이터 업데이트
         SDNSyncCryptoModule();
-        // CryptoSession 테이블 생성
+        // CryptoSession 데이터 업데이트
         SDNSyncCryptoSession();
-        // PmPort 테이블 생성
+        // PmPort 데이터 업데이트
         SDNSyncPmPort();
     }
 
