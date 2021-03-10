@@ -19,4 +19,7 @@ public class HolaSdnOtnNodeUsage {
     @Id
     @GeneratedValue
     int HOLA_SDN_OTN_NODE_USAGE;
+    String AREA;
+    String CITY;
+    String MOUNTING_STATUS;
 }

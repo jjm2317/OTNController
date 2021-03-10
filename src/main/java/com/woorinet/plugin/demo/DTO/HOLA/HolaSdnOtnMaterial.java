@@ -19,4 +19,10 @@ public class HolaSdnOtnMaterial {
     @Id
     @GeneratedValue
     int HOLA_SDN_OTN_MATERIAL;
+    String VENDOR;
+    String CELL;
+    String NODE;
+    String IP;
+    String SHELF;
+    String UNIT_LIST;
 }

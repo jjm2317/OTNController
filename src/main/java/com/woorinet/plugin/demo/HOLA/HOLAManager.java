@@ -68,6 +68,8 @@ public class HOLAManager {
         HolaSyncSdnLineNumSheet();
         //LinkMng 테이블 생성
         HolaSyncSdnLinkMng();
+        //상세 Inventory 현황 테이블 생성
+        HolaSyncSdnInventoryDetail();
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
@@ -140,6 +142,50 @@ public class HOLAManager {
             });
 
         holaSdnLinkMngStream.forEach(holaSdnLinkMngRepository::save);
+    }
+
+    private void HolaSyncSdnInventoryDetail() throws Exception {
+        Stream<HolaSdnInventoryDetail> holaSdnInventoryDetailStream = sdnConnectorList
+            .stream()
+            .map(sdnConnector -> {
+                SdnNode sdnNode = sdnNodeList.stream().
+                        filter(node -> node.getNe_name().equals(sdnConnector.getNe_name()))
+                        .findAny().map(node -> node).orElse(null);
+
+                SdnLink sdnLink = sdnLinkList.stream().
+                        filter(link -> link.getLink_id().contains(sdnConnector.getConnect_id()))
+                        .findAny().map(link -> link).orElse(null);
+
+                HolaSdnInventoryDetail holaSdnInventoryDetail = new HolaSdnInventoryDetail(
+                        "Woorinet", //vendor
+                        "", //cell
+                        sdnConnector.getNe_name(), //tid
+                        sdnConnector.getShelf_id(), //shelf_id
+                        sdnNode != null ? sdnNode.getIp_addr() : "", //ip
+                        "", //ne_type
+                        sdnConnector.getUnit_type(), //unit_type
+                        sdnConnector.getConnect_pec(), // unit_pec
+                        sdnConnector.getConnect_serial(), //serial_number
+                        sdnConnector.getSlot_id(), //slot_id
+                        sdnConnector.getPort_id(), //port_id
+                        sdnConnector.getConnect_idle(), //connect_status
+                        "", //llcf
+                        sdnConnector.getModule_name(), //module_name
+                        sdnConnector.getConnect_pec(), //module_pec
+                        sdnLink != null ? sdnLink.getDistance() : "", //distance
+                        "", //module_description
+                        "", //cable_name
+                        "" //remarks_list
+                );
+                return holaSdnInventoryDetail;
+            });
+
+        holaSdnInventoryDetailStream.forEach(holaSdnInventroyDetailRepository::save);
+
+    }
+
+    private void HolaSyncSdnOtnNodeUsage() throws Exception {
+
     }
 
 
