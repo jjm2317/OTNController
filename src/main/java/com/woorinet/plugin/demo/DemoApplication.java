@@ -1,7 +1,6 @@
 package com.woorinet.plugin.demo;
 
 import com.google.gson.Gson;
-import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLineNumSheet;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.HOLA.HOLAManager;
@@ -190,11 +189,6 @@ public class DemoApplication {
 
 	}
 
-	@RequestMapping("/")
-	String home() {
-//		System.out.println(odu_mpls_ifRepository.findByTid("EMS_1000_C"));
-		return "Hello World!";
-	}
 
 	@RequestMapping("/hola")
 	String syncronizeHola() {
