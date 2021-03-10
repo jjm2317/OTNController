@@ -614,32 +614,30 @@ public class SDNManager {
     }
 
     public void SDNSyncAccess_if() throws Exception {
+        Stream<SdnAccessIf> sdnAccessIfStream = tl1MplsIfList
+            .stream()
+            .filter(tl1MplsIf -> oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]) != null)
+            .map(tl1MplsIf -> {
+                Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1MplsIf.getTID());
+                SdnNode sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
+                SdnConnector sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
+                Tl1Odu tl1Odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
 
-        for(Tl1MplsIf tl1MplsIf : tl1MplsIfList) {
+                SdnAccessIf sdnAccessIf = new SdnAccessIf(
+                        200009, // ems_id
+                        tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id(), // access_if_id
+                        "", // accessif_name
+                        sdnNode.getNe_id(), // ne_id
+                        sdnConnector.getConnect_id(), // connector_id
+                        tl1Odu.getSERVICE(), // accessif_type
+                        tl1MplsIf.getOPERATION_STATUS(), // accessif_status
+                        "", // service_ref
+                        "" // node_connector_ref
+                );
 
-            Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1MplsIf.getTID());
-
-            SdnAccessIf sdnSdnAccessIf = new SdnAccessIf();
-            SdnNode sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
-            SdnConnector sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
-            Tl1Odu tl1Odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
-            if(tl1Odu == null) continue;
-
-            sdnSdnAccessIf.setEms_id(200009);
-            sdnSdnAccessIf.setAccessif_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id()); // 조합
-            sdnSdnAccessIf.setAccessif_name("");
-            sdnSdnAccessIf.setNe_id(sdnNode.getNe_id());
-            sdnSdnAccessIf.setConnector_id(sdnConnector.getConnect_id());
-            sdnSdnAccessIf.setAccessif_type(tl1Odu.getSERVICE());
-            sdnSdnAccessIf.setAccessif_status(tl1MplsIf.getOPERATION_STATUS());
-            sdnSdnAccessIf.setService_ref("");
-            sdnSdnAccessIf.setNode_connector_ref("");
-
-            sdnAccessIfRepository.save(sdnSdnAccessIf);
-
-
-        }
-
+                return sdnAccessIf;
+            });
+        sdnAccessIfStream.forEach(sdnAccessIfRepository::save);
     }
 
     public void SDNSyncCryptoModule() throws Exception {
