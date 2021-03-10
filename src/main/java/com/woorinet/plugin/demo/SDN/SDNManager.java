@@ -590,27 +590,27 @@ public class SDNManager {
     }
 
     public void SDNSyncConstraint() throws Exception {
+        Stream<SdnConstraint> sdnConstraintStream = tl1OduListForService
+            .stream()
+            .map(tl1OduList -> {
+                Tl1Odu tl1Odu_head = tl1OduList.get(0);
+                Tl1Odu tl1Odu_tail = tl1OduList.get(1);
 
-        for (List<Tl1Odu> tl1Odu_list :tl1OduListForService) {
-            Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
-            Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
+                SdnNode srcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
 
-            SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
+                SdnConstraint sdnConstraint = new SdnConstraint(
+                        200009, // ems_id
+                        srcSdnNode.getVendor() + separator + srcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME(), // service_id
+                        "protection type", // const_id
+                        "", // const_type
+                        "PROTECTION TYPE", // const_name
+                        tl1Odu_head.getPROT_TYPE(), // const_value
+                        "" // const_operator
+                );
 
-            SdnConstraint sdnConstraint = new SdnConstraint();
-
-            sdnConstraint.setEms_id(200009);
-            sdnConstraint.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
-            sdnConstraint.setConst_id("protection type");
-            sdnConstraint.setConst_type("");
-            sdnConstraint.setConst_name("PROTECTION TYPE");
-            sdnConstraint.setConst_value(tl1Odu_head.getPROT_TYPE());
-            sdnConstraint.setConst_operator("");
-
-
-            sdnConstraintRepository.save(sdnConstraint);
-
-        }
+                return sdnConstraint;
+            });
+        sdnConstraintStream.forEach(sdnConstraintRepository::save);
     }
 
     public void SDNSyncAccess_if() throws Exception {
