@@ -60,7 +60,7 @@ public class SDNManager {
     HashMap<String, Tl1Odu> tl1OduNameHeadHashMapForOduTunnel = new HashMap<>();
     HashMap<String, Tl1Odu> tl1OduMapInMplsTpByLocalId = new HashMap<>();
     HashMap<String, Tl1OduMplsIf> tl1OduMplsIfHashMap = new HashMap<>();
-    HashMap<String, List<Tl1Odu>> oduHashMapForPath = new HashMap<>();
+    HashMap<String, List<Tl1Odu>> tl1OduHashMapForPath = new HashMap<>();
     HashMap<String, Tl1CmPort> tl1CmPortHashMap = new HashMap<>();
     HashMap<String, Tl1BypassInfo> tl1BypassInfoHashMap = new HashMap<>();
     HashMap<String, Tl1CmProgramInfo> tl1CmProgramInfoHashMap = new HashMap<>();
@@ -148,14 +148,14 @@ public class SDNManager {
             tl1OpticPowerHashMap.put(tl1OpticPower.getTID()+"/"+ tl1OpticPower.getAID(), tl1OpticPower);
         }
         for(Tl1Odu tl1Odu : tl1OduList) {
-            if(oduHashMapForPath.get(tl1Odu.getNAME()) == null ) {
+            if(tl1OduHashMapForPath.get(tl1Odu.getNAME()) == null ) {
                 List<Tl1Odu> tl1Odu_list = new ArrayList<>();
                 tl1Odu_list.add(tl1Odu);
-                oduHashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
+                tl1OduHashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
             } else {
-                List<Tl1Odu> tl1Odu_list = oduHashMapForPath.get(tl1Odu.getNAME());
+                List<Tl1Odu> tl1Odu_list = tl1OduHashMapForPath.get(tl1Odu.getNAME());
                 tl1Odu_list.add(tl1Odu);
-                oduHashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
+                tl1OduHashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
             }
 
             if(tl1Odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
@@ -477,7 +477,7 @@ public class SDNManager {
     }
 
     public void SDNSyncPathList() throws  Exception {
-        for (Map.Entry<String, List<Tl1Odu>> entry : oduHashMapForPath.entrySet() ) {
+        for (Map.Entry<String, List<Tl1Odu>> entry : tl1OduHashMapForPath.entrySet() ) {
             List<Tl1Odu> tl1Odu_list = entry.getValue();
             if(tl1Odu_list.size() != 4) continue;
 
@@ -532,7 +532,7 @@ public class SDNManager {
             }
         }
 
-        for (Map.Entry<String, List<Tl1Odu>> entry : oduHashMapForPath.entrySet() ) {
+        for (Map.Entry<String, List<Tl1Odu>> entry : tl1OduHashMapForPath.entrySet() ) {
             List<Tl1Odu> tl1Odu_list = entry.getValue();
             if(tl1Odu_list.size() != 4) continue;
 
