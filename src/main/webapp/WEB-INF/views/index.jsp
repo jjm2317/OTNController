@@ -52,59 +52,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="page-header">
-								<h3 id="page-beginning"><i class="bi bi-file-earmark-excel"> </i><strong>Purge 매뉴얼
-									</strong> - <a href="./purge-guide/index.html"
-										class="bb btn btn-default btn-lg">이동</a> <small>v1.1</small></h3>
-							</div>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="page-header">
-								<h3 id="page-beginning">
-									<i class="bi bi-bar-chart"> </i><strong>통계 API 매뉴얼
-									</strong> - <a href="./traffic-guide/index.html"
-										class="bb btn btn-default btn-lg">이동</a> <small>v1</small>
-								</h3>
-								</h3>
-							</div>
-							<!-- <div style="margin-left: 30px;" class="page-header">
-							<h4 id="page-beginning"><i class="bi bi-arrow-right-short"></i><strong> v2 guide</strong> -
-								<a href="./traffic-guide/index2.html"
-											class="bb btn btn-default btn-sm">이동</a> <small>v2 (개발중)</small></h3>
-							</h4>
-						</div> -->
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="page-header">
-								<h3 id="page-beginning"><i class="bi bi-arrow-repeat"> </i><strong>Transcoder 매뉴얼
-									</strong> - <a href="./transcoder-guide/index.html"
-										class="bb btn btn-default btn-sm">이동</a> <small>v1.1</small></h3>
-							</div>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="page-header">
-								<h3 id="page-beginning"><i class="bi bi-scissors"> </i><strong>Live Clipper 사용자
-										매뉴얼</strong>
-									-
-									<a href="./liveclipper" class="bb btn btn-default btn-sm">이동</a> <small>(JTBC)
-									</small>
-								</h3>
-								</h3>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<img class="img-responsive" src="./img/apcdn2.jpg" alt="Auto Provisioning CDN">
+				<img class="img-responsive" src="resources/assets/images/apcdn2.jpg" alt="Auto Provisioning CDN">
 			</div>
 		</div> <!-- row-->
 	</div>
