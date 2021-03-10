@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.CONTROLLER.SDN;
+package com.woorinet.plugin.demo.CONTROLLER;
 
 
 import com.woorinet.plugin.demo.Repository.SDN.SdnConnectorRepository;
