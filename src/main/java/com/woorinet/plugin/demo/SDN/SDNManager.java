@@ -439,52 +439,46 @@ public class SDNManager {
     }
 
     public void SDNSyncTunnelList( ) throws  Exception {
+        Stream<SdnTunnel> sdnTunnelStream = tl1OduList
+            .stream()
+            .map(tl1Odu -> {
+                SdnNode srcSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_SRC_LSR());
+                SdnNode dstSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_DST_LSR());
 
-        for (Tl1Odu tl1Odu : tl1OduList) {
-            SdnTunnel sdnTunnel = new SdnTunnel();
-            SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_SRC_LSR());
-            SdnNode sdnDstSdnNode = sdnNodeHashMap.get(tl1Odu.getEMS_DST_LSR());
+                SdnTunnel sdnTunnel = new SdnTunnel(
+                        200009, // ems_id
+                        srcSdnNode.getVendor() + separator + srcSdnNode.getSys_type() + separator + tl1Odu.getNAME(), // tunnel_id
+                        srcSdnNode.getNe_id(), // src_ne_id
+                        srcSdnNode.getNe_name(), // src_ne_name
+                        dstSdnNode.getNe_id(), // dst_ne_id
+                        dstSdnNode.getNe_name(), // dst_ne_name
+                        tl1Odu.getTYPE(), // rate_type
+                        "1", // multiple_rate
+                        "", // local_id
+                        "", // request_id
+                        tl1Odu.getNAME(), // tunnel_name
+                        tl1Odu.getEMS_SERVICE().equals("ODU_TUNNEL")?"otn":tl1Odu.getEMS_SERVICE(), // tunnel_type
+                        "", // tunnel_status
+                        "", // configuration_action
+                        "", // configuration_result_type
+                        "", // tunnel_oam_enabler
+                        "", // deployment_enabler
+                        "", // deployment_status
+                        tl1Odu.getACTIVE_PATH_STATUS(), // active_path
+                        "", // src_node_ref
+                        "", // dst_node_ref
+                        "", // service_ref
+                        "", // accessif_ref
+                        tl1Odu.getPROT_TYPE(), // protection_type
+                        "", // working_path
+                        "", // protection_path
+                        "", // service_mapping
+                        tl1Odu.getCREATION_DATE() // creation_date
+                );
 
-
-            sdnTunnel.setEms_id(200009);
-            sdnTunnel.setTunnel_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu.getNAME());
-            sdnTunnel.setSrc_ne_id(sdnSrcSdnNode.getNe_id());
-            sdnTunnel.setSrc_ne_name(sdnSrcSdnNode.getNe_name());
-            sdnTunnel.setDst_ne_id(sdnDstSdnNode.getNe_id());
-            sdnTunnel.setDst_ne_name(sdnDstSdnNode.getNe_name());
-            sdnTunnel.setRate_type(tl1Odu.getTYPE());
-            sdnTunnel.setMultiple_rate("1");
-            sdnTunnel.setLocal_id("");
-            sdnTunnel.setRequest_id("");
-            sdnTunnel.setTunnel_name(tl1Odu.getNAME());
-            if(tl1Odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
-                sdnTunnel.setTunnel_type("otn");
-            }else {
-                sdnTunnel.setTunnel_type(tl1Odu.getEMS_SERVICE());
-            }
-            sdnTunnel.setTunnel_status("");
-            sdnTunnel.setConfiguration_action("");
-            sdnTunnel.setConfiguration_result_type("");
-            sdnTunnel.setTunnel_oam_enabler("");
-            sdnTunnel.setDeployment_enabler("");
-            sdnTunnel.setDeployment_status("");
-            sdnTunnel.setActive_path(tl1Odu.getACTIVE_PATH_STATUS());
-            sdnTunnel.setSrc_node_ref("");
-            sdnTunnel.setDst_node_ref("");
-            sdnTunnel.setService_ref("");
-            sdnTunnel.setAccessif_ref("");
-            sdnTunnel.setProtection_type(tl1Odu.getPROT_TYPE());
-            sdnTunnel.setWorking_path("");
-            sdnTunnel.setProtection_path("");
-            sdnTunnel.setService_mapping("");
-            sdnTunnel.setCreation_date(tl1Odu.getCREATION_DATE());
-
-            sdnTunnelRepository.save(sdnTunnel);
-
-
-
-
-        }
+                return sdnTunnel;
+            });
+        sdnTunnelStream.forEach(sdnTunnelRepository::save);
     }
 
     public void SDNSyncPathList() throws  Exception {
