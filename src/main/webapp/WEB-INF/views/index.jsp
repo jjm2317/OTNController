@@ -32,8 +32,8 @@
 	</div>
 	<header class="jumbotron subhead" id="overview">
 		<div class="container">
-			<h1 class="text-center">SKB CDN Auto Provisioning System
-				<br><br>USER GUIDE (사용자 설명서)
+			<h1 class="text-center"> QKD SDN PLATFORM
+				<br><br>API GUIDE
 			</h1>
 		</div>
 		<div class="jumbotron-cover"></div>
@@ -46,26 +46,27 @@
 					<div class="row-fluid">
 						<div class="span12">
 							<div class="page-header">
-								<h3 id="htmlStructure"><i class="bi bi-card-checklist"> </i><strong>Swagger 메뉴얼
-									</strong> - <a href="./swagger-ui.html"
-										class="bb btn btn-default btn-lg">이동</a> <small>v1.5.9</small></h3>
+								<h3 id="htmlStructure"><i class="bi bi-card-checklist"> </i><strong>Swagger 매뉴얼
+									</strong> - <a href="swagger-ui.html"
+										class="bb btn btn-default btn-lg">이동</a> <small>v0.7</small></h3>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<img class="img-responsive" src="resources/assets/images/apcdn2.jpg" alt="Auto Provisioning CDN">
+				<img class="img-responsive" src="resources/assets/images/qsdn.jpg" alt="QSDN">
 			</div>
 		</div> <!-- row-->
 	</div>
 
 	<footer class="footer">
 		<div class="container text-left">
-			<p>COPYRIGHT 2021 BY SK broadband CO.LTD. ALL RIGHTS RESERVED.</a>.</p>
+			<p> <img class="img-responsive" style='height: 3em' src="resources/assets/images/skt.png" alt="skt"> </p>
+			<br>
+			<p>우편번호: 04539 서울특별시 중구 을지로65 (을지로2가) SK T-타워 SK텔레콤(주)    대표이사 사장 박정호</p>
+			<p>COPYRIGHT SK TELECOM CO., LTD. ALL RIGHTS RESERVED.</a>.</p>
 			<br />
-			<p><a href="https://biz.skbroadband.com/Page.do?menu_id=F03010000">CDN 서비스 소개</a></p>
 		</div>
 	</footer>
 
@@ -73,3 +74,4 @@
 </body>
 
 </html>
+
