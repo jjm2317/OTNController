@@ -22,4 +22,23 @@ public class HolaSdnOtnNodeUsage {
     String AREA;
     String CITY;
     String MOUNTING_STATUS;
+
+    public HolaSdnOtnNodeUsage() {
+    }
+
+    public HolaSdnOtnNodeUsage(String AREA, String CITY, String MOUNTING_STATUS) {
+        this.AREA = AREA;
+        this.CITY = CITY;
+        this.MOUNTING_STATUS = MOUNTING_STATUS;
+    }
+
+    @Override
+    public String toString() {
+        return "HolaSdnOtnNodeUsage{" +
+                "HOLA_SDN_OTN_NODE_USAGE=" + HOLA_SDN_OTN_NODE_USAGE +
+                ", AREA='" + AREA + '\'' +
+                ", CITY='" + CITY + '\'' +
+                ", MOUNTING_STATUS='" + MOUNTING_STATUS + '\'' +
+                '}';
+    }
 }

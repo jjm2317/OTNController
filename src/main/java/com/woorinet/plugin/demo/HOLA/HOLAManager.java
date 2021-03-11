@@ -1,13 +1,13 @@
 package com.woorinet.plugin.demo.HOLA;
 
-import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnInventoryDetail;
-import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLineNumSheet;
-import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnLinkMng;
-import com.woorinet.plugin.demo.DTO.HOLA.HolaSdnTrunkUsage;
+import com.woorinet.plugin.demo.DTO.HOLA.*;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HOLAManager {
@@ -70,6 +70,11 @@ public class HOLAManager {
         HolaSyncSdnLinkMng();
         //상세 Inventory 현황 테이블 생성
         HolaSyncSdnInventoryDetail();
+        //OTN NODE 사용현황 테이블 생성
+        HolaSyncSdnOtnNodeUsage();
+        //OTN 물자 현황 테이블 생성
+        HolaSyncSdnOtnMaterial();
+
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
@@ -148,20 +153,22 @@ public class HOLAManager {
         Stream<HolaSdnInventoryDetail> holaSdnInventoryDetailStream = sdnConnectorList
             .stream()
             .map(sdnConnector -> {
-                SdnNode sdnNode = sdnNodeList.stream().
+                Optional<SdnNode> sdnNode = sdnNodeList.stream().
                         filter(node -> node.getNe_name().equals(sdnConnector.getNe_name()))
-                        .findAny().map(node -> node).orElse(null);
+                            .findAny();
 
-                SdnLink sdnLink = sdnLinkList.stream().
+
+
+                Optional<SdnLink> sdnLink = sdnLinkList.stream().
                         filter(link -> link.getLink_id().contains(sdnConnector.getConnect_id()))
-                        .findAny().map(link -> link).orElse(null);
+                        .findAny();
 
                 HolaSdnInventoryDetail holaSdnInventoryDetail = new HolaSdnInventoryDetail(
                         "Woorinet", //vendor
                         "", //cell
                         sdnConnector.getNe_name(), //tid
                         sdnConnector.getShelf_id(), //shelf_id
-                        sdnNode != null ? sdnNode.getIp_addr() : "", //ip
+                        sdnNode.map(node -> node.getIp_addr()).orElse(""), //ip
                         "", //ne_type
                         sdnConnector.getUnit_type(), //unit_type
                         sdnConnector.getConnect_pec(), // unit_pec
@@ -172,7 +179,7 @@ public class HOLAManager {
                         "", //llcf
                         sdnConnector.getModule_name(), //module_name
                         sdnConnector.getConnect_pec(), //module_pec
-                        sdnLink != null ? sdnLink.getDistance() : "", //distance
+                        sdnLink.map(link -> link.getDistance()).orElse(""), //distance
                         "", //module_description
                         "", //cable_name
                         "" //remarks_list
@@ -185,7 +192,37 @@ public class HOLAManager {
     }
 
     private void HolaSyncSdnOtnNodeUsage() throws Exception {
+        HolaSdnOtnNodeUsage holaSdnOtnNodeUsage = new HolaSdnOtnNodeUsage(
+                "수도권", //area
+                "", //city
+                "" //mounting_status
+        );
 
+        holaSdnOtnNodeUsageRepository.save(holaSdnOtnNodeUsage);
+    }
+
+    private void HolaSyncSdnOtnMaterial() throws Exception {
+        Stream<HolaSdnOtnMaterial> holaSdnOtnMaterialStream = sdnNodeList
+            .stream()
+            .map(sdnNode -> {
+
+                SdnConnector sdnConnector = sdnConnectorList
+                        .stream()
+                        .filter(connector -> connector.getNe_name().equals(sdnNode.getNe_name()))
+                        .findAny().get();
+
+                HolaSdnOtnMaterial holaSdnOtnMaterial = new HolaSdnOtnMaterial(
+                        sdnNode.getVendor(), //vendor
+                        "", //cell
+                        sdnNode.getNe_name(), //node
+                        sdnNode.getIp_addr(), //ip
+                        sdnConnector.getShelf_id(), //shelf_id
+                        "" //unit_list
+                );
+
+                return holaSdnOtnMaterial;
+            });
+        holaSdnOtnMaterialStream.forEach(holaSdnOtnMaterialRepository::save);
     }
 
 
