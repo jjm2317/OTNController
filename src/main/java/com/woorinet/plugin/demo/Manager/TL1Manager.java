@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.Tl1;
+package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
@@ -173,7 +173,6 @@ public class TL1Manager {
             Tl1SyncNodeList();
             Tl1SyncOduNodeConnector();
             TL1SyncCmProgramInfo();
-            if(true) throw new Exception();
             //SystemInfo DB연동
             Tl1SyncSystemInfo();
             //Slot DB연동
