@@ -52,15 +52,15 @@ public class SDNManager {
     HashMap<String, Tl1SystemInfo> tl1SystemInfoHashMap = new HashMap<>();
     HashMap<String, Tl1Inventory> tl1InventoryHashMap = new HashMap<>();
     HashMap<String, Tl1OpticPower> tl1OpticPowerHashMap = new HashMap<>();
-    HashMap<String, Tl1OduNodeConnector> odu_node_connectorHashMap = new HashMap<>();
-    HashMap<String, Tl1Odu> oduHashMapForODUTUNNEL = new HashMap<>();
-    HashMap<String, Tl1Odu> oduHashMapForMPLSTP = new HashMap<>();
-    HashMap<String, Tl1AccessIf> access_ifHashMap = new HashMap<>();
-    HashMap<String, Tl1Odu> oduNameTailHashMapForODUTUNNEL = new HashMap<>();
-    HashMap<String, Tl1Odu> oduNameHeadHashMapForODUTUNNEL = new HashMap<>();
-    HashMap<String, Tl1Odu> oduMapInMPLSTPByLocalId = new HashMap<>();
+    HashMap<String, Tl1OduNodeConnector> tl1OduNodeConnectorHashMap = new HashMap<>();
+    HashMap<String, Tl1Odu> tl1OduHashMapForOduTunnel = new HashMap<>();
+    HashMap<String, Tl1Odu> tl1OduHashMapForMplsTp = new HashMap<>();
+    HashMap<String, Tl1AccessIf> tl1AccessIfHashMap = new HashMap<>();
+    HashMap<String, Tl1Odu> tl1OduNameTailHashMapForOduTunnel = new HashMap<>();
+    HashMap<String, Tl1Odu> tl1OduNameHeadHashMapForOduTunnel = new HashMap<>();
+    HashMap<String, Tl1Odu> tl1OduMapInMplsTpByLocalId = new HashMap<>();
     HashMap<String, Tl1OduMplsIf> tl1OduMplsIfHashMap = new HashMap<>();
-    HashMap<String, List<Tl1Odu>> odu_hashMapForPath = new HashMap<>();
+    HashMap<String, List<Tl1Odu>> tl1OduHashMapForPath = new HashMap<>();
     HashMap<String, Tl1CmPort> tl1CmPortHashMap = new HashMap<>();
     HashMap<String, Tl1BypassInfo> tl1BypassInfoHashMap = new HashMap<>();
     HashMap<String, Tl1CmProgramInfo> tl1CmProgramInfoHashMap = new HashMap<>();
@@ -148,50 +148,50 @@ public class SDNManager {
             tl1OpticPowerHashMap.put(tl1OpticPower.getTID()+"/"+ tl1OpticPower.getAID(), tl1OpticPower);
         }
         for(Tl1Odu tl1Odu : tl1OduList) {
-            if(odu_hashMapForPath.get(tl1Odu.getNAME()) == null ) {
+            if(tl1OduHashMapForPath.get(tl1Odu.getNAME()) == null ) {
                 List<Tl1Odu> tl1Odu_list = new ArrayList<>();
                 tl1Odu_list.add(tl1Odu);
-                odu_hashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
+                tl1OduHashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
             } else {
-                List<Tl1Odu> tl1Odu_list = odu_hashMapForPath.get(tl1Odu.getNAME());
+                List<Tl1Odu> tl1Odu_list = tl1OduHashMapForPath.get(tl1Odu.getNAME());
                 tl1Odu_list.add(tl1Odu);
-                odu_hashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
+                tl1OduHashMapForPath.put(tl1Odu.getNAME(), tl1Odu_list);
             }
 
             if(tl1Odu.getEMS_SERVICE().equals("ODU_TUNNEL")) {
-                oduHashMapForODUTUNNEL.put(tl1Odu.getTID() + '/' + tl1Odu.getLOCAL_ID().split("-")[0] +'-'+ tl1Odu.getLOCAL_ID().split("-")[1], tl1Odu);
+                tl1OduHashMapForOduTunnel.put(tl1Odu.getTID() + '/' + tl1Odu.getLOCAL_ID().split("-")[0] +'-'+ tl1Odu.getLOCAL_ID().split("-")[1], tl1Odu);
                 if (tl1Odu.getROLE().equals("TAIL")) {
-                    oduNameTailHashMapForODUTUNNEL.put(tl1Odu.getNAME(), tl1Odu);
+                    tl1OduNameTailHashMapForOduTunnel.put(tl1Odu.getNAME(), tl1Odu);
 
-                    if (oduNameHeadHashMapForODUTUNNEL.get(tl1Odu.getNAME()) != null) {
+                    if (tl1OduNameHeadHashMapForOduTunnel.get(tl1Odu.getNAME()) != null) {
                         List<Tl1Odu> tl1Odu_list = new ArrayList<>();
-                        tl1Odu_list.add(oduNameHeadHashMapForODUTUNNEL.get(tl1Odu.getNAME()));
+                        tl1Odu_list.add(tl1OduNameHeadHashMapForOduTunnel.get(tl1Odu.getNAME()));
                         tl1Odu_list.add(tl1Odu);
                         tl1OduListForService.add(tl1Odu_list);
                     }
                 } else {
-                    oduNameHeadHashMapForODUTUNNEL.put(tl1Odu.getNAME(), tl1Odu);
+                    tl1OduNameHeadHashMapForOduTunnel.put(tl1Odu.getNAME(), tl1Odu);
 
-                    if (oduNameTailHashMapForODUTUNNEL.get(tl1Odu.getNAME()) != null) {
+                    if (tl1OduNameTailHashMapForOduTunnel.get(tl1Odu.getNAME()) != null) {
                         List<Tl1Odu> tl1Odu_list = new ArrayList<>();
                         tl1Odu_list.add(tl1Odu);
-                        tl1Odu_list.add(oduNameTailHashMapForODUTUNNEL.get(tl1Odu.getNAME()));
+                        tl1Odu_list.add(tl1OduNameTailHashMapForOduTunnel.get(tl1Odu.getNAME()));
                         tl1OduListForService.add(tl1Odu_list);
                     }
                 }
             } else if (tl1Odu.getEMS_SERVICE().equals("MPLS_TP")) {
-                oduMapInMPLSTPByLocalId.put(tl1Odu.getTID()+'/'+ tl1Odu.getLOCAL_ID(), tl1Odu);
-                oduHashMapForMPLSTP.put(tl1Odu.getTID()+ '/' + tl1Odu.getLOCAL_ID().split("-")[0] +'-'+ tl1Odu.getLOCAL_ID().split("-")[1], tl1Odu);
+                tl1OduMapInMplsTpByLocalId.put(tl1Odu.getTID()+'/'+ tl1Odu.getLOCAL_ID(), tl1Odu);
+                tl1OduHashMapForMplsTp.put(tl1Odu.getTID()+ '/' + tl1Odu.getLOCAL_ID().split("-")[0] +'-'+ tl1Odu.getLOCAL_ID().split("-")[1], tl1Odu);
             }
 
 
 
         }
         for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
-            odu_node_connectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), tl1OduNodeConnector);
+            tl1OduNodeConnectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), tl1OduNodeConnector);
         }
         for(Tl1AccessIf Tl1AccessIf : tl1AccessIfList) {
-            access_ifHashMap.put(Tl1AccessIf.getTID(), Tl1AccessIf);
+            tl1AccessIfHashMap.put(Tl1AccessIf.getTID(), Tl1AccessIf);
         }
         for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfList) {
             tl1OduMplsIfHashMap.put(tl1OduMplsIf.getTID()+'/'+ tl1OduMplsIf.getMPLS_TP_ID(), tl1OduMplsIf);
@@ -333,8 +333,8 @@ public class SDNManager {
                 SdnConnector srcSdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
                 SdnConnector dstSdnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDST_TID()+ '/' + tl1OduMplsIf.getDST_PORT());
                 Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduMplsIf.getTID() + '/' + tl1OduMplsIf.getMPLS_TP_ID());
-                Tl1Odu tl1Odu = oduHashMapForODUTUNNEL.get(tl1OduMplsIf.getTID()+ '/' + tl1OduMplsIf.getMPLS_TP_ID());
-                Tl1OduNodeConnector tl1OduNodeConnector = odu_node_connectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
+                Tl1Odu tl1Odu = tl1OduHashMapForOduTunnel.get(tl1OduMplsIf.getTID()+ '/' + tl1OduMplsIf.getMPLS_TP_ID());
+                Tl1OduNodeConnector tl1OduNodeConnector = tl1OduNodeConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
 
                 int maximumBandwidth = Integer.parseInt(tl1OduMplsIf.getMAXIMUM_BANDWIDTH());
                 int availableBandwidth = Integer.parseInt(tl1OduMplsIf.getAVAILABLE_BANDWIDTH());
@@ -477,7 +477,7 @@ public class SDNManager {
     }
 
     public void SDNSyncPathList() throws  Exception {
-        for (Map.Entry<String, List<Tl1Odu>> entry : odu_hashMapForPath.entrySet() ) {
+        for (Map.Entry<String, List<Tl1Odu>> entry : tl1OduHashMapForPath.entrySet() ) {
             List<Tl1Odu> tl1Odu_list = entry.getValue();
             if(tl1Odu_list.size() != 4) continue;
 
@@ -532,7 +532,7 @@ public class SDNManager {
             }
         }
 
-        for (Map.Entry<String, List<Tl1Odu>> entry : odu_hashMapForPath.entrySet() ) {
+        for (Map.Entry<String, List<Tl1Odu>> entry : tl1OduHashMapForPath.entrySet() ) {
             List<Tl1Odu> tl1Odu_list = entry.getValue();
             if(tl1Odu_list.size() != 4) continue;
 
@@ -590,56 +590,54 @@ public class SDNManager {
     }
 
     public void SDNSyncConstraint() throws Exception {
+        Stream<SdnConstraint> sdnConstraintStream = tl1OduListForService
+            .stream()
+            .map(tl1OduList -> {
+                Tl1Odu tl1Odu_head = tl1OduList.get(0);
+                Tl1Odu tl1Odu_tail = tl1OduList.get(1);
 
-        for (List<Tl1Odu> tl1Odu_list :tl1OduListForService) {
-            Tl1Odu tl1Odu_head = tl1Odu_list.get(0);
-            Tl1Odu tl1Odu_tail = tl1Odu_list.get(1);
+                SdnNode srcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
 
-            SdnNode sdnSrcSdnNode = sdnNodeHashMap.get(tl1Odu_head.getTID());
+                SdnConstraint sdnConstraint = new SdnConstraint(
+                        200009, // ems_id
+                        srcSdnNode.getVendor() + separator + srcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME(), // service_id
+                        "protection type", // const_id
+                        "", // const_type
+                        "PROTECTION TYPE", // const_name
+                        tl1Odu_head.getPROT_TYPE(), // const_value
+                        "" // const_operator
+                );
 
-            SdnConstraint sdnConstraint = new SdnConstraint();
-
-            sdnConstraint.setEms_id(200009);
-            sdnConstraint.setService_id(sdnSrcSdnNode.getVendor() + separator + sdnSrcSdnNode.getSys_type() + separator + tl1Odu_head.getNAME());
-            sdnConstraint.setConst_id("protection type");
-            sdnConstraint.setConst_type("");
-            sdnConstraint.setConst_name("PROTECTION TYPE");
-            sdnConstraint.setConst_value(tl1Odu_head.getPROT_TYPE());
-            sdnConstraint.setConst_operator("");
-
-
-            sdnConstraintRepository.save(sdnConstraint);
-
-        }
+                return sdnConstraint;
+            });
+        sdnConstraintStream.forEach(sdnConstraintRepository::save);
     }
 
     public void SDNSyncAccess_if() throws Exception {
+        Stream<SdnAccessIf> sdnAccessIfStream = tl1MplsIfList
+            .stream()
+            .filter(tl1MplsIf -> tl1OduHashMapForMplsTp.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]) != null)
+            .map(tl1MplsIf -> {
+                Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1MplsIf.getTID());
+                SdnNode sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
+                SdnConnector sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
+                Tl1Odu tl1Odu = tl1OduHashMapForMplsTp.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
 
-        for(Tl1MplsIf tl1MplsIf : tl1MplsIfList) {
+                SdnAccessIf sdnAccessIf = new SdnAccessIf(
+                        200009, // ems_id
+                        tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id(), // access_if_id
+                        "", // accessif_name
+                        sdnNode.getNe_id(), // ne_id
+                        sdnConnector.getConnect_id(), // connector_id
+                        tl1Odu.getSERVICE(), // accessif_type
+                        tl1MplsIf.getOPERATION_STATUS(), // accessif_status
+                        "", // service_ref
+                        "" // node_connector_ref
+                );
 
-            Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1MplsIf.getTID());
-
-            SdnAccessIf sdnSdnAccessIf = new SdnAccessIf();
-            SdnNode sdnNode = sdnNodeHashMap.get(tl1MplsIf.getTID());
-            SdnConnector sdnConnector = sdnConnectorHashMap.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
-            Tl1Odu tl1Odu = oduHashMapForMPLSTP.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]);
-            if(tl1Odu == null) continue;
-
-            sdnSdnAccessIf.setEms_id(200009);
-            sdnSdnAccessIf.setAccessif_id(tl1SystemInfo.getVENDOR() + separator + sdnNode.getSys_type() + separator + sdnNode.getNe_id() + separator + sdnConnector.getConnect_id()); // 조합
-            sdnSdnAccessIf.setAccessif_name("");
-            sdnSdnAccessIf.setNe_id(sdnNode.getNe_id());
-            sdnSdnAccessIf.setConnector_id(sdnConnector.getConnect_id());
-            sdnSdnAccessIf.setAccessif_type(tl1Odu.getSERVICE());
-            sdnSdnAccessIf.setAccessif_status(tl1MplsIf.getOPERATION_STATUS());
-            sdnSdnAccessIf.setService_ref("");
-            sdnSdnAccessIf.setNode_connector_ref("");
-
-            sdnAccessIfRepository.save(sdnSdnAccessIf);
-
-
-        }
-
+                return sdnAccessIf;
+            });
+        sdnAccessIfStream.forEach(sdnAccessIfRepository::save);
     }
 
     public void SDNSyncCryptoModule() throws Exception {
