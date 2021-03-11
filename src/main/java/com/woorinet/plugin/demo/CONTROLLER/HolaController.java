@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
 import com.woorinet.plugin.demo.DTO.HOLA.HolaLineNumSheet;
+import com.woorinet.plugin.demo.DTO.HOLA.HolaLinkMng;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.Manager.HOLAManager;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
@@ -39,9 +40,6 @@ public class HolaController {
     @ResponseBody
     public ResponseEntity selectLineNumSheetList() {
         if(holaLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
-
-
-
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
@@ -109,7 +107,36 @@ public class HolaController {
     @ResponseBody
     public ResponseEntity selectLinkMngList() {
         if(holaLinkMngRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(holaLinkMngRepository.findAll());
+
+        JSONArray jsonArray = new JSONArray();
+        JSONParser parser = new JSONParser();
+        try {
+            for (HolaLinkMng holaLinkMng : holaLinkMngRepository.findAll()) {
+                JSONObject jsonObject = new JSONObject();
+
+                JSONArray linkJsonArray = (JSONArray) parser.parse(holaLinkMng.getLINK());
+
+                jsonObject.put("hola_link_mng_id", holaLinkMng.getHOLA_SDN_LINK_MNG_ID());
+                jsonObject.put("vendor", holaLinkMng.getVENDOR());
+                jsonObject.put("link", linkJsonArray);
+                jsonObject.put("admin_weight", holaLinkMng.getADMIN_WEIGHT());
+                jsonObject.put("maximum_usage_ratio",holaLinkMng.getMAXIMUM_USAGE_RATIO());
+                jsonObject.put("memory",holaLinkMng.getMEMORY());
+                jsonObject.put("usage_ratio",holaLinkMng.getUSAGE_RATIO());
+                jsonObject.put("all_memory",holaLinkMng.getALL_MEMORY());
+                jsonObject.put("all_usage_ratio",holaLinkMng.getALL_USAGE_RATIO());
+                jsonObject.put("distance",holaLinkMng.getDISTANCE());
+                jsonObject.put("srlg",holaLinkMng.getSRLG());
+                jsonObject.put("roadm_path",holaLinkMng.getROADM_PATH());
+                jsonObject.put("remarks",holaLinkMng.getREMARKS());
+
+                jsonArray.add(jsonObject);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok(jsonArray.toString());
     }
 
     @ApiOperation(value = "get trunk usage", notes = "전체 trunk 사용률 조회")
