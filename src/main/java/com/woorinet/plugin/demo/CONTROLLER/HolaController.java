@@ -1,10 +1,13 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
+import com.woorinet.plugin.demo.DTO.HOLA.HolaLineNumSheet;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.Manager.HOLAManager;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import io.swagger.annotations.ApiOperation;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +38,17 @@ public class HolaController {
     @ResponseBody
     public ResponseEntity selectLineNumSheetList() {
         if(holaLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
+
+        List<HolaLineNumSheet> holaLineNumSheetList = holaLineNumSheetRepository.findAll();
+
+        HolaLineNumSheet holaLineNumSheet = holaLineNumSheetList.get(0);
+
+        JSONObject obj = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        obj.put("test", holaLineNumSheet.getENDPOINT_CLIENT_START());
+
+        System.out.println(obj.toString());
+
         return ResponseEntity.ok(holaLineNumSheetRepository.findAll());
     }
 
