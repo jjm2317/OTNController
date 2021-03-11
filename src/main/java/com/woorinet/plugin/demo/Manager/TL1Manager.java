@@ -173,7 +173,6 @@ public class TL1Manager {
             Tl1SyncNodeList();
             Tl1SyncOduNodeConnector();
             TL1SyncCmProgramInfo();
-            if(true) throw new Exception();
             //SystemInfo DB연동
             Tl1SyncSystemInfo();
             //Slot DB연동
