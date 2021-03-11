@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class HolaOtnNodeUsage {
     @Id
     @GeneratedValue
-    int HOLA_SDN_OTN_NODE_USAGE;
+    int HOLA_SDN_OTN_NODE_USAGE_ID;
     String AREA;
     String CITY;
     String MOUNTING_STATUS;
@@ -34,8 +34,8 @@ public class HolaOtnNodeUsage {
 
     @Override
     public String toString() {
-        return "HolaSdnOtnNodeUsage{" +
-                "HOLA_SDN_OTN_NODE_USAGE=" + HOLA_SDN_OTN_NODE_USAGE +
+        return "HolaOtnNodeUsage{" +
+                "HOLA_SDN_OTN_NODE_USAGE_ID=" + HOLA_SDN_OTN_NODE_USAGE_ID +
                 ", AREA='" + AREA + '\'' +
                 ", CITY='" + CITY + '\'' +
                 ", MOUNTING_STATUS='" + MOUNTING_STATUS + '\'' +

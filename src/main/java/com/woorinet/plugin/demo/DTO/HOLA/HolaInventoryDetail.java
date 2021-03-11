@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class HolaInventoryDetail {
     @Id
     @GeneratedValue
-    int HOLA_SDN_INVENTORY_DETAIL;
+    int HOLA_SDN_INVENTORY_DETAIL_ID;
     String VENDOR;
     String CELL;
     String TID;
@@ -66,8 +66,8 @@ public class HolaInventoryDetail {
 
     @Override
     public String toString() {
-        return "HolaSdnInventoryDetail{" +
-                "HOLA_SDN_INVENTORY_DETAIL=" + HOLA_SDN_INVENTORY_DETAIL +
+        return "HolaInventoryDetail{" +
+                "HOLA_SDN_INVENTORY_DETAIL_ID=" + HOLA_SDN_INVENTORY_DETAIL_ID +
                 ", VENDOR='" + VENDOR + '\'' +
                 ", CELL='" + CELL + '\'' +
                 ", TID='" + TID + '\'' +

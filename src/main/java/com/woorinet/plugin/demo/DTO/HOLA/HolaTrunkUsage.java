@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class HolaTrunkUsage {
     @Id
     @GeneratedValue
-    int HOLA_SDN_TRUNK_USAGE;
+    int HOLA_SDN_TRUNK_USAGE_ID;
     String VENDOR;
     String LINK;
     String ADMIN_WEIGHT;

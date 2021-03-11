@@ -4,6 +4,7 @@ import com.woorinet.plugin.demo.DTO.HOLA.*;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -65,7 +66,7 @@ public class HOLAManager {
         //선번장 테이블 생성
         HolaSyncSdnLineNumSheet();
         //LinkMng 테이블 생성
-        HolaSyncSdnLinkMng();
+        HolaSyncLinkMng();
         //상세 Inventory 현황 테이블 생성
         HolaSyncSdnInventoryDetail();
         //OTN NODE 사용현황 테이블 생성
@@ -120,9 +121,13 @@ public class HOLAManager {
         holaSdnLineNumSheetStream.forEach(holaLineNumSheetRepository::save);
     }
 
-    private void HolaSyncSdnLinkMng() throws Exception {
-        Stream<HolaLinkMng> holaSdnLinkMngStream = sdnLinkList
+    private void HolaSyncLinkMng() throws Exception {
+        Stream<HolaLinkMng> holaLinkMngStream = sdnLinkList
             .stream()
+            .filter(sdnLink -> {
+                String [] halfOflinkId = sdnLink.getLink_id().split(":");
+                return (halfOflinkId[0].split("_")[2].charAt(0) < halfOflinkId[1].split("_")[2].charAt(0));
+            })
             .map(sdnLink -> {
                 HolaLinkMng holaLinkMng = new HolaLinkMng(
                         "Woorinet", //vendor
@@ -137,14 +142,44 @@ public class HOLAManager {
                         "", //srlg
                         "", //roadm_path
                         "" //remarks, user input
-
-
                 );
+
+
+                String[] firstHalfOfLinkIdSplits = sdnLink.getLink_id().split(":")[0].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_B, 1, S03, 1]
+                String[] secondHalfOfLinkIdSplits = sdnLink.getLink_id().split(":")[1].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_C, 1, S02, 3]
+
+
+                String[] firstLinkFields = {
+                        firstHalfOfLinkIdSplits[2],
+                        firstHalfOfLinkIdSplits[3],
+                        firstHalfOfLinkIdSplits[4],
+                        firstHalfOfLinkIdSplits[5],
+                        secondHalfOfLinkIdSplits[2],
+                        secondHalfOfLinkIdSplits[3],
+                        secondHalfOfLinkIdSplits[4],
+                        secondHalfOfLinkIdSplits[5]
+                };
+                String[] secondLinkFields = {
+                        secondHalfOfLinkIdSplits[2],
+                        secondHalfOfLinkIdSplits[3],
+                        secondHalfOfLinkIdSplits[4],
+                        secondHalfOfLinkIdSplits[5],
+                        firstHalfOfLinkIdSplits[2],
+                        firstHalfOfLinkIdSplits[3],
+                        firstHalfOfLinkIdSplits[4],
+                        firstHalfOfLinkIdSplits[5]
+                };
+
+                holaLinkMng.setLink(firstLinkFields, secondLinkFields);
+
 
                 return holaLinkMng;
             });
 
-        holaSdnLinkMngStream.forEach(holaLinkMngRepository::save);
+        holaLinkMngStream.forEach(item -> {
+            System.out.println(item);
+            holaLinkMngRepository.save(item);
+        });
     }
 
     private void HolaSyncSdnInventoryDetail() throws Exception {
