@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.HOLA;
+package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.HOLA.*;
 import com.woorinet.plugin.demo.DTO.SDN.*;

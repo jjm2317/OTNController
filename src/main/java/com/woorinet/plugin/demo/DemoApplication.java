@@ -3,7 +3,7 @@ package com.woorinet.plugin.demo;
 import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
-import com.woorinet.plugin.demo.HOLA.HOLAManager;
+import com.woorinet.plugin.demo.Manager.HOLAManager;
 import com.woorinet.plugin.demo.Manager.QNETManager;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
@@ -38,42 +38,6 @@ public class DemoApplication {
 	@Autowired
 	private QNETMapper qnetMapper;
 
-	@Autowired
-	private SdnNodeRepository sdnNodeRepository;
-	@Autowired
-	private SdnConnectorRepository sdnConnectorRepository;
-	@Autowired
-	private SdnLinkRepository sdnLinkRepository;
-	@Autowired
-	private SdnServiceRepository sdnServiceRepository;
-	@Autowired
-	private SdnTunnelRepository sdnTunnelRepository;
-	@Autowired
-	private SdnAccessIfRepository sdnAccessIfRepository;
-	@Autowired
-	private SdnConstraintRepository sdnConstraintRepository;
-	@Autowired
-	private SdnPathRepository sdnPathRepository;
-	@Autowired
-	private SdnCryptoModuleRepository sdnCryptoModuleRepository;
-	@Autowired
-	private SdnCryptoSessionRepository sdnCryptoSessionRepository;
-	@Autowired
-	private SdnPmPortRepository sdnPmPortRepository;
-
-	@Autowired
-	private HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
-	@Autowired
-	private HolaSdnLinkMngRepository holaSdnLinkMngRepository;
-	@Autowired
-	private HolaSdnTrunkUsageRepository holaSdnTrunkUsageRepository;
-	@Autowired
-	private HolaSdnInventroyDetailRepository holaSdnInventroyDetailRepository;
-	@Autowired
-	private HolaSdnOtnNodeUsageRepository holaSdnOtnNodeUsageRepository;
-	@Autowired
-	private HolaSdnOtnMaterialRepository holaSdnOtnMaterialRepository;
-
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
@@ -107,51 +71,7 @@ public class DemoApplication {
 
 	}
 
-
-	@RequestMapping("/hola")
-	String syncronizeHola() {
-		try {
-			//SdnNode 조회
-			List<SdnNode> sdnNodeList = sdnNodeRepository.findAll();
-			//SdnConnector 조회
-			List<SdnConnector> sdnConnectorList = sdnConnectorRepository.findAll();
-			//SdnLink 조회
-			List<SdnLink> sdnLinkList = sdnLinkRepository.findAll();
-			//SdnService 조회
-			List<SdnService> sdnServiceList = sdnServiceRepository.findAll();
-			//SdnPath 조회
-			List<SdnPath> sdnPathList = sdnPathRepository.findAll();
-			//SdnConstraint 조회
-			List<SdnConstraint> sdnConstraintList = sdnConstraintRepository.findAll();
-			//SdnAccessIf 조회
-			List<SdnAccessIf> sdnAccessIfList = sdnAccessIfRepository.findAll();
-
-			HOLAManager manager = new HOLAManager(holaSdnLineNumSheetRepository,
-					holaSdnLinkMngRepository,
-					holaSdnTrunkUsageRepository,
-					holaSdnInventroyDetailRepository,
-					holaSdnOtnNodeUsageRepository,
-					holaSdnOtnMaterialRepository,
-					sdnNodeList,
-					sdnConnectorList,
-					sdnLinkList,
-					sdnServiceList,
-					sdnPathList,
-					sdnConstraintList,
-					sdnAccessIfList
-
-			);
-
-			manager.HOLASyncStart();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return "sync hola";
-	}
-
-
-
+	/*
 	@RequestMapping("/synchronization_anapi")
 	String synchronizationQNAPI() {
 
@@ -319,6 +239,6 @@ public class DemoApplication {
 		}
 		return (new Gson()).toJson(list);
 	}
-
+	*/
 }
 
