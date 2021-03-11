@@ -8,6 +8,7 @@ import com.woorinet.plugin.demo.Repository.SDN.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,17 +40,68 @@ public class HolaController {
     public ResponseEntity selectLineNumSheetList() {
         if(holaLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
 
-        List<HolaLineNumSheet> holaLineNumSheetList = holaLineNumSheetRepository.findAll();
 
-        HolaLineNumSheet holaLineNumSheet = holaLineNumSheetList.get(0);
 
-        JSONObject obj = new JSONObject();
+
         JSONArray jsonArray = new JSONArray();
-        obj.put("test", holaLineNumSheet.getENDPOINT_CLIENT_START());
+        JSONParser parser = new JSONParser();
+        try {
 
-        System.out.println(obj.toString());
+            for(HolaLineNumSheet holaLineNumSheet : holaLineNumSheetRepository.findAll()) {
+                JSONObject jsonObject = new JSONObject();
 
-        return ResponseEntity.ok(holaLineNumSheetRepository.findAll());
+                JSONObject EPStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getENDPOINT_CLIENT_START());
+                JSONObject TCStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getTRANSMIT_CLIENT_START());
+                JSONObject LStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getLINK_START());
+                JSONObject RMStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getROADM_MUX_START());
+                JSONObject RMEndJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getROADM_MUX_END());
+                JSONObject LEndJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getLINK_END());
+                JSONObject TCEndJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getTRANSMIT_CLIENT_END());
+                JSONObject EPENDJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getENDPOINT_CLIENT_END());
+
+
+                jsonObject.put("line_num_sheet_id", holaLineNumSheet.getLINE_NUM_SHEET_ID());
+                jsonObject.put("group", holaLineNumSheet.getGROUP());
+                jsonObject.put("domain_type", holaLineNumSheet.getDOMAIN_TYPE());
+                jsonObject.put("area_start", holaLineNumSheet.getAREA_START());
+                jsonObject.put("area_end", holaLineNumSheet.getAREA_END());
+                jsonObject.put("node_start", holaLineNumSheet.getNODE_START());
+                jsonObject.put("node_end",holaLineNumSheet.getNODE_END());
+                jsonObject.put("circuit_id",holaLineNumSheet.getCIRCUIT_ID());
+                jsonObject.put("auto_service_name",holaLineNumSheet.getAUTO_SERVICE_NAME());
+                jsonObject.put("input_service_name",holaLineNumSheet.getINPUT_SERVICE_NAME());
+                jsonObject.put("service_type",holaLineNumSheet.getSERVICE_TYPE());
+                jsonObject.put("vendor",holaLineNumSheet.getVENDOR());
+                jsonObject.put("constraint_id",holaLineNumSheet.getCONSTRAINT_ID());
+                jsonObject.put("protection_type",holaLineNumSheet.getPROTECTIOM_TYPE());
+                jsonObject.put("service_rate",holaLineNumSheet.getSERVICE_RATE());
+                jsonObject.put("service_status",holaLineNumSheet.getSERVICE_STATUS());
+                jsonObject.put("active_path",holaLineNumSheet.getACTIVE_PATH());
+                jsonObject.put("traffic_status",holaLineNumSheet.getTRAFFIC_STATUS());
+                jsonObject.put("home_path",holaLineNumSheet.getHOME_PATH());
+                jsonObject.put("latency",holaLineNumSheet.getLATENCY());
+                jsonObject.put("cable_creation_date",holaLineNumSheet.getCABLE_CREATION_DATE());
+                jsonObject.put("network_cable_number",holaLineNumSheet.getNETWORK_CABLE_NUMBER());
+                jsonObject.put("writer",holaLineNumSheet.getWRITER());
+                jsonObject.put("remarks",holaLineNumSheet.getREMARKS());
+                jsonObject.put("endpoint_client_start",EPStartJsonObj);
+                jsonObject.put("transmit_client_start",TCStartJsonObj);
+                jsonObject.put("link_start", LStartJsonObj);
+                jsonObject.put("roadm_mux_start", RMStartJsonObj);
+                jsonObject.put("roadm_mux_end", RMEndJsonObj);
+                jsonObject.put("link_end", LEndJsonObj);
+                jsonObject.put("transmit_client_end",TCEndJsonObj);
+                jsonObject.put("endpoint_client_end",EPENDJsonObj);
+
+                jsonArray.add(jsonObject);
+            }
+
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+
+
+        return ResponseEntity.ok(jsonArray.toString());
     }
 
     @ApiOperation(value = "get link mng", notes = "전체 링크관리 조회")
