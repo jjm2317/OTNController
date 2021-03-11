@@ -6,17 +6,15 @@ import com.woorinet.plugin.demo.Repository.HOLA.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class HOLAManager {
-    HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
-    HolaSdnLinkMngRepository holaSdnLinkMngRepository;
-    HolaSdnTrunkUsageRepository holaSdnTrunkUsageRepository;
-    HolaSdnInventroyDetailRepository holaSdnInventroyDetailRepository;
-    HolaSdnOtnNodeUsageRepository holaSdnOtnNodeUsageRepository;
-    HolaSdnOtnMaterialRepository holaSdnOtnMaterialRepository;
+    HolaLineNumSheetRepository holaLineNumSheetRepository;
+    HolaLinkMngRepository holaLinkMngRepository;
+    HolaTrunkUsageRepository holaTrunkUsageRepository;
+    HolaInventroyDetailRepository holaInventroyDetailRepository;
+    HolaOtnNodeUsageRepository holaOtnNodeUsageRepository;
+    HolaOtnMaterialRepository holaOtnMaterialRepository;
 
     List<SdnNode> sdnNodeList;
     List<SdnConnector> sdnConnectorList;
@@ -27,12 +25,12 @@ public class HOLAManager {
     List<SdnAccessIf> sdnAccessIfList;
 
 
-    public HOLAManager(HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository,
-                       HolaSdnLinkMngRepository holaSdnLinkMngRepository,
-                       HolaSdnTrunkUsageRepository holaSdnTrunkUsageRepository,
-                       HolaSdnInventroyDetailRepository holaSdnInventroyDetailRepository,
-                       HolaSdnOtnNodeUsageRepository holaSdnOtnNodeUsageRepository,
-                       HolaSdnOtnMaterialRepository holaSdnOtnMaterialRepository,
+    public HOLAManager(HolaLineNumSheetRepository holaLineNumSheetRepository,
+                       HolaLinkMngRepository holaLinkMngRepository,
+                       HolaTrunkUsageRepository holaTrunkUsageRepository,
+                       HolaInventroyDetailRepository holaInventroyDetailRepository,
+                       HolaOtnNodeUsageRepository holaOtnNodeUsageRepository,
+                       HolaOtnMaterialRepository holaOtnMaterialRepository,
                        List<SdnNode> sdnNodeList,
                        List<SdnConnector> sdnConnectorList,
                        List<SdnLink> sdnLinkList,
@@ -41,12 +39,12 @@ public class HOLAManager {
                        List<SdnConstraint> sdnConstraintList,
                        List<SdnAccessIf> sdnAccessIfList
                        ) throws Exception{
-        this.holaSdnLineNumSheetRepository = holaSdnLineNumSheetRepository;
-        this.holaSdnLinkMngRepository = holaSdnLinkMngRepository;
-        this.holaSdnTrunkUsageRepository = holaSdnTrunkUsageRepository;
-        this.holaSdnInventroyDetailRepository = holaSdnInventroyDetailRepository;
-        this.holaSdnOtnNodeUsageRepository = holaSdnOtnNodeUsageRepository;
-        this.holaSdnOtnMaterialRepository = holaSdnOtnMaterialRepository;
+        this.holaLineNumSheetRepository = holaLineNumSheetRepository;
+        this.holaLinkMngRepository = holaLinkMngRepository;
+        this.holaTrunkUsageRepository = holaTrunkUsageRepository;
+        this.holaInventroyDetailRepository = holaInventroyDetailRepository;
+        this.holaOtnNodeUsageRepository = holaOtnNodeUsageRepository;
+        this.holaOtnMaterialRepository = holaOtnMaterialRepository;
 
         this.sdnNodeList = sdnNodeList;
         this.sdnConnectorList = sdnConnectorList;
@@ -78,10 +76,10 @@ public class HOLAManager {
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
-        Stream<HolaSdnLineNumSheet> holaSdnLineNumSheetStream = sdnServiceList
+        Stream<HolaLineNumSheet> holaSdnLineNumSheetStream = sdnServiceList
             .stream()
             .map(sdnService -> {
-                HolaSdnLineNumSheet holaSdnLineNumSheet = new HolaSdnLineNumSheet(
+                HolaLineNumSheet holaLineNumSheet = new HolaLineNumSheet(
                         "", // group
                         "Single", //domain_type
                         "", //area_start, userinput
@@ -117,16 +115,16 @@ public class HOLAManager {
                         "" //bypass_path
                 );
 
-                return holaSdnLineNumSheet;
+                return holaLineNumSheet;
             });
-        holaSdnLineNumSheetStream.forEach(holaSdnLineNumSheetRepository::save);
+        holaSdnLineNumSheetStream.forEach(holaLineNumSheetRepository::save);
     }
 
     private void HolaSyncSdnLinkMng() throws Exception {
-        Stream<HolaSdnLinkMng> holaSdnLinkMngStream = sdnLinkList
+        Stream<HolaLinkMng> holaSdnLinkMngStream = sdnLinkList
             .stream()
             .map(sdnLink -> {
-                HolaSdnLinkMng holaSdnLinkMng = new HolaSdnLinkMng(
+                HolaLinkMng holaLinkMng = new HolaLinkMng(
                         "Woorinet", //vendor
                         "", // link
                         "", // admin_weight, user input
@@ -143,14 +141,14 @@ public class HOLAManager {
 
                 );
 
-                return holaSdnLinkMng;
+                return holaLinkMng;
             });
 
-        holaSdnLinkMngStream.forEach(holaSdnLinkMngRepository::save);
+        holaSdnLinkMngStream.forEach(holaLinkMngRepository::save);
     }
 
     private void HolaSyncSdnInventoryDetail() throws Exception {
-        Stream<HolaSdnInventoryDetail> holaSdnInventoryDetailStream = sdnConnectorList
+        Stream<HolaInventoryDetail> holaSdnInventoryDetailStream = sdnConnectorList
             .stream()
             .map(sdnConnector -> {
                 Optional<SdnNode> sdnNode = sdnNodeList.stream().
@@ -163,7 +161,7 @@ public class HOLAManager {
                         filter(link -> link.getLink_id().contains(sdnConnector.getConnect_id()))
                         .findAny();
 
-                HolaSdnInventoryDetail holaSdnInventoryDetail = new HolaSdnInventoryDetail(
+                HolaInventoryDetail holaInventoryDetail = new HolaInventoryDetail(
                         "Woorinet", //vendor
                         "", //cell
                         sdnConnector.getNe_name(), //tid
@@ -184,25 +182,25 @@ public class HOLAManager {
                         "", //cable_name
                         "" //remarks_list
                 );
-                return holaSdnInventoryDetail;
+                return holaInventoryDetail;
             });
 
-        holaSdnInventoryDetailStream.forEach(holaSdnInventroyDetailRepository::save);
+        holaSdnInventoryDetailStream.forEach(holaInventroyDetailRepository::save);
 
     }
 
     private void HolaSyncSdnOtnNodeUsage() throws Exception {
-        HolaSdnOtnNodeUsage holaSdnOtnNodeUsage = new HolaSdnOtnNodeUsage(
+        HolaOtnNodeUsage holaSdnOtnNodeUsage = new HolaOtnNodeUsage(
                 "수도권", //area
                 "", //city
                 "" //mounting_status
         );
 
-        holaSdnOtnNodeUsageRepository.save(holaSdnOtnNodeUsage);
+        holaOtnNodeUsageRepository.save(holaSdnOtnNodeUsage);
     }
 
     private void HolaSyncSdnOtnMaterial() throws Exception {
-        Stream<HolaSdnOtnMaterial> holaSdnOtnMaterialStream = sdnNodeList
+        Stream<HolaOtnMaterial> holaSdnOtnMaterialStream = sdnNodeList
             .stream()
             .map(sdnNode -> {
 
@@ -211,7 +209,7 @@ public class HOLAManager {
                         .filter(connector -> connector.getNe_name().equals(sdnNode.getNe_name()))
                         .findAny().get();
 
-                HolaSdnOtnMaterial holaSdnOtnMaterial = new HolaSdnOtnMaterial(
+                HolaOtnMaterial holaOtnMaterial = new HolaOtnMaterial(
                         sdnNode.getVendor(), //vendor
                         "", //cell
                         sdnNode.getNe_name(), //node
@@ -220,9 +218,9 @@ public class HOLAManager {
                         "" //unit_list
                 );
 
-                return holaSdnOtnMaterial;
+                return holaOtnMaterial;
             });
-        holaSdnOtnMaterialStream.forEach(holaSdnOtnMaterialRepository::save);
+        holaSdnOtnMaterialStream.forEach(holaOtnMaterialRepository::save);
     }
 
 

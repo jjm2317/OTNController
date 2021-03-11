@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="hola_sdn_otn_material")
-public class HolaSdnOtnMaterial {
+@Table(name="hola_otn_material")
+public class HolaOtnMaterial {
     @Id
     @GeneratedValue
     int HOLA_SDN_OTN_MATERIAL;
@@ -26,10 +26,10 @@ public class HolaSdnOtnMaterial {
     String SHELF;
     String UNIT_LIST;
 
-    public HolaSdnOtnMaterial() {
+    public HolaOtnMaterial() {
     }
 
-    public HolaSdnOtnMaterial(String VENDOR, String CELL, String NODE, String IP, String SHELF, String UNIT_LIST) {
+    public HolaOtnMaterial(String VENDOR, String CELL, String NODE, String IP, String SHELF, String UNIT_LIST) {
         this.VENDOR = VENDOR;
         this.CELL = CELL;
         this.NODE = NODE;

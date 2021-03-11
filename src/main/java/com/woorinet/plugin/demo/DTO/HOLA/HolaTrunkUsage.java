@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table
-public class HolaSdnTrunkUsage {
+public class HolaTrunkUsage {
     @Id
     @GeneratedValue
     int HOLA_SDN_TRUNK_USAGE;

@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Entity
 @Data
-@Table(name="hola_sdn_line_num_sheet")
-public class HolaSdnLineNumSheet {
+@Table(name="hola_line_num_sheet")
+public class HolaLineNumSheet {
     @Id
     @GeneratedValue
     int LINE_NUM_SHEET_ID;
@@ -53,10 +53,10 @@ public class HolaSdnLineNumSheet {
     String MAIN_PATH;
     String BYPASS_PATH;
 
-    public HolaSdnLineNumSheet() {
+    public HolaLineNumSheet() {
     }
 
-    public HolaSdnLineNumSheet(String GROUP, String DOMAIN_TYPE, String AREA_START, String AREA_END, String NODE_START, String NODE_END, String CIRCUIT_ID, String AUTO_SERVICE_NAME, String INPUT_SERVICE_NAME, String SERVICE_TYPE, String VENDOR, String CONSTRAINT_ID, String PROTECTIOM_TYPE, String SERVICE_RATE, String SERVICE_STATUS, String ACTIVE_PATH, String TRAFFIC_STATUS, String HOME_PATH, String LATENCY, String CABLE_CREATION_DATE, String NETWORK_CABLE_NUMBER, String WRITER, String REMARKS, String ENDPOINT_CLIENT_START, String TRANSMIT_CLIENT_START, String LINK_START, String ROADM_MUX_START, String ROADM_MUX_END, String LINK_END, String TRANSMIT_CLIENT_END, String ENDPOINT_CLIENT_END, String MAIN_PATH, String BYPASS_PATH) {
+    public HolaLineNumSheet(String GROUP, String DOMAIN_TYPE, String AREA_START, String AREA_END, String NODE_START, String NODE_END, String CIRCUIT_ID, String AUTO_SERVICE_NAME, String INPUT_SERVICE_NAME, String SERVICE_TYPE, String VENDOR, String CONSTRAINT_ID, String PROTECTIOM_TYPE, String SERVICE_RATE, String SERVICE_STATUS, String ACTIVE_PATH, String TRAFFIC_STATUS, String HOME_PATH, String LATENCY, String CABLE_CREATION_DATE, String NETWORK_CABLE_NUMBER, String WRITER, String REMARKS, String ENDPOINT_CLIENT_START, String TRANSMIT_CLIENT_START, String LINK_START, String ROADM_MUX_START, String ROADM_MUX_END, String LINK_END, String TRANSMIT_CLIENT_END, String ENDPOINT_CLIENT_END, String MAIN_PATH, String BYPASS_PATH) {
         this.GROUP = GROUP;
         this.DOMAIN_TYPE = DOMAIN_TYPE;
         this.AREA_START = AREA_START;

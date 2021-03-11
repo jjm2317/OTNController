@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="hola_sdn_inventory_detail")
-public class HolaSdnInventoryDetail {
+@Table(name="hola_inventory_detail")
+public class HolaInventoryDetail {
     @Id
     @GeneratedValue
     int HOLA_SDN_INVENTORY_DETAIL;
@@ -39,10 +39,10 @@ public class HolaSdnInventoryDetail {
     String CABLE_NAME;
     String REMARKS_LIST;
 
-    public HolaSdnInventoryDetail() {
+    public HolaInventoryDetail() {
     }
 
-    public HolaSdnInventoryDetail(String VENDOR, String CELL, String TID, String SHELF_ID, String IP, String NE_TYPE, String UNIT_TYPE, String UNIT_PEC, String SERIAL_NUMBER, String SLOT_ID, String PORT_ID, String CONNECT_STATUS, String LLCF, String MODULE_NAME, String MODULE_PEC, String DISTANCE, String MODULE_DESCRIPTION, String CABLE_NAME, String REMARKS_LIST) {
+    public HolaInventoryDetail(String VENDOR, String CELL, String TID, String SHELF_ID, String IP, String NE_TYPE, String UNIT_TYPE, String UNIT_PEC, String SERIAL_NUMBER, String SLOT_ID, String PORT_ID, String CONNECT_STATUS, String LLCF, String MODULE_NAME, String MODULE_PEC, String DISTANCE, String MODULE_DESCRIPTION, String CABLE_NAME, String REMARKS_LIST) {
         this.VENDOR = VENDOR;
         this.CELL = CELL;
         this.TID = TID;

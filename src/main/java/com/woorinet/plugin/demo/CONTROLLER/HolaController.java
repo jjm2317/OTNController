@@ -38,17 +38,17 @@ public class HolaController {
     private SdnPmPortRepository sdnPmPortRepository;
 
     @Autowired
-    private HolaSdnLineNumSheetRepository holaSdnLineNumSheetRepository;
+    private HolaLineNumSheetRepository holaLineNumSheetRepository;
     @Autowired
-    private HolaSdnLinkMngRepository holaSdnLinkMngRepository;
+    private HolaLinkMngRepository holaLinkMngRepository;
     @Autowired
-    private HolaSdnTrunkUsageRepository holaSdnTrunkUsageRepository;
+    private HolaTrunkUsageRepository holaTrunkUsageRepository;
     @Autowired
-    private HolaSdnInventroyDetailRepository holaSdnInventroyDetailRepository;
+    private HolaInventroyDetailRepository holaInventroyDetailRepository;
     @Autowired
-    private HolaSdnOtnNodeUsageRepository holaSdnOtnNodeUsageRepository;
+    private HolaOtnNodeUsageRepository holaOtnNodeUsageRepository;
     @Autowired
-    private HolaSdnOtnMaterialRepository holaSdnOtnMaterialRepository;
+    private HolaOtnMaterialRepository holaOtnMaterialRepository;
 
     @GetMapping("/hola")
     String syncronizeHola() {
@@ -68,12 +68,12 @@ public class HolaController {
             //SdnAccessIf 조회
             List<SdnAccessIf> sdnAccessIfList = sdnAccessIfRepository.findAll();
 
-            HOLAManager manager = new HOLAManager(holaSdnLineNumSheetRepository,
-                    holaSdnLinkMngRepository,
-                    holaSdnTrunkUsageRepository,
-                    holaSdnInventroyDetailRepository,
-                    holaSdnOtnNodeUsageRepository,
-                    holaSdnOtnMaterialRepository,
+            HOLAManager manager = new HOLAManager(holaLineNumSheetRepository,
+                    holaLinkMngRepository,
+                    holaTrunkUsageRepository,
+                    holaInventroyDetailRepository,
+                    holaOtnNodeUsageRepository,
+                    holaOtnMaterialRepository,
                     sdnNodeList,
                     sdnConnectorList,
                     sdnLinkList,

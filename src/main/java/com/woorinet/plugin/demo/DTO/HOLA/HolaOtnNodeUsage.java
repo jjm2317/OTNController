@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Setter
 @Data
 @Entity
-@Table(name="hola_sdn_otn_node_usage")
-public class HolaSdnOtnNodeUsage {
+@Table(name="hola_otn_node_usage")
+public class HolaOtnNodeUsage {
     @Id
     @GeneratedValue
     int HOLA_SDN_OTN_NODE_USAGE;
@@ -23,10 +23,10 @@ public class HolaSdnOtnNodeUsage {
     String CITY;
     String MOUNTING_STATUS;
 
-    public HolaSdnOtnNodeUsage() {
+    public HolaOtnNodeUsage() {
     }
 
-    public HolaSdnOtnNodeUsage(String AREA, String CITY, String MOUNTING_STATUS) {
+    public HolaOtnNodeUsage(String AREA, String CITY, String MOUNTING_STATUS) {
         this.AREA = AREA;
         this.CITY = CITY;
         this.MOUNTING_STATUS = MOUNTING_STATUS;
