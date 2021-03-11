@@ -190,10 +190,10 @@ public class SdnController {
             manager.SDNSyncStart();
         } catch (Exception e) {
             e.printStackTrace();
-            return "convert 실패";
+            return "sdn synchronization fail";
         }
 
-        return "convert complete";
+        return "sdn synchronization success";
     }
 
 
