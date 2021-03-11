@@ -1,42 +1,26 @@
 package com.woorinet.plugin.demo;
 
-import com.google.gson.Gson;
-import com.woorinet.plugin.demo.DTO.SDN.*;
-import com.woorinet.plugin.demo.DTO.TL1.*;
-import com.woorinet.plugin.demo.Manager.HOLAManager;
-import com.woorinet.plugin.demo.Manager.QNETManager;
+import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventTca;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
-import com.woorinet.plugin.demo.Repository.HOLA.*;
-import com.woorinet.plugin.demo.Repository.SDN.*;
-import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-import io.swagger.annotations.ApiOperation;
+import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventTcaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.netty.http.client.HttpClient;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @SpringBootApplication
 public class DemoApplication {
 	@Autowired
 	private QNETMapper qnetMapper;
+
+	@Autowired
+	private static Tl1EventTcaRepository tl1EventTcaRepository;
 
 	public static void main(String[] args) {
 
@@ -62,7 +46,16 @@ public class DemoApplication {
 					bufferStr = charset.decode(byteBuffer).toString();
 					result += bufferStr;
 				}
-				if(!result.equals("")) System.out.println(result);
+				if(!result.equals("")) {
+					if(result.contains("TCA") && result.contains("EMS")) {
+						String[] fields = ConvertResponseForTCA(result);
+						Tl1EventTca tl1EventTca = new Tl1EventTca(fields);
+						tl1EventTcaRepository.save(tl1EventTca);
+					} else if (result.contains("REPT ALM")) {
+						System.out.println("test2");
+					}
+					System.out.println(result);
+				}
 
 			}
 		} catch (Exception e) {
@@ -70,7 +63,40 @@ public class DemoApplication {
 		}
 
 	}
+	private static String[] ConvertResponseForTCA(String data) throws Exception {
+		String[] convData = data.split("\n");
 
+		String[] result;
+
+		String TID = "";
+		String AID = "";
+		String UNIT = "";
+		String SIGNAL = "";
+		String TIME = "";
+		String PM_ELEMENT = "";
+		String DATETIME = "";
+		String EVENT_DATETIME = "";
+		for(String line: convData) {
+			line = line.trim();
+			if(line.startsWith("EMS")) {
+				TID = line.split(" ")[0];
+				EVENT_DATETIME = line.split(" ")[2];
+			} else if (line.contains("/*") && line.contains("*/")) {
+				line = line.replace("/*", "");
+				line = line.replace("*/", "");
+
+				String[] columns = line.split(",");
+				AID = columns[0];
+				UNIT = columns[1];
+				SIGNAL = columns[2];
+				TIME = columns[3];
+				PM_ELEMENT = columns[4];
+				DATETIME = columns[5];
+			}
+		}
+		result = new String[]{TID, AID, UNIT, SIGNAL, TIME, PM_ELEMENT, DATETIME, EVENT_DATETIME};
+		return result;
+	}
 	/*
 	@RequestMapping("/synchronization_anapi")
 	String synchronizationQNAPI() {
