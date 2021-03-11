@@ -1,14 +1,15 @@
 package com.woorinet.plugin.demo.DTO.HOLA;
 
 
+import com.google.gson.Gson;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 @Setter
 @Getter
@@ -20,6 +21,7 @@ public class HolaLinkMng {
     @GeneratedValue
     int HOLA_SDN_LINK_MNG_ID;
     String VENDOR;
+    @Column(length = 1000)
     String LINK;
     String ADMIN_WEIGHT;
     String MAXIMUM_USAGE_RATIO;
@@ -68,7 +70,18 @@ public class HolaLinkMng {
                 '}';
     }
 
-    class link {
+
+    public void setLink(String[] firstLinkFields, String[] secondLinkFields) {
+        Link firstLink = new Link(firstLinkFields);
+        Link secondLink = new Link(secondLinkFields);
+        String[] result = {(new Gson()).toJson(firstLink), (new Gson()).toJson(secondLink)};
+
+        System.out.println(result);
+        System.out.println("asdf");
+        this.LINK = Arrays.toString(result);
+    }
+
+    class Link {
         String SOURCE_NODE;
         String SOURCE_SHELF_ID;
         String SOURCE_SLOT_ID;
@@ -79,10 +92,21 @@ public class HolaLinkMng {
         String DESTIMATION_PORT_ID;
 
 
-        public link() {
+        public Link() {
         }
 
-        public link(String SOURCE_NODE, String SOURCE_SHELF_ID, String SOURCE_SLOT_ID, String SOURCE_PORT_ID, String DESTINATION_NODE, String DESTINATION_SHELF_ID, String DESTINATION_SLOT_ID, String DESTIMATION_PORT_ID) {
+        public Link(String[] fields) {
+            this.SOURCE_NODE = fields[0];
+            this.SOURCE_SHELF_ID = fields[1];
+            this.SOURCE_SLOT_ID = fields[2];
+            this.SOURCE_PORT_ID = fields[3];
+            this.DESTINATION_NODE = fields[4];
+            this.DESTINATION_SHELF_ID = fields[5];
+            this.DESTINATION_SLOT_ID = fields[6];
+            this.DESTIMATION_PORT_ID = fields[7];
+        }
+
+        public Link(String SOURCE_NODE, String SOURCE_SHELF_ID, String SOURCE_SLOT_ID, String SOURCE_PORT_ID, String DESTINATION_NODE, String DESTINATION_SHELF_ID, String DESTINATION_SLOT_ID, String DESTIMATION_PORT_ID) {
             this.SOURCE_NODE = SOURCE_NODE;
             this.SOURCE_SHELF_ID = SOURCE_SHELF_ID;
             this.SOURCE_SLOT_ID = SOURCE_SLOT_ID;

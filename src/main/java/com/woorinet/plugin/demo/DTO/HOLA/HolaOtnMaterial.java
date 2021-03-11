@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class HolaOtnMaterial {
     @Id
     @GeneratedValue
-    int HOLA_SDN_OTN_MATERIAL;
+    int HOLA_SDN_OTN_MATERIAL_ID;
     String VENDOR;
     String CELL;
     String NODE;
@@ -40,8 +40,8 @@ public class HolaOtnMaterial {
 
     @Override
     public String toString() {
-        return "HolaSdnOtnMaterial{" +
-                "HOLA_SDN_OTN_MATERIAL=" + HOLA_SDN_OTN_MATERIAL +
+        return "HolaOtnMaterial{" +
+                "HOLA_SDN_OTN_MATERIAL_ID=" + HOLA_SDN_OTN_MATERIAL_ID +
                 ", VENDOR='" + VENDOR + '\'' +
                 ", CELL='" + CELL + '\'' +
                 ", NODE='" + NODE + '\'' +
