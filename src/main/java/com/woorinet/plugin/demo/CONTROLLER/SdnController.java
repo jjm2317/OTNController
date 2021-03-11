@@ -271,9 +271,9 @@ public class SdnController {
     @ApiOperation(value = "get path", notes = "경로 조회")
     @GetMapping(value = "/path")
     @ResponseBody
-    public ResponseEntity selectPath(@RequestParam(required = false) int id, @RequestParam(required = false) String service_id) {
+    public ResponseEntity selectPath(@RequestParam(required = false, defaultValue = "0") int id , @RequestParam(required = false) String service_id) {
         if (id != 0) return ResponseEntity.ok(sdnPathRepository.findSdnPathById(id));
-        else return ResponseEntity.ok(sdnPathRepository.findSdnPathByServiceId(service_id));
+        return ResponseEntity.ok(sdnPathRepository.findSdnPathByServiceId(service_id));
     }
 
     @ApiOperation(value = "get constraint list", notes = "전체 속성 조회")
@@ -284,9 +284,9 @@ public class SdnController {
     @ApiOperation(value = "get constraint", notes = "속성 조회")
     @GetMapping(value = "/constraint")
     @ResponseBody
-    public ResponseEntity selectConstraint(@RequestParam(required = false) int id, @RequestParam(required = false) String service_id) {
+    public ResponseEntity selectConstraint(@RequestParam(required = false, defaultValue = "0") int id, @RequestParam(required = false) String service_id) {
         if(id != 0) return ResponseEntity.ok(sdnConstraintRepository.findSdnConstraintById(id));
-        else return ResponseEntity.ok(sdnConstraintRepository.findSdnConstraintByServiceId(service_id));
+        return ResponseEntity.ok(sdnConstraintRepository.findSdnConstraintByServiceId(service_id));
     }
 
     @ApiOperation(value = "get accessif list", notes = "전체 access interface 조회")
