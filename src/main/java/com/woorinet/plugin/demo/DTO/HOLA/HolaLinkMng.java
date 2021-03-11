@@ -67,4 +67,44 @@ public class HolaLinkMng {
                 ", REMARKS='" + REMARKS + '\'' +
                 '}';
     }
+
+    class link {
+        String SOURCE_NODE;
+        String SOURCE_SHELF_ID;
+        String SOURCE_SLOT_ID;
+        String SOURCE_PORT_ID;
+        String DESTINATION_NODE;
+        String DESTINATION_SHELF_ID;
+        String DESTINATION_SLOT_ID;
+        String DESTIMATION_PORT_ID;
+
+
+        public link() {
+        }
+
+        public link(String SOURCE_NODE, String SOURCE_SHELF_ID, String SOURCE_SLOT_ID, String SOURCE_PORT_ID, String DESTINATION_NODE, String DESTINATION_SHELF_ID, String DESTINATION_SLOT_ID, String DESTIMATION_PORT_ID) {
+            this.SOURCE_NODE = SOURCE_NODE;
+            this.SOURCE_SHELF_ID = SOURCE_SHELF_ID;
+            this.SOURCE_SLOT_ID = SOURCE_SLOT_ID;
+            this.SOURCE_PORT_ID = SOURCE_PORT_ID;
+            this.DESTINATION_NODE = DESTINATION_NODE;
+            this.DESTINATION_SHELF_ID = DESTINATION_SHELF_ID;
+            this.DESTINATION_SLOT_ID = DESTINATION_SLOT_ID;
+            this.DESTIMATION_PORT_ID = DESTIMATION_PORT_ID;
+        }
+
+        @Override
+        public String toString() {
+            return "{" +
+                    "SOURCE_NODE='" + SOURCE_NODE + '\'' +
+                    ", SOURCE_SHELF_ID='" + SOURCE_SHELF_ID + '\'' +
+                    ", SOURCE_SLOT_ID='" + SOURCE_SLOT_ID + '\'' +
+                    ", SOURCE_PORT_ID='" + SOURCE_PORT_ID + '\'' +
+                    ", DESTINATION_NODE='" + DESTINATION_NODE + '\'' +
+                    ", DESTINATION_SHELF_ID='" + DESTINATION_SHELF_ID + '\'' +
+                    ", DESTINATION_SLOT_ID='" + DESTINATION_SLOT_ID + '\'' +
+                    ", DESTIMATION_PORT_ID='" + DESTIMATION_PORT_ID + '\'' +
+                    '}';
+        }
+    }
 }
