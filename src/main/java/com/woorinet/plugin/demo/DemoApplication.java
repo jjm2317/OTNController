@@ -4,13 +4,12 @@ import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.HOLA.HOLAManager;
-import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Manager.QNETManager;
+import com.woorinet.plugin.demo.Manager.TL1Manager;
+import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
-import com.woorinet.plugin.demo.Manager.SDNManager;
-import com.woorinet.plugin.demo.Manager.TL1Manager;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
@@ -230,84 +229,6 @@ public class DemoApplication {
 		}
 
 		return "sync hola";
-	}
-
-	@RequestMapping("/convertTL1")
-	String convertTL1() {
-		try {
-			// Node 조회
-			List<Tl1Node> tl1NodeList = tl1NodeRepository.findAll();
-			// SYSTEM_INFO 조회
-			List<Tl1SystemInfo> tl1SystemInfoList = tl1SystemInfoRepository.findAll();
-			// ODU_NODE_CONNECTOR 조회
-			List<Tl1OduNodeConnector> tl1OduNodeConnectorList = tl1OduNodeConnectorRepository.findAll();
-			// ODU 조회
-			List<Tl1Odu> tl1OduList = tl1OduRepository.findAll();
-			// ODU_MPLS_IF 조회
-			List<Tl1OduMplsIf> tl1OduMplsIfList = tl1OduMplsIfRepository.findAll();
-			// OPTIC_POWER 조회
-			List<Tl1OpticPower> tl1OpticPowerList = tl1OpticPowerRepository.findAll();
-			// SERVICE 조회
-			List<Tl1Service> tl1ServiceList = tl1ServiceRepository.findAll();
-			// ACCESS_IF 조회
-			List<Tl1AccessIf> tl1AccessIfList = tl1AccessIfRepository.findAll();
-			// SERVICE_EXT 조회
-			List<Tl1ServiceExt> tl1ServiceExtList = tl1ServiceExtRepository.findAll();
-			// MPLS_IF 조회
-			List<Tl1MplsIf> tl1MplsIfList = tl1MplsIfRepository.findAll();
-			// INVENTORY 조회
-			List<Tl1Inventory> tl1InventorieList = tl1InventoryRepository.findAll();
-			// CM_PORT 조회
-			List<Tl1CmPort> tl1CmPortList = tl1CmPortRepository.findAll();
-			// MODULE_INFO 조회
-			List<Tl1ModuleInfo> tl1ModuleInfoList = tl1ModuleInfoRepository.findAll();
-			// BYPASS_INFO 조회
-			List<Tl1BypassInfo> tl1BypassInfoList = tl1BypassInfoRepository.findAll();
-			// CM_PROGRAM_INFO 조회
-			List<Tl1CmProgramInfo> tl1CmProgramInfoList = tl1CmProgramInfoRepository.findAll();
-			// SESS_STATE 조회
-			List<Tl1SessState> tl1SessStateList = tl1SessStateRepository.findAll();
-			// KEY_STATE 조회
-			List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
-			// PM_PORT 조회
-			List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
-			SDNManager manager = new SDNManager(
-					sdnNodeRepository,
-					sdnConnectorRepository,
-					sdnLinkRepository,
-					sdnServiceRepository,
-					sdnTunnelRepository,
-					sdnPathRepository,
-					sdnConstraintRepository,
-					sdnAccessIfRepository,
-					sdnCryptoModuleRepository,
-					sdnCryptoSessionRepository,
-					sdnPmPortRepository,
-					tl1NodeList,
-					tl1SystemInfoList,
-					tl1OduNodeConnectorList,
-					tl1OpticPowerList,
-					tl1OduList,
-					tl1OduMplsIfList,
-					tl1ServiceList,
-					tl1AccessIfList,
-					tl1ServiceExtList,
-					tl1MplsIfList,
-					tl1InventorieList,
-					tl1CmPortList,
-					tl1ModuleInfoList,
-					tl1BypassInfoList,
-					tl1CmProgramInfoList,
-					tl1SessStateList,
-					tl1KeyStateList,
-					tl1PmPortList);
-			// Sync 시작
-			manager.SDNSyncStart();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return "convert complete";
 	}
 
 	@RequestMapping("/synchronization")
