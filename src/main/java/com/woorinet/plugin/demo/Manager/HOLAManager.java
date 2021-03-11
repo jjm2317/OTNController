@@ -80,6 +80,19 @@ public class HOLAManager {
         Stream<HolaLineNumSheet> holaSdnLineNumSheetStream = sdnServiceList
             .stream()
             .map(sdnService -> {
+
+                Optional<SdnConnector> srcSdnConnector = sdnConnectorList.stream().
+                        filter(connector -> connector.getConnect_id().equals(sdnService.getSrc_connector_id()))
+                        .findAny();
+
+                Optional<SdnConnector> dstSdnConnector = sdnConnectorList.stream().
+                        filter(connector -> connector.getConnect_id().equals(sdnService.getDst_connector_id()))
+                        .findAny();
+
+                Optional<SdnLink> sdnLink = sdnLinkList.stream().
+                        filter(link -> link.getLink_id().equals(sdnService.getSrc_connector_id() + ":" + sdnService.getDst_connector_id()))
+                        .findAny();
+
                 HolaLineNumSheet holaLineNumSheet = new HolaLineNumSheet(
                         "", // group
                         "Single", //domain_type
@@ -115,6 +128,74 @@ public class HOLAManager {
                         "", //main_path
                         "" //bypass_path
                 );
+                String[] endPointClientStartFields = {"", "", "", "", "", "", "", "", "", ""};
+
+                String[] transmitClientStartFields = {
+                        "OTN",
+                        "",
+                        "Woorinet",
+                        "",
+                        sdnService.getSrc_ne_name(),
+                        srcSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        ""
+                };
+
+                String[] linkStartFields = {
+                        "OTN",
+                        "",
+                        "Woorinet",
+                        "",
+                        sdnLink.map(link -> link.getSrc_ne_name()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        ""
+                };
+
+                String[] roadmMuxStartFields = {"", "", "", "", "", "", "", "", "", ""};
+
+                String[] roadmMuxEndFields = {"", "", "", "", "", "", "", "", "", ""};
+
+                String[] linkEndFields = {
+                        "OTN",
+                        "",
+                        "Woorinet",
+                        "",
+                        sdnLink.map(link -> link.getDst_ne_name()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        ""
+                };
+
+                String[] transmitClientEndFields = {
+                        "OTN",
+                        "",
+                        "Woorinet",
+                        "",
+                        sdnService.getDst_ne_name(),
+                        dstSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        ""
+                };
+
+                String[] endPointClientEndFields = {"", "", "", "","", "", "", "", "", ""};
+
+                holaLineNumSheet.setENDPOINT_CLIENT_START(holaLineNumSheet.getNodeRef(endPointClientStartFields));
+                holaLineNumSheet.setTRANSMIT_CLIENT_START(holaLineNumSheet.getNodeRef(transmitClientStartFields));
+                holaLineNumSheet.setLINK_START(holaLineNumSheet.getNodeRef(linkStartFields));
+                holaLineNumSheet.setROADM_MUX_START(holaLineNumSheet.getNodeRef(roadmMuxStartFields));
+                holaLineNumSheet.setROADM_MUX_END(holaLineNumSheet.getNodeRef(roadmMuxEndFields));
+                holaLineNumSheet.setLINK_END(holaLineNumSheet.getNodeRef(linkEndFields));
+                holaLineNumSheet.setTRANSMIT_CLIENT_END(holaLineNumSheet.getNodeRef(transmitClientEndFields));
+                holaLineNumSheet.setENDPOINT_CLIENT_END(holaLineNumSheet.getNodeRef(endPointClientEndFields));
 
                 return holaLineNumSheet;
             });
