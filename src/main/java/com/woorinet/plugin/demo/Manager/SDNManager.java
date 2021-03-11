@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.SDN;
+package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.Tl1AccessIf;

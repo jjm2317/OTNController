@@ -1,20 +1,13 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
 
-import com.woorinet.plugin.demo.Repository.SDN.SdnConnectorRepository;
-
-import com.woorinet.plugin.demo.Repository.SDN.SdnLinkRepository;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping(value = "/sdn")
 public class SdnController {
 

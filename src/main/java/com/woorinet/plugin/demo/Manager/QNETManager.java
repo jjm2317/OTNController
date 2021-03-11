@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.QNET;
+package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.QNET.*;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;

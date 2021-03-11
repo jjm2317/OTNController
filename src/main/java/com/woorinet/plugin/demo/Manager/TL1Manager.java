@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.Tl1;
+package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
