@@ -31,7 +31,7 @@ public class HolaController {
     private HolaOtnMaterialRepository holaOtnMaterialRepository;
 
     @ApiOperation(value = "get Line Number Sheet", notes = "전체 선번장 조회")
-    @GetMapping(value = "/lineNumSheet")
+    @GetMapping(value = "/lineNumSheet/list")
     @ResponseBody
     public ResponseEntity selectLineNumSheetList() {
         if(holaLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -39,7 +39,7 @@ public class HolaController {
     }
 
     @ApiOperation(value = "get link mng", notes = "전체 링크관리 조회")
-    @GetMapping(value = "/linkMng")
+    @GetMapping(value = "/linkMng/list")
     @ResponseBody
     public ResponseEntity selectLinkMngList() {
         if(holaLinkMngRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -47,7 +47,7 @@ public class HolaController {
     }
 
     @ApiOperation(value = "get trunk usage", notes = "전체 trunk 사용률 조회")
-    @GetMapping(value = "/trunkUsage")
+    @GetMapping(value = "/trunkUsage/list")
     @ResponseBody
     public ResponseEntity selectTrunkUsageList() {
         if(holaTrunkUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -55,7 +55,7 @@ public class HolaController {
     }
 
     @ApiOperation(value = "get inventory detail", notes = "전체 상새 inventory 현황 조회")
-    @GetMapping(value = "/inventoryDetail")
+    @GetMapping(value = "/inventoryDetail/list")
     @ResponseBody
     public ResponseEntity selectInventoryDetail() {
         if(holaInventroyDetailRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -63,7 +63,7 @@ public class HolaController {
     }
 
     @ApiOperation(value = "get otn node usage", notes = "전체 otn node 사용현황 조회")
-    @GetMapping(value = "/otnNodeUsage")
+    @GetMapping(value = "/otnNodeUsage/list")
     @ResponseBody
     public ResponseEntity selectOtnNodeUsage() {
         if(holaOtnNodeUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -71,7 +71,7 @@ public class HolaController {
     }
 
     @ApiOperation(value = "get otn material", notes = "전체 otn 물자현황 조회")
-    @GetMapping(value = "/otnMaterial")
+    @GetMapping(value = "/otnMaterial/list")
     @ResponseBody
     public ResponseEntity selectOtnMaterial() {
         if(holaOtnMaterialRepository.findAll() == null) return ResponseEntity.notFound().build();

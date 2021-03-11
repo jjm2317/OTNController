@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.DTO.HOLA;
 
 
+import com.google.gson.Gson;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -131,4 +132,43 @@ public class HolaLineNumSheet {
                 ", BYPASS_PATH='" + BYPASS_PATH + '\'' +
                 '}';
     }
+
+    public String getNodeRef(String[] fields) {
+        NodeRef nodeRef = new NodeRef(fields);
+
+        return (new Gson()).toJson(nodeRef);
+    }
+
+    class NodeRef {
+        String SYSTEM;
+        String MANAGEMENT_TEAM;
+        String VENDOR;
+        String CELL;
+        String NODE_NAME;
+        String UNIT_TYPE;
+        String SHELF_ID;
+        String SLOT_ID;
+        String PORT_ID;
+        String FDF;
+
+        public NodeRef() {
+        }
+
+        public NodeRef(String[] fields) {
+            this.SYSTEM = fields[0];
+            this.MANAGEMENT_TEAM = fields[1];
+            this.VENDOR = fields[2];
+            this.CELL = fields[3];
+            this.NODE_NAME = fields[4];
+            this.UNIT_TYPE = fields[5];
+            this.SHELF_ID = fields[6];
+            this.SLOT_ID = fields[7];
+            this.PORT_ID = fields[8];
+            this.FDF = fields[9];
+        }
+
+
+    }
+
+
 }
