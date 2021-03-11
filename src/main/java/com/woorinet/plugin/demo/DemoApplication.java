@@ -1,7 +1,9 @@
 package com.woorinet.plugin.demo;
 
+import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventAlm;
 import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventTca;
 import com.woorinet.plugin.demo.Mapper.QNETMapper;
+import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventAlmRepository;
 import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventTcaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -21,6 +23,9 @@ public class DemoApplication {
 
 	@Autowired
 	private static Tl1EventTcaRepository tl1EventTcaRepository;
+
+	@Autowired
+	private static Tl1EventAlmRepository tl1EventAlmRepository;
 
 	public static void main(String[] args) {
 
@@ -52,7 +57,9 @@ public class DemoApplication {
 						Tl1EventTca tl1EventTca = new Tl1EventTca(fields);
 						tl1EventTcaRepository.save(tl1EventTca);
 					} else if (result.contains("REPT ALM")) {
-						System.out.println("test2");
+						String[] fields = ConvertResponseForAlm(result);
+						Tl1EventAlm tl1EventAlm = new Tl1EventAlm(fields);
+						tl1EventAlmRepository.save(tl1EventAlm);
 					}
 					System.out.println(result);
 				}
@@ -62,6 +69,47 @@ public class DemoApplication {
 
 		}
 
+	}
+	private static String[] ConvertResponseForAlm(String data) throws Exception {
+		String[] convData = data.split("\n");
+		String[] result;
+
+		String TID = "";
+		String AID = "";
+		String NAME = "";
+		String UNIT = "";
+		String REASON = "";
+		String SEV = "";
+		String SA = "";
+		String DATETIME = "";
+		String EVENT_DATETIME = "";
+
+		for(String line: convData) {
+			line = line.trim();
+
+			if (line.startsWith("EMS")) {
+				TID = line.split(" ")[0];
+				EVENT_DATETIME = line.split(" ")[2];
+			} else if (line.contains("/*") && line.contains("*/")) {
+				line = line.replace("/*", "");
+				line = line.replace("*/", "");
+
+				String[] columns = line.split(",");
+				AID = columns[0];
+				NAME = columns[1];
+				UNIT = columns[2];
+				REASON = columns[3];
+				SEV = columns[4];
+				SA = columns[5];
+				DATETIME = columns[6];
+			}
+
+		}
+
+
+		result = new String[]{TID,AID,NAME,UNIT,REASON,SEV,SA,DATETIME,EVENT_DATETIME};
+
+		return result;
 	}
 	private static String[] ConvertResponseForTCA(String data) throws Exception {
 		String[] convData = data.split("\n");
