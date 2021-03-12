@@ -8,14 +8,12 @@ import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventTcaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
-@RestController
 @SpringBootApplication
 public class DemoApplication {
 	@Autowired
