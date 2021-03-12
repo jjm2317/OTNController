@@ -14,6 +14,18 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
+/*
+전체 프로그램 설계에 대한 설명
+
+View Controller: view(웹페이지)를 담당하는 controller
+Tl1 Controller: woorinet(우리넷)의 TL1 api를 통해 받은 데이터 값을 관리하는 controller
+Sdn Controller: TL1데이터를 모비젠 DB 스키마에 맞춘 데이터를 관리하는 controller
+Hola Controller: Sdn(모비젠 DB 스키마)를 Hola 라는 SKT 사이트의 형태로 맞춘 데이터를 관리하는 controller
+
+Tl1 -> Sdn -> Hola 순으로 되어 있다.( TL1 데이터를 Sdn데이터로 변환, Sdn 데이터를 Hola데이터로 가공 해서 사용 하고 있다.)
+
+ */
+
 @SpringBootApplication
 public class DemoApplication {
 	@Autowired
@@ -28,6 +40,9 @@ public class DemoApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
+		/*
+		스프링 부트가 실행되고 있는 동안에는 계속해서 Event 데이터를 받아서 DB에 저장 하고 있다.
+		*/
 		try {
 			String ip = "222.117.54.175";
 			int port = 19012;
