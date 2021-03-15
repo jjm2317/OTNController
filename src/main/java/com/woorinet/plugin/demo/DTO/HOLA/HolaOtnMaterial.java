@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.DTO.HOLA;
 
 
+import com.google.gson.Gson;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,5 +50,31 @@ public class HolaOtnMaterial {
                 ", SHELF='" + SHELF + '\'' +
                 ", UNIT_LIST='" + UNIT_LIST + '\'' +
                 '}';
+    }
+
+    public String getUnit( String[] fields) {
+       Unit unit = new Unit(fields);
+       return (new Gson()).toJson(unit);
+    }
+
+    class Unit {
+        String UNIT_TYPE;
+        String UNIT_COUNT;
+        String ALL_PORT_COUNT;
+        String USAGE_PORT_COUNT;
+        String USAGE_RATIO;
+
+        public Unit() {
+        }
+
+        public Unit(String[] fields) {
+            this.UNIT_TYPE = fields[0];
+            this.UNIT_COUNT = fields[1];
+            this.ALL_PORT_COUNT = fields[2];
+            this.USAGE_PORT_COUNT = fields[3];
+            this.USAGE_RATIO = fields[4];
+        }
+
+
     }
 }

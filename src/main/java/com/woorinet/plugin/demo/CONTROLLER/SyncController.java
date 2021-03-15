@@ -295,6 +295,7 @@ public class SyncController {
                     holaInventroyDetailRepository,
                     holaOtnNodeUsageRepository,
                     holaOtnMaterialRepository,
+                    sdnConnectorRepository,
                     sdnNodeList,
                     sdnConnectorList,
                     sdnLinkList,

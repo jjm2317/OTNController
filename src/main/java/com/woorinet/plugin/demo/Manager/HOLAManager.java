@@ -3,6 +3,7 @@ package com.woorinet.plugin.demo.Manager;
 import com.woorinet.plugin.demo.DTO.HOLA.*;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
+import com.woorinet.plugin.demo.Repository.SDN.SdnConnectorRepository;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,8 @@ public class HOLAManager {
     HolaInventroyDetailRepository holaInventroyDetailRepository;
     HolaOtnNodeUsageRepository holaOtnNodeUsageRepository;
     HolaOtnMaterialRepository holaOtnMaterialRepository;
+
+    SdnConnectorRepository sdnConnectorRepository;
 
     List<SdnNode> sdnNodeList;
     List<SdnConnector> sdnConnectorList;
@@ -32,6 +35,7 @@ public class HOLAManager {
                        HolaInventroyDetailRepository holaInventroyDetailRepository,
                        HolaOtnNodeUsageRepository holaOtnNodeUsageRepository,
                        HolaOtnMaterialRepository holaOtnMaterialRepository,
+                       SdnConnectorRepository sdnConnectorRepository,
                        List<SdnNode> sdnNodeList,
                        List<SdnConnector> sdnConnectorList,
                        List<SdnLink> sdnLinkList,
@@ -46,6 +50,8 @@ public class HOLAManager {
         this.holaInventroyDetailRepository = holaInventroyDetailRepository;
         this.holaOtnNodeUsageRepository = holaOtnNodeUsageRepository;
         this.holaOtnMaterialRepository = holaOtnMaterialRepository;
+
+        this.sdnConnectorRepository = sdnConnectorRepository;
 
         this.sdnNodeList = sdnNodeList;
         this.sdnConnectorList = sdnConnectorList;
@@ -319,24 +325,69 @@ public class HOLAManager {
         Stream<HolaOtnMaterial> holaSdnOtnMaterialStream = sdnNodeList
             .stream()
             .map(sdnNode -> {
-
-                SdnConnector sdnConnector = sdnConnectorList
+                //sdnNode와 매치되는 sdnConnector들의 stream
+                Stream<SdnConnector> sdnConnectorStream = sdnConnectorList
                         .stream()
-                        .filter(connector -> connector.getNe_name().equals(sdnNode.getNe_name()))
-                        .findAny().get();
-
+                        .filter(connector -> connector.getNe_name().equals(sdnNode.getNe_name()));
+                /* sdnNode 별 Otn 물자현황 데이터 생성, unitList필드는 아래에서 생성*/
                 HolaOtnMaterial holaOtnMaterial = new HolaOtnMaterial(
                         sdnNode.getVendor(), //vendor
                         "", //cell
                         sdnNode.getNe_name(), //node
                         sdnNode.getIp_addr(), //ip
-                        sdnConnector.getShelf_id(), //shelf_id
+                        sdnConnectorStream.findAny().map(connector -> connector.getShelf_id()).orElse(""), //shelf_id
                         "" //unit_list
                 );
+
+                /* HolaOtnMaterial 인스턴스의 unitList 필드값 생성 */
+                // sdnConnector에 있는 unit_type 종류 조회 by Jpa query
+                List<String> unitList = sdnConnectorRepository.findAllUnitTypesNative();
+
+                // unitListValue: holaOtnMaterial의 unitList 필드값을 담을 변수
+                String unitListValue = "";
+
+                unitList.stream().forEach(unitType -> {
+//                    int unitCount = Long.valueOf(sdnConnectorStream.
+//                            filter( connector -> connector.getUnit_type().equals(unitType))
+//                            .count()).intValue();
+//                    int allPortCount = unitCount * getPortCountOfUnitType(unitType);
+//                    int usagePortCount sdnConnectorRepository.
+//
+//                    String[] UnitFields = {
+//                            unitType, //unit_type
+//                            String.valueOf(unitCount), //unit_count
+//                            String.valueOf(allPortCount), //all_port_count
+//
+//
+//
+//
+//
+//                    };
+                });
+
+
+//                holaOtnMaterial.setUNIT_LIST();
 
                 return holaOtnMaterial;
             });
         holaSdnOtnMaterialStream.forEach(holaOtnMaterialRepository::save);
+    }
+
+    private int getPortCountOfUnitType (String unitType) {
+        switch (unitType) {
+            case "O208CLU":
+                return 8;
+            case "OC201SU":
+                return 1;
+            case "O210SU":
+                return 10;
+            case "O220SU":
+                return 20;
+            case "O210U":
+                return 10;
+            default:
+                return 0;
+        }
     }
 
 
