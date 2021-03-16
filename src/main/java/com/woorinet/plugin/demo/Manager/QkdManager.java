@@ -1,6 +1,5 @@
 package com.woorinet.plugin.demo.Manager;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.QKD.QkdLink;
 import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
@@ -94,7 +93,6 @@ public class QkdManager {
             Map<String, Object> kemsnode = (Map) kemsNodeListIterator.next();
             Gson gson = new Gson();
 
-            ObjectMapper objectMapper = new ObjectMapper();
             QkdNode qkdNode = new QkdNode(
                     kemsnode.get("id") == null ? "" : kemsnode.get("id").toString(),
                     kemsnode.get("uid") == null ? "" :kemsnode.get("uid").toString(),
