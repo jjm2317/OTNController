@@ -82,6 +82,8 @@ public class QkdManager {
     public void QkdSyncNode (List qkdNodeList) throws Exception {
         if(qkdNodeList == null) return;
 
+        qkdNodeRepository.deleteAll();
+
         Iterator qkdNodeListIterator = qkdNodeList.iterator();
         while(qkdNodeListIterator.hasNext()) {
             Map<String, Object> node = (Map) qkdNodeListIterator.next();
