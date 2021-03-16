@@ -5,17 +5,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @Setter
 @Getter
-@Table
-
+@Table(name="qkd_service")
 public class QkdService {
     @Id
     @GeneratedValue
@@ -23,15 +19,21 @@ public class QkdService {
     String ID;
     String UID;
     String NAME;
+    @Lob
     String OPER_MODE;
+    @Lob
     String SOURCE;
+    @Lob
     String DEST;
+    @Lob
     String PRESHARED_KEY;
+    @Lob
+    String QKEY_STORE;
 
     public QkdService() {
     }
 
-    public QkdService(String ID, String UID, String NAME, String OPER_MODE, String SOURCE, String DEST, String PRESHARED_KEY) {
+    public QkdService(String ID, String UID, String NAME, String OPER_MODE, String SOURCE, String DEST, String PRESHARED_KEY, String QKEY_STORE) {
         this.ID = ID;
         this.UID = UID;
         this.NAME = NAME;
@@ -39,6 +41,7 @@ public class QkdService {
         this.SOURCE = SOURCE;
         this.DEST = DEST;
         this.PRESHARED_KEY = PRESHARED_KEY;
+        this.QKEY_STORE = QKEY_STORE;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class QkdService {
                 ", SOURCE='" + SOURCE + '\'' +
                 ", DEST='" + DEST + '\'' +
                 ", PRESHARED_KEY='" + PRESHARED_KEY + '\'' +
+                ", QKEY_STORE='" + QKEY_STORE + '\'' +
                 '}';
     }
 }

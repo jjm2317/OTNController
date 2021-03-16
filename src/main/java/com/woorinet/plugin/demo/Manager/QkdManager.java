@@ -1,7 +1,9 @@
 package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
+import com.woorinet.plugin.demo.DTO.QKD.QkdService;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
+import com.woorinet.plugin.demo.Repository.QKD.QkdServiceRepository;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
@@ -20,13 +22,14 @@ public class QkdManager {
     List<QkdNode> qkdNodeList;
 
     QkdNodeRepository qkdNodeRepository;
+    QkdServiceRepository qkdServiceRepository;
 
 
-    public QkdManager(QkdNodeRepository qkdNodeRepository) throws Exception {
+    public QkdManager(QkdNodeRepository qkdNodeRepository, QkdServiceRepository qkdServiceRepository) throws Exception {
         this.qkdNodeList = new ArrayList<>();
 
         this.qkdNodeRepository = qkdNodeRepository;
-
+        this.qkdServiceRepository = qkdServiceRepository;
 
     }
 
@@ -63,11 +66,9 @@ public class QkdManager {
                 .map(map -> (Map) map.get("configuration"))
                 .map(map -> {
                     try {
-                        QkdSyncNode((List) map.get("nodes"));
-                        //qnetManager.QNETSyncKMSNodeLinks((List) map.get("nodeLinks"),qnetMapper);
-                        //qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"),qnetMapper);
-                        //qnetManager.QNETSyncKMSProviderLinks((List) map.get("providerLinks"), qnetMapper);
-                        //qnetManager.QNETSyncKMSPaths((List) map.get("paths"),qnetMapper);
+                        QkdSyncNodeList((List) map.get("nodes"));
+                        QkdSyncServiceList((List) map.get("consumerLinks"));
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -79,41 +80,59 @@ public class QkdManager {
 
     }
 
-    public void QkdSyncNode (List qkdNodeList) throws Exception {
-        if(qkdNodeList == null) return;
+    private void QkdSyncNodeList (List kemsNodeList) throws Exception {
+        if(kemsNodeList == null) return;
 
         qkdNodeRepository.deleteAll();
 
-        Iterator qkdNodeListIterator = qkdNodeList.iterator();
-        while(qkdNodeListIterator.hasNext()) {
-            Map<String, Object> node = (Map) qkdNodeListIterator.next();
+        Iterator kemsNodeListIterator = kemsNodeList.iterator();
+        while(kemsNodeListIterator.hasNext()) {
+            Map<String, Object> kemsnode = (Map) kemsNodeListIterator.next();
 
             QkdNode qkdNode = new QkdNode(
-                    node.get("id") == null ? "" : node.get("id").toString(),
-                    node.get("uid") == null ? "" :node.get("uid").toString(),
-                    node.get("name") == null ? "" :node.get("name").toString(),
-                    node.get("enabled") == null ? "" :node.get("enabled").toString(),
-                    node.get("description") == null ? "" :node.get("description").toString(),
-                    node.get("groupId") == null ? "" :node.get("groupId").toString(),
-                    node.get("group") == null ? "" :node.get("group").toString(),
-                    node.get("uniqueId") == null ? "" :node.get("uniqueId").toString(),
-                    node.get("qncWebApiUrl") == null ? "" :node.get("qncWebApiUrl").toString(),
-                    node.get("qncWebApiAuth") == null ? "" :node.get("qncWebApiAuth").toString(),
-                    node.get("cert") == null ? "" :node.get("cert").toString(),
-                    node.get("kems-cert") == null ? "" :node.get("kems-cert").toString(),
-                    node.get("network") == null ? "" :node.get("network").toString(),
-                    node.get("consumers") == null ? "" :node.get("consumers").toString(),
-                    node.get("providers") == null ? "" :node.get("providers").toString(),
-                    node.get("locX") == null ? "" :node.get("locX").toString(),
-                    node.get("locY") == null ? "" :node.get("locY").toString()
+                    kemsnode.get("id") == null ? "" : kemsnode.get("id").toString(),
+                    kemsnode.get("uid") == null ? "" :kemsnode.get("uid").toString(),
+                    kemsnode.get("name") == null ? "" :kemsnode.get("name").toString(),
+                    kemsnode.get("enabled") == null ? "" :kemsnode.get("enabled").toString(),
+                    kemsnode.get("description") == null ? "" :kemsnode.get("description").toString(),
+                    kemsnode.get("groupId") == null ? "" :kemsnode.get("groupId").toString(),
+                    kemsnode.get("group") == null ? "" :kemsnode.get("group").toString(),
+                    kemsnode.get("uniqueId") == null ? "" :kemsnode.get("uniqueId").toString(),
+                    kemsnode.get("qncWebApiUrl") == null ? "" :kemsnode.get("qncWebApiUrl").toString(),
+                    kemsnode.get("qncWebApiAuth") == null ? "" :kemsnode.get("qncWebApiAuth").toString(),
+                    kemsnode.get("cert") == null ? "" :kemsnode.get("cert").toString(),
+                    kemsnode.get("kems-cert") == null ? "" :kemsnode.get("kems-cert").toString(),
+                    kemsnode.get("network") == null ? "" :kemsnode.get("network").toString(),
+                    kemsnode.get("consumers") == null ? "" :kemsnode.get("consumers").toString(),
+                    kemsnode.get("providers") == null ? "" :kemsnode.get("providers").toString(),
+                    kemsnode.get("locX") == null ? "" :kemsnode.get("locX").toString(),
+                    kemsnode.get("locY") == null ? "" :kemsnode.get("locY").toString()
             );
 
             qkdNodeRepository.save(qkdNode);
         }
+    }
 
+    private void QkdSyncServiceList(List kemsConsumerLinkList) throws Exception {
+        if(kemsConsumerLinkList == null) return;
 
+        qkdServiceRepository.deleteAll();
+        Iterator kemsConsumerLinkListIterator = kemsConsumerLinkList.iterator();
+        while(kemsConsumerLinkListIterator.hasNext()) {
+            Map<String, Object> kemsConsumerLink = (Map) kemsConsumerLinkListIterator.next();
 
-
+            QkdService qkdService = new QkdService(
+                    kemsConsumerLink.get("id") == null ? "" : kemsConsumerLink.get("id").toString(),
+                    kemsConsumerLink.get("uid") == null ? "" :kemsConsumerLink.get("uid").toString(),
+                    kemsConsumerLink.get("name") == null ? "" :kemsConsumerLink.get("name").toString(),
+                    kemsConsumerLink.get("operMode") == null ? "" :kemsConsumerLink.get("operMode").toString(),
+                     kemsConsumerLink.get("source") == null ? "" :kemsConsumerLink.get("source").toString(),
+                    kemsConsumerLink.get("dest") == null ? "" :kemsConsumerLink.get("dest").toString(),
+                    kemsConsumerLink.get("presharedKey") == null ? "" :kemsConsumerLink.get("presharedKey").toString(),
+                    kemsConsumerLink.get("qkeyStore") == null ? "" :kemsConsumerLink.get("qkeyStore").toString()
+            );
+            qkdServiceRepository.save(qkdService);
+        }
     }
 
 

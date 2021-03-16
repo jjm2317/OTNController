@@ -10,6 +10,7 @@ import com.woorinet.plugin.demo.Manager.Tl1Manager;
 import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
 import com.woorinet.plugin.demo.Repository.OTN.*;
+import com.woorinet.plugin.demo.Repository.QKD.QkdServiceRepository;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -319,12 +320,16 @@ public class SyncController {
 
     @Autowired
     private QkdNodeRepository qkdNodeRepository;
+    @Autowired
+    private QkdServiceRepository qkdServiceRepository;
+
 
     @GetMapping("/qkd")
     String syncronizeQKD() {
         try {
             QkdManager manager = new QkdManager(
-                    qkdNodeRepository
+                    qkdNodeRepository,
+                    qkdServiceRepository
             );
             manager.QkdSyncStart();
         } catch (Exception e) {
