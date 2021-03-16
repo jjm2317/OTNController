@@ -1,7 +1,9 @@
 package com.woorinet.plugin.demo.Manager;
 
+import com.woorinet.plugin.demo.DTO.QKD.QkdLink;
 import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
 import com.woorinet.plugin.demo.DTO.QKD.QkdService;
+import com.woorinet.plugin.demo.Repository.QKD.QkdLinkRepository;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
 import com.woorinet.plugin.demo.Repository.QKD.QkdServiceRepository;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
@@ -13,24 +15,19 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class QkdManager {
-    List<QkdNode> qkdNodeList;
-
     QkdNodeRepository qkdNodeRepository;
     QkdServiceRepository qkdServiceRepository;
+    QkdLinkRepository qkdLinkRepository;
 
-
-    public QkdManager(QkdNodeRepository qkdNodeRepository, QkdServiceRepository qkdServiceRepository) throws Exception {
-        this.qkdNodeList = new ArrayList<>();
-
+    public QkdManager(QkdNodeRepository qkdNodeRepository, QkdServiceRepository qkdServiceRepository, QkdLinkRepository qkdLinkRepository) throws Exception {
         this.qkdNodeRepository = qkdNodeRepository;
         this.qkdServiceRepository = qkdServiceRepository;
-
+        this.qkdLinkRepository = qkdLinkRepository;
     }
 
     public void QkdSyncStart() throws Exception {
@@ -68,7 +65,7 @@ public class QkdManager {
                     try {
                         QkdSyncNodeList((List) map.get("nodes"));
                         QkdSyncServiceList((List) map.get("consumerLinks"));
-
+                        QkdSnycLinkList((List) map.get("nodeLinks"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -126,13 +123,37 @@ public class QkdManager {
                     kemsConsumerLink.get("uid") == null ? "" :kemsConsumerLink.get("uid").toString(),
                     kemsConsumerLink.get("name") == null ? "" :kemsConsumerLink.get("name").toString(),
                     kemsConsumerLink.get("operMode") == null ? "" :kemsConsumerLink.get("operMode").toString(),
-                     kemsConsumerLink.get("source") == null ? "" :kemsConsumerLink.get("source").toString(),
+                    kemsConsumerLink.get("source") == null ? "" :kemsConsumerLink.get("source").toString(),
                     kemsConsumerLink.get("dest") == null ? "" :kemsConsumerLink.get("dest").toString(),
                     kemsConsumerLink.get("presharedKey") == null ? "" :kemsConsumerLink.get("presharedKey").toString(),
                     kemsConsumerLink.get("qkeyStore") == null ? "" :kemsConsumerLink.get("qkeyStore").toString()
             );
             qkdServiceRepository.save(qkdService);
         }
+    }
+
+    private void QkdSnycLinkList(List kemsNodeLinkList) throws Exception {
+        if(kemsNodeLinkList == null) return;
+
+        qkdLinkRepository.deleteAll();
+        Iterator kemsNodeLinkListIterator = kemsNodeLinkList.iterator();
+        while(kemsNodeLinkListIterator.hasNext()) {
+            Map<String, Object> kemsNodeLink = (Map) kemsNodeLinkListIterator.next();
+
+            QkdLink qkdLink = new QkdLink(
+                kemsNodeLink.get("id") == null ? "" : kemsNodeLink.get("id").toString(),
+                kemsNodeLink.get("name") == null ? "" :kemsNodeLink.get("name").toString(),
+                kemsNodeLink.get("uid") == null ? "" :kemsNodeLink.get("uid").toString(),
+                kemsNodeLink.get("type") == null ? "" :kemsNodeLink.get("type").toString(),
+                kemsNodeLink.get("algorithm") == null ? "" :kemsNodeLink.get("algorithm").toString(),
+                kemsNodeLink.get("weight") == null ? "" :kemsNodeLink.get("weight").toString(),
+                kemsNodeLink.get("psk") == null ? "" :kemsNodeLink.get("psk").toString(),
+                kemsNodeLink.get("source") == null ? "" :kemsNodeLink.get("source").toString(),
+                kemsNodeLink.get("dest") == null ? "" :kemsNodeLink.get("dest").toString()
+            );
+            qkdLinkRepository.save(qkdLink);
+        }
+
     }
 
 

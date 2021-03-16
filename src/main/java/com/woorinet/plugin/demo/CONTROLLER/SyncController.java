@@ -3,13 +3,14 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
+import com.woorinet.plugin.demo.Manager.OtnManager;
 import com.woorinet.plugin.demo.Manager.PortalManager;
 import com.woorinet.plugin.demo.Manager.QkdManager;
-import com.woorinet.plugin.demo.Manager.OtnManager;
 import com.woorinet.plugin.demo.Manager.Tl1Manager;
-import com.woorinet.plugin.demo.Repository.PORTAL.*;
-import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
 import com.woorinet.plugin.demo.Repository.OTN.*;
+import com.woorinet.plugin.demo.Repository.PORTAL.*;
+import com.woorinet.plugin.demo.Repository.QKD.QkdLinkRepository;
+import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
 import com.woorinet.plugin.demo.Repository.QKD.QkdServiceRepository;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -322,6 +323,8 @@ public class SyncController {
     private QkdNodeRepository qkdNodeRepository;
     @Autowired
     private QkdServiceRepository qkdServiceRepository;
+    @Autowired
+    private QkdLinkRepository qkdLinkRepository;
 
 
     @GetMapping("/qkd")
@@ -329,7 +332,8 @@ public class SyncController {
         try {
             QkdManager manager = new QkdManager(
                     qkdNodeRepository,
-                    qkdServiceRepository
+                    qkdServiceRepository,
+                    qkdLinkRepository
             );
             manager.QkdSyncStart();
         } catch (Exception e) {
