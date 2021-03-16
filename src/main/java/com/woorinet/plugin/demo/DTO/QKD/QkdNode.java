@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class QkdNode {
     @Id
     @GeneratedValue
-    int KMS_NODE_ID;
+    int QKD_NODE_ID;
     String ID;
     String UID;
     String NAME;
