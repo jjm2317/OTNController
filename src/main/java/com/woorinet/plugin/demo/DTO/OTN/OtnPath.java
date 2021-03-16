@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Data
-@Table(name="sdn_path")
+@Table(name="otn_path")
 public class OtnPath {
     @GeneratedValue
     @Id

@@ -3,11 +3,11 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
-import com.woorinet.plugin.demo.Manager.HOLAManager;
-import com.woorinet.plugin.demo.Manager.QKDManager;
-import com.woorinet.plugin.demo.Manager.OTNManager;
-import com.woorinet.plugin.demo.Manager.TL1Manager;
-import com.woorinet.plugin.demo.Repository.HOLA.*;
+import com.woorinet.plugin.demo.Manager.PortalManager;
+import com.woorinet.plugin.demo.Manager.QkdManager;
+import com.woorinet.plugin.demo.Manager.OtnManager;
+import com.woorinet.plugin.demo.Manager.Tl1Manager;
+import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
 import com.woorinet.plugin.demo.Repository.OTN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
@@ -128,7 +128,7 @@ public class SyncController {
     String synchronization() {
         int CTAG = 100;
         try {
-            TL1Manager manager = new TL1Manager(
+            Tl1Manager manager = new Tl1Manager(
                     CTAG,
                     "222.117.54.175",
                     19011,
@@ -220,7 +220,7 @@ public class SyncController {
             List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
             // PM_PORT 조회
             List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
-            OTNManager manager = new OTNManager(
+            OtnManager manager = new OtnManager(
                     otnNodeRepository,
                     otnConnectorRepository,
                     otnLinkRepository,
@@ -261,17 +261,17 @@ public class SyncController {
     }
 
     @Autowired
-    private HolaLineNumSheetRepository holaLineNumSheetRepository;
+    private PortalLineNumSheetRepository portalLineNumSheetRepository;
     @Autowired
-    private HolaLinkMngRepository holaLinkMngRepository;
+    private PortalLinkMngRepository portalLinkMngRepository;
     @Autowired
-    private HolaTrunkUsageRepository holaTrunkUsageRepository;
+    private PortalTrunkUsageRepository portalTrunkUsageRepository;
     @Autowired
-    private HolaInventroyDetailRepository holaInventroyDetailRepository;
+    private PortalInventroyDetailRepository portalInventroyDetailRepository;
     @Autowired
-    private HolaOtnNodeUsageRepository holaOtnNodeUsageRepository;
+    private PortalOtnNodeUsageRepository portalOtnNodeUsageRepository;
     @Autowired
-    private HolaOtnMaterialRepository holaOtnMaterialRepository;
+    private PortalOtnMaterialRepository portalOtnMaterialRepository;
 
     @GetMapping("/hola")
     String syncronizeHola() {
@@ -291,12 +291,12 @@ public class SyncController {
             //SdnAccessIf 조회
             List<OtnAccessIf> otnAccessIfList = otnAccessIfRepository.findAll();
 
-            HOLAManager manager = new HOLAManager(holaLineNumSheetRepository,
-                    holaLinkMngRepository,
-                    holaTrunkUsageRepository,
-                    holaInventroyDetailRepository,
-                    holaOtnNodeUsageRepository,
-                    holaOtnMaterialRepository,
+            PortalManager manager = new PortalManager(portalLineNumSheetRepository,
+                    portalLinkMngRepository,
+                    portalTrunkUsageRepository,
+                    portalInventroyDetailRepository,
+                    portalOtnNodeUsageRepository,
+                    portalOtnMaterialRepository,
                     otnConnectorRepository,
                     otnNodeList,
                     otnConnectorList,
@@ -320,21 +320,18 @@ public class SyncController {
     @Autowired
     private QkdNodeRepository qkdNodeRepository;
 
-    @GetMapping("/kms")
-    String syncronizeKMS() {
+    @GetMapping("/qkd")
+    String syncronizeQKD() {
         try {
-
-
-
-            QKDManager manager = new QKDManager(
+            QkdManager manager = new QkdManager(
                     qkdNodeRepository
             );
-            manager.KMSSyncStart();
+            manager.QkdSyncStart();
         } catch (Exception e) {
             e.printStackTrace();
-            return "kms synchronization fail";
+            return "qkd synchronization fail";
         }
 
-        return "kms synchronization success";
+        return "qkd synchronization success";
     }
 }

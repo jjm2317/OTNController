@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "sdn_service")
+@Table(name = "otn_service")
 @Data
 public class OtnService {
     int ems_id;

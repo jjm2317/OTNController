@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.HOLA;
+package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
 import com.google.gson.Gson;
@@ -15,8 +15,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="hola_otn_material")
-public class HolaOtnMaterial {
+@Table(name="portal_otn_material")
+public class PortalOtnMaterial {
     @Id
     @GeneratedValue
     int HOLA_SDN_OTN_MATERIAL_ID;
@@ -27,10 +27,10 @@ public class HolaOtnMaterial {
     String SHELF;
     String UNIT_LIST;
 
-    public HolaOtnMaterial() {
+    public PortalOtnMaterial() {
     }
 
-    public HolaOtnMaterial(String VENDOR, String CELL, String NODE, String IP, String SHELF, String UNIT_LIST) {
+    public PortalOtnMaterial(String VENDOR, String CELL, String NODE, String IP, String SHELF, String UNIT_LIST) {
         this.VENDOR = VENDOR;
         this.CELL = CELL;
         this.NODE = NODE;

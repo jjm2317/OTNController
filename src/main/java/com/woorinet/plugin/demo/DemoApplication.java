@@ -2,7 +2,6 @@ package com.woorinet.plugin.demo;
 
 import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventAlm;
 import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventTca;
-import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventAlmRepository;
 import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventTcaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,6 @@ Tl1 -> Sdn -> Hola 순으로 되어 있다.( TL1 데이터를 Sdn데이터로 �
 
 @SpringBootApplication
 public class DemoApplication {
-	@Autowired
-	private QNETMapper qnetMapper;
-
 	@Autowired
 	private static Tl1EventTcaRepository tl1EventTcaRepository;
 
@@ -159,73 +155,6 @@ public class DemoApplication {
 		return result;
 	}
 	/*
-	@RequestMapping("/synchronization_anapi")
-	String synchronizationQNAPI() {
-
-		try {
-			qnetMapper.initDatabase();
-			qnetMapper.initNodeTable();
-			qnetMapper.initNodeLinkTable();
-			qnetMapper.initConsumerLinkTable();
-			qnetMapper.initProviderLinkTable();
-			qnetMapper.initPathTable();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		WebClient client1 = WebClient
-				.builder()
-				.baseUrl("https://1.226.250.42/v1/admin")
-				.defaultHeaders( httpHeaders -> {
-					httpHeaders.add(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46QWRtaW4=");
-					httpHeaders.add(HttpHeaders.ACCEPT, "text/plain");
-				})
-				.clientConnector(
-						new ReactorClientHttpConnector(
-								HttpClient.create()
-									.secure(
-											ThrowingConsumer.unchecked(
-													sslContextSpec -> sslContextSpec.sslContext(
-															SslContextBuilder.forClient()
-															.trustManager(InsecureTrustManagerFactory.INSTANCE)
-															.build()
-													)
-											)
-									)
-						)
-				)
-				.build();
-
-		WebClient.RequestBodySpec uri1 = client1
-				.method(HttpMethod.GET)
-				.uri("/node?consumers=true&providers=true&links=true");
-
-		QNETManager qnetManager = new QNETManager();
-		String response = uri1.retrieve()
-					.bodyToMono(Map.class)
-					.map(map -> (Map) map.get("configuration"))
-					.map(map -> {
-						qnetManager.QNETSyncKMSGroups((List) map.get("groups"));
-						try {
-							qnetManager.QNETSyncKMSNodes((List) map.get("nodes"), qnetMapper);
-							qnetManager.QNETSyncKMSNodeLinks((List) map.get("nodeLinks"),qnetMapper);
-							qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"),qnetMapper);
-							qnetManager.QNETSyncKMSProviderLinks((List) map.get("providerLinks"), qnetMapper);
-							qnetManager.QNETSyncKMSPaths((List) map.get("paths"),qnetMapper);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						return "ok";
-					})
-					.block();
-
-		System.out.println("response: " + response);
-
-		return "ok";
-	}
-
-
-
 	@RequestMapping("/select_node")
 	@ApiOperation(value="test", notes="test")
 	@GetMapping(value="/save")

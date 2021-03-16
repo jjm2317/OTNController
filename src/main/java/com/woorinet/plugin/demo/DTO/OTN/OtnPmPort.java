@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Setter
 @Data
 @Entity
-@Table(name="sdn_pm_port")
+@Table(name="otn_pm_port")
 public class OtnPmPort {
     @Id
     @GeneratedValue

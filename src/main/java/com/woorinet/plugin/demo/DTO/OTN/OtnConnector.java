@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Data
-@Table(name="sdn_connector")
+@Table(name="otn_connector")
 public class OtnConnector {
     int ems_id;
     @Id

@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.HOLA;
+package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
 import lombok.Data;
@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table
-public class HolaTrunkUsage {
+@Table(name="portal_trunk_usage")
+public class PortalTrunkUsage {
     @Id
     @GeneratedValue
     int HOLA_SDN_TRUNK_USAGE_ID;
@@ -30,10 +30,10 @@ public class HolaTrunkUsage {
     String ROADM_PATH;
     String REMARKS;
 
-    public HolaTrunkUsage() {
+    public PortalTrunkUsage() {
     }
 
-    public HolaTrunkUsage(String VENDOR, String LINK, String ADMIN_WEIGHT, String MAXIMUM_USAGE_RATIO, String MEMORY, String USAGE_RATIO, String DISTANCE, String SRLG, String ROADM_PATH, String REMARKS) {
+    public PortalTrunkUsage(String VENDOR, String LINK, String ADMIN_WEIGHT, String MAXIMUM_USAGE_RATIO, String MEMORY, String USAGE_RATIO, String DISTANCE, String SRLG, String ROADM_PATH, String REMARKS) {
         this.VENDOR = VENDOR;
         this.LINK = LINK;
         this.ADMIN_WEIGHT = ADMIN_WEIGHT;
