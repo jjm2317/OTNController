@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -23,16 +20,20 @@ public class QkdAppLink {
     String ID;
     String UID;
     String NAME;
+    @Lob
     String OPER_MODE;
+    @Lob
     String SOURCE;
+    @Lob
     String DEST;
     String PRESHARED_KEY;
-    String Q_KEY_STORE;
+    @Lob
+    String QKEY_STORE;
 
     public QkdAppLink() {
     }
 
-    public QkdAppLink(String ID, String UID, String NAME, String OPER_MODE, String SOURCE, String DEST, String PRESHARED_KEY, String q_KEY_STORE) {
+    public QkdAppLink(String ID, String UID, String NAME, String OPER_MODE, String SOURCE, String DEST, String PRESHARED_KEY, String QKEY_STORE) {
         this.ID = ID;
         this.UID = UID;
         this.NAME = NAME;
@@ -40,7 +41,7 @@ public class QkdAppLink {
         this.SOURCE = SOURCE;
         this.DEST = DEST;
         this.PRESHARED_KEY = PRESHARED_KEY;
-        Q_KEY_STORE = q_KEY_STORE;
+        this.QKEY_STORE = QKEY_STORE;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class QkdAppLink {
                 ", SOURCE='" + SOURCE + '\'' +
                 ", DEST='" + DEST + '\'' +
                 ", PRESHARED_KEY='" + PRESHARED_KEY + '\'' +
-                ", Q_KEY_STORE='" + Q_KEY_STORE + '\'' +
+                ", QKEY_STORE='" + QKEY_STORE + '\'' +
                 '}';
     }
 }
