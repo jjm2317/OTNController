@@ -3,10 +3,10 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
-import com.woorinet.plugin.demo.Manager.HOLAManager;
-import com.woorinet.plugin.demo.Manager.QKDManager;
-import com.woorinet.plugin.demo.Manager.OTNManager;
-import com.woorinet.plugin.demo.Manager.TL1Manager;
+import com.woorinet.plugin.demo.Manager.HolaManager;
+import com.woorinet.plugin.demo.Manager.QkdManager;
+import com.woorinet.plugin.demo.Manager.OtnManager;
+import com.woorinet.plugin.demo.Manager.Tl1Manager;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
 import com.woorinet.plugin.demo.Repository.OTN.*;
@@ -128,7 +128,7 @@ public class SyncController {
     String synchronization() {
         int CTAG = 100;
         try {
-            TL1Manager manager = new TL1Manager(
+            Tl1Manager manager = new Tl1Manager(
                     CTAG,
                     "222.117.54.175",
                     19011,
@@ -220,7 +220,7 @@ public class SyncController {
             List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
             // PM_PORT 조회
             List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
-            OTNManager manager = new OTNManager(
+            OtnManager manager = new OtnManager(
                     otnNodeRepository,
                     otnConnectorRepository,
                     otnLinkRepository,
@@ -291,7 +291,7 @@ public class SyncController {
             //SdnAccessIf 조회
             List<OtnAccessIf> otnAccessIfList = otnAccessIfRepository.findAll();
 
-            HOLAManager manager = new HOLAManager(holaLineNumSheetRepository,
+            HolaManager manager = new HolaManager(holaLineNumSheetRepository,
                     holaLinkMngRepository,
                     holaTrunkUsageRepository,
                     holaInventroyDetailRepository,
@@ -323,7 +323,7 @@ public class SyncController {
     @GetMapping("/qkd")
     String syncronizeQKD() {
         try {
-            QKDManager manager = new QKDManager(
+            QkdManager manager = new QkdManager(
                     qkdNodeRepository
             );
             manager.QkdSyncStart();

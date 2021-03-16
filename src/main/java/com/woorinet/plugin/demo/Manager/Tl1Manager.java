@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TL1Manager {
+public class Tl1Manager {
     int CTAG;
 
     List<Tl1Node> tl1NodeList;
@@ -70,7 +70,7 @@ public class TL1Manager {
     HashMap<String, Tl1AccessIf> accessIfHashMap = new HashMap<>();
     HashMap<String, Tl1OduMplsIf> odu_mpls_ifHashMap = new HashMap<>();
 
-    public TL1Manager(int CTAG,
+    public Tl1Manager(int CTAG,
                       String ip,
                       int port,
                       Tl1NodeRepository tl1NodeRepository,

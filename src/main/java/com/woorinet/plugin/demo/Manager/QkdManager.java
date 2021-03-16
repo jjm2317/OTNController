@@ -16,13 +16,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class QKDManager {
+public class QkdManager {
     List<QkdNode> qkdNodeList;
 
     QkdNodeRepository qkdNodeRepository;
 
 
-    public QKDManager(QkdNodeRepository qkdNodeRepository) throws Exception {
+    public QkdManager(QkdNodeRepository qkdNodeRepository) throws Exception {
         this.qkdNodeList = new ArrayList<>();
 
         this.qkdNodeRepository = qkdNodeRepository;

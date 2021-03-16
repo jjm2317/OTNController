@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-public class HOLAManager {
+public class HolaManager {
     HolaLineNumSheetRepository holaLineNumSheetRepository;
     HolaLinkMngRepository holaLinkMngRepository;
     HolaTrunkUsageRepository holaTrunkUsageRepository;
@@ -28,7 +28,7 @@ public class HOLAManager {
     List<OtnAccessIf> otnAccessIfList;
 
 
-    public HOLAManager(HolaLineNumSheetRepository holaLineNumSheetRepository,
+    public HolaManager(HolaLineNumSheetRepository holaLineNumSheetRepository,
                        HolaLinkMngRepository holaLinkMngRepository,
                        HolaTrunkUsageRepository holaTrunkUsageRepository,
                        HolaInventroyDetailRepository holaInventroyDetailRepository,

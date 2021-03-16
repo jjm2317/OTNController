@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class OTNManager {
+public class OtnManager {
     OtnNodeRepository otnNodeRepository;
     OtnConnectorRepository otnConnectorRepository;
     OtnLinkRepository otnLinkRepository;
@@ -71,7 +71,7 @@ public class OTNManager {
     HashMap<String, OtnLink> sdnLinkHashMap = new HashMap<>();
     HashMap<String, OtnService> sdnServiceHashMapForPath = new HashMap<>();
 
-    public OTNManager(OtnNodeRepository otnNodeRepository,
+    public OtnManager(OtnNodeRepository otnNodeRepository,
                       OtnConnectorRepository otnConnectorRepository,
                       OtnLinkRepository otnLinkRepository,
                       OtnServiceRepository otnServiceRepository,
