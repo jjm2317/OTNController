@@ -1,4 +1,7 @@
 package com.woorinet.plugin.demo.Repository.QKD;
 
-public interface QkdProviderLinkRepository {
+import com.woorinet.plugin.demo.DTO.QKD.QkdProviderLink;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface QkdProviderLinkRepository extends JpaRepository<QkdProviderLink, Integer> {
 }
