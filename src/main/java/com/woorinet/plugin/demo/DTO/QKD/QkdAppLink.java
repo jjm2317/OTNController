@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @Setter
 @Getter
-@Table
+@Table(name = "qkd_app_link")
 
 public class QkdAppLink {
     @Id

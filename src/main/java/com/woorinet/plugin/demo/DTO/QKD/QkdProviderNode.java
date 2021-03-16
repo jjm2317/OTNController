@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Setter
 @Getter
-@Table
+@Table(name="qkd_provider_node")
 
 public class QkdProviderNode {
     @Id
