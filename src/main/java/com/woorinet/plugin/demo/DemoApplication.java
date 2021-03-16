@@ -133,9 +133,9 @@ public class DemoApplication {
 		String PM_ELEMENT = "";
 		String DATETIME = "";
 		String EVENT_DATETIME = "";
-		for(String line: convData) {
+		for (String line : convData) {
 			line = line.trim();
-			if(line.startsWith("EMS")) {
+			if (line.startsWith("EMS")) {
 				TID = line.split(" ")[0];
 				EVENT_DATETIME = line.split(" ")[2];
 			} else if (line.contains("/*") && line.contains("*/")) {
@@ -154,107 +154,5 @@ public class DemoApplication {
 		result = new String[]{TID, AID, UNIT, SIGNAL, TIME, PM_ELEMENT, DATETIME, EVENT_DATETIME};
 		return result;
 	}
-	/*
-	@RequestMapping("/select_node")
-	@ApiOperation(value="test", notes="test")
-	@GetMapping(value="/save")
-	@ResponseBody
-	String selectNode() {
-		List<Tl1Node> list = null;
-		try {
-			//list = tl1Mapper.selectNode();
-			for (Tl1Node item: list) {
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (new Gson()).toJson(list);
-	}
-
-	@RequestMapping("/system_info")
-	String selectSystemInfo() {
-		List<Tl1SystemInfo> list = null;
-		try {
-			//list = tl1Mapper.selectSystemInfo();
-			for (Tl1SystemInfo item: list) {
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (new Gson()).toJson(list);
-	}
-
-	@RequestMapping("/access_if")
-	String selectAccessIf() {
-		List<Tl1AccessIf> list = null;
-		try {
-			//list = tl1Mapper.selectAccessIf();
-			for (Tl1AccessIf item: list) {
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (new Gson()).toJson(list);
-	}
-
-	@RequestMapping("/ces_node_connector")
-	String selectCesNodeConnector() {
-		List<Tl1CesNodeConnector> list = null;
-		try {
-			//list = tl1Mapper.selectCesNodeConnector();
-			for (Tl1CesNodeConnector item: list) {
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (new Gson()).toJson(list);
-	}
-
-	@RequestMapping("/eth_port")
-	String selectEthPort() {
-		List<Tl1EthPort> list = null;
-		try {
-			//list = tl1Mapper.selectEthPort();
-			for (Tl1EthPort item: list) {
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (new Gson()).toJson(list);
-	}
-
-	@RequestMapping("/mpls_ac")
-	String selectMplsAc() {
-		List<Tl1MplsAc> list = null;
-		try {
-			//list = tl1Mapper.selectMplsAc();
-			for (Tl1MplsAc item: list) {
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (new Gson()).toJson(list);
-	}
-
-	@RequestMapping("/mpls_if")
-	String selectMplsIf() {
-		List<Tl1MplsIf> list = null;
-		try {
-			//list = tl1Mapper.selectMplsIf();
-			for (Tl1MplsIf item: list) {
-				System.out.println(item.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (new Gson()).toJson(list);
-	}
-	*/
 }
 
