@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Data
-@Table(name="sdn_node")
+@Table(name="otn_node")
 public class OtnNode {
     int ems_id;
     @Id
