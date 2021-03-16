@@ -1,14 +1,8 @@
 package com.woorinet.plugin.demo.Manager;
 
 import com.google.gson.Gson;
-import com.woorinet.plugin.demo.DTO.QKD.QkdLink;
-import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
-import com.woorinet.plugin.demo.DTO.QKD.QkdPath;
-import com.woorinet.plugin.demo.DTO.QKD.QkdService;
-import com.woorinet.plugin.demo.Repository.QKD.QkdLinkRepository;
-import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
-import com.woorinet.plugin.demo.Repository.QKD.QkdPathRepository;
-import com.woorinet.plugin.demo.Repository.QKD.QkdServiceRepository;
+import com.woorinet.plugin.demo.DTO.QKD.*;
+import com.woorinet.plugin.demo.Repository.QKD.*;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
@@ -18,24 +12,35 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class QkdManager {
     Gson gson;
+    List<Map<String,Object>> kemsProviderMapList;
+
     QkdNodeRepository qkdNodeRepository;
     QkdServiceRepository qkdServiceRepository;
     QkdLinkRepository qkdLinkRepository;
     QkdPathRepository qkdPathRepository;
+    QkdProviderNodeRepository qkdProviderNodeRepository;
 
-    public QkdManager(QkdNodeRepository qkdNodeRepository, QkdServiceRepository qkdServiceRepository, QkdLinkRepository qkdLinkRepository, QkdPathRepository qkdPathRepository) throws Exception {
+    public QkdManager(QkdNodeRepository qkdNodeRepository,
+                      QkdServiceRepository qkdServiceRepository,
+                      QkdLinkRepository qkdLinkRepository,
+                      QkdPathRepository qkdPathRepository,
+                      QkdProviderNodeRepository qkdProviderNodeRepository
+    ) throws Exception {
         this.gson = new Gson();
+        this.kemsProviderMapList = new ArrayList<>();
 
         this.qkdNodeRepository = qkdNodeRepository;
         this.qkdServiceRepository = qkdServiceRepository;
         this.qkdLinkRepository = qkdLinkRepository;
         this.qkdPathRepository = qkdPathRepository;
+        this.qkdProviderNodeRepository = qkdProviderNodeRepository;
     }
 
     public void QkdSyncStart() throws Exception {
@@ -75,6 +80,7 @@ public class QkdManager {
                         QkdSyncServiceList((List) map.get("consumerLinks"));
                         QkdSnycLinkList((List) map.get("nodeLinks"));
                         QkdSyncPathList((List) map.get("paths"));
+                        QkdSyncProviderNode();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -94,6 +100,9 @@ public class QkdManager {
         Iterator kemsNodeListIterator = kemsNodeList.iterator();
         while(kemsNodeListIterator.hasNext()) {
             Map<String, Object> kemsnode = (Map) kemsNodeListIterator.next();
+
+            prepareProvider((List)kemsnode.get("providers"));
+
 
             QkdNode qkdNode = new QkdNode(
                     kemsnode.get("id") == null ? "" : kemsnode.get("id").toString(),
@@ -185,6 +194,42 @@ public class QkdManager {
                 kemsPath.get("remark") == null ? "" :kemsPath.get("remark").toString()
             );
             qkdPathRepository.save(qkdPath);
+        }
+    }
+
+    private void prepareProvider(List kemsProviderList) {
+        Iterator kemsProviderListIterator = kemsProviderList.iterator();
+        while(kemsProviderListIterator.hasNext()) {
+            Map<String, Object> kemsProvider = (Map) kemsProviderListIterator.next();
+            kemsProviderMapList.add(kemsProvider);
+
+        }
+    }
+
+    private void QkdSyncProviderNode() throws Exception {
+        qkdProviderNodeRepository.deleteAll();
+        for(Map<String,Object> kemsProvider: kemsProviderMapList) {
+            QkdProviderNode qkdProviderNode = new QkdProviderNode(
+                    kemsProvider.get("kms_id") == null ? "" : kemsProvider.get("kmsId").toString(),
+                    kemsProvider.get("kmsName") == null ? "" : kemsProvider.get("kmsName").toString(),
+                    kemsProvider.get("groupId") == null ? "" : kemsProvider.get("groupId").toString(),
+                    kemsProvider.get("groupName") == null ? "" : kemsProvider.get("groupName").toString(),
+                    kemsProvider.get("id") == null ? "" : kemsProvider.get("id").toString(),
+                    kemsProvider.get("uid") == null ? "" : kemsProvider.get("uid").toString(),
+                    kemsProvider.get("name") == null ? "" : kemsProvider.get("name").toString(),
+                    kemsProvider.get("description") == null ? "" : kemsProvider.get("description").toString(),
+                    kemsProvider.get("agent") == null ? "" : gson.toJson(kemsProvider.get("agent")),
+                    kemsProvider.get("network") == null ? "" : gson.toJson(kemsProvider.get("network")),
+                    kemsProvider.get("qncWebApiUrl") == null ? "" : kemsProvider.get("qncWebApiUrl").toString(),
+                    kemsProvider.get("qncWebApiAuth") == null ? "" : kemsProvider.get("qncWebApiAuth").toString(),
+                    kemsProvider.get("interfaces") == null ? "" : gson.toJson(kemsProvider.get("interfaces")),
+                    kemsProvider.get("node") == null ? "" : kemsProvider.get("node").toString(),
+                    kemsProvider.get("locX") == null ? "" : kemsProvider.get("locX").toString(),
+                    kemsProvider.get("locY") == null ? "" : kemsProvider.get("locY").toString(),
+                    kemsProvider.get("lat") == null ? "" : kemsProvider.get("lat").toString(),
+                    kemsProvider.get("long") == null ? "" : kemsProvider.get("long").toString()
+            );
+            qkdProviderNodeRepository.save(qkdProviderNode);
         }
     }
 
