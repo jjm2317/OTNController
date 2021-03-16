@@ -181,7 +181,7 @@ public class SyncController {
         return "tl1 synchronization success";
     }
 
-    @GetMapping("/sdn")
+    @GetMapping("/otn")
     String convertTL1() {
         try {
             // Node 조회
@@ -273,7 +273,7 @@ public class SyncController {
     @Autowired
     private PortalOtnMaterialRepository portalOtnMaterialRepository;
 
-    @GetMapping("/hola")
+    @GetMapping("/portal")
     String syncronizeHola() {
         try {
             //SdnNode 조회
