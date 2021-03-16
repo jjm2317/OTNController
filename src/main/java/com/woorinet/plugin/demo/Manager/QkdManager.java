@@ -20,6 +20,7 @@ import java.util.Map;
 public class QkdManager {
     Gson gson;
     List<Map<String,Object>> kemsProviderMapList;
+    List<Map<String,Object>> kemsConsumerMapList;
 
     QkdNodeRepository qkdNodeRepository;
     QkdServiceRepository qkdServiceRepository;
@@ -27,16 +28,19 @@ public class QkdManager {
     QkdPathRepository qkdPathRepository;
     QkdProviderNodeRepository qkdProviderNodeRepository;
     QkdProviderLinkRepository qkdProviderLinkRepository;
+    QkdAppNodeRepository qkdAppNodeRepository;
 
     public QkdManager(QkdNodeRepository qkdNodeRepository,
                       QkdServiceRepository qkdServiceRepository,
                       QkdLinkRepository qkdLinkRepository,
                       QkdPathRepository qkdPathRepository,
                       QkdProviderNodeRepository qkdProviderNodeRepository,
-                      QkdProviderLinkRepository qkdProviderLinkRepository
+                      QkdProviderLinkRepository qkdProviderLinkRepository,
+                      QkdAppNodeRepository qkdAppNodeRepository
     ) throws Exception {
         this.gson = new Gson();
         this.kemsProviderMapList = new ArrayList<>();
+        this.kemsConsumerMapList = new ArrayList<>();
 
         this.qkdNodeRepository = qkdNodeRepository;
         this.qkdServiceRepository = qkdServiceRepository;
@@ -44,6 +48,7 @@ public class QkdManager {
         this.qkdPathRepository = qkdPathRepository;
         this.qkdProviderNodeRepository = qkdProviderNodeRepository;
         this.qkdProviderLinkRepository = qkdProviderLinkRepository;
+        this.qkdAppNodeRepository = qkdAppNodeRepository;
     }
 
     public void QkdSyncStart() throws Exception {
@@ -85,6 +90,7 @@ public class QkdManager {
                         QkdSyncPathList((List) map.get("paths"));
                         QkdSyncProviderNodeList();
                         QkdSyncProviderLinkList((List) map.get("providerLinks"));
+                        QkdSyncAppNodeList();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -106,6 +112,7 @@ public class QkdManager {
             Map<String, Object> kemsnode = (Map) kemsNodeListIterator.next();
 
             prepareProvider((List)kemsnode.get("providers"));
+            prepareConsumer((List)kemsnode.get("consumers"));
 
 
             QkdNode qkdNode = new QkdNode(
@@ -206,7 +213,6 @@ public class QkdManager {
         while(kemsProviderListIterator.hasNext()) {
             Map<String, Object> kemsProvider = (Map) kemsProviderListIterator.next();
             kemsProviderMapList.add(kemsProvider);
-
         }
     }
 
@@ -257,7 +263,39 @@ public class QkdManager {
             );
             qkdProviderLinkRepository.save(qkdProviderLink);
         }
+    }
 
+    private void prepareConsumer(List kemsConsumerList) {
+        Iterator kemsConsumerListListIterator = kemsConsumerList.iterator();
+        while(kemsConsumerListListIterator.hasNext()) {
+            Map<String, Object> kemsConsumer = (Map) kemsConsumerListListIterator.next();
+            kemsConsumerMapList.add(kemsConsumer);
+        }
+    }
+
+    private void QkdSyncAppNodeList() {
+        qkdAppNodeRepository.deleteAll();
+        for(Map<String,Object> kemsConsumer : kemsConsumerMapList){
+            QkdAppNode qkdAppNode = new QkdAppNode(
+                    kemsConsumer.get("level") == null ? "":  kemsConsumer.get("level").toString(),
+                    kemsConsumer.get("kmsId") == null ? "":  kemsConsumer.get("kmsId").toString(),
+                    kemsConsumer.get("kmsName") == null ? "":  kemsConsumer.get("kmsName").toString(),
+                    kemsConsumer.get("groupId") == null ? "":  kemsConsumer.get("groupId").toString(),
+                    kemsConsumer.get("groupName") == null ? "":  kemsConsumer.get("groupName").toString(),
+                    kemsConsumer.get("id") == null ? "":  kemsConsumer.get("id").toString(),
+                    kemsConsumer.get("uid") == null ? "":  kemsConsumer.get("uid").toString(),
+                    kemsConsumer.get("name") == null ? "":  kemsConsumer.get("name").toString(),
+                    kemsConsumer.get("description") == null ? "":  kemsConsumer.get("description").toString(),
+                    kemsConsumer.get("agent") == null ? "":  gson.toJson(kemsConsumer.get("agent")),
+                    kemsConsumer.get("network") == null ? "":   gson.toJson(kemsConsumer.get("network")),
+                    kemsConsumer.get("interfaces") == null ? "":  gson.toJson(kemsConsumer.get("interfaces")),
+                    kemsConsumer.get("locX") == null ? "":  kemsConsumer.get("locX").toString(),
+                    kemsConsumer.get("locY") == null ? "":  kemsConsumer.get("locY").toString(),
+                    kemsConsumer.get("lat") == null ? "":  kemsConsumer.get("lat").toString(),
+                    kemsConsumer.get("long") == null ? "":  kemsConsumer.get("long").toString()
+            );
+            qkdAppNodeRepository.save(qkdAppNode);
+        }
     }
 
 }

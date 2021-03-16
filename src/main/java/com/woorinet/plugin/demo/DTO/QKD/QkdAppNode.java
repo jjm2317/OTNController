@@ -5,17 +5,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @Setter
 @Getter
-@Table
-
+@Table(name="qkd_app_node")
 public class QkdAppNode {
     @Id
     @GeneratedValue
@@ -29,8 +25,11 @@ public class QkdAppNode {
     String UID;
     String NAME;
     String DESCRIPTION;
+    @Lob
     String AGENT;
+    @Lob
     String NETWORK;
+    @Lob
     String INTERFACES;
     String LOC_X;
     String LOC_Y;

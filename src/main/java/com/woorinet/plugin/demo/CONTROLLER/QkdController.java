@@ -1,13 +1,10 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.QKD.*;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -244,7 +241,7 @@ public class QkdController {
                 JSONObject modeJsonObject = (JSONObject) parser.parse(qkdProviderLink.getMODE());
                 JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdProviderLink.getSOURCE());
                 JSONObject destinationJsonObject = (JSONObject) parser.parse((qkdProviderLink.getDESTINATION()));
-                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdProviderLink.getQ_KEY_STORE());
+                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdProviderLink.getQKEY_STORE());
 
                 jsonObject.put("qkd_provider_link", qkdProviderLink.getQKD_PROVIDER_LINK_ID());
                 jsonObject.put("id", qkdProviderLink.getID());

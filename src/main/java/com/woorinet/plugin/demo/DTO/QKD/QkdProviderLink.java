@@ -14,8 +14,7 @@ import javax.persistence.Table;
 @Data
 @Setter
 @Getter
-@Table
-
+@Table(name="qkd_provider_link")
 public class QkdProviderLink {
     @Id
     @GeneratedValue

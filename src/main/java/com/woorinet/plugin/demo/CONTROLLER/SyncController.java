@@ -329,7 +329,8 @@ public class SyncController {
     private QkdProviderNodeRepository qkdProviderNodeRepository;
     @Autowired
     private QkdProviderLinkRepository qkdProviderLinkRepository;
-
+    @Autowired
+    private QkdAppNodeRepository qkdAppNodeRepository;
     @GetMapping("/qkd")
     String syncronizeQKD() {
         try {
@@ -339,7 +340,8 @@ public class SyncController {
                     qkdLinkRepository,
                     qkdPathRepository,
                     qkdProviderNodeRepository,
-                    qkdProviderLinkRepository
+                    qkdProviderLinkRepository,
+                    qkdAppNodeRepository
             );
             manager.QkdSyncStart();
         } catch (Exception e) {
