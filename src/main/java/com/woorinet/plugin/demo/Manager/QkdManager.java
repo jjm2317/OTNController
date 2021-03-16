@@ -1,5 +1,6 @@
 package com.woorinet.plugin.demo.Manager;
 
+import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.QKD.QkdLink;
 import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
 import com.woorinet.plugin.demo.DTO.QKD.QkdPath;
@@ -90,6 +91,7 @@ public class QkdManager {
         Iterator kemsNodeListIterator = kemsNodeList.iterator();
         while(kemsNodeListIterator.hasNext()) {
             Map<String, Object> kemsnode = (Map) kemsNodeListIterator.next();
+            Gson gson = new Gson();
 
             QkdNode qkdNode = new QkdNode(
                     kemsnode.get("id") == null ? "" : kemsnode.get("id").toString(),
@@ -104,9 +106,9 @@ public class QkdManager {
                     kemsnode.get("qncWebApiAuth") == null ? "" :kemsnode.get("qncWebApiAuth").toString(),
                     kemsnode.get("cert") == null ? "" :kemsnode.get("cert").toString(),
                     kemsnode.get("kems-cert") == null ? "" :kemsnode.get("kems-cert").toString(),
-                    kemsnode.get("network") == null ? "" :kemsnode.get("network").toString(),
-                    kemsnode.get("consumers") == null ? "" :kemsnode.get("consumers").toString(),
-                    kemsnode.get("providers") == null ? "" :kemsnode.get("providers").toString(),
+                    kemsnode.get("network") == null ? "" :gson.toJson(kemsnode.get("network")),
+                    kemsnode.get("consumers") == null ? "" :gson.toJson(kemsnode.get("consumers")),
+                    kemsnode.get("providers") == null ? "" :gson.toJson(kemsnode.get("providers")),
                     kemsnode.get("locX") == null ? "" :kemsnode.get("locX").toString(),
                     kemsnode.get("locY") == null ? "" :kemsnode.get("locY").toString()
             );
@@ -183,10 +185,5 @@ public class QkdManager {
             qkdPathRepository.save(qkdPath);
         }
     }
-
-
-
-
-
 
 }
