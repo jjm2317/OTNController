@@ -96,7 +96,7 @@ public class QkdController {
                 JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdService.getOPER_MODE());
                 JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdService.getSOURCE());
                 JSONObject destJsonObject = (JSONObject) parser.parse(qkdService.getDEST());
-                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdService.getQ_KEY_STORE());
+                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdService.getQKEY_STORE());
 
                 jsonObject.put("qkd_service_id", qkdService.getQKD_SERVICE_ID());
                 jsonObject.put("id", qkdService.getID());

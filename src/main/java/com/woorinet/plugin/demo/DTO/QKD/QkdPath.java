@@ -5,17 +5,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @Setter
 @Getter
-@Table
-
+@Table(name = "qkd_path")
 public class QkdPath {
     @Id
     @GeneratedValue
@@ -23,10 +19,13 @@ public class QkdPath {
     String ID;
     String FAIL_BACK_MODE;
     String FAIL_BACK_PERIOD;
+    @Lob
     String CONSUMER_LINK;
+    @Lob
     String PRIMARY;
     String PRIMARY_USAGE;
     String PRIMARY_FAULT;
+    @Lob
     String SECONDARY;
     String SECONDARY_USAGE;
     String SECONDARY_FAULT;

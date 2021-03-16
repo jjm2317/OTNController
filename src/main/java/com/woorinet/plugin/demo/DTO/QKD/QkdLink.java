@@ -5,17 +5,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @Setter
 @Getter
-@Table
-
+@Table(name = "qkd_link")
 public class QkdLink {
     @Id
     @GeneratedValue
@@ -23,11 +19,16 @@ public class QkdLink {
     String ID;
     String NAME;
     String UID;
+    @Lob
     String TYPE;
+    @Lob
     String ALGORITHM;
     String WEIGHT;
+    @Lob
     String PSK;
+    @Lob
     String SOURCE;
+    @Lob
     String DEST;
 
 
