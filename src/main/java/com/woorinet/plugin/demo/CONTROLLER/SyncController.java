@@ -11,6 +11,7 @@ import com.woorinet.plugin.demo.Repository.OTN.*;
 import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import com.woorinet.plugin.demo.Repository.QKD.QkdLinkRepository;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
+import com.woorinet.plugin.demo.Repository.QKD.QkdPathRepository;
 import com.woorinet.plugin.demo.Repository.QKD.QkdServiceRepository;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -325,7 +326,8 @@ public class SyncController {
     private QkdServiceRepository qkdServiceRepository;
     @Autowired
     private QkdLinkRepository qkdLinkRepository;
-
+    @Autowired
+    private QkdPathRepository qkdPathRepository;
 
     @GetMapping("/qkd")
     String syncronizeQKD() {
@@ -333,7 +335,8 @@ public class SyncController {
             QkdManager manager = new QkdManager(
                     qkdNodeRepository,
                     qkdServiceRepository,
-                    qkdLinkRepository
+                    qkdLinkRepository,
+                    qkdPathRepository
             );
             manager.QkdSyncStart();
         } catch (Exception e) {

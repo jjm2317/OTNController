@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -23,10 +20,15 @@ public class QkdService {
     String ID;
     String UID;
     String NAME;
+    @Lob
     String OPER_MODE;
+    @Lob
     String SOURCE;
+    @Lob
     String DEST;
+    @Lob
     String PRESHARED_KEY;
+    @Lob
     String QKEY_STORE;
 
     public QkdService() {

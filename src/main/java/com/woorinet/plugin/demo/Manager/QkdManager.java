@@ -2,9 +2,11 @@ package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.QKD.QkdLink;
 import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
+import com.woorinet.plugin.demo.DTO.QKD.QkdPath;
 import com.woorinet.plugin.demo.DTO.QKD.QkdService;
 import com.woorinet.plugin.demo.Repository.QKD.QkdLinkRepository;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
+import com.woorinet.plugin.demo.Repository.QKD.QkdPathRepository;
 import com.woorinet.plugin.demo.Repository.QKD.QkdServiceRepository;
 import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
 import io.netty.handler.ssl.SslContextBuilder;
@@ -23,11 +25,13 @@ public class QkdManager {
     QkdNodeRepository qkdNodeRepository;
     QkdServiceRepository qkdServiceRepository;
     QkdLinkRepository qkdLinkRepository;
+    QkdPathRepository qkdPathRepository;
 
-    public QkdManager(QkdNodeRepository qkdNodeRepository, QkdServiceRepository qkdServiceRepository, QkdLinkRepository qkdLinkRepository) throws Exception {
+    public QkdManager(QkdNodeRepository qkdNodeRepository, QkdServiceRepository qkdServiceRepository, QkdLinkRepository qkdLinkRepository, QkdPathRepository qkdPathRepository) throws Exception {
         this.qkdNodeRepository = qkdNodeRepository;
         this.qkdServiceRepository = qkdServiceRepository;
         this.qkdLinkRepository = qkdLinkRepository;
+        this.qkdPathRepository = qkdPathRepository;
     }
 
     public void QkdSyncStart() throws Exception {
@@ -66,6 +70,7 @@ public class QkdManager {
                         QkdSyncNodeList((List) map.get("nodes"));
                         QkdSyncServiceList((List) map.get("consumerLinks"));
                         QkdSnycLinkList((List) map.get("nodeLinks"));
+                        QkdSyncPathList((List) map.get("paths"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -105,7 +110,6 @@ public class QkdManager {
                     kemsnode.get("locX") == null ? "" :kemsnode.get("locX").toString(),
                     kemsnode.get("locY") == null ? "" :kemsnode.get("locY").toString()
             );
-
             qkdNodeRepository.save(qkdNode);
         }
     }
@@ -153,7 +157,31 @@ public class QkdManager {
             );
             qkdLinkRepository.save(qkdLink);
         }
+    }
 
+    private void QkdSyncPathList(List kemsPathList) throws Exception {
+        if(kemsPathList == null) return;
+
+        qkdPathRepository.deleteAll();
+        Iterator kemsPathListIterator = kemsPathList.iterator();
+        while(kemsPathListIterator.hasNext()) {
+            Map<String, Object> kemsPath = (Map) kemsPathListIterator.next();
+
+            QkdPath qkdPath = new QkdPath(
+                kemsPath.get("id") == null ? "" : kemsPath.get("id").toString(),
+                kemsPath.get("failbackMode") == null ? "" :kemsPath.get("failbackMode").toString(),
+                kemsPath.get("failbackPeriod") == null ? "" :kemsPath.get("failbackPeriod").toString(),
+                kemsPath.get("consumerLink") == null ? "" :kemsPath.get("consumerLink").toString(),
+                kemsPath.get("primary") == null ? "" :kemsPath.get("primary").toString(),
+                kemsPath.get("primaryUsage") == null ? "":kemsPath.get("primaryUsage").toString(),
+                kemsPath.get("primaryFault") == null ? "":kemsPath.get("primaryFault").toString(),
+                kemsPath.get("secondary") == null ? "" :kemsPath.get("secondary").toString(),
+                kemsPath.get("secondaryUsage") == null ? "":kemsPath.get("primaryUsage").toString(),
+                kemsPath.get("secondaryFault") == null ? "":kemsPath.get("primaryFault").toString(),
+                kemsPath.get("remark") == null ? "" :kemsPath.get("remark").toString()
+            );
+            qkdPathRepository.save(qkdPath);
+        }
     }
 
 
