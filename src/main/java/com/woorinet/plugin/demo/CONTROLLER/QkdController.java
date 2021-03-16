@@ -188,7 +188,7 @@ public class QkdController {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-//    @ApiOperation(value = "get qkd ", notes = "")
+//    @ApiOperation(value = "get qkd provider_node list ", notes = "전체 provider node 조회")
 //    @GetMapping(value = "")
 //    @ResponseBody
 //    public ResponseEntity selectQkdLinkList() {
