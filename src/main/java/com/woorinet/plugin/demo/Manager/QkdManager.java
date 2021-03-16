@@ -130,11 +130,11 @@ public class QkdManager {
                     kemsConsumerLink.get("id") == null ? "" : kemsConsumerLink.get("id").toString(),
                     kemsConsumerLink.get("uid") == null ? "" :kemsConsumerLink.get("uid").toString(),
                     kemsConsumerLink.get("name") == null ? "" :kemsConsumerLink.get("name").toString(),
-                    kemsConsumerLink.get("operMode") == null ? "" : gson.toJson(kemsConsumerLink.get("operMode").toString()),
-                    kemsConsumerLink.get("source") == null ? "" : gson.toJson(kemsConsumerLink.get("source").toString()),
-                    kemsConsumerLink.get("dest") == null ? "" : gson.toJson(kemsConsumerLink.get("dest").toString()),
+                    kemsConsumerLink.get("operMode") == null ? "" : gson.toJson(kemsConsumerLink.get("operMode")),
+                    kemsConsumerLink.get("source") == null ? "" : gson.toJson(kemsConsumerLink.get("source")),
+                    kemsConsumerLink.get("dest") == null ? "" : gson.toJson(kemsConsumerLink.get("dest")),
                     kemsConsumerLink.get("presharedKey") == null ? "" :kemsConsumerLink.get("presharedKey").toString(),
-                    kemsConsumerLink.get("qkeyStore") == null ? "" : gson.toJson(kemsConsumerLink.get("qkeyStore").toString())
+                    kemsConsumerLink.get("qkeyStore") == null ? "" : gson.toJson(kemsConsumerLink.get("qkeyStore"))
             );
             qkdServiceRepository.save(qkdService);
         }
@@ -152,12 +152,12 @@ public class QkdManager {
                 kemsNodeLink.get("id") == null ? "" : kemsNodeLink.get("id").toString(),
                 kemsNodeLink.get("name") == null ? "" :kemsNodeLink.get("name").toString(),
                 kemsNodeLink.get("uid") == null ? "" :kemsNodeLink.get("uid").toString(),
-                kemsNodeLink.get("type") == null ? "" :kemsNodeLink.get("type").toString(),
-                kemsNodeLink.get("algorithm") == null ? "" :kemsNodeLink.get("algorithm").toString(),
+                kemsNodeLink.get("type") == null ? "" :gson.toJson(kemsNodeLink.get("type")),
+                kemsNodeLink.get("algorithm") == null ? "" :gson.toJson(kemsNodeLink.get("algorithm")),
                 kemsNodeLink.get("weight") == null ? "" :kemsNodeLink.get("weight").toString(),
                 kemsNodeLink.get("psk") == null ? "" :kemsNodeLink.get("psk").toString(),
-                kemsNodeLink.get("source") == null ? "" :kemsNodeLink.get("source").toString(),
-                kemsNodeLink.get("dest") == null ? "" :kemsNodeLink.get("dest").toString()
+                kemsNodeLink.get("source") == null ? "" :gson.toJson(kemsNodeLink.get("source")),
+                kemsNodeLink.get("dest") == null ? "" :gson.toJson(kemsNodeLink.get("dest"))
             );
             qkdLinkRepository.save(qkdLink);
         }
