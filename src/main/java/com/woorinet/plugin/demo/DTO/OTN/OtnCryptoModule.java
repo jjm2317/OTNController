@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="sdn_crypto_module")
+@Table(name="otn_crypto_module")
 public class OtnCryptoModule {
     @Id
     @GeneratedValue

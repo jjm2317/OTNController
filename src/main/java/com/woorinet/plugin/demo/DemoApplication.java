@@ -2,7 +2,6 @@ package com.woorinet.plugin.demo;
 
 import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventAlm;
 import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventTca;
-import com.woorinet.plugin.demo.Mapper.QNETMapper;
 import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventAlmRepository;
 import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventTcaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,6 @@ Tl1 -> Sdn -> Hola 순으로 되어 있다.( TL1 데이터를 Sdn데이터로 �
 
 @SpringBootApplication
 public class DemoApplication {
-	@Autowired
-	private QNETMapper qnetMapper;
-
 	@Autowired
 	private static Tl1EventTcaRepository tl1EventTcaRepository;
 

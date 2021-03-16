@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Data
-@Table(name="sdn_constraint")
+@Table(name="otn_constraint")
 public class OtnConstraint {
     @Id
     @GeneratedValue

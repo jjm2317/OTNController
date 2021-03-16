@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Data
-@Table(name="sdn_link")
+@Table(name="otn_link")
 public class OtnLink {
     int ems_id;
     int dst_ems_id;
