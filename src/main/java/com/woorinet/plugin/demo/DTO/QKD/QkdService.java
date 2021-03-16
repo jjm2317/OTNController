@@ -11,8 +11,7 @@ import javax.persistence.*;
 @Data
 @Setter
 @Getter
-@Table
-
+@Table(name = "qkd_service")
 public class QkdService {
     @Id
     @GeneratedValue
