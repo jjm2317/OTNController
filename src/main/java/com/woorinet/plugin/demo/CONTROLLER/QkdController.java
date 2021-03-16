@@ -101,7 +101,7 @@ public class QkdController {
                 jsonObject.put("source", sourceJsonObject);
                 jsonObject.put("dest", destJsonObject);
                 jsonObject.put("preshared_key", qkdService.getPRESHARED_KEY());
-                jsonObject.put("q_key_store", qKeyStoreJsonObject);
+                jsonObject.put("qkey_store", qKeyStoreJsonObject);
 
                 jsonArray.add(jsonObject);
             }
@@ -250,7 +250,7 @@ public class QkdController {
                 jsonObject.put("mode", modeJsonObject);
                 jsonObject.put("source", sourceJsonObject);
                 jsonObject.put("destination", destinationJsonObject);
-                jsonObject.put("q_key_store", qKeyStoreJsonObject);
+                jsonObject.put("qkey_store", qKeyStoreJsonObject);
 
                 jsonArray.add(jsonObject);
             }
@@ -327,7 +327,7 @@ public class QkdController {
                 jsonObject.put("source", sourceJsonObject);
                 jsonObject.put("dest", destJsonObject);
                 jsonObject.put("preshared_key", qkdAppLink.getPRESHARED_KEY());
-                jsonObject.put("q_key_store", qKeyStoreJsonObject);
+                jsonObject.put("qkey_store", qKeyStoreJsonObject);
 
                 jsonArray.add(jsonObject);
             }
