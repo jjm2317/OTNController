@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class QkdProviderLink {
     @Id
     @GeneratedValue
-    int QKD_PROVIDER_LINK;
+    int QKD_PROVIDER_LINK_ID;
     String ID;
     String UID;
     String NAME;

@@ -2,10 +2,7 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.woorinet.plugin.demo.DTO.QKD.QkdLink;
-import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
-import com.woorinet.plugin.demo.DTO.QKD.QkdPath;
-import com.woorinet.plugin.demo.DTO.QKD.QkdService;
+import com.woorinet.plugin.demo.DTO.QKD.*;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
@@ -188,39 +185,83 @@ public class QkdController {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-//    @ApiOperation(value = "get qkd provider_node list ", notes = "전체 provider node 조회")
-//    @GetMapping(value = "")
-//    @ResponseBody
-//    public ResponseEntity selectQkdLinkList() {
-//        if(qkdLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
-//        JSONArray jsonArray = new JSONArray();
-//        JSONParser parser = new JSONParser();
-//
-//        try {
-//            for(QkdService qkdService : qkdServiceRepository.findAll()) {
-//                JSONObject jsonObject = new JSONObject();
-//                JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdService.getOPER_MODE());
-//                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdService.getSOURCE());
-//                JSONObject destJsonObject = (JSONObject) parser.parse(qkdService.getDEST());
-//                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdService.getQ_KEY_STORE());
-//
-//                jsonObject.put("qkd_service_id;", qkdService.getQKD_SERVICE_ID());
-//                jsonObject.put("id;", qkdService.getID());
-//                jsonObject.put("uid;", qkdService.getUID());
-//                jsonObject.put("name;", qkdService.getNAME());
-//                jsonObject.put("oper_mode;", operModeJsonObject);
-//                jsonObject.put("source;", sourceJsonObject);
-//                jsonObject.put("dest;", destJsonObject);
-//                jsonObject.put("preshared_key;", qkdService.getPRESHARED_KEY());
-//                jsonObject.put("q_key_store;", qKeyStoreJsonObject);
-//
-//                jsonArray.add(jsonObject);
-//            }
-//        } catch (Exception exception){
-//            exception.printStackTrace();
-//        }
-//        return ResponseEntity.ok();
-//    }
+    @ApiOperation(value = "get qkd provider_node list ", notes = "전체 provider(qkd) node 조회")
+    @GetMapping(value = "/provider_node/list")
+    @ResponseBody
+    public ResponseEntity selectQkdProviderNodeList() {
+        if(qkdProviderNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        JSONArray jsonArray = new JSONArray();
+        JSONParser parser = new JSONParser();
+
+        try {
+            for(QkdProviderNode qkdProviderNode : qkdProviderNodeRepository.findAll()) {
+                JSONObject jsonObject = new JSONObject();
+                JSONObject agentJsonObject = (JSONObject) parser.parse(qkdProviderNode.getAGENT());
+                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdProviderNode.getNETWORK());
+                JSONArray interfacesJsonArray = (JSONArray) parser.parse(qkdProviderNode.getINTERFACES());
+
+
+
+                jsonObject.put("qkd_node_id", qkdProviderNode.getQKD_NODE_ID());
+                jsonObject.put("kms_id", qkdProviderNode.getKMS_ID());
+                jsonObject.put("kms_name", qkdProviderNode.getKMS_NAME());
+                jsonObject.put("group_id", qkdProviderNode.getGROUP_ID());
+                jsonObject.put("group_name", qkdProviderNode.getGROUP_NAME());
+                jsonObject.put("id", qkdProviderNode.getID());
+                jsonObject.put("uid", qkdProviderNode.getUID());
+                jsonObject.put("name", qkdProviderNode.getNAME());
+                jsonObject.put("description", qkdProviderNode.getDESCRIPTION());
+                jsonObject.put("agent", agentJsonObject);
+                jsonObject.put("network", networkJsonObject);
+                jsonObject.put("qnc_web_api_url", qkdProviderNode.getQNC_WEB_API_URL());
+                jsonObject.put("qnc_web_api_auth", qkdProviderNode.getQNC_WEB_API_AUTH());
+                jsonObject.put("interfaces", interfacesJsonArray);
+                jsonObject.put("node", qkdProviderNode.getNODE());
+                jsonObject.put("loc_x", qkdProviderNode.getLOC_X());
+                jsonObject.put("loc_y", qkdProviderNode.getLOC_Y());
+                jsonObject.put("lat", qkdProviderNode.getLAT());
+                jsonObject.put("long", qkdProviderNode.getLONG());
+
+                jsonArray.add(jsonObject);
+            }
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return ResponseEntity.ok(jsonArray.toString());
+    }
+
+    @ApiOperation(value = "get qkd provider_link list ", notes = "전체 provider(qkd) link 조회")
+    @GetMapping(value = "/provider_link/list")
+    @ResponseBody
+    public ResponseEntity selectQkdProviderLinkList() {
+        if(qkdProviderLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
+        JSONArray jsonArray = new JSONArray();
+        JSONParser parser = new JSONParser();
+
+        try {
+            for(QkdProviderLink qkdProviderLink : qkdProviderLinkRepository.findAll()) {
+                JSONObject jsonObject = new JSONObject();
+                JSONObject modeJsonObject = (JSONObject) parser.parse(qkdProviderLink.getMODE());
+                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdProviderLink.getSOURCE());
+                JSONObject destinationJsonObject = (JSONObject) parser.parse((qkdProviderLink.getDESTINATION()));
+                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdProviderLink.getQ_KEY_STORE());
+
+                jsonObject.put("qkd_provider_link", qkdProviderLink.getQKD_PROVIDER_LINK_ID());
+                jsonObject.put("id", qkdProviderLink.getID());
+                jsonObject.put("uid", qkdProviderLink.getUID());
+                jsonObject.put("name", qkdProviderLink.getNAME());
+                jsonObject.put("mode", modeJsonObject);
+                jsonObject.put("source", sourceJsonObject);
+                jsonObject.put("destination", destinationJsonObject);
+                jsonObject.put("q_key_store", qKeyStoreJsonObject);
+
+                jsonArray.add(jsonObject);
+            }
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return ResponseEntity.ok(jsonArray.toString());
+    }
 
 //    @ApiOperation(value = "get qkd ", notes = "")
 //    @GetMapping(value = "")
