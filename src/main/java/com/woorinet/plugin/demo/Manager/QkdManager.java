@@ -26,12 +26,14 @@ public class QkdManager {
     QkdLinkRepository qkdLinkRepository;
     QkdPathRepository qkdPathRepository;
     QkdProviderNodeRepository qkdProviderNodeRepository;
+    QkdProviderLinkRepository qkdProviderLinkRepository;
 
     public QkdManager(QkdNodeRepository qkdNodeRepository,
                       QkdServiceRepository qkdServiceRepository,
                       QkdLinkRepository qkdLinkRepository,
                       QkdPathRepository qkdPathRepository,
-                      QkdProviderNodeRepository qkdProviderNodeRepository
+                      QkdProviderNodeRepository qkdProviderNodeRepository,
+                      QkdProviderLinkRepository qkdProviderLinkRepository
     ) throws Exception {
         this.gson = new Gson();
         this.kemsProviderMapList = new ArrayList<>();
@@ -41,6 +43,7 @@ public class QkdManager {
         this.qkdLinkRepository = qkdLinkRepository;
         this.qkdPathRepository = qkdPathRepository;
         this.qkdProviderNodeRepository = qkdProviderNodeRepository;
+        this.qkdProviderLinkRepository = qkdProviderLinkRepository;
     }
 
     public void QkdSyncStart() throws Exception {
@@ -80,7 +83,8 @@ public class QkdManager {
                         QkdSyncServiceList((List) map.get("consumerLinks"));
                         QkdSnycLinkList((List) map.get("nodeLinks"));
                         QkdSyncPathList((List) map.get("paths"));
-                        QkdSyncProviderNode();
+                        QkdSyncProviderNodeList();
+                        QkdSyncProviderLinkList((List) map.get("providerLinks"));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -206,7 +210,7 @@ public class QkdManager {
         }
     }
 
-    private void QkdSyncProviderNode() throws Exception {
+    private void QkdSyncProviderNodeList() throws Exception {
         qkdProviderNodeRepository.deleteAll();
         for(Map<String,Object> kemsProvider: kemsProviderMapList) {
             QkdProviderNode qkdProviderNode = new QkdProviderNode(
@@ -231,6 +235,29 @@ public class QkdManager {
             );
             qkdProviderNodeRepository.save(qkdProviderNode);
         }
+    }
+
+    private void QkdSyncProviderLinkList(List kemsProviderLinkList) throws Exception {
+        if(kemsProviderLinkList == null) return;
+
+        qkdProviderLinkRepository.deleteAll();
+
+        Iterator kemsProviderLinkListIterator = kemsProviderLinkList.iterator();
+        while(kemsProviderLinkListIterator.hasNext()) {
+            Map<String, Object> kemsProviderLink = (Map)kemsProviderLinkListIterator.next();
+
+            QkdProviderLink qkdProviderLink = new QkdProviderLink(
+                kemsProviderLink.get("id") == null ? "" : kemsProviderLink.get("id").toString(),
+                kemsProviderLink.get("uid") == null ? "" :kemsProviderLink.get("uid").toString(),
+                kemsProviderLink.get("name") == null ? "" :kemsProviderLink.get("name").toString(),
+                kemsProviderLink.get("mode") == null ? "" :gson.toJson(kemsProviderLink.get("mode")),
+                kemsProviderLink.get("source") == null ? "" :gson.toJson(kemsProviderLink.get("source")),
+                kemsProviderLink.get("destination") == null ? "" :gson.toJson(kemsProviderLink.get("destination")),
+                kemsProviderLink.get("qkeyStore") == null ? "" :gson.toJson(kemsProviderLink.get("qkeyStore"))
+            );
+            qkdProviderLinkRepository.save(qkdProviderLink);
+        }
+
     }
 
 }
