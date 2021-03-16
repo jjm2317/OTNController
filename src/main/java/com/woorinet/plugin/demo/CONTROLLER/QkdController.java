@@ -35,7 +35,7 @@ public class QkdController {
 
 
     @ApiOperation(value = "get kms node list", notes = "전체 KMS 노드 조회")
-    @GetMapping(value = "/node/list")
+    @GetMapping(value = "/node")
     @ResponseBody
     public ResponseEntity selectNodeList() {
         if(qkdNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -79,7 +79,7 @@ public class QkdController {
     }
 
     @ApiOperation(value = "get qkd service list", notes = "전체 kms service 조회")
-    @GetMapping(value = "/service/list")
+    @GetMapping(value = "/service")
     @ResponseBody
     public ResponseEntity selectServiceList() {
         if(qkdServiceRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -113,7 +113,7 @@ public class QkdController {
     }
 
     @ApiOperation(value = "get qkd link list", notes = "전체 QKD Link 조회")
-    @GetMapping(value = "/link/list")
+    @GetMapping(value = "/link")
     @ResponseBody
     public ResponseEntity selectQkdLinkList() {
         if(qkdLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -148,7 +148,7 @@ public class QkdController {
     }
 
     @ApiOperation(value = "get qkd path list", notes = "전체 QKD Path 조회")
-    @GetMapping(value = "/path/list")
+    @GetMapping(value = "/path")
     @ResponseBody
     public ResponseEntity selectQkdPathList() {
         if(qkdPathRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -183,7 +183,7 @@ public class QkdController {
     }
 
     @ApiOperation(value = "get qkd provider_node list ", notes = "전체 provider(qkd) node 조회")
-    @GetMapping(value = "/provider_node/list")
+    @GetMapping(value = "/provider_node")
     @ResponseBody
     public ResponseEntity selectQkdProviderNodeList() {
         if(qkdProviderNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -228,7 +228,7 @@ public class QkdController {
     }
 
     @ApiOperation(value = "get qkd provider_link list ", notes = "전체 provider(qkd) link 조회")
-    @GetMapping(value = "/provider_link/list")
+    @GetMapping(value = "/provider_link")
     @ResponseBody
     public ResponseEntity selectQkdProviderLinkList() {
         if(qkdProviderLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -261,7 +261,7 @@ public class QkdController {
     }
 
     @ApiOperation(value = "get qkd app_node list", notes = "전체 app node 조회")
-    @GetMapping(value = "/app_node/list")
+    @GetMapping(value = "/app_node")
     @ResponseBody
     public ResponseEntity selectQkdAppNodeList() {
         if(qkdAppNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -304,7 +304,7 @@ public class QkdController {
     }
 
     @ApiOperation(value = "get qkd app_link list", notes = "전체 app link 조회")
-    @GetMapping(value = "/app_link/list")
+    @GetMapping(value = "/app_link")
     @ResponseBody
     public ResponseEntity selectQkdAppLinkList() {
         if(qkdAppLinkRepositroy.findAll() == null) return ResponseEntity.notFound().build();
