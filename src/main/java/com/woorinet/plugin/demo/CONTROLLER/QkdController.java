@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.woorinet.plugin.demo.DTO.QKD.QkdLink;
 import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
+import com.woorinet.plugin.demo.DTO.QKD.QkdPath;
 import com.woorinet.plugin.demo.DTO.QKD.QkdService;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import io.swagger.annotations.ApiOperation;
@@ -152,39 +153,40 @@ public class QkdController {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-//    @ApiOperation(value = "get qkd path list", notes = "전체 QKD Path 조회")
-//    @GetMapping(value = "/path/list")
-//    @ResponseBody
-//    public ResponseEntity selectQkdPathList() {
-//        if(qkdPathRepository.findAll() == null) return ResponseEntity.notFound().build();
-//        JSONArray jsonArray = new JSONArray();
-//        JSONParser parser = new JSONParser();
-//
-//        try {
-//            for(QkdService qkdService : qkdServiceRepository.findAll()) {
-//                JSONObject jsonObject = new JSONObject();
-//                JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdService.getOPER_MODE());
-//                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdService.getSOURCE());
-//                JSONObject destJsonObject = (JSONObject) parser.parse(qkdService.getDEST());
-//                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdService.getQ_KEY_STORE());
-//
-//                jsonObject.put("qkd_service_id;", qkdService.getQKD_SERVICE_ID());
-//                jsonObject.put("id;", qkdService.getID());
-//                jsonObject.put("uid;", qkdService.getUID());
-//                jsonObject.put("name;", qkdService.getNAME());
-//                jsonObject.put("oper_mode;", operModeJsonObject);
-//                jsonObject.put("source;", sourceJsonObject);
-//                jsonObject.put("dest;", destJsonObject);
-//                jsonObject.put("preshared_key;", qkdService.getPRESHARED_KEY());
-//                jsonObject.put("q_key_store;", qKeyStoreJsonObject);
-//
-//                jsonArray.add(jsonObject);
-//            }
-//        } catch (Exception exception){
-//            exception.printStackTrace();
-//        }
-//        return ResponseEntity.ok();
-//    }
+    @ApiOperation(value = "get qkd path list", notes = "전체 QKD Path 조회")
+    @GetMapping(value = "/path/list")
+    @ResponseBody
+    public ResponseEntity selectQkdPathList() {
+        if(qkdPathRepository.findAll() == null) return ResponseEntity.notFound().build();
+        JSONArray jsonArray = new JSONArray();
+        JSONParser parser = new JSONParser();
+
+        try {
+            for(QkdPath qkdPath : qkdPathRepository.findAll()) {
+                JSONObject jsonObject = new JSONObject();
+                JSONObject consumerLinkJsonObject = (JSONObject) parser.parse(qkdPath.getCONSUMER_LINK());
+                JSONArray primaryJsonArray = (JSONArray) parser.parse(qkdPath.getPRIMARY());
+                JSONArray secondaryJsonArray = (JSONArray) parser.parse(qkdPath.getSECONDARY());
+
+                jsonObject.put("qkd_path_id", qkdPath.getQKD_PATH_ID());
+                jsonObject.put("id", qkdPath.getID());
+                jsonObject.put("fail_back_mode", qkdPath.getFAIL_BACK_MODE());
+                jsonObject.put("fail_back_period", qkdPath.getFAIL_BACK_PERIOD());
+                jsonObject.put("consumer_link", consumerLinkJsonObject);
+                jsonObject.put("primary", primaryJsonArray);
+                jsonObject.put("primary_usage", qkdPath.getPRIMARY_USAGE());
+                jsonObject.put("primary_fault", qkdPath.getPRIMARY_FAULT());
+                jsonObject.put("secondary", secondaryJsonArray);
+                jsonObject.put("secondary_usage", qkdPath.getSECONDARY_USAGE());
+                jsonObject.put("secondary_fault", qkdPath.getSECONDARY_FAULT());
+                jsonObject.put("remark", qkdPath.getREMARK());
+                jsonArray.add(jsonObject);
+            }
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return ResponseEntity.ok(jsonArray.toString());
+    }
 
 //    @ApiOperation(value = "get qkd ", notes = "")
 //    @GetMapping(value = "")
