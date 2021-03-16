@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.HOLA;
+package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
 import com.google.gson.Gson;
@@ -7,16 +7,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
 
 @Setter
 @Getter
 @Data
 @Entity
-@Table(name="hola_link_mng")
-public class HolaLinkMng {
+@Table(name="portal_link_mng")
+public class PortalLinkMng {
     @Id
     @GeneratedValue
     int HOLA_SDN_LINK_MNG_ID;
@@ -34,10 +32,10 @@ public class HolaLinkMng {
     String ROADM_PATH;
     String REMARKS;
 
-    public HolaLinkMng() {
+    public PortalLinkMng() {
     }
 
-    public HolaLinkMng(String VENDOR, String LINK, String ADMIN_WEIGHT, String MAXIMUM_USAGE_RATIO, String MEMORY, String USAGE_RATIO, String ALL_MEMORY, String ALL_USAGE_RATIO, String DISTANCE, String SRLG, String ROADM_PATH, String REMARKS) {
+    public PortalLinkMng(String VENDOR, String LINK, String ADMIN_WEIGHT, String MAXIMUM_USAGE_RATIO, String MEMORY, String USAGE_RATIO, String ALL_MEMORY, String ALL_USAGE_RATIO, String DISTANCE, String SRLG, String ROADM_PATH, String REMARKS) {
         this.VENDOR = VENDOR;
         this.LINK = LINK;
         this.ADMIN_WEIGHT = ADMIN_WEIGHT;

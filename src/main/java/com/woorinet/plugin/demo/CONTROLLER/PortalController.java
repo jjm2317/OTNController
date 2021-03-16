@@ -1,8 +1,8 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
-import com.woorinet.plugin.demo.DTO.HOLA.HolaLineNumSheet;
-import com.woorinet.plugin.demo.DTO.HOLA.HolaLinkMng;
-import com.woorinet.plugin.demo.Repository.HOLA.*;
+import com.woorinet.plugin.demo.DTO.PORTAL.PortalLineNumSheet;
+import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkMng;
+import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,65 +18,65 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/portal")
 public class PortalController {
     @Autowired
-    private HolaLineNumSheetRepository holaLineNumSheetRepository;
+    private PortalLineNumSheetRepository portalLineNumSheetRepository;
     @Autowired
-    private HolaLinkMngRepository holaLinkMngRepository;
+    private PortalLinkMngRepository portalLinkMngRepository;
     @Autowired
-    private HolaTrunkUsageRepository holaTrunkUsageRepository;
+    private PortalTrunkUsageRepository portalTrunkUsageRepository;
     @Autowired
-    private HolaInventroyDetailRepository holaInventroyDetailRepository;
+    private PortalInventroyDetailRepository portalInventroyDetailRepository;
     @Autowired
-    private HolaOtnNodeUsageRepository holaOtnNodeUsageRepository;
+    private PortalOtnNodeUsageRepository portalOtnNodeUsageRepository;
     @Autowired
-    private HolaOtnMaterialRepository holaOtnMaterialRepository;
+    private PortalOtnMaterialRepository portalOtnMaterialRepository;
 
     @ApiOperation(value = "get Line Number Sheet", notes = "전체 선번장 조회")
     @GetMapping(value = "/lineNumSheet/list")
     @ResponseBody
     public ResponseEntity selectLineNumSheetList() {
-        if(holaLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
 
-            for(HolaLineNumSheet holaLineNumSheet : holaLineNumSheetRepository.findAll()) {
+            for(PortalLineNumSheet portalLineNumSheet : portalLineNumSheetRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
-                JSONObject EPStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getENDPOINT_CLIENT_START());
-                JSONObject TCStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getTRANSMIT_CLIENT_START());
-                JSONObject LStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getLINK_START());
-                JSONObject RMStartJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getROADM_MUX_START());
-                JSONObject RMEndJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getROADM_MUX_END());
-                JSONObject LEndJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getLINK_END());
-                JSONObject TCEndJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getTRANSMIT_CLIENT_END());
-                JSONObject EPENDJsonObj = (JSONObject) parser.parse(holaLineNumSheet.getENDPOINT_CLIENT_END());
+                JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getENDPOINT_CLIENT_START());
+                JSONObject TCStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTRANSMIT_CLIENT_START());
+                JSONObject LStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLINK_START());
+                JSONObject RMStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getROADM_MUX_START());
+                JSONObject RMEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getROADM_MUX_END());
+                JSONObject LEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLINK_END());
+                JSONObject TCEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTRANSMIT_CLIENT_END());
+                JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getENDPOINT_CLIENT_END());
 
 
-                jsonObject.put("line_num_sheet_id", holaLineNumSheet.getLINE_NUM_SHEET_ID());
-                jsonObject.put("group", holaLineNumSheet.getGROUP());
-                jsonObject.put("domain_type", holaLineNumSheet.getDOMAIN_TYPE());
-                jsonObject.put("area_start", holaLineNumSheet.getAREA_START());
-                jsonObject.put("area_end", holaLineNumSheet.getAREA_END());
-                jsonObject.put("node_start", holaLineNumSheet.getNODE_START());
-                jsonObject.put("node_end",holaLineNumSheet.getNODE_END());
-                jsonObject.put("circuit_id",holaLineNumSheet.getCIRCUIT_ID());
-                jsonObject.put("auto_service_name",holaLineNumSheet.getAUTO_SERVICE_NAME());
-                jsonObject.put("input_service_name",holaLineNumSheet.getINPUT_SERVICE_NAME());
-                jsonObject.put("service_type",holaLineNumSheet.getSERVICE_TYPE());
-                jsonObject.put("vendor",holaLineNumSheet.getVENDOR());
-                jsonObject.put("constraint_id",holaLineNumSheet.getCONSTRAINT_ID());
-                jsonObject.put("protection_type",holaLineNumSheet.getPROTECTIOM_TYPE());
-                jsonObject.put("service_rate",holaLineNumSheet.getSERVICE_RATE());
-                jsonObject.put("service_status",holaLineNumSheet.getSERVICE_STATUS());
-                jsonObject.put("active_path",holaLineNumSheet.getACTIVE_PATH());
-                jsonObject.put("traffic_status",holaLineNumSheet.getTRAFFIC_STATUS());
-                jsonObject.put("home_path",holaLineNumSheet.getHOME_PATH());
-                jsonObject.put("latency",holaLineNumSheet.getLATENCY());
-                jsonObject.put("cable_creation_date",holaLineNumSheet.getCABLE_CREATION_DATE());
-                jsonObject.put("network_cable_number",holaLineNumSheet.getNETWORK_CABLE_NUMBER());
-                jsonObject.put("writer",holaLineNumSheet.getWRITER());
-                jsonObject.put("remarks",holaLineNumSheet.getREMARKS());
+                jsonObject.put("line_num_sheet_id", portalLineNumSheet.getLINE_NUM_SHEET_ID());
+                jsonObject.put("group", portalLineNumSheet.getGROUP());
+                jsonObject.put("domain_type", portalLineNumSheet.getDOMAIN_TYPE());
+                jsonObject.put("area_start", portalLineNumSheet.getAREA_START());
+                jsonObject.put("area_end", portalLineNumSheet.getAREA_END());
+                jsonObject.put("node_start", portalLineNumSheet.getNODE_START());
+                jsonObject.put("node_end", portalLineNumSheet.getNODE_END());
+                jsonObject.put("circuit_id", portalLineNumSheet.getCIRCUIT_ID());
+                jsonObject.put("auto_service_name", portalLineNumSheet.getAUTO_SERVICE_NAME());
+                jsonObject.put("input_service_name", portalLineNumSheet.getINPUT_SERVICE_NAME());
+                jsonObject.put("service_type", portalLineNumSheet.getSERVICE_TYPE());
+                jsonObject.put("vendor", portalLineNumSheet.getVENDOR());
+                jsonObject.put("constraint_id", portalLineNumSheet.getCONSTRAINT_ID());
+                jsonObject.put("protection_type", portalLineNumSheet.getPROTECTIOM_TYPE());
+                jsonObject.put("service_rate", portalLineNumSheet.getSERVICE_RATE());
+                jsonObject.put("service_status", portalLineNumSheet.getSERVICE_STATUS());
+                jsonObject.put("active_path", portalLineNumSheet.getACTIVE_PATH());
+                jsonObject.put("traffic_status", portalLineNumSheet.getTRAFFIC_STATUS());
+                jsonObject.put("home_path", portalLineNumSheet.getHOME_PATH());
+                jsonObject.put("latency", portalLineNumSheet.getLATENCY());
+                jsonObject.put("cable_creation_date", portalLineNumSheet.getCABLE_CREATION_DATE());
+                jsonObject.put("network_cable_number", portalLineNumSheet.getNETWORK_CABLE_NUMBER());
+                jsonObject.put("writer", portalLineNumSheet.getWRITER());
+                jsonObject.put("remarks", portalLineNumSheet.getREMARKS());
                 jsonObject.put("endpoint_client_start",EPStartJsonObj);
                 jsonObject.put("transmit_client_start",TCStartJsonObj);
                 jsonObject.put("link_start", LStartJsonObj);
@@ -101,29 +101,29 @@ public class PortalController {
     @GetMapping(value = "/linkMng/list")
     @ResponseBody
     public ResponseEntity selectLinkMngList() {
-        if(holaLinkMngRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalLinkMngRepository.findAll() == null) return ResponseEntity.notFound().build();
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
-            for (HolaLinkMng holaLinkMng : holaLinkMngRepository.findAll()) {
+            for (PortalLinkMng portalLinkMng : portalLinkMngRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
-                JSONArray linkJsonArray = (JSONArray) parser.parse(holaLinkMng.getLINK());
+                JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLINK());
 
-                jsonObject.put("hola_link_mng_id", holaLinkMng.getHOLA_SDN_LINK_MNG_ID());
-                jsonObject.put("vendor", holaLinkMng.getVENDOR());
+                jsonObject.put("hola_link_mng_id", portalLinkMng.getHOLA_SDN_LINK_MNG_ID());
+                jsonObject.put("vendor", portalLinkMng.getVENDOR());
                 jsonObject.put("link", linkJsonArray);
-                jsonObject.put("admin_weight", holaLinkMng.getADMIN_WEIGHT());
-                jsonObject.put("maximum_usage_ratio",holaLinkMng.getMAXIMUM_USAGE_RATIO());
-                jsonObject.put("memory",holaLinkMng.getMEMORY());
-                jsonObject.put("usage_ratio",holaLinkMng.getUSAGE_RATIO());
-                jsonObject.put("all_memory",holaLinkMng.getALL_MEMORY());
-                jsonObject.put("all_usage_ratio",holaLinkMng.getALL_USAGE_RATIO());
-                jsonObject.put("distance",holaLinkMng.getDISTANCE());
-                jsonObject.put("srlg",holaLinkMng.getSRLG());
-                jsonObject.put("roadm_path",holaLinkMng.getROADM_PATH());
-                jsonObject.put("remarks",holaLinkMng.getREMARKS());
+                jsonObject.put("admin_weight", portalLinkMng.getADMIN_WEIGHT());
+                jsonObject.put("maximum_usage_ratio", portalLinkMng.getMAXIMUM_USAGE_RATIO());
+                jsonObject.put("memory", portalLinkMng.getMEMORY());
+                jsonObject.put("usage_ratio", portalLinkMng.getUSAGE_RATIO());
+                jsonObject.put("all_memory", portalLinkMng.getALL_MEMORY());
+                jsonObject.put("all_usage_ratio", portalLinkMng.getALL_USAGE_RATIO());
+                jsonObject.put("distance", portalLinkMng.getDISTANCE());
+                jsonObject.put("srlg", portalLinkMng.getSRLG());
+                jsonObject.put("roadm_path", portalLinkMng.getROADM_PATH());
+                jsonObject.put("remarks", portalLinkMng.getREMARKS());
 
                 jsonArray.add(jsonObject);
             }
@@ -138,31 +138,31 @@ public class PortalController {
     @GetMapping(value = "/trunkUsage/list")
     @ResponseBody
     public ResponseEntity selectTrunkUsageList() {
-        if(holaTrunkUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(holaTrunkUsageRepository.findAll());
+        if(portalTrunkUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalTrunkUsageRepository.findAll());
     }
 
     @ApiOperation(value = "get inventory detail", notes = "전체 상새 inventory 현황 조회")
     @GetMapping(value = "/inventoryDetail/list")
     @ResponseBody
     public ResponseEntity selectInventoryDetail() {
-        if(holaInventroyDetailRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(holaInventroyDetailRepository.findAll());
+        if(portalInventroyDetailRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalInventroyDetailRepository.findAll());
     }
 
     @ApiOperation(value = "get otn node usage", notes = "전체 otn node 사용현황 조회")
     @GetMapping(value = "/otnNodeUsage/list")
     @ResponseBody
     public ResponseEntity selectOtnNodeUsage() {
-        if(holaOtnNodeUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(holaOtnNodeUsageRepository.findAll());
+        if(portalOtnNodeUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalOtnNodeUsageRepository.findAll());
     }
 
     @ApiOperation(value = "get otn material", notes = "전체 otn 물자현황 조회")
     @GetMapping(value = "/otnMaterial/list")
     @ResponseBody
     public ResponseEntity selectOtnMaterial() {
-        if(holaOtnMaterialRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(holaOtnMaterialRepository.findAll());
+        if(portalOtnMaterialRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalOtnMaterialRepository.findAll());
     }
 }

@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.HOLA;
+package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
 import lombok.Data;
@@ -14,8 +14,8 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="hola_inventory_detail")
-public class HolaInventoryDetail {
+@Table(name="portal_inventory_detail")
+public class PortalInventoryDetail {
     @Id
     @GeneratedValue
     int HOLA_SDN_INVENTORY_DETAIL_ID;
@@ -39,10 +39,10 @@ public class HolaInventoryDetail {
     String CABLE_NAME;
     String REMARKS_LIST;
 
-    public HolaInventoryDetail() {
+    public PortalInventoryDetail() {
     }
 
-    public HolaInventoryDetail(String VENDOR, String CELL, String TID, String SHELF_ID, String IP, String NE_TYPE, String UNIT_TYPE, String UNIT_PEC, String SERIAL_NUMBER, String SLOT_ID, String PORT_ID, String CONNECT_STATUS, String LLCF, String MODULE_NAME, String MODULE_PEC, String DISTANCE, String MODULE_DESCRIPTION, String CABLE_NAME, String REMARKS_LIST) {
+    public PortalInventoryDetail(String VENDOR, String CELL, String TID, String SHELF_ID, String IP, String NE_TYPE, String UNIT_TYPE, String UNIT_PEC, String SERIAL_NUMBER, String SLOT_ID, String PORT_ID, String CONNECT_STATUS, String LLCF, String MODULE_NAME, String MODULE_PEC, String DISTANCE, String MODULE_DESCRIPTION, String CABLE_NAME, String REMARKS_LIST) {
         this.VENDOR = VENDOR;
         this.CELL = CELL;
         this.TID = TID;
