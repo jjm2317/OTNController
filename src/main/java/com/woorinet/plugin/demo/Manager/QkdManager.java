@@ -23,12 +23,15 @@ import java.util.List;
 import java.util.Map;
 
 public class QkdManager {
+    Gson gson;
     QkdNodeRepository qkdNodeRepository;
     QkdServiceRepository qkdServiceRepository;
     QkdLinkRepository qkdLinkRepository;
     QkdPathRepository qkdPathRepository;
 
     public QkdManager(QkdNodeRepository qkdNodeRepository, QkdServiceRepository qkdServiceRepository, QkdLinkRepository qkdLinkRepository, QkdPathRepository qkdPathRepository) throws Exception {
+        this.gson = new Gson();
+
         this.qkdNodeRepository = qkdNodeRepository;
         this.qkdServiceRepository = qkdServiceRepository;
         this.qkdLinkRepository = qkdLinkRepository;
@@ -91,7 +94,6 @@ public class QkdManager {
         Iterator kemsNodeListIterator = kemsNodeList.iterator();
         while(kemsNodeListIterator.hasNext()) {
             Map<String, Object> kemsnode = (Map) kemsNodeListIterator.next();
-            Gson gson = new Gson();
 
             QkdNode qkdNode = new QkdNode(
                     kemsnode.get("id") == null ? "" : kemsnode.get("id").toString(),
@@ -128,11 +130,11 @@ public class QkdManager {
                     kemsConsumerLink.get("id") == null ? "" : kemsConsumerLink.get("id").toString(),
                     kemsConsumerLink.get("uid") == null ? "" :kemsConsumerLink.get("uid").toString(),
                     kemsConsumerLink.get("name") == null ? "" :kemsConsumerLink.get("name").toString(),
-                    kemsConsumerLink.get("operMode") == null ? "" :kemsConsumerLink.get("operMode").toString(),
-                    kemsConsumerLink.get("source") == null ? "" :kemsConsumerLink.get("source").toString(),
-                    kemsConsumerLink.get("dest") == null ? "" :kemsConsumerLink.get("dest").toString(),
+                    kemsConsumerLink.get("operMode") == null ? "" : gson.toJson(kemsConsumerLink.get("operMode").toString()),
+                    kemsConsumerLink.get("source") == null ? "" : gson.toJson(kemsConsumerLink.get("source").toString()),
+                    kemsConsumerLink.get("dest") == null ? "" : gson.toJson(kemsConsumerLink.get("dest").toString()),
                     kemsConsumerLink.get("presharedKey") == null ? "" :kemsConsumerLink.get("presharedKey").toString(),
-                    kemsConsumerLink.get("qkeyStore") == null ? "" :kemsConsumerLink.get("qkeyStore").toString()
+                    kemsConsumerLink.get("qkeyStore") == null ? "" : gson.toJson(kemsConsumerLink.get("qkeyStore").toString())
             );
             qkdServiceRepository.save(qkdService);
         }
