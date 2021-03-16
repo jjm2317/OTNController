@@ -4,9 +4,11 @@ package com.woorinet.plugin.demo.CONTROLLER;
 import com.woorinet.plugin.demo.DTO.SDN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Manager.HOLAManager;
+import com.woorinet.plugin.demo.Manager.KMSManager;
 import com.woorinet.plugin.demo.Manager.SDNManager;
 import com.woorinet.plugin.demo.Manager.TL1Manager;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
+import com.woorinet.plugin.demo.Repository.KMS.KmsNodeRepository;
 import com.woorinet.plugin.demo.Repository.SDN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -313,5 +315,26 @@ public class SyncController {
         }
 
         return "hola synchronization success";
+    }
+
+    @Autowired
+    private KmsNodeRepository kmsNodeRepository;
+
+    @GetMapping("/kms")
+    String syncronizeKMS() {
+        try {
+
+
+
+            KMSManager manager = new KMSManager(
+               kmsNodeRepository
+            );
+            manager.KMSSyncStart();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "kms synchronization fail";
+        }
+
+        return "kms synchronization success";
     }
 }

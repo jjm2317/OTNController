@@ -35,7 +35,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .apiInfo(getApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.woorinet.plugin.demo"))
-                .paths(PathSelectors.regex("/sdn/.*|/hola/.*|/kms/.*"))
+                .paths(PathSelectors.regex("/sdn/.*|/hola/.*|/kms/.*|/qkd/.*"))
                 .build();
     }
 

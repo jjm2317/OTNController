@@ -22,7 +22,7 @@ public class KmsNode {
     String ID;
     String UID;
     String NAME;
-    Boolean ENABLED;
+    String ENABLED;
     String DESCRIPTION;
     String GROUP_ID;
     String QNC_WEB_API_URL;
@@ -38,7 +38,7 @@ public class KmsNode {
     public KmsNode() {
     }
 
-    public KmsNode(String ID, String UID, String NAME, Boolean ENABLED, String DESCRIPTION, String GROUP_ID, String QNC_WEB_API_URL, String QNC_WEB_APIAUTH, String CERT, String KEMS_CERT, String NETWORK, String CONSUMERS, String PROVIDERS, String LOC_X, String LOC_Y) {
+    public KmsNode(String ID, String UID, String NAME, String ENABLED, String DESCRIPTION, String GROUP_ID, String QNC_WEB_API_URL, String QNC_WEB_APIAUTH, String CERT, String KEMS_CERT, String NETWORK, String CONSUMERS, String PROVIDERS, String LOC_X, String LOC_Y) {
         this.ID = ID;
         this.UID = UID;
         this.NAME = NAME;
@@ -58,11 +58,11 @@ public class KmsNode {
 
     @Override
     public String toString() {
-        return "KMSNode{" +
+        return "KmsNode{" +
                 "ID='" + ID + '\'' +
                 ", UID='" + UID + '\'' +
                 ", NAME='" + NAME + '\'' +
-                ", ENABLED=" + ENABLED +
+                ", ENABLED='" + ENABLED + '\'' +
                 ", DESCRIPTION='" + DESCRIPTION + '\'' +
                 ", GROUP_ID='" + GROUP_ID + '\'' +
                 ", QNC_WEB_API_URL='" + QNC_WEB_API_URL + '\'' +
