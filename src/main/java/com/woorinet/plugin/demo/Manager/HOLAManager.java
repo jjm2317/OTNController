@@ -1,11 +1,10 @@
 package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.HOLA.*;
-import com.woorinet.plugin.demo.DTO.SDN.*;
+import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
-import com.woorinet.plugin.demo.Repository.SDN.SdnConnectorRepository;
+import com.woorinet.plugin.demo.Repository.OTN.OtnConnectorRepository;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -18,15 +17,15 @@ public class HOLAManager {
     HolaOtnNodeUsageRepository holaOtnNodeUsageRepository;
     HolaOtnMaterialRepository holaOtnMaterialRepository;
 
-    SdnConnectorRepository sdnConnectorRepository;
+    OtnConnectorRepository otnConnectorRepository;
 
-    List<SdnNode> sdnNodeList;
-    List<SdnConnector> sdnConnectorList;
-    List<SdnLink> sdnLinkList;
-    List<SdnService> sdnServiceList;
-    List<SdnPath> sdnPathList;
-    List<SdnConstraint> sdnConstraintList;
-    List<SdnAccessIf> sdnAccessIfList;
+    List<OtnNode> otnNodeList;
+    List<OtnConnector> otnConnectorList;
+    List<OtnLink> otnLinkList;
+    List<OtnService> otnServiceList;
+    List<OtnPath> otnPathList;
+    List<OtnConstraint> otnConstraintList;
+    List<OtnAccessIf> otnAccessIfList;
 
 
     public HOLAManager(HolaLineNumSheetRepository holaLineNumSheetRepository,
@@ -35,14 +34,14 @@ public class HOLAManager {
                        HolaInventroyDetailRepository holaInventroyDetailRepository,
                        HolaOtnNodeUsageRepository holaOtnNodeUsageRepository,
                        HolaOtnMaterialRepository holaOtnMaterialRepository,
-                       SdnConnectorRepository sdnConnectorRepository,
-                       List<SdnNode> sdnNodeList,
-                       List<SdnConnector> sdnConnectorList,
-                       List<SdnLink> sdnLinkList,
-                       List<SdnService> sdnServiceList,
-                       List<SdnPath> sdnPathList,
-                       List<SdnConstraint> sdnConstraintList,
-                       List<SdnAccessIf> sdnAccessIfList
+                       OtnConnectorRepository otnConnectorRepository,
+                       List<OtnNode> otnNodeList,
+                       List<OtnConnector> otnConnectorList,
+                       List<OtnLink> otnLinkList,
+                       List<OtnService> otnServiceList,
+                       List<OtnPath> otnPathList,
+                       List<OtnConstraint> otnConstraintList,
+                       List<OtnAccessIf> otnAccessIfList
                        ) throws Exception{
         this.holaLineNumSheetRepository = holaLineNumSheetRepository;
         this.holaLinkMngRepository = holaLinkMngRepository;
@@ -51,15 +50,15 @@ public class HOLAManager {
         this.holaOtnNodeUsageRepository = holaOtnNodeUsageRepository;
         this.holaOtnMaterialRepository = holaOtnMaterialRepository;
 
-        this.sdnConnectorRepository = sdnConnectorRepository;
+        this.otnConnectorRepository = otnConnectorRepository;
 
-        this.sdnNodeList = sdnNodeList;
-        this.sdnConnectorList = sdnConnectorList;
-        this.sdnLinkList = sdnLinkList;
-        this.sdnServiceList = sdnServiceList;
-        this.sdnPathList = sdnPathList;
-        this.sdnConstraintList = sdnConstraintList;
-        this.sdnAccessIfList = sdnAccessIfList;
+        this.otnNodeList = otnNodeList;
+        this.otnConnectorList = otnConnectorList;
+        this.otnLinkList = otnLinkList;
+        this.otnServiceList = otnServiceList;
+        this.otnPathList = otnPathList;
+        this.otnConstraintList = otnConstraintList;
+        this.otnAccessIfList = otnAccessIfList;
 
         makeHashMap();
     }
@@ -83,20 +82,20 @@ public class HOLAManager {
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
-        Stream<HolaLineNumSheet> holaSdnLineNumSheetStream = sdnServiceList
+        Stream<HolaLineNumSheet> holaSdnLineNumSheetStream = otnServiceList
             .stream()
-            .map(sdnService -> {
+            .map(otnService -> {
 
-                Optional<SdnConnector> srcSdnConnector = sdnConnectorList.stream().
-                        filter(connector -> connector.getConnect_id().equals(sdnService.getSrc_connector_id()))
+                Optional<OtnConnector> srcSdnConnector = otnConnectorList.stream().
+                        filter(connector -> connector.getConnect_id().equals(otnService.getSrc_connector_id()))
                         .findAny();
 
-                Optional<SdnConnector> dstSdnConnector = sdnConnectorList.stream().
-                        filter(connector -> connector.getConnect_id().equals(sdnService.getDst_connector_id()))
+                Optional<OtnConnector> dstSdnConnector = otnConnectorList.stream().
+                        filter(connector -> connector.getConnect_id().equals(otnService.getDst_connector_id()))
                         .findAny();
 
-                Optional<SdnLink> sdnLink = sdnLinkList.stream().
-                        filter(link -> link.getLink_id().equals(sdnService.getSrc_connector_id() + ":" + sdnService.getDst_connector_id()))
+                Optional<OtnLink> sdnLink = otnLinkList.stream().
+                        filter(link -> link.getLink_id().equals(otnService.getSrc_connector_id() + ":" + otnService.getDst_connector_id()))
                         .findAny();
 
                 HolaLineNumSheet holaLineNumSheet = new HolaLineNumSheet(
@@ -104,22 +103,22 @@ public class HOLAManager {
                         "Single", //domain_type
                         "", //area_start, userinput
                         "", //area_end, userinput
-                        sdnService.getSrc_ne_name() ,//node_start
-                        sdnService.getDst_ne_name() ,//node_end
+                        otnService.getSrc_ne_name() ,//node_start
+                        otnService.getDst_ne_name() ,//node_end
                         "", //circuit_id
-                        sdnService.getService_name(), //auto_service_name
+                        otnService.getService_name(), //auto_service_name
                         "", //input_service_name, userinput
                         "", //service_type, userinput
                         "Woorinet", //vendor
                         "", //constraint_id
                         "no protection", //protection_type, otn 장비는 보호타입이 no protection
-                        sdnService.getService_rate(), //service_rate,
+                        otnService.getService_rate(), //service_rate,
                         "", //service_status, 일반적으로 서비스 상태는 값이 나오는데 여긴 없음, 모비젠에 문의 해야됨
-                        sdnService.getActive_path().contains("active") ? "주" : "예비", //active_path, 주의 기준??
+                        otnService.getActive_path().contains("active") ? "주" : "예비", //active_path, 주의 기준??
                         "active", //traffic_status, 어디 있지??
                         "", //home_path
                         "", //latency
-                        sdnService.getCreation_date(), //cable_creation_date
+                        otnService.getCreation_date(), //cable_creation_date
                         "", //network_cable_number
                         "", //writer
                         "", //remarks
@@ -141,7 +140,7 @@ public class HOLAManager {
                         "",
                         "Woorinet",
                         "",
-                        sdnService.getSrc_ne_name(),
+                        otnService.getSrc_ne_name(),
                         srcSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
                         srcSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
                         srcSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
@@ -184,7 +183,7 @@ public class HOLAManager {
                         "",
                         "Woorinet",
                         "",
-                        sdnService.getDst_ne_name(),
+                        otnService.getDst_ne_name(),
                         dstSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
                         dstSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
                         dstSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
@@ -209,13 +208,13 @@ public class HOLAManager {
     }
 
     private void HolaSyncLinkMng() throws Exception {
-        Stream<HolaLinkMng> holaLinkMngStream = sdnLinkList
+        Stream<HolaLinkMng> holaLinkMngStream = otnLinkList
             .stream()
-            .filter(sdnLink -> {
-                String [] halfOflinkId = sdnLink.getLink_id().split(":");
+            .filter(otnLink -> {
+                String [] halfOflinkId = otnLink.getLink_id().split(":");
                 return (halfOflinkId[0].split("_")[2].charAt(0) < halfOflinkId[1].split("_")[2].charAt(0));
             })
-            .map(sdnLink -> {
+            .map(otnLink -> {
                 HolaLinkMng holaLinkMng = new HolaLinkMng(
                         "Woorinet", //vendor
                         "", // link
@@ -232,8 +231,8 @@ public class HOLAManager {
                 );
 
 
-                String[] firstHalfOfLinkIdSplits = sdnLink.getLink_id().split(":")[0].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_B, 1, S03, 1]
-                String[] secondHalfOfLinkIdSplits = sdnLink.getLink_id().split(":")[1].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_C, 1, S02, 3]
+                String[] firstHalfOfLinkIdSplits = otnLink.getLink_id().split(":")[0].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_B, 1, S03, 1]
+                String[] secondHalfOfLinkIdSplits = otnLink.getLink_id().split(":")[1].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_C, 1, S02, 3]
 
 
                 String[] firstLinkFields = {
@@ -270,35 +269,35 @@ public class HOLAManager {
     }
 
     private void HolaSyncSdnInventoryDetail() throws Exception {
-        Stream<HolaInventoryDetail> holaSdnInventoryDetailStream = sdnConnectorList
+        Stream<HolaInventoryDetail> holaSdnInventoryDetailStream = otnConnectorList
             .stream()
-            .map(sdnConnector -> {
-                Optional<SdnNode> sdnNode = sdnNodeList.stream().
-                        filter(node -> node.getNe_name().equals(sdnConnector.getNe_name()))
+            .map(otnConnector -> {
+                Optional<OtnNode> sdnNode = otnNodeList.stream().
+                        filter(node -> node.getNe_name().equals(otnConnector.getNe_name()))
                             .findAny();
 
 
 
-                Optional<SdnLink> sdnLink = sdnLinkList.stream().
-                        filter(link -> link.getLink_id().contains(sdnConnector.getConnect_id()))
+                Optional<OtnLink> sdnLink = otnLinkList.stream().
+                        filter(link -> link.getLink_id().contains(otnConnector.getConnect_id()))
                         .findAny();
 
                 HolaInventoryDetail holaInventoryDetail = new HolaInventoryDetail(
                         "Woorinet", //vendor
                         "", //cell
-                        sdnConnector.getNe_name(), //tid
-                        sdnConnector.getShelf_id(), //shelf_id
+                        otnConnector.getNe_name(), //tid
+                        otnConnector.getShelf_id(), //shelf_id
                         sdnNode.map(node -> node.getIp_addr()).orElse(""), //ip
                         "", //ne_type
-                        sdnConnector.getUnit_type(), //unit_type
-                        sdnConnector.getConnect_pec(), // unit_pec
-                        sdnConnector.getConnect_serial(), //serial_number
-                        sdnConnector.getSlot_id(), //slot_id
-                        sdnConnector.getPort_id(), //port_id
-                        sdnConnector.getConnect_idle(), //connect_status
+                        otnConnector.getUnit_type(), //unit_type
+                        otnConnector.getConnect_pec(), // unit_pec
+                        otnConnector.getConnect_serial(), //serial_number
+                        otnConnector.getSlot_id(), //slot_id
+                        otnConnector.getPort_id(), //port_id
+                        otnConnector.getConnect_idle(), //connect_status
                         "", //llcf
-                        sdnConnector.getModule_name(), //module_name
-                        sdnConnector.getConnect_pec(), //module_pec
+                        otnConnector.getModule_name(), //module_name
+                        otnConnector.getConnect_pec(), //module_pec
                         sdnLink.map(link -> link.getDistance()).orElse(""), //distance
                         "", //module_description
                         "", //cable_name
@@ -322,11 +321,11 @@ public class HOLAManager {
     }
 
     private void HolaSyncSdnOtnMaterial() throws Exception {
-        Stream<HolaOtnMaterial> holaSdnOtnMaterialStream = sdnNodeList
+        Stream<HolaOtnMaterial> holaSdnOtnMaterialStream = otnNodeList
             .stream()
             .map(sdnNode -> {
                 //sdnNode와 매치되는 sdnConnector들의 stream
-                Stream<SdnConnector> sdnConnectorStream = sdnConnectorList
+                Stream<OtnConnector> sdnConnectorStream = otnConnectorList
                         .stream()
                         .filter(connector -> connector.getNe_name().equals(sdnNode.getNe_name()));
                 /* sdnNode 별 Otn 물자현황 데이터 생성, unitList필드는 아래에서 생성*/
@@ -341,7 +340,7 @@ public class HOLAManager {
 
                 /* HolaOtnMaterial 인스턴스의 unitList 필드값 생성 */
                 // sdnConnector에 있는 unit_type 종류 조회 by Jpa query
-                List<String> unitList = sdnConnectorRepository.findAllUnitTypesNative();
+                List<String> unitList = otnConnectorRepository.findAllUnitTypesNative();
 
                 // unitListValue: holaOtnMaterial의 unitList 필드값을 담을 변수
                 String unitListValue = "";

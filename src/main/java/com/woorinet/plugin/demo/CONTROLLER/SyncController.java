@@ -1,15 +1,15 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
 
-import com.woorinet.plugin.demo.DTO.SDN.*;
+import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Manager.HOLAManager;
-import com.woorinet.plugin.demo.Manager.KMSManager;
-import com.woorinet.plugin.demo.Manager.SDNManager;
+import com.woorinet.plugin.demo.Manager.QKDManager;
+import com.woorinet.plugin.demo.Manager.OTNManager;
 import com.woorinet.plugin.demo.Manager.TL1Manager;
 import com.woorinet.plugin.demo.Repository.HOLA.*;
-import com.woorinet.plugin.demo.Repository.KMS.KmsNodeRepository;
-import com.woorinet.plugin.demo.Repository.SDN.*;
+import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
+import com.woorinet.plugin.demo.Repository.OTN.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -101,27 +101,27 @@ public class SyncController {
     private Tl1CmProgramInfoRepository tl1CmProgramInfoRepository;
 
     @Autowired
-    private SdnNodeRepository sdnNodeRepository;
+    private OtnNodeRepository otnNodeRepository;
     @Autowired
-    private SdnConnectorRepository sdnConnectorRepository;
+    private OtnConnectorRepository otnConnectorRepository;
     @Autowired
-    private SdnLinkRepository sdnLinkRepository;
+    private OtnLinkRepository otnLinkRepository;
     @Autowired
-    private SdnServiceRepository sdnServiceRepository;
+    private OtnServiceRepository otnServiceRepository;
     @Autowired
-    private SdnTunnelRepository sdnTunnelRepository;
+    private OtnTunnelRepository otnTunnelRepository;
     @Autowired
-    private SdnAccessIfRepository sdnAccessIfRepository;
+    private OtnAccessIfRepository otnAccessIfRepository;
     @Autowired
-    private SdnConstraintRepository sdnConstraintRepository;
+    private OtnConstraintRepository otnConstraintRepository;
     @Autowired
-    private SdnPathRepository sdnPathRepository;
+    private OtnPathRepository otnPathRepository;
     @Autowired
-    private SdnCryptoModuleRepository sdnCryptoModuleRepository;
+    private OtnCryptoModuleRepository otnCryptoModuleRepository;
     @Autowired
-    private SdnCryptoSessionRepository sdnCryptoSessionRepository;
+    private OtnCryptoSessionRepository otnCryptoSessionRepository;
     @Autowired
-    private SdnPmPortRepository sdnPmPortRepository;
+    private OtnPmPortRepository otnPmPortRepository;
 
 
     @GetMapping("/tl1")
@@ -220,18 +220,18 @@ public class SyncController {
             List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
             // PM_PORT 조회
             List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
-            SDNManager manager = new SDNManager(
-                    sdnNodeRepository,
-                    sdnConnectorRepository,
-                    sdnLinkRepository,
-                    sdnServiceRepository,
-                    sdnTunnelRepository,
-                    sdnPathRepository,
-                    sdnConstraintRepository,
-                    sdnAccessIfRepository,
-                    sdnCryptoModuleRepository,
-                    sdnCryptoSessionRepository,
-                    sdnPmPortRepository,
+            OTNManager manager = new OTNManager(
+                    otnNodeRepository,
+                    otnConnectorRepository,
+                    otnLinkRepository,
+                    otnServiceRepository,
+                    otnTunnelRepository,
+                    otnPathRepository,
+                    otnConstraintRepository,
+                    otnAccessIfRepository,
+                    otnCryptoModuleRepository,
+                    otnCryptoSessionRepository,
+                    otnPmPortRepository,
                     tl1NodeList,
                     tl1SystemInfoList,
                     tl1OduNodeConnectorList,
@@ -277,19 +277,19 @@ public class SyncController {
     String syncronizeHola() {
         try {
             //SdnNode 조회
-            List<SdnNode> sdnNodeList = sdnNodeRepository.findAll();
+            List<OtnNode> otnNodeList = otnNodeRepository.findAll();
             //SdnConnector 조회
-            List<SdnConnector> sdnConnectorList = sdnConnectorRepository.findAll();
+            List<OtnConnector> otnConnectorList = otnConnectorRepository.findAll();
             //SdnLink 조회
-            List<SdnLink> sdnLinkList = sdnLinkRepository.findAll();
+            List<OtnLink> otnLinkList = otnLinkRepository.findAll();
             //SdnService 조회
-            List<SdnService> sdnServiceList = sdnServiceRepository.findAll();
+            List<OtnService> otnServiceList = otnServiceRepository.findAll();
             //SdnPath 조회
-            List<SdnPath> sdnPathList = sdnPathRepository.findAll();
+            List<OtnPath> otnPathList = otnPathRepository.findAll();
             //SdnConstraint 조회
-            List<SdnConstraint> sdnConstraintList = sdnConstraintRepository.findAll();
+            List<OtnConstraint> otnConstraintList = otnConstraintRepository.findAll();
             //SdnAccessIf 조회
-            List<SdnAccessIf> sdnAccessIfList = sdnAccessIfRepository.findAll();
+            List<OtnAccessIf> otnAccessIfList = otnAccessIfRepository.findAll();
 
             HOLAManager manager = new HOLAManager(holaLineNumSheetRepository,
                     holaLinkMngRepository,
@@ -297,14 +297,14 @@ public class SyncController {
                     holaInventroyDetailRepository,
                     holaOtnNodeUsageRepository,
                     holaOtnMaterialRepository,
-                    sdnConnectorRepository,
-                    sdnNodeList,
-                    sdnConnectorList,
-                    sdnLinkList,
-                    sdnServiceList,
-                    sdnPathList,
-                    sdnConstraintList,
-                    sdnAccessIfList
+                    otnConnectorRepository,
+                    otnNodeList,
+                    otnConnectorList,
+                    otnLinkList,
+                    otnServiceList,
+                    otnPathList,
+                    otnConstraintList,
+                    otnAccessIfList
 
             );
 
@@ -318,7 +318,7 @@ public class SyncController {
     }
 
     @Autowired
-    private KmsNodeRepository kmsNodeRepository;
+    private QkdNodeRepository qkdNodeRepository;
 
     @GetMapping("/kms")
     String syncronizeKMS() {
@@ -326,8 +326,8 @@ public class SyncController {
 
 
 
-            KMSManager manager = new KMSManager(
-               kmsNodeRepository
+            QKDManager manager = new QKDManager(
+                    qkdNodeRepository
             );
             manager.KMSSyncStart();
         } catch (Exception e) {
