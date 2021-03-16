@@ -320,21 +320,18 @@ public class SyncController {
     @Autowired
     private QkdNodeRepository qkdNodeRepository;
 
-    @GetMapping("/kms")
-    String syncronizeKMS() {
+    @GetMapping("/qkd")
+    String syncronizeQKD() {
         try {
-
-
-
             QKDManager manager = new QKDManager(
                     qkdNodeRepository
             );
-            manager.KMSSyncStart();
+            manager.QkdSyncStart();
         } catch (Exception e) {
             e.printStackTrace();
-            return "kms synchronization fail";
+            return "qkd synchronization fail";
         }
 
-        return "kms synchronization success";
+        return "qkd synchronization success";
     }
 }

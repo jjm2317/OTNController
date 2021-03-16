@@ -2,14 +2,19 @@ package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.QKD.QkdNode;
 import com.woorinet.plugin.demo.Repository.QKD.QkdNodeRepository;
-import org.json.simple.parser.JSONParser;
+import com.woorinet.plugin.demo.UTIL.ThrowingConsumer;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.netty.http.client.HttpClient;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class QKDManager {
     List<QkdNode> qkdNodeList;
@@ -25,76 +30,91 @@ public class QKDManager {
 
     }
 
-    public void KMSSyncStart() throws Exception {
-        //kms node 데이터 업데이트
-        KMSSyncNode();
+    public void QkdSyncStart() throws Exception {
+        WebClient client1 = WebClient
+                .builder()
+                .baseUrl("https://1.226.250.42/v1/admin")
+                .defaultHeaders( httpHeaders -> {
+                    httpHeaders.add(HttpHeaders.AUTHORIZATION, "Basic QWRtaW46QWRtaW4=");
+                    httpHeaders.add(HttpHeaders.ACCEPT, "text/plain");
+                })
+                .clientConnector(
+                        new ReactorClientHttpConnector(
+                                HttpClient.create()
+                                        .secure(
+                                                ThrowingConsumer.unchecked(
+                                                        sslContextSpec -> sslContextSpec.sslContext(
+                                                                SslContextBuilder.forClient()
+                                                                        .trustManager(InsecureTrustManagerFactory.INSTANCE)
+                                                                        .build()
+                                                        )
+                                                )
+                                        )
+                        )
+                )
+                .build();
+
+        WebClient.RequestBodySpec uri1 = client1
+                .method(HttpMethod.GET)
+                .uri("/node?consumers=true&providers=true&links=true");
+
+        String response = uri1.retrieve()
+                .bodyToMono(Map.class)
+                .map(map -> (Map) map.get("configuration"))
+                .map(map -> {
+                    try {
+                        QkdSyncNode((List) map.get("nodes"));
+                        //qnetManager.QNETSyncKMSNodeLinks((List) map.get("nodeLinks"),qnetMapper);
+                        //qnetManager.QNETSyncKMSConsumerLinks((List) map.get("consumerLinks"),qnetMapper);
+                        //qnetManager.QNETSyncKMSProviderLinks((List) map.get("providerLinks"), qnetMapper);
+                        //qnetManager.QNETSyncKMSPaths((List) map.get("paths"),qnetMapper);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return "ok";
+                })
+                .block();
+
+        System.out.println("response: " + response);
+
     }
 
-    public void KMSSyncNode () throws Exception {
-        System.out.println(getResponse("https://1.226.250.42/v1/admin/node?consumers=true&providers=true&links=true"));
-        JSONParser jsonParser = new JSONParser();
-//        JSONObject jsonObject = (JSONObject)jsonParser.parse(prettify(getResponse("https://1.226.250.42/v1/admin/node?consumers=true&providers=true&links=true")));
-//        System.out.println("json Object");
-//        System.out.println(jsonObject);
-        QkdNode qkdNode = new QkdNode(
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
-        );
+    public void QkdSyncNode (List qkdNodeList) throws Exception {
+        if(qkdNodeList == null) return;
 
-        qkdNodeRepository.save(qkdNode);
-    }
+        Iterator qkdNodeListIterator = qkdNodeList.iterator();
+        while(qkdNodeListIterator.hasNext()) {
+            Map<String, Object> node = (Map) qkdNodeListIterator.next();
 
-    public String getResponse (String strUrl) throws Exception{
-        try {
-            URL url = new URL(strUrl);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();;
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-            connection.setRequestMethod("GET");
-            connection.setDoOutput(true);
+            QkdNode qkdNode = new QkdNode(
+                    node.get("id") == null ? "" : node.get("id").toString(),
+                    node.get("uid") == null ? "" :node.get("uid").toString(),
+                    node.get("name") == null ? "" :node.get("name").toString(),
+                    node.get("enabled") == null ? "" :node.get("enabled").toString(),
+                    node.get("description") == null ? "" :node.get("description").toString(),
+                    node.get("groupId") == null ? "" :node.get("groupId").toString(),
+                    node.get("group") == null ? "" :node.get("group").toString(),
+                    node.get("uniqueId") == null ? "" :node.get("uniqueId").toString(),
+                    node.get("qncWebApiUrl") == null ? "" :node.get("qncWebApiUrl").toString(),
+                    node.get("qncWebApiAuth") == null ? "" :node.get("qncWebApiAuth").toString(),
+                    node.get("cert") == null ? "" :node.get("cert").toString(),
+                    node.get("kems-cert") == null ? "" :node.get("kems-cert").toString(),
+                    node.get("network") == null ? "" :node.get("network").toString(),
+                    node.get("consumers") == null ? "" :node.get("consumers").toString(),
+                    node.get("providers") == null ? "" :node.get("providers").toString(),
+                    node.get("locX") == null ? "" :node.get("locX").toString(),
+                    node.get("locY") == null ? "" :node.get("locY").toString()
+            );
 
-            StringBuilder response = new StringBuilder ();
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()));
-
-            String line;
-            while ((line = in.readLine()) != null) {
-                response.append(line);
-            }
-            System.out.println(in);
-            in.close();
-
-            return response.toString();
-
-
-        } catch (Exception e) {
-            System.err.println(e.toString());
+            qkdNodeRepository.save(qkdNode);
         }
 
-        return "";
+
+
+
     }
 
-//    public String prettify (String json_text) throws Exception{
-//        System.out.println("jsonText");
-//        System.out.println(json_text);
-//        JsonParser parser = new JsonParser();
-//        JsonObject json = parser.parse(json_text).getAsJsonObject();
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        return gson.toJson(json);
-//    }
+
 
 
 
