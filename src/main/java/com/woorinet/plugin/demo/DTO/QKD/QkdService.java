@@ -27,12 +27,12 @@ public class QkdService {
     String SOURCE;
     String DEST;
     String PRESHARED_KEY;
-    String Q_KEY_STORE;
+    String QKEY_STORE;
 
     public QkdService() {
     }
 
-    public QkdService(String ID, String UID, String NAME, String OPER_MODE, String SOURCE, String DEST, String PRESHARED_KEY, String q_KEY_STORE) {
+    public QkdService(String ID, String UID, String NAME, String OPER_MODE, String SOURCE, String DEST, String PRESHARED_KEY,String QKEY_STORE) {
         this.ID = ID;
         this.UID = UID;
         this.NAME = NAME;
@@ -40,7 +40,7 @@ public class QkdService {
         this.SOURCE = SOURCE;
         this.DEST = DEST;
         this.PRESHARED_KEY = PRESHARED_KEY;
-        Q_KEY_STORE = q_KEY_STORE;
+        this.QKEY_STORE = QKEY_STORE;
     }
 
     @Override
@@ -53,7 +53,6 @@ public class QkdService {
                 ", SOURCE='" + SOURCE + '\'' +
                 ", DEST='" + DEST + '\'' +
                 ", PRESHARED_KEY='" + PRESHARED_KEY + '\'' +
-                ", Q_KEY_STORE='" + Q_KEY_STORE + '\'' +
                 '}';
     }
 }
