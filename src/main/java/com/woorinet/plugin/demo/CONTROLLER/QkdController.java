@@ -44,7 +44,7 @@ public class QkdController {
                 JSONArray consumersJsonArray = (JSONArray) parser.parse(qkdNode.getCONSUMERS());
                 JSONArray providersJsonArray = (JSONArray) parser.parse(qkdNode.getPROVIDERS());
 
-                jsonObject.put("kms_node_id;", qkdNode.getKMS_NODE_ID());
+                jsonObject.put("kms_node_id;", qkdNode.getQKD_NODE_ID());
                 jsonObject.put("id;", qkdNode.getID());
                 jsonObject.put("uid;", qkdNode.getUID());
                 jsonObject.put("name;", qkdNode.getNAME());
