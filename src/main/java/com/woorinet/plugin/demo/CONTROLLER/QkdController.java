@@ -263,39 +263,48 @@ public class QkdController {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-//    @ApiOperation(value = "get qkd ", notes = "")
-//    @GetMapping(value = "")
-//    @ResponseBody
-//    public ResponseEntity selectQkdLinkList() {
-//        if(qkdLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
-//        JSONArray jsonArray = new JSONArray();
-//        JSONParser parser = new JSONParser();
-//
-//        try {
-//            for(QkdService qkdService : qkdServiceRepository.findAll()) {
-//                JSONObject jsonObject = new JSONObject();
-//                JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdService.getOPER_MODE());
-//                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdService.getSOURCE());
-//                JSONObject destJsonObject = (JSONObject) parser.parse(qkdService.getDEST());
-//                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdService.getQ_KEY_STORE());
-//
-//                jsonObject.put("qkd_service_id;", qkdService.getQKD_SERVICE_ID());
-//                jsonObject.put("id;", qkdService.getID());
-//                jsonObject.put("uid;", qkdService.getUID());
-//                jsonObject.put("name;", qkdService.getNAME());
-//                jsonObject.put("oper_mode;", operModeJsonObject);
-//                jsonObject.put("source;", sourceJsonObject);
-//                jsonObject.put("dest;", destJsonObject);
-//                jsonObject.put("preshared_key;", qkdService.getPRESHARED_KEY());
-//                jsonObject.put("q_key_store;", qKeyStoreJsonObject);
-//
-//                jsonArray.add(jsonObject);
-//            }
-//        } catch (Exception exception){
-//            exception.printStackTrace();
-//        }
-//        return ResponseEntity.ok();
-//    }
+    @ApiOperation(value = "get qkd app_node list", notes = "전체 app node 조회")
+    @GetMapping(value = "/app_node/list")
+    @ResponseBody
+    public ResponseEntity selectQkdAppNodeList() {
+        if(qkdAppNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        JSONArray jsonArray = new JSONArray();
+        JSONParser parser = new JSONParser();
+
+        try {
+            for(QkdAppNode qkdAppNode : qkdAppNodeRepository.findAll()) {
+                JSONObject jsonObject = new JSONObject();
+
+                JSONObject agentJsonObject = (JSONObject) parser.parse(qkdAppNode.getAGENT());
+                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdAppNode.getNETWORK());
+                JSONArray interfacesJsonArray = (JSONArray) parser.parse(qkdAppNode.getINTERFACES());
+
+                jsonObject.put("qkd_app_node_id", qkdAppNode.getQKD_APP_NODE_ID());
+                jsonObject.put("level", qkdAppNode.getLEVEL());
+                jsonObject.put("kms_id", qkdAppNode.getKMS_ID());
+                jsonObject.put("kms_name", qkdAppNode.getKMS_NAME());
+                jsonObject.put("group_id", qkdAppNode.getGROUP_ID());
+                jsonObject.put("group_name", qkdAppNode.getGROUP_NAME());
+                jsonObject.put("id", qkdAppNode.getID());
+                jsonObject.put("uid", qkdAppNode.getUID());
+                jsonObject.put("name", qkdAppNode.getNAME());
+                jsonObject.put("description", qkdAppNode.getDESCRIPTION());
+                jsonObject.put("agent", agentJsonObject);
+                jsonObject.put("network", networkJsonObject);
+                jsonObject.put("interfaces", interfacesJsonArray);
+                jsonObject.put("loc_x", qkdAppNode.getLOC_X());
+                jsonObject.put("loc_y", qkdAppNode.getLOC_Y());
+                jsonObject.put("lat", qkdAppNode.getLAT());
+                jsonObject.put("long", qkdAppNode.getLONG());
+
+
+                jsonArray.add(jsonObject);
+            }
+        } catch (Exception exception){
+            exception.printStackTrace();
+        }
+        return ResponseEntity.ok(jsonArray.toString());
+    }
 
 //    @ApiOperation(value = "get qkd ", notes = "")
 //    @GetMapping(value = "")

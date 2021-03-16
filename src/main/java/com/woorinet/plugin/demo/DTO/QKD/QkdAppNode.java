@@ -30,7 +30,7 @@ public class QkdAppNode {
     String NAME;
     String DESCRIPTION;
     String AGENT;
-    String NETWORKS;
+    String NETWORK;
     String INTERFACES;
     String LOC_X;
     String LOC_Y;
@@ -40,7 +40,7 @@ public class QkdAppNode {
     public QkdAppNode() {
     }
 
-    public QkdAppNode(String LEVEL, String KMS_ID, String KMS_NAME, String GROUP_ID, String GROUP_NAME, String ID, String UID, String NAME, String DESCRIPTION, String AGENT, String NETWORKS, String INTERFACES, String LOC_X, String LOC_Y, String LAT, String LONG) {
+    public QkdAppNode(String LEVEL, String KMS_ID, String KMS_NAME, String GROUP_ID, String GROUP_NAME, String ID, String UID, String NAME, String DESCRIPTION, String AGENT, String NETWORK, String INTERFACES, String LOC_X, String LOC_Y, String LAT, String LONG) {
         this.LEVEL = LEVEL;
         this.KMS_ID = KMS_ID;
         this.KMS_NAME = KMS_NAME;
@@ -51,7 +51,7 @@ public class QkdAppNode {
         this.NAME = NAME;
         this.DESCRIPTION = DESCRIPTION;
         this.AGENT = AGENT;
-        this.NETWORKS = NETWORKS;
+        this.NETWORK = NETWORK;
         this.INTERFACES = INTERFACES;
         this.LOC_X = LOC_X;
         this.LOC_Y = LOC_Y;
@@ -72,7 +72,7 @@ public class QkdAppNode {
                 ", NAME='" + NAME + '\'' +
                 ", DESCRIPTION='" + DESCRIPTION + '\'' +
                 ", AGENT='" + AGENT + '\'' +
-                ", NETWORKS='" + NETWORKS + '\'' +
+                ", NETWORK='" + NETWORK + '\'' +
                 ", INTERFACES='" + INTERFACES + '\'' +
                 ", LOC_X='" + LOC_X + '\'' +
                 ", LOC_Y='" + LOC_Y + '\'' +
