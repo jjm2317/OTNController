@@ -92,9 +92,9 @@ public class OtnController {
     @ApiOperation(value = "get tunnel", notes = "터널 조회")
     @GetMapping(value = "/tunnel")
     @ResponseBody
-    public ResponseEntity selectTunnel(@RequestParam String tunnel_id) {
-        if(otnTunnelRepository.findSdnTunnelByTunnelId(tunnel_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnTunnelRepository.findSdnTunnelByTunnelId(tunnel_id));
+    public ResponseEntity selectTunnel(@RequestParam String tunnelId) {
+        if(otnTunnelRepository.findOtnTunnelByTunnelId(tunnelId) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnTunnelRepository.findOtnTunnelByTunnelId(tunnelId));
     }
 
     @ApiOperation(value = "get service list", notes = "전체 서비스 조회")
@@ -108,9 +108,9 @@ public class OtnController {
     @ApiOperation(value = "get service", notes = "서비스 조회")
     @GetMapping(value = "/service")
     @ResponseBody
-    public ResponseEntity selectService(@RequestParam String service_id) {
-        if(otnServiceRepository.findSdnServiceByServiceId(service_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnServiceRepository.findSdnServiceByServiceId(service_id));
+    public ResponseEntity selectService(@RequestParam String serviceId) {
+        if(otnServiceRepository.findOtnServiceByServiceId(serviceId) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnServiceRepository.findOtnServiceByServiceId(serviceId));
     }
 
     @ApiOperation(value = "get path list", notes = "전체 경로 조회")
