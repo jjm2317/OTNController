@@ -193,14 +193,14 @@ public class PortalManager {
 
                 String[] endPointClientEndFields = {"", "", "", "","", "", "", "", "", ""};
 
-                portalLineNumSheet.setENDPOINT_CLIENT_START(portalLineNumSheet.getNodeRef(endPointClientStartFields));
-                portalLineNumSheet.setTRANSMIT_CLIENT_START(portalLineNumSheet.getNodeRef(transmitClientStartFields));
-                portalLineNumSheet.setLINK_START(portalLineNumSheet.getNodeRef(linkStartFields));
-                portalLineNumSheet.setROADM_MUX_START(portalLineNumSheet.getNodeRef(roadmMuxStartFields));
-                portalLineNumSheet.setROADM_MUX_END(portalLineNumSheet.getNodeRef(roadmMuxEndFields));
-                portalLineNumSheet.setLINK_END(portalLineNumSheet.getNodeRef(linkEndFields));
-                portalLineNumSheet.setTRANSMIT_CLIENT_END(portalLineNumSheet.getNodeRef(transmitClientEndFields));
-                portalLineNumSheet.setENDPOINT_CLIENT_END(portalLineNumSheet.getNodeRef(endPointClientEndFields));
+                portalLineNumSheet.setEndpointClientStart(portalLineNumSheet.getNodeRef(endPointClientStartFields));
+                portalLineNumSheet.setTransmitClientStart(portalLineNumSheet.getNodeRef(transmitClientStartFields));
+                portalLineNumSheet.setLinkStart(portalLineNumSheet.getNodeRef(linkStartFields));
+                portalLineNumSheet.setRoadmMuxStart(portalLineNumSheet.getNodeRef(roadmMuxStartFields));
+                portalLineNumSheet.setRoadmMuxEnd(portalLineNumSheet.getNodeRef(roadmMuxEndFields));
+                portalLineNumSheet.setLinkEnd(portalLineNumSheet.getNodeRef(linkEndFields));
+                portalLineNumSheet.setTransmitClientEnd(portalLineNumSheet.getNodeRef(transmitClientEndFields));
+                portalLineNumSheet.setEndpointClientEnd(portalLineNumSheet.getNodeRef(endPointClientEndFields));
 
                 return portalLineNumSheet;
             });

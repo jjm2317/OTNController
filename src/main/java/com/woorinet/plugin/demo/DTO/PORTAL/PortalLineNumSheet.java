@@ -32,7 +32,7 @@ public class PortalLineNumSheet {
     String serviceType;
     String vendor;
     String constraintId;
-    String protectiomType;
+    String protectionType;
     String serviceRate;
     String serviceStatus;
     String activePath;
@@ -58,7 +58,7 @@ public class PortalLineNumSheet {
     }
 
 
-    public PortalLineNumSheet(String group, String domainType, String areaStart, String areaEnd, String nodeStart, String nodeEnd, String circuitId, String autoServiceName, String inputServiceName, String serviceType, String vendor, String constraintId, String protectiomType, String serviceRate, String serviceStatus, String activePath, String trafficStatus, String homePath, String latency, String cableCreationDate, String networkCableNumber, String writer, String remarks, String endpointClientStart, String transmitClientStart, String linkStart, String roadmMuxStart, String roadmMuxEnd, String linkEnd, String transmitClientEnd, String endpointClientEnd, String mainPath, String bypassPath) {
+    public PortalLineNumSheet(String group, String domainType, String areaStart, String areaEnd, String nodeStart, String nodeEnd, String circuitId, String autoServiceName, String inputServiceName, String serviceType, String vendor, String constraintId, String protectionType, String serviceRate, String serviceStatus, String activePath, String trafficStatus, String homePath, String latency, String cableCreationDate, String networkCableNumber, String writer, String remarks, String endpointClientStart, String transmitClientStart, String linkStart, String roadmMuxStart, String roadmMuxEnd, String linkEnd, String transmitClientEnd, String endpointClientEnd, String mainPath, String bypassPath) {
         this.group = group;
         this.domainType = domainType;
         this.areaStart = areaStart;
@@ -71,7 +71,7 @@ public class PortalLineNumSheet {
         this.serviceType = serviceType;
         this.vendor = vendor;
         this.constraintId = constraintId;
-        this.protectiomType = protectiomType;
+        this.protectionType = protectionType;
         this.serviceRate = serviceRate;
         this.serviceStatus = serviceStatus;
         this.activePath = activePath;
@@ -109,7 +109,7 @@ public class PortalLineNumSheet {
                 ", serviceType='" + serviceType + '\'' +
                 ", vendor='" + vendor + '\'' +
                 ", constraintId='" + constraintId + '\'' +
-                ", protectiomType='" + protectiomType + '\'' +
+                ", protectionType='" + protectionType + '\'' +
                 ", serviceRate='" + serviceRate + '\'' +
                 ", serviceStatus='" + serviceStatus + '\'' +
                 ", activePath='" + activePath + '\'' +

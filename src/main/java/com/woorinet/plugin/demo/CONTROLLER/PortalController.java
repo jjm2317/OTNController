@@ -43,40 +43,40 @@ public class PortalController {
             for(PortalLineNumSheet portalLineNumSheet : portalLineNumSheetRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
-                JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getENDPOINT_CLIENT_START());
-                JSONObject TCStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTRANSMIT_CLIENT_START());
-                JSONObject LStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLINK_START());
-                JSONObject RMStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getROADM_MUX_START());
-                JSONObject RMEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getROADM_MUX_END());
-                JSONObject LEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLINK_END());
-                JSONObject TCEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTRANSMIT_CLIENT_END());
-                JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getENDPOINT_CLIENT_END());
+                JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getEndpointClientStart());
+                JSONObject TCStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTransmitClientStart());
+                JSONObject LStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLinkStart());
+                JSONObject RMStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getRoadmMuxStart());
+                JSONObject RMEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getRoadmMuxEnd());
+                JSONObject LEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLinkEnd());
+                JSONObject TCEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTransmitClientEnd());
+                JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getEndpointClientEnd());
 
 
-                jsonObject.put("line_num_sheet_id", portalLineNumSheet.getLINE_NUM_SHEET_ID());
-                jsonObject.put("group", portalLineNumSheet.getGROUP());
-                jsonObject.put("domain_type", portalLineNumSheet.getDOMAIN_TYPE());
-                jsonObject.put("area_start", portalLineNumSheet.getAREA_START());
-                jsonObject.put("area_end", portalLineNumSheet.getAREA_END());
-                jsonObject.put("node_start", portalLineNumSheet.getNODE_START());
-                jsonObject.put("node_end", portalLineNumSheet.getNODE_END());
-                jsonObject.put("circuit_id", portalLineNumSheet.getCIRCUIT_ID());
-                jsonObject.put("auto_service_name", portalLineNumSheet.getAUTO_SERVICE_NAME());
-                jsonObject.put("input_service_name", portalLineNumSheet.getINPUT_SERVICE_NAME());
-                jsonObject.put("service_type", portalLineNumSheet.getSERVICE_TYPE());
-                jsonObject.put("vendor", portalLineNumSheet.getVENDOR());
-                jsonObject.put("constraint_id", portalLineNumSheet.getCONSTRAINT_ID());
-                jsonObject.put("protection_type", portalLineNumSheet.getPROTECTIOM_TYPE());
-                jsonObject.put("service_rate", portalLineNumSheet.getSERVICE_RATE());
-                jsonObject.put("service_status", portalLineNumSheet.getSERVICE_STATUS());
-                jsonObject.put("active_path", portalLineNumSheet.getACTIVE_PATH());
-                jsonObject.put("traffic_status", portalLineNumSheet.getTRAFFIC_STATUS());
-                jsonObject.put("home_path", portalLineNumSheet.getHOME_PATH());
-                jsonObject.put("latency", portalLineNumSheet.getLATENCY());
-                jsonObject.put("cable_creation_date", portalLineNumSheet.getCABLE_CREATION_DATE());
-                jsonObject.put("network_cable_number", portalLineNumSheet.getNETWORK_CABLE_NUMBER());
-                jsonObject.put("writer", portalLineNumSheet.getWRITER());
-                jsonObject.put("remarks", portalLineNumSheet.getREMARKS());
+                jsonObject.put("line_num_sheet_id", portalLineNumSheet.getLineNumSheetId());
+                jsonObject.put("group", portalLineNumSheet.getGroup());
+                jsonObject.put("domain_type", portalLineNumSheet.getDomainType());
+                jsonObject.put("area_start", portalLineNumSheet.getAreaStart());
+                jsonObject.put("area_end", portalLineNumSheet.getAreaEnd());
+                jsonObject.put("node_start", portalLineNumSheet.getNodeStart());
+                jsonObject.put("node_end", portalLineNumSheet.getNodeEnd());
+                jsonObject.put("circuit_id", portalLineNumSheet.getCircuitId());
+                jsonObject.put("auto_service_name", portalLineNumSheet.getAutoServiceName());
+                jsonObject.put("input_service_name", portalLineNumSheet.getInputServiceName());
+                jsonObject.put("service_type", portalLineNumSheet.getServiceType());
+                jsonObject.put("vendor", portalLineNumSheet.getVendor());
+                jsonObject.put("constraint_id", portalLineNumSheet.getConstraintId());
+                jsonObject.put("protection_type", portalLineNumSheet.getProtectionType());
+                jsonObject.put("service_rate", portalLineNumSheet.getServiceRate());
+                jsonObject.put("service_status", portalLineNumSheet.getServiceStatus());
+                jsonObject.put("active_path", portalLineNumSheet.getActivePath());
+                jsonObject.put("traffic_status", portalLineNumSheet.getTrafficStatus());
+                jsonObject.put("home_path", portalLineNumSheet.getHomePath());
+                jsonObject.put("latency", portalLineNumSheet.getLatency());
+                jsonObject.put("cable_creation_date", portalLineNumSheet.getCableCreationDate());
+                jsonObject.put("network_cable_number", portalLineNumSheet.getNetworkCableNumber());
+                jsonObject.put("writer", portalLineNumSheet.getWriter());
+                jsonObject.put("remarks", portalLineNumSheet.getRemarks());
                 jsonObject.put("endpoint_client_start",EPStartJsonObj);
                 jsonObject.put("transmit_client_start",TCStartJsonObj);
                 jsonObject.put("link_start", LStartJsonObj);
@@ -109,21 +109,21 @@ public class PortalController {
             for (PortalLinkMng portalLinkMng : portalLinkMngRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
-                JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLINK());
+                JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
 
-                jsonObject.put("hola_link_mng_id", portalLinkMng.getHOLA_SDN_LINK_MNG_ID());
-                jsonObject.put("vendor", portalLinkMng.getVENDOR());
+                jsonObject.put("hola_link_mng_id", portalLinkMng.getHolaSdnLinkMngId());
+                jsonObject.put("vendor", portalLinkMng.getVendor());
                 jsonObject.put("link", linkJsonArray);
-                jsonObject.put("admin_weight", portalLinkMng.getADMIN_WEIGHT());
-                jsonObject.put("maximum_usage_ratio", portalLinkMng.getMAXIMUM_USAGE_RATIO());
-                jsonObject.put("memory", portalLinkMng.getMEMORY());
-                jsonObject.put("usage_ratio", portalLinkMng.getUSAGE_RATIO());
-                jsonObject.put("all_memory", portalLinkMng.getALL_MEMORY());
-                jsonObject.put("all_usage_ratio", portalLinkMng.getALL_USAGE_RATIO());
-                jsonObject.put("distance", portalLinkMng.getDISTANCE());
-                jsonObject.put("srlg", portalLinkMng.getSRLG());
-                jsonObject.put("roadm_path", portalLinkMng.getROADM_PATH());
-                jsonObject.put("remarks", portalLinkMng.getREMARKS());
+                jsonObject.put("admin_weight", portalLinkMng.getAdminWeight());
+                jsonObject.put("maximum_usage_ratio", portalLinkMng.getMaximumUsageRatio());
+                jsonObject.put("memory", portalLinkMng.getMemory());
+                jsonObject.put("usage_ratio", portalLinkMng.getUsageRatio());
+                jsonObject.put("all_memory", portalLinkMng.getAllMemory());
+                jsonObject.put("all_usage_ratio", portalLinkMng.getAllUsageRatio());
+                jsonObject.put("distance", portalLinkMng.getDistance());
+                jsonObject.put("srlg", portalLinkMng.getSrlg());
+                jsonObject.put("roadm_path", portalLinkMng.getRoadmPath());
+                jsonObject.put("remarks", portalLinkMng.getRemarks());
 
                 jsonArray.add(jsonObject);
             }
