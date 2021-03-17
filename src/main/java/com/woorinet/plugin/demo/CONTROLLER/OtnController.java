@@ -61,8 +61,8 @@ public class OtnController {
     @GetMapping(value = "/connector")
     @ResponseBody
     public ResponseEntity selectConnector(@RequestParam String connect_id) {
-        if(otnConnectorRepository.findSdnConnectorByConnectId(connect_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnConnectorRepository.findSdnConnectorByConnectId(connect_id));
+        if(otnConnectorRepository.findOtnConnectorByConnectId(connect_id) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnConnectorRepository.findOtnConnectorByConnectId(connect_id));
     }
 
     @ApiOperation(value = "get link list", notes = "전체 링크 조회")
@@ -77,8 +77,8 @@ public class OtnController {
     @GetMapping(value = "/link")
     @ResponseBody
     public ResponseEntity selectLink(@RequestParam String link_id) {
-        if(otnLinkRepository.findSdnLinkByLinkId(link_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnLinkRepository.findSdnLinkByLinkId(link_id));
+        if(otnLinkRepository.findOtnLinkByLinkId(link_id) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnLinkRepository.findOtnLinkByLinkId(link_id));
     }
 
     @ApiOperation(value = "get tunnel list", notes = "전체 터널 조회")
@@ -146,8 +146,8 @@ public class OtnController {
     @ResponseBody
     public ResponseEntity selectConstraint(@RequestParam(required = false, defaultValue = "0") int id, @RequestParam(required = false) String service_id) {
         if(id != 0) {
-            if (otnConstraintRepository.findSdnConstraintById(id) == null) return ResponseEntity.notFound().build();
-            return ResponseEntity.ok(otnConstraintRepository.findSdnConstraintById(id));
+            if (otnConstraintRepository.findOtnConstraintById(id) == null) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(otnConstraintRepository.findOtnConstraintById(id));
         }
         if(otnConstraintRepository.findSdnConstraintByServiceId(service_id) == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(otnConstraintRepository.findSdnConstraintByServiceId(service_id));
@@ -165,8 +165,8 @@ public class OtnController {
     @GetMapping(value = "/accessif")
     @ResponseBody
     public ResponseEntity selectAccessIf(@RequestParam String accessif_id) {
-        if(otnAccessIfRepository.findSdnAccessIfByAccessifId(accessif_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnAccessIfRepository.findSdnAccessIfByAccessifId(accessif_id));
+        if(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessif_id) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessif_id));
     }
 }
 
