@@ -60,9 +60,9 @@ public class OtnController {
     @ApiOperation(value = "get connector", notes = "커넥터 조회")
     @GetMapping(value = "/connector")
     @ResponseBody
-    public ResponseEntity selectConnector(@RequestParam String connect_id) {
-        if(otnConnectorRepository.findOtnConnectorByConnectId(connect_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnConnectorRepository.findOtnConnectorByConnectId(connect_id));
+    public ResponseEntity selectConnector(@RequestParam String connectId) {
+        if(otnConnectorRepository.findOtnConnectorByConnectId(connectId) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnConnectorRepository.findOtnConnectorByConnectId(connectId));
     }
 
     @ApiOperation(value = "get link list", notes = "전체 링크 조회")
@@ -76,9 +76,9 @@ public class OtnController {
     @ApiOperation(value = "get link", notes = "링크 조회")
     @GetMapping(value = "/link")
     @ResponseBody
-    public ResponseEntity selectLink(@RequestParam String link_id) {
-        if(otnLinkRepository.findOtnLinkByLinkId(link_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnLinkRepository.findOtnLinkByLinkId(link_id));
+    public ResponseEntity selectLink(@RequestParam String linkId) {
+        if(otnLinkRepository.findOtnLinkByLinkId(linkId) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnLinkRepository.findOtnLinkByLinkId(linkId));
     }
 
     @ApiOperation(value = "get tunnel list", notes = "전체 터널 조회")
@@ -124,13 +124,13 @@ public class OtnController {
     @ApiOperation(value = "get path", notes = "경로 조회")
     @GetMapping(value = "/path")
     @ResponseBody
-    public ResponseEntity selectPath(@RequestParam(required = false, defaultValue = "0") int id , @RequestParam(required = false) String service_id) {
+    public ResponseEntity selectPath(@RequestParam(required = false, defaultValue = "0") int id , @RequestParam(required = false) String serviceId) {
         if (id != 0) {
             if (otnPathRepository.findOtnPathById(id) == null) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(otnPathRepository.findOtnPathById(id));
         }
-        if (otnPathRepository.findOtnPathByServiceId(service_id) == null)  return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnPathRepository.findOtnPathByServiceId(service_id));
+        if (otnPathRepository.findOtnPathByServiceId(serviceId) == null)  return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnPathRepository.findOtnPathByServiceId(serviceId));
     }
 
     @ApiOperation(value = "get constraint list", notes = "전체 속성 조회")
@@ -144,13 +144,13 @@ public class OtnController {
     @ApiOperation(value = "get constraint", notes = "속성 조회")
     @GetMapping(value = "/constraint")
     @ResponseBody
-    public ResponseEntity selectConstraint(@RequestParam(required = false, defaultValue = "0") int id, @RequestParam(required = false) String service_id) {
+    public ResponseEntity selectConstraint(@RequestParam(required = false, defaultValue = "0") int id, @RequestParam(required = false) String serviceId) {
         if(id != 0) {
             if (otnConstraintRepository.findOtnConstraintById(id) == null) return ResponseEntity.notFound().build();
             return ResponseEntity.ok(otnConstraintRepository.findOtnConstraintById(id));
         }
-        if(otnConstraintRepository.findSdnConstraintByServiceId(service_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnConstraintRepository.findSdnConstraintByServiceId(service_id));
+        if(otnConstraintRepository.findSdnConstraintByServiceId(serviceId) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnConstraintRepository.findSdnConstraintByServiceId(serviceId));
     }
 
     @ApiOperation(value = "get accessif list", notes = "전체 access interface 조회")
@@ -164,9 +164,9 @@ public class OtnController {
     @ApiOperation(value = "get accessif", notes = "access interface 조회")
     @GetMapping(value = "/accessif")
     @ResponseBody
-    public ResponseEntity selectAccessIf(@RequestParam String accessif_id) {
-        if(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessif_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessif_id));
+    public ResponseEntity selectAccessIf(@RequestParam String accessifId) {
+        if(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId));
     }
 }
 
