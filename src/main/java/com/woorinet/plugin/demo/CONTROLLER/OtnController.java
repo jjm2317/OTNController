@@ -126,11 +126,11 @@ public class OtnController {
     @ResponseBody
     public ResponseEntity selectPath(@RequestParam(required = false, defaultValue = "0") int id , @RequestParam(required = false) String service_id) {
         if (id != 0) {
-            if (otnPathRepository.findSdnPathById(id) == null) return ResponseEntity.notFound().build();
-            return ResponseEntity.ok(otnPathRepository.findSdnPathById(id));
+            if (otnPathRepository.findOtnPathById(id) == null) return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(otnPathRepository.findOtnPathById(id));
         }
-        if (otnPathRepository.findSdnPathByServiceId(service_id) == null)  return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnPathRepository.findSdnPathByServiceId(service_id));
+        if (otnPathRepository.findOtnPathByServiceId(service_id) == null)  return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnPathRepository.findOtnPathByServiceId(service_id));
     }
 
     @ApiOperation(value = "get constraint list", notes = "전체 속성 조회")
