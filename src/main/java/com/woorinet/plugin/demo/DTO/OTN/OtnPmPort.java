@@ -1,5 +1,7 @@
 package com.woorinet.plugin.demo.DTO.OTN;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +16,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name="otn_pm_port")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OtnPmPort {
     @Id
     @GeneratedValue

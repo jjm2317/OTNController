@@ -1,6 +1,8 @@
 package com.woorinet.plugin.demo.DTO.OTN;
 
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.Generated;
 import lombok.Getter;
@@ -16,6 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Data
 @Table(name="otn_constraint")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OtnConstraint {
     @Id
     @GeneratedValue
