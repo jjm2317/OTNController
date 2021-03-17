@@ -18,38 +18,38 @@ import javax.persistence.Table;
 public class QkdProviderLink {
     @Id
     @GeneratedValue
-    int QKD_PROVIDER_LINK_ID;
-    String ID;
-    String UID;
-    String NAME;
-    String MODE;
-    String SOURCE;
-    String DESTINATION;
-    String QKEY_STORE;
+    int qkdProviderLinkId;
+    String id;
+    String uid;
+    String name;
+    String mode;
+    String source;
+    String destination;
+    String qkeyStore;
 
     public QkdProviderLink() {
     }
 
-    public QkdProviderLink(String ID, String UID, String NAME, String MODE, String SOURCE, String DESTINATION, String QKEY_STORE) {
-        this.ID = ID;
-        this.UID = UID;
-        this.NAME = NAME;
-        this.MODE = MODE;
-        this.SOURCE = SOURCE;
-        this.DESTINATION = DESTINATION;
-        this.QKEY_STORE = QKEY_STORE;
+    public QkdProviderLink(String id, String uid, String name, String mode, String source, String destination, String qkeyStore) {
+        this.id = id;
+        this.uid = uid;
+        this.name = name;
+        this.mode = mode;
+        this.source = source;
+        this.destination = destination;
+        this.qkeyStore = qkeyStore;
     }
 
     @Override
     public String toString() {
         return "QkdProviderLink{" +
-                "ID='" + ID + '\'' +
-                ", UID='" + UID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", MODE='" + MODE + '\'' +
-                ", SOURCE='" + SOURCE + '\'' +
-                ", DESTINATION='" + DESTINATION + '\'' +
-                ", QKEY_STORE='" + QKEY_STORE + '\'' +
+                "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", mode='" + mode + '\'' +
+                ", source='" + source + '\'' +
+                ", destination='" + destination + '\'' +
+                ", qkeyStore='" + qkeyStore + '\'' +
                 '}';
     }
 }

@@ -15,50 +15,50 @@ import javax.persistence.*;
 public class QkdLink {
     @Id
     @GeneratedValue
-    int QKD_LINK_ID;
-    String ID;
-    String NAME;
-    String UID;
+    int qkdLinkId;
+    String id;
+    String name;
+    String uid;
     @Lob
-    String TYPE;
+    String type;
     @Lob
-    String ALGORITHM;
-    String WEIGHT;
+    String algorithm;
+    String weight;
     @Lob
-    String PSK;
+    String psk;
     @Lob
-    String SOURCE;
+    String source;
     @Lob
-    String DEST;
+    String dest;
 
 
     public QkdLink() {
     }
 
-    public QkdLink(String ID, String NAME, String UID, String TYPE, String ALGORITHM, String WEIGHT, String PSK, String SOURCE, String DEST) {
-        this.ID = ID;
-        this.NAME = NAME;
-        this.UID = UID;
-        this.TYPE = TYPE;
-        this.ALGORITHM = ALGORITHM;
-        this.WEIGHT = WEIGHT;
-        this.PSK = PSK;
-        this.SOURCE = SOURCE;
-        this.DEST = DEST;
+    public QkdLink(String id, String name, String uid, String type, String algorithm, String weight, String psk, String source, String dest) {
+        this.id = id;
+        this.name = name;
+        this.uid = uid;
+        this.type = type;
+        this.algorithm = algorithm;
+        this.weight = weight;
+        this.psk = psk;
+        this.source = source;
+        this.dest = dest;
     }
 
     @Override
     public String toString() {
         return "QkdLink{" +
-                "ID='" + ID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", UID='" + UID + '\'' +
-                ", TYPE='" + TYPE + '\'' +
-                ", ALGORITHM='" + ALGORITHM + '\'' +
-                ", WEIGHT='" + WEIGHT + '\'' +
-                ", PSK='" + PSK + '\'' +
-                ", SOURCE='" + SOURCE + '\'' +
-                ", DEST='" + DEST + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", uid='" + uid + '\'' +
+                ", type='" + type + '\'' +
+                ", algorithm='" + algorithm + '\'' +
+                ", weight='" + weight + '\'' +
+                ", psk='" + psk + '\'' +
+                ", source='" + source + '\'' +
+                ", dest='" + dest + '\'' +
                 '}';
     }
 }
