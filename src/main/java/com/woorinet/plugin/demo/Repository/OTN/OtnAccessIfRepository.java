@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface OtnAccessIfRepository extends JpaRepository<OtnAccessIf, String> {
-    @Query("from OtnAccessIf where accessif_id= :accessifId" )
-    OtnAccessIf findSdnAccessIfByAccessifId(@Param("accessifId") String accessifId);
+    OtnAccessIf findOtnAccessIfByAccessifId(String accessifId);
 }

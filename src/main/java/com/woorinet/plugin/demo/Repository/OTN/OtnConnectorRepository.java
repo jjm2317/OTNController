@@ -8,8 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface OtnConnectorRepository extends JpaRepository<OtnConnector, String> {
-    @Query("from OtnConnector where connect_id= :connectId" )
-    OtnConnector findSdnConnectorByConnectId(@Param("connectId") String connectId);
+    OtnConnector findOtnConnectorByConnectId( String connectId);
 
     @Query(value = "select c.unit_type from SdnConnector c where c.unit_type != '' group by c.unit_type ",
             nativeQuery = true)
