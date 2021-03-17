@@ -15,45 +15,46 @@ import javax.persistence.*;
 public class QkdService {
     @Id
     @GeneratedValue
-    int QKD_SERVICE_ID;
-    String ID;
-    String UID;
-    String NAME;
+    int qkdServiceId;
+    String id;
+    String uid;
+    String name;
     @Lob
-    String OPER_MODE;
+    String operMode;
     @Lob
-    String SOURCE;
+    String source;
     @Lob
-    String DEST;
+    String dest;
     @Lob
-    String PRESHARED_KEY;
+    String presharedKey;
     @Lob
-    String QKEY_STORE;
+    String qkeyStore;
 
     public QkdService() {
     }
 
-    public QkdService(String ID, String UID, String NAME, String OPER_MODE, String SOURCE, String DEST, String PRESHARED_KEY,String QKEY_STORE) {
-        this.ID = ID;
-        this.UID = UID;
-        this.NAME = NAME;
-        this.OPER_MODE = OPER_MODE;
-        this.SOURCE = SOURCE;
-        this.DEST = DEST;
-        this.PRESHARED_KEY = PRESHARED_KEY;
-        this.QKEY_STORE = QKEY_STORE;
+    public QkdService(String id, String uid, String name, String operMode, String source, String dest, String presharedKey, String qkeyStore) {
+        this.id = id;
+        this.uid = uid;
+        this.name = name;
+        this.operMode = operMode;
+        this.source = source;
+        this.dest = dest;
+        this.presharedKey = presharedKey;
+        this.qkeyStore = qkeyStore;
     }
 
     @Override
     public String toString() {
         return "QkdService{" +
-                "ID='" + ID + '\'' +
-                ", UID='" + UID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", OPER_MODE='" + OPER_MODE + '\'' +
-                ", SOURCE='" + SOURCE + '\'' +
-                ", DEST='" + DEST + '\'' +
-                ", PRESHARED_KEY='" + PRESHARED_KEY + '\'' +
+                "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", operMode='" + operMode + '\'' +
+                ", source='" + source + '\'' +
+                ", dest='" + dest + '\'' +
+                ", presharedKey='" + presharedKey + '\'' +
+                ", qkeyStore='" + qkeyStore + '\'' +
                 '}';
     }
 }

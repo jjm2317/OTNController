@@ -45,29 +45,29 @@ public class QkdController {
             for (QkdNode qkdNode : qkdNodeRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
-                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdNode.getNETWORK());
-                JSONArray consumersJsonArray = (JSONArray) parser.parse(qkdNode.getCONSUMERS());
-                JSONArray providersJsonArray = (JSONArray) parser.parse(qkdNode.getPROVIDERS());
+                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdNode.getNetwork());
+                JSONArray consumersJsonArray = (JSONArray) parser.parse(qkdNode.getConsumers());
+                JSONArray providersJsonArray = (JSONArray) parser.parse(qkdNode.getProviders());
 
 
-                jsonObject.put("qkd_node_id", qkdNode.getQKD_NODE_ID());
-                jsonObject.put("id", qkdNode.getID());
-                jsonObject.put("uid", qkdNode.getUID());
-                jsonObject.put("name", qkdNode.getNAME());
-                jsonObject.put("enabled", qkdNode.getENABLED());
-                jsonObject.put("description", qkdNode.getDESCRIPTION());
-                jsonObject.put("group_id", qkdNode.getGROUP_ID());
-                jsonObject.put("group", qkdNode.getGROUP());
-                jsonObject.put("unique_id", qkdNode.getUNIQUE_ID());
-                jsonObject.put("qnc_web_api_url", qkdNode.getQNC_WEB_API_URL());
-                jsonObject.put("qnc_web_api_auth", qkdNode.getQNC_WEB_API_AUTH());
-                jsonObject.put("cert", qkdNode.getCERT());
+                jsonObject.put("qkd_node_id", qkdNode.getQkdNodeId());
+                jsonObject.put("id", qkdNode.getId());
+                jsonObject.put("uid", qkdNode.getUid());
+                jsonObject.put("name", qkdNode.getName());
+                jsonObject.put("enabled", qkdNode.getEnabled());
+                jsonObject.put("description", qkdNode.getDescription());
+                jsonObject.put("group_id", qkdNode.getGroupId());
+                jsonObject.put("group", qkdNode.getGroup());
+                jsonObject.put("unique_id", qkdNode.getUniqueId());
+                jsonObject.put("qnc_web_api_url", qkdNode.getQncWebApiUrl());
+                jsonObject.put("qnc_web_api_auth", qkdNode.getQncWebApiAuth());
+                jsonObject.put("cert", qkdNode.getCert());
                 jsonObject.put("network", networkJsonObject);
-                jsonObject.put("kems_cert", qkdNode.getKEMS_CERT());
+                jsonObject.put("kems_cert", qkdNode.getKemsCert());
                 jsonObject.put("apps", consumersJsonArray);
                 jsonObject.put("providers", providersJsonArray);
-                jsonObject.put("loc_x", qkdNode.getLOC_X());
-                jsonObject.put("loc_y", qkdNode.getLOC_Y());
+                jsonObject.put("loc_x", qkdNode.getLocX());
+                jsonObject.put("loc_y", qkdNode.getLocY());
 
                 jsonArray.add(jsonObject);
             }
@@ -88,19 +88,19 @@ public class QkdController {
         try {
             for(QkdService qkdService : qkdServiceRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
-                JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdService.getOPER_MODE());
-                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdService.getSOURCE());
-                JSONObject destJsonObject = (JSONObject) parser.parse(qkdService.getDEST());
-                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdService.getQKEY_STORE());
+                JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdService.getOperMode());
+                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdService.getSource());
+                JSONObject destJsonObject = (JSONObject) parser.parse(qkdService.getDest());
+                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdService.getQkeyStore());
 
-                jsonObject.put("qkd_service_id", qkdService.getQKD_SERVICE_ID());
-                jsonObject.put("id", qkdService.getID());
-                jsonObject.put("uid", qkdService.getUID());
-                jsonObject.put("name", qkdService.getNAME());
+                jsonObject.put("qkd_service_id", qkdService.getQkdServiceId());
+                jsonObject.put("id", qkdService.getId());
+                jsonObject.put("uid", qkdService.getUid());
+                jsonObject.put("name", qkdService.getName());
                 jsonObject.put("oper_mode", operModeJsonObject);
                 jsonObject.put("source", sourceJsonObject);
                 jsonObject.put("dest", destJsonObject);
-                jsonObject.put("preshared_key", qkdService.getPRESHARED_KEY());
+                jsonObject.put("preshared_key", qkdService.getPresharedKey());
                 jsonObject.put("qkey_store", qKeyStoreJsonObject);
 
                 jsonArray.add(jsonObject);
@@ -123,19 +123,19 @@ public class QkdController {
         try {
             for(QkdLink qkdLink : qkdLinkRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
-                JSONObject typeJsonObject = (JSONObject) parser.parse(qkdLink.getTYPE());
-                JSONObject algorithmJsonObject = (JSONObject) parser.parse(qkdLink.getALGORITHM());
-                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdLink.getSOURCE());
-                JSONObject destJsonObject = (JSONObject) parser.parse(qkdLink.getDEST());
+                JSONObject typeJsonObject = (JSONObject) parser.parse(qkdLink.getType());
+                JSONObject algorithmJsonObject = (JSONObject) parser.parse(qkdLink.getAlgorithm());
+                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdLink.getSource());
+                JSONObject destJsonObject = (JSONObject) parser.parse(qkdLink.getDest());
 
-                jsonObject.put("qkd_link_id", qkdLink.getQKD_LINK_ID());
-                jsonObject.put("id", qkdLink.getID());
-                jsonObject.put("name", qkdLink.getNAME());
-                jsonObject.put("uid", qkdLink.getUID());
+                jsonObject.put("qkd_link_id", qkdLink.getQkdLinkId());
+                jsonObject.put("id", qkdLink.getId());
+                jsonObject.put("name", qkdLink.getName());
+                jsonObject.put("uid", qkdLink.getUid());
                 jsonObject.put("type", typeJsonObject);
                 jsonObject.put("algorithm", algorithmJsonObject);
-                jsonObject.put("weight", qkdLink.getWEIGHT());
-                jsonObject.put("psk", qkdLink.getPSK());
+                jsonObject.put("weight", qkdLink.getWeight());
+                jsonObject.put("psk", qkdLink.getPsk());
                 jsonObject.put("source", sourceJsonObject);
                 jsonObject.put("dest", destJsonObject);
 
@@ -158,22 +158,22 @@ public class QkdController {
         try {
             for(QkdPath qkdPath : qkdPathRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
-                JSONObject consumerLinkJsonObject = (JSONObject) parser.parse(qkdPath.getCONSUMER_LINK());
-                JSONArray primaryJsonArray = (JSONArray) parser.parse(qkdPath.getPRIMARY());
-                JSONArray secondaryJsonArray = (JSONArray) parser.parse(qkdPath.getSECONDARY());
+                JSONObject consumerLinkJsonObject = (JSONObject) parser.parse(qkdPath.getConsumerLink());
+                JSONArray primaryJsonArray = (JSONArray) parser.parse(qkdPath.getPrimary());
+                JSONArray secondaryJsonArray = (JSONArray) parser.parse(qkdPath.getSecondary());
 
-                jsonObject.put("qkd_path_id", qkdPath.getQKD_PATH_ID());
-                jsonObject.put("id", qkdPath.getID());
-                jsonObject.put("fail_back_mode", qkdPath.getFAIL_BACK_MODE());
-                jsonObject.put("fail_back_period", qkdPath.getFAIL_BACK_PERIOD());
+                jsonObject.put("qkd_path_id", qkdPath.getQkdPathId());
+                jsonObject.put("id", qkdPath.getId());
+                jsonObject.put("fail_back_mode", qkdPath.getFailBackMode());
+                jsonObject.put("fail_back_period", qkdPath.getFailBackPeriod());
                 jsonObject.put("app_link", consumerLinkJsonObject);
                 jsonObject.put("primary", primaryJsonArray);
-                jsonObject.put("primary_usage", qkdPath.getPRIMARY_USAGE());
-                jsonObject.put("primary_fault", qkdPath.getPRIMARY_FAULT());
+                jsonObject.put("primary_usage", qkdPath.getPrimaryUsage());
+                jsonObject.put("primary_fault", qkdPath.getPrimaryFault());
                 jsonObject.put("secondary", secondaryJsonArray);
-                jsonObject.put("secondary_usage", qkdPath.getSECONDARY_USAGE());
-                jsonObject.put("secondary_fault", qkdPath.getSECONDARY_FAULT());
-                jsonObject.put("remark", qkdPath.getREMARK());
+                jsonObject.put("secondary_usage", qkdPath.getSecondaryUsage());
+                jsonObject.put("secondary_fault", qkdPath.getSecondaryFault());
+                jsonObject.put("remark", qkdPath.getRemark());
                 jsonArray.add(jsonObject);
             }
         } catch (Exception exception){
@@ -193,31 +193,31 @@ public class QkdController {
         try {
             for(QkdProviderNode qkdProviderNode : qkdProviderNodeRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
-                JSONObject agentJsonObject = (JSONObject) parser.parse(qkdProviderNode.getAGENT());
-                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdProviderNode.getNETWORK());
-                JSONArray interfacesJsonArray = (JSONArray) parser.parse(qkdProviderNode.getINTERFACES());
+                JSONObject agentJsonObject = (JSONObject) parser.parse(qkdProviderNode.getAgent());
+                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdProviderNode.getNetwork());
+                JSONArray interfacesJsonArray = (JSONArray) parser.parse(qkdProviderNode.getInterfaces());
 
 
 
-                jsonObject.put("qkd_node_id", qkdProviderNode.getQKD_NODE_ID());
-                jsonObject.put("kms_id", qkdProviderNode.getKMS_ID());
-                jsonObject.put("kms_name", qkdProviderNode.getKMS_NAME());
-                jsonObject.put("group_id", qkdProviderNode.getGROUP_ID());
-                jsonObject.put("group_name", qkdProviderNode.getGROUP_NAME());
-                jsonObject.put("id", qkdProviderNode.getID());
-                jsonObject.put("uid", qkdProviderNode.getUID());
-                jsonObject.put("name", qkdProviderNode.getNAME());
-                jsonObject.put("description", qkdProviderNode.getDESCRIPTION());
+                jsonObject.put("qkd_node_id", qkdProviderNode.getQkdNodeId());
+                jsonObject.put("kms_id", qkdProviderNode.getKmsId());
+                jsonObject.put("kms_name", qkdProviderNode.getKmsName());
+                jsonObject.put("group_id", qkdProviderNode.getGroupId());
+                jsonObject.put("group_name", qkdProviderNode.getGroupName());
+                jsonObject.put("id", qkdProviderNode.getId());
+                jsonObject.put("uid", qkdProviderNode.getUid());
+                jsonObject.put("name", qkdProviderNode.getName());
+                jsonObject.put("description", qkdProviderNode.getDescription());
                 jsonObject.put("agent", agentJsonObject);
                 jsonObject.put("network", networkJsonObject);
-                jsonObject.put("qnc_web_api_url", qkdProviderNode.getQNC_WEB_API_URL());
-                jsonObject.put("qnc_web_api_auth", qkdProviderNode.getQNC_WEB_API_AUTH());
+                jsonObject.put("qnc_web_api_url", qkdProviderNode.getQncWebApiUrl());
+                jsonObject.put("qnc_web_api_auth", qkdProviderNode.getQncWebApiAuth());
                 jsonObject.put("interfaces", interfacesJsonArray);
-                jsonObject.put("node", qkdProviderNode.getNODE());
-                jsonObject.put("loc_x", qkdProviderNode.getLOC_X());
-                jsonObject.put("loc_y", qkdProviderNode.getLOC_Y());
-                jsonObject.put("lat", qkdProviderNode.getLAT());
-                jsonObject.put("long", qkdProviderNode.getLONG());
+                jsonObject.put("node", qkdProviderNode.getNode());
+                jsonObject.put("loc_x", qkdProviderNode.getLocX());
+                jsonObject.put("loc_y", qkdProviderNode.getLocY());
+                jsonObject.put("lat", qkdProviderNode.getLat());
+                jsonObject.put("long", qkdProviderNode.getLongitude());
 
                 jsonArray.add(jsonObject);
             }
@@ -238,15 +238,15 @@ public class QkdController {
         try {
             for(QkdProviderLink qkdProviderLink : qkdProviderLinkRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
-                JSONObject modeJsonObject = (JSONObject) parser.parse(qkdProviderLink.getMODE());
-                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdProviderLink.getSOURCE());
-                JSONObject destinationJsonObject = (JSONObject) parser.parse((qkdProviderLink.getDESTINATION()));
-                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdProviderLink.getQKEY_STORE());
+                JSONObject modeJsonObject = (JSONObject) parser.parse(qkdProviderLink.getMode());
+                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdProviderLink.getSource());
+                JSONObject destinationJsonObject = (JSONObject) parser.parse((qkdProviderLink.getDestination()));
+                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdProviderLink.getQkeyStore());
 
-                jsonObject.put("qkd_provider_link", qkdProviderLink.getQKD_PROVIDER_LINK_ID());
-                jsonObject.put("id", qkdProviderLink.getID());
-                jsonObject.put("uid", qkdProviderLink.getUID());
-                jsonObject.put("name", qkdProviderLink.getNAME());
+                jsonObject.put("qkd_provider_link_id", qkdProviderLink.getQkdProviderLinkId());
+                jsonObject.put("id", qkdProviderLink.getId());
+                jsonObject.put("uid", qkdProviderLink.getUid());
+                jsonObject.put("name", qkdProviderLink.getName());
                 jsonObject.put("mode", modeJsonObject);
                 jsonObject.put("source", sourceJsonObject);
                 jsonObject.put("destination", destinationJsonObject);
@@ -272,27 +272,27 @@ public class QkdController {
             for(QkdAppNode qkdAppNode : qkdAppNodeRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
-                JSONObject agentJsonObject = (JSONObject) parser.parse(qkdAppNode.getAGENT());
-                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdAppNode.getNETWORK());
-                JSONArray interfacesJsonArray = (JSONArray) parser.parse(qkdAppNode.getINTERFACES());
+                JSONObject agentJsonObject = (JSONObject) parser.parse(qkdAppNode.getAgent());
+                JSONObject networkJsonObject = (JSONObject) parser.parse(qkdAppNode.getNetwork());
+                JSONArray interfacesJsonArray = (JSONArray) parser.parse(qkdAppNode.getInterfaces());
 
-                jsonObject.put("qkd_app_node_id", qkdAppNode.getQKD_APP_NODE_ID());
-                jsonObject.put("level", qkdAppNode.getLEVEL());
-                jsonObject.put("kms_id", qkdAppNode.getKMS_ID());
-                jsonObject.put("kms_name", qkdAppNode.getKMS_NAME());
-                jsonObject.put("group_id", qkdAppNode.getGROUP_ID());
-                jsonObject.put("group_name", qkdAppNode.getGROUP_NAME());
-                jsonObject.put("id", qkdAppNode.getID());
-                jsonObject.put("uid", qkdAppNode.getUID());
-                jsonObject.put("name", qkdAppNode.getNAME());
-                jsonObject.put("description", qkdAppNode.getDESCRIPTION());
+                jsonObject.put("qkd_app_node_id", qkdAppNode.getQkdAppNodeId());
+                jsonObject.put("level", qkdAppNode.getLevel());
+                jsonObject.put("kms_id", qkdAppNode.getKmsId());
+                jsonObject.put("kms_name", qkdAppNode.getKmsName());
+                jsonObject.put("group_id", qkdAppNode.getGroupId());
+                jsonObject.put("group_name", qkdAppNode.getGroupName());
+                jsonObject.put("id", qkdAppNode.getId());
+                jsonObject.put("uid", qkdAppNode.getUid());
+                jsonObject.put("name", qkdAppNode.getName());
+                jsonObject.put("description", qkdAppNode.getDescription());
                 jsonObject.put("agent", agentJsonObject);
                 jsonObject.put("network", networkJsonObject);
                 jsonObject.put("interfaces", interfacesJsonArray);
-                jsonObject.put("loc_x", qkdAppNode.getLOC_X());
-                jsonObject.put("loc_y", qkdAppNode.getLOC_Y());
-                jsonObject.put("lat", qkdAppNode.getLAT());
-                jsonObject.put("long", qkdAppNode.getLONG());
+                jsonObject.put("loc_x", qkdAppNode.getLocX());
+                jsonObject.put("loc_y", qkdAppNode.getLocY());
+                jsonObject.put("lat", qkdAppNode.getLat());
+                jsonObject.put("long", qkdAppNode.getLongitude());
 
 
                 jsonArray.add(jsonObject);
@@ -314,19 +314,19 @@ public class QkdController {
         try {
             for(QkdAppLink qkdAppLink : qkdAppLinkRepositroy.findAll()) {
                 JSONObject jsonObject = new JSONObject();
-                JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdAppLink.getOPER_MODE());
-                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdAppLink.getSOURCE());
-                JSONObject destJsonObject = (JSONObject) parser.parse(qkdAppLink.getDEST());
-                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdAppLink.getQKEY_STORE());
+                JSONObject operModeJsonObject = (JSONObject) parser.parse(qkdAppLink.getOperMode());
+                JSONObject sourceJsonObject = (JSONObject) parser.parse(qkdAppLink.getSource());
+                JSONObject destJsonObject = (JSONObject) parser.parse(qkdAppLink.getDest());
+                JSONObject qKeyStoreJsonObject = (JSONObject) parser.parse(qkdAppLink.getQkeyStore());
 
-                jsonObject.put("qkd_app_link_id", qkdAppLink.getQKD_APP_LINK_ID());
-                jsonObject.put("id", qkdAppLink.getID());
-                jsonObject.put("uid", qkdAppLink.getUID());
-                jsonObject.put("name", qkdAppLink.getNAME());
+                jsonObject.put("qkd_app_link_id", qkdAppLink.getQkdAppLinkId());
+                jsonObject.put("id", qkdAppLink.getId());
+                jsonObject.put("uid", qkdAppLink.getUid());
+                jsonObject.put("name", qkdAppLink.getName());
                 jsonObject.put("oper_mode", operModeJsonObject);
                 jsonObject.put("source", sourceJsonObject);
                 jsonObject.put("dest", destJsonObject);
-                jsonObject.put("preshared_key", qkdAppLink.getPRESHARED_KEY());
+                jsonObject.put("preshared_key", qkdAppLink.getPresharedKey());
                 jsonObject.put("qkey_store", qKeyStoreJsonObject);
 
                 jsonArray.add(jsonObject);

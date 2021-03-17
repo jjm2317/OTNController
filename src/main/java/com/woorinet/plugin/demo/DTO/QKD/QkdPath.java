@@ -15,53 +15,53 @@ import javax.persistence.*;
 public class QkdPath {
     @Id
     @GeneratedValue
-    int QKD_PATH_ID;
-    String ID;
-    String FAIL_BACK_MODE;
-    String FAIL_BACK_PERIOD;
+    int qkdPathId;
+    String id;
+    String failBackMode;
+    String failBackPeriod;
     @Lob
-    String CONSUMER_LINK;
+    String consumerLink;
     @Lob
-    String PRIMARY;
-    String PRIMARY_USAGE;
-    String PRIMARY_FAULT;
+    String primary;
+    String primaryUsage;
+    String primaryFault;
     @Lob
-    String SECONDARY;
-    String SECONDARY_USAGE;
-    String SECONDARY_FAULT;
-    String REMARK;
+    String secondary;
+    String secondaryUsage;
+    String secondaryFault;
+    String remark;
 
     public QkdPath() {
     }
 
-    public QkdPath(String ID, String FAIL_BACK_MODE, String FAIL_BACK_PERIOD, String CONSUMER_LINK, String PRIMARY, String PRIMARY_USAGE, String PRIMARY_FAULT, String SECONDARY, String SECONDARY_USAGE, String SECONDARY_FAULT, String REMARK) {
-        this.ID = ID;
-        this.FAIL_BACK_MODE = FAIL_BACK_MODE;
-        this.FAIL_BACK_PERIOD = FAIL_BACK_PERIOD;
-        this.CONSUMER_LINK = CONSUMER_LINK;
-        this.PRIMARY = PRIMARY;
-        this.PRIMARY_USAGE = PRIMARY_USAGE;
-        this.PRIMARY_FAULT = PRIMARY_FAULT;
-        this.SECONDARY = SECONDARY;
-        this.SECONDARY_USAGE = SECONDARY_USAGE;
-        this.SECONDARY_FAULT = SECONDARY_FAULT;
-        this.REMARK = REMARK;
+    public QkdPath(String id, String failBackMode, String failBackPeriod, String consumerLink, String primary, String primaryUsage, String primaryFault, String secondary, String secondaryUsage, String secondaryFault, String remark) {
+        this.id = id;
+        this.failBackMode = failBackMode;
+        this.failBackPeriod = failBackPeriod;
+        this.consumerLink = consumerLink;
+        this.primary = primary;
+        this.primaryUsage = primaryUsage;
+        this.primaryFault = primaryFault;
+        this.secondary = secondary;
+        this.secondaryUsage = secondaryUsage;
+        this.secondaryFault = secondaryFault;
+        this.remark = remark;
     }
 
     @Override
     public String toString() {
         return "QkdPath{" +
-                "ID='" + ID + '\'' +
-                ", FAIL_BACK_MODE='" + FAIL_BACK_MODE + '\'' +
-                ", FAIL_BACK_PERIOD='" + FAIL_BACK_PERIOD + '\'' +
-                ", CONSUMER_LINK='" + CONSUMER_LINK + '\'' +
-                ", PRIMARY='" + PRIMARY + '\'' +
-                ", PRIMARY_USAGE='" + PRIMARY_USAGE + '\'' +
-                ", PRIMARY_FAULT='" + PRIMARY_FAULT + '\'' +
-                ", SECONDARY='" + SECONDARY + '\'' +
-                ", SECONDARY_USAGE='" + SECONDARY_USAGE + '\'' +
-                ", SECONDARY_FAULT='" + SECONDARY_FAULT + '\'' +
-                ", REMARK='" + REMARK + '\'' +
+                "id='" + id + '\'' +
+                ", failBackMode='" + failBackMode + '\'' +
+                ", failBackPeriod='" + failBackPeriod + '\'' +
+                ", consumerLink='" + consumerLink + '\'' +
+                ", primary='" + primary + '\'' +
+                ", primaryUsage='" + primaryUsage + '\'' +
+                ", primaryFault='" + primaryFault + '\'' +
+                ", secondary='" + secondary + '\'' +
+                ", secondaryUsage='" + secondaryUsage + '\'' +
+                ", secondaryFault='" + secondaryFault + '\'' +
+                ", remark='" + remark + '\'' +
                 '}';
     }
 }
