@@ -64,7 +64,7 @@ public class QkdController {
                 jsonObject.put("cert", qkdNode.getCERT());
                 jsonObject.put("network", networkJsonObject);
                 jsonObject.put("kems_cert", qkdNode.getKEMS_CERT());
-                jsonObject.put("consumers", consumersJsonArray);
+                jsonObject.put("apps", consumersJsonArray);
                 jsonObject.put("providers", providersJsonArray);
                 jsonObject.put("loc_x", qkdNode.getLOC_X());
                 jsonObject.put("loc_y", qkdNode.getLOC_Y());
@@ -166,7 +166,7 @@ public class QkdController {
                 jsonObject.put("id", qkdPath.getID());
                 jsonObject.put("fail_back_mode", qkdPath.getFAIL_BACK_MODE());
                 jsonObject.put("fail_back_period", qkdPath.getFAIL_BACK_PERIOD());
-                jsonObject.put("consumer_link", consumerLinkJsonObject);
+                jsonObject.put("app_link", consumerLinkJsonObject);
                 jsonObject.put("primary", primaryJsonArray);
                 jsonObject.put("primary_usage", qkdPath.getPRIMARY_USAGE());
                 jsonObject.put("primary_fault", qkdPath.getPRIMARY_FAULT());
