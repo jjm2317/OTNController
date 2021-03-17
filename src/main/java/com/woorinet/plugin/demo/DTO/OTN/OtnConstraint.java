@@ -21,39 +21,38 @@ public class OtnConstraint {
     @GeneratedValue
     @Generated
     int id;
-    int ems_id;
-    String service_id;
-    String const_id;
-    String const_type;
-    String const_name;
-    String const_value;
-    String const_operator;
+    int emsId;
+    String serviceId;
+    String constId;
+    String constType;
+    String constName;
+    String constValue;
+    String constOperator;
 
     public OtnConstraint() {
 
     }
 
-    public OtnConstraint(int ems_id, String service_id, String const_id, String const_type, String const_name, String const_value, String const_operator) {
-        this.ems_id = ems_id;
-        this.service_id = service_id;
-        this.const_id = const_id;
-        this.const_type = const_type;
-        this.const_name = const_name;
-        this.const_value = const_value;
-        this.const_operator = const_operator;
+    public OtnConstraint(int emsId, String serviceId, String constId, String constType, String constName, String constValue, String constOperator) {
+        this.emsId = emsId;
+        this.serviceId = serviceId;
+        this.constId = constId;
+        this.constType = constType;
+        this.constName = constName;
+        this.constValue = constValue;
+        this.constOperator = constOperator;
     }
 
     @Override
     public String toString() {
-        return "CONSTRAINT{" +
-                "ems_id=" + ems_id +
-                ", service_id='" + service_id + '\'' +
-                ", const_id='" + const_id + '\'' +
-                ", const_type='" + const_type + '\'' +
-                ", const_name='" + const_name + '\'' +
-                ", const_value='" + const_value + '\'' +
-                ", const_operator='" + const_operator + '\'' +
+        return "OtnConstraint{" +
+                "emsId=" + emsId +
+                ", serviceId='" + serviceId + '\'' +
+                ", constId='" + constId + '\'' +
+                ", constType='" + constType + '\'' +
+                ", constName='" + constName + '\'' +
+                ", constValue='" + constValue + '\'' +
+                ", constOperator='" + constOperator + '\'' +
                 '}';
     }
-
 }

@@ -16,126 +16,84 @@ import javax.persistence.Table;
 @Data
 @Table(name="otn_link")
 public class OtnLink {
-    int ems_id;
-    int dst_ems_id;
+    int emsId;
+    int dstEmsId;
     @Id
     @Generated
-    String link_id;
-    String link_nm;
-    String src_ne_id;
-    String src_ne_name;
-    String src_node_connector_id;
-    String dst_ne_id;
-    String dst_ne_name;
-    String dst_node_connector_id;
-    String link_type;
-    String link_status;
-    String link_category;
-    String high_order_tunnel;
+    String linkId;
+    String linkNm;
+    String srcNeId;
+    String srcNeName;
+    String srcNodeConnectorId;
+    String dstNeId;
+    String dstNeName;
+    String dstNodeConnectorId;
+    String linkType;
+    String linkStatus;
+    String linkCategory;
+    String highOrderTunnel;
     String latency;
     String distance;
     String srlg;
     String ovpn;
     String timeslot;
     String lambda;
-    int maximum_odu0s;
-    int maximum_odu1s;
-    int maximum_odu2s;
-    int maximum_odu2es;
-    int maximum_odu3s;
-    int maximum_odu4s;
-    int maximum_odu4cns;
-    int maximum_oduflexs;
-    int available_odu0s;
-    int available_odu1s;
-    int available_odu2s;
-    int available_odu2es;
-    int available_odu3s;
-    int available_odu4s;
-    int available_odu4cns;
-    int available_oduflexs;
+    int maximumOdu0s;
+    int maximumOdu1s;
+    int maximumOdu2s;
+    int maximumOdu2es;
+    int maximumOdu3s;
+    int maximumOdu4s;
+    int maximumOdu4cns;
+    int maximumOduflexs;
+    int availableOdu0s;
+    int availableOdu1s;
+    int availableOdu2s;
+    int availableOdu2es;
+    int availableOdu3s;
+    int availableOdu4s;
+    int availableOdu4cns;
+    int availableOduflexs;
     public OtnLink() {
 
     }
 
-    public OtnLink(int ems_id, int dst_ems_id, String link_id, String link_nm, String src_ne_id, String src_ne_name, String src_node_connector_id, String dst_ne_id, String dst_ne_name, String dst_node_connector_id, String link_ype, String link_stats, String link_category, String high_order_tunnel, String latency, String distance, String srlg, String ovpn, String timeslot, String lambda, int maximum_odu0s, int maximum_odu1s, int maximum_odu2s, int maximum_odu2es, int maximum_odu3s, int maximum_odu4s, int maximum_odu4cns, int maximum_odu4flexs, int available_odu0s, int available_odu1s, int available_odu2s, int available_odu2es, int available_odu3s, int available_odu4s, int available_odu4cns, int available_oduflexs) {
-        this.ems_id = ems_id;
-        this.dst_ems_id = dst_ems_id;
-        this.link_id = link_id;
-        this.link_nm = link_nm;
-        this.src_ne_id = src_ne_id;
-        this.src_ne_name = src_ne_name;
-        this.src_node_connector_id = src_node_connector_id;
-        this.dst_ne_id = dst_ne_id;
-        this.dst_ne_name = dst_ne_name;
-        this.dst_node_connector_id = dst_node_connector_id;
-        this.link_type = link_type;
-        this.link_status = link_status;
-        this.link_category = link_category;
-        this.high_order_tunnel = high_order_tunnel;
+    public OtnLink(int emsId, int dstEmsId, String linkId, String linkNm, String srcNeId, String srcNeName, String srcNodeConnectorId, String dstNeId, String dstNeName, String dstNodeConnectorId, String linkType, String linkStatus, String linkCategory, String highOrderTunnel, String latency, String distance, String srlg, String ovpn, String timeslot, String lambda, int maximumOdu0s, int maximumOdu1s, int maximumOdu2s, int maximumOdu2es, int maximumOdu3s, int maximumOdu4s, int maximumOdu4cns, int maximumOduflexs, int availableOdu0s, int availableOdu1s, int availableOdu2s, int availableOdu2es, int availableOdu3s, int availableOdu4s, int availableOdu4cns, int availableOduflexs) {
+        this.emsId = emsId;
+        this.dstEmsId = dstEmsId;
+        this.linkId = linkId;
+        this.linkNm = linkNm;
+        this.srcNeId = srcNeId;
+        this.srcNeName = srcNeName;
+        this.srcNodeConnectorId = srcNodeConnectorId;
+        this.dstNeId = dstNeId;
+        this.dstNeName = dstNeName;
+        this.dstNodeConnectorId = dstNodeConnectorId;
+        this.linkType = linkType;
+        this.linkStatus = linkStatus;
+        this.linkCategory = linkCategory;
+        this.highOrderTunnel = highOrderTunnel;
         this.latency = latency;
         this.distance = distance;
         this.srlg = srlg;
         this.ovpn = ovpn;
         this.timeslot = timeslot;
         this.lambda = lambda;
-        this.maximum_odu0s = maximum_odu0s;
-        this.maximum_odu1s = maximum_odu1s;
-        this.maximum_odu2s = maximum_odu2s;
-        this.maximum_odu2es = maximum_odu2es;
-        this.maximum_odu3s = maximum_odu3s;
-        this.maximum_odu4s = maximum_odu4s;
-        this.maximum_odu4cns = maximum_odu4cns;
-        this.maximum_oduflexs = maximum_oduflexs;
-        this.available_odu0s = available_odu0s;
-        this.available_odu1s = available_odu1s;
-        this.available_odu2s = available_odu2s;
-        this.available_odu2es = available_odu2es;
-        this.available_odu3s = available_odu3s;
-        this.available_odu4s = available_odu4s;
-        this.available_odu4cns = available_odu4cns;
-        this.available_oduflexs = available_oduflexs;
-    }
-
-    @Override
-    public String toString() {
-        return "LINK{" +
-                "ems_id=" + ems_id +
-                ", dst_ems_id=" + dst_ems_id +
-                ", link_id='" + link_id + '\'' +
-                ", link_nm='" + link_nm + '\'' +
-                ", src_ne_id='" + src_ne_id + '\'' +
-                ", src_ne_name='" + src_ne_name + '\'' +
-                ", src_node_connector_id='" + src_node_connector_id + '\'' +
-                ", dst_ne_id='" + dst_ne_id + '\'' +
-                ", dst_ne_name='" + dst_ne_name + '\'' +
-                ", dst_node_connector_id='" + dst_node_connector_id + '\'' +
-                ", link_type='" + link_type + '\'' +
-                ", link_status='" + link_status + '\'' +
-                ", link_category='" + link_category + '\'' +
-                ", high_order_tunnel='" + high_order_tunnel + '\'' +
-                ", latency='" + latency + '\'' +
-                ", distance='" + distance + '\'' +
-                ", srlg='" + srlg + '\'' +
-                ", ovpn='" + ovpn + '\'' +
-                ", timeslot='" + timeslot + '\'' +
-                ", lambda='" + lambda + '\'' +
-                ", maximum_odu0s=" + maximum_odu0s +
-                ", maximum_odu1s=" + maximum_odu1s +
-                ", maximum_odu2s=" + maximum_odu2s +
-                ", maximum_odu2es=" + maximum_odu2es +
-                ", maximum_odu3s=" + maximum_odu3s +
-                ", maximum_odu4s=" + maximum_odu4s +
-                ", maximum_odu4cns=" + maximum_odu4cns +
-                ", maximum_oduflexs=" + maximum_oduflexs +
-                ", available_odu0s=" + available_odu0s +
-                ", available_odu1s=" + available_odu1s +
-                ", available_odu2s=" + available_odu2s +
-                ", available_odu2es=" + available_odu2es +
-                ", available_odu3s=" + available_odu3s +
-                ", available_odu4s=" + available_odu4s +
-                ", available_odu4cns=" + available_odu4cns +
-                ", available_oduflexs=" + available_oduflexs +
-                '}';
+        this.maximumOdu0s = maximumOdu0s;
+        this.maximumOdu1s = maximumOdu1s;
+        this.maximumOdu2s = maximumOdu2s;
+        this.maximumOdu2es = maximumOdu2es;
+        this.maximumOdu3s = maximumOdu3s;
+        this.maximumOdu4s = maximumOdu4s;
+        this.maximumOdu4cns = maximumOdu4cns;
+        this.maximumOduflexs = maximumOduflexs;
+        this.availableOdu0s = availableOdu0s;
+        this.availableOdu1s = availableOdu1s;
+        this.availableOdu2s = availableOdu2s;
+        this.availableOdu2es = availableOdu2es;
+        this.availableOdu3s = availableOdu3s;
+        this.availableOdu4s = availableOdu4s;
+        this.availableOdu4cns = availableOdu4cns;
+        this.availableOduflexs = availableOduflexs;
     }
 }

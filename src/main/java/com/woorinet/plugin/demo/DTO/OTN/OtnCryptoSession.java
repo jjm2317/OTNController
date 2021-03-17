@@ -18,60 +18,60 @@ import javax.persistence.Table;
 public class OtnCryptoSession {
     @Id
     @GeneratedValue
-    int CRYPTO_SESSION_ID;
-    String AID;
-    String LOCAL_IP;
-    String REMOTE_IP;
-    String KSP_MODE;
-    String DEAD_TIME;
-    String RETRY_REQUEST_INTERVAL;
-    String DST_LID;
-    String KEY_SOURCE_MODE;
-    String KEY_FAILOVER_MODE;
-    String KEY_LIFE_TIME;
-    String TX_KEY_STATE;
-    String TX_KEY_BANK_STATE;
-    String RX_KEY_STATE;
-    String RX_KEY_BANK_STATE;
+    int cryptoSessionId;
+    String aid;
+    String localIp;
+    String remoteIp;
+    String kspMode;
+    String deadTime;
+    String retryRequestInterval;
+    String dstLid;
+    String keySourceMode;
+    String keyFailoverMode;
+    String keyLifeTime;
+    String txKeyState;
+    String txKeyBankState;
+    String rxKeyState;
+    String rxKeyBankState;
 
     public OtnCryptoSession() {
 
     }
 
-    public OtnCryptoSession(String AID, String LOCAL_IP, String REMOTE_IP, String KSP_MODE, String DEAD_TIME, String RETRY_REQUEST_INTERVAL, String DST_LID, String KEY_SOURCE_MODE, String KEY_FAILOVER_MODE, String KEY_LIFE_TIME, String TX_KEY_STATE, String TX_KEY_BANK_STATE, String RX_KEY_STATE, String RX_KEY_BANK_STATE) {
-        this.AID = AID;
-        this.LOCAL_IP = LOCAL_IP;
-        this.REMOTE_IP = REMOTE_IP;
-        this.KSP_MODE = KSP_MODE;
-        this.DEAD_TIME = DEAD_TIME;
-        this.RETRY_REQUEST_INTERVAL = RETRY_REQUEST_INTERVAL;
-        this.DST_LID = DST_LID;
-        this.KEY_SOURCE_MODE = KEY_SOURCE_MODE;
-        this.KEY_FAILOVER_MODE = KEY_FAILOVER_MODE;
-        this.KEY_LIFE_TIME = KEY_LIFE_TIME;
-        this.TX_KEY_STATE = TX_KEY_STATE;
-        this.TX_KEY_BANK_STATE = TX_KEY_BANK_STATE;
-        this.RX_KEY_STATE = RX_KEY_STATE;
-        this.RX_KEY_BANK_STATE = RX_KEY_BANK_STATE;
+    public OtnCryptoSession(String aid, String localIp, String remoteIp, String kspMode, String deadTime, String retryRequestInterval, String dstLid, String keySourceMode, String keyFailoverMode, String keyLifeTime, String txKeyState, String txKeyBankState, String rxKeyState, String rxKeyBankState) {
+        this.aid = aid;
+        this.localIp = localIp;
+        this.remoteIp = remoteIp;
+        this.kspMode = kspMode;
+        this.deadTime = deadTime;
+        this.retryRequestInterval = retryRequestInterval;
+        this.dstLid = dstLid;
+        this.keySourceMode = keySourceMode;
+        this.keyFailoverMode = keyFailoverMode;
+        this.keyLifeTime = keyLifeTime;
+        this.txKeyState = txKeyState;
+        this.txKeyBankState = txKeyBankState;
+        this.rxKeyState = rxKeyState;
+        this.rxKeyBankState = rxKeyBankState;
     }
 
     @Override
     public String toString() {
-        return "SdnCryptoSession{" +
-                "AID='" + AID + '\'' +
-                ", LOCAL_IP='" + LOCAL_IP + '\'' +
-                ", REMOTE_IP='" + REMOTE_IP + '\'' +
-                ", KSP_MODE='" + KSP_MODE + '\'' +
-                ", DEAD_TIME='" + DEAD_TIME + '\'' +
-                ", RETRY_REQUEST_INTERVAL='" + RETRY_REQUEST_INTERVAL + '\'' +
-                ", DST_LID='" + DST_LID + '\'' +
-                ", KEY_SOURCE_MODE='" + KEY_SOURCE_MODE + '\'' +
-                ", KEY_FAILOVER_MODE='" + KEY_FAILOVER_MODE + '\'' +
-                ", KEY_LIFE_TIME='" + KEY_LIFE_TIME + '\'' +
-                ", TX_KEY_STATE='" + TX_KEY_STATE + '\'' +
-                ", TX_KEY_BANK_STATE='" + TX_KEY_BANK_STATE + '\'' +
-                ", RX_KEY_STATE='" + RX_KEY_STATE + '\'' +
-                ", RX_KEY_BANK_STATE='" + RX_KEY_BANK_STATE + '\'' +
+        return "OtnCryptoSession{" +
+                "aid='" + aid + '\'' +
+                ", localIp='" + localIp + '\'' +
+                ", remoteIp='" + remoteIp + '\'' +
+                ", kspMode='" + kspMode + '\'' +
+                ", deadTime='" + deadTime + '\'' +
+                ", retryRequestInterval='" + retryRequestInterval + '\'' +
+                ", dstLid='" + dstLid + '\'' +
+                ", keySourceMode='" + keySourceMode + '\'' +
+                ", keyFailoverMode='" + keyFailoverMode + '\'' +
+                ", keyLifeTime='" + keyLifeTime + '\'' +
+                ", txKeyState='" + txKeyState + '\'' +
+                ", txKeyBankState='" + txKeyBankState + '\'' +
+                ", rxKeyState='" + rxKeyState + '\'' +
+                ", rxKeyBankState='" + rxKeyBankState + '\'' +
                 '}';
     }
 }

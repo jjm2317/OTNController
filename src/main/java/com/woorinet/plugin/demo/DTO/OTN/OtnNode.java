@@ -15,52 +15,52 @@ import javax.persistence.Table;
 @Data
 @Table(name="otn_node")
 public class OtnNode {
-    int ems_id;
+    int emsId;
     @Id
     @Generated
-    String ne_id;
-    String ne_name;
-    String ne_type;
-    String ne_model;
-    String ne_status;
-    String sw_ver;
-    String ip_addr;
+    String neId;
+    String neName;
+    String neType;
+    String neModel;
+    String neStatus;
+    String swVer;
+    String ipAddr;
     String vendor;
-    String serial_num;
-    String sys_type;
+    String serialNum;
+    String sysType;
 
     public OtnNode() {
 
     }
 
-    public OtnNode(int ems_id, String ne_id, String ne_name, String ne_type, String ne_model, String ne_status, String sw_ver, String ip_addr, String vendor, String serial_num, String sys_type) {
-        this.ems_id = ems_id;
-        this.ne_id = ne_id;
-        this.ne_name = ne_name;
-        this.ne_type = ne_type;
-        this.ne_model = ne_model;
-        this.ne_status = ne_status;
-        this.sw_ver = sw_ver;
-        this.ip_addr = ip_addr;
+    public OtnNode(int emsId, String neId, String neName, String neType, String neModel, String neStatus, String swVer, String ipAddr, String vendor, String serialNum, String sysType) {
+        this.emsId = emsId;
+        this.neId = neId;
+        this.neName = neName;
+        this.neType = neType;
+        this.neModel = neModel;
+        this.neStatus = neStatus;
+        this.swVer = swVer;
+        this.ipAddr = ipAddr;
         this.vendor = vendor;
-        this.serial_num = serial_num;
-        this.sys_type = sys_type;
+        this.serialNum = serialNum;
+        this.sysType = sysType;
     }
 
     @Override
     public String toString() {
-        return "NODE{" +
-                "ems_id=" + ems_id +
-                ", ne_id='" + ne_id + '\'' +
-                ", ne_name='" + ne_name + '\'' +
-                ", ne_type='" + ne_type + '\'' +
-                ", ne_model='" + ne_model + '\'' +
-                ", ne_status='" + ne_status + '\'' +
-                ", sw_ver='" + sw_ver + '\'' +
-                ", ip_addr='" + ip_addr + '\'' +
+        return "OtnNode{" +
+                "emsId=" + emsId +
+                ", neId='" + neId + '\'' +
+                ", neName='" + neName + '\'' +
+                ", neType='" + neType + '\'' +
+                ", neModel='" + neModel + '\'' +
+                ", neStatus='" + neStatus + '\'' +
+                ", swVer='" + swVer + '\'' +
+                ", ipAddr='" + ipAddr + '\'' +
                 ", vendor='" + vendor + '\'' +
-                ", serial_num='" + serial_num + '\'' +
-                ", sys_type='" + sys_type + '\'' +
+                ", serialNum='" + serialNum + '\'' +
+                ", sysType='" + sysType + '\'' +
                 '}';
     }
 }

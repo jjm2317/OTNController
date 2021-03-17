@@ -16,102 +16,102 @@ import javax.persistence.Table;
 @Data
 @Table(name="otn_tunnel")
 public class OtnTunnel {
-    int ems_id;
+    int emsId;
     @Id
     @Generated
-    String tunnel_id;
-    String src_ne_id;
-    String src_ne_name;
-    String dst_ne_id;
-    String dst_ne_name;
-    String rate_type;
-    String multiple_rate;
-    String local_id;
-    String request_id;
-    String tunnel_name;
-    String tunnel_type;
-    String tunnel_status;
-    String configuration_action;
-    String configuration_result_type;
-    String tunnel_oam_enabler;
-    String deployment_enabler;
-    String deployment_status;
-    String active_path;
-    String src_node_ref;
-    String dst_node_ref;
-    String service_ref;
-    String accessif_ref;
-    String protection_type;
-    String working_path;
-    String protection_path;
-    String service_mapping;
-    String creation_date;
+    String tunnelId;
+    String srcNeId;
+    String srcNeName;
+    String dstNeId;
+    String dstNeName;
+    String rateType;
+    String multipleRate;
+    String localId;
+    String requestId;
+    String tunnelName;
+    String tunnelType;
+    String tunnelStatus;
+    String configurationAction;
+    String configurationResultType;
+    String tunnelOamEnabler;
+    String deploymentEnabler;
+    String deploymentStatus;
+    String activePath;
+    String srcNodeRef;
+    String dstNodeRef;
+    String serviceRef;
+    String accessifRef;
+    String protectionType;
+    String workingPath;
+    String protectionPath;
+    String serviceMapping;
+    String creationDate;
 
     public OtnTunnel() {
     }
 
-    public OtnTunnel(int ems_id, String tunnel_id, String src_ne_id, String src_ne_name, String dst_ne_id, String dst_ne_name, String rate_type, String multiple_rate, String local_id, String request_id, String tunnel_name, String tunnel_type, String tunnel_status, String configuration_action, String configuration_result_type, String tunnel_oam_enabler, String deployment_enabler, String deployment_status, String active_path, String src_node_ref, String dst_node_ref, String service_ref, String accessif_ref, String protection_type, String working_path, String protection_path, String service_mapping, String creation_date) {
-        this.ems_id = ems_id;
-        this.tunnel_id = tunnel_id;
-        this.src_ne_id = src_ne_id;
-        this.src_ne_name = src_ne_name;
-        this.dst_ne_id = dst_ne_id;
-        this.dst_ne_name = dst_ne_name;
-        this.rate_type = rate_type;
-        this.multiple_rate = multiple_rate;
-        this.local_id = local_id;
-        this.request_id = request_id;
-        this.tunnel_name = tunnel_name;
-        this.tunnel_type = tunnel_type;
-        this.tunnel_status = tunnel_status;
-        this.configuration_action = configuration_action;
-        this.configuration_result_type = configuration_result_type;
-        this.tunnel_oam_enabler = tunnel_oam_enabler;
-        this.deployment_enabler = deployment_enabler;
-        this.deployment_status = deployment_status;
-        this.active_path = active_path;
-        this.src_node_ref = src_node_ref;
-        this.dst_node_ref = dst_node_ref;
-        this.service_ref = service_ref;
-        this.accessif_ref = accessif_ref;
-        this.protection_type = protection_type;
-        this.working_path = working_path;
-        this.protection_path = protection_path;
-        this.service_mapping = service_mapping;
-        this.creation_date = creation_date;
+    public OtnTunnel(int emsId, String tunnelId, String srcNeId, String srcNeName, String dstNeId, String dstNeName, String rateType, String multipleRate, String localId, String requestId, String tunnelName, String tunnelType, String tunnelStatus, String configurationAction, String configurationResultType, String tunnelOamEnabler, String deploymentEnabler, String deploymentStatus, String activePath, String srcNodeRef, String dstNodeRef, String serviceRef, String accessifRef, String protectionType, String workingPath, String protectionPath, String serviceMapping, String creationDate) {
+        this.emsId = emsId;
+        this.tunnelId = tunnelId;
+        this.srcNeId = srcNeId;
+        this.srcNeName = srcNeName;
+        this.dstNeId = dstNeId;
+        this.dstNeName = dstNeName;
+        this.rateType = rateType;
+        this.multipleRate = multipleRate;
+        this.localId = localId;
+        this.requestId = requestId;
+        this.tunnelName = tunnelName;
+        this.tunnelType = tunnelType;
+        this.tunnelStatus = tunnelStatus;
+        this.configurationAction = configurationAction;
+        this.configurationResultType = configurationResultType;
+        this.tunnelOamEnabler = tunnelOamEnabler;
+        this.deploymentEnabler = deploymentEnabler;
+        this.deploymentStatus = deploymentStatus;
+        this.activePath = activePath;
+        this.srcNodeRef = srcNodeRef;
+        this.dstNodeRef = dstNodeRef;
+        this.serviceRef = serviceRef;
+        this.accessifRef = accessifRef;
+        this.protectionType = protectionType;
+        this.workingPath = workingPath;
+        this.protectionPath = protectionPath;
+        this.serviceMapping = serviceMapping;
+        this.creationDate = creationDate;
     }
 
     @Override
     public String toString() {
-        return "TUNNEL{" +
-                "ems_id=" + ems_id +
-                ", tunnel_id='" + tunnel_id + '\'' +
-                ", src_ne_id='" + src_ne_id + '\'' +
-                ", src_ne_name='" + src_ne_name + '\'' +
-                ", dst_ne_id='" + dst_ne_id + '\'' +
-                ", dst_ne_name='" + dst_ne_name + '\'' +
-                ", rate_type='" + rate_type + '\'' +
-                ", multiple_rate='" + multiple_rate + '\'' +
-                ", local_id='" + local_id + '\'' +
-                ", request_id='" + request_id + '\'' +
-                ", tunnel_name='" + tunnel_name + '\'' +
-                ", tunnel_type='" + tunnel_type + '\'' +
-                ", tunnel_status='" + tunnel_status + '\'' +
-                ", configuration_action='" + configuration_action + '\'' +
-                ", configuration_result_type='" + configuration_result_type + '\'' +
-                ", tunnel_oam_enabler='" + tunnel_oam_enabler + '\'' +
-                ", deployment_enabler='" + deployment_enabler + '\'' +
-                ", deployment_status='" + deployment_status + '\'' +
-                ", active_path='" + active_path + '\'' +
-                ", src_node_ref='" + src_node_ref + '\'' +
-                ", dst_node_ref='" + dst_node_ref + '\'' +
-                ", service_ref='" + service_ref + '\'' +
-                ", accessif_ref='" + accessif_ref + '\'' +
-                ", protection_type='" + protection_type + '\'' +
-                ", working_path='" + working_path + '\'' +
-                ", protection_path='" + protection_path + '\'' +
-                ", service_mapping='" + service_mapping + '\'' +
-                ", creation_date='" + creation_date + '\'' +
+        return "OtnTunnel{" +
+                "emsId=" + emsId +
+                ", tunnelId='" + tunnelId + '\'' +
+                ", srcNeId='" + srcNeId + '\'' +
+                ", srcNeName='" + srcNeName + '\'' +
+                ", dstNeId='" + dstNeId + '\'' +
+                ", dstNeName='" + dstNeName + '\'' +
+                ", rateType='" + rateType + '\'' +
+                ", multipleRate='" + multipleRate + '\'' +
+                ", localId='" + localId + '\'' +
+                ", requestId='" + requestId + '\'' +
+                ", tunnelName='" + tunnelName + '\'' +
+                ", tunnelType='" + tunnelType + '\'' +
+                ", tunnelStatus='" + tunnelStatus + '\'' +
+                ", configurationAction='" + configurationAction + '\'' +
+                ", configurationResultType='" + configurationResultType + '\'' +
+                ", tunnelOamEnabler='" + tunnelOamEnabler + '\'' +
+                ", deploymentEnabler='" + deploymentEnabler + '\'' +
+                ", deploymentStatus='" + deploymentStatus + '\'' +
+                ", activePath='" + activePath + '\'' +
+                ", srcNodeRef='" + srcNodeRef + '\'' +
+                ", dstNodeRef='" + dstNodeRef + '\'' +
+                ", serviceRef='" + serviceRef + '\'' +
+                ", accessifRef='" + accessifRef + '\'' +
+                ", protectionType='" + protectionType + '\'' +
+                ", workingPath='" + workingPath + '\'' +
+                ", protectionPath='" + protectionPath + '\'' +
+                ", serviceMapping='" + serviceMapping + '\'' +
+                ", creationDate='" + creationDate + '\'' +
                 '}';
     }
 }

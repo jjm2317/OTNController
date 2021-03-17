@@ -277,9 +277,9 @@ public class OtnManager {
 
                 String connectId = tl1SystemInfo.getVENDOR() +
                         separator +
-                        otnNode.getSys_type() +
+                        otnNode.getSysType() +
                         separator +
-                        otnNode.getNe_name() +
+                        otnNode.getNeName() +
                         separator +
                         tl1OduNodeConnector.getSHELF_INDEX() +
                         separator +
@@ -299,8 +299,8 @@ public class OtnManager {
                         connectId, // connect_id
                         "", // connect_name
                         tl1OpticPower == null ? "" : connectType, // connect_type
-                        otnNode.getNe_id(), // ne_id
-                        otnNode.getNe_name(), // ne_name
+                        otnNode.getNeId(), // ne_id
+                        otnNode.getNeName(), // ne_name
                         "", // rack_id
                         tl1OduNodeConnector.getSHELF_INDEX(), // shelf_id
                         tl1OduNodeConnector.getSLOT_INDEX(), // slot_id
@@ -339,22 +339,22 @@ public class OtnManager {
                 int maximumBandwidth = Integer.parseInt(tl1OduMplsIf.getMAXIMUM_BANDWIDTH());
                 int availableBandwidth = Integer.parseInt(tl1OduMplsIf.getAVAILABLE_BANDWIDTH());
 
-                String linkId = srcTl1SystemInfo.getVENDOR() + separator + srcOtnNode.getSys_type() + separator + srcOtnNode.getNe_name() + separator +
-                        srcOtnConnector.getShelf_id() + separator + srcOtnConnector.getSlot_id() + separator + srcOtnConnector.getPort_id()
-                        + ":" + dstTl1SystemInfo.getVENDOR() + separator + dstOtnNode.getSys_type() + separator + dstOtnNode.getNe_name() + separator +
-                        dstOtnConnector.getShelf_id() + separator + dstOtnConnector.getSlot_id() + separator + dstOtnConnector.getPort_id();
+                String linkId = srcTl1SystemInfo.getVENDOR() + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
+                        srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId()
+                        + ":" + dstTl1SystemInfo.getVENDOR() + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
+                        dstOtnConnector.getShelfId() + separator + dstOtnConnector.getSlotId() + separator + dstOtnConnector.getPortId();
 
                 OtnLink otnLink = new OtnLink(
                         200009, // ems_id
                         200009, // dst_ems_id
                         linkId, // link_id
                         tl1OduMplsIf.getNAME(), // link_nm
-                        srcOtnNode.getNe_id(), // src_ne_id
-                        srcOtnNode.getNe_name(), // src_ne_name
-                        srcOtnConnector.getConnect_id(), // src_node_connector_id
-                        dstOtnNode.getNe_id(), // dst_ne_id
-                        dstOtnNode.getNe_name(), // dst_ne_name
-                        dstOtnConnector.getConnect_id(), // dst_node_connector_id
+                        srcOtnNode.getNeId(), // src_ne_id
+                        srcOtnNode.getNeName(), // src_ne_name
+                        srcOtnConnector.getConnectId(), // src_node_connector_id
+                        dstOtnNode.getNeId(), // dst_ne_id
+                        dstOtnNode.getNeName(), // dst_ne_name
+                        dstOtnConnector.getConnectId(), // dst_node_connector_id
                         tl1OduNodeConnector.getPORT_TYPE(), // link_type
                         tl1OduMplsIf.getOPERATION_STATUS(), // link_status
                         "", // link_category
@@ -407,14 +407,14 @@ public class OtnManager {
 
                 OtnService otnService = new OtnService(
                         200009, // ems_id
-                        srcOtnNode.getVendor() + separator + srcOtnNode.getSys_type() + separator + tl1OduHead.getNAME(), // service_id
-                        srcOtnNode.getNe_id(), // src_ne_id
-                        srcOtnNode.getNe_name(), // src_ne_name
-                        srcOtnConnector.getConnect_id(), // src_connect_id
+                        srcOtnNode.getVendor() + separator + srcOtnNode.getSysType() + separator + tl1OduHead.getNAME(), // service_id
+                        srcOtnNode.getNeId(), // src_ne_id
+                        srcOtnNode.getNeName(), // src_ne_name
+                        srcOtnConnector.getConnectId(), // src_connect_id
                         tl1OduHead.getSERVICE(), // src_accessif_type
-                        dstOtnNode.getNe_id(), // dst_ne_id
-                        dstOtnNode.getNe_name(), // dst_ne_name
-                        dstOtnConnector.getConnect_id(), // dst_connect_id
+                        dstOtnNode.getNeId(), // dst_ne_id
+                        dstOtnNode.getNeName(), // dst_ne_name
+                        dstOtnConnector.getConnectId(), // dst_connect_id
                         tl1OduTail.getSERVICE(), // dst_accessif_type
                         "", // service_type
                         tl1OduHead.getNAME(), // service_name
@@ -427,7 +427,7 @@ public class OtnManager {
                         tl1OduHead.getACTIVE_PATH_STATUS(), // active_path
                         tl1OduHead.getCREATION_DATE() // creation_date
                 );
-                sdnServiceHashMapForPath.put(otnService.getService_name(), otnService);
+                sdnServiceHashMapForPath.put(otnService.getServiceName(), otnService);
                 return otnService;
             });
         sdnServiceStream.forEach(otnServiceRepository::save);
@@ -442,11 +442,11 @@ public class OtnManager {
 
                 OtnTunnel otnTunnel = new OtnTunnel(
                         200009, // ems_id
-                        srcOtnNode.getVendor() + separator + srcOtnNode.getSys_type() + separator + tl1Odu.getNAME(), // tunnel_id
-                        srcOtnNode.getNe_id(), // src_ne_id
-                        srcOtnNode.getNe_name(), // src_ne_name
-                        dstOtnNode.getNe_id(), // dst_ne_id
-                        dstOtnNode.getNe_name(), // dst_ne_name
+                        srcOtnNode.getVendor() + separator + srcOtnNode.getSysType() + separator + tl1Odu.getNAME(), // tunnel_id
+                        srcOtnNode.getNeId(), // src_ne_id
+                        srcOtnNode.getNeName(), // src_ne_name
+                        dstOtnNode.getNeId(), // dst_ne_id
+                        dstOtnNode.getNeName(), // dst_ne_name
                         tl1Odu.getTYPE(), // rate_type
                         "1", // multiple_rate
                         "", // local_id
@@ -502,32 +502,32 @@ public class OtnManager {
                 OtnLink otnLink = sdnLinkHashMap.get(tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] );
                 OtnService otnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 OtnPath otnPath = new OtnPath();
-                otnPath.setEms_id(200009);
-                otnPath.setService_id(otnService.getService_id());
-                otnPath.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
-                otnPath.setConnection_idx("1");
-                otnPath.setConnection_type("Forward");
-                otnPath.setDirection_type("ingress");
-                otnPath.setTp_type("");
-                otnPath.setInstance_type("link");
-                otnPath.setInstance_ref(otnLink.getLink_id());
-                otnPath.setRef_type("");
+                otnPath.setEmsId(200009);
+                otnPath.setServiceId(otnService.getServiceId());
+                otnPath.setPathType(tl1Odu_head.getACTIVE_PATH_STATUS());
+                otnPath.setConnectionIdx("1");
+                otnPath.setConnectionType("Forward");
+                otnPath.setDirectionType("ingress");
+                otnPath.setTpType("");
+                otnPath.setInstanceType("link");
+                otnPath.setInstanceRef(otnLink.getLinkId());
+                otnPath.setRefType("");
                 otnPathRepository.save(otnPath);
             }
             { // TRANSIT_TO <--> TAIL
                 OtnLink otnLink = sdnLinkHashMap.get(tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] );
                 OtnService otnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 OtnPath otnPath = new OtnPath();
-                otnPath.setEms_id(200009);
-                otnPath.setService_id(otnService.getService_id());
-                otnPath.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
-                otnPath.setConnection_idx("2");
-                otnPath.setConnection_type("Forward");
-                otnPath.setDirection_type("ingress");
-                otnPath.setTp_type("");
-                otnPath.setInstance_type("link");
-                otnPath.setInstance_ref(otnLink.getLink_id());
-                otnPath.setRef_type("");
+                otnPath.setEmsId(200009);
+                otnPath.setServiceId(otnService.getServiceId());
+                otnPath.setPathType(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
+                otnPath.setConnectionIdx("2");
+                otnPath.setConnectionType("Forward");
+                otnPath.setDirectionType("ingress");
+                otnPath.setTpType("");
+                otnPath.setInstanceType("link");
+                otnPath.setInstanceRef(otnLink.getLinkId());
+                otnPath.setRefType("");
                 otnPathRepository.save(otnPath);
             }
         }
@@ -557,32 +557,32 @@ public class OtnManager {
                 OtnLink otnLink = sdnLinkHashMap.get(tl1Odu_transit_from.getTID() +'/'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_transit_from.getLOCAL_ID().split("-")[1] + '-' + tl1Odu_head.getTID() +'/'+ tl1Odu_head.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_head.getLOCAL_ID().split("-")[1]);
                 OtnService otnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 OtnPath otnPath = new OtnPath();
-                otnPath.setEms_id(200009);
-                otnPath.setService_id(otnService.getService_id());
-                otnPath.setPath_type(tl1Odu_head.getACTIVE_PATH_STATUS());
-                otnPath.setConnection_idx("3");
-                otnPath.setConnection_type("Forward");
-                otnPath.setDirection_type("egress");
-                otnPath.setTp_type("");
-                otnPath.setInstance_type("link");
-                otnPath.setInstance_ref(otnLink.getLink_id());
-                otnPath.setRef_type("");
+                otnPath.setEmsId(200009);
+                otnPath.setServiceId(otnService.getServiceId());
+                otnPath.setPathType(tl1Odu_head.getACTIVE_PATH_STATUS());
+                otnPath.setConnectionIdx("3");
+                otnPath.setConnectionType("Forward");
+                otnPath.setDirectionType("egress");
+                otnPath.setTpType("");
+                otnPath.setInstanceType("link");
+                otnPath.setInstanceRef(otnLink.getLinkId());
+                otnPath.setRefType("");
                 otnPathRepository.save(otnPath);
             }
             { // TRANSIT_TO <--> TAIL
                 OtnLink otnLink = sdnLinkHashMap.get(tl1Odu_tail.getTID() +'/'+ tl1Odu_tail.getLOCAL_ID().split("-")[0]+'-'+ tl1Odu_tail.getLOCAL_ID().split("-")[1] +'-'+ tl1Odu_transit_to.getTID() +'/'+ tl1Odu_transit_to.getLOCAL_ID().split("-")[0]+'-' + tl1Odu_transit_to.getLOCAL_ID().split("-")[1]);
                 OtnService otnService = sdnServiceHashMapForPath.get(tl1Odu_head.getNAME());
                 OtnPath otnPath = new OtnPath();
-                otnPath.setEms_id(200009);
-                otnPath.setService_id(otnService.getService_id());
-                otnPath.setPath_type(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
-                otnPath.setConnection_idx("4");
-                otnPath.setConnection_type("Forward");
-                otnPath.setDirection_type("egress");
-                otnPath.setTp_type("");
-                otnPath.setInstance_type("link");
-                otnPath.setInstance_ref(otnLink.getLink_id());
-                otnPath.setRef_type("");
+                otnPath.setEmsId(200009);
+                otnPath.setServiceId(otnService.getServiceId());
+                otnPath.setPathType(tl1Odu_transit_to.getACTIVE_PATH_STATUS());
+                otnPath.setConnectionIdx("4");
+                otnPath.setConnectionType("Forward");
+                otnPath.setDirectionType("egress");
+                otnPath.setTpType("");
+                otnPath.setInstanceType("link");
+                otnPath.setInstanceRef(otnLink.getLinkId());
+                otnPath.setRefType("");
                 otnPathRepository.save(otnPath);
             }
         }
@@ -600,7 +600,7 @@ public class OtnManager {
 
                 OtnConstraint otnConstraint = new OtnConstraint(
                         200009, // ems_id
-                        srcOtnNode.getVendor() + separator + srcOtnNode.getSys_type() + separator + tl1Odu_head.getNAME(), // service_id
+                        srcOtnNode.getVendor() + separator + srcOtnNode.getSysType() + separator + tl1Odu_head.getNAME(), // service_id
                         "protection type", // const_id
                         "", // const_type
                         "PROTECTION TYPE", // const_name
@@ -625,10 +625,10 @@ public class OtnManager {
 
                 OtnAccessIf otnAccessIf = new OtnAccessIf(
                         200009, // ems_id
-                        tl1SystemInfo.getVENDOR() + separator + otnNode.getSys_type() + separator + otnNode.getNe_id() + separator + otnConnector.getConnect_id(), // access_if_id
+                        tl1SystemInfo.getVENDOR() + separator + otnNode.getSysType() + separator + otnNode.getNeId() + separator + otnConnector.getConnectId(), // access_if_id
                         "", // accessif_name
-                        otnNode.getNe_id(), // ne_id
-                        otnConnector.getConnect_id(), // connector_id
+                        otnNode.getNeId(), // ne_id
+                        otnConnector.getConnectId(), // connector_id
                         tl1Odu.getSERVICE(), // accessif_type
                         tl1MplsIf.getOPERATION_STATUS(), // accessif_status
                         "", // service_ref
@@ -649,18 +649,18 @@ public class OtnManager {
             Tl1CmProgramInfo tl1CmProgramInfo = tl1CmProgramInfoHashMap.get(aidPieces[0] + "-" + aidPieces[1] + "-" + aidPieces[2]);
 
             OtnCryptoModule otnCryptoModule = new OtnCryptoModule();
-            otnCryptoModule.setAID(tl1ModuleInfo.getAID());
-            otnCryptoModule.setMODULE_ACT_TYPE(tl1CmPort.getUNIT_TYPE());
-            otnCryptoModule.setMID(tl1ModuleInfo.getMID());
-            otnCryptoModule.setPMID(tl1ModuleInfo.getPMID());
-            otnCryptoModule.setMID_CONTEXT(tl1ModuleInfo.getMID_CONTEXT());
-            otnCryptoModule.setPMID_CONTEXT(tl1ModuleInfo.getPMID_CONTEXT());
-            otnCryptoModule.setBYPASS_MODE(tl1BypassInfo.getCURRENT_ACTION());
-            otnCryptoModule.setCRYPTO_MODE(tl1ModuleInfo.getCRYPTO_MODE());
-            otnCryptoModule.setCRYPTO_MODULE_PKG_VERSION(tl1CmProgramInfo.getPKG_VERSION());
-            otnCryptoModule.setCRYPTO_MODULE_FPGA_VERSION(tl1CmProgramInfo.getFPGA_VERSION());
-            otnCryptoModule.setCRYPTO_MODULE_CPLD_VERSION(tl1CmProgramInfo.getCPLD_VERSION());
-            otnCryptoModule.setCRYPTO_MODULE_HW_VERSION(tl1CmProgramInfo.getHW_VERSION());
+            otnCryptoModule.setAid(tl1ModuleInfo.getAID());
+            otnCryptoModule.setModuleActType(tl1CmPort.getUNIT_TYPE());
+            otnCryptoModule.setMid(tl1ModuleInfo.getMID());
+            otnCryptoModule.setPmid(tl1ModuleInfo.getPMID());
+            otnCryptoModule.setMidContext(tl1ModuleInfo.getMID_CONTEXT());
+            otnCryptoModule.setPmidContext(tl1ModuleInfo.getPMID_CONTEXT());
+            otnCryptoModule.setBypassMode(tl1BypassInfo.getCURRENT_ACTION());
+            otnCryptoModule.setCryptoMode(tl1ModuleInfo.getCRYPTO_MODE());
+            otnCryptoModule.setCryptoModulePkgVersion(tl1CmProgramInfo.getPKG_VERSION());
+            otnCryptoModule.setCryptoModuleFpgaVersion(tl1CmProgramInfo.getFPGA_VERSION());
+            otnCryptoModule.setCryptoModuleCpldVersion(tl1CmProgramInfo.getCPLD_VERSION());
+            otnCryptoModule.setCryptoModuleHwVersion(tl1CmProgramInfo.getHW_VERSION());
 
             System.out.println(otnCryptoModule);
             otnCryptoModuleRepository.save(otnCryptoModule);
@@ -674,20 +674,20 @@ public class OtnManager {
 
             OtnCryptoSession otnCryptoSession = new OtnCryptoSession();
 
-            otnCryptoSession.setAID(tl1SessState.getAID());
-            otnCryptoSession.setLOCAL_IP(tl1SessState.getLOCAL_IP());
-            otnCryptoSession.setREMOTE_IP(tl1SessState.getREMOTE_IP());
-            otnCryptoSession.setKSP_MODE(tl1SessState.getKSP_MODE());
-            otnCryptoSession.setDEAD_TIME(tl1SessState.getDEAD_TIME());
-            otnCryptoSession.setRETRY_REQUEST_INTERVAL(tl1SessState.getRETRY_REQ_INTERVAL());
-            otnCryptoSession.setDST_LID(tl1SessState.getDST_LID());
-            otnCryptoSession.setKEY_SOURCE_MODE(tl1SessState.getKEY_SRC_MODE());
-            otnCryptoSession.setKEY_FAILOVER_MODE(tl1SessState.getKEY_FAILOVER());
-            otnCryptoSession.setKEY_LIFE_TIME(tl1SessState.getKEY_LIFE_TIME());
-            otnCryptoSession.setTX_KEY_STATE(tl1KeyState.getTX_KEY_STATE());
-            otnCryptoSession.setTX_KEY_BANK_STATE(tl1KeyState.getTX_KEY_BANK_STATE());
-            otnCryptoSession.setRX_KEY_STATE(tl1KeyState.getRX_KEY_STATE());
-            otnCryptoSession.setRX_KEY_BANK_STATE(tl1KeyState.getRX_KEY_BANK_STATE());
+            otnCryptoSession.setAid(tl1SessState.getAID());
+            otnCryptoSession.setLocalIp(tl1SessState.getLOCAL_IP());
+            otnCryptoSession.setRemoteIp(tl1SessState.getREMOTE_IP());
+            otnCryptoSession.setKspMode(tl1SessState.getKSP_MODE());
+            otnCryptoSession.setDeadTime(tl1SessState.getDEAD_TIME());
+            otnCryptoSession.setRetryRequestInterval(tl1SessState.getRETRY_REQ_INTERVAL());
+            otnCryptoSession.setDstLid(tl1SessState.getDST_LID());
+            otnCryptoSession.setKeySourceMode(tl1SessState.getKEY_SRC_MODE());
+            otnCryptoSession.setKeyFailoverMode(tl1SessState.getKEY_FAILOVER());
+            otnCryptoSession.setKeyLifeTime(tl1SessState.getKEY_LIFE_TIME());
+            otnCryptoSession.setTxKeyState(tl1KeyState.getTX_KEY_STATE());
+            otnCryptoSession.setTxKeyBankState(tl1KeyState.getTX_KEY_BANK_STATE());
+            otnCryptoSession.setRxKeyState(tl1KeyState.getRX_KEY_STATE());
+            otnCryptoSession.setRxKeyBankState(tl1KeyState.getRX_KEY_BANK_STATE());
 
             return otnCryptoSession;
         });
@@ -700,32 +700,32 @@ public class OtnManager {
         .map(tl1PmPort -> {
             OtnPmPort otnPmPort = new OtnPmPort();
 
-            otnPmPort.setTID(tl1PmPort.getTID());
-            otnPmPort.setAID(tl1PmPort.getAID());
-            otnPmPort.setUNIT(tl1PmPort.getUNIT());
-            otnPmPort.setDATE(tl1PmPort.getDATE());
-            otnPmPort.setTIME(tl1PmPort.getTIME());
-            otnPmPort.setIN_OCTETS(tl1PmPort.getIN_OCTETS());
-            otnPmPort.setIN_OK_PACKETS(tl1PmPort.getIN_OK_PACKETS());
-            otnPmPort.setIN_DISCARD_PACKETS(tl1PmPort.getIN_DISCARD_PACKETS());
-            otnPmPort.setIN_ERROR_PACKETS(tl1PmPort.getIN_ERROR_PACKETS());
-            otnPmPort.setIN_PAUSE_PACKETS(tl1PmPort.getIN_PAUSE_PACKETS());
-            otnPmPort.setIN_ALIGNMENT_ERRORS(tl1PmPort.getIN_ALIGNMENT_ERRORS());
-            otnPmPort.setIN_FCS_ERRORS(tl1PmPort.getIN_FCS_ERRORS());
-            otnPmPort.setIN_SYMBOL_ERRORS(tl1PmPort.getIN_SYMBOL_ERRORS());
-            otnPmPort.setOUT_OCTETS(tl1PmPort.getOUT_OCTETS());
-            otnPmPort.setOUT_OK_PACKETS(tl1PmPort.getOUT_OK_PACKETS());
-            otnPmPort.setOUT_UNICAST_PACKETS(tl1PmPort.getOUT_UNICAST_PACKETS());
-            otnPmPort.setOUT_NON_UNICAST_PACKETS(tl1PmPort.getOUT_NON_UNICAST_PACKETS());
-            otnPmPort.setOUT_DISCARD_PACKETS(tl1PmPort.getOUT_DISCARD_PACKETS());
-            otnPmPort.setOUT_ERROR_PACKETS(tl1PmPort.getOUT_ERROR_PACKETS());
-            otnPmPort.setOUT_BROADCAST_PACKETS(tl1PmPort.getOUT_BROADCAST_PACKETS());
-            otnPmPort.setOUT_MULTICAST_PACKETS(tl1PmPort.getOUT_MULTICAST_PACKETS());
-            otnPmPort.setOUT_PAUSE_PACKETS(tl1PmPort.getOUT_PAUSE_PACKETS());
-            otnPmPort.setIN_RATE(tl1PmPort.getIN_RATE());
-            otnPmPort.setOUT_RATE(tl1PmPort.getOUT_RATE());
-            otnPmPort.setIN_LOSS_RATIO(tl1PmPort.getIN_LOSS_RATIO());
-            otnPmPort.setOUT_LOSS_RATIO(tl1PmPort.getOUT_LOSS_RATIO());
+            otnPmPort.setTid(tl1PmPort.getTID());
+            otnPmPort.setAid(tl1PmPort.getAID());
+            otnPmPort.setUnit(tl1PmPort.getUNIT());
+            otnPmPort.setDate(tl1PmPort.getDATE());
+            otnPmPort.setTime(tl1PmPort.getTIME());
+            otnPmPort.setInOctets(tl1PmPort.getIN_OCTETS());
+            otnPmPort.setInOkPackets(tl1PmPort.getIN_OK_PACKETS());
+            otnPmPort.setInDiscardPackets(tl1PmPort.getIN_DISCARD_PACKETS());
+            otnPmPort.setInErrorPackets(tl1PmPort.getIN_ERROR_PACKETS());
+            otnPmPort.setInPausePackets(tl1PmPort.getIN_PAUSE_PACKETS());
+            otnPmPort.setInAlignmentErrors(tl1PmPort.getIN_ALIGNMENT_ERRORS());
+            otnPmPort.setInFcsErrors(tl1PmPort.getIN_FCS_ERRORS());
+            otnPmPort.setInSymbolErrors(tl1PmPort.getIN_SYMBOL_ERRORS());
+            otnPmPort.setOutOctets(tl1PmPort.getOUT_OCTETS());
+            otnPmPort.setOutOkPackets(tl1PmPort.getOUT_OK_PACKETS());
+            otnPmPort.setOutUnicastPackets(tl1PmPort.getOUT_UNICAST_PACKETS());
+            otnPmPort.setOutNonUnicastPackets(tl1PmPort.getOUT_NON_UNICAST_PACKETS());
+            otnPmPort.setOutDiscardPackets(tl1PmPort.getOUT_DISCARD_PACKETS());
+            otnPmPort.setOutErrorPackets(tl1PmPort.getOUT_ERROR_PACKETS());
+            otnPmPort.setOutBroadcastPackets(tl1PmPort.getOUT_BROADCAST_PACKETS());
+            otnPmPort.setOutMulticastPackets(tl1PmPort.getOUT_MULTICAST_PACKETS());
+            otnPmPort.setOutPausePackets(tl1PmPort.getOUT_PAUSE_PACKETS());
+            otnPmPort.setInRate(tl1PmPort.getIN_RATE());
+            otnPmPort.setOutRate(tl1PmPort.getOUT_RATE());
+            otnPmPort.setInLossRatio(tl1PmPort.getIN_LOSS_RATIO());
+            otnPmPort.setOutLossRatio(tl1PmPort.getOUT_LOSS_RATIO());
 
             return otnPmPort;
         });

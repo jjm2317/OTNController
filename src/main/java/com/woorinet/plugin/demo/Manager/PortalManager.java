@@ -87,15 +87,15 @@ public class PortalManager {
             .map(otnService -> {
 
                 Optional<OtnConnector> srcSdnConnector = otnConnectorList.stream().
-                        filter(connector -> connector.getConnect_id().equals(otnService.getSrc_connector_id()))
+                        filter(connector -> connector.getConnectId().equals(otnService.getSrcConnectorId()))
                         .findAny();
 
                 Optional<OtnConnector> dstSdnConnector = otnConnectorList.stream().
-                        filter(connector -> connector.getConnect_id().equals(otnService.getDst_connector_id()))
+                        filter(connector -> connector.getConnectId().equals(otnService.getDstConnectorId()))
                         .findAny();
 
                 Optional<OtnLink> sdnLink = otnLinkList.stream().
-                        filter(link -> link.getLink_id().equals(otnService.getSrc_connector_id() + ":" + otnService.getDst_connector_id()))
+                        filter(link -> link.getLinkId().equals(otnService.getSrcConnectorId() + ":" + otnService.getDstConnectorId()))
                         .findAny();
 
                 PortalLineNumSheet portalLineNumSheet = new PortalLineNumSheet(
@@ -103,22 +103,22 @@ public class PortalManager {
                         "Single", //domain_type
                         "", //area_start, userinput
                         "", //area_end, userinput
-                        otnService.getSrc_ne_name() ,//node_start
-                        otnService.getDst_ne_name() ,//node_end
+                        otnService.getSrcNeName() ,//node_start
+                        otnService.getDstNeName() ,//node_end
                         "", //circuit_id
-                        otnService.getService_name(), //auto_service_name
+                        otnService.getServiceName(), //auto_service_name
                         "", //input_service_name, userinput
                         "", //service_type, userinput
                         "Woorinet", //vendor
                         "", //constraint_id
                         "no protection", //protection_type, otn 장비는 보호타입이 no protection
-                        otnService.getService_rate(), //service_rate,
+                        otnService.getServiceRate(), //service_rate,
                         "", //service_status, 일반적으로 서비스 상태는 값이 나오는데 여긴 없음, 모비젠에 문의 해야됨
-                        otnService.getActive_path().contains("active") ? "주" : "예비", //active_path, 주의 기준??
+                        otnService.getActivePath().contains("active") ? "주" : "예비", //active_path, 주의 기준??
                         "active", //traffic_status, 어디 있지??
                         "", //home_path
                         "", //latency
-                        otnService.getCreation_date(), //cable_creation_date
+                        otnService.getCreationDate(), //cable_creation_date
                         "", //network_cable_number
                         "", //writer
                         "", //remarks
@@ -140,11 +140,11 @@ public class PortalManager {
                         "",
                         "Woorinet",
                         "",
-                        otnService.getSrc_ne_name(),
-                        srcSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        otnService.getSrcNeName(),
+                        srcSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
@@ -153,11 +153,11 @@ public class PortalManager {
                         "",
                         "Woorinet",
                         "",
-                        sdnLink.map(link -> link.getSrc_ne_name()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        sdnLink.map(link -> link.getSrcNeName()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        srcSdnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
@@ -170,11 +170,11 @@ public class PortalManager {
                         "",
                         "Woorinet",
                         "",
-                        sdnLink.map(link -> link.getDst_ne_name()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        sdnLink.map(link -> link.getDstNeName()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
@@ -183,11 +183,11 @@ public class PortalManager {
                         "",
                         "Woorinet",
                         "",
-                        otnService.getDst_ne_name(),
-                        dstSdnConnector.map(connector -> connector.getUnit_type()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getShelf_id()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getSlot_id()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getPort_id()).orElse(""),
+                        otnService.getDstNeName(),
+                        dstSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        dstSdnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
@@ -211,7 +211,7 @@ public class PortalManager {
         Stream<PortalLinkMng> holaLinkMngStream = otnLinkList
             .stream()
             .filter(otnLink -> {
-                String [] halfOflinkId = otnLink.getLink_id().split(":");
+                String [] halfOflinkId = otnLink.getLinkId().split(":");
                 return (halfOflinkId[0].split("_")[2].charAt(0) < halfOflinkId[1].split("_")[2].charAt(0));
             })
             .map(otnLink -> {
@@ -231,8 +231,8 @@ public class PortalManager {
                 );
 
 
-                String[] firstHalfOfLinkIdSplits = otnLink.getLink_id().split(":")[0].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_B, 1, S03, 1]
-                String[] secondHalfOfLinkIdSplits = otnLink.getLink_id().split(":")[1].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_C, 1, S02, 3]
+                String[] firstHalfOfLinkIdSplits = otnLink.getLinkId().split(":")[0].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_B, 1, S03, 1]
+                String[] secondHalfOfLinkIdSplits = otnLink.getLinkId().split(":")[1].split("\\.");//ex) [WOORI-NET, otn, EMS_1000_C, 1, S02, 3]
 
 
                 String[] firstLinkFields = {
@@ -273,31 +273,31 @@ public class PortalManager {
             .stream()
             .map(otnConnector -> {
                 Optional<OtnNode> sdnNode = otnNodeList.stream().
-                        filter(node -> node.getNe_name().equals(otnConnector.getNe_name()))
+                        filter(node -> node.getNeName().equals(otnConnector.getNeName()))
                             .findAny();
 
 
 
                 Optional<OtnLink> sdnLink = otnLinkList.stream().
-                        filter(link -> link.getLink_id().contains(otnConnector.getConnect_id()))
+                        filter(link -> link.getLinkId().contains(otnConnector.getConnectId()))
                         .findAny();
 
                 PortalInventoryDetail portalInventoryDetail = new PortalInventoryDetail(
                         "Woorinet", //vendor
                         "", //cell
-                        otnConnector.getNe_name(), //tid
-                        otnConnector.getShelf_id(), //shelf_id
-                        sdnNode.map(node -> node.getIp_addr()).orElse(""), //ip
+                        otnConnector.getNeName(), //tid
+                        otnConnector.getShelfId(), //shelf_id
+                        sdnNode.map(node -> node.getIpAddr()).orElse(""), //ip
                         "", //ne_type
-                        otnConnector.getUnit_type(), //unit_type
-                        otnConnector.getConnect_pec(), // unit_pec
-                        otnConnector.getConnect_serial(), //serial_number
-                        otnConnector.getSlot_id(), //slot_id
-                        otnConnector.getPort_id(), //port_id
-                        otnConnector.getConnect_idle(), //connect_status
+                        otnConnector.getUnitType(), //unit_type
+                        otnConnector.getConnectPec(), // unit_pec
+                        otnConnector.getConnectSerial(), //serial_number
+                        otnConnector.getSlotId(), //slot_id
+                        otnConnector.getPortId(), //port_id
+                        otnConnector.getConnectIdle(), //connect_status
                         "", //llcf
-                        otnConnector.getModule_name(), //module_name
-                        otnConnector.getConnect_pec(), //module_pec
+                        otnConnector.getModuleName(), //module_name
+                        otnConnector.getConnectPec(), //module_pec
                         sdnLink.map(link -> link.getDistance()).orElse(""), //distance
                         "", //module_description
                         "", //cable_name

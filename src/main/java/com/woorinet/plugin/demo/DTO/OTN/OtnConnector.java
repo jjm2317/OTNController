@@ -16,79 +16,79 @@ import javax.persistence.Table;
 @Data
 @Table(name="otn_connector")
 public class OtnConnector {
-    int ems_id;
+    int emsId;
     @Id
     @Generated
-    String connect_id;
-    String connect_name;
-    String connect_type;
-    String ne_id;
-    String ne_name;
-    String rack_id;
-    String shelf_id;
-    String slot_id;
-    String subslot_id;
-    String port_id;
-    String connect_status;
-    String connect_role;
-    String connect_idle;
-    String connect_llcf;
-    String connect_lambda;
-    String module_name;
-    String connect_pec;
-    String connect_serial;
-    String unit_type;
+    String connectId;
+    String connectName;
+    String connectType;
+    String neId;
+    String neName;
+    String rackId;
+    String shelfId;
+    String slotId;
+    String subslotId;
+    String portId;
+    String connectStatus;
+    String connectRole;
+    String connectIdle;
+    String connectLlcf;
+    String connectLambda;
+    String moduleName;
+    String connectPec;
+    String connectSerial;
+    String unitType;
 
     public OtnConnector() {
 
     }
 
-    public OtnConnector(int ems_id, String connect_id, String connect_name, String connect_type, String ne_id, String ne_name, String rack_id, String shelf_id, String slot_id, String subslot_id, String port_id, String connect_status, String connect_role, String connect_idle, String connect_llcf, String connect_lambda, String module_name, String connect_pec, String connect_serial, String unit_type) {
-        this.ems_id = ems_id;
-        this.connect_id = connect_id;
-        this.connect_name = connect_name;
-        this.connect_type = connect_type;
-        this.ne_id = ne_id;
-        this.ne_name = ne_name;
-        this.rack_id = rack_id;
-        this.shelf_id = shelf_id;
-        this.slot_id = slot_id;
-        this.subslot_id = subslot_id;
-        this.port_id = port_id;
-        this.connect_status = connect_status;
-        this.connect_role = connect_role;
-        this.connect_idle = connect_idle;
-        this.connect_llcf = connect_llcf;
-        this.connect_lambda = connect_lambda;
-        this.module_name = module_name;
-        this.connect_pec = connect_pec;
-        this.connect_serial = connect_serial;
-        this.unit_type = unit_type;
+    public OtnConnector(int emsId, String connectId, String connectName, String connectType, String neId, String neName, String rackId, String shelfId, String slotId, String subslotId, String portId, String connectStatus, String connectRole, String connectIdle, String connectLlcf, String connectLambda, String moduleName, String connectPec, String connectSerial, String unitType) {
+        this.emsId = emsId;
+        this.connectId = connectId;
+        this.connectName = connectName;
+        this.connectType = connectType;
+        this.neId = neId;
+        this.neName = neName;
+        this.rackId = rackId;
+        this.shelfId = shelfId;
+        this.slotId = slotId;
+        this.subslotId = subslotId;
+        this.portId = portId;
+        this.connectStatus = connectStatus;
+        this.connectRole = connectRole;
+        this.connectIdle = connectIdle;
+        this.connectLlcf = connectLlcf;
+        this.connectLambda = connectLambda;
+        this.moduleName = moduleName;
+        this.connectPec = connectPec;
+        this.connectSerial = connectSerial;
+        this.unitType = unitType;
     }
 
     @Override
     public String toString() {
-        return "CONNECTOR{" +
-                "ems_id=" + ems_id +
-                ", connect_id='" + connect_id + '\'' +
-                ", connect_name='" + connect_name + '\'' +
-                ", connect_type='" + connect_type + '\'' +
-                ", ne_id='" + ne_id + '\'' +
-                ", ne_name='" + ne_name + '\'' +
-                ", rack_id='" + rack_id + '\'' +
-                ", shelf_id='" + shelf_id + '\'' +
-                ", slot_id='" + slot_id + '\'' +
-                ", subslot_id='" + subslot_id + '\'' +
-                ", port_id='" + port_id + '\'' +
-                ", connect_status='" + connect_status + '\'' +
-                ", connect_role='" + connect_role + '\'' +
-                ", connect_idle='" + connect_idle + '\'' +
-                ", connect_llcf='" + connect_llcf + '\'' +
-                ", connect_lambda='" + connect_lambda + '\'' +
-                ", module_name='" + module_name + '\'' +
-                ", connect_pec='" + connect_pec + '\'' +
-                ", connect_serial='" + connect_serial + '\'' +
-                ", unit_type='" + unit_type + '\'' +
+        return "OtnConnector{" +
+                "emsId=" + emsId +
+                ", connectId='" + connectId + '\'' +
+                ", connectName='" + connectName + '\'' +
+                ", connectType='" + connectType + '\'' +
+                ", neId='" + neId + '\'' +
+                ", neName='" + neName + '\'' +
+                ", rackId='" + rackId + '\'' +
+                ", shelfId='" + shelfId + '\'' +
+                ", slotId='" + slotId + '\'' +
+                ", subslotId='" + subslotId + '\'' +
+                ", portId='" + portId + '\'' +
+                ", connectStatus='" + connectStatus + '\'' +
+                ", connectRole='" + connectRole + '\'' +
+                ", connectIdle='" + connectIdle + '\'' +
+                ", connectLlcf='" + connectLlcf + '\'' +
+                ", connectLambda='" + connectLambda + '\'' +
+                ", moduleName='" + moduleName + '\'' +
+                ", connectPec='" + connectPec + '\'' +
+                ", connectSerial='" + connectSerial + '\'' +
+                ", unitType='" + unitType + '\'' +
                 '}';
     }
 }

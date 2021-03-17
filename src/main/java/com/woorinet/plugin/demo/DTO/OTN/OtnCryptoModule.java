@@ -18,53 +18,53 @@ import javax.persistence.Table;
 public class OtnCryptoModule {
     @Id
     @GeneratedValue
-    int CRYPTO_MODULE_ID;
-    String AID;
-    String MODULE_ACT_TYPE;
-    String MID;
-    String PMID;
-    String MID_CONTEXT;
-    String PMID_CONTEXT;
-    String BYPASS_MODE;
-    String CRYPTO_MODE;
-    String CRYPTO_MODULE_PKG_VERSION;
-    String CRYPTO_MODULE_FPGA_VERSION;
-    String CRYPTO_MODULE_CPLD_VERSION;
-    String CRYPTO_MODULE_HW_VERSION;
+    int cryptoModuleId;
+    String aid;
+    String moduleActType;
+    String mid;
+    String pmid;
+    String midContext;
+    String pmidContext;
+    String bypassMode;
+    String cryptoMode;
+    String cryptoModulePkgVersion;
+    String cryptoModuleFpgaVersion;
+    String cryptoModuleCpldVersion;
+    String cryptoModuleHwVersion;
 
     public OtnCryptoModule() {
     }
 
-    public OtnCryptoModule(String AID, String MODULE_ACT_TYPE, String MID, String PMID, String MID_CONTEXT, String PMID_CONTEXT, String BYPASS_MODE, String CRYPTO_MODE, String CRYPTO_MODULE_PKG_VERSION, String CRYPTO_MODULE_FPGA_VERSION, String CRYPTO_MODULE_CPLD_VERSION, String CRYPTO_MODULE_HW_VERSION) {
-        this.AID = AID;
-        this.MODULE_ACT_TYPE = MODULE_ACT_TYPE;
-        this.MID = MID;
-        this.PMID = PMID;
-        this.MID_CONTEXT = MID_CONTEXT;
-        this.PMID_CONTEXT = PMID_CONTEXT;
-        this.BYPASS_MODE = BYPASS_MODE;
-        this.CRYPTO_MODE = CRYPTO_MODE;
-        this.CRYPTO_MODULE_PKG_VERSION = CRYPTO_MODULE_PKG_VERSION;
-        this.CRYPTO_MODULE_FPGA_VERSION = CRYPTO_MODULE_FPGA_VERSION;
-        this.CRYPTO_MODULE_CPLD_VERSION = CRYPTO_MODULE_CPLD_VERSION;
-        this.CRYPTO_MODULE_HW_VERSION = CRYPTO_MODULE_HW_VERSION;
+    public OtnCryptoModule(String aid, String moduleActType, String mid, String pmid, String midContext, String pmidContext, String bypassMode, String cryptoMode, String cryptoModulePkgVersion, String cryptoModuleFpgaVersion, String cryptoModuleCpldVersion, String cryptoModuleHwVersion) {
+        this.aid = aid;
+        this.moduleActType = moduleActType;
+        this.mid = mid;
+        this.pmid = pmid;
+        this.midContext = midContext;
+        this.pmidContext = pmidContext;
+        this.bypassMode = bypassMode;
+        this.cryptoMode = cryptoMode;
+        this.cryptoModulePkgVersion = cryptoModulePkgVersion;
+        this.cryptoModuleFpgaVersion = cryptoModuleFpgaVersion;
+        this.cryptoModuleCpldVersion = cryptoModuleCpldVersion;
+        this.cryptoModuleHwVersion = cryptoModuleHwVersion;
     }
 
     @Override
     public String toString() {
-        return "SdnCryptoModule{" +
-                "AID='" + AID + '\'' +
-                ", MODULE_ACT_TYPE='" + MODULE_ACT_TYPE + '\'' +
-                ", MID='" + MID + '\'' +
-                ", PMID='" + PMID + '\'' +
-                ", MID_CONTEXT='" + MID_CONTEXT + '\'' +
-                ", PMID_CONTEXT='" + PMID_CONTEXT + '\'' +
-                ", BYPASS_MODE='" + BYPASS_MODE + '\'' +
-                ", CRYPTO_MODE='" + CRYPTO_MODE + '\'' +
-                ", CRYPTO_MODULE_PKG_VERSION='" + CRYPTO_MODULE_PKG_VERSION + '\'' +
-                ", CRYPTO_MODULE_FPGA_VERSION='" + CRYPTO_MODULE_FPGA_VERSION + '\'' +
-                ", CRYPTO_MODULE_CPLD_VERSION='" + CRYPTO_MODULE_CPLD_VERSION + '\'' +
-                ", CRYPTO_MODULE_HW_VERSION='" + CRYPTO_MODULE_HW_VERSION + '\'' +
+        return "OtnCryptoModule{" +
+                "aid='" + aid + '\'' +
+                ", moduleActType='" + moduleActType + '\'' +
+                ", mid='" + mid + '\'' +
+                ", pmid='" + pmid + '\'' +
+                ", midContext='" + midContext + '\'' +
+                ", pmidContext='" + pmidContext + '\'' +
+                ", bypassMode='" + bypassMode + '\'' +
+                ", cryptoMode='" + cryptoMode + '\'' +
+                ", cryptoModulePkgVersion='" + cryptoModulePkgVersion + '\'' +
+                ", cryptoModuleFpgaVersion='" + cryptoModuleFpgaVersion + '\'' +
+                ", cryptoModuleCpldVersion='" + cryptoModuleCpldVersion + '\'' +
+                ", cryptoModuleHwVersion='" + cryptoModuleHwVersion + '\'' +
                 '}';
     }
 }
