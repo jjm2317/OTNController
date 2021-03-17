@@ -108,9 +108,9 @@ public class OtnController {
     @ApiOperation(value = "get service", notes = "서비스 조회")
     @GetMapping(value = "/service")
     @ResponseBody
-    public ResponseEntity selectService(@RequestParam String service_id) {
-        if(otnServiceRepository.findSdnServiceByServiceId(service_id) == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnServiceRepository.findSdnServiceByServiceId(service_id));
+    public ResponseEntity selectService(@RequestParam String serviceId) {
+        if(otnServiceRepository.findOtnServiceByServiceId(serviceId) == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnServiceRepository.findOtnServiceByServiceId(serviceId));
     }
 
     @ApiOperation(value = "get path list", notes = "전체 경로 조회")
