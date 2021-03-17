@@ -1,6 +1,8 @@
 package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name="portal_otn_node_usage")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalOtnNodeUsage {
     @Id
     @GeneratedValue
