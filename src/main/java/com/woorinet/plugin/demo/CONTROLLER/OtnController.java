@@ -45,8 +45,8 @@ public class OtnController {
     @GetMapping(value = "/node")
     @ResponseBody
     public ResponseEntity selectNode(@RequestParam String neId) {
-        if(otnNodeRepository.findSdnNodeByNeId(neId) == null)  return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(otnNodeRepository.findSdnNodeByNeId(neId));
+        if(otnNodeRepository.findOtnNodeByNeId(neId) == null)  return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(otnNodeRepository.findOtnNodeByNeId(neId));
     }
 
     @ApiOperation(value = "get connector list", notes = "전체 커넥터 조회")
