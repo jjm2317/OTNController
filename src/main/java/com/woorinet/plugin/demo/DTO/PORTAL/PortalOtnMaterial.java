@@ -19,60 +19,59 @@ import javax.persistence.Table;
 public class PortalOtnMaterial {
     @Id
     @GeneratedValue
-    int HOLA_SDN_OTN_MATERIAL_ID;
-    String VENDOR;
-    String CELL;
-    String NODE;
-    String IP;
-    String SHELF;
-    String UNIT_LIST;
+    int holaSdnOtnMaterialId;
+    String vendor;
+    String cell;
+    String node;
+    String ip;
+    String shelf;
+    String unitList;
 
     public PortalOtnMaterial() {
     }
 
-    public PortalOtnMaterial(String VENDOR, String CELL, String NODE, String IP, String SHELF, String UNIT_LIST) {
-        this.VENDOR = VENDOR;
-        this.CELL = CELL;
-        this.NODE = NODE;
-        this.IP = IP;
-        this.SHELF = SHELF;
-        this.UNIT_LIST = UNIT_LIST;
+    public PortalOtnMaterial(String vendor, String cell, String node, String ip, String shelf, String unitList) {
+        this.vendor = vendor;
+        this.cell = cell;
+        this.node = node;
+        this.ip = ip;
+        this.shelf = shelf;
+        this.unitList = unitList;
     }
 
     @Override
     public String toString() {
-        return "HolaOtnMaterial{" +
-                "HOLA_SDN_OTN_MATERIAL_ID=" + HOLA_SDN_OTN_MATERIAL_ID +
-                ", VENDOR='" + VENDOR + '\'' +
-                ", CELL='" + CELL + '\'' +
-                ", NODE='" + NODE + '\'' +
-                ", IP='" + IP + '\'' +
-                ", SHELF='" + SHELF + '\'' +
-                ", UNIT_LIST='" + UNIT_LIST + '\'' +
+        return "PortalOtnMaterial{" +
+                "vendor='" + vendor + '\'' +
+                ", cell='" + cell + '\'' +
+                ", node='" + node + '\'' +
+                ", ip='" + ip + '\'' +
+                ", shelf='" + shelf + '\'' +
+                ", unitList='" + unitList + '\'' +
                 '}';
     }
 
-    public String getUnit( String[] fields) {
+    public String getUnit(String[] fields) {
        Unit unit = new Unit(fields);
        return (new Gson()).toJson(unit);
     }
 
     class Unit {
-        String UNIT_TYPE;
-        String UNIT_COUNT;
-        String ALL_PORT_COUNT;
-        String USAGE_PORT_COUNT;
-        String USAGE_RATIO;
+        String unitType;
+        String unitCount;
+        String allPortCount;
+        String usagePortCount;
+        String usageRatio;
 
         public Unit() {
         }
 
         public Unit(String[] fields) {
-            this.UNIT_TYPE = fields[0];
-            this.UNIT_COUNT = fields[1];
-            this.ALL_PORT_COUNT = fields[2];
-            this.USAGE_PORT_COUNT = fields[3];
-            this.USAGE_RATIO = fields[4];
+            this.unitType = fields[0];
+            this.unitCount = fields[1];
+            this.allPortCount = fields[2];
+            this.usagePortCount = fields[3];
+            this.usageRatio = fields[4];
         }
 
 

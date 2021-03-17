@@ -18,27 +18,26 @@ import javax.persistence.Table;
 public class PortalOtnNodeUsage {
     @Id
     @GeneratedValue
-    int HOLA_SDN_OTN_NODE_USAGE_ID;
-    String AREA;
-    String CITY;
-    String MOUNTING_STATUS;
+    int holaSdnOtnNodeUsageId;
+    String area;
+    String city;
+    String mountingStatus;
 
     public PortalOtnNodeUsage() {
     }
 
-    public PortalOtnNodeUsage(String AREA, String CITY, String MOUNTING_STATUS) {
-        this.AREA = AREA;
-        this.CITY = CITY;
-        this.MOUNTING_STATUS = MOUNTING_STATUS;
+    public PortalOtnNodeUsage(String area, String city, String mountingStatus) {
+        this.area = area;
+        this.city = city;
+        this.mountingStatus = mountingStatus;
     }
 
     @Override
     public String toString() {
-        return "HolaOtnNodeUsage{" +
-                "HOLA_SDN_OTN_NODE_USAGE_ID=" + HOLA_SDN_OTN_NODE_USAGE_ID +
-                ", AREA='" + AREA + '\'' +
-                ", CITY='" + CITY + '\'' +
-                ", MOUNTING_STATUS='" + MOUNTING_STATUS + '\'' +
+        return "PortalOtnNodeUsage{" +
+                "area='" + area + '\'' +
+                ", city='" + city + '\'' +
+                ", mountingStatus='" + mountingStatus + '\'' +
                 '}';
     }
 }

@@ -18,49 +18,47 @@ import javax.persistence.Table;
 public class PortalTrunkUsage {
     @Id
     @GeneratedValue
-    int HOLA_SDN_TRUNK_USAGE_ID;
-    String VENDOR;
-    String LINK;
-    String ADMIN_WEIGHT;
-    String MAXIMUM_USAGE_RATIO;
-    String MEMORY;
-    String USAGE_RATIO;
-    String DISTANCE;
-    String SRLG;
-    String ROADM_PATH;
-    String REMARKS;
+    int holaSdnTrunkUsageId;
+    String vendor;
+    String link;
+    String adminWeight;
+    String maximumUsageRatio;
+    String memory;
+    String usageRatio;
+    String distance;
+    String srlg;
+    String roadmPath;
+    String remarks;
 
     public PortalTrunkUsage() {
     }
 
-    public PortalTrunkUsage(String VENDOR, String LINK, String ADMIN_WEIGHT, String MAXIMUM_USAGE_RATIO, String MEMORY, String USAGE_RATIO, String DISTANCE, String SRLG, String ROADM_PATH, String REMARKS) {
-        this.VENDOR = VENDOR;
-        this.LINK = LINK;
-        this.ADMIN_WEIGHT = ADMIN_WEIGHT;
-        this.MAXIMUM_USAGE_RATIO = MAXIMUM_USAGE_RATIO;
-        this.MEMORY = MEMORY;
-        this.USAGE_RATIO = USAGE_RATIO;
-        this.DISTANCE = DISTANCE;
-        this.SRLG = SRLG;
-        this.ROADM_PATH = ROADM_PATH;
-        this.REMARKS = REMARKS;
+    public PortalTrunkUsage(String vendor, String link, String adminWeight, String maximumUsageRatio, String memory, String usageRatio, String distance, String srlg, String roadmPath, String remarks) {
+        this.vendor = vendor;
+        this.link = link;
+        this.adminWeight = adminWeight;
+        this.maximumUsageRatio = maximumUsageRatio;
+        this.memory = memory;
+        this.usageRatio = usageRatio;
+        this.distance = distance;
+        this.srlg = srlg;
+        this.roadmPath = roadmPath;
+        this.remarks = remarks;
     }
 
     @Override
     public String toString() {
-        return "HolaTrunkUsage{" +
-                "VENDOR='" + VENDOR + '\'' +
-                ", LINK='" + LINK + '\'' +
-                ", ADMIN_WEIGHT='" + ADMIN_WEIGHT + '\'' +
-                ", MAXIMUM_USAGE_RATIO='" + MAXIMUM_USAGE_RATIO + '\'' +
-                ", MEMORY='" + MEMORY + '\'' +
-                ", USAGE_RATIO='" + USAGE_RATIO + '\'' +
-                ", DISTANCE='" + DISTANCE + '\'' +
-                ", SRLG='" + SRLG + '\'' +
-                ", ROADM_PATH='" + ROADM_PATH + '\'' +
-                ", REMARKS='" + REMARKS + '\'' +
+        return "PortalTrunkUsage{" +
+                "vendor='" + vendor + '\'' +
+                ", link='" + link + '\'' +
+                ", adminWeight='" + adminWeight + '\'' +
+                ", maximumUsageRatio='" + maximumUsageRatio + '\'' +
+                ", memory='" + memory + '\'' +
+                ", usageRatio='" + usageRatio + '\'' +
+                ", distance='" + distance + '\'' +
+                ", srlg='" + srlg + '\'' +
+                ", roadmPath='" + roadmPath + '\'' +
+                ", remarks='" + remarks + '\'' +
                 '}';
     }
-
-
 }
