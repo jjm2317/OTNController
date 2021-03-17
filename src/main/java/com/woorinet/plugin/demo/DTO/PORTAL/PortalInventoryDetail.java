@@ -18,75 +18,74 @@ import javax.persistence.Table;
 public class PortalInventoryDetail {
     @Id
     @GeneratedValue
-    int HOLA_SDN_INVENTORY_DETAIL_ID;
-    String VENDOR;
-    String CELL;
-    String TID;
-    String SHELF_ID;
-    String IP;
-    String NE_TYPE;
-    String UNIT_TYPE;
-    String UNIT_PEC;
-    String SERIAL_NUMBER;
-    String SLOT_ID;
-    String PORT_ID;
-    String CONNECT_STATUS;
-    String LLCF;
-    String MODULE_NAME;
-    String MODULE_PEC;
-    String DISTANCE;
-    String MODULE_DESCRIPTION;
-    String CABLE_NAME;
-    String REMARKS_LIST;
+    int holaSdnInventoryDetailId;
+    String vendor;
+    String cell;
+    String tid;
+    String shelfId;
+    String ip;
+    String neType;
+    String unitType;
+    String unitPec;
+    String serialNumber;
+    String slotId;
+    String portId;
+    String connectStatus;
+    String llcf;
+    String moduleName;
+    String modulePec;
+    String distance;
+    String moduleDescription;
+    String cableName;
+    String remarksList;
 
     public PortalInventoryDetail() {
     }
 
-    public PortalInventoryDetail(String VENDOR, String CELL, String TID, String SHELF_ID, String IP, String NE_TYPE, String UNIT_TYPE, String UNIT_PEC, String SERIAL_NUMBER, String SLOT_ID, String PORT_ID, String CONNECT_STATUS, String LLCF, String MODULE_NAME, String MODULE_PEC, String DISTANCE, String MODULE_DESCRIPTION, String CABLE_NAME, String REMARKS_LIST) {
-        this.VENDOR = VENDOR;
-        this.CELL = CELL;
-        this.TID = TID;
-        this.SHELF_ID = SHELF_ID;
-        this.IP = IP;
-        this.NE_TYPE = NE_TYPE;
-        this.UNIT_TYPE = UNIT_TYPE;
-        this.UNIT_PEC = UNIT_PEC;
-        this.SERIAL_NUMBER = SERIAL_NUMBER;
-        this.SLOT_ID = SLOT_ID;
-        this.PORT_ID = PORT_ID;
-        this.CONNECT_STATUS = CONNECT_STATUS;
-        this.LLCF = LLCF;
-        this.MODULE_NAME = MODULE_NAME;
-        this.MODULE_PEC = MODULE_PEC;
-        this.DISTANCE = DISTANCE;
-        this.MODULE_DESCRIPTION = MODULE_DESCRIPTION;
-        this.CABLE_NAME = CABLE_NAME;
-        this.REMARKS_LIST = REMARKS_LIST;
+    public PortalInventoryDetail(String vendor, String cell, String tid, String shelfId, String ip, String neType, String unitType, String unitPec, String serialNumber, String slotId, String portId, String connectStatus, String llcf, String moduleName, String modulePec, String distance, String moduleDescription, String cableName, String remarksList) {
+        this.vendor = vendor;
+        this.cell = cell;
+        this.tid = tid;
+        this.shelfId = shelfId;
+        this.ip = ip;
+        this.neType = neType;
+        this.unitType = unitType;
+        this.unitPec = unitPec;
+        this.serialNumber = serialNumber;
+        this.slotId = slotId;
+        this.portId = portId;
+        this.connectStatus = connectStatus;
+        this.llcf = llcf;
+        this.moduleName = moduleName;
+        this.modulePec = modulePec;
+        this.distance = distance;
+        this.moduleDescription = moduleDescription;
+        this.cableName = cableName;
+        this.remarksList = remarksList;
     }
 
     @Override
     public String toString() {
-        return "HolaInventoryDetail{" +
-                "HOLA_SDN_INVENTORY_DETAIL_ID=" + HOLA_SDN_INVENTORY_DETAIL_ID +
-                ", VENDOR='" + VENDOR + '\'' +
-                ", CELL='" + CELL + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SHELF_ID='" + SHELF_ID + '\'' +
-                ", IP='" + IP + '\'' +
-                ", NE_TYPE='" + NE_TYPE + '\'' +
-                ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
-                ", UNIT_PEC='" + UNIT_PEC + '\'' +
-                ", SERIAL_NUMBER='" + SERIAL_NUMBER + '\'' +
-                ", SLOT_ID='" + SLOT_ID + '\'' +
-                ", PORT_ID='" + PORT_ID + '\'' +
-                ", CONNECT_STATUS='" + CONNECT_STATUS + '\'' +
-                ", LLCF='" + LLCF + '\'' +
-                ", MODULE_NAME='" + MODULE_NAME + '\'' +
-                ", MODULE_PEC='" + MODULE_PEC + '\'' +
-                ", DISTANCE='" + DISTANCE + '\'' +
-                ", MODULE_DESCRIPTION='" + MODULE_DESCRIPTION + '\'' +
-                ", CABLE_NAME='" + CABLE_NAME + '\'' +
-                ", REMARKS_LIST='" + REMARKS_LIST + '\'' +
+        return "PortalInventoryDetail{" +
+                "vendor='" + vendor + '\'' +
+                ", cell='" + cell + '\'' +
+                ", tid='" + tid + '\'' +
+                ", shelfId='" + shelfId + '\'' +
+                ", ip='" + ip + '\'' +
+                ", neType='" + neType + '\'' +
+                ", unitType='" + unitType + '\'' +
+                ", unitPec='" + unitPec + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", slotId='" + slotId + '\'' +
+                ", portId='" + portId + '\'' +
+                ", connectStatus='" + connectStatus + '\'' +
+                ", llcf='" + llcf + '\'' +
+                ", moduleName='" + moduleName + '\'' +
+                ", modulePec='" + modulePec + '\'' +
+                ", distance='" + distance + '\'' +
+                ", moduleDescription='" + moduleDescription + '\'' +
+                ", cableName='" + cableName + '\'' +
+                ", remarksList='" + remarksList + '\'' +
                 '}';
     }
 }
