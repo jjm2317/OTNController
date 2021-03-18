@@ -30,10 +30,10 @@ public class Tn2Controller {
     @Autowired
     private PortalStatsSuppliesRepository portalStatsSuppliesRepository;
 
-    @ApiOperation(value = "get Line Number Sheet", notes = "전체 선번장 조회")
+    @ApiOperation(value = "get linkbook", notes = "전체 선번장 조회")
     @GetMapping(value = "/linkbook/list")
     @ResponseBody
-    public ResponseEntity selectLineNumSheetList() {
+    public ResponseEntity selectLinkbookList() {
         if(portalLinkBookRepository.findAll() == null) return ResponseEntity.notFound().build();
 
         JSONArray jsonArray = new JSONArray();
@@ -97,10 +97,10 @@ public class Tn2Controller {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-    @ApiOperation(value = "get link mng", notes = "전체 링크관리 조회")
+    @ApiOperation(value = "get linkmng", notes = "전체 링크관리 조회")
     @GetMapping(value = "/linkmng/list")
     @ResponseBody
-    public ResponseEntity selectLinkMngList() {
+    public ResponseEntity selectLinkmngList() {
         if(portalLinkMngRepository.findAll() == null) return ResponseEntity.notFound().build();
 
         JSONArray jsonArray = new JSONArray();
@@ -111,7 +111,7 @@ public class Tn2Controller {
 
                 JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
 
-                jsonObject.put("link_mng_id", portalLinkMng.getPortalLinkMngId());
+                jsonObject.put("linkmng_id", portalLinkMng.getPortalLinkMngId());
                 jsonObject.put("vendor", portalLinkMng.getVendor());
                 jsonObject.put("link", linkJsonArray);
                 jsonObject.put("admin_weight", portalLinkMng.getAdminWeight());
@@ -142,26 +142,26 @@ public class Tn2Controller {
         return ResponseEntity.ok(portalTrunkUsageRepository.findAll());
     }
 
-    @ApiOperation(value = "get inventory detail", notes = "전체 상새 inventory 현황 조회")
+    @ApiOperation(value = "get stats inventory", notes = "전체 상세 inventory 현황 조회")
     @GetMapping(value = "/inventory/list")
     @ResponseBody
-    public ResponseEntity selectInventoryDetail() {
+    public ResponseEntity selectStatsInventory() {
         if(portalStatsInventroyRepository.findAll() == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(portalStatsInventroyRepository.findAll());
     }
 
-    @ApiOperation(value = "get otn node usage", notes = "전체 otn node 사용현황 조회")
+    @ApiOperation(value = "get stats node", notes = "전체 otn node 사용현황 조회")
     @GetMapping(value = "/stats/node/list")
     @ResponseBody
-    public ResponseEntity selectOtnNodeUsage() {
+    public ResponseEntity selectStatsNode() {
         if(portalStatsNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(portalStatsNodeRepository.findAll());
     }
 
-    @ApiOperation(value = "get otn material", notes = "전체 otn 물자현황 조회")
+    @ApiOperation(value = "get stats supplies", notes = "전체 otn 물자현황 조회")
     @GetMapping(value = "/stats/supplies/list")
     @ResponseBody
-    public ResponseEntity selectOtnMaterial() {
+    public ResponseEntity selectStatsSupplies() {
         if(portalStatsSuppliesRepository.findAll() == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(portalStatsSuppliesRepository.findAll());
     }

@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Entity
 @Data
-@Table(name="portal_line_num_sheet")
+@Table
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalLinkBook {
     @Id

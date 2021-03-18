@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class PortalStatsSupplies {
     @Id
     @GeneratedValue
-    int portalOtnMaterialId;
+    int portalStatsSuppliesId;
     String vendor;
     String cell;
     String node;
