@@ -1,9 +1,11 @@
 package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.gson.Gson;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +24,7 @@ import javax.persistence.Table;
 public class PortalLinkbook {
     @Id
     @GeneratedValue
-    int portalLinkBookId;
+    int portalLinkbookId;
     String group;
     String domainType;
     String areaStart;
@@ -135,13 +137,8 @@ public class PortalLinkbook {
                 ", bypassPath='" + bypassPath + '\'' +
                 '}';
     }
-
-    public String getNodeRef(String[] fields) {
-        NodeRef nodeRef = new NodeRef(fields);
-
-        return (new Gson()).toJson(nodeRef);
-    }
-
+    @Data
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     class NodeRef {
         String system;
         String managementTeam;
@@ -170,8 +167,40 @@ public class PortalLinkbook {
             this.fdf = fields[9];
         }
 
-
+        @Override
+        public String toString() {
+            return "NodeRef{" +
+                    "system='" + system + '\'' +
+                    ", managementTeam='" + managementTeam + '\'' +
+                    ", vendor='" + vendor + '\'' +
+                    ", cell='" + cell + '\'' +
+                    ", nodeName='" + nodeName + '\'' +
+                    ", unitType='" + unitType + '\'' +
+                    ", shelfId='" + shelfId + '\'' +
+                    ", slotId='" + slotId + '\'' +
+                    ", portId='" + portId + '\'' +
+                    ", fdf='" + fdf + '\'' +
+                    '}';
+        }
     }
+
+    public String getNodeRef(String[] fields)  {
+        try {
+            NodeRef nodeRef = new NodeRef(fields);
+            ObjectMapper mapper = new ObjectMapper();
+
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+
+            //return (new Gson()).toJson(nodeRef);
+
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(nodeRef);
+        } catch (Exception e){
+            e.printStackTrace();
+            return "{}";
+        }
+    }
+
+
 
 
 }

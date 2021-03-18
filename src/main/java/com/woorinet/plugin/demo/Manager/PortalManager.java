@@ -195,7 +195,7 @@ public class PortalManager {
 
                 portalLinkBook.setEndpointClientStart(portalLinkBook.getNodeRef(endPointClientStartFields));
                 portalLinkBook.setTransmitClientStart(portalLinkBook.getNodeRef(transmitClientStartFields));
-                portalLinkBook.setLinkStart(portalLinkBook.getNodeRef(linkStartFields));
+                portalLinkBook.setLinkStart( portalLinkBook.getNodeRef(linkStartFields));
                 portalLinkBook.setRoadmMuxStart(portalLinkBook.getNodeRef(roadmMuxStartFields));
                 portalLinkBook.setRoadmMuxEnd(portalLinkBook.getNodeRef(roadmMuxEndFields));
                 portalLinkBook.setLinkEnd(portalLinkBook.getNodeRef(linkEndFields));

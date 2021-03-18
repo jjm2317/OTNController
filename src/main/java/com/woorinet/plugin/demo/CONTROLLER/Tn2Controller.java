@@ -53,7 +53,7 @@ public class Tn2Controller {
                 JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLinkBook.getEndpointClientEnd());
 
 
-                jsonObject.put("linkbook_id", portalLinkBook.getPortalLinkBookId());
+                jsonObject.put("linkbook_id", portalLinkBook.getPortalLinkbookId());
                 jsonObject.put("group", portalLinkBook.getGroup());
                 jsonObject.put("domain_type", portalLinkBook.getDomainType());
                 jsonObject.put("area_start", portalLinkBook.getAreaStart());
