@@ -14,8 +14,8 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@Entity
 @Data
+@Entity
 @Table(name="otn_connector")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OtnConnector {

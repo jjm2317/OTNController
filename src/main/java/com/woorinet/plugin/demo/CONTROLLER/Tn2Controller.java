@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/v1/portal")
-public class PortalController {
+@RequestMapping(value = "/v1/tn2")
+public class Tn2Controller {
     @Autowired
     private PortalLineNumSheetRepository portalLineNumSheetRepository;
     @Autowired
@@ -31,7 +31,7 @@ public class PortalController {
     private PortalOtnMaterialRepository portalOtnMaterialRepository;
 
     @ApiOperation(value = "get Line Number Sheet", notes = "전체 선번장 조회")
-    @GetMapping(value = "/lineNumSheet/list")
+    @GetMapping(value = "/linkbook/list")
     @ResponseBody
     public ResponseEntity selectLineNumSheetList() {
         if(portalLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -98,7 +98,7 @@ public class PortalController {
     }
 
     @ApiOperation(value = "get link mng", notes = "전체 링크관리 조회")
-    @GetMapping(value = "/linkMng/list")
+    @GetMapping(value = "/linkmng/list")
     @ResponseBody
     public ResponseEntity selectLinkMngList() {
         if(portalLinkMngRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -135,7 +135,7 @@ public class PortalController {
     }
 
     @ApiOperation(value = "get trunk usage", notes = "전체 trunk 사용률 조회")
-    @GetMapping(value = "/trunkUsage/list")
+    @GetMapping(value = "/trunkusage/list")
     @ResponseBody
     public ResponseEntity selectTrunkUsageList() {
         if(portalTrunkUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -143,7 +143,7 @@ public class PortalController {
     }
 
     @ApiOperation(value = "get inventory detail", notes = "전체 상새 inventory 현황 조회")
-    @GetMapping(value = "/inventoryDetail/list")
+    @GetMapping(value = "/inventory/list")
     @ResponseBody
     public ResponseEntity selectInventoryDetail() {
         if(portalInventroyDetailRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -151,7 +151,7 @@ public class PortalController {
     }
 
     @ApiOperation(value = "get otn node usage", notes = "전체 otn node 사용현황 조회")
-    @GetMapping(value = "/otnNodeUsage/list")
+    @GetMapping(value = "/stats/node/list")
     @ResponseBody
     public ResponseEntity selectOtnNodeUsage() {
         if(portalOtnNodeUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
@@ -159,7 +159,7 @@ public class PortalController {
     }
 
     @ApiOperation(value = "get otn material", notes = "전체 otn 물자현황 조회")
-    @GetMapping(value = "/otnMaterial/list")
+    @GetMapping(value = "/stats/supplies/list")
     @ResponseBody
     public ResponseEntity selectOtnMaterial() {
         if(portalOtnMaterialRepository.findAll() == null) return ResponseEntity.notFound().build();

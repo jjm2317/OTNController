@@ -321,55 +321,56 @@ public class PortalManager {
     }
 
     private void HolaSyncSdnOtnMaterial() throws Exception {
-//        Stream<PortalOtnMaterial> holaSdnOtnMaterialStream = otnNodeList
-//            .stream()
-//            .map(sdnNode -> {
-//                //sdnNode와 매치되는 sdnConnector들의 stream
-//                Stream<OtnConnector> sdnConnectorStream = otnConnectorList
-//                        .stream()
-//                        .filter(connector -> connector.getNe_name().equals(sdnNode.getNe_name()));
-//                /* sdnNode 별 Otn 물자현황 데이터 생성, unitList필드는 아래에서 생성*/
-//                PortalOtnMaterial portalOtnMaterial = new PortalOtnMaterial(
-//                        sdnNode.getVendor(), //vendor
-//                        "", //cell
-//                        sdnNode.getNe_name(), //node
-//                        sdnNode.getIp_addr(), //ip
-//                        sdnConnectorStream.findAny().map(connector -> connector.getShelf_id()).orElse(""), //shelf_id
-//                        "" //unit_list
-//                );
+        Stream<PortalOtnMaterial> portalOtnMaterialStream = otnNodeList
+            .stream()
+            .map(otnNode -> {
+                //otnConnectorStream : otnNode의 ne_name(예: EMS_1000_B)과 매치되는 otnConnector들의 stream
+                Stream<OtnConnector> otnConnectorStream = otnConnectorList
+                        .stream()
+                        .filter(connector -> connector.getNeName().equals(otnNode.getNeName()));
+
+                /* sdnNode 별 Otn 물자현황 데이터 생성, unitList필드는 아래에서 생성*/
+                PortalOtnMaterial portalOtnMaterial = new PortalOtnMaterial(
+                        otnNode.getVendor(), //vendor
+                        "", //cell
+                        otnNode.getNeName(), //node
+                        otnNode.getIpAddr(), //ip
+                        otnConnectorStream.findAny().map(connector -> connector.getShelfId()).orElse(""), //shelf_id
+                        "" //unit_list
+                );
+
+                /* unitList 필드값 생성 */
+                // sdnConnector에 있는 unit_type 종류 조회 by Jpa query
+                List<String> unitList = otnConnectorRepository.findUnitTypes();
+
+                // unitListValue: holaOtnMaterial의 unitList 필드값을 담을 변수
+                String unitListValue = "";
+
+                unitList.stream().forEach(unitType -> {
+//                    int unitCount = Long.valueOf(sdnConnectorStream.
+//                            filter( connector -> connector.getUnit_type().equals(unitType))
+//                            .count()).intValue();
+//                    int allPortCount = unitCount * getPortCountOfUnitType(unitType);
+//                    int usagePortCount sdnConnectorRepository.
 //
-//                /* HolaOtnMaterial 인스턴스의 unitList 필드값 생성 */
-//                // sdnConnector에 있는 unit_type 종류 조회 by Jpa query
-//                List<String> unitList = otnConnectorRepository.findAllUnitTypesNative();
-//
-//                // unitListValue: holaOtnMaterial의 unitList 필드값을 담을 변수
-//                String unitListValue = "";
-//
-//                unitList.stream().forEach(unitType -> {
-////                    int unitCount = Long.valueOf(sdnConnectorStream.
-////                            filter( connector -> connector.getUnit_type().equals(unitType))
-////                            .count()).intValue();
-////                    int allPortCount = unitCount * getPortCountOfUnitType(unitType);
-////                    int usagePortCount sdnConnectorRepository.
-////
-////                    String[] UnitFields = {
-////                            unitType, //unit_type
-////                            String.valueOf(unitCount), //unit_count
-////                            String.valueOf(allPortCount), //all_port_count
-////
-////
-////
-////
-////
-////                    };
-//                });
+//                    String[] UnitFields = {
+//                            unitType, //unit_type
+//                            String.valueOf(unitCount), //unit_count
+//                            String.valueOf(allPortCount), //all_port_count
 //
 //
-////                holaOtnMaterial.setUNIT_LIST();
 //
-//                return portalOtnMaterial;
-//            });
-//        holaSdnOtnMaterialStream.forEach(portalOtnMaterialRepository::save);
+//
+//
+//                    };
+                });
+
+
+//                holaOtnMaterial.setUNIT_LIST();
+
+                return portalOtnMaterial;
+            });
+        portalOtnMaterialStream.forEach(portalOtnMaterialRepository::save);
     }
 
     private int getPortCountOfUnitType (String unitType) {

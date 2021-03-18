@@ -168,5 +168,10 @@ public class OtnController {
         if(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId) == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId));
     }
+
+    @GetMapping(value = "/test")
+    public void test() {
+        System.out.println(otnConnectorRepository.findUnitTypes() + "...test" );
+    }
 }
 
