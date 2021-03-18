@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="portal_inventory_detail")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class PortalInventoryDetail {
+public class PortalInventory {
     @Id
     @GeneratedValue
     int portalInventoryDetailId;
@@ -42,10 +42,10 @@ public class PortalInventoryDetail {
     String cableName;
     String remarksList;
 
-    public PortalInventoryDetail() {
+    public PortalInventory() {
     }
 
-    public PortalInventoryDetail(String vendor, String cell, String tid, String shelfId, String ip, String neType, String unitType, String unitPec, String serialNumber, String slotId, String portId, String connectStatus, String llcf, String moduleName, String modulePec, String distance, String moduleDescription, String cableName, String remarksList) {
+    public PortalInventory(String vendor, String cell, String tid, String shelfId, String ip, String neType, String unitType, String unitPec, String serialNumber, String slotId, String portId, String connectStatus, String llcf, String moduleName, String modulePec, String distance, String moduleDescription, String cableName, String remarksList) {
         this.vendor = vendor;
         this.cell = cell;
         this.tid = tid;

@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="portal_otn_node_usage")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class PortalOtnNodeUsage {
+public class PortalStatsNode {
     @Id
     @GeneratedValue
     int portalOtnNodeUsageId;
@@ -26,10 +26,10 @@ public class PortalOtnNodeUsage {
     String city;
     String mountingStatus;
 
-    public PortalOtnNodeUsage() {
+    public PortalStatsNode() {
     }
 
-    public PortalOtnNodeUsage(String area, String city, String mountingStatus) {
+    public PortalStatsNode(String area, String city, String mountingStatus) {
         this.area = area;
         this.city = city;
         this.mountingStatus = mountingStatus;

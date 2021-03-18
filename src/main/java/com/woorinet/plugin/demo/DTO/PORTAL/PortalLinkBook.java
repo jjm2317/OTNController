@@ -19,10 +19,10 @@ import javax.persistence.Table;
 @Data
 @Table(name="portal_line_num_sheet")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class PortalLineNumSheet {
+public class PortalLinkBook {
     @Id
     @GeneratedValue
-    int portalLineNumSheetId;
+    int portalLinkBookId;
     String group;
     String domainType;
     String areaStart;
@@ -57,11 +57,11 @@ public class PortalLineNumSheet {
     String mainPath;
     String bypassPath;
 
-    public PortalLineNumSheet() {
+    public PortalLinkBook() {
     }
 
 
-    public PortalLineNumSheet(String group, String domainType, String areaStart, String areaEnd, String nodeStart, String nodeEnd, String circuitId, String autoServiceName, String inputServiceName, String serviceType, String vendor, String constraintId, String protectionType, String serviceRate, String serviceStatus, String activePath, String trafficStatus, String homePath, String latency, String cableCreationDate, String networkCableNumber, String writer, String remarks, String endpointClientStart, String transmitClientStart, String linkStart, String roadmMuxStart, String roadmMuxEnd, String linkEnd, String transmitClientEnd, String endpointClientEnd, String mainPath, String bypassPath) {
+    public PortalLinkBook(String group, String domainType, String areaStart, String areaEnd, String nodeStart, String nodeEnd, String circuitId, String autoServiceName, String inputServiceName, String serviceType, String vendor, String constraintId, String protectionType, String serviceRate, String serviceStatus, String activePath, String trafficStatus, String homePath, String latency, String cableCreationDate, String networkCableNumber, String writer, String remarks, String endpointClientStart, String transmitClientStart, String linkStart, String roadmMuxStart, String roadmMuxEnd, String linkEnd, String transmitClientEnd, String endpointClientEnd, String mainPath, String bypassPath) {
         this.group = group;
         this.domainType = domainType;
         this.areaStart = areaStart;

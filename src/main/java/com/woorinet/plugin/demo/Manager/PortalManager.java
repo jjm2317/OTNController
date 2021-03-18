@@ -82,7 +82,7 @@ public class PortalManager {
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
-        Stream<PortalLineNumSheet> holaSdnLineNumSheetStream = otnServiceList
+        Stream<PortalLinkBook> holaSdnLineNumSheetStream = otnServiceList
             .stream()
             .map(otnService -> {
 
@@ -98,7 +98,7 @@ public class PortalManager {
                         filter(link -> link.getLinkId().equals(otnService.getSrcConnectorId() + ":" + otnService.getDstConnectorId()))
                         .findAny();
 
-                PortalLineNumSheet portalLineNumSheet = new PortalLineNumSheet(
+                PortalLinkBook portalLinkBook = new PortalLinkBook(
                         "", // group
                         "Single", //domain_type
                         "", //area_start, userinput
@@ -193,16 +193,16 @@ public class PortalManager {
 
                 String[] endPointClientEndFields = {"", "", "", "","", "", "", "", "", ""};
 
-                portalLineNumSheet.setEndpointClientStart(portalLineNumSheet.getNodeRef(endPointClientStartFields));
-                portalLineNumSheet.setTransmitClientStart(portalLineNumSheet.getNodeRef(transmitClientStartFields));
-                portalLineNumSheet.setLinkStart(portalLineNumSheet.getNodeRef(linkStartFields));
-                portalLineNumSheet.setRoadmMuxStart(portalLineNumSheet.getNodeRef(roadmMuxStartFields));
-                portalLineNumSheet.setRoadmMuxEnd(portalLineNumSheet.getNodeRef(roadmMuxEndFields));
-                portalLineNumSheet.setLinkEnd(portalLineNumSheet.getNodeRef(linkEndFields));
-                portalLineNumSheet.setTransmitClientEnd(portalLineNumSheet.getNodeRef(transmitClientEndFields));
-                portalLineNumSheet.setEndpointClientEnd(portalLineNumSheet.getNodeRef(endPointClientEndFields));
+                portalLinkBook.setEndpointClientStart(portalLinkBook.getNodeRef(endPointClientStartFields));
+                portalLinkBook.setTransmitClientStart(portalLinkBook.getNodeRef(transmitClientStartFields));
+                portalLinkBook.setLinkStart(portalLinkBook.getNodeRef(linkStartFields));
+                portalLinkBook.setRoadmMuxStart(portalLinkBook.getNodeRef(roadmMuxStartFields));
+                portalLinkBook.setRoadmMuxEnd(portalLinkBook.getNodeRef(roadmMuxEndFields));
+                portalLinkBook.setLinkEnd(portalLinkBook.getNodeRef(linkEndFields));
+                portalLinkBook.setTransmitClientEnd(portalLinkBook.getNodeRef(transmitClientEndFields));
+                portalLinkBook.setEndpointClientEnd(portalLinkBook.getNodeRef(endPointClientEndFields));
 
-                return portalLineNumSheet;
+                return portalLinkBook;
             });
         holaSdnLineNumSheetStream.forEach(portalLineNumSheetRepository::save);
     }
@@ -269,7 +269,7 @@ public class PortalManager {
     }
 
     private void HolaSyncSdnInventoryDetail() throws Exception {
-        Stream<PortalInventoryDetail> holaSdnInventoryDetailStream = otnConnectorList
+        Stream<PortalInventory> holaSdnInventoryDetailStream = otnConnectorList
             .stream()
             .map(otnConnector -> {
                 Optional<OtnNode> sdnNode = otnNodeList.stream().
@@ -282,7 +282,7 @@ public class PortalManager {
                         filter(link -> link.getLinkId().contains(otnConnector.getConnectId()))
                         .findAny();
 
-                PortalInventoryDetail portalInventoryDetail = new PortalInventoryDetail(
+                PortalInventory portalInventory = new PortalInventory(
                         "Woorinet", //vendor
                         "", //cell
                         otnConnector.getNeName(), //tid
@@ -303,7 +303,7 @@ public class PortalManager {
                         "", //cable_name
                         "" //remarks_list
                 );
-                return portalInventoryDetail;
+                return portalInventory;
             });
 
         holaSdnInventoryDetailStream.forEach(portalInventroyDetailRepository::save);
@@ -311,7 +311,7 @@ public class PortalManager {
     }
 
     private void HolaSyncSdnOtnNodeUsage() throws Exception {
-        PortalOtnNodeUsage holaSdnOtnNodeUsage = new PortalOtnNodeUsage(
+        PortalStatsNode holaSdnOtnNodeUsage = new PortalStatsNode(
                 "수도권", //area
                 "", //city
                 "" //mounting_status
@@ -321,7 +321,7 @@ public class PortalManager {
     }
 
     private void HolaSyncSdnOtnMaterial() throws Exception {
-        Stream<PortalOtnMaterial> portalOtnMaterialStream = otnNodeList
+        Stream<PortalStatsSupplies> portalOtnMaterialStream = otnNodeList
             .stream()
             .map(otnNode -> {
                 //otnConnectorStream : otnNode의 ne_name(예: EMS_1000_B)과 매치되는 otnConnector들의 stream
@@ -330,7 +330,7 @@ public class PortalManager {
                         .filter(connector -> connector.getNeName().equals(otnNode.getNeName()));
 
                 /* sdnNode 별 Otn 물자현황 데이터 생성, unitList필드는 아래에서 생성*/
-                PortalOtnMaterial portalOtnMaterial = new PortalOtnMaterial(
+                PortalStatsSupplies portalStatsSupplies = new PortalStatsSupplies(
                         otnNode.getVendor(), //vendor
                         "", //cell
                         otnNode.getNeName(), //node
@@ -368,7 +368,7 @@ public class PortalManager {
 
 //                holaOtnMaterial.setUNIT_LIST();
 
-                return portalOtnMaterial;
+                return portalStatsSupplies;
             });
         portalOtnMaterialStream.forEach(portalOtnMaterialRepository::save);
     }

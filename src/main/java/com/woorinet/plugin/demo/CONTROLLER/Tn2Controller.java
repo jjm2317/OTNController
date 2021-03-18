@@ -1,6 +1,6 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
-import com.woorinet.plugin.demo.DTO.PORTAL.PortalLineNumSheet;
+import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkBook;
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkMng;
 import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import io.swagger.annotations.ApiOperation;
@@ -40,43 +40,43 @@ public class Tn2Controller {
         JSONParser parser = new JSONParser();
         try {
 
-            for(PortalLineNumSheet portalLineNumSheet : portalLineNumSheetRepository.findAll()) {
+            for(PortalLinkBook portalLinkBook : portalLineNumSheetRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
-                JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getEndpointClientStart());
-                JSONObject TCStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTransmitClientStart());
-                JSONObject LStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLinkStart());
-                JSONObject RMStartJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getRoadmMuxStart());
-                JSONObject RMEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getRoadmMuxEnd());
-                JSONObject LEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getLinkEnd());
-                JSONObject TCEndJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getTransmitClientEnd());
-                JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getEndpointClientEnd());
+                JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLinkBook.getEndpointClientStart());
+                JSONObject TCStartJsonObj = (JSONObject) parser.parse(portalLinkBook.getTransmitClientStart());
+                JSONObject LStartJsonObj = (JSONObject) parser.parse(portalLinkBook.getLinkStart());
+                JSONObject RMStartJsonObj = (JSONObject) parser.parse(portalLinkBook.getRoadmMuxStart());
+                JSONObject RMEndJsonObj = (JSONObject) parser.parse(portalLinkBook.getRoadmMuxEnd());
+                JSONObject LEndJsonObj = (JSONObject) parser.parse(portalLinkBook.getLinkEnd());
+                JSONObject TCEndJsonObj = (JSONObject) parser.parse(portalLinkBook.getTransmitClientEnd());
+                JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLinkBook.getEndpointClientEnd());
 
 
-                jsonObject.put("linkbook_id", portalLineNumSheet.getLineNumSheetId());
-                jsonObject.put("group", portalLineNumSheet.getGroup());
-                jsonObject.put("domain_type", portalLineNumSheet.getDomainType());
-                jsonObject.put("area_start", portalLineNumSheet.getAreaStart());
-                jsonObject.put("area_end", portalLineNumSheet.getAreaEnd());
-                jsonObject.put("node_start", portalLineNumSheet.getNodeStart());
-                jsonObject.put("node_end", portalLineNumSheet.getNodeEnd());
-                jsonObject.put("circuit_id", portalLineNumSheet.getCircuitId());
-                jsonObject.put("auto_service_name", portalLineNumSheet.getAutoServiceName());
-                jsonObject.put("input_service_name", portalLineNumSheet.getInputServiceName());
-                jsonObject.put("service_type", portalLineNumSheet.getServiceType());
-                jsonObject.put("vendor", portalLineNumSheet.getVendor());
-                jsonObject.put("constraint_id", portalLineNumSheet.getConstraintId());
-                jsonObject.put("protection_type", portalLineNumSheet.getProtectionType());
-                jsonObject.put("service_rate", portalLineNumSheet.getServiceRate());
-                jsonObject.put("service_status", portalLineNumSheet.getServiceStatus());
-                jsonObject.put("active_path", portalLineNumSheet.getActivePath());
-                jsonObject.put("traffic_status", portalLineNumSheet.getTrafficStatus());
-                jsonObject.put("home_path", portalLineNumSheet.getHomePath());
-                jsonObject.put("latency", portalLineNumSheet.getLatency());
-                jsonObject.put("cable_creation_date", portalLineNumSheet.getCableCreationDate());
-                jsonObject.put("network_cable_number", portalLineNumSheet.getNetworkCableNumber());
-                jsonObject.put("writer", portalLineNumSheet.getWriter());
-                jsonObject.put("remarks", portalLineNumSheet.getRemarks());
+                jsonObject.put("linkbook_id", portalLinkBook.getPortalLinkBookId());
+                jsonObject.put("group", portalLinkBook.getGroup());
+                jsonObject.put("domain_type", portalLinkBook.getDomainType());
+                jsonObject.put("area_start", portalLinkBook.getAreaStart());
+                jsonObject.put("area_end", portalLinkBook.getAreaEnd());
+                jsonObject.put("node_start", portalLinkBook.getNodeStart());
+                jsonObject.put("node_end", portalLinkBook.getNodeEnd());
+                jsonObject.put("circuit_id", portalLinkBook.getCircuitId());
+                jsonObject.put("auto_service_name", portalLinkBook.getAutoServiceName());
+                jsonObject.put("input_service_name", portalLinkBook.getInputServiceName());
+                jsonObject.put("service_type", portalLinkBook.getServiceType());
+                jsonObject.put("vendor", portalLinkBook.getVendor());
+                jsonObject.put("constraint_id", portalLinkBook.getConstraintId());
+                jsonObject.put("protection_type", portalLinkBook.getProtectionType());
+                jsonObject.put("service_rate", portalLinkBook.getServiceRate());
+                jsonObject.put("service_status", portalLinkBook.getServiceStatus());
+                jsonObject.put("active_path", portalLinkBook.getActivePath());
+                jsonObject.put("traffic_status", portalLinkBook.getTrafficStatus());
+                jsonObject.put("home_path", portalLinkBook.getHomePath());
+                jsonObject.put("latency", portalLinkBook.getLatency());
+                jsonObject.put("cable_creation_date", portalLinkBook.getCableCreationDate());
+                jsonObject.put("network_cable_number", portalLinkBook.getNetworkCableNumber());
+                jsonObject.put("writer", portalLinkBook.getWriter());
+                jsonObject.put("remarks", portalLinkBook.getRemarks());
                 jsonObject.put("endpoint_client_start",EPStartJsonObj);
                 jsonObject.put("transmit_client_start",TCStartJsonObj);
                 jsonObject.put("link_start", LStartJsonObj);
@@ -111,7 +111,7 @@ public class Tn2Controller {
 
                 JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
 
-                jsonObject.put("link_mng_id", portalLinkMng.getHolaSdnLinkMngId());
+                jsonObject.put("link_mng_id", portalLinkMng.getPortalLinkMngId());
                 jsonObject.put("vendor", portalLinkMng.getVendor());
                 jsonObject.put("link", linkJsonArray);
                 jsonObject.put("admin_weight", portalLinkMng.getAdminWeight());

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="portal_otn_material")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class PortalOtnMaterial {
+public class PortalStatsSupplies {
     @Id
     @GeneratedValue
     int portalOtnMaterialId;
@@ -30,10 +30,10 @@ public class PortalOtnMaterial {
     String shelf;
     String unitList;
 
-    public PortalOtnMaterial() {
+    public PortalStatsSupplies() {
     }
 
-    public PortalOtnMaterial(String vendor, String cell, String node, String ip, String shelf, String unitList) {
+    public PortalStatsSupplies(String vendor, String cell, String node, String ip, String shelf, String unitList) {
         this.vendor = vendor;
         this.cell = cell;
         this.node = node;
