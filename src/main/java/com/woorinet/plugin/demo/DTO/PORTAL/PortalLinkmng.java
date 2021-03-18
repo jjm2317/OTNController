@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.google.gson.Gson;
@@ -15,12 +16,12 @@ import java.util.Arrays;
 @Getter
 @Data
 @Entity
-@Table(name="portal_link_mng")
+@Table(name="portal_linkmng")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalLinkmng {
     @Id
     @GeneratedValue
-    int portalLinkMngId;
+    int portalLinkmngId;
     String vendor;
     @Column(length = 1000)
     String link;
@@ -71,15 +72,23 @@ public class PortalLinkmng {
     }
 
     public void setLink(String[] firstLinkFields, String[] secondLinkFields) {
-        Link firstLink = new Link(firstLinkFields);
-        Link secondLink = new Link(secondLinkFields);
-        String[] result = {(new Gson()).toJson(firstLink), (new Gson()).toJson(secondLink)};
+        try {
+            Link firstLink = new Link(firstLinkFields);
+            Link secondLink = new Link(secondLinkFields);
 
-        System.out.println(result);
-        System.out.println("asdf");
-        this.link = Arrays.toString(result);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+
+            String[] result = {mapper.writerWithDefaultPrettyPrinter().writeValueAsString(firstLink), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(secondLink)};
+
+            this.link = Arrays.toString(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    @Data
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     class Link {
         String sourceNode;
         String sourceShelfId;

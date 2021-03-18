@@ -111,7 +111,7 @@ public class Tn2Controller {
 
                 JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
 
-                jsonObject.put("linkmng_id", portalLinkMng.getPortalLinkMngId());
+                jsonObject.put("linkmng_id", portalLinkMng.getPortalLinkmngId());
                 jsonObject.put("vendor", portalLinkMng.getVendor());
                 jsonObject.put("link", linkJsonArray);
                 jsonObject.put("admin_weight", portalLinkMng.getAdminWeight());
