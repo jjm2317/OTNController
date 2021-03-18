@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class PortalOtnNodeUsage {
     @Id
     @GeneratedValue
-    int holaSdnOtnNodeUsageId;
+    int portalOtnNodeUsageId;
     String area;
     String city;
     String mountingStatus;

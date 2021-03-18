@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class PortalInventoryDetail {
     @Id
     @GeneratedValue
-    int holaSdnInventoryDetailId;
+    int portalInventoryDetailId;
     String vendor;
     String cell;
     String tid;

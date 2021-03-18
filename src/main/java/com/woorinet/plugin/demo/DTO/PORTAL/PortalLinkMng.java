@@ -20,7 +20,7 @@ import java.util.Arrays;
 public class PortalLinkMng {
     @Id
     @GeneratedValue
-    int holaSdnLinkMngId;
+    int portalLinkMngId;
     String vendor;
     @Column(length = 1000)
     String link;

@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class PortalTrunkUsage {
     @Id
     @GeneratedValue
-    int holaSdnTrunkUsageId;
+    int portalTrunkUsageId;
     String vendor;
     String link;
     String adminWeight;

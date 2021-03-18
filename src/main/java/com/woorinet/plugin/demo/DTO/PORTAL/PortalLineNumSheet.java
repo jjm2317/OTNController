@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class PortalLineNumSheet {
     @Id
     @GeneratedValue
-    int lineNumSheetId;
+    int portalLineNumSheetId;
     String group;
     String domainType;
     String areaStart;
