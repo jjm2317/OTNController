@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Setter
 @Data
 @Entity
-@Table(name="portal_otn_node_usage")
+@Table(name="portal_stats_node")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalStatsNode {
     @Id

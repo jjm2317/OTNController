@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Getter
 @Data
 @Entity
-@Table(name="portal_inventory_detail")
+@Table(name="portal_stats_inventory")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalStatsInventory {
     @Id
