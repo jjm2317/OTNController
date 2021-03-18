@@ -10,8 +10,8 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class PortalManager {
-    PortalLinkbookRepository portalLinkBookRepository;
-    PortalLinkmngRepository portalLinkMngRepository;
+    PortalLinkbookRepository portalLinkbookRepository;
+    PortalLinkmngRepository portalLinkmngRepository;
     PortalTrunkUsageRepository portalTrunkUsageRepository;
     PortalStatsInventoryRepository portalStatsInventoryRepository;
     PortalStatsNodeRepository portalStatsNodeRepository;
@@ -43,8 +43,8 @@ public class PortalManager {
                          List<OtnConstraint> otnConstraintList,
                          List<OtnAccessIf> otnAccessIfList
                        ) throws Exception{
-        this.portalLinkBookRepository = portalLinkBookRepository;
-        this.portalLinkMngRepository = portalLinkMngRepository;
+        this.portalLinkbookRepository = portalLinkBookRepository;
+        this.portalLinkmngRepository = portalLinkMngRepository;
         this.portalTrunkUsageRepository = portalTrunkUsageRepository;
         this.portalStatsInventoryRepository = portalStatsInventoryRepository;
         this.portalStatsNodeRepository = portalStatsNodeRepository;
@@ -67,21 +67,21 @@ public class PortalManager {
 
     }
 
-    public void HOLASyncStart() throws Exception {
+    public void PortalSyncStart() throws Exception {
         //선번장 테이블 생성
-        HolaSyncSdnLineNumSheet();
+        PortalSyncLinkbook();
         //LinkMng 테이블 생성
-        HolaSyncLinkMng();
+        PortalSyncLinkmng();
         //상세 Inventory 현황 테이블 생성
-        HolaSyncSdnInventoryDetail();
+        PortalSyncStatsInventory();
         //OTN NODE 사용현황 테이블 생성
-        HolaSyncSdnOtnNodeUsage();
+        PortalSyncStatsNode();
         //OTN 물자 현황 테이블 생성
-        HolaSyncSdnOtnMaterial();
+        PortalSyncStatsSupplies();
 
     }
 
-    private void HolaSyncSdnLineNumSheet() throws Exception {
+    private void PortalSyncLinkbook() throws Exception {
         Stream<PortalLinkbook> holaSdnLineNumSheetStream = otnServiceList
             .stream()
             .map(otnService -> {
@@ -204,10 +204,10 @@ public class PortalManager {
 
                 return portalLinkBook;
             });
-        holaSdnLineNumSheetStream.forEach(portalLinkBookRepository::save);
+        holaSdnLineNumSheetStream.forEach(portalLinkbookRepository::save);
     }
 
-    private void HolaSyncLinkMng() throws Exception {
+    private void PortalSyncLinkmng() throws Exception {
         Stream<PortalLinkmng> holaLinkMngStream = otnLinkList
             .stream()
             .filter(otnLink -> {
@@ -264,11 +264,11 @@ public class PortalManager {
 
         holaLinkMngStream.forEach(item -> {
             System.out.println(item);
-            portalLinkMngRepository.save(item);
+            portalLinkmngRepository.save(item);
         });
     }
 
-    private void HolaSyncSdnInventoryDetail() throws Exception {
+    private void PortalSyncStatsInventory() throws Exception {
         Stream<PortalStatsInventory> holaSdnInventoryDetailStream = otnConnectorList
             .stream()
             .map(otnConnector -> {
@@ -310,7 +310,7 @@ public class PortalManager {
 
     }
 
-    private void HolaSyncSdnOtnNodeUsage() throws Exception {
+    private void PortalSyncStatsNode() throws Exception {
         PortalStatsNode holaSdnOtnNodeUsage = new PortalStatsNode(
                 "수도권", //area
                 "", //city
@@ -320,7 +320,7 @@ public class PortalManager {
         portalStatsNodeRepository.save(holaSdnOtnNodeUsage);
     }
 
-    private void HolaSyncSdnOtnMaterial() throws Exception {
+    private void PortalSyncStatsSupplies() throws Exception {
         Stream<PortalStatsSupplies> portalOtnMaterialStream = otnNodeList
             .stream()
             .map(otnNode -> {

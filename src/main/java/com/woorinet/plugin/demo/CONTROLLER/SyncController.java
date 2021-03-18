@@ -308,7 +308,7 @@ public class SyncController {
 
             );
 
-            manager.HOLASyncStart();
+            manager.PortalSyncStart();
         } catch (Exception e) {
             e.printStackTrace();
             return "hola synchronization fail";
