@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/tn2")
 public class Tn2Controller {
     @Autowired
-    private PortalLinkbookRepository portalLinkBookRepository;
+    private PortalLinkbookRepository portalLinkbookRepository;
     @Autowired
-    private PortalLinkmngRepository portalLinkMngRepository;
+    private PortalLinkmngRepository portalLinkmngRepository;
     @Autowired
     private PortalTrunkUsageRepository portalTrunkUsageRepository;
     @Autowired
@@ -34,13 +34,13 @@ public class Tn2Controller {
     @GetMapping(value = "/linkbook/list")
     @ResponseBody
     public ResponseEntity selectLinkbookList() {
-        if(portalLinkBookRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalLinkbookRepository.findAll() == null) return ResponseEntity.notFound().build();
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
 
-            for(PortalLinkbook portalLinkBook : portalLinkBookRepository.findAll()) {
+            for(PortalLinkbook portalLinkBook : portalLinkbookRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
                 JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLinkBook.getEndpointClientStart());
@@ -101,12 +101,12 @@ public class Tn2Controller {
     @GetMapping(value = "/linkmng/list")
     @ResponseBody
     public ResponseEntity selectLinkmngList() {
-        if(portalLinkMngRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalLinkmngRepository.findAll() == null) return ResponseEntity.notFound().build();
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
-            for (PortalLinkmng portalLinkMng : portalLinkMngRepository.findAll()) {
+            for (PortalLinkmng portalLinkMng : portalLinkmngRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
                 JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
