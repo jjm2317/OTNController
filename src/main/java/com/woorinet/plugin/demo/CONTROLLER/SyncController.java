@@ -261,13 +261,13 @@ public class SyncController {
     }
 
     @Autowired
-    private PortalLinkBookRepository portalLinkBookRepository;
+    private PortalLinkbookRepository portalLinkBookRepository;
     @Autowired
-    private PortalLinkMngRepository portalLinkMngRepository;
+    private PortalLinkmngRepository portalLinkMngRepository;
     @Autowired
     private PortalTrunkUsageRepository portalTrunkUsageRepository;
     @Autowired
-    private PortalStatsInventroyRepository portalStatsInventroyRepository;
+    private PortalStatsInventoryRepository portalStatsInventoryRepository;
     @Autowired
     private PortalStatsNodeRepository portalStatsNodeRepository;
     @Autowired
@@ -294,7 +294,7 @@ public class SyncController {
             PortalManager manager = new PortalManager(portalLinkBookRepository,
                     portalLinkMngRepository,
                     portalTrunkUsageRepository,
-                    portalStatsInventroyRepository,
+                    portalStatsInventoryRepository,
                     portalStatsNodeRepository,
                     portalStatsSuppliesRepository,
                     otnConnectorRepository,

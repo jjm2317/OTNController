@@ -1,7 +1,7 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
-import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkBook;
-import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkMng;
+import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkbook;
+import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkmng;
 import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/tn2")
 public class Tn2Controller {
     @Autowired
-    private PortalLinkBookRepository portalLinkBookRepository;
+    private PortalLinkbookRepository portalLinkBookRepository;
     @Autowired
-    private PortalLinkMngRepository portalLinkMngRepository;
+    private PortalLinkmngRepository portalLinkMngRepository;
     @Autowired
     private PortalTrunkUsageRepository portalTrunkUsageRepository;
     @Autowired
-    private PortalStatsInventroyRepository portalStatsInventroyRepository;
+    private PortalStatsInventoryRepository portalStatsInventoryRepository;
     @Autowired
     private PortalStatsNodeRepository portalStatsNodeRepository;
     @Autowired
@@ -40,7 +40,7 @@ public class Tn2Controller {
         JSONParser parser = new JSONParser();
         try {
 
-            for(PortalLinkBook portalLinkBook : portalLinkBookRepository.findAll()) {
+            for(PortalLinkbook portalLinkBook : portalLinkBookRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
                 JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLinkBook.getEndpointClientStart());
@@ -106,7 +106,7 @@ public class Tn2Controller {
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
-            for (PortalLinkMng portalLinkMng : portalLinkMngRepository.findAll()) {
+            for (PortalLinkmng portalLinkMng : portalLinkMngRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
                 JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
@@ -146,8 +146,8 @@ public class Tn2Controller {
     @GetMapping(value = "/inventory/list")
     @ResponseBody
     public ResponseEntity selectStatsInventory() {
-        if(portalStatsInventroyRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(portalStatsInventroyRepository.findAll());
+        if(portalStatsInventoryRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalStatsInventoryRepository.findAll());
     }
 
     @ApiOperation(value = "get stats node", notes = "전체 otn node 사용현황 조회")

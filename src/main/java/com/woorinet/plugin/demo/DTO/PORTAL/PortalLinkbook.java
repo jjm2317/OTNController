@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Data
 @Table
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class PortalLinkBook {
+public class PortalLinkbook {
     @Id
     @GeneratedValue
     int portalLinkBookId;
@@ -57,11 +57,11 @@ public class PortalLinkBook {
     String mainPath;
     String bypassPath;
 
-    public PortalLinkBook() {
+    public PortalLinkbook() {
     }
 
 
-    public PortalLinkBook(String group, String domainType, String areaStart, String areaEnd, String nodeStart, String nodeEnd, String circuitId, String autoServiceName, String inputServiceName, String serviceType, String vendor, String constraintId, String protectionType, String serviceRate, String serviceStatus, String activePath, String trafficStatus, String homePath, String latency, String cableCreationDate, String networkCableNumber, String writer, String remarks, String endpointClientStart, String transmitClientStart, String linkStart, String roadmMuxStart, String roadmMuxEnd, String linkEnd, String transmitClientEnd, String endpointClientEnd, String mainPath, String bypassPath) {
+    public PortalLinkbook(String group, String domainType, String areaStart, String areaEnd, String nodeStart, String nodeEnd, String circuitId, String autoServiceName, String inputServiceName, String serviceType, String vendor, String constraintId, String protectionType, String serviceRate, String serviceStatus, String activePath, String trafficStatus, String homePath, String latency, String cableCreationDate, String networkCableNumber, String writer, String remarks, String endpointClientStart, String transmitClientStart, String linkStart, String roadmMuxStart, String roadmMuxEnd, String linkEnd, String transmitClientEnd, String endpointClientEnd, String mainPath, String bypassPath) {
         this.group = group;
         this.domainType = domainType;
         this.areaStart = areaStart;

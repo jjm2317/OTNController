@@ -17,7 +17,7 @@ import java.util.Arrays;
 @Entity
 @Table(name="portal_link_mng")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class PortalLinkMng {
+public class PortalLinkmng {
     @Id
     @GeneratedValue
     int portalLinkMngId;
@@ -34,10 +34,10 @@ public class PortalLinkMng {
     String srlg;
     String roadmPath;
     String remarks;
-    public PortalLinkMng() {
+    public PortalLinkmng() {
     }
 
-    public PortalLinkMng(String vendor, String link, String adminWeight, String maximumUsageRatio, String memory, String usageRatio, String allMemory, String allUsageRatio, String distance, String srlg, String roadmPath, String remarks) {
+    public PortalLinkmng(String vendor, String link, String adminWeight, String maximumUsageRatio, String memory, String usageRatio, String allMemory, String allUsageRatio, String distance, String srlg, String roadmPath, String remarks) {
         this.vendor = vendor;
         this.link = link;
         this.adminWeight = adminWeight;

@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class PortalManager {
-    PortalLinkBookRepository portalLinkBookRepository;
-    PortalLinkMngRepository portalLinkMngRepository;
+    PortalLinkbookRepository portalLinkBookRepository;
+    PortalLinkmngRepository portalLinkMngRepository;
     PortalTrunkUsageRepository portalTrunkUsageRepository;
-    PortalStatsInventroyRepository portalStatsInventroyRepository;
+    PortalStatsInventoryRepository portalStatsInventoryRepository;
     PortalStatsNodeRepository portalStatsNodeRepository;
     PortalStatsSuppliesRepository portalStatsSuppliesRepository;
 
@@ -28,10 +28,10 @@ public class PortalManager {
     List<OtnAccessIf> otnAccessIfList;
 
 
-    public PortalManager(PortalLinkBookRepository portalLinkBookRepository,
-                         PortalLinkMngRepository portalLinkMngRepository,
+    public PortalManager(PortalLinkbookRepository portalLinkBookRepository,
+                         PortalLinkmngRepository portalLinkMngRepository,
                          PortalTrunkUsageRepository portalTrunkUsageRepository,
-                         PortalStatsInventroyRepository portalStatsInventroyRepository,
+                         PortalStatsInventoryRepository portalStatsInventoryRepository,
                          PortalStatsNodeRepository portalStatsNodeRepository,
                          PortalStatsSuppliesRepository portalStatsSuppliesRepository,
                          OtnConnectorRepository otnConnectorRepository,
@@ -46,7 +46,7 @@ public class PortalManager {
         this.portalLinkBookRepository = portalLinkBookRepository;
         this.portalLinkMngRepository = portalLinkMngRepository;
         this.portalTrunkUsageRepository = portalTrunkUsageRepository;
-        this.portalStatsInventroyRepository = portalStatsInventroyRepository;
+        this.portalStatsInventoryRepository = portalStatsInventoryRepository;
         this.portalStatsNodeRepository = portalStatsNodeRepository;
         this.portalStatsSuppliesRepository = portalStatsSuppliesRepository;
 
@@ -82,7 +82,7 @@ public class PortalManager {
     }
 
     private void HolaSyncSdnLineNumSheet() throws Exception {
-        Stream<PortalLinkBook> holaSdnLineNumSheetStream = otnServiceList
+        Stream<PortalLinkbook> holaSdnLineNumSheetStream = otnServiceList
             .stream()
             .map(otnService -> {
 
@@ -98,7 +98,7 @@ public class PortalManager {
                         filter(link -> link.getLinkId().equals(otnService.getSrcConnectorId() + ":" + otnService.getDstConnectorId()))
                         .findAny();
 
-                PortalLinkBook portalLinkBook = new PortalLinkBook(
+                PortalLinkbook portalLinkBook = new PortalLinkbook(
                         "", // group
                         "Single", //domain_type
                         "", //area_start, userinput
@@ -208,14 +208,14 @@ public class PortalManager {
     }
 
     private void HolaSyncLinkMng() throws Exception {
-        Stream<PortalLinkMng> holaLinkMngStream = otnLinkList
+        Stream<PortalLinkmng> holaLinkMngStream = otnLinkList
             .stream()
             .filter(otnLink -> {
                 String [] halfOflinkId = otnLink.getLinkId().split(":");
                 return (halfOflinkId[0].split("_")[2].charAt(0) < halfOflinkId[1].split("_")[2].charAt(0));
             })
             .map(otnLink -> {
-                PortalLinkMng portalLinkMng = new PortalLinkMng(
+                PortalLinkmng portalLinkMng = new PortalLinkmng(
                         "Woorinet", //vendor
                         "", // link
                         "", // admin_weight, user input
@@ -306,7 +306,7 @@ public class PortalManager {
                 return portalStatsInventory;
             });
 
-        holaSdnInventoryDetailStream.forEach(portalStatsInventroyRepository::save);
+        holaSdnInventoryDetailStream.forEach(portalStatsInventoryRepository::save);
 
     }
 
