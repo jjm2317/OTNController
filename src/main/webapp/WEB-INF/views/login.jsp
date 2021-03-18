@@ -5,10 +5,10 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	<!-- Bootstrap styles -->
 	<link href="resources/assets/bootstrap/css/login.css" rel="stylesheet">
-	<script type="text/javascript" src="resources/assets/out/login.js"></script>
-
 </head>
-
+<body>
+<script type="text/javascript" src="resources/assets/js/jquery-3.6.0.min.js" defer></script>
+<script type="text/javascript" src="resources/assets/js/login.js" defer></script>
 <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -38,9 +38,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+						<input type="submit" value="login" class="login100-form-btn">
 					</div>
 
 					<div class="text-center p-t-12">
@@ -62,3 +60,4 @@
 			</div>
 		</div>
 	</div>
+</body>
