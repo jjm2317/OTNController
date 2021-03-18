@@ -28,8 +28,8 @@ public class PortalManager {
     List<OtnAccessIf> otnAccessIfList;
 
 
-    public PortalManager(PortalLinkbookRepository portalLinkBookRepository,
-                         PortalLinkmngRepository portalLinkMngRepository,
+    public PortalManager(PortalLinkbookRepository portalLinkbookRepository,
+                         PortalLinkmngRepository portalLinkmngRepository,
                          PortalTrunkUsageRepository portalTrunkUsageRepository,
                          PortalStatsInventoryRepository portalStatsInventoryRepository,
                          PortalStatsNodeRepository portalStatsNodeRepository,
@@ -43,8 +43,8 @@ public class PortalManager {
                          List<OtnConstraint> otnConstraintList,
                          List<OtnAccessIf> otnAccessIfList
                        ) throws Exception{
-        this.portalLinkbookRepository = portalLinkBookRepository;
-        this.portalLinkmngRepository = portalLinkMngRepository;
+        this.portalLinkbookRepository = portalLinkbookRepository;
+        this.portalLinkmngRepository = portalLinkmngRepository;
         this.portalTrunkUsageRepository = portalTrunkUsageRepository;
         this.portalStatsInventoryRepository = portalStatsInventoryRepository;
         this.portalStatsNodeRepository = portalStatsNodeRepository;
@@ -82,15 +82,15 @@ public class PortalManager {
     }
 
     private void PortalSyncLinkbook() throws Exception {
-        Stream<PortalLinkbook> holaSdnLineNumSheetStream = otnServiceList
+        Stream<PortalLinkbook> portalLinkbookStream = otnServiceList
             .stream()
             .map(otnService -> {
 
-                Optional<OtnConnector> srcSdnConnector = otnConnectorList.stream().
+                Optional<OtnConnector> srcOtnConnector = otnConnectorList.stream().
                         filter(connector -> connector.getConnectId().equals(otnService.getSrcConnectorId()))
                         .findAny();
 
-                Optional<OtnConnector> dstSdnConnector = otnConnectorList.stream().
+                Optional<OtnConnector> dstOtnConnector = otnConnectorList.stream().
                         filter(connector -> connector.getConnectId().equals(otnService.getDstConnectorId()))
                         .findAny();
 
@@ -98,7 +98,7 @@ public class PortalManager {
                         filter(link -> link.getLinkId().equals(otnService.getSrcConnectorId() + ":" + otnService.getDstConnectorId()))
                         .findAny();
 
-                PortalLinkbook portalLinkBook = new PortalLinkbook(
+                PortalLinkbook portalLinkbook = new PortalLinkbook(
                         "", // group
                         "Single", //domain_type
                         "", //area_start, userinput
@@ -141,10 +141,10 @@ public class PortalManager {
                         "Woorinet",
                         "",
                         otnService.getSrcNeName(),
-                        srcSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getPortId()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
@@ -154,10 +154,10 @@ public class PortalManager {
                         "Woorinet",
                         "",
                         sdnLink.map(link -> link.getSrcNeName()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
-                        srcSdnConnector.map(connector -> connector.getPortId()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        srcOtnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
@@ -171,10 +171,10 @@ public class PortalManager {
                         "Woorinet",
                         "",
                         sdnLink.map(link -> link.getDstNeName()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getPortId()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
@@ -184,31 +184,31 @@ public class PortalManager {
                         "Woorinet",
                         "",
                         otnService.getDstNeName(),
-                        dstSdnConnector.map(connector -> connector.getUnitType()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getShelfId()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getSlotId()).orElse(""),
-                        dstSdnConnector.map(connector -> connector.getPortId()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getUnitType()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getShelfId()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getSlotId()).orElse(""),
+                        dstOtnConnector.map(connector -> connector.getPortId()).orElse(""),
                         ""
                 };
 
                 String[] endPointClientEndFields = {"", "", "", "","", "", "", "", "", ""};
 
-                portalLinkBook.setEndpointClientStart(portalLinkBook.getNodeRef(endPointClientStartFields));
-                portalLinkBook.setTransmitClientStart(portalLinkBook.getNodeRef(transmitClientStartFields));
-                portalLinkBook.setLinkStart( portalLinkBook.getNodeRef(linkStartFields));
-                portalLinkBook.setRoadmMuxStart(portalLinkBook.getNodeRef(roadmMuxStartFields));
-                portalLinkBook.setRoadmMuxEnd(portalLinkBook.getNodeRef(roadmMuxEndFields));
-                portalLinkBook.setLinkEnd(portalLinkBook.getNodeRef(linkEndFields));
-                portalLinkBook.setTransmitClientEnd(portalLinkBook.getNodeRef(transmitClientEndFields));
-                portalLinkBook.setEndpointClientEnd(portalLinkBook.getNodeRef(endPointClientEndFields));
+                portalLinkbook.setEndpointClientStart(portalLinkbook.getNodeRef(endPointClientStartFields));
+                portalLinkbook.setTransmitClientStart(portalLinkbook.getNodeRef(transmitClientStartFields));
+                portalLinkbook.setLinkStart( portalLinkbook.getNodeRef(linkStartFields));
+                portalLinkbook.setRoadmMuxStart(portalLinkbook.getNodeRef(roadmMuxStartFields));
+                portalLinkbook.setRoadmMuxEnd(portalLinkbook.getNodeRef(roadmMuxEndFields));
+                portalLinkbook.setLinkEnd(portalLinkbook.getNodeRef(linkEndFields));
+                portalLinkbook.setTransmitClientEnd(portalLinkbook.getNodeRef(transmitClientEndFields));
+                portalLinkbook.setEndpointClientEnd(portalLinkbook.getNodeRef(endPointClientEndFields));
 
-                return portalLinkBook;
+                return portalLinkbook;
             });
-        holaSdnLineNumSheetStream.forEach(portalLinkbookRepository::save);
+        portalLinkbookStream.forEach(portalLinkbookRepository::save);
     }
 
     private void PortalSyncLinkmng() throws Exception {
-        Stream<PortalLinkmng> holaLinkMngStream = otnLinkList
+        Stream<PortalLinkmng> portalLinkmngStream = otnLinkList
             .stream()
             .filter(otnLink -> {
                 String [] halfOflinkId = otnLink.getLinkId().split(":");
@@ -262,14 +262,14 @@ public class PortalManager {
                 return portalLinkMng;
             });
 
-        holaLinkMngStream.forEach(item -> {
+        portalLinkmngStream.forEach(item -> {
             System.out.println(item);
             portalLinkmngRepository.save(item);
         });
     }
 
     private void PortalSyncStatsInventory() throws Exception {
-        Stream<PortalStatsInventory> holaSdnInventoryDetailStream = otnConnectorList
+        Stream<PortalStatsInventory> portalStatsInventoryStream = otnConnectorList
             .stream()
             .map(otnConnector -> {
                 Optional<OtnNode> sdnNode = otnNodeList.stream().
@@ -306,22 +306,22 @@ public class PortalManager {
                 return portalStatsInventory;
             });
 
-        holaSdnInventoryDetailStream.forEach(portalStatsInventoryRepository::save);
+        portalStatsInventoryStream.forEach(portalStatsInventoryRepository::save);
 
     }
 
     private void PortalSyncStatsNode() throws Exception {
-        PortalStatsNode holaSdnOtnNodeUsage = new PortalStatsNode(
+        PortalStatsNode portalStatsNode = new PortalStatsNode(
                 "수도권", //area
                 "", //city
                 "" //mounting_status
         );
 
-        portalStatsNodeRepository.save(holaSdnOtnNodeUsage);
+        portalStatsNodeRepository.save(portalStatsNode);
     }
 
     private void PortalSyncStatsSupplies() throws Exception {
-        Stream<PortalStatsSupplies> portalOtnMaterialStream = otnNodeList
+        Stream<PortalStatsSupplies> portalStatsSuppliesStream = otnNodeList
             .stream()
             .map(otnNode -> {
                 //otnConnectorStream : otnNode의 ne_name(예: EMS_1000_B)과 매치되는 otnConnector들의 stream
@@ -370,7 +370,7 @@ public class PortalManager {
 
                 return portalStatsSupplies;
             });
-        portalOtnMaterialStream.forEach(portalStatsSuppliesRepository::save);
+        portalStatsSuppliesStream.forEach(portalStatsSuppliesRepository::save);
     }
 
     private int getPortCountOfUnitType (String unitType) {
