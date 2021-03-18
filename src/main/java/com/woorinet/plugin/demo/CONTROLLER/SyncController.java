@@ -261,17 +261,17 @@ public class SyncController {
     }
 
     @Autowired
-    private PortalLineNumSheetRepository portalLineNumSheetRepository;
+    private PortalLinkBookRepository portalLinkBookRepository;
     @Autowired
     private PortalLinkMngRepository portalLinkMngRepository;
     @Autowired
     private PortalTrunkUsageRepository portalTrunkUsageRepository;
     @Autowired
-    private PortalInventroyDetailRepository portalInventroyDetailRepository;
+    private PortalStatsInventroyRepository portalStatsInventroyRepository;
     @Autowired
-    private PortalOtnNodeUsageRepository portalOtnNodeUsageRepository;
+    private PortalStatsNodeRepository portalStatsNodeRepository;
     @Autowired
-    private PortalOtnMaterialRepository portalOtnMaterialRepository;
+    private PortalStatsSuppliesRepository portalStatsSuppliesRepository;
 
     @GetMapping("/portal")
     String syncronizeHola() {
@@ -291,12 +291,12 @@ public class SyncController {
             //SdnAccessIf 조회
             List<OtnAccessIf> otnAccessIfList = otnAccessIfRepository.findAll();
 
-            PortalManager manager = new PortalManager(portalLineNumSheetRepository,
+            PortalManager manager = new PortalManager(portalLinkBookRepository,
                     portalLinkMngRepository,
                     portalTrunkUsageRepository,
-                    portalInventroyDetailRepository,
-                    portalOtnNodeUsageRepository,
-                    portalOtnMaterialRepository,
+                    portalStatsInventroyRepository,
+                    portalStatsNodeRepository,
+                    portalStatsSuppliesRepository,
                     otnConnectorRepository,
                     otnNodeList,
                     otnConnectorList,

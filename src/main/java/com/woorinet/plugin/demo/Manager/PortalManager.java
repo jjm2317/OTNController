@@ -10,12 +10,12 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class PortalManager {
-    PortalLineNumSheetRepository portalLineNumSheetRepository;
+    PortalLinkBookRepository portalLinkBookRepository;
     PortalLinkMngRepository portalLinkMngRepository;
     PortalTrunkUsageRepository portalTrunkUsageRepository;
-    PortalInventroyDetailRepository portalInventroyDetailRepository;
-    PortalOtnNodeUsageRepository portalOtnNodeUsageRepository;
-    PortalOtnMaterialRepository portalOtnMaterialRepository;
+    PortalStatsInventroyRepository portalStatsInventroyRepository;
+    PortalStatsNodeRepository portalStatsNodeRepository;
+    PortalStatsSuppliesRepository portalStatsSuppliesRepository;
 
     OtnConnectorRepository otnConnectorRepository;
 
@@ -28,12 +28,12 @@ public class PortalManager {
     List<OtnAccessIf> otnAccessIfList;
 
 
-    public PortalManager(PortalLineNumSheetRepository portalLineNumSheetRepository,
+    public PortalManager(PortalLinkBookRepository portalLinkBookRepository,
                          PortalLinkMngRepository portalLinkMngRepository,
                          PortalTrunkUsageRepository portalTrunkUsageRepository,
-                         PortalInventroyDetailRepository portalInventroyDetailRepository,
-                         PortalOtnNodeUsageRepository portalOtnNodeUsageRepository,
-                         PortalOtnMaterialRepository portalOtnMaterialRepository,
+                         PortalStatsInventroyRepository portalStatsInventroyRepository,
+                         PortalStatsNodeRepository portalStatsNodeRepository,
+                         PortalStatsSuppliesRepository portalStatsSuppliesRepository,
                          OtnConnectorRepository otnConnectorRepository,
                          List<OtnNode> otnNodeList,
                          List<OtnConnector> otnConnectorList,
@@ -43,12 +43,12 @@ public class PortalManager {
                          List<OtnConstraint> otnConstraintList,
                          List<OtnAccessIf> otnAccessIfList
                        ) throws Exception{
-        this.portalLineNumSheetRepository = portalLineNumSheetRepository;
+        this.portalLinkBookRepository = portalLinkBookRepository;
         this.portalLinkMngRepository = portalLinkMngRepository;
         this.portalTrunkUsageRepository = portalTrunkUsageRepository;
-        this.portalInventroyDetailRepository = portalInventroyDetailRepository;
-        this.portalOtnNodeUsageRepository = portalOtnNodeUsageRepository;
-        this.portalOtnMaterialRepository = portalOtnMaterialRepository;
+        this.portalStatsInventroyRepository = portalStatsInventroyRepository;
+        this.portalStatsNodeRepository = portalStatsNodeRepository;
+        this.portalStatsSuppliesRepository = portalStatsSuppliesRepository;
 
         this.otnConnectorRepository = otnConnectorRepository;
 
@@ -204,7 +204,7 @@ public class PortalManager {
 
                 return portalLinkBook;
             });
-        holaSdnLineNumSheetStream.forEach(portalLineNumSheetRepository::save);
+        holaSdnLineNumSheetStream.forEach(portalLinkBookRepository::save);
     }
 
     private void HolaSyncLinkMng() throws Exception {
@@ -269,7 +269,7 @@ public class PortalManager {
     }
 
     private void HolaSyncSdnInventoryDetail() throws Exception {
-        Stream<PortalInventory> holaSdnInventoryDetailStream = otnConnectorList
+        Stream<PortalStatsInventory> holaSdnInventoryDetailStream = otnConnectorList
             .stream()
             .map(otnConnector -> {
                 Optional<OtnNode> sdnNode = otnNodeList.stream().
@@ -282,7 +282,7 @@ public class PortalManager {
                         filter(link -> link.getLinkId().contains(otnConnector.getConnectId()))
                         .findAny();
 
-                PortalInventory portalInventory = new PortalInventory(
+                PortalStatsInventory portalStatsInventory = new PortalStatsInventory(
                         "Woorinet", //vendor
                         "", //cell
                         otnConnector.getNeName(), //tid
@@ -303,10 +303,10 @@ public class PortalManager {
                         "", //cable_name
                         "" //remarks_list
                 );
-                return portalInventory;
+                return portalStatsInventory;
             });
 
-        holaSdnInventoryDetailStream.forEach(portalInventroyDetailRepository::save);
+        holaSdnInventoryDetailStream.forEach(portalStatsInventroyRepository::save);
 
     }
 
@@ -317,7 +317,7 @@ public class PortalManager {
                 "" //mounting_status
         );
 
-        portalOtnNodeUsageRepository.save(holaSdnOtnNodeUsage);
+        portalStatsNodeRepository.save(holaSdnOtnNodeUsage);
     }
 
     private void HolaSyncSdnOtnMaterial() throws Exception {
@@ -370,7 +370,7 @@ public class PortalManager {
 
                 return portalStatsSupplies;
             });
-        portalOtnMaterialStream.forEach(portalOtnMaterialRepository::save);
+        portalOtnMaterialStream.forEach(portalStatsSuppliesRepository::save);
     }
 
     private int getPortCountOfUnitType (String unitType) {

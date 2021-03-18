@@ -18,29 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v1/tn2")
 public class Tn2Controller {
     @Autowired
-    private PortalLineNumSheetRepository portalLineNumSheetRepository;
+    private PortalLinkBookRepository portalLinkBookRepository;
     @Autowired
     private PortalLinkMngRepository portalLinkMngRepository;
     @Autowired
     private PortalTrunkUsageRepository portalTrunkUsageRepository;
     @Autowired
-    private PortalInventroyDetailRepository portalInventroyDetailRepository;
+    private PortalStatsInventroyRepository portalStatsInventroyRepository;
     @Autowired
-    private PortalOtnNodeUsageRepository portalOtnNodeUsageRepository;
+    private PortalStatsNodeRepository portalStatsNodeRepository;
     @Autowired
-    private PortalOtnMaterialRepository portalOtnMaterialRepository;
+    private PortalStatsSuppliesRepository portalStatsSuppliesRepository;
 
     @ApiOperation(value = "get Line Number Sheet", notes = "전체 선번장 조회")
     @GetMapping(value = "/linkbook/list")
     @ResponseBody
     public ResponseEntity selectLineNumSheetList() {
-        if(portalLineNumSheetRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalLinkBookRepository.findAll() == null) return ResponseEntity.notFound().build();
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
 
-            for(PortalLinkBook portalLinkBook : portalLineNumSheetRepository.findAll()) {
+            for(PortalLinkBook portalLinkBook : portalLinkBookRepository.findAll()) {
                 JSONObject jsonObject = new JSONObject();
 
                 JSONObject EPStartJsonObj = (JSONObject) parser.parse(portalLinkBook.getEndpointClientStart());
@@ -146,23 +146,23 @@ public class Tn2Controller {
     @GetMapping(value = "/inventory/list")
     @ResponseBody
     public ResponseEntity selectInventoryDetail() {
-        if(portalInventroyDetailRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(portalInventroyDetailRepository.findAll());
+        if(portalStatsInventroyRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalStatsInventroyRepository.findAll());
     }
 
     @ApiOperation(value = "get otn node usage", notes = "전체 otn node 사용현황 조회")
     @GetMapping(value = "/stats/node/list")
     @ResponseBody
     public ResponseEntity selectOtnNodeUsage() {
-        if(portalOtnNodeUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(portalOtnNodeUsageRepository.findAll());
+        if(portalStatsNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalStatsNodeRepository.findAll());
     }
 
     @ApiOperation(value = "get otn material", notes = "전체 otn 물자현황 조회")
     @GetMapping(value = "/stats/supplies/list")
     @ResponseBody
     public ResponseEntity selectOtnMaterial() {
-        if(portalOtnMaterialRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(portalOtnMaterialRepository.findAll());
+        if(portalStatsSuppliesRepository.findAll() == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(portalStatsSuppliesRepository.findAll());
     }
 }
