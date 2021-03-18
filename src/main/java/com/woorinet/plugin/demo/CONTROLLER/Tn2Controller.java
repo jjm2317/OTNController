@@ -53,7 +53,7 @@ public class Tn2Controller {
                 JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLineNumSheet.getEndpointClientEnd());
 
 
-                jsonObject.put("line_num_sheet_id", portalLineNumSheet.getLineNumSheetId());
+                jsonObject.put("linkbook_id", portalLineNumSheet.getLineNumSheetId());
                 jsonObject.put("group", portalLineNumSheet.getGroup());
                 jsonObject.put("domain_type", portalLineNumSheet.getDomainType());
                 jsonObject.put("area_start", portalLineNumSheet.getAreaStart());
@@ -111,7 +111,7 @@ public class Tn2Controller {
 
                 JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
 
-                jsonObject.put("hola_link_mng_id", portalLinkMng.getHolaSdnLinkMngId());
+                jsonObject.put("link_mng_id", portalLinkMng.getHolaSdnLinkMngId());
                 jsonObject.put("vendor", portalLinkMng.getVendor());
                 jsonObject.put("link", linkJsonArray);
                 jsonObject.put("admin_weight", portalLinkMng.getAdminWeight());
