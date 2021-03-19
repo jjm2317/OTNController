@@ -16,7 +16,7 @@
 					<img src="https://colorlib.com/etc/lf/Login_v1/images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form" action="/home">
+				<form class="login100-form validate-form" >
 					<span class="login100-form-title">
 						Member Login
 					</span>
