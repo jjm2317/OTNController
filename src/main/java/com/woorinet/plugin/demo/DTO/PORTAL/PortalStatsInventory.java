@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Setter
 @Getter
@@ -88,5 +90,34 @@ public class PortalStatsInventory {
                 ", cableName='" + cableName + '\'' +
                 ", remarksList='" + remarksList + '\'' +
                 '}';
+    }
+
+    public void setLink(String[] firstLinkFields, String[] secondLinkFields) {
+        try {
+            PortalStatsInventory.Remarks firstRemarks = new PortalStatsInventory.Remarks(firstLinkFields);
+            PortalStatsInventory.Remarks secondRemarks = new PortalStatsInventory.Remarks(secondLinkFields);
+
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+
+            String[] result = {mapper.writerWithDefaultPrettyPrinter().writeValueAsString(firstRemarks), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(secondRemarks)};
+
+            this.remarksList = Arrays.toString(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Data
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+    class Remarks {
+        String remarks;
+        String creationDate;
+        String writer;
+
+        public Remarks(String[] fields) {
+            this.remarks = fields[0];
+            this.creationDate = fields[1];
+            this.writer = fields[2];
+        }
     }
 }
