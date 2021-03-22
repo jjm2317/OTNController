@@ -4,10 +4,13 @@ import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventAlm;
 import com.woorinet.plugin.demo.DTO.TL1.EVENT.Tl1EventTca;
 import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventAlmRepository;
 import com.woorinet.plugin.demo.Repository.TL1.EVENT.Tl1EventTcaRepository;
+import me.saro.commons.ftp.FTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
@@ -34,11 +37,17 @@ public class DemoApplication {
 	private static Tl1EventAlmRepository tl1EventAlmRepository;
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(DemoApplication.class, args);
 		/*
 		스프링 부트가 실행되고 있는 동안에는 계속해서 Event 데이터를 받아서 DB에 저장 하고 있다.
 		*/
+		try {
+			ftpConnect();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+
 		try {
 			String ip = "222.117.54.175";
 			int port = 19012;
@@ -153,6 +162,32 @@ public class DemoApplication {
 		}
 		result = new String[]{TID, AID, UNIT, SIGNAL, TIME, PM_ELEMENT, DATETIME, EVENT_DATETIME};
 		return result;
+	}
+	private static void ftpConnect() throws Exception {
+		String host = "woorinet.speedvpn.net";
+		int port = 621;
+		String user = "ftpuser";
+		String pass = "ftp-123456";
+		FTP ftp = FTP.openFTP(host, port, user, pass);
+
+		String down_path = "./ftp";
+
+		File deleteFolder = new File(down_path);
+		File[] deleteFolderList = deleteFolder.listFiles();
+		for (int j = 0; deleteFolderList != null &&j < deleteFolderList.length; j++  ) {
+			deleteFolderList[j].delete();
+		}
+		deleteFolder.delete();
+		new File(down_path).mkdirs();
+		ftp.listFiles().forEach(e -> {
+			try {
+				ftp.recv(e, new File(down_path + "/" + e));
+			} catch (IOException ioException) {
+				ioException.printStackTrace();
+			}
+		});
+
+
 	}
 }
 
