@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
-    @GetMapping("/home")
+    @GetMapping("/")
     String home() {
         return "index";
     }
 
-    @GetMapping("/")
+    @GetMapping("/login")
     String login() { return "login"; }
 }
