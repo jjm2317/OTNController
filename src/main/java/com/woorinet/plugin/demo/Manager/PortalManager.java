@@ -1,8 +1,8 @@
 package com.woorinet.plugin.demo.Manager;
 
-import com.woorinet.plugin.demo.DTO.PORTAL.*;
+import com.woorinet.plugin.demo.DTO.TN2.*;
 import com.woorinet.plugin.demo.DTO.OTN.*;
-import com.woorinet.plugin.demo.Repository.PORTAL.*;
+import com.woorinet.plugin.demo.Repository.TN2.*;
 import com.woorinet.plugin.demo.Repository.OTN.OtnConnectorRepository;
 
 import java.util.List;

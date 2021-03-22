@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.PORTAL;
+package com.woorinet.plugin.demo.DTO.TN2;
 
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

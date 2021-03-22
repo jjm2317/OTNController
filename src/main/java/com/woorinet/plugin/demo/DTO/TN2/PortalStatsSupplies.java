@@ -1,16 +1,14 @@
-package com.woorinet.plugin.demo.DTO.PORTAL;
+package com.woorinet.plugin.demo.DTO.TN2;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.google.gson.Gson;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Arrays;
 
 @Setter
 @Getter
