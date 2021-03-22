@@ -303,6 +303,11 @@ public class PortalManager {
                         "", //cable_name
                         "" //remarks_list
                 );
+
+                String[] firstRemarks = {"", "", ""};
+                String[] secondRemarks = {"", "", ""};
+
+                portalStatsInventory.setRemarksList(firstRemarks, secondRemarks);
                 return portalStatsInventory;
             });
 

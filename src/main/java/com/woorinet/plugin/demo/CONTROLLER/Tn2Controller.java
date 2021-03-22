@@ -2,6 +2,7 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkbook;
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkmng;
+import com.woorinet.plugin.demo.DTO.PORTAL.PortalStatsInventory;
 import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
@@ -53,7 +54,7 @@ public class Tn2Controller {
                 JSONObject EPENDJsonObj = (JSONObject) parser.parse(portalLinkBook.getEndpointClientEnd());
 
 
-                jsonObject.put("linkbook_id", portalLinkBook.getPortalLinkbookId());
+                jsonObject.put("tn2_linkbook_id", portalLinkBook.getPortalLinkbookId());
                 jsonObject.put("group", portalLinkBook.getGroup());
                 jsonObject.put("domain_type", portalLinkBook.getDomainType());
                 jsonObject.put("area_start", portalLinkBook.getAreaStart());
@@ -111,7 +112,7 @@ public class Tn2Controller {
 
                 JSONArray linkJsonArray = (JSONArray) parser.parse(portalLinkMng.getLink());
 
-                jsonObject.put("linkmng_id", portalLinkMng.getPortalLinkmngId());
+                jsonObject.put("tn2_linkmng_id", portalLinkMng.getPortalLinkmngId());
                 jsonObject.put("vendor", portalLinkMng.getVendor());
                 jsonObject.put("link", linkJsonArray);
                 jsonObject.put("admin_weight", portalLinkMng.getAdminWeight());
@@ -147,7 +148,42 @@ public class Tn2Controller {
     @ResponseBody
     public ResponseEntity selectStatsInventory() {
         if(portalStatsInventoryRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(portalStatsInventoryRepository.findAll());
+        JSONArray jsonArray = new JSONArray();
+        JSONParser parser = new JSONParser();
+        try {
+            for (PortalStatsInventory portalStatsInventory : portalStatsInventoryRepository.findAll()) {
+                JSONObject jsonObject = new JSONObject();
+
+                JSONArray remarksListArray = (JSONArray) parser.parse(portalStatsInventory.getRemarksList());
+
+//                jsonObject.put("tn2_stats_inventory_id", );
+//                jsonObject.put("vendor", );
+//                jsonObject.put("cell", );
+//                jsonObject.put("tid", );
+//                jsonObject.put("shelf_id", );
+//                jsonObject.put("ip", );
+//                jsonObject.put("ne_type", );
+//                jsonObject.put("unit_type", );
+//                jsonObject.put("unit_pec", );
+//                jsonObject.put("serial_number", );
+//                jsonObject.put("slot_id", );
+//                jsonObject.put("port_id", );
+//                jsonObject.put("connect_status", );
+//                jsonObject.put("llcf", );
+//                jsonObject.put("module_name", );
+//                jsonObject.put("module_pec", );
+//                jsonObject.put("distance", );
+//                jsonObject.put("module_description", );
+//                jsonObject.put("cable_name", );
+//                jsonObject.put("remarks_list", )
+
+                jsonArray.add(jsonObject);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok(jsonArray.toString());
     }
 
     @ApiOperation(value = "get stats node", notes = "전체 otn node 사용현황 조회")

@@ -92,7 +92,7 @@ public class PortalStatsInventory {
                 '}';
     }
 
-    public void setLink(String[] firstLinkFields, String[] secondLinkFields) {
+    public void setRemarksList(String[] firstLinkFields, String[] secondLinkFields) {
         try {
             PortalStatsInventory.Remarks firstRemarks = new PortalStatsInventory.Remarks(firstLinkFields);
             PortalStatsInventory.Remarks secondRemarks = new PortalStatsInventory.Remarks(secondLinkFields);
@@ -101,8 +101,8 @@ public class PortalStatsInventory {
             mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 
             String[] result = {mapper.writerWithDefaultPrettyPrinter().writeValueAsString(firstRemarks), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(secondRemarks)};
-
             this.remarksList = Arrays.toString(result);
+            System.out.println(this.remarksList);
         } catch (Exception e) {
             e.printStackTrace();
         }
