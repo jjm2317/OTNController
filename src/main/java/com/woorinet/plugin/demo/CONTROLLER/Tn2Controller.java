@@ -3,6 +3,7 @@ package com.woorinet.plugin.demo.CONTROLLER;
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkbook;
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkmng;
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalStatsInventory;
+import com.woorinet.plugin.demo.DTO.PORTAL.PortalStatsNode;
 import com.woorinet.plugin.demo.Repository.PORTAL.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
@@ -191,7 +192,22 @@ public class Tn2Controller {
     @ResponseBody
     public ResponseEntity selectStatsNode() {
         if(portalStatsNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(portalStatsNodeRepository.findAll());
+        PortalStatsNode portalStatsNode = portalStatsNodeRepository.findAll().get(0);
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            JSONObject mountingStatusJson = (JSONObject) parser.parse(portalStatsNode.getMountingStatus());
+
+            jsonObject.put("tn2_stats_node_id", portalStatsNode.getPortalStatsNodeId());
+            jsonObject.put("area", portalStatsNode.getArea());
+            jsonObject.put("city", portalStatsNode.getCity());
+            jsonObject.put("mounting_status", mountingStatusJson);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok(jsonObject.toString());
     }
 
     @ApiOperation(value = "get stats supplies", notes = "전체 otn 물자현황 조회")

@@ -205,8 +205,8 @@ public class QkdManager {
                 kemsPath.get("primaryUsage") == null ? "":kemsPath.get("primaryUsage").toString(),
                 kemsPath.get("primaryFault") == null ? "":kemsPath.get("primaryFault").toString(),
                 kemsPath.get("secondary") == null ? "" :gson.toJson(kemsPath.get("secondary")),
-                kemsPath.get("secondaryUsage") == null ? "":kemsPath.get("primaryUsage").toString(),
-                kemsPath.get("secondaryFault") == null ? "":kemsPath.get("primaryFault").toString(),
+                kemsPath.get("secondaryUsage") == null ? "":kemsPath.get("secondaryUsage").toString(),
+                kemsPath.get("secondaryFault") == null ? "":kemsPath.get("secondaryFault").toString(),
                 kemsPath.get("remark") == null ? "" :kemsPath.get("remark").toString()
             );
             qkdPathRepository.save(qkdPath);

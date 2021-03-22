@@ -321,9 +321,9 @@ public class PortalManager {
                 "", //city
                 "" //mounting_status
         );
-
-        portalStatsNode.setMountingStatus(portalStatsNode.getMountingStatus());
-
+        String[] mountingStatusFields = {"", "", "", ""};
+        portalStatsNode.setMountingStatus(portalStatsNode.getMountingStatusRef(mountingStatusFields));
+        System.out.println(portalStatsNode.getMountingStatus() + "....test");
         portalStatsNodeRepository.save(portalStatsNode);
     }
 

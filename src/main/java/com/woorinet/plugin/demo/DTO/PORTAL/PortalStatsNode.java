@@ -43,9 +43,9 @@ public class PortalStatsNode {
                 '}';
     }
 
-    public String getNodeRef(String[] fields)  {
+    public String getMountingStatusRef(String[] fields)  {
         try {
-            MountingStatus mountingStatus = new MountingStatus(fields);
+            MountingStatus mountingStatus = new PortalStatsNode.MountingStatus(fields);
             ObjectMapper mapper = new ObjectMapper();
 
             mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
@@ -59,6 +59,8 @@ public class PortalStatsNode {
         }
     }
 
+    @Data
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     class MountingStatus {
         String xG;
         String tenG;

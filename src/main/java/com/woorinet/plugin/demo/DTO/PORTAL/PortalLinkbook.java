@@ -137,7 +137,8 @@ public class PortalLinkbook {
     }
     @Data
     @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-    class NodeRef {
+    class
+    NodeRef {
         String system;
         String managementTeam;
         String vendor;
