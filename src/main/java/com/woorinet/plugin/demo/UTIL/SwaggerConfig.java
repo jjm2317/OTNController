@@ -8,11 +8,12 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,12 +33,19 @@ public class SwaggerConfig implements WebMvcConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .consumes(getConsumeContentTypes())
                 .produces(getProduceContentTypes())
-                .apiInfo(getApiInfo())
+                .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.woorinet.plugin.demo"))
                 .paths(PathSelectors.regex("/otn/.*|/portal/.*|/v1/.*|/qkd/.*"))
-                .build();
+                .build()
+                .securitySchemes(Arrays.asList(apiKey()));
     }
+    /* jwt 설정 */
+    private ApiKey apiKey() {
+        return new ApiKey("jwtToken", "Authorization", "header");
+    }
+    /* jwt 설정 */
+
 
     private Set<String> getConsumeContentTypes() {
         Set<String> consumes = new HashSet<>();
@@ -52,11 +60,11 @@ public class SwaggerConfig implements WebMvcConfigurer {
         return produces;
     }
 
-    private ApiInfo getApiInfo() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("API")
-                .description("[Bamdule] API.")
-                .contact(new Contact("Bamdule Swagger", "https://bamdule.tistory.com/", "Bamdule5@gmail.com"))
+                .title("Sig-Predict REST API Document")
+                .description("work in progress")
+                .termsOfServiceUrl("localhost")
                 .version("1.0")
                 .build();
     }
