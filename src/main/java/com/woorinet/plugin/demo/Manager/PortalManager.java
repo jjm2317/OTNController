@@ -322,6 +322,8 @@ public class PortalManager {
                 "" //mounting_status
         );
 
+        portalStatsNode.setMountingStatus(portalStatsNode.getMountingStatus());
+
         portalStatsNodeRepository.save(portalStatsNode);
     }
 

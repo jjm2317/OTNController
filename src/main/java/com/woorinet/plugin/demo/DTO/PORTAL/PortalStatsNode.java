@@ -1,6 +1,7 @@
 package com.woorinet.plugin.demo.DTO.PORTAL;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
@@ -40,5 +41,35 @@ public class PortalStatsNode {
                 ", city='" + city + '\'' +
                 ", mountingStatus='" + mountingStatus + '\'' +
                 '}';
+    }
+
+    public String getNodeRef(String[] fields)  {
+        try {
+            MountingStatus mountingStatus = new MountingStatus(fields);
+            ObjectMapper mapper = new ObjectMapper();
+
+            mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+
+            //return (new Gson()).toJson(nodeRef);
+
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(mountingStatus);
+        } catch (Exception e){
+            e.printStackTrace();
+            return "{}";
+        }
+    }
+
+    class MountingStatus {
+        String xG;
+        String tenG;
+        String hundredG;
+        String twoHundredG;
+
+        public MountingStatus(String[] fields) {
+            this.xG = fields[0];
+            this.tenG = fields[1];
+            this.hundredG = fields[2];
+            this.twoHundredG = fields[3];
+        }
     }
 }
