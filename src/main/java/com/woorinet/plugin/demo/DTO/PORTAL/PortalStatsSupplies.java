@@ -9,21 +9,19 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Arrays;
 
 @Setter
 @Getter
 @Data
 @Entity
-@Table(name="portal_stats_supplies")
+@Table(name="tn2_stats_supplies")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalStatsSupplies {
     @Id
     @GeneratedValue
+    @Column(name="tn2_stats_supplies_id")
     int portalStatsSuppliesId;
     String vendor;
     String cell;

@@ -7,20 +7,18 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Setter
 @Getter
 @Data
 @Entity
-@Table(name="portal_trunk_usage")
+@Table(name="tn2_trunkusage")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalTrunkUsage {
     @Id
     @GeneratedValue
+    @Column(name="tn2_trunkusage_id")
     int portalTrunkUsageId;
     String vendor;
     String link;

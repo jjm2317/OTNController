@@ -16,11 +16,12 @@ import java.util.Arrays;
 @Getter
 @Data
 @Entity
-@Table(name="portal_linkmng")
+@Table(name="tn2_linkmng")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalLinkmng {
     @Id
     @GeneratedValue
+    @Column(name="tn2_linkmng_id")
     int portalLinkmngId;
     String vendor;
     @Column(length = 1000)

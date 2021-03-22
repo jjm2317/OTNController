@@ -7,20 +7,18 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @Data
 @Entity
-@Table(name="portal_stats_node")
+@Table(name="tn2_stats_node")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalStatsNode {
     @Id
     @GeneratedValue
+    @Column(name="tn2_stats_node_id")
     int portalStatsNodeId;
     String area;
     String city;

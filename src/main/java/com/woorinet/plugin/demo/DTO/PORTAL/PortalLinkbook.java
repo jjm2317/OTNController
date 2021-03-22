@@ -10,20 +10,18 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Setter
 @Getter
 @Entity
 @Data
-@Table
+@Table(name="tn2_linkbook")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PortalLinkbook {
     @Id
     @GeneratedValue
+    @Column(name="tn2_linkbook_id")
     int portalLinkbookId;
     String group;
     String domainType;
