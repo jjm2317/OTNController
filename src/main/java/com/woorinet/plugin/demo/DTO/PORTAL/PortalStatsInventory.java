@@ -40,6 +40,7 @@ public class PortalStatsInventory {
     String distance;
     String moduleDescription;
     String cableName;
+    @Column(length = 1000)
     String remarksList;
 
     public PortalStatsInventory() {

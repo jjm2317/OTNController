@@ -156,26 +156,26 @@ public class Tn2Controller {
 
                 JSONArray remarksListArray = (JSONArray) parser.parse(portalStatsInventory.getRemarksList());
 
-//                jsonObject.put("tn2_stats_inventory_id", );
-//                jsonObject.put("vendor", );
-//                jsonObject.put("cell", );
-//                jsonObject.put("tid", );
-//                jsonObject.put("shelf_id", );
-//                jsonObject.put("ip", );
-//                jsonObject.put("ne_type", );
-//                jsonObject.put("unit_type", );
-//                jsonObject.put("unit_pec", );
-//                jsonObject.put("serial_number", );
-//                jsonObject.put("slot_id", );
-//                jsonObject.put("port_id", );
-//                jsonObject.put("connect_status", );
-//                jsonObject.put("llcf", );
-//                jsonObject.put("module_name", );
-//                jsonObject.put("module_pec", );
-//                jsonObject.put("distance", );
-//                jsonObject.put("module_description", );
-//                jsonObject.put("cable_name", );
-//                jsonObject.put("remarks_list", )
+                jsonObject.put("tn2_stats_inventory_id", portalStatsInventory.getPortalStatsInventoryId());
+                jsonObject.put("vendor", portalStatsInventory.getVendor());
+                jsonObject.put("cell", portalStatsInventory.getCell());
+                jsonObject.put("tid", portalStatsInventory.getTid());
+                jsonObject.put("shelf_id", portalStatsInventory.getShelfId());
+                jsonObject.put("ip", portalStatsInventory.getIp());
+                jsonObject.put("ne_type", portalStatsInventory.getNeType());
+                jsonObject.put("unit_type", portalStatsInventory.getUnitType());
+                jsonObject.put("unit_pec", portalStatsInventory.getUnitPec());
+                jsonObject.put("serial_number", portalStatsInventory.getSerialNumber());
+                jsonObject.put("slot_id", portalStatsInventory.getSlotId());
+                jsonObject.put("port_id", portalStatsInventory.getPortId());
+                jsonObject.put("connect_status", portalStatsInventory.getConnectStatus());
+                jsonObject.put("llcf", portalStatsInventory.getLlcf());
+                jsonObject.put("module_name", portalStatsInventory.getModuleName());
+                jsonObject.put("module_pec", portalStatsInventory.getModulePec());
+                jsonObject.put("distance", portalStatsInventory.getDistance());
+                jsonObject.put("module_description", portalStatsInventory.getModuleDescription());
+                jsonObject.put("cable_name", portalStatsInventory.getCableName());
+                jsonObject.put("remarks_list", remarksListArray);
 
                 jsonArray.add(jsonObject);
             }
