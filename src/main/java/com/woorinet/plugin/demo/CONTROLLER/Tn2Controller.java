@@ -1,10 +1,10 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
-import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkbook;
-import com.woorinet.plugin.demo.DTO.PORTAL.PortalLinkmng;
-import com.woorinet.plugin.demo.DTO.PORTAL.PortalStatsInventory;
-import com.woorinet.plugin.demo.DTO.PORTAL.PortalStatsNode;
-import com.woorinet.plugin.demo.Repository.PORTAL.*;
+import com.woorinet.plugin.demo.DTO.TN2.PortalLinkbook;
+import com.woorinet.plugin.demo.DTO.TN2.PortalLinkmng;
+import com.woorinet.plugin.demo.DTO.TN2.PortalStatsInventory;
+import com.woorinet.plugin.demo.DTO.TN2.PortalStatsNode;
+import com.woorinet.plugin.demo.Repository.TN2.*;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -5,6 +5,15 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	<!-- Bootstrap styles -->
 	<link href="resources/assets/bootstrap/css/login.css" rel="stylesheet">
+	<style>
+	    .token {
+	        display: block;
+	        width: 350px;
+	        height: 200px;
+	        padding-rigth: 40px;
+            white-space: pre-line;
+	    }
+	</style>
 </head>
 <body>
 <script type="text/javascript" src="resources/assets/js/jquery-3.6.0.min.js" defer></script>
@@ -20,7 +29,6 @@
 					<span class="login100-form-title">
 						Member Login
 					</span>
-
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is wrong: ex@abc.xyz">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100"></span>
@@ -49,6 +57,7 @@
 							Username / Password?
 						</a>
 					</div>
+                    <div class="token" ></div>
 
 					<div class="text-center p-t-136">
 						<a class="txt2" href="#">

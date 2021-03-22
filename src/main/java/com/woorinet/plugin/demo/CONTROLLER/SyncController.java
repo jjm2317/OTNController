@@ -8,7 +8,7 @@ import com.woorinet.plugin.demo.Manager.PortalManager;
 import com.woorinet.plugin.demo.Manager.QkdManager;
 import com.woorinet.plugin.demo.Manager.Tl1Manager;
 import com.woorinet.plugin.demo.Repository.OTN.*;
-import com.woorinet.plugin.demo.Repository.PORTAL.*;
+import com.woorinet.plugin.demo.Repository.TN2.*;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import org.springframework.beans.factory.annotation.Autowired;

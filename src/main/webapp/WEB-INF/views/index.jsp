@@ -50,6 +50,11 @@
 									</strong> - <a href="swagger-ui.html"
 										class="bb btn btn-default btn-lg">이동</a> <small>v0.7</small></h3>
 							</div>
+							<div class="page-header">
+                                <h3 id="htmlStructure"><i class="bi bi-card-checklist"> </i><strong>토큰 발급
+                                    </strong> - <a href="login"
+                                        class="bb btn btn-default btn-lg">이동</a> <small>v0.7</small></h3>
+                            </div>
 						</div>
 					</div>
 				</div>
