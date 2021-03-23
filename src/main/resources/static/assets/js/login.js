@@ -59,7 +59,9 @@
         return check;
     });
 
-
+    $('.move-swagger').on('click', e => {
+        location.href="/swagger-ui.html";
+    })
     $('.validate-form .input100').each(function(){
         $(this).focus(function(){
            hideValidate(this);

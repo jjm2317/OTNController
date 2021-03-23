@@ -79,7 +79,17 @@
 			color: #fff;
 			background-color: #888;
 			border-radius: 3px;
-			padding: 1px;
+			padding: 2px;
+			margin-bottom: 4px;
+		}
+		.move-swagger {
+			width: 100%;
+			height: 50px;
+			border-radius: 25px;
+			background-color: #000;
+			color: #fff;
+			font-size: 15px;
+			margin-top: 18px;
 		}
 	</style>
 </head>
@@ -125,10 +135,11 @@
 							Username / Password?
 						</a>
 					</div>
-
+					<button class="move-swagger">MOVE TO SWAGGER</button>
 					<div id="open-modal" class="modal-window">
 
 					</div>
+
 
 
 
