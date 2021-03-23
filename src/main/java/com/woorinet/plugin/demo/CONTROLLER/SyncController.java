@@ -171,6 +171,7 @@ public class SyncController {
                     tl1BypassInfoRepository,
                     tl1CryptoModeRepository,
                     tl1CmProgramInfoRepository);
+            manager.Tl1PmWithFtpSyncStart();
             manager.TL1SyncStart();
             manager.close();
         } catch (Exception e) {
