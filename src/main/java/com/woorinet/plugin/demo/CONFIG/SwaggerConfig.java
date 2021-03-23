@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.UTIL;
+package com.woorinet.plugin.demo.CONFIG;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
