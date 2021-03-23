@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.annotation.Repeatable;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "/v1/tn2")
 public class Tn2Controller {
@@ -96,25 +99,36 @@ public class Tn2Controller {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-    @ApiOperation(value = "create linkbook", notes = "선번장 생성")
-    @PostMapping(value = "/linkbook")
-    @ResponseBody
-    public void createLinkbook() {
-
-    }
-
-    @ApiOperation(value = "update linkbook", notes = "선번장 수정")
-    @PatchMapping(value = "/linkbook")
-    @ResponseBody
-    public void updateLinkbook() {
-
-    }
+//    @ApiOperation(value = "create linkbook", notes = "선번장 생성")
+//    @PostMapping(value = "/linkbook")
+//    @ResponseBody
+//    public ResponseEntity createLinkbook(@RequestBody PortalLinkbook linkbook) {
+//        portalLinkbookRepository.save(linkbook);
+//        return ResponseEntity.ok("create");
+//    }
+//
+//    @ApiOperation(value = "update linkbook", notes = "선번장 수정")
+//    @PatchMapping(value = "/linkbook")
+//    @ResponseBody
+//    public ResponseEntity updateLinkbook(@RequestBody PortalLinkbook newLinkbook) {
+//        System.out.println(newLinkbook+",...test");
+//        Optional<PortalLinkbook> linkbookOptional = portalLinkbookRepository.findById(newLinkbook.getPortalLinkbookId());
+//        linkbookOptional.ifPresent(selectedLinkbook -> {
+//            portalLinkbookRepository.delete(selectedLinkbook);
+//            portalLinkbookRepository.save(newLinkbook);
+//        });
+//        return ResponseEntity.ok("update");
+//    }
 
     @ApiOperation(value = "delete linkbook", notes = "선번장 삭제")
     @DeleteMapping(value = "/linkbook")
     @ResponseBody
-    public void deleteLinkbook() {
-
+    public ResponseEntity deleteLinkbook(@RequestParam int id) {
+        Optional<PortalLinkbook> linkbookOptional = portalLinkbookRepository.findById(id);
+        linkbookOptional.ifPresent(linkbook -> {
+            portalLinkbookRepository.delete(linkbook);
+        });
+        return ResponseEntity.ok("delete");
     }
 
     @ApiOperation(value = "get linkmng", notes = "전체 링크관리 조회")
@@ -154,26 +168,26 @@ public class Tn2Controller {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-    @ApiOperation(value = "create linkmng", notes = "링크관리 생성")
-    @PostMapping(value = "/linkmng")
-    @ResponseBody
-    public void createLinkmng() {
-
-    }
-
-    @ApiOperation(value = "update linkmng", notes = "링크관리 수정")
-    @PatchMapping(value = "/linkmng")
-    @ResponseBody
-    public void updateLinkmng() {
-
-    }
-
-    @ApiOperation(value = "delete linkmng", notes = "링크관리 삭제")
-    @DeleteMapping(value = "/linkmng")
-    @ResponseBody
-    public void deleteLinkmng() {
-
-    }
+//    @ApiOperation(value = "create linkmng", notes = "링크관리 생성")
+//    @PostMapping(value = "/linkmng")
+//    @ResponseBody
+//    public void createLinkmng() {
+//
+//    }
+//
+//    @ApiOperation(value = "update linkmng", notes = "링크관리 수정")
+//    @PatchMapping(value = "/linkmng")
+//    @ResponseBody
+//    public void updateLinkmng() {
+//
+//    }
+//
+//    @ApiOperation(value = "delete linkmng", notes = "링크관리 삭제")
+//    @DeleteMapping(value = "/linkmng")
+//    @ResponseBody
+//    public void deleteLinkmng() {
+//
+//    }
 
     @ApiOperation(value = "get trunk usage", notes = "전체 trunk 사용률 조회")
     @GetMapping(value = "/trunkusage/list")
@@ -226,26 +240,26 @@ public class Tn2Controller {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
-    @ApiOperation(value = "create stats inventory", notes = "Inventory 정보 생성")
-    @PostMapping(value = "/stats/inventory")
-    @ResponseBody
-    public void createStatsInventory() {
-
-    }
-
-    @ApiOperation(value = "update stats inventory", notes = "Inventory 정보 수정")
-    @PatchMapping(value = "/stats/inventory")
-    @ResponseBody
-    public void updateStatsInventory() {
-
-    }
-
-    @ApiOperation(value = "delete stats inventory", notes = "Inventory 정보 삭제")
-    @DeleteMapping(value = "/stats/inventory")
-    @ResponseBody
-    public void deleteStatsInventory() {
-
-    }
+//    @ApiOperation(value = "create stats inventory", notes = "Inventory 정보 생성")
+//    @PostMapping(value = "/stats/inventory")
+//    @ResponseBody
+//    public void createStatsInventory() {
+//
+//    }
+//
+//    @ApiOperation(value = "update stats inventory", notes = "Inventory 정보 수정")
+//    @PatchMapping(value = "/stats/inventory")
+//    @ResponseBody
+//    public void updateStatsInventory() {
+//
+//    }
+//
+//    @ApiOperation(value = "delete stats inventory", notes = "Inventory 정보 삭제")
+//    @DeleteMapping(value = "/stats/inventory")
+//    @ResponseBody
+//    public void deleteStatsInventory() {
+//
+//    }
 
 
 
