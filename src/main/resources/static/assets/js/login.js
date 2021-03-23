@@ -8,6 +8,11 @@
     [ Validate ]*/
     var input = $('.validate-input .input100');
     var $token = $('.token');
+    var $modal = $('.modal-window');
+    var $modalHeading = $('.modal-heading');
+    var $modalContent = $('.modal-content');
+
+
     $('.validate-form').on('submit',function(e){
         e.preventDefault();
         var check = true;
@@ -30,7 +35,18 @@
               }),
             })
               .then((response) => response.json())
-              .then((data) => data.token === undefined ? alert("아이디 패스워드를 확인해주세요") : $token.text(data.token))
+              .then((data) => {
+                  var token = data.token;
+                  $modal.html(`<div>
+                      <a href="#" title="Close" onclick="$('.modal-window').toggleClass('active')" class="modal-close">Close</a>
+                      <h1 class="modal-heading">${token === undefined ? "Login Fail" : "Your Token is"}</h1>
+                      <div class="modal-content">
+                        ${token === undefined ? "아이디 패스워드를 확인해주세요" : token}
+                      </div>`)
+
+                  $modal.toggleClass("active")
+
+              })
         }
 
         return check;
