@@ -223,16 +223,6 @@ public class Tl1Manager {
             Tl1SyncL2Lacp();
             //OPTIC-POWER DB연동
             Tl1SyncOPTICPOWER();
-            //PM DB연동
-            TL1SyncPM();
-            //PM-PORT DB연동
-            Tl1SyncPmPort();
-            //PM-AC DB연동
-            TL1SyncPmAc();
-            //PM-PW DB연동
-            TL1SyncPmPw();
-            //PM-TUNNEL DB연동
-            TL1SyncPmTunnel();
             //INVENTORY DB연동
             TL1SyncInventory();
             //SESS_STATE DB연동
