@@ -31,7 +31,7 @@
 			 opacity: 1;
 			 pointer-events: auto;
 		 }
-		.modal-window > div {
+		.modal-window > div, .modal-window > input {
 			  width: 400px;
 			  position: absolute;
 			  top: 50%;
@@ -58,11 +58,28 @@
 			width: 70px;
 			text-decoration: none;
 		}
+		.modal-window input.modal-content {
+			border: 1px solid #000;
+			width: 350px;
+			height: 20px;
+			padding:  2px;
+			/*display: block;*/
+			/*width: 400px;*/
+			/*height: 200px;*/
+			/*word-wrap: break-word;*/
+		}
 		.modal-close:hover {
 			color: black;
 		}
 		.modal-content{
+
 			word-wrap: break-word;
+		}
+		.modal-copy {
+			color: #fff;
+			background-color: #888;
+			border-radius: 3px;
+			padding: 1px;
 		}
 	</style>
 </head>

@@ -7,10 +7,7 @@
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
-    var $token = $('.token');
     var $modal = $('.modal-window');
-    var $modalHeading = $('.modal-heading');
-    var $modalContent = $('.modal-content');
 
 
     $('.validate-form').on('submit',function(e){
@@ -35,16 +32,26 @@
               }),
             })
               .then((response) => response.json())
-              .then((data) => {
-                  var token = data.token;
+              .then((data) => data.token)
+              .then(token => {
+
                   $modal.html(`<div>
                       <a href="#" title="Close" onclick="$('.modal-window').toggleClass('active')" class="modal-close">Close</a>
                       <h1 class="modal-heading">${token === undefined ? "Login Fail" : "Your Token is"}</h1>
-                      <div class="modal-content">
-                        ${token === undefined ? "아이디 패스워드를 확인해주세요" : token}
-                      </div>`)
+                      ${token === undefined ? "" : '<button class="modal-copy">copy</button>'}`+
+                      (token === undefined? `<div class="modal-content">아이디 패스워드를 확인해주세요</div>`: `<input type=text" class="modal-content"
+                        value=${token}>
+                      `));
+                  $('.modal-content').val('Bearer ' + $('.modal-content').val());
 
                   $modal.toggleClass("active")
+                  $('.modal-copy').on('click', e => {
+                      e.preventDefault();
+                      $('.modal-content').select();
+
+                      document.execCommand('copy');
+                  });
+
 
               })
         }
