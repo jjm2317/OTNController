@@ -2,7 +2,9 @@ package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
+import me.saro.commons.ftp.FTP;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -164,6 +166,38 @@ public class Tl1Manager {
         socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(true);
         socketChannel.connect(new InetSocketAddress(ip, port));
+    }
+    public void Tl1PmWithFtpSyncStart() throws Exception {
+        try {
+            FTP ftp = FTP.openFTP("woorinet.speedvpn.net", 621, "ftpuser", "ftp-123456");
+
+            String localPath = "./ftp";
+            File localPathFile = new File(localPath);
+
+            localPathFile.mkdirs();
+            ftpDownAllFiles(ftp, localPath);
+
+            rmLocalFtpFolder(localPathFile);
+            ftp.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void ftpDownAllFiles(FTP ftp, String localPath) throws Exception {
+        ftp.listFiles().forEach(e -> {
+            try {
+                ftp.recv(e, new File(localPath + "/" + e));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+    }
+    private void rmLocalFtpFolder(File localPathFile) {
+        File[] deleteFolderList = localPathFile.listFiles();
+        for (int j = 0; deleteFolderList != null &&j < deleteFolderList.length; j++  ) {
+            deleteFolderList[j].delete();
+        }
+        localPathFile.delete();
     }
     public void TL1SyncStart() throws IOException {
         try {
