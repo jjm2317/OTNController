@@ -11,10 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/v1/tn2")
@@ -99,6 +96,27 @@ public class Tn2Controller {
         return ResponseEntity.ok(jsonArray.toString());
     }
 
+    @ApiOperation(value = "create linkbook", notes = "선번장 생성")
+    @PostMapping(value = "/linkbook")
+    @ResponseBody
+    public void createLinkbook() {
+
+    }
+
+    @ApiOperation(value = "update linkbook", notes = "선번장 수정")
+    @PatchMapping(value = "/linkbook")
+    @ResponseBody
+    public void updateLinkbook() {
+
+    }
+
+    @ApiOperation(value = "delete linkbook", notes = "선번장 삭제")
+    @DeleteMapping(value = "/linkbook")
+    @ResponseBody
+    public void deleteLinkbook() {
+
+    }
+
     @ApiOperation(value = "get linkmng", notes = "전체 링크관리 조회")
     @GetMapping(value = "/linkmng/list")
     @ResponseBody
@@ -134,6 +152,27 @@ public class Tn2Controller {
         }
 
         return ResponseEntity.ok(jsonArray.toString());
+    }
+
+    @ApiOperation(value = "create linkmng", notes = "링크관리 생성")
+    @PostMapping(value = "/linkmng")
+    @ResponseBody
+    public void createLinkmng() {
+
+    }
+
+    @ApiOperation(value = "update linkmng", notes = "링크관리 수정")
+    @PatchMapping(value = "/linkmng")
+    @ResponseBody
+    public void updateLinkmng() {
+
+    }
+
+    @ApiOperation(value = "delete linkmng", notes = "링크관리 삭제")
+    @DeleteMapping(value = "/linkmng")
+    @ResponseBody
+    public void deleteLinkmng() {
+
     }
 
     @ApiOperation(value = "get trunk usage", notes = "전체 trunk 사용률 조회")
@@ -186,6 +225,29 @@ public class Tn2Controller {
 
         return ResponseEntity.ok(jsonArray.toString());
     }
+
+    @ApiOperation(value = "create stats inventory", notes = "Inventory 정보 생성")
+    @PostMapping(value = "/stats/inventory")
+    @ResponseBody
+    public void createStatsInventory() {
+
+    }
+
+    @ApiOperation(value = "update stats inventory", notes = "Inventory 정보 수정")
+    @PatchMapping(value = "/stats/inventory")
+    @ResponseBody
+    public void updateStatsInventory() {
+
+    }
+
+    @ApiOperation(value = "delete stats inventory", notes = "Inventory 정보 삭제")
+    @DeleteMapping(value = "/stats/inventory")
+    @ResponseBody
+    public void deleteStatsInventory() {
+
+    }
+
+
 
     @ApiOperation(value = "get stats node", notes = "전체 otn node 사용현황 조회")
     @GetMapping(value = "/stats/node/list")
