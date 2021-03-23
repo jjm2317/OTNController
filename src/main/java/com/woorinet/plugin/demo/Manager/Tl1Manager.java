@@ -167,38 +167,37 @@ public class Tl1Manager {
         socketChannel.configureBlocking(true);
         socketChannel.connect(new InetSocketAddress(ip, port));
     }
-    public void Tl1PmWithFtpSyncStart() throws IOException {
+    public void Tl1PmWithFtpSyncStart() throws Exception {
         try {
+            FTP ftp = FTP.openFTP("woorinet.speedvpn.net", 621, "ftpuser", "ftp-123456");
 
+            String localPath = "./ftp";
+            File localPathFile = new File(localPath);
+
+            localPathFile.mkdirs();
+            ftpDownAllFiles(ftp, localPath);
+
+            rmLocalFtpFolder(localPathFile);
+            ftp.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    private static void ftpConnect() throws Exception {
-        String host = "woorinet.speedvpn.net";
-        int port = 621;
-        String user = "ftpuser";
-        String pass = "ftp-123456";
-        FTP ftp = FTP.openFTP(host, port, user, pass);
-
-        String down_path = "./ftp";
-
-        File deleteFolder = new File(down_path);
-        File[] deleteFolderList = deleteFolder.listFiles();
-        for (int j = 0; deleteFolderList != null &&j < deleteFolderList.length; j++  ) {
-            deleteFolderList[j].delete();
-        }
-        deleteFolder.delete();
-        new File(down_path).mkdirs();
+    private void ftpDownAllFiles(FTP ftp, String localPath) throws Exception {
         ftp.listFiles().forEach(e -> {
             try {
-                ftp.recv(e, new File(down_path + "/" + e));
+                ftp.recv(e, new File(localPath + "/" + e));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
         });
-
-
+    }
+    private void rmLocalFtpFolder(File localPathFile) {
+        File[] deleteFolderList = localPathFile.listFiles();
+        for (int j = 0; deleteFolderList != null &&j < deleteFolderList.length; j++  ) {
+            deleteFolderList[j].delete();
+        }
+        localPathFile.delete();
     }
     public void TL1SyncStart() throws IOException {
         try {
