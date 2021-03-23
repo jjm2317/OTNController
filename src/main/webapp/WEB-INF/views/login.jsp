@@ -124,7 +124,7 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<input type="submit" value="login" class="login100-form-btn">
+						<input type="submit" value="login & Get Token" class="login100-form-btn">
 					</div>
 
 					<div class="text-center p-t-12">
