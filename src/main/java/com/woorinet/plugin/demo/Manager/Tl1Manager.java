@@ -66,11 +66,15 @@ public class Tl1Manager {
     Tl1CmProgramInfoRepository tl1CmProgramInfoRepository;
 
     SocketChannel socketChannel;
-    List<Tl1AccessIf> Tl1AccessIfs;
-    List<Tl1OduMplsIf> tl1OduMplsIfs;
 
-    HashMap<String, Tl1AccessIf> accessIfHashMap = new HashMap<>();
-    HashMap<String, Tl1OduMplsIf> odu_mpls_ifHashMap = new HashMap<>();
+    List<String> pmPwFilepathList;
+    List<String> pmTunnelFilepathList;
+    List<String> pmTemperatureFilepathList;
+    List<String> pmAcFilepathList;
+    List<String> pmOpticFilepathList;
+    List<String> pmFilepathList;
+    List<String> pmPortFilepathList;
+    List<String> pmOpticTemperatureFilepathList;
 
     public Tl1Manager(int CTAG,
                       String ip,
@@ -166,16 +170,39 @@ public class Tl1Manager {
         socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(true);
         socketChannel.connect(new InetSocketAddress(ip, port));
+
+        this.pmPwFilepathList = new ArrayList<>();
+        this.pmTunnelFilepathList  = new ArrayList<>();
+        this.pmTemperatureFilepathList  = new ArrayList<>();
+        this.pmAcFilepathList  = new ArrayList<>();
+        this.pmOpticFilepathList  = new ArrayList<>();
+        this.pmFilepathList  = new ArrayList<>();
+        this.pmPortFilepathList  = new ArrayList<>();
+        this.pmOpticTemperatureFilepathList  = new ArrayList<>();
     }
     public void Tl1PmWithFtpSyncStart() throws Exception {
         try {
-            FTP ftp = FTP.openFTP("woorinet.speedvpn.net", 621, "ftpuser", "ftp-123456");
+            String host = "woorinet.speedvpn.net";
+            int port = 621;
+            String user = "ftpuser";
+            String pass = "ftp-123456";
+            FTP ftp = FTP.openFTP(host, port, user, pass);
 
             String localPath = "./ftp";
             File localPathFile = new File(localPath);
 
+
             localPathFile.mkdirs();
             ftpDownAllFiles(ftp, localPath);
+
+            Tl1SyncPmPw();
+            Tl1SyncPmTunnel();
+            Tl1SyncPmTemperature();
+            Tl1SyncPmAc();
+            Tl1SyncPmOptic();
+            Tl1SyncPm();
+            Tl1SyncPmPort();
+            Tl1SyncPmOpticTemperature();
 
             rmLocalFtpFolder(localPathFile);
             ftp.close();
@@ -183,10 +210,121 @@ public class Tl1Manager {
             e.printStackTrace();
         }
     }
+    private void Tl1SyncPmPw() throws Exception {
+        pmPwFilepathList.forEach(e->{
+            System.out.println(e);
+        });
+        /*
+        for (Tl1Node tl1Node : tl1NodeList) {
+            String cmd = "RTRV-PM-PW:" + tl1Node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                System.out.println(fields);
+                pmPwRepository.save(new Tl1PmPw(fields));
+            }
+        }
+        */
+    }
+    private void Tl1SyncPmTunnel() throws Exception {
+        pmTunnelFilepathList.forEach(e-> {
+            System.out.println(e);
+        });
+        /*
+        for (Tl1Node tl1Node : tl1NodeList) {
+            String cmd = "RTRV-PM-TUNNEL:" + tl1Node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
+            ArrayList<String[]> fieldList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldList) {
+                System.out.println(fields);
+                tl1PmTunnelRepository.save(new Tl1PmTunnel(fields));
+            }
+        }
+        */
+    }
+    private void Tl1SyncPmTemperature() throws Exception {
+        pmTemperatureFilepathList.forEach(e-> {
+            System.out.println(e);
+        });
+    }
+    private void Tl1SyncPmAc() throws Exception {
+        pmAcFilepathList.forEach(e->{
+            System.out.println(e);
+        });
+        /*
+        for (Tl1MplsAc mplsAc : tl1MplsAcList) {
+            String cmd = "RTRV-PM-AC:" + mplsAc.getTID() + "::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields : fieldsList) {
+                System.out.println(fields);
+                tl1PmAcRepository.save(new Tl1PmAc(fields));
+            }
+        }
+        */
+    }
+    private void Tl1SyncPmOptic() throws Exception {
+        pmOpticFilepathList.forEach(e-> {
+            System.out.println(e);
+        });
+    }
+    private void Tl1SyncPm() throws Exception {
+        pmFilepathList.forEach(e-> {
+            System.out.println(e);
+        });
+        /*
+        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
+            String TID = tl1OduNodeConnector.getTID();
+            String AID = tl1OduNodeConnector.getAID();
+            String SIGNAL = getMITypeByTID(tl1OduMplsIfList, TID);
+            String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
+
+            ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                tl1PmRepository.save(new Tl1Pm(fields));
+            }
+        }
+        */
+    }
+    private void Tl1SyncPmPort() throws Exception {
+        pmPortFilepathList.forEach(e-> {
+            System.out.println(e);
+        });
+        /*
+        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
+            String cmd = "RTRV-PM-PORT:" + tl1OduNodeConnector.getTID() +":" + tl1OduNodeConnector.getAID() +":"+ CTAG +":pm-time=15MIN;";
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                tl1PmPortRepository.save(new Tl1PmPort(fields));
+            }
+        }
+        */
+    }
+    private void Tl1SyncPmOpticTemperature() throws Exception {
+        pmOpticTemperatureFilepathList.forEach(e-> {
+            System.out.println(e);
+        });
+    }
     private void ftpDownAllFiles(FTP ftp, String localPath) throws Exception {
         ftp.listFiles().forEach(e -> {
             try {
-                ftp.recv(e, new File(localPath + "/" + e));
+                String pathName = localPath + "/" + e;
+                ftp.recv(e, new File(pathName));
+                String []splitDataList = e.split("_");
+                String tableName = "";
+                for(String splitData : splitDataList) {
+                    if( '0' <=splitData.charAt(0) &&splitData.charAt(0) <='9') break;
+                    else tableName += splitData + "_";
+                }
+                tableName = tableName.replaceFirst(".$",""); // 마지막 문자 '_' 제거
+
+                if(tableName.equals("PM_PW")) pmPwFilepathList.add(pathName);
+                else if(tableName.equals("PM_TUNNEL")) pmTunnelFilepathList.add(pathName);
+                else if(tableName.equals("PM_TEMPERATURE")) pmTemperatureFilepathList.add(pathName);
+                else if(tableName.equals("PM_AC")) pmAcFilepathList.add(pathName);
+                else if(tableName.equals("PM_OPTIC")) pmOpticFilepathList.add(pathName);
+                else if(tableName.equals("PM")) pmFilepathList.add(pathName);
+                else if(tableName.equals("PM_PORT")) pmPortFilepathList.add(pathName);
+                else if(tableName.equals("PM_OPTIC_TEMPERATURE")) pmOpticTemperatureFilepathList.add(pathName);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -567,70 +705,6 @@ public class Tl1Manager {
             }
         }
     }
-
-    public void TL1SyncPM() throws Exception {
-        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
-            String TID = tl1OduNodeConnector.getTID();
-            String AID = tl1OduNodeConnector.getAID();
-            String SIGNAL = getMITypeByTID(tl1OduMplsIfList, TID);
-            String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
-
-            ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
-            for (String[] fields: fieldsList) {
-                System.out.println(fields);
-                tl1PmRepository.save(new Tl1Pm(fields));
-            }
-        }
-    }
-
-    public void Tl1SyncPmPort() throws Exception {
-
-        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
-            String cmd = "RTRV-PM-PORT:" + tl1OduNodeConnector.getTID() +":" + tl1OduNodeConnector.getAID() +":"+ CTAG +":pm-time=15MIN;";
-            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields: fieldsList) {
-                System.out.println(fields);
-                tl1PmPortRepository.save(new Tl1PmPort(fields));
-            }
-        }
-    }
-
-    public void TL1SyncPmAc() throws Exception {
-        for (Tl1MplsAc mplsAc : tl1MplsAcList) {
-            String cmd = "RTRV-PM-AC:" + mplsAc.getTID() + "::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
-            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields : fieldsList) {
-                System.out.println(fields);
-                tl1PmAcRepository.save(new Tl1PmAc(fields));
-            }
-        }
-
-    }
-
-    public void TL1SyncPmPw() throws Exception {
-        for (Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-PM-PW:" + tl1Node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
-            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields : fieldsList) {
-                System.out.println(fields);
-                pmPwRepository.save(new Tl1PmPw(fields));
-            }
-        }
-
-    }
-
-    public void TL1SyncPmTunnel() throws Exception {
-        for (Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-PM-TUNNEL:" + tl1Node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
-            ArrayList<String[]> fieldList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields : fieldList) {
-                System.out.println(fields);
-                tl1PmTunnelRepository.save(new Tl1PmTunnel(fields));
-            }
-        }
-
-    }
-
     public void TL1SyncInventory() throws  Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
             String cmd = "RTRV-INVENTORY:" + tl1Node.getTID() +";";

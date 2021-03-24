@@ -172,7 +172,7 @@ public class SyncController {
                     tl1CryptoModeRepository,
                     tl1CmProgramInfoRepository);
             manager.Tl1PmWithFtpSyncStart();
-            manager.TL1SyncStart();
+           //manager.TL1SyncStart();
             manager.close();
         } catch (Exception e) {
             e.printStackTrace();
