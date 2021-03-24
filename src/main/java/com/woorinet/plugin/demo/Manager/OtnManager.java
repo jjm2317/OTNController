@@ -355,8 +355,8 @@ public class OtnManager {
                         dstOtnNode.getNeId(), // dst_ne_id
                         dstOtnNode.getNeName(), // dst_ne_name
                         dstOtnConnector.getConnectId(), // dst_node_connector_id
-                        tl1OduNodeConnector.getPORT_TYPE(), // link_type
-                        tl1OduMplsIf.getOPERATION_STATUS(), // link_status
+                        tl1OduMplsIf.getLINK_TYPE(), // link_type
+                        tl1OduMplsIf.getPORT_CONSTRAINT_TYPE(), // link_status
                         "", // link_category
                         "", // high_order_tunnel
                         "", // latency
