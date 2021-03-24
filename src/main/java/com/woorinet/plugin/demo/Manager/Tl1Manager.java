@@ -218,16 +218,6 @@ public class Tl1Manager {
         pmPwFilepathList.forEach(e->{
             System.out.println(e);
         });
-        /*
-        for (Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-PM-PW:" + tl1Node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
-            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields : fieldsList) {
-                System.out.println(fields);
-                pmPwRepository.save(new Tl1PmPw(fields));
-            }
-        }
-        */
     }
     private void Tl1SyncPmTunnel() throws Exception {
         pmTunnelFilepathList.forEach(e-> {
