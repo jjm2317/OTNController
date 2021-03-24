@@ -64,6 +64,7 @@ public class Tl1Manager {
     Tl1BypassInfoRepository tl1BypassInfoRepository;
     Tl1CryptoModeRepository tl1CryptoModeRepository;
     Tl1CmProgramInfoRepository tl1CmProgramInfoRepository;
+    Tl1QkdInfoRepository tl1QkdInfoRepository;
 
     SocketChannel socketChannel;
 
@@ -117,7 +118,9 @@ public class Tl1Manager {
                       Tl1CmPortRepository tl1CmPortRepository,
                       Tl1BypassInfoRepository tl1BypassInfoRepository,
                       Tl1CryptoModeRepository tl1CryptoModeRepository,
-                      Tl1CmProgramInfoRepository tl1CmProgramInfoRepository) throws IOException {
+                      Tl1CmProgramInfoRepository tl1CmProgramInfoRepository,
+                      Tl1QkdInfoRepository tl1QkdInfoRepository
+                      ) throws IOException {
         this.CTAG = CTAG;
         this.tl1NodeList = new ArrayList<>();
         this.serviceList = new ArrayList<>();
@@ -166,6 +169,7 @@ public class Tl1Manager {
         this.tl1BypassInfoRepository = tl1BypassInfoRepository;
         this.tl1CryptoModeRepository = tl1CryptoModeRepository;
         this.tl1CmProgramInfoRepository = tl1CmProgramInfoRepository;
+        this.tl1QkdInfoRepository = tl1QkdInfoRepository;
 
         socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(true);
@@ -411,6 +415,8 @@ public class Tl1Manager {
             TL1SyncCryptoMode();
             //CM_PROGRAM_INFO DB연동
             TL1SyncCmProgramInfo();
+            // QKD_INFO DB연동
+            TL1SyncQkdInfo();
             //TL1 로그아웃
             Tl1Logout("admin");
         } catch (Exception e) {
@@ -818,6 +824,21 @@ public class Tl1Manager {
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
                 tl1CmProgramInfoRepository.save(new Tl1CmProgramInfo(fields));
+            }
+        }
+    }
+
+    public void TL1SyncQkdInfo() throws Exception {
+        for (Tl1Node tl1Node : tl1NodeList) {
+            if(!tl1Node.getNODE_TYPE().equals("otn")) continue;
+            String TID = tl1Node.getTID();
+            String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
+            String cmd = "RTRV-QKD-INFO:" + TID + ":" + SLOT_INDEX + ";";
+
+            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
+            for (String[] fields: fieldsList) {
+                System.out.println(fields);
+                tl1QkdInfoRepository.save(new Tl1QkdInfo(fields));
             }
         }
     }
