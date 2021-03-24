@@ -8,9 +8,9 @@ import com.woorinet.plugin.demo.Manager.PortalManager;
 import com.woorinet.plugin.demo.Manager.QkdManager;
 import com.woorinet.plugin.demo.Manager.Tl1Manager;
 import com.woorinet.plugin.demo.Repository.OTN.*;
-import com.woorinet.plugin.demo.Repository.TN2.*;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
+import com.woorinet.plugin.demo.Repository.TN2.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -99,6 +99,8 @@ public class SyncController {
     private Tl1CryptoModeRepository tl1CryptoModeRepository;
     @Autowired
     private Tl1CmProgramInfoRepository tl1CmProgramInfoRepository;
+    @Autowired
+    private Tl1QkdInfoRepository tl1QkdInfoRepository;
 
     @Autowired
     private OtnNodeRepository otnNodeRepository;
@@ -170,9 +172,10 @@ public class SyncController {
                     tl1CmPortRepository,
                     tl1BypassInfoRepository,
                     tl1CryptoModeRepository,
-                    tl1CmProgramInfoRepository);
-            manager.Tl1PmWithFtpSyncStart();
-           //manager.TL1SyncStart();
+                    tl1CmProgramInfoRepository,
+                    tl1QkdInfoRepository);
+            //manager.Tl1PmWithFtpSyncStart();
+            manager.TL1SyncStart();
             manager.close();
         } catch (Exception e) {
             e.printStackTrace();
