@@ -4,8 +4,7 @@ import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import me.saro.commons.ftp.FTP;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
@@ -220,19 +219,17 @@ public class Tl1Manager {
         });
     }
     private void Tl1SyncPmTunnel() throws Exception {
+        tl1PmTunnelRepository.deleteAll();
         pmTunnelFilepathList.forEach(e-> {
-            System.out.println(e);
-        });
-        /*
-        for (Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-PM-TUNNEL:" + tl1Node.getTID() + "::" + CTAG + ":pm-time=15MIN;";
-            ArrayList<String[]> fieldList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields : fieldList) {
-                System.out.println(fields);
-                tl1PmTunnelRepository.save(new Tl1PmTunnel(fields));
+            try {
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmTunnelRepository.save(new Tl1PmTunnel(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
-        }
-        */
+        });
     }
     private void Tl1SyncPmTemperature() throws Exception {
         pmTemperatureFilepathList.forEach(e-> {
@@ -981,6 +978,26 @@ public class Tl1Manager {
         }
 
         return result;
+    }
+
+    private ArrayList<String[]> convertTxtFileResponse(String filePathName) throws Exception {
+        File file = new File(filePathName);
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufReader = new BufferedReader(fileReader);
+        ArrayList<String[]> fieldsList = new ArrayList<>();
+
+        String line = "";
+        while((line = bufReader.readLine()) != null){
+            if(line.contains("/*") || line.contains("*/") || line.equals("")) continue;
+            String []fields = line.split("\\|");
+
+            for(int i=0; i< fields.length ;i++) fields[i] = fields[i].trim();
+
+            fieldsList.add(fields);
+        }
+        bufReader.close();
+
+        return fieldsList;
     }
 
     public void close() throws IOException {

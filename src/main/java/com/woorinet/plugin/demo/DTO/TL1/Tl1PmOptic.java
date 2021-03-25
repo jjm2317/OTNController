@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -13,6 +15,8 @@ import javax.persistence.Table;
 @Setter
 @Table(name = "tl1_pm_optic")
 public class Tl1PmOptic {
+    @Id
+    @GeneratedValue
     int pmOpticId;
     String tid;
     String systemType;
