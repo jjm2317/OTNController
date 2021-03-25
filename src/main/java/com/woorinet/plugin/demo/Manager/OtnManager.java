@@ -411,12 +411,12 @@ public class OtnManager {
                         srcOtnNode.getNeId(), // src_ne_id
                         srcOtnNode.getNeName(), // src_ne_name
                         srcOtnConnector.getConnectId(), // src_connect_id
-                        tl1OduHead.getSERVICE(), // src_accessif_type
+                        tl1OduHead.getEMS_SERVICE() + "," + tl1OduHead.getEMS_SERVICE_SIG(), // src_accessif_type
                         dstOtnNode.getNeId(), // dst_ne_id
                         dstOtnNode.getNeName(), // dst_ne_name
                         dstOtnConnector.getConnectId(), // dst_connect_id
-                        tl1OduTail.getSERVICE(), // dst_accessif_type
-                        "", // service_type
+                        tl1OduTail.getEMS_SERVICE() + "," + tl1OduTail.getEMS_SERVICE_SIG(), // dst_accessif_type
+                        tl1OduHead.getTYPE(), // service_type
                         tl1OduHead.getNAME(), // service_name
                         "", // network_type
                         "", // service_status
