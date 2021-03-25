@@ -74,15 +74,21 @@ public class SyncController {
     @Autowired
     private Tl1OpticPowerRepository tl1OpticPowerRepository;
     @Autowired
+    private Tl1PmPwRepository tl1PmPwRepository;
+    @Autowired
+    private Tl1PmTunnelRepository tl1PmTunnelRepository;
+    @Autowired
+    private Tl1PmTemperatureRepository tl1PmTemperatureRepository;
+    @Autowired
+    private Tl1PmAcRepository tl1PmAcRepository;
+    @Autowired
+    private Tl1PmOpticRepository tl1PmOpticRepository;
+    @Autowired
     private Tl1PmRepository tl1PmRepository;
     @Autowired
     private Tl1PmPortRepository tl1PmPortRepository;
     @Autowired
-    private Tl1PmAcRepository tl1PmAcRepository;
-    @Autowired
-    private Tl1PmPwRepository tl1PmPwRepository;
-    @Autowired
-    private Tl1PmTunnelRepository tl1PmTunnelRepository;
+    private Tl1PmOpticTemperatureRepository tl1PmOpticTemperatureRepository;
     @Autowired
     private Tl1InventoryRepository tl1InventoryRepository;
     @Autowired
@@ -160,11 +166,14 @@ public class SyncController {
                     tl1CesPwRepository,
                     tl1L2LacpRepository,
                     tl1OpticPowerRepository,
-                    tl1PmRepository,
-                    tl1PmPortRepository,
-                    tl1PmAcRepository,
                     tl1PmPwRepository,
                     tl1PmTunnelRepository,
+                    tl1PmTemperatureRepository,
+                    tl1PmAcRepository,
+                    tl1PmOpticRepository,
+                    tl1PmRepository,
+                    tl1PmPortRepository,
+                    tl1PmOpticTemperatureRepository,
                     tl1InventoryRepository,
                     tl1SessStateRepository,
                     tl1KeyStateRepository,

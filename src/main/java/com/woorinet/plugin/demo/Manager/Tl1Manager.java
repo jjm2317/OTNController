@@ -50,11 +50,14 @@ public class Tl1Manager {
     Tl1CesPwRepository tl1CesPwRepository;
     Tl1L2LacpRepository tl1L2LacpRepository;
     Tl1OpticPowerRepository tl1OpticPowerRepository;
+    Tl1PmPwRepository tl1PmPwRepository;
+    Tl1PmTunnelRepository tl1PmTunnelRepository;
+    Tl1PmTemperatureRepository tl1PmTemperatureRepository;
+    Tl1PmAcRepository tl1PmAcRepository;
+    Tl1PmOpticRepository tl1PmOpticRepository;
     Tl1PmRepository tl1PmRepository;
     Tl1PmPortRepository tl1PmPortRepository;
-    Tl1PmAcRepository tl1PmAcRepository;
-    Tl1PmPwRepository pmPwRepository;
-    Tl1PmTunnelRepository tl1PmTunnelRepository;
+    Tl1PmOpticTemperatureRepository tl1PmOpticTemperatureRepository;
     Tl1InventoryRepository tl1InventoryRepository;
     Tl1SessStateRepository tl1SessStateRepository;
     Tl1KeyStateRepository tl1KeyStateRepository;
@@ -105,11 +108,14 @@ public class Tl1Manager {
                       Tl1CesPwRepository tl1CesPwRepository,
                       Tl1L2LacpRepository tl1L2LacpRepository,
                       Tl1OpticPowerRepository tl1OpticPowerRepository,
+                      Tl1PmPwRepository tl1PmPwRepository,
+                      Tl1PmTunnelRepository tl1PmTunnelRepository,
+                      Tl1PmTemperatureRepository tl1PmTemperatureRepository,
+                      Tl1PmAcRepository tl1PmAcRepository,
+                      Tl1PmOpticRepository tl1PmOpticRepository,
                       Tl1PmRepository tl1PmRepository,
                       Tl1PmPortRepository tl1PmPortRepository,
-                      Tl1PmAcRepository tl1PmAcRepository,
-                      Tl1PmPwRepository pmPwRepository,
-                      Tl1PmTunnelRepository tl1PmTunnelRepository,
+                      Tl1PmOpticTemperatureRepository tl1PmOpticTemperatureRepository,
                       Tl1InventoryRepository tl1InventoryRepository,
                       Tl1SessStateRepository tl1SessStateRepository,
                       Tl1KeyStateRepository tl1KeyStateRepository,
@@ -155,11 +161,14 @@ public class Tl1Manager {
         this.tl1L2LacpRepository = tl1L2LacpRepository;
         this.tl1OpticPowerRepository = tl1OpticPowerRepository;
 
-        this.tl1PmRepository = tl1PmRepository;
-        this.tl1PmPortRepository = tl1PmPortRepository;
-        this.tl1PmAcRepository = tl1PmAcRepository;
-        this.pmPwRepository = pmPwRepository;
+        this.tl1PmPwRepository = tl1PmPwRepository;
         this.tl1PmTunnelRepository = tl1PmTunnelRepository;
+        this.tl1PmTemperatureRepository = tl1PmTemperatureRepository;
+        this.tl1PmAcRepository = tl1PmAcRepository;
+        this.tl1PmOpticRepository = tl1PmOpticRepository;
+        this.tl1PmRepository =tl1PmRepository;
+        this.tl1PmPortRepository = tl1PmPortRepository;
+        this.tl1PmOpticTemperatureRepository = tl1PmOpticTemperatureRepository;
         this.tl1InventoryRepository = tl1InventoryRepository;
         this.tl1SessStateRepository = tl1SessStateRepository;
         this.tl1KeyStateRepository = tl1KeyStateRepository;
@@ -214,8 +223,16 @@ public class Tl1Manager {
         }
     }
     private void Tl1SyncPmPw() throws Exception {
+        tl1PmPwRepository.deleteAll();
         pmPwFilepathList.forEach(e->{
-            System.out.println(e);
+            try {
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmPwRepository.save(new Tl1PmPw(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
     }
     private void Tl1SyncPmTunnel() throws Exception {
