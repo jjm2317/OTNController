@@ -356,7 +356,7 @@ public class OtnManager {
                         dstOtnNode.getNeName(), // dst_ne_name
                         dstOtnConnector.getConnectId(), // dst_node_connector_id
                         tl1OduMplsIf.getLINK_TYPE(), // link_type
-                        tl1OduMplsIf.getPORT_CONSTRAINT_TYPE(), // link_status
+                        tl1OduNodeConnector.getPORT_STATUS(), // link_status
                         "", // link_category
                         "", // high_order_tunnel
                         "", // latency
@@ -411,12 +411,12 @@ public class OtnManager {
                         srcOtnNode.getNeId(), // src_ne_id
                         srcOtnNode.getNeName(), // src_ne_name
                         srcOtnConnector.getConnectId(), // src_connect_id
-                        tl1OduHead.getSERVICE(), // src_accessif_type
+                        tl1OduHead.getEMS_SERVICE() + "," + tl1OduHead.getEMS_SERVICE_SIG(), // src_accessif_type
                         dstOtnNode.getNeId(), // dst_ne_id
                         dstOtnNode.getNeName(), // dst_ne_name
                         dstOtnConnector.getConnectId(), // dst_connect_id
-                        tl1OduTail.getSERVICE(), // dst_accessif_type
-                        "", // service_type
+                        tl1OduTail.getEMS_SERVICE() + "," + tl1OduTail.getEMS_SERVICE_SIG(), // dst_accessif_type
+                        tl1OduHead.getTYPE(), // service_type
                         tl1OduHead.getNAME(), // service_name
                         "", // network_type
                         "", // service_status
