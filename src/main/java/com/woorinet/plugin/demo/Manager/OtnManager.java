@@ -699,7 +699,7 @@ public class OtnManager {
         Stream<OtnPmPort> sdnPmPortStream = tl1PmPortList.stream()
         .map(tl1PmPort -> {
             OtnPmPort otnPmPort = new OtnPmPort();
-
+            /*
             otnPmPort.setTid(tl1PmPort.getTID());
             otnPmPort.setAid(tl1PmPort.getAID());
             otnPmPort.setUnit(tl1PmPort.getUNIT());
@@ -726,7 +726,7 @@ public class OtnManager {
             otnPmPort.setOutRate(tl1PmPort.getOUT_RATE());
             otnPmPort.setInLossRatio(tl1PmPort.getIN_LOSS_RATIO());
             otnPmPort.setOutLossRatio(tl1PmPort.getOUT_LOSS_RATIO());
-
+                */
             return otnPmPort;
         });
 
