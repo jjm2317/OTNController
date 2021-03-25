@@ -18,66 +18,76 @@ public class Tl1Pm {
     /* TID,AID,UNIT-TYPE,SIGNAL,INTERVAL,PM-TYPE,BIP,ES,SES,UAS,BEI */
     @Id
     @GeneratedValue
-    int PM_ID;
-    String TID;
-    String AID;
-    String UNIT_TYPE;
-    String SIGNAL;
-    String INTERVAL;
-    String PM_TYPE;
-    String BIP;
-    String ES;
-    String SES;
-    String UAS;
-    String BEI;
-
+    int pmId;
+    String tid;
+    String systemType;
+    String slot;
+    String port;
+    String signal;
+    String time;
+    String inErrorPackets;
+    String es;
+    String ses;
+    String uas;
+    String inDiscardPackets;
+    String outErrorPackets;
+    String outDiscardPackets;
+    String date;
 
     public Tl1Pm() {
     }
 
-    public Tl1Pm(String TID, String AID, String UNIT_TYPE, String SIGNAL, String INTERVAL, String PM_TYPE, String BIP, String ES, String SES, String UAS, String BEI) {
-        this.TID = TID;
-        this.AID = AID;
-        this.UNIT_TYPE = UNIT_TYPE;
-        this.SIGNAL = SIGNAL;
-        this.INTERVAL = INTERVAL;
-        this.PM_TYPE = PM_TYPE;
-        this.BIP = BIP;
-        this.ES = ES;
-        this.SES = SES;
-        this.UAS = UAS;
-        this.BEI = BEI;
+    public Tl1Pm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date) {
+        this.tid = tid;
+        this.systemType = systemType;
+        this.slot = slot;
+        this.port = port;
+        this.signal = signal;
+        this.time = time;
+        this.inErrorPackets = inErrorPackets;
+        this.es = es;
+        this.ses = ses;
+        this.uas = uas;
+        this.inDiscardPackets = inDiscardPackets;
+        this.outErrorPackets = outErrorPackets;
+        this.outDiscardPackets = outDiscardPackets;
+        this.date = date;
     }
 
     public Tl1Pm(String[] fields) {
-        this.TID = fields[0];
-        this.AID = fields[1];
-        this.UNIT_TYPE = fields[2];
-        this.SIGNAL = fields[3];
-        this.INTERVAL = fields[4];
-        this.PM_TYPE = fields[5];
-        this.BIP = fields[6];
-        this.ES = fields[7];
-        this.SES = fields[8];
-        this.UAS = fields[9];
-        this.BEI = fields[10];
+        this.tid = fields[0];
+        this.systemType = fields[1];
+        this.slot = fields[2];
+        this.port  = fields[3];
+        this.signal = fields[4];
+        this.time = fields[5];
+        this.inErrorPackets = fields[6];
+        this.es = fields[7];
+        this.ses = fields[8];
+        this.uas = fields[9];
+        this.inDiscardPackets  = fields[10];
+        this.outErrorPackets = fields[11];
+        this.outDiscardPackets = fields[12];
+        this.date = fields[13];
     }
 
     @Override
     public String toString() {
-        return "PM{" +
-                "PM_ID='" + PM_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", AID='" + AID + '\'' +
-                ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
-                ", SIGNAL='" + SIGNAL + '\'' +
-                ", INTERVAL='" + INTERVAL + '\'' +
-                ", PM_TYPE='" + PM_TYPE + '\'' +
-                ", BIP='" + BIP + '\'' +
-                ", ES='" + ES + '\'' +
-                ", SES='" + SES + '\'' +
-                ", UAS='" + UAS + '\'' +
-                ", BEI='" + BEI + '\'' +
+        return "Tl1Pm{" +
+                "tid='" + tid + '\'' +
+                ", systemType='" + systemType + '\'' +
+                ", slot='" + slot + '\'' +
+                ", port='" + port + '\'' +
+                ", signal='" + signal + '\'' +
+                ", time='" + time + '\'' +
+                ", inErrorPackets='" + inErrorPackets + '\'' +
+                ", es='" + es + '\'' +
+                ", ses='" + ses + '\'' +
+                ", uas='" + uas + '\'' +
+                ", inDiscardPackets='" + inDiscardPackets + '\'' +
+                ", outErrorPackets='" + outErrorPackets + '\'' +
+                ", outDiscardPackets='" + outDiscardPackets + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }
