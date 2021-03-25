@@ -18,70 +18,73 @@ import javax.persistence.Table;
 public class Tl1PmAc {
     @Id
     @GeneratedValue
-    int PM_AC_ID;
-    String TID;
-    String SERVICE_NAME;
-    String AC_ID;
-    String TYPE;
-    String DATE;
-    String TIME;
-    String ING_PKT;
-    String ING_BYTE;
-    String ING_RATE;
-    String EGR_PKT;
-    String EGR_BYTE;
-    String EGR_RATE;
+    int pmAcId;
+    String tid;
+    String systemType;
+    String slot;
+    String port;
+    String time;
+    String name;
+    String ingPackets;
+    String ingBytes;
+    String ingRate;
+    String egrPackets;
+    String egrBytes;
+    String egrRate;
+    String date;
+
 
     public Tl1PmAc() {
     }
 
-    public Tl1PmAc(String TID, String SERVICE_NAME, String AC_ID, String TYPE, String DATE, String TIME, String ING_PKT, String ING_BYTE, String ING_RATE, String EGR_PKT, String EGR_BYTE, String EGR_RATE) {
-        this.TID = TID;
-        this.SERVICE_NAME = SERVICE_NAME;
-        this.AC_ID = AC_ID;
-        this.TYPE = TYPE;
-        this.DATE = DATE;
-        this.TIME = TIME;
-        this.ING_PKT = ING_PKT;
-        this.ING_BYTE = ING_BYTE;
-        this.ING_RATE = ING_RATE;
-        this.EGR_PKT = EGR_PKT;
-        this.EGR_BYTE = EGR_BYTE;
-        this.EGR_RATE = EGR_RATE;
+    public Tl1PmAc(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
+        this.tid = tid;
+        this.systemType = systemType;
+        this.slot = slot;
+        this.port = port;
+        this.time = time;
+        this.name = name;
+        this.ingPackets = ingPackets;
+        this.ingBytes = ingBytes;
+        this.ingRate = ingRate;
+        this.egrPackets = egrPackets;
+        this.egrBytes = egrBytes;
+        this.egrRate = egrRate;
+        this.date = date;
     }
 
     public Tl1PmAc(String[] fields) {
-        this.TID = fields[0];
-        this.SERVICE_NAME = fields[1];
-        this.AC_ID = fields[2];
-        this.TYPE = fields[3];
-        this.DATE = fields[4];
-        this.TIME = fields[5];
-        this.ING_PKT = fields[6];
-        this.ING_BYTE = fields[7];
-        this.ING_RATE = fields[8];
-        this.EGR_PKT = fields[9];
-        this.EGR_BYTE = fields[10];
-        this.EGR_RATE = fields[11];
+        this.tid = fields[0];
+        this.systemType = fields[1];
+        this.slot = fields[2];
+        this.port = fields[3];
+        this.time = fields[4];
+        this.name = fields[5];
+        this.ingPackets = fields[6];
+        this.ingBytes = fields[7];
+        this.ingRate= fields[8];
+        this.egrPackets = fields[9];
+        this.egrBytes = fields[10];
+        this.egrRate = fields[11];
+        this.date = fields[12];
     }
-
-
 
     @Override
     public String toString() {
-        return "PM_AC{" +
-                "TID='" + TID + '\'' +
-                ", SERVICE_NAME='" + SERVICE_NAME + '\'' +
-                ", AC_ID='" + AC_ID + '\'' +
-                ", TYPE='" + TYPE + '\'' +
-                ", DATE='" + DATE + '\'' +
-                ", TIME='" + TIME + '\'' +
-                ", ING_PKT='" + ING_PKT + '\'' +
-                ", ING_BYTE='" + ING_BYTE + '\'' +
-                ", ING_RATE='" + ING_RATE + '\'' +
-                ", EGR_PKT='" + EGR_PKT + '\'' +
-                ", EGR_BYTE='" + EGR_BYTE + '\'' +
-                ", EGR_RATE='" + EGR_RATE + '\'' +
+        return "Tl1PmAc{" +
+                "tid='" + tid + '\'' +
+                ", systemType='" + systemType + '\'' +
+                ", slot='" + slot + '\'' +
+                ", port='" + port + '\'' +
+                ", time='" + time + '\'' +
+                ", name='" + name + '\'' +
+                ", ingPackets='" + ingPackets + '\'' +
+                ", ingBytes='" + ingBytes + '\'' +
+                ", ingRate='" + ingRate + '\'' +
+                ", egrPackets='" + egrPackets + '\'' +
+                ", egrBytes='" + egrBytes + '\'' +
+                ", egrRate='" + egrRate + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }
