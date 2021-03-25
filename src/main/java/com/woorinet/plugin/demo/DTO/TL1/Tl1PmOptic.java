@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Data
 @Getter
 @Setter
-@Table(name = "tl1_pm_ac")
+@Table(name = "tl1_pm_optic")
 public class Tl1PmOptic {
     int pmOpticId;
     String tid;
