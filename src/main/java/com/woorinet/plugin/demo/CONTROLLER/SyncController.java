@@ -184,7 +184,7 @@ public class SyncController {
                     tl1CmProgramInfoRepository,
                     tl1QkdInfoRepository);
             manager.Tl1PmWithFtpSyncStart();
-            //manager.TL1SyncStart();
+            manager.TL1SyncStart();
             manager.close();
         } catch (Exception e) {
             e.printStackTrace();

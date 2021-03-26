@@ -388,7 +388,7 @@ public class Tl1Manager {
             //STUNNEL_EXT DB연동
             Tl1SyncSTunnelExt();
             //STUNNEL_TRANSIT DB연동
-            Tl1SyncSTunnelTransit();
+            //Tl1SyncSTunnelTransit();
             //TUNNEL_PROT DB연동
             Tl1SyncTunnelProt();
             //SPW DB연동
@@ -523,6 +523,7 @@ public class Tl1Manager {
 
     public void Tl1SyncOduNodeConnector() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
+            if (!tl1Node.getNODE_TYPE().equals("otn")) continue;
             String cmd = "RTRV-ODU-NODE-CONNECTOR:" + tl1Node.getTID() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
