@@ -1,6 +1,7 @@
-package com.woorinet.plugin.demo.DTO.TL1;
+package com.woorinet.plugin.demo.DTO.OTN.PM;
 
-
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +15,9 @@ import javax.persistence.Table;
 @Data
 @Getter
 @Setter
-@Table(name = "tl1_pm_ac")
-public class Tl1PmAc {
+@Table(name = "otn_pm_ac")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class OtnPmAc {
     @Id
     @GeneratedValue
     int pmAcId;
@@ -33,11 +35,10 @@ public class Tl1PmAc {
     String egrRate;
     String date;
 
-
-    public Tl1PmAc() {
+    public OtnPmAc() {
     }
 
-    public Tl1PmAc(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
+    public OtnPmAc(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -53,25 +54,9 @@ public class Tl1PmAc {
         this.date = date;
     }
 
-    public Tl1PmAc(String[] fields) {
-        this.tid = fields[0];
-        this.systemType = fields[1];
-        this.slot = fields[2];
-        this.port = fields[3];
-        this.time = fields[4];
-        this.name = fields[5];
-        this.ingPackets = fields[6];
-        this.ingBytes = fields[7];
-        this.ingRate= fields[8];
-        this.egrPackets = fields[9];
-        this.egrBytes = fields[10];
-        this.egrRate = fields[11];
-        this.date = fields[12];
-    }
-
     @Override
     public String toString() {
-        return "Tl1PmAc{" +
+        return "OtnPmAc{" +
                 "tid='" + tid + '\'' +
                 ", systemType='" + systemType + '\'' +
                 ", slot='" + slot + '\'' +

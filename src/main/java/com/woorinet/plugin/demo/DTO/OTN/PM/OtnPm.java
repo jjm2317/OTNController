@@ -1,5 +1,7 @@
-package com.woorinet.plugin.demo.DTO.TL1;
+package com.woorinet.plugin.demo.DTO.OTN.PM;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,13 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Setter
 @Getter
+@Setter
 @Data
 @Entity
-@Table(name = "tl1_pm")
-public class Tl1Pm {
-    /* TID,AID,UNIT-TYPE,SIGNAL,INTERVAL,PM-TYPE,BIP,ES,SES,UAS,BEI */
+@Table(name="otn_pm")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class OtnPm {
     @Id
     @GeneratedValue
     int pmId;
@@ -34,10 +36,10 @@ public class Tl1Pm {
     String outDiscardPackets;
     String date;
 
-    public Tl1Pm() {
-    }
+    public OtnPm(){
 
-    public Tl1Pm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date) {
+    }
+    public OtnPm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -54,26 +56,9 @@ public class Tl1Pm {
         this.date = date;
     }
 
-    public Tl1Pm(String[] fields) {
-        this.tid = fields[0];
-        this.systemType = fields[1];
-        this.slot = fields[2];
-        this.port  = fields[3];
-        this.signal = fields[4];
-        this.time = fields[5];
-        this.inErrorPackets = fields[6];
-        this.es = fields[7];
-        this.ses = fields[8];
-        this.uas = fields[9];
-        this.inDiscardPackets  = fields[10];
-        this.outErrorPackets = fields[11];
-        this.outDiscardPackets = fields[12];
-        this.date = fields[13];
-    }
-
     @Override
     public String toString() {
-        return "Tl1Pm{" +
+        return "OtnPm{" +
                 "tid='" + tid + '\'' +
                 ", systemType='" + systemType + '\'' +
                 ", slot='" + slot + '\'' +

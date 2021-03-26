@@ -1,11 +1,11 @@
 package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
-import com.woorinet.plugin.demo.DTO.TL1.Tl1AccessIf;
-import com.woorinet.plugin.demo.DTO.TL1.Tl1Node;
-import com.woorinet.plugin.demo.DTO.TL1.Tl1Service;
+import com.woorinet.plugin.demo.DTO.OTN.PM.*;
+import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
+import com.woorinet.plugin.demo.Repository.OTN.PM.*;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -21,7 +21,14 @@ public class OtnManager {
     OtnAccessIfRepository otnAccessIfRepository;
     OtnCryptoModuleRepository otnCryptoModuleRepository;
     OtnCryptoSessionRepository otnCryptoSessionRepository;
+    OtnPmPwRepository otnPmPwRepository;
+    OtnPmTunnelRepository otnPmTunnelRepository;
+    OtnPmTemperatureRepository otnPmTemperatureRepository;
+    OtnPmAcRepository otnPmAcRepository;
+    OtnPmOpticRepository otnPmOpticRepository;
+    OtnPmRepository otnPmRepository;
     OtnPmPortRepository otnPmPortRepository;
+    OtnPmOpticTemperatureRepository otnPmOpticTemperatureRepository;
     OtnCmInventoryRepository otnCmInventoryRepository;
     OtnCmLinkRepository otnCmLinkRepository;
     OtnCmSessionRepository otnCmSessionRepository;
@@ -47,7 +54,14 @@ public class OtnManager {
     List<Tl1CmProgramInfo> tl1CmProgramInfoList;
     List<Tl1SessState> tl1SessStateList;
     List<Tl1KeyState> tl1KeyStateList;
+    List<Tl1PmPw> tl1PmPwList;
+    List<Tl1PmTunnel> tl1PmTunnelList;
+    List<Tl1PmTemperature> tl1PmTemperatureList;
+    List<Tl1PmAc> tl1PmAcList;
+    List<Tl1PmOptic> tl1PmOpticList;
+    List<Tl1Pm> tl1PmList;
     List<Tl1PmPort> tl1PmPortList;
+    List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList;
 
     HashMap<String, Tl1Node> tl1NodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> tl1SystemInfoHashMap = new HashMap<>();
@@ -80,13 +94,22 @@ public class OtnManager {
                       OtnPathRepository otnPathRepository,
                       OtnConstraintRepository otnConstraintRepository,
                       OtnAccessIfRepository otnAccessIfRepository,
-                      OtnCryptoModuleRepository otnCryptoModuleRepository,
-                      OtnCryptoSessionRepository otnCryptoSessionRepository,
+
+                      OtnPmPwRepository otnPmPwRepository,
+                      OtnPmTunnelRepository otnPmTunnelRepository,
+                      OtnPmTemperatureRepository otnPmTemperatureRepository,
+                      OtnPmAcRepository otnPmAcRepository,
+                      OtnPmOpticRepository otnPmOpticRepository,
+                      OtnPmRepository otnPmRepository,
                       OtnPmPortRepository otnPmPortRepository,
+                      OtnPmOpticTemperatureRepository otnPmOpticTemperatureRepository,
                       OtnCmInventoryRepository otnCmInventoryRepository,
                       OtnCmLinkRepository otnCmLinkRepository,
                       OtnCmSessionRepository otnCmSessionRepository,
                       OtnCmQkdLinkRepository otnCmQkdLinkRepository,
+                      OtnCryptoModuleRepository otnCryptoModuleRepository,
+                      OtnCryptoSessionRepository otnCryptoSessionRepository,
+
                       List<Tl1Node> tl1NodeList,
                       List<Tl1SystemInfo> tl1SystemInfoList,
                       List<Tl1OduNodeConnector> tl1OduNodeConnectorList,
@@ -104,7 +127,15 @@ public class OtnManager {
                       List<Tl1CmProgramInfo> tl1CmProgramInfoList,
                       List<Tl1SessState> tl1SessStateList,
                       List<Tl1KeyState> tl1KeyStateList,
-                      List<Tl1PmPort> tl1PmPortList) throws Exception{
+                      List<Tl1PmPw> tl1PmPwList,
+                      List<Tl1PmTunnel> tl1PmTunnelList,
+                      List<Tl1PmTemperature> tl1PmTemperatureList,
+                      List<Tl1PmAc> tl1PmAcList,
+                      List<Tl1PmOptic> tl1PmOpticList,
+                      List<Tl1Pm> tl1PmList,
+                      List<Tl1PmPort> tl1PmPortList,
+                      List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList
+    ) throws Exception{
         this.otnNodeRepository = otnNodeRepository;
         this.otnConnectorRepository = otnConnectorRepository;
         this.otnLinkRepository = otnLinkRepository;
@@ -115,11 +146,19 @@ public class OtnManager {
         this.otnAccessIfRepository = otnAccessIfRepository;
         this.otnCryptoModuleRepository = otnCryptoModuleRepository;
         this.otnCryptoSessionRepository = otnCryptoSessionRepository;
+        this.otnPmPwRepository = otnPmPwRepository;
+        this.otnPmTunnelRepository = otnPmTunnelRepository;
+        this.otnPmTemperatureRepository = otnPmTemperatureRepository;
+        this.otnPmAcRepository = otnPmAcRepository;
+        this.otnPmOpticRepository = otnPmOpticRepository;
+        this.otnPmRepository = otnPmRepository;
         this.otnPmPortRepository = otnPmPortRepository;
+        this.otnPmOpticTemperatureRepository = otnPmOpticTemperatureRepository;
         this.otnCmInventoryRepository = otnCmInventoryRepository;
         this.otnCmLinkRepository = otnCmLinkRepository;
         this.otnCmSessionRepository = otnCmSessionRepository;
         this.otnCmQkdLinkRepository = otnCmQkdLinkRepository;
+
 
         this.separator = ".";
         this.tl1NodeList = tl1NodeList;
@@ -139,7 +178,14 @@ public class OtnManager {
         this.tl1CmProgramInfoList = tl1CmProgramInfoList;
         this.tl1SessStateList = tl1SessStateList;
         this.tl1KeyStateList = tl1KeyStateList;
+        this.tl1PmPwList = tl1PmPwList;
+        this.tl1PmTunnelList = tl1PmTunnelList;
+        this.tl1PmTemperatureList = tl1PmTemperatureList;
+        this.tl1PmAcList = tl1PmAcList;
+        this.tl1PmOpticList = tl1PmOpticList;
+        this.tl1PmList = tl1PmList;
         this.tl1PmPortList = tl1PmPortList;
+        this.tl1PmOpticTemperatureList = tl1PmOpticTemperatureList;
 
         makeHashMap();
     }
@@ -224,6 +270,14 @@ public class OtnManager {
     }
 
     public void OtnSyncStart() throws Exception {
+        OTNSyncPmPw();
+        OTNSyncPmTunnel();
+        OTNSyncPmTemperature();
+        OTNSyncPmAc();
+        OTNSyncPmOptic();
+        OTNSyncPm();
+        OTNSyncPmPort();
+        OTNSyncPmOpticTemperature();
         // Node 데이터 업데이트
         OtnSyncNodeList();
         // Connector 데이터 업데이트
@@ -244,8 +298,6 @@ public class OtnManager {
         OtnSyncCryptoModule();
         // CryptoSession 데이터 업데이트
         OtnSyncCryptoSession();
-        // PmPort 데이터 업데이트
-        OtnSyncPmPort();
     }
 
     private void OtnSyncNodeList() throws Exception {
@@ -705,43 +757,192 @@ public class OtnManager {
         sdnCryptoSessionStream.forEach(otnCryptoSessionRepository::save);
     }
 
-    public void OtnSyncPmPort() throws Exception {
+    public void OTNSyncPmPw() throws Exception {
+        Stream<OtnPmPw> otnPmPwStream = tl1PmPwList.stream()
+            .map(tl1PmPw -> {
+               OtnPmPw otnPmPw = new OtnPmPw(
+                       tl1PmPw.getTid(),
+                       tl1PmPw.getSystemType(),
+                       tl1PmPw.getSlot(),
+                       tl1PmPw.getPort(),
+                       tl1PmPw.getTime(),
+                       tl1PmPw.getName(),
+                       tl1PmPw.getIngPackets(),
+                       tl1PmPw.getIngBytes(),
+                       tl1PmPw.getIngRate(),
+                       tl1PmPw.getEgrPackets(),
+                       tl1PmPw.getEgrBytes(),
+                       tl1PmPw.getEgrRate(),
+                       tl1PmPw.getDate()
+               );
+               return otnPmPw;
+            });
+        otnPmPwStream.forEach(otnPmPwRepository::save);
+    }
+
+    public void OTNSyncPmTunnel() throws Exception {
+        Stream<OtnPmTunnel> otnPmTunnelStream = tl1PmTunnelList.stream()
+            .map(tl1PmTunnel -> {
+               OtnPmTunnel otnPmTunnel = new OtnPmTunnel(
+                       tl1PmTunnel.getTid(),
+                       tl1PmTunnel.getSystemType(),
+                       tl1PmTunnel.getSlot(),
+                       tl1PmTunnel.getPort(),
+                       tl1PmTunnel.getTime(),
+                       tl1PmTunnel.getName(),
+                       tl1PmTunnel.getIngPackets(),
+                       tl1PmTunnel.getIngBytes(),
+                       tl1PmTunnel.getIngRate(),
+                       tl1PmTunnel.getEgrPackets(),
+                       tl1PmTunnel.getEgrBytes(),
+                       tl1PmTunnel.getEgrRate(),
+                       tl1PmTunnel.getDate()
+               );
+               return otnPmTunnel;
+            });
+        otnPmTunnelStream.forEach(otnPmTunnelRepository::save);
+    }
+
+    public void OTNSyncPmTemperature() throws Exception {
+        Stream<OtnPmTemperature> otnPmTemperatureStream = tl1PmTemperatureList.stream()
+            .map(tl1PmTemperature -> {
+               OtnPmTemperature otnPmTemperature = new OtnPmTemperature(
+                       tl1PmTemperature.getTid(),
+                       tl1PmTemperature.getSystemType(),
+                       tl1PmTemperature.getSlot(),
+                       tl1PmTemperature.getTime(),
+                       tl1PmTemperature.getMax(),
+                       tl1PmTemperature.getMin(),
+                       tl1PmTemperature.getAverage(),
+                       tl1PmTemperature.getDate()
+                       );
+               return otnPmTemperature;
+            });
+        otnPmTemperatureStream.forEach(otnPmTemperatureRepository::save);
+    }
+
+    public void OTNSyncPmAc() throws Exception {
+        Stream<OtnPmAc> otnPmAcStream = tl1PmAcList.stream()
+            .map(tl1PmAc -> {
+               OtnPmAc otnPmAc = new OtnPmAc(
+                       tl1PmAc.getTid(),
+                       tl1PmAc.getSystemType(),
+                       tl1PmAc.getSlot(),
+                       tl1PmAc.getPort(),
+                       tl1PmAc.getTime(),
+                       tl1PmAc.getName(),
+                       tl1PmAc.getIngPackets(),
+                       tl1PmAc.getIngBytes(),
+                       tl1PmAc.getIngRate(),
+                       tl1PmAc.getEgrPackets(),
+                       tl1PmAc.getEgrBytes(),
+                       tl1PmAc.getEgrRate(),
+                       tl1PmAc.getDate()
+               );
+               return otnPmAc;
+            });
+        otnPmAcStream.forEach(otnPmAcRepository::save);
+    }
+
+    public void OTNSyncPmOptic() throws Exception {
+        Stream<OtnPmOptic> otnPmOpticStream = tl1PmOpticList.stream()
+            .map(tl1PmOptic -> {
+               OtnPmOptic otnPmOptic = new OtnPmOptic(
+                       tl1PmOptic.getTid(),
+                       tl1PmOptic.getSystemType(),
+                       tl1PmOptic.getSlot(),
+                       tl1PmOptic.getPort(),
+                       tl1PmOptic.getPmType(),
+                       tl1PmOptic.getRxMinPower(),
+                       tl1PmOptic.getRxMaxPower(),
+                       tl1PmOptic.getRxAvgPower(),
+                       tl1PmOptic.getTxMinPower(),
+                       tl1PmOptic.getTxMaxPower(),
+                       tl1PmOptic.getTxAvgPower(),
+                       tl1PmOptic.getDate()
+               );
+               return otnPmOptic;
+            });
+        otnPmOpticStream.forEach(otnPmOpticRepository::save);
+    }
+
+    public void OTNSyncPm() throws Exception {
+        Stream<OtnPm> otnPmStream = tl1PmList.stream()
+            .map(tl1Pm -> {
+               OtnPm otnPm = new OtnPm(
+                   tl1Pm.getTid(),
+                   tl1Pm.getSystemType(),
+                   tl1Pm.getSlot(),
+                   tl1Pm.getPort(),
+                   tl1Pm.getSignal(),
+                   tl1Pm.getTime(),
+                   tl1Pm.getInErrorPackets(),
+                   tl1Pm.getEs(),
+                   tl1Pm.getSes(),
+                   tl1Pm.getUas(),
+                   tl1Pm.getInDiscardPackets(),
+                   tl1Pm.getOutErrorPackets(),
+                   tl1Pm.getOutDiscardPackets(),
+                   tl1Pm.getDate()
+               );
+               return otnPm;
+            });
+        otnPmStream.forEach(otnPmRepository::save);
+    }
+
+    public void OTNSyncPmPort() throws Exception {
         Stream<OtnPmPort> sdnPmPortStream = tl1PmPortList.stream()
         .map(tl1PmPort -> {
-            OtnPmPort otnPmPort = new OtnPmPort();
-            /*
-            otnPmPort.setTid(tl1PmPort.getTID());
-            otnPmPort.setAid(tl1PmPort.getAID());
-            otnPmPort.setUnit(tl1PmPort.getUNIT());
-            otnPmPort.setDate(tl1PmPort.getDATE());
-            otnPmPort.setTime(tl1PmPort.getTIME());
-            otnPmPort.setInOctets(tl1PmPort.getIN_OCTETS());
-            otnPmPort.setInOkPackets(tl1PmPort.getIN_OK_PACKETS());
-            otnPmPort.setInDiscardPackets(tl1PmPort.getIN_DISCARD_PACKETS());
-            otnPmPort.setInErrorPackets(tl1PmPort.getIN_ERROR_PACKETS());
-            otnPmPort.setInPausePackets(tl1PmPort.getIN_PAUSE_PACKETS());
-            otnPmPort.setInAlignmentErrors(tl1PmPort.getIN_ALIGNMENT_ERRORS());
-            otnPmPort.setInFcsErrors(tl1PmPort.getIN_FCS_ERRORS());
-            otnPmPort.setInSymbolErrors(tl1PmPort.getIN_SYMBOL_ERRORS());
-            otnPmPort.setOutOctets(tl1PmPort.getOUT_OCTETS());
-            otnPmPort.setOutOkPackets(tl1PmPort.getOUT_OK_PACKETS());
-            otnPmPort.setOutUnicastPackets(tl1PmPort.getOUT_UNICAST_PACKETS());
-            otnPmPort.setOutNonUnicastPackets(tl1PmPort.getOUT_NON_UNICAST_PACKETS());
-            otnPmPort.setOutDiscardPackets(tl1PmPort.getOUT_DISCARD_PACKETS());
-            otnPmPort.setOutErrorPackets(tl1PmPort.getOUT_ERROR_PACKETS());
-            otnPmPort.setOutBroadcastPackets(tl1PmPort.getOUT_BROADCAST_PACKETS());
-            otnPmPort.setOutMulticastPackets(tl1PmPort.getOUT_MULTICAST_PACKETS());
-            otnPmPort.setOutPausePackets(tl1PmPort.getOUT_PAUSE_PACKETS());
-            otnPmPort.setInRate(tl1PmPort.getIN_RATE());
-            otnPmPort.setOutRate(tl1PmPort.getOUT_RATE());
-            otnPmPort.setInLossRatio(tl1PmPort.getIN_LOSS_RATIO());
-            otnPmPort.setOutLossRatio(tl1PmPort.getOUT_LOSS_RATIO());
-                */
+            OtnPmPort otnPmPort = new OtnPmPort(
+                    tl1PmPort.getTid(),
+                    tl1PmPort.getSystemType(),
+                    tl1PmPort.getSlot(),
+                    tl1PmPort.getPort(),
+                    tl1PmPort.getTime(),
+                    tl1PmPort.getInOctets(),
+                    tl1PmPort.getInOkPackets(),
+                    tl1PmPort.getInDiscardPackets(),
+                    tl1PmPort.getInErrorPackets(),
+                    tl1PmPort.getInPausePackets(),
+                    tl1PmPort.getInAlignmentErrors(),
+                    tl1PmPort.getInFcsErrors(),
+                    tl1PmPort.getInSymbolErrors(),
+                    tl1PmPort.getOutOctets(),
+                    tl1PmPort.getOutOkPackets(),
+                    tl1PmPort.getOutUnicastPackets(),
+                    tl1PmPort.getOutNonUnicastPackets(),
+                    tl1PmPort.getOutDiscardPackets(),
+                    tl1PmPort.getOutErrorPackets(),
+                    tl1PmPort.getOutBroadcastPackets(),
+                    tl1PmPort.getOutMulticastPackets(),
+                    tl1PmPort.getOutPausePackets(),
+                    tl1PmPort.getInRate(),
+                    tl1PmPort.getOutRate(),
+                    tl1PmPort.getInLossRatio(),
+                    tl1PmPort.getOutLossRatio(),
+                    tl1PmPort.getDate()
+            );
+
             return otnPmPort;
         });
-
         sdnPmPortStream.forEach(otnPmPortRepository::save);
-
+    }
+    public void OTNSyncPmOpticTemperature() throws Exception {
+        Stream<OtnPmOpticTemperature> otnPmOpticTemperatureStream = tl1PmOpticTemperatureList.stream()
+            .map(tl1PmOpticTemperature -> {
+               OtnPmOpticTemperature otnPmOpticTemperature = new OtnPmOpticTemperature(
+                       tl1PmOpticTemperature.getTid(),
+                       tl1PmOpticTemperature.getSystemType(),
+                       tl1PmOpticTemperature.getSlot(),
+                       tl1PmOpticTemperature.getTime(),
+                       tl1PmOpticTemperature.getMax(),
+                       tl1PmOpticTemperature.getMin(),
+                       tl1PmOpticTemperature.getAverage(),
+                       tl1PmOpticTemperature.getDate()
+               );
+               return otnPmOpticTemperature;
+            });
+        otnPmOpticTemperatureStream.forEach(otnPmOpticTemperatureRepository::save);
     }
 
     //cm module
