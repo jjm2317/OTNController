@@ -275,47 +275,55 @@ public class Tl1Manager {
         });
     }
     private void Tl1SyncPmOptic() throws Exception {
+        tl1PmOpticRepository.deleteAll();
         pmOpticFilepathList.forEach(e-> {
-            System.out.println(e);
+            try{
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmOpticRepository.save(new Tl1PmOptic(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
     }
     private void Tl1SyncPm() throws Exception {
+        tl1PmRepository.deleteAll();
         pmFilepathList.forEach(e-> {
-            System.out.println(e);
-        });
-        /*
-        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
-            String TID = tl1OduNodeConnector.getTID();
-            String AID = tl1OduNodeConnector.getAID();
-            String SIGNAL = getMITypeByTID(tl1OduMplsIfList, TID);
-            String cmd = "RTRV-PM:" + TID +":" + AID + ":" + CTAG + ":SIGNAL=" + SIGNAL + ",INTERVAL=15MIN,TYPE=CURR;";
-
-            ArrayList<String[]> fieldsList = ConvertResponse((ExecuteCmd(cmd)));
-            for (String[] fields: fieldsList) {
-                System.out.println(fields);
-                tl1PmRepository.save(new Tl1Pm(fields));
+            try{
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmRepository.save(new Tl1Pm(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
-        }
-        */
+        });
     }
     private void Tl1SyncPmPort() throws Exception {
+        tl1PmPortRepository.deleteAll();
         pmPortFilepathList.forEach(e-> {
-            System.out.println(e);
-        });
-        /*
-        for (Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
-            String cmd = "RTRV-PM-PORT:" + tl1OduNodeConnector.getTID() +":" + tl1OduNodeConnector.getAID() +":"+ CTAG +":pm-time=15MIN;";
-            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields: fieldsList) {
-                System.out.println(fields);
-                tl1PmPortRepository.save(new Tl1PmPort(fields));
+            try{
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmPortRepository.save(new Tl1PmPort(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
-        }
-        */
+        });
     }
     private void Tl1SyncPmOpticTemperature() throws Exception {
+        tl1PmOpticTemperatureRepository.deleteAll();
         pmOpticTemperatureFilepathList.forEach(e-> {
-            System.out.println(e);
+            try{
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmOpticTemperatureRepository.save(new Tl1PmOpticTemperature(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
     }
     private void ftpDownAllFiles(FTP ftp, String localPath) throws Exception {
