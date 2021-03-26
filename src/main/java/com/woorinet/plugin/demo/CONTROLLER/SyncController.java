@@ -2,13 +2,15 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
+import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
-import com.woorinet.plugin.demo.DTO.TL1.PM.Tl1PmPort;
 import com.woorinet.plugin.demo.Manager.OtnManager;
 import com.woorinet.plugin.demo.Manager.PortalManager;
 import com.woorinet.plugin.demo.Manager.QkdManager;
 import com.woorinet.plugin.demo.Manager.Tl1Manager;
 import com.woorinet.plugin.demo.Repository.OTN.*;
+import com.woorinet.plugin.demo.Repository.OTN.PM.OtnPmPortRepository;
+import com.woorinet.plugin.demo.Repository.OTN.PM.OtnPmRepository;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.Repository.TN2.*;
@@ -109,29 +111,6 @@ public class SyncController {
     @Autowired
     private Tl1QkdInfoRepository tl1QkdInfoRepository;
 
-    @Autowired
-    private OtnNodeRepository otnNodeRepository;
-    @Autowired
-    private OtnConnectorRepository otnConnectorRepository;
-    @Autowired
-    private OtnLinkRepository otnLinkRepository;
-    @Autowired
-    private OtnServiceRepository otnServiceRepository;
-    @Autowired
-    private OtnTunnelRepository otnTunnelRepository;
-    @Autowired
-    private OtnAccessIfRepository otnAccessIfRepository;
-    @Autowired
-    private OtnConstraintRepository otnConstraintRepository;
-    @Autowired
-    private OtnPathRepository otnPathRepository;
-    @Autowired
-    private OtnCryptoModuleRepository otnCryptoModuleRepository;
-    @Autowired
-    private OtnCryptoSessionRepository otnCryptoSessionRepository;
-    @Autowired
-    private OtnPmPortRepository otnPmPortRepository;
-
 
     @GetMapping("/tl1")
     String synchronization() {
@@ -195,45 +174,60 @@ public class SyncController {
         return "tl1 synchronization success";
     }
 
+    @Autowired
+    private OtnNodeRepository otnNodeRepository;
+    @Autowired
+    private OtnConnectorRepository otnConnectorRepository;
+    @Autowired
+    private OtnLinkRepository otnLinkRepository;
+    @Autowired
+    private OtnServiceRepository otnServiceRepository;
+    @Autowired
+    private OtnTunnelRepository otnTunnelRepository;
+    @Autowired
+    private OtnAccessIfRepository otnAccessIfRepository;
+    @Autowired
+    private OtnConstraintRepository otnConstraintRepository;
+    @Autowired
+    private OtnPathRepository otnPathRepository;
+    @Autowired
+    private OtnCryptoModuleRepository otnCryptoModuleRepository;
+    @Autowired
+    private OtnCryptoSessionRepository otnCryptoSessionRepository;
+    @Autowired
+    private OtnPmRepository otnPmRepository;
+    @Autowired
+    private OtnPmPortRepository otnPmPortRepository;
+
     @GetMapping("/otn")
     String convertTL1() {
         try {
-            // Node 조회
             List<Tl1Node> tl1NodeList = tl1NodeRepository.findAll();
-            // SYSTEM_INFO 조회
             List<Tl1SystemInfo> tl1SystemInfoList = tl1SystemInfoRepository.findAll();
-            // ODU_NODE_CONNECTOR 조회
             List<Tl1OduNodeConnector> tl1OduNodeConnectorList = tl1OduNodeConnectorRepository.findAll();
-            // ODU 조회
             List<Tl1Odu> tl1OduList = tl1OduRepository.findAll();
-            // ODU_MPLS_IF 조회
             List<Tl1OduMplsIf> tl1OduMplsIfList = tl1OduMplsIfRepository.findAll();
-            // OPTIC_POWER 조회
             List<Tl1OpticPower> tl1OpticPowerList = tl1OpticPowerRepository.findAll();
-            // SERVICE 조회
             List<Tl1Service> tl1ServiceList = tl1ServiceRepository.findAll();
-            // ACCESS_IF 조회
             List<Tl1AccessIf> tl1AccessIfList = tl1AccessIfRepository.findAll();
-            // SERVICE_EXT 조회
             List<Tl1ServiceExt> tl1ServiceExtList = tl1ServiceExtRepository.findAll();
-            // MPLS_IF 조회
             List<Tl1MplsIf> tl1MplsIfList = tl1MplsIfRepository.findAll();
-            // INVENTORY 조회
             List<Tl1Inventory> tl1InventorieList = tl1InventoryRepository.findAll();
-            // CM_PORT 조회
             List<Tl1CmPort> tl1CmPortList = tl1CmPortRepository.findAll();
-            // MODULE_INFO 조회
             List<Tl1ModuleInfo> tl1ModuleInfoList = tl1ModuleInfoRepository.findAll();
-            // BYPASS_INFO 조회
             List<Tl1BypassInfo> tl1BypassInfoList = tl1BypassInfoRepository.findAll();
-            // CM_PROGRAM_INFO 조회
             List<Tl1CmProgramInfo> tl1CmProgramInfoList = tl1CmProgramInfoRepository.findAll();
-            // SESS_STATE 조회
             List<Tl1SessState> tl1SessStateList = tl1SessStateRepository.findAll();
-            // KEY_STATE 조회
             List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
-            // PM_PORT 조회
+
+            List<Tl1PmPw> tl1PmPwList = tl1PmPwRepository.findAll();
+            List<Tl1PmTunnel> tl1PmTunnelList = tl1PmTunnelRepository.findAll();
+            List<Tl1PmTemperature> tl1PmTemperatureList = tl1PmTemperatureRepository.findAll();
+            List<Tl1PmAc> tl1PmAcList = tl1PmAcRepository.findAll();
+            List<Tl1PmOptic> tl1PmOpticList = tl1PmOpticRepository.findAll();
+            List<Tl1Pm> tl1PmList = tl1PmRepository.findAll();
             List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
+            List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList = tl1PmOpticTemperatureRepository.findAll();
             OtnManager manager = new OtnManager(
                     otnNodeRepository,
                     otnConnectorRepository,

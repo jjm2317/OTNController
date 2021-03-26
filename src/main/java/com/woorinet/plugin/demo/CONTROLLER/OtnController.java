@@ -2,6 +2,7 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 
 import com.woorinet.plugin.demo.Repository.OTN.*;
+import com.woorinet.plugin.demo.Repository.OTN.PM.OtnPmPortRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

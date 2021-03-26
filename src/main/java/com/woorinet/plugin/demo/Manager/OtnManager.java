@@ -8,6 +8,7 @@ import com.woorinet.plugin.demo.DTO.TL1.Tl1Node;
 import com.woorinet.plugin.demo.DTO.TL1.Tl1Service;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
+import com.woorinet.plugin.demo.Repository.OTN.PM.OtnPmPortRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
