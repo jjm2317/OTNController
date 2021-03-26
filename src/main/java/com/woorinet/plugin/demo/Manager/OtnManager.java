@@ -285,6 +285,7 @@ public class OtnManager {
         OTNSyncPmOptic();
         OTNSyncPm();
         OTNSyncPmPort();
+        OTNSyncPmOpticTemperature();
     }
 
     private void SDNSyncNodeList() throws Exception {
@@ -912,9 +913,24 @@ public class OtnManager {
 
             return otnPmPort;
         });
-
         sdnPmPortStream.forEach(otnPmPortRepository::save);
-
+    }
+    public void OTNSyncPmOpticTemperature() throws Exception {
+        Stream<OtnPmOpticTemperature> otnPmOpticTemperatureStream = tl1PmOpticTemperatureList.stream()
+            .map(tl1PmOpticTemperature -> {
+               OtnPmOpticTemperature otnPmOpticTemperature = new OtnPmOpticTemperature(
+                       tl1PmOpticTemperature.getTid(),
+                       tl1PmOpticTemperature.getSystemType(),
+                       tl1PmOpticTemperature.getSlot(),
+                       tl1PmOpticTemperature.getTime(),
+                       tl1PmOpticTemperature.getMax(),
+                       tl1PmOpticTemperature.getMin(),
+                       tl1PmOpticTemperature.getAverage(),
+                       tl1PmOpticTemperature.getDate()
+               );
+               return otnPmOpticTemperature;
+            });
+        otnPmOpticTemperatureStream.forEach(otnPmOpticTemperatureRepository::save);
     }
 
 
