@@ -262,19 +262,17 @@ public class Tl1Manager {
         });
     }
     private void Tl1SyncPmAc() throws Exception {
+        tl1PmAcRepository.deleteAll();
         pmAcFilepathList.forEach(e->{
-            System.out.println(e);
-        });
-        /*
-        for (Tl1MplsAc mplsAc : tl1MplsAcList) {
-            String cmd = "RTRV-PM-AC:" + mplsAc.getTID() + "::"+ CTAG +":ac-id="+ mplsAc.getAC_ID() +",pm-time=15MIN;";
-            ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
-            for (String[] fields : fieldsList) {
-                System.out.println(fields);
-                tl1PmAcRepository.save(new Tl1PmAc(fields));
+            try{
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmAcRepository.save(new Tl1PmAc(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
-        }
-        */
+        });
     }
     private void Tl1SyncPmOptic() throws Exception {
         pmOpticFilepathList.forEach(e-> {
