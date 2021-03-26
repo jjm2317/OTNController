@@ -7,10 +7,7 @@ import com.woorinet.plugin.demo.DTO.TL1.Tl1Service;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class OtnManager {
@@ -773,5 +770,35 @@ public class OtnManager {
         otnCmInventoryStream.forEach(otnCmInventoryRepository::save);
     }
 
+    public void OtnSyncCmLink() throws Exception {
+        Stream<OtnCmLink> otnCmLinkStream = tl1CmPortList.stream()
+            .map(tl1CmPort -> {
+                Optional<Tl1ModuleInfo> tl1ModuleInfo = tl1ModuleInfoList.stream()
+                    .filter(moduleInfo -> moduleInfo.getAID().equals(tl1CmPort.getAID())).findAny();
 
+                //예> AID(EMS_1000_B-OPN1000-S03-P1)에서 3, 4번째 값만 추출, 구분자는 '-'
+                String slot = tl1CmPort.getAID().split("-")[2];
+                String port = tl1CmPort.getAID().split("-")[3];
+
+                OtnCmLink otnCmLink = new OtnCmLink(
+                        tl1CmPort.getTID(),//tid
+                        slot,//slot
+                        port,//port
+                        tl1CmPort.getUNIT_TYPE(),//unitType
+                        tl1CmPort.getSIGNAL(),//signal
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMID()).orElse(""),//mid
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMID_CONTEXT()).orElse(""),//midContext
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPMID()).orElse(""),//pmid
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPMID_CONTEXT()).orElse(""),//pmidContext
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOPERATION_STATE()).orElse(""),//operationState
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOPERATION_STATE_REASON()).orElse(""),//operationStateReason
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getCRYPTO_MODE()).orElse("")//cryptoMode
+
+                );
+
+                return otnCmLink;
+            });
+
+        otnCmLinkStream.forEach(otnCmLinkRepository::save);
+    }
 }
