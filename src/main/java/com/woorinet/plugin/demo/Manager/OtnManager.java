@@ -2,6 +2,7 @@ package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPort;
+import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPw;
 import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
@@ -741,7 +742,26 @@ public class OtnManager {
     }
 
     public void OTNSyncPmPw() throws Exception {
-        //Stream<OtnPmPw> OtnPmPwStream =
+        Stream<OtnPmPw> OtnPmPwStream = tl1PmPwList.stream()
+            .map(tl1PmPw -> {
+               OtnPmPw otnPmPw = new OtnPmPw(
+                       tl1PmPw.getTid(),
+                       tl1PmPw.getSystemType(),
+                       tl1PmPw.getSlot(),
+                       tl1PmPw.getPort(),
+                       tl1PmPw.getTime(),
+                       tl1PmPw.getName(),
+                       tl1PmPw.getIngPackets(),
+                       tl1PmPw.getIngBytes(),
+                       tl1PmPw.getIngRate(),
+                       tl1PmPw.getEgrPackets(),
+                       tl1PmPw.getEgrBytes(),
+                       tl1PmPw.getEgrRate(),
+                       tl1PmPw.getDate()
+               );
+               return otnPmPw;
+            });
+        OtnPmPwStream.forEach(otnPmPwRepository::save);
     }
 
     public void SDNSyncPmPort() throws Exception {
