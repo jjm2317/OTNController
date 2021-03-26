@@ -256,7 +256,7 @@ public class OtnManager {
                         tl1NodeState.getSOFTWARE(), // sw_ver
                         tl1NodeState.getIP_ADDR(), // ip_addr
                         tl1SystemInfo==null? "":tl1SystemInfo.getVENDOR(), // vendor
-                        tl1Inventory==null||tl1Inventory.getSERIAL_NUM().equals("---") ? "" : tl1Inventory.getSERIAL_NUM(), // serial_num
+                        tl1Inventory==null ? "" : tl1Inventory.getSERIAL_NUM(), // serial_num
                         tl1NodeState.getNODE_TYPE() // sys_type
                 );
 
