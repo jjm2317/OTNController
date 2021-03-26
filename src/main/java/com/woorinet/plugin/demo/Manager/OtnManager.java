@@ -748,7 +748,30 @@ public class OtnManager {
     }
 
     //cm module
+    public void OtnSyncCmInventory() throws Exception {
+        Stream<OtnCmInventory> otnCmInventoryStream = tl1CmProgramInfoList.stream()
+            .map(tl1CmProgramInfo -> {
+                OtnCmInventory otnCmInventory = new OtnCmInventory(
+                    tl1CmProgramInfo.getTID(),//tid
+                    tl1CmProgramInfo.getAID(),//slot
+                    tl1CmProgramInfo.getUNIT_TYPE(),//unit_type
+                    tl1CmProgramInfo.getPKG_VERSION(),//pkg_version
+                    tl1CmProgramInfo.getPKG_FILENAME(),//pkg_filename
+                    tl1CmProgramInfo.getPKG_VERSION_DATE(),//pkg_version_date,
+                    tl1CmProgramInfo.getPKG_SIZE(),//pkg_size
+                    tl1CmProgramInfo.getFPGA_VERSION(),//fpga_version
+                    tl1CmProgramInfo.getFPGA_VERSION_DATE(),//fpga_version_date
+                    tl1CmProgramInfo.getFPGA_SIZE(),//fpga_size
+                    tl1CmProgramInfo.getCPLD_VERSION(),//cpld_version
+                    tl1CmProgramInfo.getCPLD_VERSION_DATE(),//cpld_version_date,
+                    tl1CmProgramInfo.getCPLD_SIZE(),//cpld_size
+                    tl1CmProgramInfo.getHW_VERSION()//hw_version
+                );
 
+                return otnCmInventory;
+            });
+        otnCmInventoryStream.forEach(otnCmInventoryRepository::save);
+    }
 
 
 }
