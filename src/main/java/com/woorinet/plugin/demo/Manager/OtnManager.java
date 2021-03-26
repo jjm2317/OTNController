@@ -282,6 +282,7 @@ public class OtnManager {
         OTNSyncPmTunnel();
         OTNSyncPmTemperature();
         OTNSyncPmAc();
+        OTNSyncPmOptic();
         // PmPort 데이터 업데이트
         SDNSyncPmPort();
     }
@@ -828,6 +829,28 @@ public class OtnManager {
                return otnPmAc;
             });
         otnPmAcStream.forEach(otnPmAcRepository::save);
+    }
+
+    public void OTNSyncPmOptic() throws Exception {
+        Stream<OtnPmOptic> otnPmOpticStream = tl1PmOpticList.stream()
+            .map(tl1PmOptic -> {
+               OtnPmOptic otnPmOptic = new OtnPmOptic(
+                       tl1PmOptic.getTid(),
+                       tl1PmOptic.getSystemType(),
+                       tl1PmOptic.getSlot(),
+                       tl1PmOptic.getPort(),
+                       tl1PmOptic.getPmType(),
+                       tl1PmOptic.getRxMinPower(),
+                       tl1PmOptic.getRxMaxPower(),
+                       tl1PmOptic.getRxAvgPower(),
+                       tl1PmOptic.getTxMinPower(),
+                       tl1PmOptic.getTxMaxPower(),
+                       tl1PmOptic.getTxAvgPower(),
+                       tl1PmOptic.getDate()
+               );
+               return otnPmOptic;
+            });
+        otnPmOpticStream.forEach(otnPmOpticRepository::save);
     }
 
     public void SDNSyncPmPort() throws Exception {
