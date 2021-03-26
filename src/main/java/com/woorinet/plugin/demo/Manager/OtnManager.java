@@ -2,10 +2,7 @@ package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPort;
-import com.woorinet.plugin.demo.DTO.TL1.PM.Tl1PmPort;
-import com.woorinet.plugin.demo.DTO.TL1.Tl1AccessIf;
-import com.woorinet.plugin.demo.DTO.TL1.Tl1Node;
-import com.woorinet.plugin.demo.DTO.TL1.Tl1Service;
+import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
 import com.woorinet.plugin.demo.Repository.OTN.PM.*;
@@ -56,7 +53,14 @@ public class OtnManager {
     List<Tl1CmProgramInfo> tl1CmProgramInfoList;
     List<Tl1SessState> tl1SessStateList;
     List<Tl1KeyState> tl1KeyStateList;
+    List<Tl1PmPw> tl1PmPwList;
+    List<Tl1PmTunnel> tl1PmTunnelList;
+    List<Tl1PmTemperature> tl1PmTemperatureList;
+    List<Tl1PmAc> tl1PmAcList;
+    List<Tl1PmOptic> tl1PmOpticList;
+    List<Tl1Pm> tl1PmList;
     List<Tl1PmPort> tl1PmPortList;
+    List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList;
 
     HashMap<String, Tl1Node> tl1NodeHashMap = new HashMap<>();
     HashMap<String, Tl1SystemInfo> tl1SystemInfoHashMap = new HashMap<>();
@@ -116,7 +120,15 @@ public class OtnManager {
                       List<Tl1CmProgramInfo> tl1CmProgramInfoList,
                       List<Tl1SessState> tl1SessStateList,
                       List<Tl1KeyState> tl1KeyStateList,
-                      List<Tl1PmPort> tl1PmPortList) throws Exception{
+                      List<Tl1PmPw> tl1PmPwList,
+                      List<Tl1PmTunnel> tl1PmTunnelList,
+                      List<Tl1PmTemperature> tl1PmTemperatureList,
+                      List<Tl1PmAc> tl1PmAcList,
+                      List<Tl1PmOptic> tl1PmOpticList,
+                      List<Tl1Pm> tl1PmList,
+                      List<Tl1PmPort> tl1PmPortList,
+                      List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList
+    ) throws Exception{
         this.otnNodeRepository = otnNodeRepository;
         this.otnConnectorRepository = otnConnectorRepository;
         this.otnLinkRepository = otnLinkRepository;
@@ -154,7 +166,14 @@ public class OtnManager {
         this.tl1CmProgramInfoList = tl1CmProgramInfoList;
         this.tl1SessStateList = tl1SessStateList;
         this.tl1KeyStateList = tl1KeyStateList;
+        this.tl1PmPwList = tl1PmPwList;
+        this.tl1PmTunnelList = tl1PmTunnelList;
+        this.tl1PmTemperatureList = tl1PmTemperatureList;
+        this.tl1PmAcList = tl1PmAcList;
+        this.tl1PmOpticList = tl1PmOpticList;
+        this.tl1PmList = tl1PmList;
         this.tl1PmPortList = tl1PmPortList;
+        this.tl1PmOpticTemperatureList = tl1PmOpticTemperatureList;
 
         makeHashMap();
     }
@@ -259,6 +278,7 @@ public class OtnManager {
         SDNSyncCryptoModule();
         // CryptoSession 데이터 업데이트
         SDNSyncCryptoSession();
+        OTNSyncPmPw();
         // PmPort 데이터 업데이트
         SDNSyncPmPort();
     }
@@ -718,6 +738,10 @@ public class OtnManager {
         });
 
         sdnCryptoSessionStream.forEach(otnCryptoSessionRepository::save);
+    }
+
+    public void OTNSyncPmPw() throws Exception {
+        //Stream<OtnPmPw> OtnPmPwStream =
     }
 
     public void SDNSyncPmPort() throws Exception {

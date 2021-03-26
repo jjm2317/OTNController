@@ -275,7 +275,15 @@ public class SyncController {
                     tl1CmProgramInfoList,
                     tl1SessStateList,
                     tl1KeyStateList,
-                    tl1PmPortList);
+                    tl1PmPwList,
+                    tl1PmTunnelList,
+                    tl1PmTemperatureList,
+                    tl1PmAcList,
+                    tl1PmOpticList,
+                    tl1PmList,
+                    tl1PmPortList,
+                    tl1PmOpticTemperatureList
+            );
             // Sync 시작
             manager.SDNSyncStart();
         } catch (Exception e) {
