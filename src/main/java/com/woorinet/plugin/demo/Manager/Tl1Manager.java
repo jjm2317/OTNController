@@ -249,8 +249,16 @@ public class Tl1Manager {
         });
     }
     private void Tl1SyncPmTemperature() throws Exception {
+        tl1PmTemperatureRepository.deleteAll();
         pmTemperatureFilepathList.forEach(e-> {
-            System.out.println(e);
+            try{
+                ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
+                for(String[] fields : fieldsList) {
+                    tl1PmTemperatureRepository.save(new Tl1PmTemperature(fields));
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
         });
     }
     private void Tl1SyncPmAc() throws Exception {
