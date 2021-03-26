@@ -36,6 +36,9 @@ public class OtnPm {
     String outDiscardPackets;
     String date;
 
+    public OtnPm(){
+
+    }
     public OtnPm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date) {
         this.tid = tid;
         this.systemType = systemType;
