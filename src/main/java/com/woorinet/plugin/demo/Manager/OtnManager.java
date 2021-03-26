@@ -25,6 +25,10 @@ public class OtnManager {
     OtnCryptoModuleRepository otnCryptoModuleRepository;
     OtnCryptoSessionRepository otnCryptoSessionRepository;
     OtnPmPortRepository otnPmPortRepository;
+    OtnCmInventoryRepository otnCmInventoryRepository;
+    OtnCmLinkRepository otnCmLinkRepository;
+    OtnCmSessionRepository otnCmSessionRepository;
+    OtnCmQkdLinkRepository otnCmQkdLinkRepository;
 
     String separator;
 
@@ -82,6 +86,10 @@ public class OtnManager {
                       OtnCryptoModuleRepository otnCryptoModuleRepository,
                       OtnCryptoSessionRepository otnCryptoSessionRepository,
                       OtnPmPortRepository otnPmPortRepository,
+                      OtnCmInventoryRepository otnCmInventoryRepository,
+                      OtnCmLinkRepository otnCmLinkRepository,
+                      OtnCmSessionRepository otnCmSessionRepository,
+                      OtnCmQkdLinkRepository otnCmQkdLinkRepository,
                       List<Tl1Node> tl1NodeList,
                       List<Tl1SystemInfo> tl1SystemInfoList,
                       List<Tl1OduNodeConnector> tl1OduNodeConnectorList,
@@ -111,6 +119,11 @@ public class OtnManager {
         this.otnCryptoModuleRepository = otnCryptoModuleRepository;
         this.otnCryptoSessionRepository = otnCryptoSessionRepository;
         this.otnPmPortRepository = otnPmPortRepository;
+        this.otnCmInventoryRepository = otnCmInventoryRepository;
+        this.otnCmLinkRepository = otnCmLinkRepository;
+        this.otnCmSessionRepository = otnCmSessionRepository;
+        this.otnCmQkdLinkRepository = otnCmQkdLinkRepository;
+
         this.separator = ".";
         this.tl1NodeList = tl1NodeList;
         this.tl1SystemInfoList = tl1SystemInfoList;

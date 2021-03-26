@@ -130,6 +130,14 @@ public class SyncController {
     private OtnCryptoSessionRepository otnCryptoSessionRepository;
     @Autowired
     private OtnPmPortRepository otnPmPortRepository;
+    @Autowired
+    private OtnCmInventoryRepository otnCmInventoryRepository;
+    @Autowired
+    private OtnCmLinkRepository otnCmLinkRepository;
+    @Autowired
+    private OtnCmSessionRepository otnCmSessionRepository;
+    @Autowired
+    private OtnCmQkdLinkRepository otnCmQkdLinkRepository;
 
 
     @GetMapping("/tl1")
@@ -245,6 +253,10 @@ public class SyncController {
                     otnCryptoModuleRepository,
                     otnCryptoSessionRepository,
                     otnPmPortRepository,
+                    otnCmInventoryRepository,
+                    otnCmLinkRepository,
+                    otnCmSessionRepository,
+                    otnCmQkdLinkRepository,
                     tl1NodeList,
                     tl1SystemInfoList,
                     tl1OduNodeConnectorList,
