@@ -1,10 +1,7 @@
 package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
-import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPort;
-import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPw;
-import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmTemperature;
-import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmTunnel;
+import com.woorinet.plugin.demo.DTO.OTN.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
@@ -284,6 +281,7 @@ public class OtnManager {
         OTNSyncPmPw();
         OTNSyncPmTunnel();
         OTNSyncPmTemperature();
+        OTNSyncPmAc();
         // PmPort 데이터 업데이트
         SDNSyncPmPort();
     }
@@ -807,6 +805,29 @@ public class OtnManager {
                return otnPmTemperature;
             });
         otnPmTemperatureStream.forEach(otnPmTemperatureRepository::save);
+    }
+
+    public void OTNSyncPmAc() throws Exception {
+        Stream<OtnPmAc> otnPmAcStream = tl1PmAcList.stream()
+            .map(tl1PmAc -> {
+               OtnPmAc otnPmAc = new OtnPmAc(
+                       tl1PmAc.getTid(),
+                       tl1PmAc.getSystemType(),
+                       tl1PmAc.getSlot(),
+                       tl1PmAc.getPort(),
+                       tl1PmAc.getTime(),
+                       tl1PmAc.getName(),
+                       tl1PmAc.getIngPackets(),
+                       tl1PmAc.getIngBytes(),
+                       tl1PmAc.getIngRate(),
+                       tl1PmAc.getEgrPackets(),
+                       tl1PmAc.getEgrBytes(),
+                       tl1PmAc.getEgrRate(),
+                       tl1PmAc.getDate()
+               );
+               return otnPmAc;
+            });
+        otnPmAcStream.forEach(otnPmAcRepository::save);
     }
 
     public void SDNSyncPmPort() throws Exception {
