@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.TL1;
+package com.woorinet.plugin.demo.DTO.TL1.PM;
 
 import lombok.Data;
 import lombok.Getter;
@@ -11,13 +11,13 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Setter
 @Getter
-@Table(name = "tl1_pm_temperature")
-public class Tl1PmTemperature {
+@Setter
+@Table(name = "tl1_pm_optic_temperature")
+public class Tl1PmOpticTemperature {
     @Id
     @GeneratedValue
-    int pmTemperatureId;
+    int pmOpticTemperatureId;
     String tid;
     String systemType;
     String slot;
@@ -27,11 +27,18 @@ public class Tl1PmTemperature {
     String average;
     String date;
 
-    public Tl1PmTemperature() {
-
+    public Tl1PmOpticTemperature(String tid, String systemType, String slot, String time, String max, String min, String average, String date) {
+        this.tid = tid;
+        this.systemType = systemType;
+        this.slot = slot;
+        this.time = time;
+        this.max = max;
+        this.min = min;
+        this.average = average;
+        this.date = date;
     }
 
-    public Tl1PmTemperature(String []fields) {
+    public Tl1PmOpticTemperature(String[] fields) {
         this.tid = fields[0];
         this.systemType = fields[1];
         this.slot = fields[2];
@@ -44,7 +51,7 @@ public class Tl1PmTemperature {
 
     @Override
     public String toString() {
-        return "Tl1PmTemperature{" +
+        return "Tl1PmOpticTemperature{" +
                 "tid='" + tid + '\'' +
                 ", systemType='" + systemType + '\'' +
                 ", slot='" + slot + '\'' +
@@ -54,16 +61,5 @@ public class Tl1PmTemperature {
                 ", average='" + average + '\'' +
                 ", date='" + date + '\'' +
                 '}';
-    }
-
-    public Tl1PmTemperature(String tid, String systemType, String slot, String time, String max, String min, String average, String date) {
-        this.tid = tid;
-        this.systemType = systemType;
-        this.slot = slot;
-        this.time = time;
-        this.max = max;
-        this.min = min;
-        this.average = average;
-        this.date = date;
     }
 }

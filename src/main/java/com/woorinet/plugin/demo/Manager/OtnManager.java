@@ -1,6 +1,8 @@
 package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
+import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPort;
+import com.woorinet.plugin.demo.DTO.TL1.PM.Tl1PmPort;
 import com.woorinet.plugin.demo.DTO.TL1.Tl1AccessIf;
 import com.woorinet.plugin.demo.DTO.TL1.Tl1Node;
 import com.woorinet.plugin.demo.DTO.TL1.Tl1Service;

@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.TL1;
+package com.woorinet.plugin.demo.DTO.TL1.PM;
 
 
 import lombok.Data;
@@ -12,13 +12,13 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Setter
 @Getter
-@Table(name = "tl1_pm_tunnel")
-public class Tl1PmTunnel {
+@Setter
+@Table(name = "tl1_pm_ac")
+public class Tl1PmAc {
     @Id
     @GeneratedValue
-    int pmTunnelId;
+    int pmAcId;
     String tid;
     String systemType;
     String slot;
@@ -33,10 +33,11 @@ public class Tl1PmTunnel {
     String egrRate;
     String date;
 
-    public Tl1PmTunnel() {
+
+    public Tl1PmAc() {
     }
 
-    public Tl1PmTunnel(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
+    public Tl1PmAc(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -52,7 +53,7 @@ public class Tl1PmTunnel {
         this.date = date;
     }
 
-    public Tl1PmTunnel(String[] fields) {
+    public Tl1PmAc(String[] fields) {
         this.tid = fields[0];
         this.systemType = fields[1];
         this.slot = fields[2];
@@ -61,7 +62,7 @@ public class Tl1PmTunnel {
         this.name = fields[5];
         this.ingPackets = fields[6];
         this.ingBytes = fields[7];
-        this.ingRate = fields[8];
+        this.ingRate= fields[8];
         this.egrPackets = fields[9];
         this.egrBytes = fields[10];
         this.egrRate = fields[11];
@@ -70,7 +71,7 @@ public class Tl1PmTunnel {
 
     @Override
     public String toString() {
-        return "Tl1PmTunnel{" +
+        return "Tl1PmAc{" +
                 "tid='" + tid + '\'' +
                 ", systemType='" + systemType + '\'' +
                 ", slot='" + slot + '\'' +

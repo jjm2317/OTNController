@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.TL1;
+package com.woorinet.plugin.demo.DTO.TL1.PM;
 
 import lombok.Data;
 import lombok.Getter;
