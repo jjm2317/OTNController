@@ -9,8 +9,7 @@ import com.woorinet.plugin.demo.Manager.PortalManager;
 import com.woorinet.plugin.demo.Manager.QkdManager;
 import com.woorinet.plugin.demo.Manager.Tl1Manager;
 import com.woorinet.plugin.demo.Repository.OTN.*;
-import com.woorinet.plugin.demo.Repository.OTN.PM.OtnPmPortRepository;
-import com.woorinet.plugin.demo.Repository.OTN.PM.OtnPmRepository;
+import com.woorinet.plugin.demo.Repository.OTN.PM.*;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.Repository.TN2.*;
@@ -195,9 +194,21 @@ public class SyncController {
     @Autowired
     private OtnCryptoSessionRepository otnCryptoSessionRepository;
     @Autowired
+    private OtnPmPwRepository otnPmPwRepository;
+    @Autowired
+    private OtnPmTunnelRepository otnPmTunnelRepository;
+    @Autowired
+    private OtnPmTemperatureRepository otnPmTemperatureRepository;
+    @Autowired
+    private OtnPmAcRepository otnPmAcRepository;
+    @Autowired
+    private OtnPmOpticRepository otnPmOpticRepository;
+    @Autowired
     private OtnPmRepository otnPmRepository;
     @Autowired
     private OtnPmPortRepository otnPmPortRepository;
+    @Autowired
+    private OtnPmOpticTemperatureRepository otnPmOpticTemperatureRepository;
 
     @GetMapping("/otn")
     String convertTL1() {
@@ -239,7 +250,14 @@ public class SyncController {
                     otnAccessIfRepository,
                     otnCryptoModuleRepository,
                     otnCryptoSessionRepository,
+                    otnPmPwRepository,
+                    otnPmTunnelRepository,
+                    otnPmTemperatureRepository,
+                    otnPmAcRepository,
+                    otnPmOpticRepository,
+                    otnPmRepository,
                     otnPmPortRepository,
+                    otnPmOpticTemperatureRepository,
                     tl1NodeList,
                     tl1SystemInfoList,
                     tl1OduNodeConnectorList,

@@ -8,7 +8,7 @@ import com.woorinet.plugin.demo.DTO.TL1.Tl1Node;
 import com.woorinet.plugin.demo.DTO.TL1.Tl1Service;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
-import com.woorinet.plugin.demo.Repository.OTN.PM.OtnPmPortRepository;
+import com.woorinet.plugin.demo.Repository.OTN.PM.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +27,14 @@ public class OtnManager {
     OtnAccessIfRepository otnAccessIfRepository;
     OtnCryptoModuleRepository otnCryptoModuleRepository;
     OtnCryptoSessionRepository otnCryptoSessionRepository;
+    OtnPmPwRepository otnPmPwRepository;
+    OtnPmTunnelRepository otnPmTunnelRepository;
+    OtnPmTemperatureRepository otnPmTemperatureRepository;
+    OtnPmAcRepository otnPmAcRepository;
+    OtnPmOpticRepository otnPmOpticRepository;
+    OtnPmRepository otnPmRepository;
     OtnPmPortRepository otnPmPortRepository;
+    OtnPmOpticTemperatureRepository otnPmOpticTemperatureRepository;
 
     String separator;
 
@@ -84,7 +91,14 @@ public class OtnManager {
                       OtnAccessIfRepository otnAccessIfRepository,
                       OtnCryptoModuleRepository otnCryptoModuleRepository,
                       OtnCryptoSessionRepository otnCryptoSessionRepository,
+                      OtnPmPwRepository otnPmPwRepository,
+                      OtnPmTunnelRepository otnPmTunnelRepository,
+                      OtnPmTemperatureRepository otnPmTemperatureRepository,
+                      OtnPmAcRepository otnPmAcRepository,
+                      OtnPmOpticRepository otnPmOpticRepository,
+                      OtnPmRepository otnPmRepository,
                       OtnPmPortRepository otnPmPortRepository,
+                      OtnPmOpticTemperatureRepository otnPmOpticTemperatureRepository,
                       List<Tl1Node> tl1NodeList,
                       List<Tl1SystemInfo> tl1SystemInfoList,
                       List<Tl1OduNodeConnector> tl1OduNodeConnectorList,
@@ -113,7 +127,15 @@ public class OtnManager {
         this.otnAccessIfRepository = otnAccessIfRepository;
         this.otnCryptoModuleRepository = otnCryptoModuleRepository;
         this.otnCryptoSessionRepository = otnCryptoSessionRepository;
+        this.otnPmPwRepository = otnPmPwRepository;
+        this.otnPmTunnelRepository = otnPmTunnelRepository;
+        this.otnPmTemperatureRepository = otnPmTemperatureRepository;
+        this.otnPmAcRepository = otnPmAcRepository;
+        this.otnPmOpticRepository = otnPmOpticRepository;
+        this.otnPmRepository = otnPmRepository;
         this.otnPmPortRepository = otnPmPortRepository;
+        this.otnPmOpticTemperatureRepository = otnPmOpticTemperatureRepository;
+
         this.separator = ".";
         this.tl1NodeList = tl1NodeList;
         this.tl1SystemInfoList = tl1SystemInfoList;
