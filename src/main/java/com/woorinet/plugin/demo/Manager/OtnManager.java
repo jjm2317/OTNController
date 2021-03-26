@@ -284,8 +284,7 @@ public class OtnManager {
         OTNSyncPmAc();
         OTNSyncPmOptic();
         OTNSyncPm();
-        // PmPort 데이터 업데이트
-        SDNSyncPmPort();
+        OTNSyncPmPort();
     }
 
     private void SDNSyncNodeList() throws Exception {
@@ -878,38 +877,39 @@ public class OtnManager {
         otnPmStream.forEach(otnPmRepository::save);
     }
 
-    public void SDNSyncPmPort() throws Exception {
+    public void OTNSyncPmPort() throws Exception {
         Stream<OtnPmPort> sdnPmPortStream = tl1PmPortList.stream()
         .map(tl1PmPort -> {
-            OtnPmPort otnPmPort = new OtnPmPort();
-            /*
-            otnPmPort.setTid(tl1PmPort.getTID());
-            otnPmPort.setAid(tl1PmPort.getAID());
-            otnPmPort.setUnit(tl1PmPort.getUNIT());
-            otnPmPort.setDate(tl1PmPort.getDATE());
-            otnPmPort.setTime(tl1PmPort.getTIME());
-            otnPmPort.setInOctets(tl1PmPort.getIN_OCTETS());
-            otnPmPort.setInOkPackets(tl1PmPort.getIN_OK_PACKETS());
-            otnPmPort.setInDiscardPackets(tl1PmPort.getIN_DISCARD_PACKETS());
-            otnPmPort.setInErrorPackets(tl1PmPort.getIN_ERROR_PACKETS());
-            otnPmPort.setInPausePackets(tl1PmPort.getIN_PAUSE_PACKETS());
-            otnPmPort.setInAlignmentErrors(tl1PmPort.getIN_ALIGNMENT_ERRORS());
-            otnPmPort.setInFcsErrors(tl1PmPort.getIN_FCS_ERRORS());
-            otnPmPort.setInSymbolErrors(tl1PmPort.getIN_SYMBOL_ERRORS());
-            otnPmPort.setOutOctets(tl1PmPort.getOUT_OCTETS());
-            otnPmPort.setOutOkPackets(tl1PmPort.getOUT_OK_PACKETS());
-            otnPmPort.setOutUnicastPackets(tl1PmPort.getOUT_UNICAST_PACKETS());
-            otnPmPort.setOutNonUnicastPackets(tl1PmPort.getOUT_NON_UNICAST_PACKETS());
-            otnPmPort.setOutDiscardPackets(tl1PmPort.getOUT_DISCARD_PACKETS());
-            otnPmPort.setOutErrorPackets(tl1PmPort.getOUT_ERROR_PACKETS());
-            otnPmPort.setOutBroadcastPackets(tl1PmPort.getOUT_BROADCAST_PACKETS());
-            otnPmPort.setOutMulticastPackets(tl1PmPort.getOUT_MULTICAST_PACKETS());
-            otnPmPort.setOutPausePackets(tl1PmPort.getOUT_PAUSE_PACKETS());
-            otnPmPort.setInRate(tl1PmPort.getIN_RATE());
-            otnPmPort.setOutRate(tl1PmPort.getOUT_RATE());
-            otnPmPort.setInLossRatio(tl1PmPort.getIN_LOSS_RATIO());
-            otnPmPort.setOutLossRatio(tl1PmPort.getOUT_LOSS_RATIO());
-                */
+            OtnPmPort otnPmPort = new OtnPmPort(
+                    tl1PmPort.getTid(),
+                    tl1PmPort.getSystemType(),
+                    tl1PmPort.getSlot(),
+                    tl1PmPort.getPort(),
+                    tl1PmPort.getTime(),
+                    tl1PmPort.getInOctets(),
+                    tl1PmPort.getInOkPackets(),
+                    tl1PmPort.getInDiscardPackets(),
+                    tl1PmPort.getInErrorPackets(),
+                    tl1PmPort.getInPausePackets(),
+                    tl1PmPort.getInAlignmentErrors(),
+                    tl1PmPort.getInFcsErrors(),
+                    tl1PmPort.getInSymbolErrors(),
+                    tl1PmPort.getOutOctets(),
+                    tl1PmPort.getOutOkPackets(),
+                    tl1PmPort.getOutUnicastPackets(),
+                    tl1PmPort.getOutNonUnicastPackets(),
+                    tl1PmPort.getOutDiscardPackets(),
+                    tl1PmPort.getOutErrorPackets(),
+                    tl1PmPort.getOutBroadcastPackets(),
+                    tl1PmPort.getOutMulticastPackets(),
+                    tl1PmPort.getOutPausePackets(),
+                    tl1PmPort.getInRate(),
+                    tl1PmPort.getOutRate(),
+                    tl1PmPort.getInLossRatio(),
+                    tl1PmPort.getOutLossRatio(),
+                    tl1PmPort.getDate()
+            );
+
             return otnPmPort;
         });
 
