@@ -31,6 +31,17 @@ public class Tl1PmTemperature {
 
     }
 
+    public Tl1PmTemperature(String []fields) {
+        this.tid = fields[0];
+        this.systemType = fields[1];
+        this.slot = fields[2];
+        this.time = fields[3];
+        this.max = fields[4];
+        this.min = fields[5];
+        this.average = fields[6];
+        this.date = fields[7];
+    }
+
     @Override
     public String toString() {
         return "Tl1PmTemperature{" +
