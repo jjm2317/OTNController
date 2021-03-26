@@ -22,9 +22,9 @@ public class OtnPmPort {
     @GeneratedValue
     int pmPortId;
     String tid;
-    String aid;
-    String unit;
-    String date;
+    String systemType;
+    String slot;
+    String port;
     String time;
     String inOctets;
     String inOkPackets;
@@ -47,16 +47,17 @@ public class OtnPmPort {
     String outRate;
     String inLossRatio;
     String outLossRatio;
+    String date;
 
     public OtnPmPort() {
 
     }
 
-    public OtnPmPort(String tid, String aid, String unit, String date, String time, String inOctets, String inOkPackets, String inDiscardPackets, String inErrorPackets, String inPausePackets, String inAlignmentErrors, String inFcsErrors, String inSymbolErrors, String outOctets, String outOkPackets, String outUnicastPackets, String outNonUnicastPackets, String outDiscardPackets, String outErrorPackets, String outBroadcastPackets, String outMulticastPackets, String outPausePackets, String inRate, String outRate, String inLossRatio, String outLossRatio) {
+    public OtnPmPort(String tid, String systemType, String slot, String port, String time, String inOctets, String inOkPackets, String inDiscardPackets, String inErrorPackets, String inPausePackets, String inAlignmentErrors, String inFcsErrors, String inSymbolErrors, String outOctets, String outOkPackets, String outUnicastPackets, String outNonUnicastPackets, String outDiscardPackets, String outErrorPackets, String outBroadcastPackets, String outMulticastPackets, String outPausePackets, String inRate, String outRate, String inLossRatio, String outLossRatio, String date) {
         this.tid = tid;
-        this.aid = aid;
-        this.unit = unit;
-        this.date = date;
+        this.systemType = systemType;
+        this.slot = slot;
+        this.port = port;
         this.time = time;
         this.inOctets = inOctets;
         this.inOkPackets = inOkPackets;
@@ -79,15 +80,16 @@ public class OtnPmPort {
         this.outRate = outRate;
         this.inLossRatio = inLossRatio;
         this.outLossRatio = outLossRatio;
+        this.date = date;
     }
 
     @Override
     public String toString() {
         return "OtnPmPort{" +
                 "tid='" + tid + '\'' +
-                ", aid='" + aid + '\'' +
-                ", unit='" + unit + '\'' +
-                ", date='" + date + '\'' +
+                ", systemType='" + systemType + '\'' +
+                ", slot='" + slot + '\'' +
+                ", port='" + port + '\'' +
                 ", time='" + time + '\'' +
                 ", inOctets='" + inOctets + '\'' +
                 ", inOkPackets='" + inOkPackets + '\'' +
@@ -110,6 +112,7 @@ public class OtnPmPort {
                 ", outRate='" + outRate + '\'' +
                 ", inLossRatio='" + inLossRatio + '\'' +
                 ", outLossRatio='" + outLossRatio + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }
