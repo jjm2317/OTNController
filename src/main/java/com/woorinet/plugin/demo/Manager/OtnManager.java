@@ -258,6 +258,14 @@ public class OtnManager {
     }
 
     public void SDNSyncStart() throws Exception {
+        OTNSyncPmPw();
+        OTNSyncPmTunnel();
+        OTNSyncPmTemperature();
+        OTNSyncPmAc();
+        OTNSyncPmOptic();
+        OTNSyncPm();
+        OTNSyncPmPort();
+        OTNSyncPmOpticTemperature();
         // Node 데이터 업데이트
         SDNSyncNodeList();
         // Connector 데이터 업데이트
@@ -278,14 +286,6 @@ public class OtnManager {
         SDNSyncCryptoModule();
         // CryptoSession 데이터 업데이트
         SDNSyncCryptoSession();
-        OTNSyncPmPw();
-        OTNSyncPmTunnel();
-        OTNSyncPmTemperature();
-        OTNSyncPmAc();
-        OTNSyncPmOptic();
-        OTNSyncPm();
-        OTNSyncPmPort();
-        OTNSyncPmOpticTemperature();
     }
 
     private void SDNSyncNodeList() throws Exception {

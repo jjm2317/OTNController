@@ -31,6 +31,9 @@ public class Tl1PmOptic {
     String txAvgPower;
     String date;
 
+    public Tl1PmOptic() {
+
+    }
     public Tl1PmOptic(String tid, String systemType, String slot, String port, String pmType, String rxMinPower, String rxMaxPower, String rxAvgPower, String txMinPower, String txMaxPower, String txAvgPower, String date) {
         this.tid = tid;
         this.systemType = systemType;
