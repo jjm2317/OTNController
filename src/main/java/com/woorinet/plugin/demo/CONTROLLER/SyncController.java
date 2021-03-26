@@ -276,7 +276,7 @@ public class SyncController {
                     tl1KeyStateList,
                     tl1PmPortList);
             // Sync 시작
-            manager.SDNSyncStart();
+            manager.OtnSyncStart();
         } catch (Exception e) {
             e.printStackTrace();
             return "sdn synchronization fail";

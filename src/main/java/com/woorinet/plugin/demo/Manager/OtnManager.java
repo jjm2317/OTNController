@@ -226,32 +226,32 @@ public class OtnManager {
         }
     }
 
-    public void SDNSyncStart() throws Exception {
+    public void OtnSyncStart() throws Exception {
         // Node 데이터 업데이트
-        SDNSyncNodeList();
+        OtnSyncNodeList();
         // Connector 데이터 업데이트
-        SDNSyncConnectorList();
+        OtnSyncConnectorList();
         // Link 데이터 업데이트
-        SDNSyncLinkList();
+        OtnSyncLinkList();
         // Tunnel 데이터 업데이트
-        SDNSyncTunnelList();
+        OtnSyncTunnelList();
         // Service 데이터 업데이트
-        SDNSyncServiceList();
+        OtnSyncServiceList();
         // Path 데이터 업데이트
-        SDNSyncPathList();
+        OtnSyncPathList();
         // Constraint 데이터 업데이트
-        SDNSyncConstraint();
+        OtnSyncConstraint();
         // AccessIf 데이터 업데이트
-        SDNSyncAccess_if();
+        OtnSyncAccess_if();
         // CryptoModule 데이터 업데이트
-        SDNSyncCryptoModule();
+        OtnSyncCryptoModule();
         // CryptoSession 데이터 업데이트
-        SDNSyncCryptoSession();
+        OtnSyncCryptoSession();
         // PmPort 데이터 업데이트
-        SDNSyncPmPort();
+        OtnSyncPmPort();
     }
 
-    private void SDNSyncNodeList() throws Exception {
+    private void OtnSyncNodeList() throws Exception {
         Stream<OtnNode> sdnNodeStream = tl1NodeList
             .stream()
             .filter(tl1NodeState -> tl1NodeState.getNODE_TYPE().equals("otn"))
@@ -279,7 +279,7 @@ public class OtnManager {
         sdnNodeStream.forEach(otnNodeRepository::save);
     }
 
-    public void SDNSyncConnectorList( ) throws Exception {
+    public void OtnSyncConnectorList( ) throws Exception {
         Stream<OtnConnector> sdnConnectorStream = tl1OduNodeConnectorList
             .stream()
             .map(tl1OduNodeConnector -> {
@@ -335,7 +335,7 @@ public class OtnManager {
         sdnConnectorStream.forEach(otnConnectorRepository::save);
     }
 
-    public void SDNSyncLinkList ( ) throws Exception {
+    public void OtnSyncLinkList ( ) throws Exception {
         Stream<OtnLink> sdnLinkStream = tl1OduMplsIfList
             .stream()
             .map(tl1OduMplsIf -> {
@@ -403,7 +403,7 @@ public class OtnManager {
         sdnLinkStream.forEach(otnLinkRepository::save);
     }
 
-    public void SDNSyncServiceList( ) throws Exception {
+    public void OtnSyncServiceList( ) throws Exception {
 
         Stream<OtnService> sdnServiceStream = tl1OduListForService
             .stream()
@@ -446,7 +446,7 @@ public class OtnManager {
         sdnServiceStream.forEach(otnServiceRepository::save);
     }
 
-    public void SDNSyncTunnelList( ) throws  Exception {
+    public void OtnSyncTunnelList( ) throws  Exception {
         Stream<OtnTunnel> sdnTunnelStream = tl1OduList
             .stream()
             .map(tl1Odu -> {
@@ -489,7 +489,7 @@ public class OtnManager {
         sdnTunnelStream.forEach(otnTunnelRepository::save);
     }
 
-    public void SDNSyncPathList() throws  Exception {
+    public void OtnSyncPathList() throws  Exception {
         for (Map.Entry<String, List<Tl1Odu>> entry : tl1OduHashMapForPath.entrySet() ) {
             List<Tl1Odu> tl1Odu_list = entry.getValue();
             if(tl1Odu_list.size() != 4) continue;
@@ -602,7 +602,7 @@ public class OtnManager {
 
     }
 
-    public void SDNSyncConstraint() throws Exception {
+    public void OtnSyncConstraint() throws Exception {
         Stream<OtnConstraint> sdnConstraintStream = tl1OduListForService
             .stream()
             .map(tl1OduList -> {
@@ -626,7 +626,7 @@ public class OtnManager {
         sdnConstraintStream.forEach(otnConstraintRepository::save);
     }
 
-    public void SDNSyncAccess_if() throws Exception {
+    public void OtnSyncAccess_if() throws Exception {
         Stream<OtnAccessIf> sdnAccessIfStream = tl1MplsIfList
             .stream()
             .filter(tl1MplsIf -> tl1OduHashMapForMplsTp.get(tl1MplsIf.getTID()+ '/' + tl1MplsIf.getMPLS_TP_ID().split("-")[0] + "-" + tl1MplsIf.getMPLS_TP_ID().split("-")[1]) != null)
@@ -653,7 +653,7 @@ public class OtnManager {
         sdnAccessIfStream.forEach(otnAccessIfRepository::save);
     }
 
-    public void SDNSyncCryptoModule() throws Exception {
+    public void OtnSyncCryptoModule() throws Exception {
         for(Tl1ModuleInfo tl1ModuleInfo : tl1ModuleInfoList) {
             // aidPieces: [노드이름, 유니트 이름, 슬롯, 포트]
             String[] aidPieces = tl1ModuleInfo.getAID().split("-");
@@ -680,7 +680,7 @@ public class OtnManager {
         }
     }
 
-    public void SDNSyncCryptoSession() throws Exception {
+    public void OtnSyncCryptoSession() throws Exception {
         Stream<OtnCryptoSession> sdnCryptoSessionStream = tl1SessStateList.stream()
             .map(tl1SessState -> {
             Tl1KeyState tl1KeyState = tl1KeyStateHashMap.get(tl1SessState.getAID());
@@ -708,7 +708,7 @@ public class OtnManager {
         sdnCryptoSessionStream.forEach(otnCryptoSessionRepository::save);
     }
 
-    public void SDNSyncPmPort() throws Exception {
+    public void OtnSyncPmPort() throws Exception {
         Stream<OtnPmPort> sdnPmPortStream = tl1PmPortList.stream()
         .map(tl1PmPort -> {
             OtnPmPort otnPmPort = new OtnPmPort();
@@ -746,6 +746,8 @@ public class OtnManager {
         sdnPmPortStream.forEach(otnPmPortRepository::save);
 
     }
+
+    //cm module
 
 
 
