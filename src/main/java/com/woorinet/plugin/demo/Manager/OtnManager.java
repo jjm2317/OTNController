@@ -3,6 +3,7 @@ package com.woorinet.plugin.demo.Manager;
 import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPort;
 import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPw;
+import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmTunnel;
 import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
@@ -280,6 +281,7 @@ public class OtnManager {
         // CryptoSession 데이터 업데이트
         SDNSyncCryptoSession();
         OTNSyncPmPw();
+        OTNSyncPmTunnel();
         // PmPort 데이터 업데이트
         SDNSyncPmPort();
     }
@@ -742,7 +744,7 @@ public class OtnManager {
     }
 
     public void OTNSyncPmPw() throws Exception {
-        Stream<OtnPmPw> OtnPmPwStream = tl1PmPwList.stream()
+        Stream<OtnPmPw> otnPmPwStream = tl1PmPwList.stream()
             .map(tl1PmPw -> {
                OtnPmPw otnPmPw = new OtnPmPw(
                        tl1PmPw.getTid(),
@@ -761,7 +763,30 @@ public class OtnManager {
                );
                return otnPmPw;
             });
-        OtnPmPwStream.forEach(otnPmPwRepository::save);
+        otnPmPwStream.forEach(otnPmPwRepository::save);
+    }
+
+    public void OTNSyncPmTunnel() throws Exception {
+        Stream<OtnPmTunnel> otnPmTunnelStream = tl1PmTunnelList.stream()
+            .map(tl1PmTunnel -> {
+               OtnPmTunnel otnPmTunnel = new OtnPmTunnel(
+                       tl1PmTunnel.getTid(),
+                       tl1PmTunnel.getSystemType(),
+                       tl1PmTunnel.getSlot(),
+                       tl1PmTunnel.getPort(),
+                       tl1PmTunnel.getTime(),
+                       tl1PmTunnel.getName(),
+                       tl1PmTunnel.getIngPackets(),
+                       tl1PmTunnel.getIngBytes(),
+                       tl1PmTunnel.getIngRate(),
+                       tl1PmTunnel.getEgrPackets(),
+                       tl1PmTunnel.getEgrBytes(),
+                       tl1PmTunnel.getEgrRate(),
+                       tl1PmTunnel.getDate()
+               );
+               return otnPmTunnel;
+            });
+        otnPmTunnelStream.forEach(otnPmTunnelRepository::save);
     }
 
     public void SDNSyncPmPort() throws Exception {
