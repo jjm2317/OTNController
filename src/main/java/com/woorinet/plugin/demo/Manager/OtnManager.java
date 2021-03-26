@@ -3,6 +3,7 @@ package com.woorinet.plugin.demo.Manager;
 import com.woorinet.plugin.demo.DTO.OTN.*;
 import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPort;
 import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmPw;
+import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmTemperature;
 import com.woorinet.plugin.demo.DTO.OTN.PM.OtnPmTunnel;
 import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
@@ -282,6 +283,7 @@ public class OtnManager {
         SDNSyncCryptoSession();
         OTNSyncPmPw();
         OTNSyncPmTunnel();
+        OTNSyncPmTemperature();
         // PmPort 데이터 업데이트
         SDNSyncPmPort();
     }
@@ -787,6 +789,24 @@ public class OtnManager {
                return otnPmTunnel;
             });
         otnPmTunnelStream.forEach(otnPmTunnelRepository::save);
+    }
+
+    public void OTNSyncPmTemperature() throws Exception {
+        Stream<OtnPmTemperature> otnPmTemperatureStream = tl1PmTemperatureList.stream()
+            .map(tl1PmTemperature -> {
+               OtnPmTemperature otnPmTemperature = new OtnPmTemperature(
+                       tl1PmTemperature.getTid(),
+                       tl1PmTemperature.getSystemType(),
+                       tl1PmTemperature.getSlot(),
+                       tl1PmTemperature.getTime(),
+                       tl1PmTemperature.getMax(),
+                       tl1PmTemperature.getMin(),
+                       tl1PmTemperature.getAverage(),
+                       tl1PmTemperature.getDate()
+                       );
+               return otnPmTemperature;
+            });
+        otnPmTemperatureStream.forEach(otnPmTemperatureRepository::save);
     }
 
     public void SDNSyncPmPort() throws Exception {
