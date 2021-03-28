@@ -301,6 +301,14 @@ public class OtnManager {
         OtnSyncCryptoModule();
         // CryptoSession 데이터 업데이트
         OtnSyncCryptoSession();
+        // cmInventory 데이터 업데이트
+        OtnSyncCmInventory();
+        // cmLink 데이터 업데이트
+        OtnSyncCmLink();
+        // cmSession 데이터 업데이트
+        OtnSyncCmSession();
+        // cmQkdLink 데이터 업데이트
+        OtnSyncCmQkdLink();
     }
 
     private void OtnSyncNodeList() throws Exception {
@@ -1055,6 +1063,27 @@ public class OtnManager {
     }
 
     public void OtnSyncCmQkdLink() throws Exception {
-//        Stream<OtnCmQkdLink> otnCmQkdLinkStream =
+        Stream<OtnCmQkdLink> otnCmQkdLinkStream = tl1QkdInfoList.stream()
+            .map(tl1QkdInfo -> {
+                OtnCmQkdLink otnCmQkdLink = new OtnCmQkdLink(
+                        tl1QkdInfo.getTid(),//tid
+                        tl1QkdInfo.getAid().split("-")[0],//slot  AID(S03-P1)에서 1번째 값만 추출, 구분자는 '-'
+                        tl1QkdInfo.getAid().split("-")[1],//port  AID(S03-P1)에서 2번째 값만 추출, 구분자는 '-'
+                        tl1QkdInfo.getServer(),//server
+                        tl1QkdInfo.getServerPort(),//server_port
+                        tl1QkdInfo.getMasterSaeId(),//master_sae_id
+                        tl1QkdInfo.getSlaveSaeId(),//slave_sae_id
+                        tl1QkdInfo.getKeyIntfIp(),//key_intf_ip
+                        tl1QkdInfo.getKeyIntfNetmask(),//key_intf_netmask
+                        tl1QkdInfo.getKeyIntfGateway(),//key_intf_gateway
+                        tl1QkdInfo.getKeySize(),//key_skey_size(byte)
+                        tl1QkdInfo.getKeyStatus(),//kms_status
+                        tl1QkdInfo.getVendor()//vendor
+                );
+
+                return otnCmQkdLink;
+            });
+
+        otnCmQkdLinkStream.forEach(otnCmQkdLinkRepository::save);
     }
 }
