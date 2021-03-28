@@ -249,7 +249,7 @@ public class OtnManager {
             tl1OduNodeConnectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), tl1OduNodeConnector);
         }
         for(Tl1AccessIf Tl1AccessIf : tl1AccessIfList) {
-            tl1AccessIfHashMap.put(Tl1AccessIf.getTID(), Tl1AccessIf);
+            tl1AccessIfHashMap.put(Tl1AccessIf.getTid(), Tl1AccessIf);
         }
         for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfList) {
             tl1OduMplsIfHashMap.put(tl1OduMplsIf.getTID()+'/'+ tl1OduMplsIf.getMPLS_TP_ID(), tl1OduMplsIf);

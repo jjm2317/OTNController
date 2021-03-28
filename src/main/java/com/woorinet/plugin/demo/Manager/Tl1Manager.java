@@ -639,7 +639,7 @@ public class Tl1Manager {
             String cmd = "RTRV-ACCESS-IF:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1AccessIfRepository.save(new Tl1AccessIf(fields));
+                tl1AccessIfRepository.save(new Tl1AccessIf(fields, syncDate));
             }
         }
     }
