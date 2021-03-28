@@ -959,32 +959,32 @@ public class OtnManager {
         Stream<OtnCmSession> otnCmSessionStream = tl1SessStateList.stream()
             .map(tl1SessState -> {
                 Optional<Tl1KeyState> tl1KeyState= tl1KeyStateList.stream()
-                    .filter(keyState -> keyState.getAid().equals(tl1SessState.getAID())).findAny();
+                    .filter(keyState -> keyState.getAid().equals(tl1SessState.getAid())).findAny();
 
                 //AID(EMS_1000_B-OPN1000-S03-P1)에서 3번째 값만 추출, 구분자는 '-'
-                String slot = tl1SessState.getAID().split("-")[2];
-                String port = tl1SessState.getAID().split("-")[3];
+                String slot = tl1SessState.getAid().split("-")[2];
+                String port = tl1SessState.getAid().split("-")[3];
 
                 Optional<Tl1BypassInfo> tl1BypassInfo = tl1BypassInfoList.stream()
-                    .filter(bypassInfo -> bypassInfo.getTid().equals(tl1SessState.getTID())
+                    .filter(bypassInfo -> bypassInfo.getTid().equals(tl1SessState.getTid())
                             && bypassInfo.getAid().equals(slot + "-" + port)).findAny();
                 System.out.println(tl1KeyState + slot + port + tl1BypassInfo + ",....test");
                 OtnCmSession otnCmSession = new OtnCmSession(
-                        tl1SessState.getTID(),//tid
+                        tl1SessState.getTid(),//tid
                         slot,//slot
                         port,//port
-                        tl1SessState.getLOCAL_IP(),//local_ip
-                        tl1SessState.getREMOTE_IP(),//remote_ip
-                        tl1SessState.getKSP_MODE(),//ksp_mode
-                        tl1SessState.getDEAD_TIME(),//dead_time
-                        tl1SessState.getKEY_LIFE_TIME(),//key_life_time
-                        tl1SessState.getKEY_SRC_MODE(),//key_src_mode
-                        tl1SessState.getKEY_FAILOVER(),//key_failover
-                        tl1SessState.getRETRY_REQ_INTERVAL(),//retry_req_interval
-                        tl1SessState.getSESSION_STATE(),//session_state
-                        tl1SessState.getDST_LID(),//dst_lid
-                        tl1SessState.getCURRENT_TX_KEY_SRC_MODE(),//current_tx_key_src_mode
-                        tl1SessState.getCURRENT_RX_KEY_SRC_MODE(),//current_rx_key_src_mode
+                        tl1SessState.getLocalIp(),//local_ip
+                        tl1SessState.getRemoteIp(),//remote_ip
+                        tl1SessState.getKspMode(),//ksp_mode
+                        tl1SessState.getDeadTime(),//dead_time
+                        tl1SessState.getKeyLifeTime(),//key_life_time
+                        tl1SessState.getKeySrcMode(),//key_src_mode
+                        tl1SessState.getKeyFailover(),//key_failover
+                        tl1SessState.getRetryReqInterval(),//retry_req_interval
+                        tl1SessState.getSessionState(),//session_state
+                        tl1SessState.getDstLid(),//dst_lid
+                        tl1SessState.getCurrentTxKeySrcMode(),//current_tx_key_src_mode
+                        tl1SessState.getCurrentRxKeySrcMode(),//current_rx_key_src_mode
                         tl1KeyState.map(keyState -> keyState.getTxKeyState()).orElse(""),//tx_key_state
                         tl1KeyState.map(keyState -> keyState.getTxKeyBankState()).orElse(""),//tx_key_bank_state
                         tl1KeyState.map(keyState -> keyState.getRxKeyState()).orElse(""),//rx_key_state

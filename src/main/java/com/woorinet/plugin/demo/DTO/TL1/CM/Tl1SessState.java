@@ -18,59 +18,82 @@ import javax.persistence.Table;
 public class Tl1SessState {
     @Id
     @GeneratedValue
-    int SESS_STATE_ID;
-    String TID;
-    String SUBNETWORK;
-    String AID;
-    String LOCAL_IP;
-    String REMOTE_IP;
-    String KSP_MODE;
-    String DEAD_TIME;
-    String KEY_LIFE_TIME;
-    String KEY_SRC_MODE;
-    String KEY_FAILOVER;
-    String RETRY_REQ_INTERVAL;
-    String SESSION_STATE;
-    String DST_LID;
-    String CURRENT_TX_KEY_SRC_MODE;
-    String CURRENT_RX_KEY_SRC_MODE;
+    int sessStateId;
+    String tid;
+    String subnetwork;
+    String aid;
+    String localIp;
+    String remoteIp;
+    String kspMode;
+    String deadTime;
+    String keyLifeTime;
+    String keySrcMode;
+    String keyFailover;
+    String retryReqInterval;
+    String sessionState;
+    String dstLid;
+    String currentTxKeySrcMode;
+    String currentRxKeySrcMode;
+    String syncDate;
 
-
-    public Tl1SessState(String TID, String SUBNETWORK, String AID, String LOCAL_IP, String REMOTE_IP, String KSP_MODE, String DEAD_TIME, String KEY_LIFE_TIME, String KEY_SRC_MODE, String KEY_FAILOVER, String RETRY_REQ_INTERVAL, String SESSION_STATE, String DST_LID, String CURRENT_TX_KEY_SRC_MODE, String CURRENT_RX_KEY_SRC_MODE) {
-        this.TID = TID;
-        this.SUBNETWORK = SUBNETWORK;
-        this.AID = AID;
-        this.LOCAL_IP = LOCAL_IP;
-        this.REMOTE_IP = REMOTE_IP;
-        this.KSP_MODE = KSP_MODE;
-        this.DEAD_TIME = DEAD_TIME;
-        this.KEY_LIFE_TIME = KEY_LIFE_TIME;
-        this.KEY_SRC_MODE = KEY_SRC_MODE;
-        this.KEY_FAILOVER = KEY_FAILOVER;
-        this.RETRY_REQ_INTERVAL = RETRY_REQ_INTERVAL;
-        this.SESSION_STATE = SESSION_STATE;
-        this.DST_LID = DST_LID;
-        this.CURRENT_TX_KEY_SRC_MODE = CURRENT_TX_KEY_SRC_MODE;
-        this.CURRENT_RX_KEY_SRC_MODE = CURRENT_RX_KEY_SRC_MODE;
-    }
-
-    public Tl1SessState(String[] fields) {
-        this.TID = fields[0];
-        this.SUBNETWORK = fields[1];
-        this.AID = fields[2];
-        this.LOCAL_IP = fields[3];
-        this.REMOTE_IP = fields[4];
-        this.KSP_MODE = fields[5];
-        this.DEAD_TIME = fields[6];
-        this.KEY_LIFE_TIME = fields[7];
-        this.KEY_SRC_MODE = fields[8];
-        this.KEY_FAILOVER = fields[9];
-        this.RETRY_REQ_INTERVAL = fields[10];
-        this.SESSION_STATE = fields[11];
-        this.DST_LID = fields[12];
-        this.CURRENT_TX_KEY_SRC_MODE = fields[13];
-        this.CURRENT_RX_KEY_SRC_MODE = fields[14];
-    }
     public Tl1SessState() {
+    }
+
+    public Tl1SessState(String tid, String subnetwork, String aid, String localIp, String remoteIp, String kspMode, String deadTime, String keyLifeTime, String keySrcMode, String keyFailover, String retryReqInterval, String sessionState, String dstLid, String currentTxKeySrcMode, String currentRxKeySrcMode) {
+        this.tid = tid;
+        this.subnetwork = subnetwork;
+        this.aid = aid;
+        this.localIp = localIp;
+        this.remoteIp = remoteIp;
+        this.kspMode = kspMode;
+        this.deadTime = deadTime;
+        this.keyLifeTime = keyLifeTime;
+        this.keySrcMode = keySrcMode;
+        this.keyFailover = keyFailover;
+        this.retryReqInterval = retryReqInterval;
+        this.sessionState = sessionState;
+        this.dstLid = dstLid;
+        this.currentTxKeySrcMode = currentTxKeySrcMode;
+        this.currentRxKeySrcMode = currentRxKeySrcMode;
+    }
+
+    public Tl1SessState(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.subnetwork = fields[1];
+        this.aid = fields[2];
+        this.localIp = fields[3];
+        this.remoteIp = fields[4];
+        this.kspMode = fields[5];
+        this.deadTime = fields[6];
+        this.keyLifeTime = fields[7];
+        this.keySrcMode = fields[8];
+        this.keyFailover = fields[9];
+        this.retryReqInterval = fields[10];
+        this.sessionState = fields[11];
+        this.dstLid = fields[12];
+        this.currentTxKeySrcMode = fields[13];
+        this.currentRxKeySrcMode = fields[14];
+        this.syncDate = syncDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Tl1SessState{" +
+                "tid='" + tid + '\'' +
+                ", subnetwork='" + subnetwork + '\'' +
+                ", aid='" + aid + '\'' +
+                ", localIp='" + localIp + '\'' +
+                ", remoteIp='" + remoteIp + '\'' +
+                ", kspMode='" + kspMode + '\'' +
+                ", deadTime='" + deadTime + '\'' +
+                ", keyLifeTime='" + keyLifeTime + '\'' +
+                ", keySrcMode='" + keySrcMode + '\'' +
+                ", keyFailover='" + keyFailover + '\'' +
+                ", retryReqInterval='" + retryReqInterval + '\'' +
+                ", sessionState='" + sessionState + '\'' +
+                ", dstLid='" + dstLid + '\'' +
+                ", currentTxKeySrcMode='" + currentTxKeySrcMode + '\'' +
+                ", currentRxKeySrcMode='" + currentRxKeySrcMode + '\'' +
+                '}';
     }
 }

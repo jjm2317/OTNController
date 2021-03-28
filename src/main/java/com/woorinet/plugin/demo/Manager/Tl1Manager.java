@@ -758,7 +758,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                tl1SessStateRepository.save(new Tl1SessState(fields));
+                tl1SessStateRepository.save(new Tl1SessState(fields, syncDate));
             }
         }
     }
