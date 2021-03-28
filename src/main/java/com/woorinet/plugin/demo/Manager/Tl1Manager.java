@@ -510,7 +510,7 @@ public class Tl1Manager {
             String cmd = "RTRV-NODE-CONNECTOR:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                Tl1NodeConnector tl1NodeConnector = new Tl1NodeConnector(fields);
+                Tl1NodeConnector tl1NodeConnector = new Tl1NodeConnector(fields, syncDate);
                 tl1NodeConnectorRepository.save(tl1NodeConnector);
                 tl1NodeConnectorList.add(tl1NodeConnector);
             }
