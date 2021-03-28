@@ -73,7 +73,7 @@ public class Tl1Odu {
 
     }
 
-    public Tl1Odu(String[] fields) {
+    public Tl1Odu(String[] fields, String syncDate) {
         this.tidId = fields[0];
         this.tid = fields[1];
         this.subnetId = fields[2];
@@ -123,6 +123,7 @@ public class Tl1Odu {
         this.creationDate = fields[46];
         this.modifiedDate = fields[47];
         this.tunnelPort = fields[48];
+        this.syncDate = syncDate;
     }
 
     @Override

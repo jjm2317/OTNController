@@ -691,7 +691,7 @@ public class Tl1Manager {
             String cmd = "RTRV-ODU:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1OduRepository.save(new Tl1Odu(fields));
+                tl1OduRepository.save(new Tl1Odu(fields, syncDate));
             }
         }
     }
