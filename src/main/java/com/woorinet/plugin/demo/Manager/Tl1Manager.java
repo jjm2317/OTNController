@@ -833,7 +833,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                tl1CryptoModeRepository.save(new Tl1CryptoMode(fields));
+                tl1CryptoModeRepository.save(new Tl1CryptoMode(fields,syncDate));
             }
         }
     }

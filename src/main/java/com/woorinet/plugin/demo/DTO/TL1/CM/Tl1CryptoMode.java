@@ -18,41 +18,42 @@ import javax.persistence.Table;
 public class Tl1CryptoMode {
     @Id
     @GeneratedValue
-    int CRYPTO_MODE_ID;
-    String TID;
-    String SUBNETWORK;
-    String AID;
-    String UNIT_TYPE;
-    String MODE;
+    int cryptoModeId;
+    String tid;
+    String subnetwork;
+    String aid;
+    String unitType;
+    String mode;
+    String syncDate;
 
     public Tl1CryptoMode() {
     }
 
-    public Tl1CryptoMode(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String MODE) {
-        this.TID = TID;
-        this.SUBNETWORK = SUBNETWORK;
-        this.AID = AID;
-        this.UNIT_TYPE = UNIT_TYPE;
-        this.MODE = MODE;
+    public Tl1CryptoMode(String tid, String subnetwork, String aid, String unitType, String mode) {
+        this.tid = tid;
+        this.subnetwork = subnetwork;
+        this.aid = aid;
+        this.unitType = unitType;
+        this.mode = mode;
     }
 
-    public Tl1CryptoMode(String[] fields) {
-        this.TID = fields[0];
-        this.SUBNETWORK = fields[1];
-        this.AID = fields[2];
-        this.UNIT_TYPE = fields[3];
-        this.MODE = fields[4];
+    public Tl1CryptoMode(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.subnetwork = fields[1];
+        this.aid = fields[2];
+        this.unitType = fields[3];
+        this.mode = fields[4];
+        this.syncDate = syncDate;
     }
-
 
     @Override
     public String toString() {
-        return "CRYPTO_MODE{" +
-                "TID='" + TID + '\'' +
-                ", SUBNETWORK='" + SUBNETWORK + '\'' +
-                ", AID='" + AID + '\'' +
-                ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
-                ", MODE='" + MODE + '\'' +
+        return "Tl1CryptoMode{" +
+                "tid='" + tid + '\'' +
+                ", subnetwork='" + subnetwork + '\'' +
+                ", aid='" + aid + '\'' +
+                ", unitType='" + unitType + '\'' +
+                ", mode='" + mode + '\'' +
                 '}';
     }
 }
