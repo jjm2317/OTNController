@@ -1081,8 +1081,8 @@ public class OtnManager {
                         tl1QkdInfo.getKeyIntfIp(),//key_intf_ip
                         tl1QkdInfo.getKeyIntfNetmask(),//key_intf_netmask
                         tl1QkdInfo.getKeyIntfGateway(),//key_intf_gateway
-                        tl1QkdInfo.getKeySize(),//key_skey_size(byte)
-                        tl1QkdInfo.getKeyStatus(),//kms_status
+                        tl1QkdInfo.getKeySize(),//key_key_size(byte)
+                        tl1QkdInfo.getKmsStatus(),//kms_status
                         tl1QkdInfo.getVendor()//vendor
                 );
 

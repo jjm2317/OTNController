@@ -31,13 +31,13 @@ public class Tl1QkdInfo {
     String keySrc;
     String keyFailover;
     String keySize;
-    String keyStatus;
+    String kmsStatus;
     String vendor;
 
     public Tl1QkdInfo() {
     }
 
-    public Tl1QkdInfo(String tid, String subnet, String aid, String server, String serverPort, String masterSaeId, String slaveSaeId, String keyIntfIp, String keyIntfNetmask, String keyIntfGateway, String keySrc, String keyFailover, String keySize, String keyStatus, String vendor) {
+    public Tl1QkdInfo(String tid, String subnet, String aid, String server, String serverPort, String masterSaeId, String slaveSaeId, String keyIntfIp, String keyIntfNetmask, String keyIntfGateway, String keySrc, String keyFailover, String keySize, String kmsStatus, String vendor) {
         this.tid = tid;
         this.subnet = subnet;
         this.aid = aid;
@@ -51,7 +51,7 @@ public class Tl1QkdInfo {
         this.keySrc = keySrc;
         this.keyFailover = keyFailover;
         this.keySize = keySize;
-        this.keyStatus = keyStatus;
+        this.kmsStatus = kmsStatus;
         this.vendor = vendor;
     }
 
@@ -69,7 +69,7 @@ public class Tl1QkdInfo {
         this.keySrc = fields[10];
         this.keyFailover = fields[11];
         this.keySize = fields[12];
-        this.keyStatus = fields[13];
+        this.kmsStatus = fields[13];
         this.vendor = fields[14];
     }
 
@@ -89,7 +89,7 @@ public class Tl1QkdInfo {
                 ", keySrc='" + keySrc + '\'' +
                 ", keyFailover='" + keyFailover + '\'' +
                 ", keySize='" + keySize + '\'' +
-                ", keyStatus='" + keyStatus + '\'' +
+                ", kmsStatus='" + kmsStatus + '\'' +
                 ", vendor='" + vendor + '\'' +
                 '}';
     }

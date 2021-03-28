@@ -32,14 +32,14 @@ public class OtnCmQkdLink {
     String keyIntfIp;
     String keyIntfNetmask;
     String keyIntfGateway;
-    String keySkeySize;
+    String keySize;
     String kmsStatus;
     String vendor;
 
     public OtnCmQkdLink() {
     }
 
-    public OtnCmQkdLink(String tid, String slot, String port, String server, String serverPort, String masterSaeId, String slaveSaeId, String keyIntfIp, String keyIntfNetmask, String keyIntfGateway, String keySkeySize, String kmsStatus, String vendor) {
+    public OtnCmQkdLink(String tid, String slot, String port, String server, String serverPort, String masterSaeId, String slaveSaeId, String keyIntfIp, String keyIntfNetmask, String keyIntfGateway, String keySize, String kmsStatus, String vendor) {
         this.tid = tid;
         this.slot = slot;
         this.port = port;
@@ -50,7 +50,7 @@ public class OtnCmQkdLink {
         this.keyIntfIp = keyIntfIp;
         this.keyIntfNetmask = keyIntfNetmask;
         this.keyIntfGateway = keyIntfGateway;
-        this.keySkeySize = keySkeySize;
+        this.keySize = keySize;
         this.kmsStatus = kmsStatus;
         this.vendor = vendor;
     }
@@ -68,7 +68,7 @@ public class OtnCmQkdLink {
                 ", keyIntfIp='" + keyIntfIp + '\'' +
                 ", keyIntfNetmask='" + keyIntfNetmask + '\'' +
                 ", keyIntfGateway='" + keyIntfGateway + '\'' +
-                ", keySkeySize='" + keySkeySize + '\'' +
+                ", keySize='" + keySize + '\'' +
                 ", kmsStatus='" + kmsStatus + '\'' +
                 ", vendor='" + vendor + '\'' +
                 '}';
