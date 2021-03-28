@@ -2,6 +2,7 @@ package com.woorinet.plugin.demo.CONTROLLER;
 
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
+import com.woorinet.plugin.demo.DTO.TL1.CM.*;
 import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Manager.OtnManager;

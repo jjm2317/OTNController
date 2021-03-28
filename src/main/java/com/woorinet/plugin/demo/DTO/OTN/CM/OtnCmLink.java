@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.DTO.OTN;
+package com.woorinet.plugin.demo.DTO.OTN.CM;
 
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

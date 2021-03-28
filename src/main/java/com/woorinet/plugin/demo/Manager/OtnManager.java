@@ -1,7 +1,12 @@
 package com.woorinet.plugin.demo.Manager;
 
 import com.woorinet.plugin.demo.DTO.OTN.*;
+import com.woorinet.plugin.demo.DTO.OTN.CM.OtnCmInventory;
+import com.woorinet.plugin.demo.DTO.OTN.CM.OtnCmLink;
+import com.woorinet.plugin.demo.DTO.OTN.CM.OtnCmQkdLink;
+import com.woorinet.plugin.demo.DTO.OTN.CM.OtnCmSession;
 import com.woorinet.plugin.demo.DTO.OTN.PM.*;
+import com.woorinet.plugin.demo.DTO.TL1.CM.*;
 import com.woorinet.plugin.demo.DTO.TL1.PM.*;
 import com.woorinet.plugin.demo.DTO.TL1.*;
 import com.woorinet.plugin.demo.Repository.OTN.*;
@@ -1027,7 +1032,7 @@ public class OtnManager {
                 Optional<Tl1BypassInfo> tl1BypassInfo = tl1BypassInfoList.stream()
                     .filter(bypassInfo -> bypassInfo.getTID().equals(tl1SessState.getTID())
                             && bypassInfo.getAID().equals(slot + "-" + port)).findAny();
-
+                System.out.println(tl1KeyState + slot + port + tl1BypassInfo + ",....test");
                 OtnCmSession otnCmSession = new OtnCmSession(
                         tl1SessState.getTID(),//tid
                         slot,//slot
