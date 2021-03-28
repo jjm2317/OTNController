@@ -627,7 +627,7 @@ public class Tl1Manager {
             String cmd = "RTRV-MPLS-AC:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                Tl1MplsAc tl1MplsAc = new Tl1MplsAc(fields);
+                Tl1MplsAc tl1MplsAc = new Tl1MplsAc(fields,syncDate);
                 tl1MplsAcRepository.save(tl1MplsAc);
                 tl1MplsAcList.add(tl1MplsAc);
             }
