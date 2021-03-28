@@ -28,10 +28,6 @@ public class OtnController {
     @Autowired
     private OtnPathRepository otnPathRepository;
     @Autowired
-    private OtnCryptoModuleRepository otnCryptoModuleRepository;
-    @Autowired
-    private OtnCryptoSessionRepository otnCryptoSessionRepository;
-    @Autowired
     private OtnPmPortRepository otnPmPortRepository;
 
     @ApiOperation(value = "get node list", notes = "전체 노드 조회")
