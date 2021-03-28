@@ -17,125 +17,168 @@ import javax.persistence.Table;
 public class Tl1StunnelTransit {
     @Id
     @GeneratedValue
-    int STUNNEL_TRANSIT_ID;
-    String TID_ID;
-    String TID;
-    String SUBNET_ID;
-    String SUBNET;
-    String TU_XC_ID;
-    String LOCAL_ID;
-    String REQUEST_ID;
-    String NAME;
-    String DESCR;
-    String CROSS_CONNECT_TYPE;
-    String ROLE;
-    String SRC_SUBNET;
-    String SRC_TID_ID;
-    String SRC_TID;
-    String DST_SUBNET;
-    String DST_TID_ID;
-    String DST_TID;
-    String TU_XC_OPERATIONAL_STATUS;
-    String TU_XC_CONFIGURATION_ACTION;
-    String TU_XC_CONFIGURATION_RESULT;
-    String DEPLOYMENT_ENABLER;
-    String DEPLOYMENT_STATUS;
-    String CIR;
-    String PIR;
-    String PATH_PROTECTION;
-    String PATH_STATUS;
-    String FROM_PORT;
-    String EAST_IN_LABEL;
-    String EAST_OUT_LABEL;
-    String TO_PORT;
-    String WEST_IN_LABEL;
-    String WEST_OUT_LABEL;
-    String PROTECTION_TYPE;
-    String PATH_TYPE;
-    String ING_LSR;
-    String ENG_LSR;
+    int stunnelTransitId;
+    String tidId;
+    String tid;
+    String subnetId;
+    String subnet;
+    String tuXcId;
+    String localId;
+    String requestId;
+    String name;
+    String descr;
+    String crossConnectType;
+    String role;
+    String srcSubnet;
+    String srcTidId;
+    String srcTid;
+    String dstSubnet;
+    String dstTidId;
+    String dstTid;
+    String tuXcOperationalStatus;
+    String tuXcConfigurationAction;
+    String tuXcConfigurationResult;
+    String deploymentEnabler;
+    String deploymentStatus;
+    String cir;
+    String pir;
+    String pathProtection;
+    String pathStatus;
+    String fromPort;
+    String eastInLabel;
+    String eastOutLabel;
+    String toPort;
+    String westInLabel;
+    String westOutLabel;
+    String protectionType;
+    String pathType;
+    String ingLsr;
+    String engLsr;
+    String syncDate;
 
     public Tl1StunnelTransit() {
 
     }
-    public Tl1StunnelTransit(String[] fields) {
-        this.TID_ID = fields[0];
-        this.TID = fields[1];
-        this.SUBNET_ID = fields[2];
-        this.SUBNET = fields[3];
-        this.TU_XC_ID = fields[4];
-        this.LOCAL_ID = fields[5];
-        this.REQUEST_ID = fields[6];
-        this.NAME = fields[7];
-        this.DESCR = fields[8];
-        this.CROSS_CONNECT_TYPE = fields[9];
-        this.ROLE = fields[10];
-        this.SRC_SUBNET = fields[11];
-        this.SRC_TID_ID = fields[12];
-        this.SRC_TID = fields[13];
-        this.DST_SUBNET = fields[14];
-        this.DST_TID_ID = fields[15];
-        this.DST_TID = fields[16];
-        this.TU_XC_OPERATIONAL_STATUS = fields[17];
-        this.TU_XC_CONFIGURATION_ACTION = fields[18];
-        this.TU_XC_CONFIGURATION_RESULT = fields[19];
-        this.DEPLOYMENT_ENABLER = fields[20];
-        this.DEPLOYMENT_STATUS = fields[21];
-        this.CIR = fields[22];
-        this.PIR = fields[23];
-        this.PATH_PROTECTION = fields[24];
-        this.PATH_STATUS = fields[25];
-        this.FROM_PORT = fields[26];
-        this.EAST_IN_LABEL = fields[27];
-        this.EAST_OUT_LABEL = fields[28];
-        this.TO_PORT = fields[29];
-        this.WEST_IN_LABEL = fields[30];
-        this.WEST_OUT_LABEL = fields[31];
-        this.PROTECTION_TYPE = fields[32];
-        this.PATH_TYPE = fields[33];
-        this.ING_LSR = fields[34];
-        this.ENG_LSR = fields[35];
+    public Tl1StunnelTransit(String[] fields, String syncDate) {
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.subnetId = fields[2];
+        this.subnet = fields[3];
+        this.tuXcId = fields[4];
+        this.localId = fields[5];
+        this.requestId = fields[6];
+        this.name = fields[7];
+        this.descr = fields[8];
+        this.crossConnectType = fields[9];
+        this.role = fields[10];
+        this.srcSubnet = fields[11];
+        this.srcTidId = fields[12];
+        this.srcTid = fields[13];
+        this.dstSubnet = fields[14];
+        this.dstTidId = fields[15];
+        this.dstTid = fields[16];
+        this.tuXcOperationalStatus = fields[17];
+        this.tuXcConfigurationAction = fields[18];
+        this.tuXcConfigurationResult = fields[19];
+        this.deploymentEnabler = fields[20];
+        this.deploymentStatus = fields[21];
+        this.cir = fields[22];
+        this.pir = fields[23];
+        this.pathProtection = fields[24];
+        this.pathStatus = fields[25];
+        this.fromPort = fields[26];
+        this.eastInLabel = fields[27];
+        this.eastOutLabel = fields[28];
+        this.toPort = fields[29];
+        this.westInLabel = fields[30];
+        this.westOutLabel = fields[31];
+        this.protectionType = fields[32];
+        this.pathType = fields[33];
+        this.ingLsr = fields[34];
+        this.engLsr = fields[35];
+        this.syncDate = syncDate;
+    }
+
+    public Tl1StunnelTransit(String tidId, String tid, String subnetId, String subnet, String tuXcId, String localId, String requestId, String name, String descr, String crossConnectType, String role, String srcSubnet, String srcTidId, String srcTid, String dstSubnet, String dstTidId, String dstTid, String tuXcOperationalStatus, String tuXcConfigurationAction, String tuXcConfigurationResult, String deploymentEnabler, String deploymentStatus, String cir, String pir, String pathProtection, String pathStatus, String fromPort, String eastInLabel, String eastOutLabel, String toPort, String westInLabel, String westOutLabel, String protectionType, String pathType, String ingLsr, String engLsr, String syncDate) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.subnetId = subnetId;
+        this.subnet = subnet;
+        this.tuXcId = tuXcId;
+        this.localId = localId;
+        this.requestId = requestId;
+        this.name = name;
+        this.descr = descr;
+        this.crossConnectType = crossConnectType;
+        this.role = role;
+        this.srcSubnet = srcSubnet;
+        this.srcTidId = srcTidId;
+        this.srcTid = srcTid;
+        this.dstSubnet = dstSubnet;
+        this.dstTidId = dstTidId;
+        this.dstTid = dstTid;
+        this.tuXcOperationalStatus = tuXcOperationalStatus;
+        this.tuXcConfigurationAction = tuXcConfigurationAction;
+        this.tuXcConfigurationResult = tuXcConfigurationResult;
+        this.deploymentEnabler = deploymentEnabler;
+        this.deploymentStatus = deploymentStatus;
+        this.cir = cir;
+        this.pir = pir;
+        this.pathProtection = pathProtection;
+        this.pathStatus = pathStatus;
+        this.fromPort = fromPort;
+        this.eastInLabel = eastInLabel;
+        this.eastOutLabel = eastOutLabel;
+        this.toPort = toPort;
+        this.westInLabel = westInLabel;
+        this.westOutLabel = westOutLabel;
+        this.protectionType = protectionType;
+        this.pathType = pathType;
+        this.ingLsr = ingLsr;
+        this.engLsr = engLsr;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "STUNNEL_TRANSIT{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", TU_XC_ID='" + TU_XC_ID + '\'' +
-                ", LOCAL_ID='" + LOCAL_ID + '\'' +
-                ", REQUEST_ID='" + REQUEST_ID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", DESCR='" + DESCR + '\'' +
-                ", CROSS_CONNECT_TYPE='" + CROSS_CONNECT_TYPE + '\'' +
-                ", ROLE='" + ROLE + '\'' +
-                ", SRC_SUBNET='" + SRC_SUBNET + '\'' +
-                ", SRC_TID_ID='" + SRC_TID_ID + '\'' +
-                ", SRC_TID='" + SRC_TID + '\'' +
-                ", DST_SUBNET='" + DST_SUBNET + '\'' +
-                ", DST_TID_ID='" + DST_TID_ID + '\'' +
-                ", DST_TID='" + DST_TID + '\'' +
-                ", TU_XC_OPERATIONAL_STATUS='" + TU_XC_OPERATIONAL_STATUS + '\'' +
-                ", TU_XC_CONFIGURATION_ACTION='" + TU_XC_CONFIGURATION_ACTION + '\'' +
-                ", TU_XC_CONFIGURATION_RESULT='" + TU_XC_CONFIGURATION_RESULT + '\'' +
-                ", DEPLOYMENT_ENABLER='" + DEPLOYMENT_ENABLER + '\'' +
-                ", DEPLOYMENT_STATUS='" + DEPLOYMENT_STATUS + '\'' +
-                ", CIR='" + CIR + '\'' +
-                ", PIR='" + PIR + '\'' +
-                ", PATH_PROTECTION='" + PATH_PROTECTION + '\'' +
-                ", PATH_STATUS='" + PATH_STATUS + '\'' +
-                ", FROM_PORT='" + FROM_PORT + '\'' +
-                ", EAST_IN_LABEL='" + EAST_IN_LABEL + '\'' +
-                ", EAST_OUT_LABEL='" + EAST_OUT_LABEL + '\'' +
-                ", TO_PORT='" + TO_PORT + '\'' +
-                ", WEST_IN_LABEL='" + WEST_IN_LABEL + '\'' +
-                ", WEST_OUT_LABEL='" + WEST_OUT_LABEL + '\'' +
-                ", PROTECTION_TYPE='" + PROTECTION_TYPE + '\'' +
-                ", PATH_TYPE='" + PATH_TYPE + '\'' +
-                ", ING_LSR='" + ING_LSR + '\'' +
-                ", ENG_LSR='" + ENG_LSR + '\'' +
+        return "Tl1StunnelTransit{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", tuXcId='" + tuXcId + '\'' +
+                ", localId='" + localId + '\'' +
+                ", requestId='" + requestId + '\'' +
+                ", name='" + name + '\'' +
+                ", descr='" + descr + '\'' +
+                ", crossConnectType='" + crossConnectType + '\'' +
+                ", role='" + role + '\'' +
+                ", srcSubnet='" + srcSubnet + '\'' +
+                ", srcTidId='" + srcTidId + '\'' +
+                ", srcTid='" + srcTid + '\'' +
+                ", dstSubnet='" + dstSubnet + '\'' +
+                ", dstTidId='" + dstTidId + '\'' +
+                ", dstTid='" + dstTid + '\'' +
+                ", tuXcOperationalStatus='" + tuXcOperationalStatus + '\'' +
+                ", tuXcConfigurationAction='" + tuXcConfigurationAction + '\'' +
+                ", tuXcConfigurationResult='" + tuXcConfigurationResult + '\'' +
+                ", deploymentEnabler='" + deploymentEnabler + '\'' +
+                ", deploymentStatus='" + deploymentStatus + '\'' +
+                ", cir='" + cir + '\'' +
+                ", pir='" + pir + '\'' +
+                ", pathProtection='" + pathProtection + '\'' +
+                ", pathStatus='" + pathStatus + '\'' +
+                ", fromPort='" + fromPort + '\'' +
+                ", eastInLabel='" + eastInLabel + '\'' +
+                ", eastOutLabel='" + eastOutLabel + '\'' +
+                ", toPort='" + toPort + '\'' +
+                ", westInLabel='" + westInLabel + '\'' +
+                ", westOutLabel='" + westOutLabel + '\'' +
+                ", protectionType='" + protectionType + '\'' +
+                ", pathType='" + pathType + '\'' +
+                ", ingLsr='" + ingLsr + '\'' +
+                ", engLsr='" + engLsr + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
