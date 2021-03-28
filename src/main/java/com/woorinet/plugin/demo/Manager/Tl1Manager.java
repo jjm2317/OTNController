@@ -743,7 +743,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                tl1InventoryRepository.save(new Tl1Inventory(fields));
+                tl1InventoryRepository.save(new Tl1Inventory(fields,syncDate));
             }
         }
     }

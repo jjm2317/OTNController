@@ -1,12 +1,11 @@
 package com.woorinet.plugin.demo.DTO.TL1;
 
 import lombok.Data;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,40 +17,47 @@ import javax.persistence.Table;
 public class Tl1Inventory {
 
     @Id
-    @Generated
-    String TID;
-    String UNIT_TYPE;
-    String VENDOR;
-    String DAT;
-    String SERIAL_NUM;
+    @GeneratedValue
+    int inventoryId;
+    String tid;
+    String unitType;
+    String vendor;
+    String dat;
+    String serialNum;
+    String syncDate;
 
     public Tl1Inventory() {
     }
 
-    public Tl1Inventory(String TID, String UNIT_TYPE, String VENDOR, String DAT, String SERIAL_NU) {
-        this.TID = TID;
-        this.UNIT_TYPE = UNIT_TYPE;
-        this.VENDOR = VENDOR;
-        this.DAT = DAT;
-        this.SERIAL_NUM = SERIAL_NU;
-    }
-
-    public Tl1Inventory(String[] fields) {
-        this.TID = fields[0];
-        this.UNIT_TYPE = fields[1];
-        this.VENDOR = fields[2];
-        this.DAT = fields[3];
-        this.SERIAL_NUM = fields[4];
+    public Tl1Inventory(String tid, String unitType, String vendor, String dat, String serialNum, String syncDate) {
+        this.tid = tid;
+        this.unitType = unitType;
+        this.vendor = vendor;
+        this.dat = dat;
+        this.serialNum = serialNum;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "INVENTORY{" +
-                "TID='" + TID + '\'' +
-                ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
-                ", VENDOR='" + VENDOR + '\'' +
-                ", DAT='" + DAT + '\'' +
-                ", SERIAL_NU='" + SERIAL_NUM + '\'' +
+        return "Tl1Inventory{" +
+                "tid='" + tid + '\'' +
+                ", unitType='" + unitType + '\'' +
+                ", vendor='" + vendor + '\'' +
+                ", dat='" + dat + '\'' +
+                ", serialNum='" + serialNum + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
+
+    public Tl1Inventory(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.unitType = fields[1];
+        this.vendor = fields[2];
+        this.dat = fields[3];
+        this.serialNum = fields[4];
+        this.syncDate = syncDate;
+    }
+
+
 }
