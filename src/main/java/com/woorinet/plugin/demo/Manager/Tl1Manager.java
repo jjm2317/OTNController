@@ -325,7 +325,7 @@ public class Tl1Manager {
             try{
                 ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
                 for(String[] fields : fieldsList) {
-                    tl1PmOpticTemperatureRepository.save(new Tl1PmOpticTemperature(fields));
+                    tl1PmOpticTemperatureRepository.save(new Tl1PmOpticTemperature(fields, syncDate));
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();
