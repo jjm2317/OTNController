@@ -555,7 +555,7 @@ public class Tl1Manager {
             String cmd = "RTRV-ODU-MPLS-IF:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                Tl1OduMplsIf tl1OduMplsIf = new Tl1OduMplsIf(fields);
+                Tl1OduMplsIf tl1OduMplsIf = new Tl1OduMplsIf(fields, syncDate);
                 tl1OduMplsIfRepository.save(tl1OduMplsIf);
                 tl1OduMplsIfList.add(tl1OduMplsIf);
             }
@@ -882,8 +882,8 @@ public class Tl1Manager {
     public String getMITypeByTID(List<Tl1OduMplsIf> tl1OduMplsIfs, String TID) {
         String result = "";
         for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfs) {
-            if (!tl1OduMplsIf.getTID().equals(TID)) continue;
-            result = tl1OduMplsIf.getMPLSIF_TYPE();
+            if (!tl1OduMplsIf.getTid().equals(TID)) continue;
+            result = tl1OduMplsIf.getMplsifType();
             return result;
         }
         return result;

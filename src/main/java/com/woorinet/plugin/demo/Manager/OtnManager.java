@@ -252,7 +252,7 @@ public class OtnManager {
             tl1AccessIfHashMap.put(Tl1AccessIf.getTid(), Tl1AccessIf);
         }
         for(Tl1OduMplsIf tl1OduMplsIf : tl1OduMplsIfList) {
-            tl1OduMplsIfHashMap.put(tl1OduMplsIf.getTID()+'/'+ tl1OduMplsIf.getMPLS_TP_ID(), tl1OduMplsIf);
+            tl1OduMplsIfHashMap.put(tl1OduMplsIf.getTid()+'/'+ tl1OduMplsIf.getMplsTpId(), tl1OduMplsIf);
         }
         for(Tl1CmPort tl1CmPort : tl1CmPortList) {
             tl1CmPortHashMap.put(tl1CmPort.getAid(), tl1CmPort);
@@ -394,18 +394,18 @@ public class OtnManager {
         Stream<OtnLink> sdnLinkStream = tl1OduMplsIfList
             .stream()
             .map(tl1OduMplsIf -> {
-                Tl1SystemInfo srcTl1SystemInfo = tl1SystemInfoHashMap.get(tl1OduMplsIf.getSRC_TID());
-                Tl1SystemInfo dstTl1SystemInfo = tl1SystemInfoHashMap.get(tl1OduMplsIf.getDST_TID());
-                OtnNode srcOtnNode = sdnNodeHashMap.get(tl1OduMplsIf.getSRC_TID());
-                OtnNode dstOtnNode = sdnNodeHashMap.get(tl1OduMplsIf.getDST_TID());
-                OtnConnector srcOtnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
-                OtnConnector dstOtnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDST_TID()+ '/' + tl1OduMplsIf.getDST_PORT());
-                Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduMplsIf.getTID() + '/' + tl1OduMplsIf.getMPLS_TP_ID());
-                Tl1Odu tl1Odu = tl1OduHashMapForOduTunnel.get(tl1OduMplsIf.getTID()+ '/' + tl1OduMplsIf.getMPLS_TP_ID());
-                Tl1OduNodeConnector tl1OduNodeConnector = tl1OduNodeConnectorHashMap.get(tl1OduMplsIf.getSRC_TID()+ '/' + tl1OduMplsIf.getSRC_PORT());
+                Tl1SystemInfo srcTl1SystemInfo = tl1SystemInfoHashMap.get(tl1OduMplsIf.getSrcTid());
+                Tl1SystemInfo dstTl1SystemInfo = tl1SystemInfoHashMap.get(tl1OduMplsIf.getDstTid());
+                OtnNode srcOtnNode = sdnNodeHashMap.get(tl1OduMplsIf.getSrcTid());
+                OtnNode dstOtnNode = sdnNodeHashMap.get(tl1OduMplsIf.getDstTid());
+                OtnConnector srcOtnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getSrcTid()+ '/' + tl1OduMplsIf.getSrcPort());
+                OtnConnector dstOtnConnector = sdnConnectorHashMap.get(tl1OduMplsIf.getDstTid()+ '/' + tl1OduMplsIf.getDstPort());
+                Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduMplsIf.getTid() + '/' + tl1OduMplsIf.getMplsTpId());
+                Tl1Odu tl1Odu = tl1OduHashMapForOduTunnel.get(tl1OduMplsIf.getTid()+ '/' + tl1OduMplsIf.getMplsTpId());
+                Tl1OduNodeConnector tl1OduNodeConnector = tl1OduNodeConnectorHashMap.get(tl1OduMplsIf.getSrcTid()+ '/' + tl1OduMplsIf.getSrcPort());
 
-                int maximumBandwidth = Integer.parseInt(tl1OduMplsIf.getMAXIMUM_BANDWIDTH());
-                int availableBandwidth = Integer.parseInt(tl1OduMplsIf.getAVAILABLE_BANDWIDTH());
+                int maximumBandwidth = Integer.parseInt(tl1OduMplsIf.getMaximumBandwidth());
+                int availableBandwidth = Integer.parseInt(tl1OduMplsIf.getAvailableBandwidth());
 
                 String linkId = srcTl1SystemInfo.getVENDOR() + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
                         srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId()
@@ -416,14 +416,14 @@ public class OtnManager {
                         200009, // ems_id
                         200009, // dst_ems_id
                         linkId, // link_id
-                        tl1OduMplsIf.getNAME(), // link_nm
+                        tl1OduMplsIf.getName(), // link_nm
                         srcOtnNode.getNeId(), // src_ne_id
                         srcOtnNode.getNeName(), // src_ne_name
                         srcOtnConnector.getConnectId(), // src_node_connector_id
                         dstOtnNode.getNeId(), // dst_ne_id
                         dstOtnNode.getNeName(), // dst_ne_name
                         dstOtnConnector.getConnectId(), // dst_node_connector_id
-                        tl1OduMplsIf.getLINK_TYPE(), // link_type
+                        tl1OduMplsIf.getLinkType(), // link_type
                         tl1OduNodeConnector.getPORT_STATUS(), // link_status
                         "", // link_category
                         "", // high_order_tunnel
@@ -451,7 +451,7 @@ public class OtnManager {
                         -1 // available_oduflexs
                 );
 
-                sdnLinkHashMap.put(tl1OduMplsIf.getSRC_TID() + '/' + tl1OduMplsIf.getSRC_PORT() + '-' + tl1OduMplsIf.getDST_TID() + '/' + tl1OduMplsIf.getDST_PORT(), otnLink);
+                sdnLinkHashMap.put(tl1OduMplsIf.getSrcTid() + '/' + tl1OduMplsIf.getSrcPort() + '-' + tl1OduMplsIf.getDstTid() + '/' + tl1OduMplsIf.getDstPort(), otnLink);
 
                 return otnLink;
             });
@@ -489,7 +489,7 @@ public class OtnManager {
                         "", // network_type
                         "", // service_status
                         tl1OduHead.getType(), // rate_type
-                        tl1OduMplsIf.getLINK_TYPE(), // service_rate
+                        tl1OduMplsIf.getLinkType(), // service_rate
                         "", // latency
                         tl1OpticPower == null ? "" : tl1OpticPower.getTX_WAVELENGTH(), // wavelength
                         tl1OduHead.getActivePathStatus(), // active_path
