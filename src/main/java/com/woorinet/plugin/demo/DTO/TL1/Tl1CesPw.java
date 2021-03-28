@@ -18,87 +18,117 @@ import javax.persistence.Table;
 public class Tl1CesPw {
     @Id
     @GeneratedValue
-    int CES_PW_ID;
-    String TID;
-    String SERVICE_NAME;
-    String DESCRIPTION;
-    String AID;
-    String SERVICE_TYPE;
-    String DS0;
-    String UNIT_TYPE;
-    String VLAN_ID;
-    String DEST_PORT;
-    String SRC_PORT;
-    String CLK_MASTER;
-    String ENABLE;
-    String CLK_REC;
-    String VSI_ID;
-    String JBSIZE;
-    String RXSIZE;
-    String WINTX;
-    String DUSIZE;
-    String CREATION_DATE;
-    String MODIFIED_DATE;
-    String CES_BANDWIDTH;
-    String TS_POS;
-    String TS_LEN;
+    int cesPwId;
+    String tid;
+    String serviceName;
+    String description;
+    String aid;
+    String serviceType;
+    String ds0;
+    String unitType;
+    String vlanId;
+    String destPort;
+    String srcPort;
+    String clkMaster;
+    String enable;
+    String clkRec;
+    String vsiId;
+    String jbsize;
+    String rxsize;
+    String wintx;
+    String dusize;
+    String creationDate;
+    String modifiedDate;
+    String cesBandwidth;
+    String tsPos;
+    String tsLen;
+    String syncDate;
 
     public Tl1CesPw() {
 
     }
 
-    public Tl1CesPw(String[] fields) {
-        this.TID = fields[0];
-        this.SERVICE_NAME = fields[1];
-        this.DESCRIPTION = fields[2];
-        this.AID = fields[3];
-        this.SERVICE_TYPE = fields[4];
-        this.DS0 = fields[5];
-        this.UNIT_TYPE = fields[6];
-        this.VLAN_ID = fields[7];
-        this.DEST_PORT = fields[8];
-        this.SRC_PORT = fields[9];
-        this.CLK_MASTER = fields[10];
-        this.ENABLE = fields[11];
-        this.CLK_REC = fields[12];
-        this.VSI_ID = fields[13];
-        this.JBSIZE = fields[14];
-        this.RXSIZE = fields[15];
-        this.WINTX = fields[16];
-        this.DUSIZE = fields[17];
-        this.CREATION_DATE = fields[18];
-        this.MODIFIED_DATE = fields[19];
-        this.CES_BANDWIDTH = fields[20];
-        this.TS_POS = fields[21];
-        this.TS_LEN = fields[22];
+    public Tl1CesPw(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.serviceName = fields[1];
+        this.description = fields[2];
+        this.aid = fields[3];
+        this.serviceType = fields[4];
+        this.ds0 = fields[5];
+        this.unitType = fields[6];
+        this.vlanId = fields[7];
+        this.destPort = fields[8];
+        this.srcPort = fields[9];
+        this.clkMaster = fields[10];
+        this.enable = fields[11];
+        this.clkRec = fields[12];
+        this.vsiId = fields[13];
+        this.jbsize = fields[14];
+        this.rxsize = fields[15];
+        this.wintx = fields[16];
+        this.dusize = fields[17];
+        this.creationDate = fields[18];
+        this.modifiedDate = fields[19];
+        this.cesBandwidth = fields[20];
+        this.tsPos = fields[21];
+        this.tsLen = fields[22];
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "CES_PW{" +
-                "TID='" + TID + '\'' +
-                ", SERVICE_NAME='" + SERVICE_NAME + '\'' +
-                ", DESCRIPTION='" + DESCRIPTION + '\'' +
-                ", AID='" + AID + '\'' +
-                ", SERVICE_TYPE='" + SERVICE_TYPE + '\'' +
-                ", DS0='" + DS0 + '\'' +
-                ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
-                ", VLAN_ID='" + VLAN_ID + '\'' +
-                ", DEST_PORT='" + DEST_PORT + '\'' +
-                ", SRC_PORT='" + SRC_PORT + '\'' +
-                ", CLK_MASTER='" + CLK_MASTER + '\'' +
-                ", ENABLE='" + ENABLE + '\'' +
-                ", CLK_REC='" + CLK_REC + '\'' +
-                ", VSI_ID='" + VSI_ID + '\'' +
-                ", JBSIZE='" + JBSIZE + '\'' +
-                ", RXSIZE='" + RXSIZE + '\'' +
-                ", WINTX='" + WINTX + '\'' +
-                ", DUSIZE='" + DUSIZE + '\'' +
-                ", CREATION_DATE='" + CREATION_DATE + '\'' +
-                ", MODIFIED_DATE='" + MODIFIED_DATE + '\'' +
-                ", CES_BANDWIDTH='" + CES_BANDWIDTH + '\'' +
-                ", TS_POS='" + TS_POS + '\'' +
-                ", TS_LEN='" + TS_LEN + '\'' +
+        return "Tl1CesPw{" +
+                "tid='" + tid + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", description='" + description + '\'' +
+                ", aid='" + aid + '\'' +
+                ", serviceType='" + serviceType + '\'' +
+                ", ds0='" + ds0 + '\'' +
+                ", unitType='" + unitType + '\'' +
+                ", vlanId='" + vlanId + '\'' +
+                ", destPort='" + destPort + '\'' +
+                ", srcPort='" + srcPort + '\'' +
+                ", clkMaster='" + clkMaster + '\'' +
+                ", enable='" + enable + '\'' +
+                ", clkRec='" + clkRec + '\'' +
+                ", vsiId='" + vsiId + '\'' +
+                ", jbsize='" + jbsize + '\'' +
+                ", rxsize='" + rxsize + '\'' +
+                ", wintx='" + wintx + '\'' +
+                ", dusize='" + dusize + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                ", modifiedDate='" + modifiedDate + '\'' +
+                ", cesBandwidth='" + cesBandwidth + '\'' +
+                ", tsPos='" + tsPos + '\'' +
+                ", tsLen='" + tsLen + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
+    }
+
+    public Tl1CesPw(String tid, String serviceName, String description, String aid, String serviceType, String ds0, String unitType, String vlanId, String destPort, String srcPort, String clkMaster, String enable, String clkRec, String vsiId, String jbsize, String rxsize, String wintx, String dusize, String creationDate, String modifiedDate, String cesBandwidth, String tsPos, String tsLen, String syncDate) {
+        this.tid = tid;
+        this.serviceName = serviceName;
+        this.description = description;
+        this.aid = aid;
+        this.serviceType = serviceType;
+        this.ds0 = ds0;
+        this.unitType = unitType;
+        this.vlanId = vlanId;
+        this.destPort = destPort;
+        this.srcPort = srcPort;
+        this.clkMaster = clkMaster;
+        this.enable = enable;
+        this.clkRec = clkRec;
+        this.vsiId = vsiId;
+        this.jbsize = jbsize;
+        this.rxsize = rxsize;
+        this.wintx = wintx;
+        this.dusize = dusize;
+        this.creationDate = creationDate;
+        this.modifiedDate = modifiedDate;
+        this.cesBandwidth = cesBandwidth;
+        this.tsPos = tsPos;
+        this.tsLen = tsLen;
+        this.syncDate = syncDate;
     }
 }

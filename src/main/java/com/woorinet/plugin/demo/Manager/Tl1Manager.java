@@ -711,7 +711,7 @@ public class Tl1Manager {
             String cmd = "RTRV-CES-PW:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1CesPwRepository.save(new Tl1CesPw(fields));
+                tl1CesPwRepository.save(new Tl1CesPw(fields, syncDate));
             }
         }
     }
