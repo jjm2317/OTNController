@@ -17,39 +17,53 @@ import javax.persistence.Table;
 public class Tl1L2Lacp {
     @Id
     @GeneratedValue
-    int L2_LACP_ID;
-    String TID;
-    String LAG_ID;
-    String AID;
-    String LACP_MODE;
-    String ACTOR_SYS_ID;
-    String PARTNER_SYS_ID;
-    String LINK_SYNC;
+    int l2LacpId;
+    String tid;
+    String lagId;
+    String aid;
+    String lacpMode;
+    String actorSysId;
+    String partnerSysId;
+    String linkSync;
+    String syncDate;
 
     public Tl1L2Lacp() {
 
     }
 
-    public Tl1L2Lacp(String[] fields) {
-        this.TID = fields[0];
-        this.LAG_ID = fields[1];
-        this.AID = fields[2];
-        this.LACP_MODE = fields[3];
-        this.ACTOR_SYS_ID = fields[4];
-        this.PARTNER_SYS_ID = fields[5];
-        this.LINK_SYNC = fields[6];
+    public Tl1L2Lacp(String tid, String lagId, String aid, String lacpMode, String actorSysId, String partnerSysId, String linkSync, String syncDate) {
+        this.tid = tid;
+        this.lagId = lagId;
+        this.aid = aid;
+        this.lacpMode = lacpMode;
+        this.actorSysId = actorSysId;
+        this.partnerSysId = partnerSysId;
+        this.linkSync = linkSync;
+        this.syncDate = syncDate;
+    }
+
+    public Tl1L2Lacp(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.lagId = fields[1];
+        this.aid = fields[2];
+        this.lacpMode = fields[3];
+        this.actorSysId = fields[4];
+        this.partnerSysId = fields[5];
+        this.linkSync = fields[6];
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "L2_LACP{" +
-                "TID='" + TID + '\'' +
-                ", LAG_ID='" + LAG_ID + '\'' +
-                ", AID='" + AID + '\'' +
-                ", LACP_MODE='" + LACP_MODE + '\'' +
-                ", ACTOR_SYS_ID='" + ACTOR_SYS_ID + '\'' +
-                ", PARTNER_SYS_ID='" + PARTNER_SYS_ID + '\'' +
-                ", LINK_SYNC='" + LINK_SYNC + '\'' +
+        return "Tl1L2Lacp{" +
+                "tid='" + tid + '\'' +
+                ", lagId='" + lagId + '\'' +
+                ", aid='" + aid + '\'' +
+                ", lacpMode='" + lacpMode + '\'' +
+                ", actorSysId='" + actorSysId + '\'' +
+                ", partnerSysId='" + partnerSysId + '\'' +
+                ", linkSync='" + linkSync + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

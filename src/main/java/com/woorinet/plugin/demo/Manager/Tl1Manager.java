@@ -721,7 +721,7 @@ public class Tl1Manager {
             String cmd = "RTRV-L2-LACP:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1L2LacpRepository.save(new Tl1L2Lacp(fields));
+                tl1L2LacpRepository.save(new Tl1L2Lacp(fields,syncDate));
             }
         }
     }
