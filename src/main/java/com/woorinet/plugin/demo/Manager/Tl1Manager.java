@@ -286,7 +286,7 @@ public class Tl1Manager {
             try{
                 ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
                 for(String[] fields : fieldsList) {
-                    tl1PmOpticRepository.save(new Tl1PmOptic(fields));
+                    tl1PmOpticRepository.save(new Tl1PmOptic(fields,syncDate));
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();

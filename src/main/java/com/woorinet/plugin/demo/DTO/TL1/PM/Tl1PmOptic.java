@@ -30,11 +30,12 @@ public class Tl1PmOptic {
     String txMaxPower;
     String txAvgPower;
     String date;
+    String syncDate;
 
     public Tl1PmOptic() {
 
     }
-    public Tl1PmOptic(String tid, String systemType, String slot, String port, String pmType, String rxMinPower, String rxMaxPower, String rxAvgPower, String txMinPower, String txMaxPower, String txAvgPower, String date) {
+    public Tl1PmOptic(String tid, String systemType, String slot, String port, String pmType, String rxMinPower, String rxMaxPower, String rxAvgPower, String txMinPower, String txMaxPower, String txAvgPower, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -47,9 +48,10 @@ public class Tl1PmOptic {
         this.txMaxPower = txMaxPower;
         this.txAvgPower = txAvgPower;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
-    public Tl1PmOptic(String[] fields) {
+    public Tl1PmOptic(String[] fields, String syncDate) {
         this.tid = fields[0];
         this.systemType = fields[1];
         this.slot = fields[2];
@@ -62,6 +64,7 @@ public class Tl1PmOptic {
         this.txMaxPower = fields[9];
         this.txAvgPower = fields[10];
         this.date = fields[11];
+        this.syncDate = syncDate;
     }
 
     @Override
@@ -79,6 +82,7 @@ public class Tl1PmOptic {
                 ", txMaxPower='" + txMaxPower + '\'' +
                 ", txAvgPower='" + txAvgPower + '\'' +
                 ", date='" + date + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
