@@ -261,7 +261,7 @@ public class OtnManager {
             tl1BypassInfoHashMap.put(tl1BypassInfo.getAid(), tl1BypassInfo);
         }
         for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfoList) {
-            tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
+            tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAid(), tl1CmProgramInfo);
         }
 
         Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStateList.stream();
@@ -902,20 +902,20 @@ public class OtnManager {
         Stream<OtnCmInventory> otnCmInventoryStream = tl1CmProgramInfoList.stream()
             .map(tl1CmProgramInfo -> {
                 OtnCmInventory otnCmInventory = new OtnCmInventory(
-                    tl1CmProgramInfo.getTID(),//tid
-                    tl1CmProgramInfo.getAID(),//slot
-                    tl1CmProgramInfo.getUNIT_TYPE(),//unit_type
-                    tl1CmProgramInfo.getPKG_VERSION(),//pkg_version
-                    tl1CmProgramInfo.getPKG_FILENAME(),//pkg_filename
-                    tl1CmProgramInfo.getPKG_VERSION_DATE(),//pkg_version_date,
-                    tl1CmProgramInfo.getPKG_SIZE(),//pkg_size
-                    tl1CmProgramInfo.getFPGA_VERSION(),//fpga_version
-                    tl1CmProgramInfo.getFPGA_VERSION_DATE(),//fpga_version_date
-                    tl1CmProgramInfo.getFPGA_SIZE(),//fpga_size
-                    tl1CmProgramInfo.getCPLD_VERSION(),//cpld_version
-                    tl1CmProgramInfo.getCPLD_VERSION_DATE(),//cpld_version_date,
-                    tl1CmProgramInfo.getCPLD_SIZE(),//cpld_size
-                    tl1CmProgramInfo.getHW_VERSION()//hw_version
+                    tl1CmProgramInfo.getTid(),//tid
+                    tl1CmProgramInfo.getAid(),//slot
+                    tl1CmProgramInfo.getUnitType(),//unit_type
+                    tl1CmProgramInfo.getPkgVersion(),//pkg_version
+                    tl1CmProgramInfo.getPkgFilename(),//pkg_filename
+                    tl1CmProgramInfo.getPkgVersionDate(),//pkg_version_date,
+                    tl1CmProgramInfo.getPkgSize(),//pkg_size
+                    tl1CmProgramInfo.getFpgaVersion(),//fpga_version
+                    tl1CmProgramInfo.getFpgaVersionDate(),//fpga_version_date
+                    tl1CmProgramInfo.getFpgaSize(),//fpga_size
+                    tl1CmProgramInfo.getCpldVersion(),//cpld_version
+                    tl1CmProgramInfo.getCpldVersionDate(),//cpld_version_date,
+                    tl1CmProgramInfo.getCpldSize(),//cpld_size
+                    tl1CmProgramInfo.getHwVersion()//hw_version
                 );
 
                 return otnCmInventory;
