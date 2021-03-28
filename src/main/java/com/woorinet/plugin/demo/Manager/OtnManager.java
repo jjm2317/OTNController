@@ -255,7 +255,7 @@ public class OtnManager {
             tl1OduMplsIfHashMap.put(tl1OduMplsIf.getTID()+'/'+ tl1OduMplsIf.getMPLS_TP_ID(), tl1OduMplsIf);
         }
         for(Tl1CmPort tl1CmPort : tl1CmPortList) {
-            tl1CmPortHashMap.put(tl1CmPort.getAID(), tl1CmPort);
+            tl1CmPortHashMap.put(tl1CmPort.getAid(), tl1CmPort);
         }
         for(Tl1BypassInfo tl1BypassInfo :tl1BypassInfoList) {
             tl1BypassInfoHashMap.put(tl1BypassInfo.getAid(), tl1BypassInfo);
@@ -927,18 +927,18 @@ public class OtnManager {
         Stream<OtnCmLink> otnCmLinkStream = tl1CmPortList.stream()
             .map(tl1CmPort -> {
                 Optional<Tl1ModuleInfo> tl1ModuleInfo = tl1ModuleInfoList.stream()
-                    .filter(moduleInfo -> moduleInfo.getAID().equals(tl1CmPort.getAID())).findAny();
+                    .filter(moduleInfo -> moduleInfo.getAID().equals(tl1CmPort.getAid())).findAny();
 
                 //예> AID(EMS_1000_B-OPN1000-S03-P1)에서 3, 4번째 값만 추출, 구분자는 '-'
-                String slot = tl1CmPort.getAID().split("-")[2];
-                String port = tl1CmPort.getAID().split("-")[3];
+                String slot = tl1CmPort.getAid().split("-")[2];
+                String port = tl1CmPort.getAid().split("-")[3];
 
                 OtnCmLink otnCmLink = new OtnCmLink(
-                        tl1CmPort.getTID(),//tid
+                        tl1CmPort.getTid(),//tid
                         slot,//slot
                         port,//port
-                        tl1CmPort.getUNIT_TYPE(),//unitType
-                        tl1CmPort.getSIGNAL(),//signal
+                        tl1CmPort.getUnitType(),//unitType
+                        tl1CmPort.getSignal(),//signal
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMID()).orElse(""),//mid
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMID_CONTEXT()).orElse(""),//midContext
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPMID()).orElse(""),//pmid

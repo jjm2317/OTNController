@@ -18,44 +18,44 @@ import javax.persistence.Table;
 public class Tl1CmPort {
     @Id
     @GeneratedValue
-    int CM_PORT_ID;
-    String TID;
-    String SUBNETWORK;
-    String AID;
-    String UNIT_TYPE;
-    String SIGNAL;
-    String VLAN_ID;
+    int cmPortId;
+    String tid;
+    String subnetwork;
+    String aid;
+    String unitType;
+    String signal;
+    String vlanId;
 
     public Tl1CmPort() {
     }
 
-    public Tl1CmPort(String TID, String SUBNETWORK, String AID, String UNIT_TYPE, String SIGNAL, String VLAN_ID) {
-        this.TID = TID;
-        this.SUBNETWORK = SUBNETWORK;
-        this.AID = AID;
-        this.UNIT_TYPE = UNIT_TYPE;
-        this.SIGNAL = SIGNAL;
-        this.VLAN_ID = VLAN_ID;
+    public Tl1CmPort(String tid, String subnetwork, String aid, String unitType, String signal, String vlanId) {
+        this.tid = tid;
+        this.subnetwork = subnetwork;
+        this.aid = aid;
+        this.unitType = unitType;
+        this.signal = signal;
+        this.vlanId = vlanId;
     }
 
     public Tl1CmPort(String[] fields) {
-        this.TID = fields[0];
-        this.SUBNETWORK = fields[1];
-        this.AID = fields[2];
-        this.UNIT_TYPE = fields[3];
-        this.SIGNAL = fields[4];
-        this.VLAN_ID = fields[5];
+        this.tid = fields[0];
+        this.subnetwork = fields[1];
+        this.aid = fields[2];
+        this.unitType = fields[3];
+        this.signal = fields[4];
+        this.vlanId = fields[5];
     }
 
     @Override
     public String toString() {
-        return "CM_PORT{" +
-                "TID='" + TID + '\'' +
-                ", SUBNETWORK='" + SUBNETWORK + '\'' +
-                ", AID='" + AID + '\'' +
-                ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
-                ", SIGNAL='" + SIGNAL + '\'' +
-                ", VLAN_ID='" + VLAN_ID + '\'' +
+        return "Tl1CmPort{" +
+                "tid='" + tid + '\'' +
+                ", subnetwork='" + subnetwork + '\'' +
+                ", aid='" + aid + '\'' +
+                ", unitType='" + unitType + '\'' +
+                ", signal='" + signal + '\'' +
+                ", vlanId='" + vlanId + '\'' +
                 '}';
     }
 }
