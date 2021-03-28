@@ -32,11 +32,12 @@ public class Tl1PmTunnel {
     String egrBytes;
     String egrRate;
     String date;
+    String syncDate;
 
     public Tl1PmTunnel() {
     }
 
-    public Tl1PmTunnel(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
+    public Tl1PmTunnel(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -50,9 +51,10 @@ public class Tl1PmTunnel {
         this.egrBytes = egrBytes;
         this.egrRate = egrRate;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
-    public Tl1PmTunnel(String[] fields) {
+    public Tl1PmTunnel(String[] fields, String syncDate) {
         this.tid = fields[0];
         this.systemType = fields[1];
         this.slot = fields[2];
@@ -66,6 +68,7 @@ public class Tl1PmTunnel {
         this.egrBytes = fields[10];
         this.egrRate = fields[11];
         this.date = fields[12];
+        this.syncDate = syncDate;
     }
 
     @Override
@@ -84,6 +87,7 @@ public class Tl1PmTunnel {
                 ", egrBytes='" + egrBytes + '\'' +
                 ", egrRate='" + egrRate + '\'' +
                 ", date='" + date + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

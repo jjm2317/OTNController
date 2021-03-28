@@ -247,7 +247,7 @@ public class Tl1Manager {
             try {
                 ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
                 for(String[] fields : fieldsList) {
-                    tl1PmTunnelRepository.save(new Tl1PmTunnel(fields));
+                    tl1PmTunnelRepository.save(new Tl1PmTunnel(fields, syncDate));
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();
