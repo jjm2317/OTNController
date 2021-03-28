@@ -197,7 +197,7 @@ public class OtnManager {
             tl1NodeHashMap.put(tl1Node.getTid(), tl1Node);
         }
         for(Tl1SystemInfo tl1SystemInfo : tl1SystemInfoList) {
-            tl1SystemInfoHashMap.put(tl1SystemInfo.getTID(), tl1SystemInfo);
+            tl1SystemInfoHashMap.put(tl1SystemInfo.getTid(), tl1SystemInfo);
         }
         for(Tl1Inventory tl1Inventory : tl1InventoryList) {
             tl1InventoryHashMap.put(tl1Inventory.getTid(), tl1Inventory);
@@ -316,14 +316,14 @@ public class OtnManager {
 
                 OtnNode otnNode = new OtnNode(
                         200009, // ems_id
-                        tl1SystemInfo==null? tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(): tl1SystemInfo.getVENDOR() + separator + tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(), // ne_id
+                        tl1SystemInfo==null? tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(): tl1SystemInfo.getVendor() + separator + tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(), // ne_id
                         tl1NodeState.getTid(), // ne_name
                         "", //ne_type
                         tl1NodeState.getSystemType(), // ne_model
                         tl1NodeState.getNodeStatus().equals("normal") ? tl1NodeState.getNodeStatus() : "broken", // ne_status
                         tl1NodeState.getSoftware(), // sw_ver
                         tl1NodeState.getIpAddr(), // ip_addr
-                        tl1SystemInfo==null? "":tl1SystemInfo.getVENDOR(), // vendor
+                        tl1SystemInfo==null? "":tl1SystemInfo.getVendor(), // vendor
                         tl1Inventory==null ? "" : tl1Inventory.getSerialNum(), // serial_num
                         tl1NodeState.getNodeType() // sys_type
                 );
@@ -343,7 +343,7 @@ public class OtnManager {
                 Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduNodeConnector.getTid()+"/"+ tl1OduNodeConnector.getAid());
                 Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1Node.getTid());
 
-                String connectId = tl1SystemInfo.getVENDOR() +
+                String connectId = tl1SystemInfo.getVendor() +
                         separator +
                         otnNode.getSysType() +
                         separator +
@@ -407,9 +407,9 @@ public class OtnManager {
                 int maximumBandwidth = Integer.parseInt(tl1OduMplsIf.getMaximumBandwidth());
                 int availableBandwidth = Integer.parseInt(tl1OduMplsIf.getAvailableBandwidth());
 
-                String linkId = srcTl1SystemInfo.getVENDOR() + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
+                String linkId = srcTl1SystemInfo.getVendor() + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
                         srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId()
-                        + ":" + dstTl1SystemInfo.getVENDOR() + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
+                        + ":" + dstTl1SystemInfo.getVendor() + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
                         dstOtnConnector.getShelfId() + separator + dstOtnConnector.getSlotId() + separator + dstOtnConnector.getPortId();
 
                 OtnLink otnLink = new OtnLink(
@@ -693,7 +693,7 @@ public class OtnManager {
 
                 OtnAccessIf otnAccessIf = new OtnAccessIf(
                         200009, // ems_id
-                        tl1SystemInfo.getVENDOR() + separator + otnNode.getSysType() + separator + otnNode.getNeId() + separator + otnConnector.getConnectId(), // access_if_id
+                        tl1SystemInfo.getVendor() + separator + otnNode.getSysType() + separator + otnNode.getNeId() + separator + otnConnector.getConnectId(), // access_if_id
                         "", // accessif_name
                         otnNode.getNeId(), // ne_id
                         otnConnector.getConnectId(), // connector_id

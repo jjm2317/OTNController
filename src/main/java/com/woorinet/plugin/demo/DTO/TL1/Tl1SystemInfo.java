@@ -17,37 +17,41 @@ import javax.persistence.Table;
 public class Tl1SystemInfo {
     @Id
     @Generated
-    String TID;
-    String UID;
-    String LOCATION;
-    String VENDOR;
-    String PWOAM;
-    String BOOT_TIME;
-    String RESET_REASON;
+    String tid;
+    String uid;
+    String location;
+    String vendor;
+    String pwoam;
+    String bootTime;
+    String resetReason;
+    String syncDate;
+
 
     public Tl1SystemInfo() {
     }
 
-    public Tl1SystemInfo(String TID, String UID, String LOCATION, String VENDOR, String PWOAM, String BOOT_TIME, String RESET_REASON) {
-        this.TID = TID;
-        this.UID = UID;
-        this.LOCATION = LOCATION;
-        this.VENDOR = VENDOR;
-        this.PWOAM = PWOAM;
-        this.BOOT_TIME = BOOT_TIME;
-        this.RESET_REASON = RESET_REASON;
+    public Tl1SystemInfo(String tid, String uid, String location, String vendor, String pwoam, String bootTime, String resetReason, String syncDate) {
+        this.tid = tid;
+        this.uid = uid;
+        this.location = location;
+        this.vendor = vendor;
+        this.pwoam = pwoam;
+        this.bootTime = bootTime;
+        this.resetReason = resetReason;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "SystemInfo{" +
-                "TID='" + TID + '\'' +
-                ", UID='" + UID + '\'' +
-                ", LOCATION='" + LOCATION + '\'' +
-                ", VENDOR='" + VENDOR + '\'' +
-                ", PWOAM='" + PWOAM + '\'' +
-                ", BOOT_TIME='" + BOOT_TIME + '\'' +
-                ", RESET_REASON='" + RESET_REASON + '\'' +
+        return "Tl1SystemInfo{" +
+                "tid='" + tid + '\'' +
+                ", uid='" + uid + '\'' +
+                ", location='" + location + '\'' +
+                ", vendor='" + vendor + '\'' +
+                ", pwoam='" + pwoam + '\'' +
+                ", bootTime='" + bootTime + '\'' +
+                ", resetReason='" + resetReason + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

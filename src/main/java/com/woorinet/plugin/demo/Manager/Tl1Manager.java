@@ -480,7 +480,8 @@ public class Tl1Manager {
                     fields.get("VENDOR") == null ? "" : fields.get("VENDOR"),
                     fields.get("PWOAM") == null ? "" : fields.get("PWOAM"),
                     fields.get("BOOT-TIME") == null ? "" : fields.get("BOOT-TIME"),
-                    fields.get("RESET-REASON") == null ? "" : fields.get("RESET-REASON"));
+                    fields.get("RESET-REASON") == null ? "" : fields.get("RESET-REASON"),
+                    syncDate);
             tl1SystemInfoRepository.save(info);
         }
     }
