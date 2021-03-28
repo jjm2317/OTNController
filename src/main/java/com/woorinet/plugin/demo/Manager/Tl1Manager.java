@@ -701,7 +701,7 @@ public class Tl1Manager {
             String cmd = "RTRV-CES-PORT:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1CesPortRepository.save(new Tl1CesPort(fields));
+                tl1CesPortRepository.save(new Tl1CesPort(fields, syncDate));
             }
         }
     }
