@@ -17,108 +17,114 @@ import javax.persistence.Table;
 public class Tl1OpticPower {
     @Id
     @GeneratedValue
-    int OPTIC_POWER_ID;
-    String TID;
-    String AID;
-    String UNIT_TYPE;
-    String MODULE_EQUIP;
-    String CORE;
-    String LCORSC;
-    String UPCORAPC;
-    String SUPPORT_SIGNAL;
-    String MODULE_TYPE;
-    String TX_CHANNEL;
-    String TX_WAVELENGTH;
-    String RX_CHANNEL;
-    String RX_WAVELENGTH;
-    String DISTANCE;
-    String TX_POWER;
-    String RX_POWER;
-    String TX_BIAS_CURRENT;
-    String FAULT_NUMBER;
-    String FAULT_DISTANCE;
-    String VENDOR;
-    String PART_NUMBER;
-    String SERIAL;
+    int opticPowerId;
+    String tid;
+    String aid;
+    String unitType;
+    String moduleEquip;
+    String core;
+    String lcorsc;
+    String upcorapc;
+    String supportSignal;
+    String moduleType;
+    String txChannel;
+    String txWavelength;
+    String rxChannel;
+    String rxWavelength;
+    String distance;
+    String txPower;
+    String rxPower;
+    String txBiasCurrent;
+    String faultNumber;
+    String faultDistance;
+    String vendor;
+    String partNumber;
+    String serial;
+    String syncDate;
 
     public Tl1OpticPower() {
 
     }
 
-    public Tl1OpticPower(String TID, String AID, String UNIT_TYPE, String MODULE_EQUIP, String CORE, String LCORSC, String UPCORAPC, String SUPPORT_SIGNAL, String MODULE_TYPE, String TX_CHANNEL, String TX_WAVELENGTH, String RX_CHANNEL, String RX_WAVELENGTH, String DISTANCE, String TX_POWER, String RX_POWER, String TX_BIAS_CURRENT, String FAULT_NUMBER, String FAULT_DISTANCE, String VENDOR, String PART_NUMBER, String SERIAL) {
-        this.TID = TID;
-        this.AID = AID;
-        this.UNIT_TYPE = UNIT_TYPE;
-        this.MODULE_EQUIP = MODULE_EQUIP;
-        this.CORE = CORE;
-        this.LCORSC = LCORSC;
-        this.UPCORAPC = UPCORAPC;
-        this.SUPPORT_SIGNAL = SUPPORT_SIGNAL;
-        this.MODULE_TYPE = MODULE_TYPE;
-        this.TX_CHANNEL = TX_CHANNEL;
-        this.TX_WAVELENGTH = TX_WAVELENGTH;
-        this.RX_CHANNEL = RX_CHANNEL;
-        this.RX_WAVELENGTH = RX_WAVELENGTH;
-        this.DISTANCE = DISTANCE;
-        this.TX_POWER = TX_POWER;
-        this.RX_POWER = RX_POWER;
-        this.TX_BIAS_CURRENT = TX_BIAS_CURRENT;
-        this.FAULT_NUMBER = FAULT_NUMBER;
-        this.FAULT_DISTANCE = FAULT_DISTANCE;
-        this.VENDOR = VENDOR;
-        this.PART_NUMBER = PART_NUMBER;
-        this.SERIAL = SERIAL;
+    public Tl1OpticPower(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.aid = fields[1];
+        this.unitType = fields[2];
+        this.moduleEquip = fields[3];
+        this.core = fields[4];
+        this.lcorsc = fields[5];
+        this.upcorapc = fields[6];
+        this.supportSignal = fields[7];
+        this.moduleType = fields[8];
+        this.txChannel = fields[9];
+        this.txWavelength = fields[10];
+        this.rxChannel = fields[11];
+        this.rxWavelength = fields[12];
+        this.distance = fields[13];
+        this.txPower = fields[14];
+        this.rxPower = fields[15];
+        this.txBiasCurrent = fields[16];
+        this.faultNumber = fields[17];
+        this.faultDistance = fields[18];
+        this.vendor = fields[19];
+        this.partNumber = fields[20];
+        this.serial = fields[21];
+        this.syncDate = syncDate;
     }
-    public Tl1OpticPower(String[] fields) {
-        this.TID = fields[0];
-        this.AID = fields[1];
-        this.UNIT_TYPE = fields[2];
-        this.MODULE_EQUIP = fields[3];
-        this.CORE = fields[4];
-        this.LCORSC = fields[5];
-        this.UPCORAPC = fields[6];
-        this.SUPPORT_SIGNAL = fields[7];
-        this.MODULE_TYPE = fields[8];
-        this.TX_CHANNEL = fields[9];
-        this.TX_WAVELENGTH = fields[10];
-        this.RX_CHANNEL = fields[11];
-        this.RX_WAVELENGTH = fields[12];
-        this.DISTANCE = fields[13];
-        this.TX_POWER = fields[14];
-        this.RX_POWER = fields[15];
-        this.TX_BIAS_CURRENT = fields[16];
-        this.FAULT_NUMBER = fields[17];
-        this.FAULT_DISTANCE = fields[18];
-        this.VENDOR = fields[19];
-        this.PART_NUMBER = fields[20];
-        this.SERIAL = fields[21];
+
+
+    public Tl1OpticPower(String tid, String aid, String unitType, String moduleEquip, String core, String lcorsc, String upcorapc, String supportSignal, String moduleType, String txChannel, String txWavelength, String rxChannel, String rxWavelength, String distance, String txPower, String rxPower, String txBiasCurrent, String faultNumber, String faultDistance, String vendor, String partNumber, String serial, String syncDate) {
+        this.tid = tid;
+        this.aid = aid;
+        this.unitType = unitType;
+        this.moduleEquip = moduleEquip;
+        this.core = core;
+        this.lcorsc = lcorsc;
+        this.upcorapc = upcorapc;
+        this.supportSignal = supportSignal;
+        this.moduleType = moduleType;
+        this.txChannel = txChannel;
+        this.txWavelength = txWavelength;
+        this.rxChannel = rxChannel;
+        this.rxWavelength = rxWavelength;
+        this.distance = distance;
+        this.txPower = txPower;
+        this.rxPower = rxPower;
+        this.txBiasCurrent = txBiasCurrent;
+        this.faultNumber = faultNumber;
+        this.faultDistance = faultDistance;
+        this.vendor = vendor;
+        this.partNumber = partNumber;
+        this.serial = serial;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "OPTIC_POWER{" +
-                "TID='" + TID + '\'' +
-                ", AID='" + AID + '\'' +
-                ", UNIT_TYPE='" + UNIT_TYPE + '\'' +
-                ", MODULE_EQUIP='" + MODULE_EQUIP + '\'' +
-                ", CORE='" + CORE + '\'' +
-                ", LCORSC='" + LCORSC + '\'' +
-                ", UPCORAPC='" + UPCORAPC + '\'' +
-                ", SUPPORT_SIGNAL='" + SUPPORT_SIGNAL + '\'' +
-                ", MODULE_TYPE='" + MODULE_TYPE + '\'' +
-                ", TX_CHANNEL='" + TX_CHANNEL + '\'' +
-                ", TX_WAVELENGTH='" + TX_WAVELENGTH + '\'' +
-                ", RX_CHANNEL='" + RX_CHANNEL + '\'' +
-                ", RX_WAVELENGTH='" + RX_WAVELENGTH + '\'' +
-                ", DISTANCE='" + DISTANCE + '\'' +
-                ", TX_POWER='" + TX_POWER + '\'' +
-                ", RX_POWER='" + RX_POWER + '\'' +
-                ", TX_BIAS_CURRENT='" + TX_BIAS_CURRENT + '\'' +
-                ", FAULT_NUMBER='" + FAULT_NUMBER + '\'' +
-                ", FAULT_DISTANCE='" + FAULT_DISTANCE + '\'' +
-                ", VENDOR='" + VENDOR + '\'' +
-                ", PART_NUMBER='" + PART_NUMBER + '\'' +
-                ", SERIAL='" + SERIAL + '\'' +
+        return "Tl1OpticPower{" +
+                "tid='" + tid + '\'' +
+                ", aid='" + aid + '\'' +
+                ", unitType='" + unitType + '\'' +
+                ", moduleEquip='" + moduleEquip + '\'' +
+                ", core='" + core + '\'' +
+                ", lcorsc='" + lcorsc + '\'' +
+                ", upcorapc='" + upcorapc + '\'' +
+                ", supportSignal='" + supportSignal + '\'' +
+                ", moduleType='" + moduleType + '\'' +
+                ", txChannel='" + txChannel + '\'' +
+                ", txWavelength='" + txWavelength + '\'' +
+                ", rxChannel='" + rxChannel + '\'' +
+                ", rxWavelength='" + rxWavelength + '\'' +
+                ", distance='" + distance + '\'' +
+                ", txPower='" + txPower + '\'' +
+                ", rxPower='" + rxPower + '\'' +
+                ", txBiasCurrent='" + txBiasCurrent + '\'' +
+                ", faultNumber='" + faultNumber + '\'' +
+                ", faultDistance='" + faultDistance + '\'' +
+                ", vendor='" + vendor + '\'' +
+                ", partNumber='" + partNumber + '\'' +
+                ", serial='" + serial + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

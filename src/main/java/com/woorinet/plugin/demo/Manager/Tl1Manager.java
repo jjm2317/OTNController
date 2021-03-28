@@ -732,7 +732,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 System.out.println(fields);
-                tl1OpticPowerRepository.save(new Tl1OpticPower(fields));
+                tl1OpticPowerRepository.save(new Tl1OpticPower(fields, syncDate));
             }
         }
     }

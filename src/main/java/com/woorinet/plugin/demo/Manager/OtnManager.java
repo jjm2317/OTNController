@@ -203,7 +203,7 @@ public class OtnManager {
             tl1InventoryHashMap.put(tl1Inventory.getTid(), tl1Inventory);
         }
         for(Tl1OpticPower tl1OpticPower : tl1OpticPowerList) {
-            tl1OpticPowerHashMap.put(tl1OpticPower.getTID()+"/"+ tl1OpticPower.getAID(), tl1OpticPower);
+            tl1OpticPowerHashMap.put(tl1OpticPower.getTid()+"/"+ tl1OpticPower.getAid(), tl1OpticPower);
         }
         for(Tl1Odu tl1Odu : tl1OduList) {
             if(tl1OduHashMapForPath.get(tl1Odu.getName()) == null ) {
@@ -246,7 +246,7 @@ public class OtnManager {
 
         }
         for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
-            tl1OduNodeConnectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), tl1OduNodeConnector);
+            tl1OduNodeConnectorHashMap.put(tl1OduNodeConnector.getTid() + '/' + tl1OduNodeConnector.getAid(), tl1OduNodeConnector);
         }
         for(Tl1AccessIf Tl1AccessIf : tl1AccessIfList) {
             tl1AccessIfHashMap.put(Tl1AccessIf.getTid(), Tl1AccessIf);
@@ -338,9 +338,9 @@ public class OtnManager {
         Stream<OtnConnector> sdnConnectorStream = tl1OduNodeConnectorList
             .stream()
             .map(tl1OduNodeConnector -> {
-                Tl1Node tl1Node = tl1NodeHashMap.get(tl1OduNodeConnector.getTID());
-                OtnNode otnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTID());
-                Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduNodeConnector.getTID()+"/"+ tl1OduNodeConnector.getAID());
+                Tl1Node tl1Node = tl1NodeHashMap.get(tl1OduNodeConnector.getTid());
+                OtnNode otnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTid());
+                Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduNodeConnector.getTid()+"/"+ tl1OduNodeConnector.getAid());
                 Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1Node.getTid());
 
                 String connectId = tl1SystemInfo.getVENDOR() +
@@ -349,17 +349,17 @@ public class OtnManager {
                         separator +
                         otnNode.getNeName() +
                         separator +
-                        tl1OduNodeConnector.getSHELF_INDEX() +
+                        tl1OduNodeConnector.getShelfIndex() +
                         separator +
-                        tl1OduNodeConnector.getSLOT_INDEX() +
+                        tl1OduNodeConnector.getSlotIndex() +
                         separator +
-                        tl1OduNodeConnector.getPORT_INDEX();
+                        tl1OduNodeConnector.getPortIndex();
                 String connectType = "";
                 if (tl1OpticPower != null) {
-                    if (tl1OpticPower.getPART_NUMBER().equals("TR-PX13L-NG2")) connectType = "sfp+";
-                    else if (tl1OpticPower.getPART_NUMBER().equals("TR-PX13L-NG2") || tl1OpticPower.getPART_NUMBER().equals("EOLP-1396-10") || tl1OpticPower.getPART_NUMBER().equals("FTLX1471D3BNL"))
+                    if (tl1OpticPower.getPartNumber().equals("TR-PX13L-NG2")) connectType = "sfp+";
+                    else if (tl1OpticPower.getPartNumber().equals("TR-PX13L-NG2") || tl1OpticPower.getPartNumber().equals("EOLP-1396-10") || tl1OpticPower.getPartNumber().equals("FTLX1471D3BNL"))
                         connectType = "sfp";
-                    else connectType = tl1OpticPower.getPART_NUMBER(); // 구글링 해야됨
+                    else connectType = tl1OpticPower.getPartNumber(); // 구글링 해야됨
                 }
 
                 OtnConnector otnConnector = new OtnConnector(
@@ -370,21 +370,21 @@ public class OtnManager {
                         otnNode.getNeId(), // ne_id
                         otnNode.getNeName(), // ne_name
                         "", // rack_id
-                        tl1OduNodeConnector.getSHELF_INDEX(), // shelf_id
-                        tl1OduNodeConnector.getSLOT_INDEX(), // slot_id
+                        tl1OduNodeConnector.getShelfIndex(), // shelf_id
+                        tl1OduNodeConnector.getSlotIndex(), // slot_id
                         "", // subslot_id
-                        tl1OduNodeConnector.getPORT_INDEX(), // port_id
-                        tl1OduNodeConnector.getPORT_STATUS().equals("ACT") ? "up" : "down", // connect_status
-                        tl1OduNodeConnector.getPORT_ROLE(), // connect_role
+                        tl1OduNodeConnector.getPortIndex(), // port_id
+                        tl1OduNodeConnector.getPortStatus().equals("ACT") ? "up" : "down", // connect_status
+                        tl1OduNodeConnector.getPortRole(), // connect_role
                         tl1OpticPower == null ? "idle" : "occupied", // connect_idle
                         tl1OpticPower == null ? "" : "", // connect_llcf
-                        tl1OpticPower == null ? "" : tl1OpticPower.getTX_WAVELENGTH(), // connect_lambda
-                        tl1OpticPower == null ? "" : tl1OpticPower.getPART_NUMBER(), // module_name
+                        tl1OpticPower == null ? "" : tl1OpticPower.getTxWavelength(), // connect_lambda
+                        tl1OpticPower == null ? "" : tl1OpticPower.getPartNumber(), // module_name
                         tl1OpticPower == null ? "" : "", // connect_pec
-                        tl1OpticPower == null ? "" : tl1OpticPower.getSERIAL(), // connect_serial
-                        tl1OpticPower == null ? "" : tl1OpticPower.getUNIT_TYPE() // unit_type
+                        tl1OpticPower == null ? "" : tl1OpticPower.getSerial(), // connect_serial
+                        tl1OpticPower == null ? "" : tl1OpticPower.getUnitType() // unit_type
                 );
-                sdnConnectorHashMap.put(tl1OduNodeConnector.getTID() + '/' + tl1OduNodeConnector.getAID(), otnConnector);
+                sdnConnectorHashMap.put(tl1OduNodeConnector.getTid() + '/' + tl1OduNodeConnector.getAid(), otnConnector);
                 return otnConnector;
             });
         sdnConnectorStream.forEach(otnConnectorRepository::save);
@@ -424,15 +424,15 @@ public class OtnManager {
                         dstOtnNode.getNeName(), // dst_ne_name
                         dstOtnConnector.getConnectId(), // dst_node_connector_id
                         tl1OduMplsIf.getLinkType(), // link_type
-                        tl1OduNodeConnector.getPORT_STATUS(), // link_status
+                        tl1OduNodeConnector.getPortStatus(), // link_status
                         "", // link_category
                         "", // high_order_tunnel
                         "", // latency
-                        tl1OpticPower.getDISTANCE(), // distance
+                        tl1OpticPower.getDistance(), // distance
                         "", // srlg
                         "", // ovpn
                         tl1Odu==null? "": tl1Odu.getTsmap(), // timeslot
-                        tl1OpticPower.getTX_WAVELENGTH(), // lambda
+                        tl1OpticPower.getTxWavelength(), // lambda
                         maximumBandwidth, // maximum_odu0s
                         maximumBandwidth/2, // maximum_odu1s
                         maximumBandwidth/8, // maximum_odu2s
@@ -491,7 +491,7 @@ public class OtnManager {
                         tl1OduHead.getType(), // rate_type
                         tl1OduMplsIf.getLinkType(), // service_rate
                         "", // latency
-                        tl1OpticPower == null ? "" : tl1OpticPower.getTX_WAVELENGTH(), // wavelength
+                        tl1OpticPower == null ? "" : tl1OpticPower.getTxWavelength(), // wavelength
                         tl1OduHead.getActivePathStatus(), // active_path
                         tl1OduHead.getCreationDate() // creation_date
                 );
