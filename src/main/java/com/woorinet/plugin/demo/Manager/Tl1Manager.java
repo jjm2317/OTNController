@@ -545,7 +545,7 @@ public class Tl1Manager {
             String cmd = "RTRV-MPLS-IF:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1MplsIfRepository.save(new Tl1MplsIf(fields));
+                tl1MplsIfRepository.save(new Tl1MplsIf(fields,syncDate));
             }
         }
     }

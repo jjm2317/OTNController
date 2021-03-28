@@ -17,177 +17,181 @@ import javax.persistence.Table;
 public class Tl1MplsIf {
     @Id
     @GeneratedValue
-    int MPLS_IF_ID;
-    String TID_ID;
-    String TID;
-    String SUBNET_ID;
-    String SUBNET;
-    String MPLS_TP_ID;
-    String BP;
-    String LOCAL_ID;
-    String REQUEST_ID;
-    String NAME;
-    String SRC_SUBNET;
-    String SRC_TID_ID;
-    String SRC_TID;
-    String SRC_PORT;
-    String DST_SUBNET;
-    String DST_TID_ID;
-    String DST_TID;
-    String DST_PORT;
-    String OPERATION_STATUS;
-    String CONFIGURATION_ACTION;
-    String CONFIGURATION_RESULT;
-    String CIR;
-    String PIR;
-    String DEP_ENABLER;
-    String DEP_STATUS;
-    String CONSTRAINT_ID;
-    String CONSTRAINT_NAME;
-    String CONSTRAINT_VALUE;
-    String CONSTRAINT_OPERATOR;
-    String PORT_CONSTRAINT_TYPE;
-    String MAXIMUM_BANDWIDTH;
-    String AVAILABLE_BANDWIDTH;
-    String LINK_TYPE;
-    String IS_VENDOR;
-    String REMOTE_NODEID;
-    String REMOTE_NODE_CONNECTOR;
-    String REMOTE_TOPOLOGYID;
-    String REMOTE_MPLSIF;
-    String PEER_MAC_ADDRESS;
-    String MPLSIF_TYPE;
+    int mplsIfId;
+    String tidId;
+    String tid;
+    String subnetId;
+    String subnet;
+    String mplsTpId;
+    String bp;
+    String localId;
+    String requestId;
+    String name;
+    String srcSubnet;
+    String srcTidId;
+    String srcTid;
+    String srcPort;
+    String dstSubnet;
+    String dstTidId;
+    String dstTid;
+    String dstPort;
+    String operationStatus;
+    String configurationAction;
+    String configurationResult;
+    String cir;
+    String pir;
+    String depEnabler;
+    String depStatus;
+    String constraintId;
+    String constraintName;
+    String constraintValue;
+    String constraintOperator;
+    String portConstraintType;
+    String maximumBandwidth;
+    String availableBandwidth;
+    String linkType;
+    String isVendor;
+    String remoteNodeid;
+    String remoteNodeConnector;
+    String remoteTopologyid;
+    String remoteMplsif;
+    String peerMacAddress;
+    String mplsifType;
+    String syncDate;
 
     public Tl1MplsIf() {
 
     }
 
-    public Tl1MplsIf(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String MPLS_TP_ID, String BP, String LOCAL_ID, String REQUEST_ID, String NAME, String SRC_SUBNET, String SRC_TID_ID, String SRC_TID, String SRC_PORT, String DST_SUBNET, String DST_TID_ID, String DST_TID, String DST_PORT, String OPERATION_STATUS, String CONFIGURATION_ACTION, String CONFIGURATION_RESULT, String CIR, String PIR, String DEP_ENABLER, String DEP_STATUS, String CONSTRAINT_ID, String CONSTRAINT_NAME, String CONSTRAINT_VALUE, String CONSTRAINT_OPERATOR, String PORT_CONSTRAINT_TYPE, String MAXIMUM_BANDWIDTH, String AVAILABLE_BANDWIDTH, String LINK_TYPE, String IS_VENDOR, String REMOTE_NODEID, String REMOTE_NODE_CONNECTOR, String REMOTE_TOPOLOGYID, String REMOTE_MPLSIF, String PEER_MAC_ADDRESS, String MPLSIF_TYPE) {
-        this.TID_ID = TID_ID;
-        this.TID = TID;
-        this.SUBNET_ID = SUBNET_ID;
-        this.SUBNET = SUBNET;
-        this.MPLS_TP_ID = MPLS_TP_ID;
-        this.BP = BP;
-        this.LOCAL_ID = LOCAL_ID;
-        this.REQUEST_ID = REQUEST_ID;
-        this.NAME = NAME;
-        this.SRC_SUBNET = SRC_SUBNET;
-        this.SRC_TID_ID = SRC_TID_ID;
-        this.SRC_TID = SRC_TID;
-        this.SRC_PORT = SRC_PORT;
-        this.DST_SUBNET = DST_SUBNET;
-        this.DST_TID_ID = DST_TID_ID;
-        this.DST_TID = DST_TID;
-        this.DST_PORT = DST_PORT;
-        this.OPERATION_STATUS = OPERATION_STATUS;
-        this.CONFIGURATION_ACTION = CONFIGURATION_ACTION;
-        this.CONFIGURATION_RESULT = CONFIGURATION_RESULT;
-        this.CIR = CIR;
-        this.PIR = PIR;
-        this.DEP_ENABLER = DEP_ENABLER;
-        this.DEP_STATUS = DEP_STATUS;
-        this.CONSTRAINT_ID = CONSTRAINT_ID;
-        this.CONSTRAINT_NAME = CONSTRAINT_NAME;
-        this.CONSTRAINT_VALUE = CONSTRAINT_VALUE;
-        this.CONSTRAINT_OPERATOR = CONSTRAINT_OPERATOR;
-        this.PORT_CONSTRAINT_TYPE = PORT_CONSTRAINT_TYPE;
-        this.MAXIMUM_BANDWIDTH = MAXIMUM_BANDWIDTH;
-        this.AVAILABLE_BANDWIDTH = AVAILABLE_BANDWIDTH;
-        this.LINK_TYPE = LINK_TYPE;
-        this.IS_VENDOR = IS_VENDOR;
-        this.REMOTE_NODEID = REMOTE_NODEID;
-        this.REMOTE_NODE_CONNECTOR = REMOTE_NODE_CONNECTOR;
-        this.REMOTE_TOPOLOGYID = REMOTE_TOPOLOGYID;
-        this.REMOTE_MPLSIF = REMOTE_MPLSIF;
-        this.PEER_MAC_ADDRESS = PEER_MAC_ADDRESS;
-        this.MPLSIF_TYPE = MPLSIF_TYPE;
+    public Tl1MplsIf(String tidId, String tid, String subnetId, String subnet, String mplsTpId, String bp, String localId, String requestId, String name, String srcSubnet, String srcTidId, String srcTid, String srcPort, String dstSubnet, String dstTidId, String dstTid, String dstPort, String operationStatus, String configurationAction, String configurationResult, String cir, String pir, String depEnabler, String depStatus, String constraintId, String constraintName, String constraintValue, String constraintOperator, String portConstraintType, String maximumBandwidth, String availableBandwidth, String linkType, String isVendor, String remoteNodeid, String remoteNodeConnector, String remoteTopologyid, String remoteMplsif, String peerMacAddress, String mplsifType, String syncDate) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.subnetId = subnetId;
+        this.subnet = subnet;
+        this.mplsTpId = mplsTpId;
+        this.bp = bp;
+        this.localId = localId;
+        this.requestId = requestId;
+        this.name = name;
+        this.srcSubnet = srcSubnet;
+        this.srcTidId = srcTidId;
+        this.srcTid = srcTid;
+        this.srcPort = srcPort;
+        this.dstSubnet = dstSubnet;
+        this.dstTidId = dstTidId;
+        this.dstTid = dstTid;
+        this.dstPort = dstPort;
+        this.operationStatus = operationStatus;
+        this.configurationAction = configurationAction;
+        this.configurationResult = configurationResult;
+        this.cir = cir;
+        this.pir = pir;
+        this.depEnabler = depEnabler;
+        this.depStatus = depStatus;
+        this.constraintId = constraintId;
+        this.constraintName = constraintName;
+        this.constraintValue = constraintValue;
+        this.constraintOperator = constraintOperator;
+        this.portConstraintType = portConstraintType;
+        this.maximumBandwidth = maximumBandwidth;
+        this.availableBandwidth = availableBandwidth;
+        this.linkType = linkType;
+        this.isVendor = isVendor;
+        this.remoteNodeid = remoteNodeid;
+        this.remoteNodeConnector = remoteNodeConnector;
+        this.remoteTopologyid = remoteTopologyid;
+        this.remoteMplsif = remoteMplsif;
+        this.peerMacAddress = peerMacAddress;
+        this.mplsifType = mplsifType;
+        this.syncDate = syncDate;
     }
 
-    public Tl1MplsIf(String[] fields) {
-        this.TID_ID = fields[0];
-        this.TID = fields[1];
-        this.SUBNET_ID = fields[2];
-        this.SUBNET = fields[3];
-        this.MPLS_TP_ID = fields[4];
-        this.BP = fields[5];
-        this.LOCAL_ID = fields[6];
-        this.REQUEST_ID = fields[7];
-        this.NAME = fields[8];
-        this.SRC_SUBNET = fields[9];
-        this.SRC_TID_ID = fields[10];
-        this.SRC_TID = fields[11];
-        this.SRC_PORT = fields[12];
-        this.DST_SUBNET = fields[13];
-        this.DST_TID_ID = fields[14];
-        this.DST_TID = fields[15];
-        this.DST_PORT = fields[16];
-        this.OPERATION_STATUS = fields[17];
-        this.CONFIGURATION_ACTION = fields[18];
-        this.CONFIGURATION_RESULT = fields[19];
-        this.CIR = fields[20];
-        this.PIR = fields[21];
-        this.DEP_ENABLER = fields[22];
-        this.DEP_STATUS = fields[23];
-        this.CONSTRAINT_ID = fields[24];
-        this.CONSTRAINT_NAME = fields[25];
-        this.CONSTRAINT_VALUE = fields[26];
-        this.CONSTRAINT_OPERATOR = fields[27];
-        this.PORT_CONSTRAINT_TYPE = fields[28];
-        this.MAXIMUM_BANDWIDTH = fields[29];
-        this.AVAILABLE_BANDWIDTH = fields[30];
-        this.LINK_TYPE = fields[31];
-        this.IS_VENDOR = fields[32];
-        this.REMOTE_NODEID = fields[33];
-        this.REMOTE_NODE_CONNECTOR = fields[34];
-        this.REMOTE_TOPOLOGYID = fields[35];
-        this.REMOTE_MPLSIF = fields[36];
-        this.PEER_MAC_ADDRESS = fields[37];
-        this.MPLSIF_TYPE = fields[38];
+    public Tl1MplsIf(String[] fields, String syncDate) {
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.subnetId = fields[2];
+        this.subnet = fields[3];
+        this.mplsTpId = fields[4];
+        this.bp = fields[5];
+        this.localId = fields[6];
+        this.requestId = fields[7];
+        this.name = fields[8];
+        this.srcSubnet = fields[9];
+        this.srcTidId = fields[10];
+        this.srcTid = fields[11];
+        this.srcPort = fields[12];
+        this.dstSubnet = fields[13];
+        this.dstTidId = fields[14];
+        this.dstTid = fields[15];
+        this.dstPort = fields[16];
+        this.operationStatus = fields[17];
+        this.configurationAction = fields[18];
+        this.configurationResult = fields[19];
+        this.cir = fields[20];
+        this.pir = fields[21];
+        this.depEnabler = fields[22];
+        this.depStatus = fields[23];
+        this.constraintId = fields[24];
+        this.constraintName = fields[25];
+        this.constraintValue = fields[26];
+        this.constraintOperator = fields[27];
+        this.portConstraintType = fields[28];
+        this.maximumBandwidth = fields[29];
+        this.availableBandwidth = fields[30];
+        this.linkType = fields[31];
+        this.isVendor = fields[32];
+        this.remoteNodeid = fields[33];
+        this.remoteNodeConnector = fields[34];
+        this.remoteTopologyid = fields[35];
+        this.remoteMplsif = fields[36];
+        this.peerMacAddress = fields[37];
+        this.mplsifType = fields[38];
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "MPLS_IF{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", MPLS_TP_ID='" + MPLS_TP_ID + '\'' +
-                ", BP='" + BP + '\'' +
-                ", LOCAL_ID='" + LOCAL_ID + '\'' +
-                ", REQUEST_ID='" + REQUEST_ID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", SRC_SUBNET='" + SRC_SUBNET + '\'' +
-                ", SRC_TID_ID='" + SRC_TID_ID + '\'' +
-                ", SRC_TID='" + SRC_TID + '\'' +
-                ", SRC_PORT='" + SRC_PORT + '\'' +
-                ", DST_SUBNET='" + DST_SUBNET + '\'' +
-                ", DST_TID_ID='" + DST_TID_ID + '\'' +
-                ", DST_TID='" + DST_TID + '\'' +
-                ", DST_PORT='" + DST_PORT + '\'' +
-                ", OPERATION_STATUS='" + OPERATION_STATUS + '\'' +
-                ", CONFIGURATION_ACTION='" + CONFIGURATION_ACTION + '\'' +
-                ", CONFIGURATION_RESULT='" + CONFIGURATION_RESULT + '\'' +
-                ", CIR='" + CIR + '\'' +
-                ", PIR='" + PIR + '\'' +
-                ", DEP_ENABLER='" + DEP_ENABLER + '\'' +
-                ", DEP_STATUS='" + DEP_STATUS + '\'' +
-                ", CONSTRAINT_ID='" + CONSTRAINT_ID + '\'' +
-                ", CONSTRAINT_NAME='" + CONSTRAINT_NAME + '\'' +
-                ", CONSTRAINT_VALUE='" + CONSTRAINT_VALUE + '\'' +
-                ", CONSTRAINT_OPERATOR='" + CONSTRAINT_OPERATOR + '\'' +
-                ", PORT_CONSTRAINT_TYPE='" + PORT_CONSTRAINT_TYPE + '\'' +
-                ", MAXIMUM_BANDWIDTH='" + MAXIMUM_BANDWIDTH + '\'' +
-                ", AVAILABLE_BANDWIDTH='" + AVAILABLE_BANDWIDTH + '\'' +
-                ", LINK_TYPE='" + LINK_TYPE + '\'' +
-                ", IS_VENDOR='" + IS_VENDOR + '\'' +
-                ", REMOTE_NODEID='" + REMOTE_NODEID + '\'' +
-                ", REMOTE_NODE_CONNECTOR='" + REMOTE_NODE_CONNECTOR + '\'' +
-                ", REMOTE_TOPOLOGYID='" + REMOTE_TOPOLOGYID + '\'' +
-                ", REMOTE_MPLSIF='" + REMOTE_MPLSIF + '\'' +
-                ", PEER_MAC_ADDRESS='" + PEER_MAC_ADDRESS + '\'' +
-                ", MPLSIF_TYPE='" + MPLSIF_TYPE + '\'' +
+        return "Tl1MplsIf{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", mplsTpId='" + mplsTpId + '\'' +
+                ", bp='" + bp + '\'' +
+                ", localId='" + localId + '\'' +
+                ", requestId='" + requestId + '\'' +
+                ", name='" + name + '\'' +
+                ", srcSubnet='" + srcSubnet + '\'' +
+                ", srcTidId='" + srcTidId + '\'' +
+                ", srcTid='" + srcTid + '\'' +
+                ", srcPort='" + srcPort + '\'' +
+                ", dstSubnet='" + dstSubnet + '\'' +
+                ", dstTidId='" + dstTidId + '\'' +
+                ", dstTid='" + dstTid + '\'' +
+                ", dstPort='" + dstPort + '\'' +
+                ", operationStatus='" + operationStatus + '\'' +
+                ", configurationAction='" + configurationAction + '\'' +
+                ", configurationResult='" + configurationResult + '\'' +
+                ", cir='" + cir + '\'' +
+                ", pir='" + pir + '\'' +
+                ", depEnabler='" + depEnabler + '\'' +
+                ", depStatus='" + depStatus + '\'' +
+                ", constraintId='" + constraintId + '\'' +
+                ", constraintName='" + constraintName + '\'' +
+                ", constraintValue='" + constraintValue + '\'' +
+                ", constraintOperator='" + constraintOperator + '\'' +
+                ", portConstraintType='" + portConstraintType + '\'' +
+                ", maximumBandwidth='" + maximumBandwidth + '\'' +
+                ", availableBandwidth='" + availableBandwidth + '\'' +
+                ", linkType='" + linkType + '\'' +
+                ", isVendor='" + isVendor + '\'' +
+                ", remoteNodeid='" + remoteNodeid + '\'' +
+                ", remoteNodeConnector='" + remoteNodeConnector + '\'' +
+                ", remoteTopologyid='" + remoteTopologyid + '\'' +
+                ", remoteMplsif='" + remoteMplsif + '\'' +
+                ", peerMacAddress='" + peerMacAddress + '\'' +
+                ", mplsifType='" + mplsifType + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
