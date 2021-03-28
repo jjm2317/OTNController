@@ -598,7 +598,7 @@ public class Tl1Manager {
             String cmd = "RTRV-TUNNEL-PROT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1TunnelPortRepository.save(new Tl1TunnelPort(fields));
+                tl1TunnelPortRepository.save(new Tl1TunnelPort(fields, syncDate));
             }
         }
     }

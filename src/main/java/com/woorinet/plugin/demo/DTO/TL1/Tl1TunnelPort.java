@@ -17,81 +17,59 @@ import javax.persistence.Table;
 public class Tl1TunnelPort {
     @Id
     @GeneratedValue
-    int TUNNEL_PORT_ID;
-    String TID;
-    String Prot_ID;
-    String Tunnel_Name;
-    String Descr;
-    String Tunnel_ID;
-    String ING_LSR_ID;
-    String EGR_LSR_ID;
-    String Prot_Type;
-    String Revert_Mode;
-    String Hold_Off_Time_msec;
-    String WTR_Time_sec;
-    String Active;
-    String State;
-    String Remain_WTR_Time_sec_;
-    String Command;
-    String WORKING_PID;
-    String PROTECTION_PID;
-    String Admin_Status;
-    String Oper_Status;
-    String Creation_Date;
-    String Modified_Date;
+    int tunnelPortId;
+    String tid;
+    String protId;
+    String tunnelName;
+    String descr;
+    String tunnelId;
+    String ingLsrId;
+    String egrLsrId;
+    String protType;
+    String revertMode;
+    String holdOffTimeMsec;
+    String wtrTimeSec;
+    String active;
+    String state;
+    String remainWtrTimeSec;
+    String command;
+    String workingPid;
+    String protectionPid;
+    String adminStatus;
+    String operStatus;
+    String creationDate;
+    String modifiedDate;
+    String syncDate;
 
     public Tl1TunnelPort() {
 
     }
 
-    public Tl1TunnelPort(String[] fields) {
-        this.TID = fields[0];
-        this.Prot_ID = fields[1];
-        this.Tunnel_Name = fields[2];
-        this.Descr = fields[3];
-        this.Tunnel_ID = fields[4];
-        this.ING_LSR_ID = fields[5];
-        this.EGR_LSR_ID = fields[6];
-        this.Prot_Type = fields[7];
-        this.Revert_Mode = fields[8];
-        this.Hold_Off_Time_msec = fields[9];
-        this.WTR_Time_sec = fields[10];
-        this.Active = fields[11];
-        this.State = fields[12];
-        this.Remain_WTR_Time_sec_ = fields[13];
-        this.Command = fields[14];
-        this.WORKING_PID = fields[15];
-        this.PROTECTION_PID = fields[16];
-        this.Admin_Status = fields[17];
-        this.Oper_Status = fields[18];
-        this.Creation_Date = fields[19];
-        this.Modified_Date = fields[20];
+    public Tl1TunnelPort(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.protId = fields[1];
+        this.tunnelName = fields[2];
+        this.descr = fields[3];
+        this.tunnelId = fields[4];
+        this.ingLsrId = fields[5];
+        this.egrLsrId = fields[6];
+        this.protType = fields[7];
+        this.revertMode = fields[8];
+        this.holdOffTimeMsec = fields[9];
+        this.wtrTimeSec = fields[10];
+        this.active = fields[11];
+        this.state = fields[12];
+        this.remainWtrTimeSec = fields[13];
+        this.command = fields[14];
+        this.workingPid = fields[15];
+        this.protectionPid = fields[16];
+        this.adminStatus = fields[17];
+        this.operStatus = fields[18];
+        this.creationDate = fields[19];
+        this.modifiedDate = fields[20];
+        this.syncDate = syncDate;
     }
 
-    @Override
-    public String toString() {
-        return "TUNNEL_PROT{" +
-                "TID='" + TID + '\'' +
-                ", Prot_ID='" + Prot_ID + '\'' +
-                ", Tunnel_Name='" + Tunnel_Name + '\'' +
-                ", Descr='" + Descr + '\'' +
-                ", Tunnel_ID='" + Tunnel_ID + '\'' +
-                ", ING_LSR_ID='" + ING_LSR_ID + '\'' +
-                ", EGR_LSR_ID='" + EGR_LSR_ID + '\'' +
-                ", Prot_Type='" + Prot_Type + '\'' +
-                ", Revert_Mode='" + Revert_Mode + '\'' +
-                ", Hold_Off_Time_msec='" + Hold_Off_Time_msec + '\'' +
-                ", WTR_Time_sec='" + WTR_Time_sec + '\'' +
-                ", Active='" + Active + '\'' +
-                ", State='" + State + '\'' +
-                ", Remain_WTR_Time_sec_='" + Remain_WTR_Time_sec_ + '\'' +
-                ", Command='" + Command + '\'' +
-                ", WORKING_PID='" + WORKING_PID + '\'' +
-                ", PROTECTION_PID='" + PROTECTION_PID + '\'' +
-                ", Admin_Status='" + Admin_Status + '\'' +
-                ", Oper_Status='" + Oper_Status + '\'' +
-                ", Creation_Date='" + Creation_Date + '\'' +
-                ", Modified_Date='" + Modified_Date + '\'' +
-                '}';
-    }
+
+
 }
