@@ -661,7 +661,7 @@ public class Tl1Manager {
             String cmd = "RTRV-SERVICE-EXT:" + tl1Service.getTid() + "::" + CTAG + ":serv-name=" + tl1Service.getName() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1ServiceExtRepository.save(new Tl1ServiceExt(fields));
+                tl1ServiceExtRepository.save(new Tl1ServiceExt(fields, syncDate));
             }
         }
     }

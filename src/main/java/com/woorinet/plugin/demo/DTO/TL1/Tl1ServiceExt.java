@@ -18,233 +18,237 @@ import javax.persistence.Table;
 public class Tl1ServiceExt {
     @Id
     @GeneratedValue
-    int SERVICE_EXT_ID;
-    String TID_ID;
-    String TID;
-    String SUBNET_ID;
-    String SUBNET;
-    String SERV_NAME;
-    String CIR;
-    String PIR;
-    String PW_ID;
-    String SC_ID;
-    String SCC_NAME;
-    String SCC_VALUE;
-    String SCC_OPERATOR;
-    String SC_TYPE;
-    String NODE_ROLE;
-    String TID_ROLE;
-    String SRC_PWID;
-    String SRC_VSI_ID;
-    String SRC_SUBNET;
-    String SRC_TID;
-    String SRC_TID_ID;
-    String SRC_AID;
-    String SRC_NODE_AIF_ID;
-    String SRC_NODE_AIF_NAME;
-    String SRC_NODE_AIF_TYPE;
-    String SRC_PORT_CID;
-    String SRC_PORT_CNAME;
-    String SRC_PORT_CVALUE;
-    String SRC_PORT_COPERATOR;
-    String SRC_PORT_CTYPE;
-    String SRC_ING_LSRID;
-    String SRC_EGR_LSRID;
-    String SRC_IN_LABEL;
-    String SRC_OUT_LABEL;
-    String DST_PWID;
-    String DST_VSI_ID;
-    String DST_SUBNET;
-    String DST_TID;
-    String DST_TID_ID;
-    String DST_AID;
-    String DST_NODE_AIF_ID;
-    String DST_NODE_AIF_NAME;
-    String DST_NODE_AIF_TYPE;
-    String DST_PORT_CID;
-    String DST_PORT_CNAME;
-    String DST_PORT_CVALUE;
-    String DST_PORT_COPERATOR;
-    String DST_PORT_CTYPE;
-    String DST_ING_LSRID;
-    String DST_EGR_LSRID;
-    String DST_IN_LABEL;
-    String DST_OUT_LABEL;
-    String MS_TUNNEL_COUNT;
-    String MS_PW_COUNT;
+    int serviceExtId;
+    String tidId;
+    String tid;
+    String subnetId;
+    String subnet;
+    String servName;
+    String cir;
+    String pir;
+    String pwId;
+    String scId;
+    String sccName;
+    String sccValue;
+    String sccOperator;
+    String scType;
+    String nodeRole;
+    String tidRole;
+    String srcPwid;
+    String srcVsiId;
+    String srcSubnet;
+    String srcTid;
+    String srcTidId;
+    String srcAid;
+    String srcNodeAifId;
+    String srcNodeAifName;
+    String srcNodeAifType;
+    String srcPortCid;
+    String srcPortCname;
+    String srcPortCvalue;
+    String srcPortCoperator;
+    String srcPortCtype;
+    String srcIngLsrid;
+    String srcEgrLsrid;
+    String srcInLabel;
+    String srcOutLabel;
+    String dstPwid;
+    String dstVsiId;
+    String dstSubnet;
+    String dstTid;
+    String dstTidId;
+    String dstAid;
+    String dstNodeAifId;
+    String dstNodeAifName;
+    String dstNodeAifType;
+    String dstPortCid;
+    String dstPortCname;
+    String dstPortCvalue;
+    String dstPortCoperator;
+    String dstPortCtype;
+    String dstIngLsrid;
+    String dstEgrLsrid;
+    String dstInLabel;
+    String dstOutLabel;
+    String msTunnelCount;
+    String msPwCount;
+    String syncDate;
 
     public Tl1ServiceExt() {
 
     }
 
-    public Tl1ServiceExt(String TID_ID, String TID, String SUBNET_ID, String SUBNET, String SERV_NAME, String CIR, String PIR, String PW_ID, String SC_ID, String SCC_NAME, String SCC_VALUE, String SCC_OPERATOR, String SC_TYPE, String NODE_ROLE, String TID_ROLE, String SRC_PWID, String SRC_VSI_ID, String SRC_SUBNET, String SRC_TID, String SRC_TID_ID, String SRC_AID, String SRC_NODE_AIF_ID, String SRC_NODE_AIF_NAME, String SRC_NODE_AIF_TYPE, String SRC_PORT_CID, String SRC_PORT_CNAME, String SRC_PORT_CVALUE, String SRC_PORT_COPERATOR, String SRC_PORT_CTYPE, String SRC_ING_LSRID, String SRC_EGR_LSRID, String SRC_IN_LABEL, String SRC_OUT_LABEL, String DST_PWID, String DST_VSI_ID, String DST_SUBNET, String DST_TID, String DST_TID_ID, String DST_AID, String DST_NODE_AIF_ID, String DST_NODE_AIF_NAME, String DST_NODE_AIF_TYPE, String DST_PORT_CID, String DST_PORT_CNAME, String DST_PORT_CVALUE, String DST_PORT_COPERATOR, String DST_PORT_CTYPE, String DST_ING_LSRID, String DST_EGR_LSRID, String DST_IN_LABEL, String DST_OUT_LABEL, String MS_TUNNEL_COUNT, String MS_PW_COUNT) {
-        this.TID_ID = TID_ID;
-        this.TID = TID;
-        this.SUBNET_ID = SUBNET_ID;
-        this.SUBNET = SUBNET;
-        this.SERV_NAME = SERV_NAME;
-        this.CIR = CIR;
-        this.PIR = PIR;
-        this.PW_ID = PW_ID;
-        this.SC_ID = SC_ID;
-        this.SCC_NAME = SCC_NAME;
-        this.SCC_VALUE = SCC_VALUE;
-        this.SCC_OPERATOR = SCC_OPERATOR;
-        this.SC_TYPE = SC_TYPE;
-        this.NODE_ROLE = NODE_ROLE;
-        this.TID_ROLE = TID_ROLE;
-        this.SRC_PWID = SRC_PWID;
-        this.SRC_VSI_ID = SRC_VSI_ID;
-        this.SRC_SUBNET = SRC_SUBNET;
-        this.SRC_TID = SRC_TID;
-        this.SRC_TID_ID = SRC_TID_ID;
-        this.SRC_AID = SRC_AID;
-        this.SRC_NODE_AIF_ID = SRC_NODE_AIF_ID;
-        this.SRC_NODE_AIF_NAME = SRC_NODE_AIF_NAME;
-        this.SRC_NODE_AIF_TYPE = SRC_NODE_AIF_TYPE;
-        this.SRC_PORT_CID = SRC_PORT_CID;
-        this.SRC_PORT_CNAME = SRC_PORT_CNAME;
-        this.SRC_PORT_CVALUE = SRC_PORT_CVALUE;
-        this.SRC_PORT_COPERATOR = SRC_PORT_COPERATOR;
-        this.SRC_PORT_CTYPE = SRC_PORT_CTYPE;
-        this.SRC_ING_LSRID = SRC_ING_LSRID;
-        this.SRC_EGR_LSRID = SRC_EGR_LSRID;
-        this.SRC_IN_LABEL = SRC_IN_LABEL;
-        this.SRC_OUT_LABEL = SRC_OUT_LABEL;
-        this.DST_PWID = DST_PWID;
-        this.DST_VSI_ID = DST_VSI_ID;
-        this.DST_SUBNET = DST_SUBNET;
-        this.DST_TID = DST_TID;
-        this.DST_TID_ID = DST_TID_ID;
-        this.DST_AID = DST_AID;
-        this.DST_NODE_AIF_ID = DST_NODE_AIF_ID;
-        this.DST_NODE_AIF_NAME = DST_NODE_AIF_NAME;
-        this.DST_NODE_AIF_TYPE = DST_NODE_AIF_TYPE;
-        this.DST_PORT_CID = DST_PORT_CID;
-        this.DST_PORT_CNAME = DST_PORT_CNAME;
-        this.DST_PORT_CVALUE = DST_PORT_CVALUE;
-        this.DST_PORT_COPERATOR = DST_PORT_COPERATOR;
-        this.DST_PORT_CTYPE = DST_PORT_CTYPE;
-        this.DST_ING_LSRID = DST_ING_LSRID;
-        this.DST_EGR_LSRID = DST_EGR_LSRID;
-        this.DST_IN_LABEL = DST_IN_LABEL;
-        this.DST_OUT_LABEL = DST_OUT_LABEL;
-        this.MS_TUNNEL_COUNT = MS_TUNNEL_COUNT;
-        this.MS_PW_COUNT = MS_PW_COUNT;
+    public Tl1ServiceExt(String[] fields, String syncDate) {
+        tidId = fields[0];
+        tid = fields[1];
+        subnetId = fields[2];
+        subnet = fields[3];
+        servName = fields[4];
+        cir = fields[5];
+        pir = fields[6];
+        pwId = fields[7];
+        scId = fields[8];
+        sccName = fields[9];
+        sccValue = fields[10];
+        sccOperator = fields[11];
+        scType = fields[12];
+        nodeRole = fields[13];
+        tidRole = fields[14];
+        srcPwid = fields[15];
+        srcVsiId = fields[16];
+        srcSubnet = fields[17];
+        srcTid = fields[18];
+        srcTidId = fields[19];
+        srcAid = fields[20];
+        srcNodeAifId = fields[21];
+        srcNodeAifName = fields[22];
+        srcNodeAifType = fields[23];
+        srcPortCid = fields[24];
+        srcPortCname = fields[25];
+        srcPortCvalue = fields[26];
+        srcPortCoperator = fields[27];
+        srcPortCtype = fields[28];
+        srcIngLsrid = fields[29];
+        srcEgrLsrid = fields[30];
+        srcInLabel = fields[31];
+        srcOutLabel = fields[32];
+        dstPwid = fields[33];
+        dstVsiId = fields[34];
+        dstSubnet = fields[35];
+        dstTid = fields[36];
+        dstTidId = fields[37];
+        dstAid = fields[38];
+        dstNodeAifId = fields[39];
+        dstNodeAifName = fields[40];
+        dstNodeAifType = fields[41];
+        dstPortCid = fields[42];
+        dstPortCname = fields[43];
+        dstPortCvalue = fields[44];
+        dstPortCoperator = fields[45];
+        dstPortCtype = fields[46];
+        dstIngLsrid = fields[47];
+        dstEgrLsrid = fields[48];
+        dstInLabel = fields[49];
+        dstOutLabel = fields[50];
+        msTunnelCount = fields[51];
+        msPwCount = fields[52];
+        this.syncDate = syncDate;
     }
 
-    public Tl1ServiceExt(String[] fields) {
-        TID_ID = fields[0];
-        TID = fields[1];
-        SUBNET_ID = fields[2];
-        SUBNET = fields[3];
-        SERV_NAME = fields[4];
-        CIR = fields[5];
-        PIR = fields[6];
-        PW_ID = fields[7];
-        SC_ID = fields[8];
-        SCC_NAME = fields[9];
-        SCC_VALUE = fields[10];
-        SCC_OPERATOR = fields[11];
-        SC_TYPE = fields[12];
-        NODE_ROLE = fields[13];
-        TID_ROLE = fields[14];
-        SRC_PWID = fields[15];
-        SRC_VSI_ID = fields[16];
-        SRC_SUBNET = fields[17];
-        SRC_TID = fields[18];
-        SRC_TID_ID = fields[19];
-        SRC_AID = fields[20];
-        SRC_NODE_AIF_ID = fields[21];
-        SRC_NODE_AIF_NAME = fields[22];
-        SRC_NODE_AIF_TYPE = fields[23];
-        SRC_PORT_CID = fields[24];
-        SRC_PORT_CNAME = fields[25];
-        SRC_PORT_CVALUE = fields[26];
-        SRC_PORT_COPERATOR = fields[27];
-        SRC_PORT_CTYPE = fields[28];
-        SRC_ING_LSRID = fields[29];
-        SRC_EGR_LSRID = fields[30];
-        SRC_IN_LABEL = fields[31];
-        SRC_OUT_LABEL = fields[32];
-        DST_PWID = fields[33];
-        DST_VSI_ID = fields[34];
-        DST_SUBNET = fields[35];
-        DST_TID = fields[36];
-        DST_TID_ID = fields[37];
-        DST_AID = fields[38];
-        DST_NODE_AIF_ID = fields[39];
-        DST_NODE_AIF_NAME = fields[40];
-        DST_NODE_AIF_TYPE = fields[41];
-        DST_PORT_CID = fields[42];
-        DST_PORT_CNAME = fields[43];
-        DST_PORT_CVALUE = fields[44];
-        DST_PORT_COPERATOR = fields[45];
-        DST_PORT_CTYPE = fields[46];
-        DST_ING_LSRID = fields[47];
-        DST_EGR_LSRID = fields[48];
-        DST_IN_LABEL = fields[49];
-        DST_OUT_LABEL = fields[50];
-        MS_TUNNEL_COUNT = fields[51];
-        MS_PW_COUNT = fields[52];
+    public Tl1ServiceExt(String tidId, String tid, String subnetId, String subnet, String servName, String cir, String pir, String pwId, String scId, String sccName, String sccValue, String sccOperator, String scType, String nodeRole, String tidRole, String srcPwid, String srcVsiId, String srcSubnet, String srcTid, String srcTidId, String srcAid, String srcNodeAifId, String srcNodeAifName, String srcNodeAifType, String srcPortCid, String srcPortCname, String srcPortCvalue, String srcPortCoperator, String srcPortCtype, String srcIngLsrid, String srcEgrLsrid, String srcInLabel, String srcOutLabel, String dstPwid, String dstVsiId, String dstSubnet, String dstTid, String dstTidId, String dstAid, String dstNodeAifId, String dstNodeAifName, String dstNodeAifType, String dstPortCid, String dstPortCname, String dstPortCvalue, String dstPortCoperator, String dstPortCtype, String dstIngLsrid, String dstEgrLsrid, String dstInLabel, String dstOutLabel, String msTunnelCount, String msPwCount, String syncDate) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.subnetId = subnetId;
+        this.subnet = subnet;
+        this.servName = servName;
+        this.cir = cir;
+        this.pir = pir;
+        this.pwId = pwId;
+        this.scId = scId;
+        this.sccName = sccName;
+        this.sccValue = sccValue;
+        this.sccOperator = sccOperator;
+        this.scType = scType;
+        this.nodeRole = nodeRole;
+        this.tidRole = tidRole;
+        this.srcPwid = srcPwid;
+        this.srcVsiId = srcVsiId;
+        this.srcSubnet = srcSubnet;
+        this.srcTid = srcTid;
+        this.srcTidId = srcTidId;
+        this.srcAid = srcAid;
+        this.srcNodeAifId = srcNodeAifId;
+        this.srcNodeAifName = srcNodeAifName;
+        this.srcNodeAifType = srcNodeAifType;
+        this.srcPortCid = srcPortCid;
+        this.srcPortCname = srcPortCname;
+        this.srcPortCvalue = srcPortCvalue;
+        this.srcPortCoperator = srcPortCoperator;
+        this.srcPortCtype = srcPortCtype;
+        this.srcIngLsrid = srcIngLsrid;
+        this.srcEgrLsrid = srcEgrLsrid;
+        this.srcInLabel = srcInLabel;
+        this.srcOutLabel = srcOutLabel;
+        this.dstPwid = dstPwid;
+        this.dstVsiId = dstVsiId;
+        this.dstSubnet = dstSubnet;
+        this.dstTid = dstTid;
+        this.dstTidId = dstTidId;
+        this.dstAid = dstAid;
+        this.dstNodeAifId = dstNodeAifId;
+        this.dstNodeAifName = dstNodeAifName;
+        this.dstNodeAifType = dstNodeAifType;
+        this.dstPortCid = dstPortCid;
+        this.dstPortCname = dstPortCname;
+        this.dstPortCvalue = dstPortCvalue;
+        this.dstPortCoperator = dstPortCoperator;
+        this.dstPortCtype = dstPortCtype;
+        this.dstIngLsrid = dstIngLsrid;
+        this.dstEgrLsrid = dstEgrLsrid;
+        this.dstInLabel = dstInLabel;
+        this.dstOutLabel = dstOutLabel;
+        this.msTunnelCount = msTunnelCount;
+        this.msPwCount = msPwCount;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "SERVICE_EXT{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", SERV_NAME='" + SERV_NAME + '\'' +
-                ", CIR='" + CIR + '\'' +
-                ", PIR='" + PIR + '\'' +
-                ", PW_ID='" + PW_ID + '\'' +
-                ", SC_ID='" + SC_ID + '\'' +
-                ", SCC_NAME='" + SCC_NAME + '\'' +
-                ", SCC_VALUE='" + SCC_VALUE + '\'' +
-                ", SCC_OPERATOR='" + SCC_OPERATOR + '\'' +
-                ", SC_TYPE='" + SC_TYPE + '\'' +
-                ", NODE_ROLE='" + NODE_ROLE + '\'' +
-                ", TID_ROLE='" + TID_ROLE + '\'' +
-                ", SRC_PWID='" + SRC_PWID + '\'' +
-                ", SRC_VSI_ID='" + SRC_VSI_ID + '\'' +
-                ", SRC_SUBNET='" + SRC_SUBNET + '\'' +
-                ", SRC_TID='" + SRC_TID + '\'' +
-                ", SRC_TID_ID='" + SRC_TID_ID + '\'' +
-                ", SRC_AID='" + SRC_AID + '\'' +
-                ", SRC_NODE_AIF_ID='" + SRC_NODE_AIF_ID + '\'' +
-                ", SRC_NODE_AIF_NAME='" + SRC_NODE_AIF_NAME + '\'' +
-                ", SRC_NODE_AIF_TYPE='" + SRC_NODE_AIF_TYPE + '\'' +
-                ", SRC_PORT_CID='" + SRC_PORT_CID + '\'' +
-                ", SRC_PORT_CNAME='" + SRC_PORT_CNAME + '\'' +
-                ", SRC_PORT_CVALUE='" + SRC_PORT_CVALUE + '\'' +
-                ", SRC_PORT_COPERATOR='" + SRC_PORT_COPERATOR + '\'' +
-                ", SRC_PORT_CTYPE='" + SRC_PORT_CTYPE + '\'' +
-                ", SRC_ING_LSRID='" + SRC_ING_LSRID + '\'' +
-                ", SRC_EGR_LSRID='" + SRC_EGR_LSRID + '\'' +
-                ", SRC_IN_LABEL='" + SRC_IN_LABEL + '\'' +
-                ", SRC_OUT_LABEL='" + SRC_OUT_LABEL + '\'' +
-                ", DST_PWID='" + DST_PWID + '\'' +
-                ", DST_VSI_ID='" + DST_VSI_ID + '\'' +
-                ", DST_SUBNET='" + DST_SUBNET + '\'' +
-                ", DST_TID='" + DST_TID + '\'' +
-                ", DST_TID_ID='" + DST_TID_ID + '\'' +
-                ", DST_AID='" + DST_AID + '\'' +
-                ", DST_NODE_AIF_ID='" + DST_NODE_AIF_ID + '\'' +
-                ", DST_NODE_AIF_NAME='" + DST_NODE_AIF_NAME + '\'' +
-                ", DST_NODE_AIF_TYPE='" + DST_NODE_AIF_TYPE + '\'' +
-                ", DST_PORT_CID='" + DST_PORT_CID + '\'' +
-                ", DST_PORT_CNAME='" + DST_PORT_CNAME + '\'' +
-                ", DST_PORT_CVALUE='" + DST_PORT_CVALUE + '\'' +
-                ", DST_PORT_COPERATOR='" + DST_PORT_COPERATOR + '\'' +
-                ", DST_PORT_CTYPE='" + DST_PORT_CTYPE + '\'' +
-                ", DST_ING_LSRID='" + DST_ING_LSRID + '\'' +
-                ", DST_EGR_LSRID='" + DST_EGR_LSRID + '\'' +
-                ", DST_IN_LABEL='" + DST_IN_LABEL + '\'' +
-                ", DST_OUT_LABEL='" + DST_OUT_LABEL + '\'' +
-                ", MS_TUNNEL_COUNT='" + MS_TUNNEL_COUNT + '\'' +
-                ", MS_PW_COUNT='" + MS_PW_COUNT + '\'' +
+        return "Tl1ServiceExt{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", servName='" + servName + '\'' +
+                ", cir='" + cir + '\'' +
+                ", pir='" + pir + '\'' +
+                ", pwId='" + pwId + '\'' +
+                ", scId='" + scId + '\'' +
+                ", sccName='" + sccName + '\'' +
+                ", sccValue='" + sccValue + '\'' +
+                ", sccOperator='" + sccOperator + '\'' +
+                ", scType='" + scType + '\'' +
+                ", nodeRole='" + nodeRole + '\'' +
+                ", tidRole='" + tidRole + '\'' +
+                ", srcPwid='" + srcPwid + '\'' +
+                ", srcVsiId='" + srcVsiId + '\'' +
+                ", srcSubnet='" + srcSubnet + '\'' +
+                ", srcTid='" + srcTid + '\'' +
+                ", srcTidId='" + srcTidId + '\'' +
+                ", srcAid='" + srcAid + '\'' +
+                ", srcNodeAifId='" + srcNodeAifId + '\'' +
+                ", srcNodeAifName='" + srcNodeAifName + '\'' +
+                ", srcNodeAifType='" + srcNodeAifType + '\'' +
+                ", srcPortCid='" + srcPortCid + '\'' +
+                ", srcPortCname='" + srcPortCname + '\'' +
+                ", srcPortCvalue='" + srcPortCvalue + '\'' +
+                ", srcPortCoperator='" + srcPortCoperator + '\'' +
+                ", srcPortCtype='" + srcPortCtype + '\'' +
+                ", srcIngLsrid='" + srcIngLsrid + '\'' +
+                ", srcEgrLsrid='" + srcEgrLsrid + '\'' +
+                ", srcInLabel='" + srcInLabel + '\'' +
+                ", srcOutLabel='" + srcOutLabel + '\'' +
+                ", dstPwid='" + dstPwid + '\'' +
+                ", dstVsiId='" + dstVsiId + '\'' +
+                ", dstSubnet='" + dstSubnet + '\'' +
+                ", dstTid='" + dstTid + '\'' +
+                ", dstTidId='" + dstTidId + '\'' +
+                ", dstAid='" + dstAid + '\'' +
+                ", dstNodeAifId='" + dstNodeAifId + '\'' +
+                ", dstNodeAifName='" + dstNodeAifName + '\'' +
+                ", dstNodeAifType='" + dstNodeAifType + '\'' +
+                ", dstPortCid='" + dstPortCid + '\'' +
+                ", dstPortCname='" + dstPortCname + '\'' +
+                ", dstPortCvalue='" + dstPortCvalue + '\'' +
+                ", dstPortCoperator='" + dstPortCoperator + '\'' +
+                ", dstPortCtype='" + dstPortCtype + '\'' +
+                ", dstIngLsrid='" + dstIngLsrid + '\'' +
+                ", dstEgrLsrid='" + dstEgrLsrid + '\'' +
+                ", dstInLabel='" + dstInLabel + '\'' +
+                ", dstOutLabel='" + dstOutLabel + '\'' +
+                ", msTunnelCount='" + msTunnelCount + '\'' +
+                ", msPwCount='" + msPwCount + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
