@@ -17,171 +17,229 @@ import javax.persistence.Table;
 public class Tl1ServiceMspw {
     @Id
     @GeneratedValue
-    int SERVICE_MSPW_ID;
-    String TID_ID;
-    String TID;
-    String SUBNET_ID;
-    String SUBNET;
-    String MSPW_ID;
-    String LOCAL_ID;
-    String REQUEST_ID;
-    String NAME;
-    String PW_SRC_LSRID;
-    String PW_SRC_SUBNET;
-    String PW_SRC_TID;
-    String PW_SRC_TID_ID;
-    String PW_DST_LSRID;
-    String PW_DST_SUBNET;
-    String PW_DST_TID;
-    String PW_DST_TID_ID;
-    String TUNNEL_NAME1;
-    String TUNNEL_ID1;
-    String TUNNEL_NAME2;
-    String TUNNEL_ID2;
-    String ING_LSRID1;
-    String ING_SUBNET1;
-    String ING_TID1;
-    String ING_TID_ID1;
-    String EGR_LSRID1;
-    String EGR_SUBNET1;
-    String EGR_TID1;
-    String EGR_TID_ID1;
-    String ING_LSRID2;
-    String ING_SUBNET2;
-    String ING_TID2;
-    String ING_TID_ID2;
-    String EGR_LSRID2;
-    String EGR_SUBNET2;
-    String EGR_TID2;
-    String EGR_TID_ID2;
-    String PWXC_OPERATIONAL_STATUS;
-    String PWXC_CONFIGURATION_ACTION;
-    String PWXC_CONFIGURATION_RESULT;
-    String CIR;
-    String PIR;
-    String PW_DEP_ENABLER;
-    String PW_DEP_STATUS;
-    String EAST_PW_PATH_STATUS_TYPE;
-    String EAST_PW_IN_LABEL;
-    String EAST_PW_OUT_LABEL;
-    String WEST_PW_PATH_STATUS_TYPE;
-    String WEST_PW_IN_LABEL;
-    String WEST_PW_OUT_LABEL;
-    String PROTECTION_TYPE;
-    String PATH_TYPE;
+    int serviceMspwId;
+    String tidId;
+    String tid;
+    String subnetId;
+    String subnet;
+    String mspwId;
+    String localId;
+    String requestId;
+    String name;
+    String pwSrcLsrid;
+    String pwSrcSubnet;
+    String pwSrcTid;
+    String pwSrcTidId;
+    String pwDstLsrid;
+    String pwDstSubnet;
+    String pwDstTid;
+    String pwDstTidId;
+    String tunnelName1;
+    String tunnelId1;
+    String tunnelName2;
+    String tunnelId2;
+    String ingLsrid1;
+    String ingSubnet1;
+    String ingTid1;
+    String ingTidId1;
+    String egrLsrid1;
+    String egrSubnet1;
+    String egrTid1;
+    String egrTidId1;
+    String ingLsrid2;
+    String ingSubnet2;
+    String ingTid2;
+    String ingTidId2;
+    String egrLsrid2;
+    String egrSubnet2;
+    String egrTid2;
+    String egrTidId2;
+    String pwxcOperationalStatus;
+    String pwxcConfigurationAction;
+    String pwxcConfigurationResult;
+    String cir;
+    String pir;
+    String pwDepEnabler;
+    String pwDepStatus;
+    String eastPwPathStatusType;
+    String eastPwInLabel;
+    String eastPwOutLabel;
+    String westPwPathStatusType;
+    String westPwInLabel;
+    String westPwOutLabel;
+    String protectionType;
+    String pathType;
+    String syncDate;
 
     public Tl1ServiceMspw() {
 
     }
 
-    public Tl1ServiceMspw(String[] fields) {
-        this.TID_ID = fields[0];
-        this.TID = fields[1];
-        this.SUBNET_ID = fields[2];
-        this.SUBNET = fields[3];
-        this.MSPW_ID = fields[4];
-        this.LOCAL_ID = fields[5];
-        this.REQUEST_ID = fields[6];
-        this.NAME = fields[7];
-        this.PW_SRC_LSRID = fields[8];
-        this.PW_SRC_SUBNET = fields[9];
-        this.PW_SRC_TID = fields[10];
-        this.PW_SRC_TID_ID = fields[11];
-        this.PW_DST_LSRID = fields[12];
-        this.PW_DST_SUBNET = fields[13];
-        this.PW_DST_TID = fields[14];
-        this.PW_DST_TID_ID = fields[15];
-        this.TUNNEL_NAME1 = fields[16];
-        this.TUNNEL_ID1 = fields[17];
-        this.TUNNEL_NAME2 = fields[18];
-        this.TUNNEL_ID2 = fields[19];
-        this.ING_LSRID1 = fields[20];
-        this.ING_SUBNET1 = fields[21];
-        this.ING_TID1 = fields[22];
-        this.ING_TID_ID1 = fields[23];
-        this.EGR_LSRID1 = fields[24];
-        this.EGR_SUBNET1 = fields[25];
-        this.EGR_TID1 = fields[26];
-        this.EGR_TID_ID1 = fields[27];
-        this.ING_LSRID2 = fields[28];
-        this.ING_SUBNET2 = fields[29];
-        this.ING_TID2 = fields[30];
-        this.ING_TID_ID2 = fields[31];
-        this.EGR_LSRID2 = fields[32];
-        this.EGR_SUBNET2 = fields[33];
-        this.EGR_TID2 = fields[34];
-        this.EGR_TID_ID2 = fields[35];
-        this.PWXC_OPERATIONAL_STATUS = fields[36];
-        this.PWXC_CONFIGURATION_ACTION = fields[37];
-        this.PWXC_CONFIGURATION_RESULT = fields[38];
-        this.CIR = fields[39];
-        this.PIR = fields[40];
-        this.PW_DEP_ENABLER = fields[41];
-        this.PW_DEP_STATUS = fields[42];
-        this.EAST_PW_PATH_STATUS_TYPE = fields[43];
-        this.EAST_PW_IN_LABEL = fields[44];
-        this.EAST_PW_OUT_LABEL = fields[45];
-        this.WEST_PW_PATH_STATUS_TYPE = fields[46];
-        this.WEST_PW_IN_LABEL = fields[47];
-        this.WEST_PW_OUT_LABEL = fields[48];
-        this.PROTECTION_TYPE = fields[49];
-        this.PATH_TYPE = fields[50];
+    public Tl1ServiceMspw(String[] fields, String syncDate) {
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.subnetId = fields[2];
+        this.subnet = fields[3];
+        this.mspwId = fields[4];
+        this.localId = fields[5];
+        this.requestId = fields[6];
+        this.name = fields[7];
+        this.pwSrcLsrid = fields[8];
+        this.pwSrcSubnet = fields[9];
+        this.pwSrcTid = fields[10];
+        this.pwSrcTidId = fields[11];
+        this.pwDstLsrid = fields[12];
+        this.pwDstSubnet = fields[13];
+        this.pwDstTid = fields[14];
+        this.pwDstTidId = fields[15];
+        this.tunnelName1 = fields[16];
+        this.tunnelId1 = fields[17];
+        this.tunnelName2 = fields[18];
+        this.tunnelId2 = fields[19];
+        this.ingLsrid1 = fields[20];
+        this.ingSubnet1 = fields[21];
+        this.ingTid1 = fields[22];
+        this.ingTidId1 = fields[23];
+        this.egrLsrid1 = fields[24];
+        this.egrSubnet1 = fields[25];
+        this.egrTid1 = fields[26];
+        this.egrTidId1 = fields[27];
+        this.ingLsrid2 = fields[28];
+        this.ingSubnet2 = fields[29];
+        this.ingTid2 = fields[30];
+        this.ingTidId2 = fields[31];
+        this.egrLsrid2 = fields[32];
+        this.egrSubnet2 = fields[33];
+        this.egrTid2 = fields[34];
+        this.egrTidId2 = fields[35];
+        this.pwxcOperationalStatus = fields[36];
+        this.pwxcConfigurationAction = fields[37];
+        this.pwxcConfigurationResult = fields[38];
+        this.cir = fields[39];
+        this.pir = fields[40];
+        this.pwDepEnabler = fields[41];
+        this.pwDepStatus = fields[42];
+        this.eastPwPathStatusType = fields[43];
+        this.eastPwInLabel = fields[44];
+        this.eastPwOutLabel = fields[45];
+        this.westPwPathStatusType = fields[46];
+        this.westPwInLabel = fields[47];
+        this.westPwOutLabel = fields[48];
+        this.protectionType = fields[49];
+        this.pathType = fields[50];
+        this.syncDate = syncDate;
+    }
+
+    public Tl1ServiceMspw(String tidId, String tid, String subnetId, String subnet, String mspwId, String localId, String requestId, String name, String pwSrcLsrid, String pwSrcSubnet, String pwSrcTid, String pwSrcTidId, String pwDstLsrid, String pwDstSubnet, String pwDstTid, String pwDstTidId, String tunnelName1, String tunnelId1, String tunnelName2, String tunnelId2, String ingLsrid1, String ingSubnet1, String ingTid1, String ingTidId1, String egrLsrid1, String egrSubnet1, String egrTid1, String egrTidId1, String ingLsrid2, String ingSubnet2, String ingTid2, String ingTidId2, String egrLsrid2, String egrSubnet2, String egrTid2, String egrTidId2, String pwxcOperationalStatus, String pwxcConfigurationAction, String pwxcConfigurationResult, String cir, String pir, String pwDepEnabler, String pwDepStatus, String eastPwPathStatusType, String eastPwInLabel, String eastPwOutLabel, String westPwPathStatusType, String westPwInLabel, String westPwOutLabel, String protectionType, String pathType, String syncDate) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.subnetId = subnetId;
+        this.subnet = subnet;
+        this.mspwId = mspwId;
+        this.localId = localId;
+        this.requestId = requestId;
+        this.name = name;
+        this.pwSrcLsrid = pwSrcLsrid;
+        this.pwSrcSubnet = pwSrcSubnet;
+        this.pwSrcTid = pwSrcTid;
+        this.pwSrcTidId = pwSrcTidId;
+        this.pwDstLsrid = pwDstLsrid;
+        this.pwDstSubnet = pwDstSubnet;
+        this.pwDstTid = pwDstTid;
+        this.pwDstTidId = pwDstTidId;
+        this.tunnelName1 = tunnelName1;
+        this.tunnelId1 = tunnelId1;
+        this.tunnelName2 = tunnelName2;
+        this.tunnelId2 = tunnelId2;
+        this.ingLsrid1 = ingLsrid1;
+        this.ingSubnet1 = ingSubnet1;
+        this.ingTid1 = ingTid1;
+        this.ingTidId1 = ingTidId1;
+        this.egrLsrid1 = egrLsrid1;
+        this.egrSubnet1 = egrSubnet1;
+        this.egrTid1 = egrTid1;
+        this.egrTidId1 = egrTidId1;
+        this.ingLsrid2 = ingLsrid2;
+        this.ingSubnet2 = ingSubnet2;
+        this.ingTid2 = ingTid2;
+        this.ingTidId2 = ingTidId2;
+        this.egrLsrid2 = egrLsrid2;
+        this.egrSubnet2 = egrSubnet2;
+        this.egrTid2 = egrTid2;
+        this.egrTidId2 = egrTidId2;
+        this.pwxcOperationalStatus = pwxcOperationalStatus;
+        this.pwxcConfigurationAction = pwxcConfigurationAction;
+        this.pwxcConfigurationResult = pwxcConfigurationResult;
+        this.cir = cir;
+        this.pir = pir;
+        this.pwDepEnabler = pwDepEnabler;
+        this.pwDepStatus = pwDepStatus;
+        this.eastPwPathStatusType = eastPwPathStatusType;
+        this.eastPwInLabel = eastPwInLabel;
+        this.eastPwOutLabel = eastPwOutLabel;
+        this.westPwPathStatusType = westPwPathStatusType;
+        this.westPwInLabel = westPwInLabel;
+        this.westPwOutLabel = westPwOutLabel;
+        this.protectionType = protectionType;
+        this.pathType = pathType;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "SERVICE_MSPW{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", MSPW_ID='" + MSPW_ID + '\'' +
-                ", LOCAL_ID='" + LOCAL_ID + '\'' +
-                ", REQUEST_ID='" + REQUEST_ID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", PW_SRC_LSRID='" + PW_SRC_LSRID + '\'' +
-                ", PW_SRC_SUBNET='" + PW_SRC_SUBNET + '\'' +
-                ", PW_SRC_TID='" + PW_SRC_TID + '\'' +
-                ", PW_SRC_TID_ID='" + PW_SRC_TID_ID + '\'' +
-                ", PW_DST_LSRID='" + PW_DST_LSRID + '\'' +
-                ", PW_DST_SUBNET='" + PW_DST_SUBNET + '\'' +
-                ", PW_DST_TID='" + PW_DST_TID + '\'' +
-                ", PW_DST_TID_ID='" + PW_DST_TID_ID + '\'' +
-                ", TUNNEL_NAME1='" + TUNNEL_NAME1 + '\'' +
-                ", TUNNEL_ID1='" + TUNNEL_ID1 + '\'' +
-                ", TUNNEL_NAME2='" + TUNNEL_NAME2 + '\'' +
-                ", TUNNEL_ID2='" + TUNNEL_ID2 + '\'' +
-                ", ING_LSRID1='" + ING_LSRID1 + '\'' +
-                ", ING_SUBNET1='" + ING_SUBNET1 + '\'' +
-                ", ING_TID1='" + ING_TID1 + '\'' +
-                ", ING_TID_ID1='" + ING_TID_ID1 + '\'' +
-                ", EGR_LSRID1='" + EGR_LSRID1 + '\'' +
-                ", EGR_SUBNET1='" + EGR_SUBNET1 + '\'' +
-                ", EGR_TID1='" + EGR_TID1 + '\'' +
-                ", EGR_TID_ID1='" + EGR_TID_ID1 + '\'' +
-                ", ING_LSRID2='" + ING_LSRID2 + '\'' +
-                ", ING_SUBNET2='" + ING_SUBNET2 + '\'' +
-                ", ING_TID2='" + ING_TID2 + '\'' +
-                ", ING_TID_ID2='" + ING_TID_ID2 + '\'' +
-                ", EGR_LSRID2='" + EGR_LSRID2 + '\'' +
-                ", EGR_SUBNET2='" + EGR_SUBNET2 + '\'' +
-                ", EGR_TID2='" + EGR_TID2 + '\'' +
-                ", EGR_TID_ID2='" + EGR_TID_ID2 + '\'' +
-                ", PWXC_OPERATIONAL_STATUS='" + PWXC_OPERATIONAL_STATUS + '\'' +
-                ", PWXC_CONFIGURATION_ACTION='" + PWXC_CONFIGURATION_ACTION + '\'' +
-                ", PWXC_CONFIGURATION_RESULT='" + PWXC_CONFIGURATION_RESULT + '\'' +
-                ", CIR='" + CIR + '\'' +
-                ", PIR='" + PIR + '\'' +
-                ", PW_DEP_ENABLER='" + PW_DEP_ENABLER + '\'' +
-                ", PW_DEP_STATUS='" + PW_DEP_STATUS + '\'' +
-                ", EAST_PW_PATH_STATUS_TYPE='" + EAST_PW_PATH_STATUS_TYPE + '\'' +
-                ", EAST_PW_IN_LABEL='" + EAST_PW_IN_LABEL + '\'' +
-                ", EAST_PW_OUT_LABEL='" + EAST_PW_OUT_LABEL + '\'' +
-                ", WEST_PW_PATH_STATUS_TYPE='" + WEST_PW_PATH_STATUS_TYPE + '\'' +
-                ", WEST_PW_IN_LABEL='" + WEST_PW_IN_LABEL + '\'' +
-                ", WEST_PW_OUT_LABEL='" + WEST_PW_OUT_LABEL + '\'' +
-                ", PROTECTION_TYPE='" + PROTECTION_TYPE + '\'' +
-                ", PATH_TYPE='" + PATH_TYPE + '\'' +
+        return "Tl1ServiceMspw{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", mspwId='" + mspwId + '\'' +
+                ", localId='" + localId + '\'' +
+                ", requestId='" + requestId + '\'' +
+                ", name='" + name + '\'' +
+                ", pwSrcLsrid='" + pwSrcLsrid + '\'' +
+                ", pwSrcSubnet='" + pwSrcSubnet + '\'' +
+                ", pwSrcTid='" + pwSrcTid + '\'' +
+                ", pwSrcTidId='" + pwSrcTidId + '\'' +
+                ", pwDstLsrid='" + pwDstLsrid + '\'' +
+                ", pwDstSubnet='" + pwDstSubnet + '\'' +
+                ", pwDstTid='" + pwDstTid + '\'' +
+                ", pwDstTidId='" + pwDstTidId + '\'' +
+                ", tunnelName1='" + tunnelName1 + '\'' +
+                ", tunnelId1='" + tunnelId1 + '\'' +
+                ", tunnelName2='" + tunnelName2 + '\'' +
+                ", tunnelId2='" + tunnelId2 + '\'' +
+                ", ingLsrid1='" + ingLsrid1 + '\'' +
+                ", ingSubnet1='" + ingSubnet1 + '\'' +
+                ", ingTid1='" + ingTid1 + '\'' +
+                ", ingTidId1='" + ingTidId1 + '\'' +
+                ", egrLsrid1='" + egrLsrid1 + '\'' +
+                ", egrSubnet1='" + egrSubnet1 + '\'' +
+                ", egrTid1='" + egrTid1 + '\'' +
+                ", egrTidId1='" + egrTidId1 + '\'' +
+                ", ingLsrid2='" + ingLsrid2 + '\'' +
+                ", ingSubnet2='" + ingSubnet2 + '\'' +
+                ", ingTid2='" + ingTid2 + '\'' +
+                ", ingTidId2='" + ingTidId2 + '\'' +
+                ", egrLsrid2='" + egrLsrid2 + '\'' +
+                ", egrSubnet2='" + egrSubnet2 + '\'' +
+                ", egrTid2='" + egrTid2 + '\'' +
+                ", egrTidId2='" + egrTidId2 + '\'' +
+                ", pwxcOperationalStatus='" + pwxcOperationalStatus + '\'' +
+                ", pwxcConfigurationAction='" + pwxcConfigurationAction + '\'' +
+                ", pwxcConfigurationResult='" + pwxcConfigurationResult + '\'' +
+                ", cir='" + cir + '\'' +
+                ", pir='" + pir + '\'' +
+                ", pwDepEnabler='" + pwDepEnabler + '\'' +
+                ", pwDepStatus='" + pwDepStatus + '\'' +
+                ", eastPwPathStatusType='" + eastPwPathStatusType + '\'' +
+                ", eastPwInLabel='" + eastPwInLabel + '\'' +
+                ", eastPwOutLabel='" + eastPwOutLabel + '\'' +
+                ", westPwPathStatusType='" + westPwPathStatusType + '\'' +
+                ", westPwInLabel='" + westPwInLabel + '\'' +
+                ", westPwOutLabel='" + westPwOutLabel + '\'' +
+                ", protectionType='" + protectionType + '\'' +
+                ", pathType='" + pathType + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

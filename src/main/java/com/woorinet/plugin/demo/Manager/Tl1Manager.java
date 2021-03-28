@@ -681,7 +681,7 @@ public class Tl1Manager {
             String cmd = "RTRV-SERVICE-MSPW:" + tl1Service.getTid() + "::" + CTAG + ":serv-name=" + tl1Service.getName() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1ServiceMspwRepository.save(new Tl1ServiceMspw(fields));
+                tl1ServiceMspwRepository.save(new Tl1ServiceMspw(fields, syncDate));
             }
         }
     }
