@@ -258,7 +258,7 @@ public class OtnManager {
             tl1CmPortHashMap.put(tl1CmPort.getAID(), tl1CmPort);
         }
         for(Tl1BypassInfo tl1BypassInfo :tl1BypassInfoList) {
-            tl1BypassInfoHashMap.put(tl1BypassInfo.getAID(), tl1BypassInfo);
+            tl1BypassInfoHashMap.put(tl1BypassInfo.getAid(), tl1BypassInfo);
         }
         for(Tl1CmProgramInfo tl1CmProgramInfo : tl1CmProgramInfoList) {
             tl1CmProgramInfoHashMap.put(tl1CmProgramInfo.getAID(), tl1CmProgramInfo);
@@ -966,8 +966,8 @@ public class OtnManager {
                 String port = tl1SessState.getAID().split("-")[3];
 
                 Optional<Tl1BypassInfo> tl1BypassInfo = tl1BypassInfoList.stream()
-                    .filter(bypassInfo -> bypassInfo.getTID().equals(tl1SessState.getTID())
-                            && bypassInfo.getAID().equals(slot + "-" + port)).findAny();
+                    .filter(bypassInfo -> bypassInfo.getTid().equals(tl1SessState.getTID())
+                            && bypassInfo.getAid().equals(slot + "-" + port)).findAny();
                 System.out.println(tl1KeyState + slot + port + tl1BypassInfo + ",....test");
                 OtnCmSession otnCmSession = new OtnCmSession(
                         tl1SessState.getTID(),//tid
@@ -989,12 +989,12 @@ public class OtnManager {
                         tl1KeyState.map(keyState -> keyState.getTX_KEY_BANK_STATE()).orElse(""),//tx_key_bank_state
                         tl1KeyState.map(keyState -> keyState.getRX_KEY_STATE()).orElse(""),//rx_key_state
                         tl1KeyState.map(keyState -> keyState.getRX_KEY_BANK_STATE()).orElse(""),//rx_key_bank_state
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getMODE()).orElse(""),//bypass_mode
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getACTION()).orElse(""),//bypass_action
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getCURRENT_ACTION()).orElse(""),//bypass_current_action
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPEER_MODE()).orElse(""),//bypass_peer_mode
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPEER_ACTION()).orElse(""),//bypass_peer_action
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPEER_CURRENT_ACTION()).orElse("")//bypass_peer_current_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getMode()).orElse(""),//bypass_mode
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getAction()).orElse(""),//bypass_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getCurrentAction()).orElse(""),//bypass_current_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerMode()).orElse(""),//bypass_peer_mode
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerAction()).orElse(""),//bypass_peer_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerCurrentAction()).orElse("")//bypass_peer_current_action
                 );
 
                 return otnCmSession;

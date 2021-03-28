@@ -818,7 +818,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                tl1BypassInfoRepository.save(new Tl1BypassInfo(fields));
+                tl1BypassInfoRepository.save(new Tl1BypassInfo(fields, syncDate));
             }
         }
     }
