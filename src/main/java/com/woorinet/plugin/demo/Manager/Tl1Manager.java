@@ -234,7 +234,7 @@ public class Tl1Manager {
             try {
                 ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
                 for(String[] fields : fieldsList) {
-                    tl1PmPwRepository.save(new Tl1PmPw(fields));
+                    tl1PmPwRepository.save(new Tl1PmPw(fields, syncDate));
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();
