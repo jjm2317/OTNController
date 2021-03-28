@@ -490,7 +490,7 @@ public class Tl1Manager {
             String cmd = "RTRV-SLOT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1SlotRepository.save(new Tl1Slot(fields));
+                tl1SlotRepository.save(new Tl1Slot(fields, syncDate));
             }
         }
     }

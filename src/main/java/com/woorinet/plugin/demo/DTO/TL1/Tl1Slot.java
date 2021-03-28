@@ -17,73 +17,77 @@ import javax.persistence.Table;
 public class Tl1Slot {
     @GeneratedValue
     @Id
-    int slot_id;
-    String TID;
-    String SLOT_PRV_UNIT;
-    String EQ_UNIT;
-    String EQ_STATE;
-    String ADMIN_STATE;
-    String INIT_OK;
-    String BP_STATE;
-    String IPC_STATE;
-    String FAIL_STATE;
-    String HW_VER;
-    String SW_VER;
-    String FPGA_VER;
-    String FPGA_DATE;
+    int slotId;
+    String tid;
+    String slotPrvUnit;
+    String eqUnit;
+    String eqState;
+    String adminState;
+    String initOk;
+    String bpState;
+    String ipcState;
+    String failState;
+    String hwVer;
+    String swVer;
+    String fpgaVer;
+    String fpgaDate;
+    String syncDate;
 
     public Tl1Slot() {
 
     }
 
-    public Tl1Slot(String TID, String SLOT_PRV_UNIT, String EQ_UNIT, String EQ_STATE, String ADMIN_STATE, String INIT_OK, String BP_STATE, String IPC_STATE, String FAIL_STATE, String HW_VER, String SW_VER, String FPGA_VER, String FPGA_DATE) {
-        this.TID = TID;
-        this.SLOT_PRV_UNIT = SLOT_PRV_UNIT;
-        this.EQ_UNIT = EQ_UNIT;
-        this.EQ_STATE = EQ_STATE;
-        this.ADMIN_STATE = ADMIN_STATE;
-        this.INIT_OK = INIT_OK;
-        this.BP_STATE = BP_STATE;
-        this.IPC_STATE = IPC_STATE;
-        this.FAIL_STATE = FAIL_STATE;
-        this.HW_VER = HW_VER;
-        this.SW_VER = SW_VER;
-        this.FPGA_VER = FPGA_VER;
-        this.FPGA_DATE = FPGA_DATE;
+    public Tl1Slot(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.slotPrvUnit = fields[1];
+        this.eqUnit = fields[2];
+        this.eqState = fields[3];
+        this.adminState = fields[3];
+        this.initOk = fields[4];
+        this.bpState = fields[5];
+        this.ipcState = fields[6];
+        this.failState = fields[7];
+        this.hwVer = fields[8];
+        this.swVer = fields[9];
+        this.fpgaVer = fields[10];
+        this.fpgaDate = fields[11];
+        this.syncDate = syncDate;
     }
 
-    public Tl1Slot(String[] fields) {
-        this.TID = fields[0];
-        this.SLOT_PRV_UNIT = fields[1];
-        this.EQ_UNIT = fields[2];
-        this.EQ_STATE = fields[3];
-        this.ADMIN_STATE = fields[3];
-        this.INIT_OK = fields[4];
-        this.BP_STATE = fields[5];
-        this.IPC_STATE = fields[6];
-        this.FAIL_STATE = fields[7];
-        this.HW_VER = fields[8];
-        this.SW_VER = fields[9];
-        this.FPGA_VER = fields[10];
-        this.FPGA_DATE = fields[11];
+    public Tl1Slot(String tid, String slotPrvUnit, String eqUnit, String eqState, String adminState, String initOk, String bpState, String ipcState, String failState, String hwVer, String swVer, String fpgaVer, String fpgaDate, String syncDate) {
+        this.tid = tid;
+        this.slotPrvUnit = slotPrvUnit;
+        this.eqUnit = eqUnit;
+        this.eqState = eqState;
+        this.adminState = adminState;
+        this.initOk = initOk;
+        this.bpState = bpState;
+        this.ipcState = ipcState;
+        this.failState = failState;
+        this.hwVer = hwVer;
+        this.swVer = swVer;
+        this.fpgaVer = fpgaVer;
+        this.fpgaDate = fpgaDate;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "Slot{" +
-                "TID='" + TID + '\'' +
-                ", PRV_UNIT='" + SLOT_PRV_UNIT + '\'' +
-                ", EQ_UNIT='" + EQ_UNIT + '\'' +
-                ", EQ_STATE='" + EQ_STATE + '\'' +
-                ", ADMIN_STATE='" + ADMIN_STATE + '\'' +
-                ", INIT_OK='" + INIT_OK + '\'' +
-                ", BP_STATE='" + BP_STATE + '\'' +
-                ", IPC_STATE='" + IPC_STATE + '\'' +
-                ", FAIL_STATE='" + FAIL_STATE + '\'' +
-                ", HW_VER='" + HW_VER + '\'' +
-                ", SW_VER='" + SW_VER + '\'' +
-                ", FPGA_VER='" + FPGA_VER + '\'' +
-                ", FPGA_DATE='" + FPGA_DATE + '\'' +
+        return "Tl1Slot{" +
+                "tid='" + tid + '\'' +
+                ", slotPrvUnit='" + slotPrvUnit + '\'' +
+                ", eqUnit='" + eqUnit + '\'' +
+                ", eqState='" + eqState + '\'' +
+                ", adminState='" + adminState + '\'' +
+                ", initOk='" + initOk + '\'' +
+                ", bpState='" + bpState + '\'' +
+                ", ipcState='" + ipcState + '\'' +
+                ", failState='" + failState + '\'' +
+                ", hwVer='" + hwVer + '\'' +
+                ", swVer='" + swVer + '\'' +
+                ", fpgaVer='" + fpgaVer + '\'' +
+                ", fpgaDate='" + fpgaDate + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
