@@ -32,6 +32,7 @@ public class Tl1Pm {
     String outErrorPackets;
     String outDiscardPackets;
     String date;
+    String syncDate;
 
     public Tl1Pm() {
     }
@@ -51,9 +52,10 @@ public class Tl1Pm {
         this.outErrorPackets = outErrorPackets;
         this.outDiscardPackets = outDiscardPackets;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
-    public Tl1Pm(String[] fields) {
+    public Tl1Pm(String[] fields, String syncDate) {
         this.tid = fields[0];
         this.systemType = fields[1];
         this.slot = fields[2];
@@ -68,6 +70,7 @@ public class Tl1Pm {
         this.outErrorPackets = fields[11];
         this.outDiscardPackets = fields[12];
         this.date = fields[13];
+        this.syncDate = syncDate;
     }
 
     @Override
@@ -87,6 +90,7 @@ public class Tl1Pm {
                 ", outErrorPackets='" + outErrorPackets + '\'' +
                 ", outDiscardPackets='" + outDiscardPackets + '\'' +
                 ", date='" + date + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

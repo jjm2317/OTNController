@@ -299,7 +299,7 @@ public class Tl1Manager {
             try{
                 ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
                 for(String[] fields : fieldsList) {
-                    tl1PmRepository.save(new Tl1Pm(fields));
+                    tl1PmRepository.save(new Tl1Pm(fields,syncDate));
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();
