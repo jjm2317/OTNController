@@ -17,165 +17,167 @@ import javax.persistence.Table;
 public class Tl1Odu {
     @Id
     @GeneratedValue
-    int ODU_ID;
-    String TID_ID;
-    String TID;
-    String SUBNET_ID;
-    String SUBNET;
-    String LOCAL_ID;
-    String EMS_SERVICE;
-    String EMS_SERVICE_SIG;
-    String EMS_SRC_SUBNET;
-    String EMS_SRC_LSR;
-    String EMS_DST_SUBNET;
-    String EMS_DST_LSR;
-    String NAME;
-    String DESCR;
-    String TRAIL_ID;
-    String PATH_ID;
-    String ING_SUBNET;
-    String ING_LSR;
-    String EGR_SUBNET;
-    String EGR_LSR;
-    String ROLE;
-    String DIRECTION;
-    String SERVICE;
-    String TYPE;
-    String START_TS;
-    String RATE;
-    String TSMAP;
-    String MAP_MODE;
-    String SF;
-    String SD;
-    String LOOP_TYPE;
-    String LOCK;
-    String LOCAL_IFINDEX;
-    String REMOTE_IFINDEX;
-    String ENCRYPTION;
-    String LOCAL_SSL_ID;
-    String REMOTE_SSL_ID;
-    String LEA_PORT;
-    String GMPLS;
-    String UNI_XC_ID;
-    String NNI_XC_ID;
-    String PROTECTION;
-    String PROT_ID;
-    String PROT_MODE;
-    String PROT_TYPE;
-    String ACTIVE_PATH_STATUS;
-    String SF_DETECT;
-    String CREATION_DATE;
-    String MODIFIED_DATE;
-    String TUNNEL_PORT;
+    int oduId;
+    String tidId;
+    String tid;
+    String subnetId;
+    String subnet;
+    String localId;
+    String emsService;
+    String emsServiceSig;
+    String emsSrcSubnet;
+    String emsSrcLsr;
+    String emsDstSubnet;
+    String emsDstLsr;
+    String name;
+    String descr;
+    String trailId;
+    String pathId;
+    String ingSubnet;
+    String ingLsr;
+    String egrSubnet;
+    String egrLsr;
+    String role;
+    String direction;
+    String service;
+    String type;
+    String startTs;
+    String rate;
+    String tsmap;
+    String mapMode;
+    String sf;
+    String sd;
+    String loopType;
+    String lock;
+    String localIfindex;
+    String remoteIfindex;
+    String encryption;
+    String localSslId;
+    String remoteSslId;
+    String leaPort;
+    String gmpls;
+    String uniXcId;
+    String nniXcId;
+    String protection;
+    String protId;
+    String protMode;
+    String protType;
+    String activePathStatus;
+    String sfDetect;
+    String creationDate;
+    String modifiedDate;
+    String tunnelPort;
+    String syncDate;
 
     public Tl1Odu() {
 
     }
 
     public Tl1Odu(String[] fields) {
-        this.TID_ID = fields[0];
-        this.TID = fields[1];
-        this.SUBNET_ID = fields[2];
-        this.SUBNET = fields[3];
-        this.LOCAL_ID = fields[4];
-        this.EMS_SERVICE = fields[5];
-        this.EMS_SERVICE_SIG = fields[6];
-        this.EMS_SRC_SUBNET = fields[7];
-        this.EMS_SRC_LSR = fields[8];
-        this.EMS_DST_SUBNET = fields[9];
-        this.EMS_DST_LSR = fields[10];
-        this.NAME = fields[11];
-        this.DESCR = fields[12];
-        this.TRAIL_ID = fields[13];
-        this.PATH_ID = fields[14];
-        this.ING_SUBNET = fields[15];
-        this.ING_LSR = fields[16];
-        this.EGR_SUBNET = fields[17];
-        this.EGR_LSR = fields[18];
-        this.ROLE = fields[19];
-        this.DIRECTION = fields[20];
-        this.SERVICE = fields[21];
-        this.TYPE = fields[22];
-        this.START_TS = fields[23];
-        this.RATE = fields[24];
-        this.TSMAP = fields[25];
-        this.MAP_MODE = fields[26];
-        this.SF = fields[27];
-        this.SD = fields[28];
-        this.LOOP_TYPE = fields[29];
-        this.LOCK = fields[30];
-        this.LOCAL_IFINDEX = fields[31];
-        this.REMOTE_IFINDEX = fields[32];
-        this.ENCRYPTION = fields[33];
-        this.LOCAL_SSL_ID = fields[34];
-        this.REMOTE_SSL_ID = fields[35];
-        this.LEA_PORT = fields[36];
-        this.GMPLS = fields[37];
-        this.UNI_XC_ID = fields[38];
-        this.NNI_XC_ID = fields[39];
-        this.PROTECTION = fields[40];
-        this.PROT_ID = fields[41];
-        this.PROT_MODE = fields[42];
-        this.PROT_TYPE = fields[43];
-        this.ACTIVE_PATH_STATUS = fields[44];
-        this.SF_DETECT = fields[45];
-        this.CREATION_DATE = fields[46];
-        this.MODIFIED_DATE = fields[47];
-        this.TUNNEL_PORT = fields[48];
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.subnetId = fields[2];
+        this.subnet = fields[3];
+        this.localId = fields[4];
+        this.emsService = fields[5];
+        this.emsServiceSig = fields[6];
+        this.emsSrcSubnet = fields[7];
+        this.emsSrcLsr = fields[8];
+        this.emsDstSubnet = fields[9];
+        this.emsDstLsr = fields[10];
+        this.name = fields[11];
+        this.descr = fields[12];
+        this.trailId = fields[13];
+        this.pathId = fields[14];
+        this.ingSubnet = fields[15];
+        this.ingLsr = fields[16];
+        this.egrSubnet = fields[17];
+        this.egrLsr = fields[18];
+        this.role = fields[19];
+        this.direction = fields[20];
+        this.service = fields[21];
+        this.type = fields[22];
+        this.startTs = fields[23];
+        this.rate = fields[24];
+        this.tsmap = fields[25];
+        this.mapMode = fields[26];
+        this.sf = fields[27];
+        this.sd = fields[28];
+        this.loopType = fields[29];
+        this.lock = fields[30];
+        this.localIfindex = fields[31];
+        this.remoteIfindex = fields[32];
+        this.encryption = fields[33];
+        this.localSslId = fields[34];
+        this.remoteSslId = fields[35];
+        this.leaPort = fields[36];
+        this.gmpls = fields[37];
+        this.uniXcId = fields[38];
+        this.nniXcId = fields[39];
+        this.protection = fields[40];
+        this.protId = fields[41];
+        this.protMode = fields[42];
+        this.protType = fields[43];
+        this.activePathStatus = fields[44];
+        this.sfDetect = fields[45];
+        this.creationDate = fields[46];
+        this.modifiedDate = fields[47];
+        this.tunnelPort = fields[48];
     }
 
     @Override
     public String toString() {
-        return "ODU{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", LOCAL_ID='" + LOCAL_ID + '\'' +
-                ", EMS_SERVICE='" + EMS_SERVICE + '\'' +
-                ", EMS_SERVICE_SIG='" + EMS_SERVICE_SIG + '\'' +
-                ", EMS_SRC_SUBNET='" + EMS_SRC_SUBNET + '\'' +
-                ", EMS_SRC_LSR='" + EMS_SRC_LSR + '\'' +
-                ", EMS_DST_SUBNET='" + EMS_DST_SUBNET + '\'' +
-                ", EMS_DST_LSR='" + EMS_DST_LSR + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", DESCR='" + DESCR + '\'' +
-                ", TRAIL_ID='" + TRAIL_ID + '\'' +
-                ", PATH_ID='" + PATH_ID + '\'' +
-                ", ING_SUBNET='" + ING_SUBNET + '\'' +
-                ", ING_LSR='" + ING_LSR + '\'' +
-                ", EGR_SUBNET='" + EGR_SUBNET + '\'' +
-                ", EGR_LSR='" + EGR_LSR + '\'' +
-                ", ROLE='" + ROLE + '\'' +
-                ", DIRECTION='" + DIRECTION + '\'' +
-                ", SERVICE='" + SERVICE + '\'' +
-                ", TYPE='" + TYPE + '\'' +
-                ", START_TS='" + START_TS + '\'' +
-                ", RATE='" + RATE + '\'' +
-                ", TSMAP='" + TSMAP + '\'' +
-                ", MAP_MODE='" + MAP_MODE + '\'' +
-                ", SF='" + SF + '\'' +
-                ", SD='" + SD + '\'' +
-                ", LOOP_TYPE='" + LOOP_TYPE + '\'' +
-                ", LOCK='" + LOCK + '\'' +
-                ", LOCAL_IFINDEX='" + LOCAL_IFINDEX + '\'' +
-                ", REMOTE_IFINDEX='" + REMOTE_IFINDEX + '\'' +
-                ", ENCRYPTION='" + ENCRYPTION + '\'' +
-                ", LOCAL_SSL_ID='" + LOCAL_SSL_ID + '\'' +
-                ", REMOTE_SSL_ID='" + REMOTE_SSL_ID + '\'' +
-                ", LEA_PORT='" + LEA_PORT + '\'' +
-                ", GMPLS='" + GMPLS + '\'' +
-                ", UNI_XC_ID='" + UNI_XC_ID + '\'' +
-                ", NNI_XC_ID='" + NNI_XC_ID + '\'' +
-                ", PROTECTION='" + PROTECTION + '\'' +
-                ", PROT_ID='" + PROT_ID + '\'' +
-                ", PROT_MODE='" + PROT_MODE + '\'' +
-                ", PROT_TYPE='" + PROT_TYPE + '\'' +
-                ", ACTIVE_PATH_STATUS='" + ACTIVE_PATH_STATUS + '\'' +
-                ", SF_DETECT='" + SF_DETECT + '\'' +
-                ", CREATION_DATE='" + CREATION_DATE + '\'' +
-                ", MODIFIED_DATE='" + MODIFIED_DATE + '\'' +
-                ", TUNNEL_PORT='" + TUNNEL_PORT + '\'' +
+        return "Tl1Odu{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", localId='" + localId + '\'' +
+                ", emsService='" + emsService + '\'' +
+                ", emsServiceSig='" + emsServiceSig + '\'' +
+                ", emsSrcSubnet='" + emsSrcSubnet + '\'' +
+                ", emsSrcLsr='" + emsSrcLsr + '\'' +
+                ", emsDstSubnet='" + emsDstSubnet + '\'' +
+                ", emsDstLsr='" + emsDstLsr + '\'' +
+                ", name='" + name + '\'' +
+                ", descr='" + descr + '\'' +
+                ", trailId='" + trailId + '\'' +
+                ", pathId='" + pathId + '\'' +
+                ", ingSubnet='" + ingSubnet + '\'' +
+                ", ingLsr='" + ingLsr + '\'' +
+                ", egrSubnet='" + egrSubnet + '\'' +
+                ", egrLsr='" + egrLsr + '\'' +
+                ", role='" + role + '\'' +
+                ", direction='" + direction + '\'' +
+                ", service='" + service + '\'' +
+                ", type='" + type + '\'' +
+                ", startTs='" + startTs + '\'' +
+                ", rate='" + rate + '\'' +
+                ", tsmap='" + tsmap + '\'' +
+                ", mapMode='" + mapMode + '\'' +
+                ", sf='" + sf + '\'' +
+                ", sd='" + sd + '\'' +
+                ", loopType='" + loopType + '\'' +
+                ", lock='" + lock + '\'' +
+                ", localIfindex='" + localIfindex + '\'' +
+                ", remoteIfindex='" + remoteIfindex + '\'' +
+                ", encryption='" + encryption + '\'' +
+                ", localSslId='" + localSslId + '\'' +
+                ", remoteSslId='" + remoteSslId + '\'' +
+                ", leaPort='" + leaPort + '\'' +
+                ", gmpls='" + gmpls + '\'' +
+                ", uniXcId='" + uniXcId + '\'' +
+                ", nniXcId='" + nniXcId + '\'' +
+                ", protection='" + protection + '\'' +
+                ", protId='" + protId + '\'' +
+                ", protMode='" + protMode + '\'' +
+                ", protType='" + protType + '\'' +
+                ", activePathStatus='" + activePathStatus + '\'' +
+                ", sfDetect='" + sfDetect + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                ", modifiedDate='" + modifiedDate + '\'' +
+                ", tunnelPort='" + tunnelPort + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
