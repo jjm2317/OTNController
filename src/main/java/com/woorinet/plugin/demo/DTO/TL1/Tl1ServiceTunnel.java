@@ -18,120 +18,159 @@ import javax.persistence.Table;
 public class Tl1ServiceTunnel {
     @Id
     @GeneratedValue
-    int SERVICE_TUNNEL_ID;
-    String TID_ID;
-    String TID;
-    String SUBNET_ID;
-    String SUBNET;
-    String PW_ID;
-    String SERVICE_NAME;
-    String OW_TID;
-    String OW_TID_ID;
-    String OW_TUNNEL_ID;
-    String OW_TUNNEL_NAME;
-    String OW_START_CONNID;
-    String OW_CONN_ID;
-    String OW_CONN_TYPE;
-    String OW_INGID;
-    String OW_EGRID;
-    String OW_SERV_TYPE;
-    String OW_SERV_RATE;
-    String OW_IN_LABEL;
-    String OW_OUT_LABEL;
-    String OP_TID;
-    String OP_TID_ID;
-    String OW_TUNNEL_ID2;
-    String OW_TUNNEL_NAME2;
-    String OP_START_CONNID;
-    String OP_CONN_ID;
-    String OP_CONN_TYPE;
-    String OP_INGID;
-    String OP_EGRID;
-    String OP_SERV_TYPE;
-    String OP_SERV_RATE;
-    String OP_IN_LABEL;
-    String OP_OUT_LABEL;
-    String HLPCF;
-    String PCP;
+    int serviceTunnelId;
+    String tidId;
+    String tid;
+    String subnetId;
+    String subnet;
+    String pwId;
+    String serviceName;
+    String owTid;
+    String owTidId;
+    String owTunnelId;
+    String owTunnelName;
+    String owStartConnid;
+    String owConnId;
+    String owConnType;
+    String owIngid;
+    String owEgrid;
+    String owServType;
+    String owServRate;
+    String owInLabel;
+    String owOutLabel;
+    String opTid;
+    String opTidId;
+    String owTunnelId2;
+    String owTunnelName2;
+    String opStartConnid;
+    String opConnId;
+    String opConnType;
+    String opIngid;
+    String opEgrid;
+    String opServType;
+    String opServRate;
+    String opInLabel;
+    String opOutLabel;
+    String hlpcf;
+    String pcp;
+    String syncDate;
 
     public Tl1ServiceTunnel() {
 
     }
 
-    public Tl1ServiceTunnel(String[] fields) {
-        this.TID_ID = fields[0];
-        this.TID = fields[1];
-        this.SUBNET_ID = fields[2];
-        this.SUBNET = fields[3];
-        this.PW_ID = fields[4];
-        this.SERVICE_NAME = fields[5];
-        this.OW_TID = fields[6];
-        this.OW_TID_ID = fields[7];
-        this.OW_TUNNEL_ID = fields[8];
-        this.OW_TUNNEL_NAME = fields[9];
-        this.OW_START_CONNID = fields[10];
-        this.OW_CONN_ID = fields[11];
-        this.OW_CONN_TYPE = fields[12];
-        this.OW_INGID = fields[13];
-        this.OW_EGRID = fields[14];
-        this.OW_SERV_TYPE = fields[15];
-        this.OW_SERV_RATE = fields[16];
-        this.OW_IN_LABEL = fields[17];
-        this.OW_OUT_LABEL = fields[18];
-        this.OP_TID = fields[19];
-        this.OP_TID_ID = fields[20];
-        this.OW_TUNNEL_ID2 = fields[21];
-        this.OW_TUNNEL_NAME2 = fields[22];
-        this.OP_START_CONNID = fields[23];
-        this.OP_CONN_ID = fields[24];
-        this.OP_CONN_TYPE = fields[25];
-        this.OP_INGID = fields[26];
-        this.OP_EGRID = fields[27];
-        this.OP_SERV_TYPE = fields[28];
-        this.OP_SERV_RATE = fields[29];
-        this.OP_IN_LABEL = fields[30];
-        this.OP_OUT_LABEL = fields[31];
-        this.HLPCF = fields[32];
-        this.PCP = fields[33];
+    public Tl1ServiceTunnel(String[] fields, String syncDate) {
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.subnetId = fields[2];
+        this.subnet = fields[3];
+        this.pwId = fields[4];
+        this.serviceName = fields[5];
+        this.owTid = fields[6];
+        this.owTidId = fields[7];
+        this.owTunnelId = fields[8];
+        this.owTunnelName = fields[9];
+        this.owStartConnid = fields[10];
+        this.owConnId = fields[11];
+        this.owConnType = fields[12];
+        this.owIngid = fields[13];
+        this.owEgrid = fields[14];
+        this.owServType = fields[15];
+        this.owServRate = fields[16];
+        this.owInLabel = fields[17];
+        this.owOutLabel = fields[18];
+        this.opTid = fields[19];
+        this.opTidId = fields[20];
+        this.owTunnelId2 = fields[21];
+        this.owTunnelName2 = fields[22];
+        this.opStartConnid = fields[23];
+        this.opConnId = fields[24];
+        this.opConnType = fields[25];
+        this.opIngid = fields[26];
+        this.opEgrid = fields[27];
+        this.opServType = fields[28];
+        this.opServRate = fields[29];
+        this.opInLabel = fields[30];
+        this.opOutLabel = fields[31];
+        this.hlpcf = fields[32];
+        this.pcp = fields[33];
+        this.syncDate = syncDate;
+    }
+
+    public Tl1ServiceTunnel(String tidId, String tid, String subnetId, String subnet, String pwId, String serviceName, String owTid, String owTidId, String owTunnelId, String owTunnelName, String owStartConnid, String owConnId, String owConnType, String owIngid, String owEgrid, String owServType, String owServRate, String owInLabel, String owOutLabel, String opTid, String opTidId, String owTunnelId2, String owTunnelName2, String opStartConnid, String opConnId, String opConnType, String opIngid, String opEgrid, String opServType, String opServRate, String opInLabel, String opOutLabel, String hlpcf, String pcp) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.subnetId = subnetId;
+        this.subnet = subnet;
+        this.pwId = pwId;
+        this.serviceName = serviceName;
+        this.owTid = owTid;
+        this.owTidId = owTidId;
+        this.owTunnelId = owTunnelId;
+        this.owTunnelName = owTunnelName;
+        this.owStartConnid = owStartConnid;
+        this.owConnId = owConnId;
+        this.owConnType = owConnType;
+        this.owIngid = owIngid;
+        this.owEgrid = owEgrid;
+        this.owServType = owServType;
+        this.owServRate = owServRate;
+        this.owInLabel = owInLabel;
+        this.owOutLabel = owOutLabel;
+        this.opTid = opTid;
+        this.opTidId = opTidId;
+        this.owTunnelId2 = owTunnelId2;
+        this.owTunnelName2 = owTunnelName2;
+        this.opStartConnid = opStartConnid;
+        this.opConnId = opConnId;
+        this.opConnType = opConnType;
+        this.opIngid = opIngid;
+        this.opEgrid = opEgrid;
+        this.opServType = opServType;
+        this.opServRate = opServRate;
+        this.opInLabel = opInLabel;
+        this.opOutLabel = opOutLabel;
+        this.hlpcf = hlpcf;
+        this.pcp = pcp;
     }
 
     @Override
     public String toString() {
-        return "SERVICE_TUNNEL{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", PW_ID='" + PW_ID + '\'' +
-                ", SERVICE_NAME='" + SERVICE_NAME + '\'' +
-                ", OW_TID='" + OW_TID + '\'' +
-                ", OW_TID_ID='" + OW_TID_ID + '\'' +
-                ", OW_TUNNEL_ID='" + OW_TUNNEL_ID + '\'' +
-                ", OW_TUNNEL_NAME='" + OW_TUNNEL_NAME + '\'' +
-                ", OW_START_CONNID='" + OW_START_CONNID + '\'' +
-                ", OW_CONN_ID='" + OW_CONN_ID + '\'' +
-                ", OW_CONN_TYPE='" + OW_CONN_TYPE + '\'' +
-                ", OW_INGID='" + OW_INGID + '\'' +
-                ", OW_EGRID='" + OW_EGRID + '\'' +
-                ", OW_SERV_TYPE='" + OW_SERV_TYPE + '\'' +
-                ", OW_SERV_RATE='" + OW_SERV_RATE + '\'' +
-                ", OW_IN_LABEL='" + OW_IN_LABEL + '\'' +
-                ", OW_OUT_LABEL='" + OW_OUT_LABEL + '\'' +
-                ", OP_TID='" + OP_TID + '\'' +
-                ", OP_TID_ID='" + OP_TID_ID + '\'' +
-                ", OW_TUNNEL_ID2='" + OW_TUNNEL_ID2 + '\'' +
-                ", OW_TUNNEL_NAME2='" + OW_TUNNEL_NAME2 + '\'' +
-                ", OP_START_CONNID='" + OP_START_CONNID + '\'' +
-                ", OP_CONN_ID='" + OP_CONN_ID + '\'' +
-                ", OP_CONN_TYPE='" + OP_CONN_TYPE + '\'' +
-                ", OP_INGID='" + OP_INGID + '\'' +
-                ", OP_EGRID='" + OP_EGRID + '\'' +
-                ", OP_SERV_TYPE='" + OP_SERV_TYPE + '\'' +
-                ", OP_SERV_RATE='" + OP_SERV_RATE + '\'' +
-                ", OP_IN_LABEL='" + OP_IN_LABEL + '\'' +
-                ", OP_OUT_LABEL='" + OP_OUT_LABEL + '\'' +
-                ", HLPCF='" + HLPCF + '\'' +
-                ", PCP='" + PCP + '\'' +
+        return "Tl1ServiceTunnel{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", pwId='" + pwId + '\'' +
+                ", serviceName='" + serviceName + '\'' +
+                ", owTid='" + owTid + '\'' +
+                ", owTidId='" + owTidId + '\'' +
+                ", owTunnelId='" + owTunnelId + '\'' +
+                ", owTunnelName='" + owTunnelName + '\'' +
+                ", owStartConnid='" + owStartConnid + '\'' +
+                ", owConnId='" + owConnId + '\'' +
+                ", owConnType='" + owConnType + '\'' +
+                ", owIngid='" + owIngid + '\'' +
+                ", owEgrid='" + owEgrid + '\'' +
+                ", owServType='" + owServType + '\'' +
+                ", owServRate='" + owServRate + '\'' +
+                ", owInLabel='" + owInLabel + '\'' +
+                ", owOutLabel='" + owOutLabel + '\'' +
+                ", opTid='" + opTid + '\'' +
+                ", opTidId='" + opTidId + '\'' +
+                ", owTunnelId2='" + owTunnelId2 + '\'' +
+                ", owTunnelName2='" + owTunnelName2 + '\'' +
+                ", opStartConnid='" + opStartConnid + '\'' +
+                ", opConnId='" + opConnId + '\'' +
+                ", opConnType='" + opConnType + '\'' +
+                ", opIngid='" + opIngid + '\'' +
+                ", opEgrid='" + opEgrid + '\'' +
+                ", opServType='" + opServType + '\'' +
+                ", opServRate='" + opServRate + '\'' +
+                ", opInLabel='" + opInLabel + '\'' +
+                ", opOutLabel='" + opOutLabel + '\'' +
+                ", hlpcf='" + hlpcf + '\'' +
+                ", pcp='" + pcp + '\'' +
                 '}';
     }
 }

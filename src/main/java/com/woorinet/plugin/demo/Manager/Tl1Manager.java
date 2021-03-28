@@ -671,7 +671,7 @@ public class Tl1Manager {
             String cmd = "RTRV-SERVICE-TUNNEL:" + tl1Service.getTid() + "::" + CTAG + ":serv-name=" + tl1Service.getName() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1ServiceTunnelRepository.save(new Tl1ServiceTunnel(fields));
+                tl1ServiceTunnelRepository.save(new Tl1ServiceTunnel(fields, syncDate));
             }
         }
     }
