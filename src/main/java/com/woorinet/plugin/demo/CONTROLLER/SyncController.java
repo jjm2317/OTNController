@@ -208,10 +208,6 @@ public class SyncController {
     @Autowired
     private OtnPmOpticTemperatureRepository otnPmOpticTemperatureRepository;
     @Autowired
-    private OtnCryptoModuleRepository otnCryptoModuleRepository;
-    @Autowired
-    private OtnCryptoSessionRepository otnCryptoSessionRepository;
-    @Autowired
     private OtnCmInventoryRepository otnCmInventoryRepository;
     @Autowired
     private OtnCmLinkRepository otnCmLinkRepository;
@@ -272,8 +268,6 @@ public class SyncController {
                     otnCmLinkRepository,
                     otnCmSessionRepository,
                     otnCmQkdLinkRepository,
-                    otnCryptoModuleRepository,
-                    otnCryptoSessionRepository,
                     tl1NodeList,
                     tl1SystemInfoList,
                     tl1OduNodeConnectorList,

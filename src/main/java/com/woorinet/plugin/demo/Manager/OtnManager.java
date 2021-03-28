@@ -24,8 +24,6 @@ public class OtnManager {
     OtnPathRepository otnPathRepository;
     OtnConstraintRepository otnConstraintRepository;
     OtnAccessIfRepository otnAccessIfRepository;
-    OtnCryptoModuleRepository otnCryptoModuleRepository;
-    OtnCryptoSessionRepository otnCryptoSessionRepository;
     OtnPmPwRepository otnPmPwRepository;
     OtnPmTunnelRepository otnPmTunnelRepository;
     OtnPmTemperatureRepository otnPmTemperatureRepository;
@@ -113,8 +111,6 @@ public class OtnManager {
                       OtnCmLinkRepository otnCmLinkRepository,
                       OtnCmSessionRepository otnCmSessionRepository,
                       OtnCmQkdLinkRepository otnCmQkdLinkRepository,
-                      OtnCryptoModuleRepository otnCryptoModuleRepository,
-                      OtnCryptoSessionRepository otnCryptoSessionRepository,
 
                       List<Tl1Node> tl1NodeList,
                       List<Tl1SystemInfo> tl1SystemInfoList,
@@ -151,8 +147,6 @@ public class OtnManager {
         this.otnPathRepository = otnPathRepository;
         this.otnConstraintRepository = otnConstraintRepository;
         this.otnAccessIfRepository = otnAccessIfRepository;
-        this.otnCryptoModuleRepository = otnCryptoModuleRepository;
-        this.otnCryptoSessionRepository = otnCryptoSessionRepository;
         this.otnPmPwRepository = otnPmPwRepository;
         this.otnPmTunnelRepository = otnPmTunnelRepository;
         this.otnPmTemperatureRepository = otnPmTemperatureRepository;
@@ -302,10 +296,6 @@ public class OtnManager {
         OtnSyncConstraint();
         // AccessIf 데이터 업데이트
         OtnSyncAccess_if();
-        // CryptoModule 데이터 업데이트
-        OtnSyncCryptoModule();
-        // CryptoSession 데이터 업데이트
-        OtnSyncCryptoSession();
         // cmInventory 데이터 업데이트
         OtnSyncCmInventory();
         // cmLink 데이터 업데이트
@@ -718,60 +708,6 @@ public class OtnManager {
         sdnAccessIfStream.forEach(otnAccessIfRepository::save);
     }
 
-    public void OtnSyncCryptoModule() throws Exception {
-        for(Tl1ModuleInfo tl1ModuleInfo : tl1ModuleInfoList) {
-            // aidPieces: [노드이름, 유니트 이름, 슬롯, 포트]
-            String[] aidPieces = tl1ModuleInfo.getAID().split("-");
-            Tl1CmPort tl1CmPort = tl1CmPortHashMap.get(tl1ModuleInfo.getAID());
-            Tl1BypassInfo tl1BypassInfo = tl1BypassInfoHashMap.get(aidPieces[2] + "-" + aidPieces[3]);
-            Tl1CmProgramInfo tl1CmProgramInfo = tl1CmProgramInfoHashMap.get(aidPieces[0] + "-" + aidPieces[1] + "-" + aidPieces[2]);
-
-            OtnCryptoModule otnCryptoModule = new OtnCryptoModule();
-            otnCryptoModule.setAid(tl1ModuleInfo.getAID());
-            otnCryptoModule.setModuleActType(tl1CmPort.getUNIT_TYPE());
-            otnCryptoModule.setMid(tl1ModuleInfo.getMID());
-            otnCryptoModule.setPmid(tl1ModuleInfo.getPMID());
-            otnCryptoModule.setMidContext(tl1ModuleInfo.getMID_CONTEXT());
-            otnCryptoModule.setPmidContext(tl1ModuleInfo.getPMID_CONTEXT());
-            otnCryptoModule.setBypassMode(tl1BypassInfo.getCURRENT_ACTION());
-            otnCryptoModule.setCryptoMode(tl1ModuleInfo.getCRYPTO_MODE());
-            otnCryptoModule.setCryptoModulePkgVersion(tl1CmProgramInfo.getPKG_VERSION());
-            otnCryptoModule.setCryptoModuleFpgaVersion(tl1CmProgramInfo.getFPGA_VERSION());
-            otnCryptoModule.setCryptoModuleCpldVersion(tl1CmProgramInfo.getCPLD_VERSION());
-            otnCryptoModule.setCryptoModuleHwVersion(tl1CmProgramInfo.getHW_VERSION());
-
-            System.out.println(otnCryptoModule);
-            otnCryptoModuleRepository.save(otnCryptoModule);
-        }
-    }
-
-    public void OtnSyncCryptoSession() throws Exception {
-        Stream<OtnCryptoSession> sdnCryptoSessionStream = tl1SessStateList.stream()
-            .map(tl1SessState -> {
-            Tl1KeyState tl1KeyState = tl1KeyStateHashMap.get(tl1SessState.getAID());
-
-            OtnCryptoSession otnCryptoSession = new OtnCryptoSession();
-
-            otnCryptoSession.setAid(tl1SessState.getAID());
-            otnCryptoSession.setLocalIp(tl1SessState.getLOCAL_IP());
-            otnCryptoSession.setRemoteIp(tl1SessState.getREMOTE_IP());
-            otnCryptoSession.setKspMode(tl1SessState.getKSP_MODE());
-            otnCryptoSession.setDeadTime(tl1SessState.getDEAD_TIME());
-            otnCryptoSession.setRetryRequestInterval(tl1SessState.getRETRY_REQ_INTERVAL());
-            otnCryptoSession.setDstLid(tl1SessState.getDST_LID());
-            otnCryptoSession.setKeySourceMode(tl1SessState.getKEY_SRC_MODE());
-            otnCryptoSession.setKeyFailoverMode(tl1SessState.getKEY_FAILOVER());
-            otnCryptoSession.setKeyLifeTime(tl1SessState.getKEY_LIFE_TIME());
-            otnCryptoSession.setTxKeyState(tl1KeyState.getTX_KEY_STATE());
-            otnCryptoSession.setTxKeyBankState(tl1KeyState.getTX_KEY_BANK_STATE());
-            otnCryptoSession.setRxKeyState(tl1KeyState.getRX_KEY_STATE());
-            otnCryptoSession.setRxKeyBankState(tl1KeyState.getRX_KEY_BANK_STATE());
-
-            return otnCryptoSession;
-        });
-
-        sdnCryptoSessionStream.forEach(otnCryptoSessionRepository::save);
-    }
 
     public void OTNSyncPmPw() throws Exception {
         Stream<OtnPmPw> otnPmPwStream = tl1PmPwList.stream()
