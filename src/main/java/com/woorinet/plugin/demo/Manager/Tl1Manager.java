@@ -788,7 +788,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                tl1ModuleInfoRepository.save(new Tl1ModuleInfo(fields));
+                tl1ModuleInfoRepository.save(new Tl1ModuleInfo(fields,syncDate));
             }
         }
     }

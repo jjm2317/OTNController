@@ -18,60 +18,64 @@ import javax.persistence.Table;
 public class Tl1ModuleInfo {
     @Id
     @GeneratedValue
-    int MODULE_INFO_ID;
-    String TID;
-    String SUBNETWORK;
-    String AID;
-    String MID;
-    String MID_CONTEXT;
-    String PMID;
-    String PMID_CONTEXT;
-    String OPERATION_STATE;
-    String OPERATION_STATE_REASON;
-    String CRYPTO_MODE;
+    int moduleInfoId;
+    String tid;
+    String subnetwork;
+    String aid;
+    String mid;
+    String midContext;
+    String pmid;
+    String pmidContext;
+    String operationState;
+    String operationStateReason;
+    String cryptoMode;
+    String syncDate;
 
     public Tl1ModuleInfo() {
     }
 
-    public Tl1ModuleInfo(String TID, String SUBNETWORK, String AID, String MID, String MID_CONTEXT, String PMID, String PMID_CONTEXT, String OPERATION_STATE, String OPERATION_STATE_REASON, String CRYPTO_MODE) {
-        this.TID = TID;
-        this.SUBNETWORK = SUBNETWORK;
-        this.AID = AID;
-        this.MID = MID;
-        this.MID_CONTEXT = MID_CONTEXT;
-        this.PMID = PMID;
-        this.PMID_CONTEXT = PMID_CONTEXT;
-        this.OPERATION_STATE = OPERATION_STATE;
-        this.OPERATION_STATE_REASON = OPERATION_STATE_REASON;
-        this.CRYPTO_MODE = CRYPTO_MODE;
+    public Tl1ModuleInfo(String tid, String subnetwork, String aid, String mid, String midContext, String pmid, String pmidContext, String operationState, String operationStateReason, String cryptoMode, String syncDate) {
+        this.tid = tid;
+        this.subnetwork = subnetwork;
+        this.aid = aid;
+        this.mid = mid;
+        this.midContext = midContext;
+        this.pmid = pmid;
+        this.pmidContext = pmidContext;
+        this.operationState = operationState;
+        this.operationStateReason = operationStateReason;
+        this.cryptoMode = cryptoMode;
+        this.syncDate = syncDate;
     }
 
-    public Tl1ModuleInfo(String[] fields) {
-        this.TID = fields[0];
-        this.SUBNETWORK = fields[1];
-        this.AID = fields[2];
-        this.MID = fields[3];
-        this.MID_CONTEXT = fields[4];
-        this.PMID = fields[5];
-        this.PMID_CONTEXT = fields[6];
-        this.OPERATION_STATE = fields[7];
-        this.OPERATION_STATE_REASON = fields[8];
-        this.CRYPTO_MODE = fields[9];
+    public Tl1ModuleInfo(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.subnetwork = fields[1];
+        this.aid = fields[2];
+        this.mid = fields[3];
+        this.midContext = fields[4];
+        this.pmid = fields[5];
+        this.pmidContext = fields[6];
+        this.operationState = fields[7];
+        this.operationStateReason = fields[8];
+        this.cryptoMode = fields[9];
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "MODULE_INFO{" +
-                "TID='" + TID + '\'' +
-                ", SUBNETWORK='" + SUBNETWORK + '\'' +
-                ", AID='" + AID + '\'' +
-                ", MID='" + MID + '\'' +
-                ", MID_CONTEXT='" + MID_CONTEXT + '\'' +
-                ", PMID='" + PMID + '\'' +
-                ", PMID_CONTEXT='" + PMID_CONTEXT + '\'' +
-                ", OPERATION_STATE='" + OPERATION_STATE + '\'' +
-                ", OPERATION_STATE_REASON='" + OPERATION_STATE_REASON + '\'' +
-                ", CRYPTO_MODE='" + CRYPTO_MODE + '\'' +
+        return "Tl1ModuleInfo{" +
+                "tid='" + tid + '\'' +
+                ", subnetwork='" + subnetwork + '\'' +
+                ", aid='" + aid + '\'' +
+                ", mid='" + mid + '\'' +
+                ", midContext='" + midContext + '\'' +
+                ", pmid='" + pmid + '\'' +
+                ", pmidContext='" + pmidContext + '\'' +
+                ", operationState='" + operationState + '\'' +
+                ", operationStateReason='" + operationStateReason + '\'' +
+                ", cryptoMode='" + cryptoMode + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

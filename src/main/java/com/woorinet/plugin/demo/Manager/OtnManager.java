@@ -927,7 +927,7 @@ public class OtnManager {
         Stream<OtnCmLink> otnCmLinkStream = tl1CmPortList.stream()
             .map(tl1CmPort -> {
                 Optional<Tl1ModuleInfo> tl1ModuleInfo = tl1ModuleInfoList.stream()
-                    .filter(moduleInfo -> moduleInfo.getAID().equals(tl1CmPort.getAid())).findAny();
+                    .filter(moduleInfo -> moduleInfo.getAid().equals(tl1CmPort.getAid())).findAny();
 
                 //예> AID(EMS_1000_B-OPN1000-S03-P1)에서 3, 4번째 값만 추출, 구분자는 '-'
                 String slot = tl1CmPort.getAid().split("-")[2];
@@ -939,13 +939,13 @@ public class OtnManager {
                         port,//port
                         tl1CmPort.getUnitType(),//unitType
                         tl1CmPort.getSignal(),//signal
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMID()).orElse(""),//mid
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMID_CONTEXT()).orElse(""),//midContext
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPMID()).orElse(""),//pmid
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPMID_CONTEXT()).orElse(""),//pmidContext
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOPERATION_STATE()).orElse(""),//operationState
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOPERATION_STATE_REASON()).orElse(""),//operationStateReason
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getCRYPTO_MODE()).orElse("")//cryptoMode
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMid()).orElse(""),//mid
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getMidContext()).orElse(""),//midContext
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPmid()).orElse(""),//pmid
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPmidContext()).orElse(""),//pmidContext
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOperationState()).orElse(""),//operationState
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOperationStateReason()).orElse(""),//operationStateReason
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getCryptoMode()).orElse("")//cryptoMode
 
                 );
 
