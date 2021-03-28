@@ -1002,4 +1002,56 @@ public class OtnManager {
 
         otnCmLinkStream.forEach(otnCmLinkRepository::save);
     }
+
+    public void OtnSyncCmSession() throws Exception {
+        Stream<OtnCmSession> otnCmSessionStream = tl1SessStateList.stream()
+            .map(tl1SessState -> {
+                Optional<Tl1KeyState> tl1KeyState= tl1KeyStateList.stream()
+                    .filter(keyState -> keyState.getAID().equals(tl1SessState.getAID())).findAny();
+
+                //AID(EMS_1000_B-OPN1000-S03-P1)에서 3번째 값만 추출, 구분자는 '-'
+                String slot = tl1SessState.getAID().split("-")[2];
+                String port = tl1SessState.getAID().split("-")[3];
+
+                Optional<Tl1BypassInfo> tl1BypassInfo = tl1BypassInfoList.stream()
+                    .filter(bypassInfo -> bypassInfo.getTID().equals(tl1SessState.getTID())
+                            && bypassInfo.getAID().equals(slot + "-" + port)).findAny();
+
+                OtnCmSession otnCmSession = new OtnCmSession(
+                        tl1SessState.getTID(),//tid
+                        slot,//slot
+                        port,//port
+                        tl1SessState.getLOCAL_IP(),//local_ip
+                        tl1SessState.getREMOTE_IP(),//remote_ip
+                        tl1SessState.getKSP_MODE(),//ksp_mode
+                        tl1SessState.getDEAD_TIME(),//dead_time
+                        tl1SessState.getKEY_LIFE_TIME(),//key_life_time
+                        tl1SessState.getKEY_SRC_MODE(),//key_src_mode
+                        tl1SessState.getKEY_FAILOVER(),//key_failover
+                        tl1SessState.getRETRY_REQ_INTERVAL(),//retry_req_interval
+                        tl1SessState.getSESSION_STATE(),//session_state
+                        tl1SessState.getDST_LID(),//dst_lid
+                        tl1SessState.getCURRENT_TX_KEY_SRC_MODE(),//current_tx_key_src_mode
+                        tl1SessState.getCURRENT_RX_KEY_SRC_MODE(),//current_rx_key_src_mode
+                        tl1KeyState.map(keyState -> keyState.getTX_KEY_STATE()).orElse(""),//tx_key_state
+                        tl1KeyState.map(keyState -> keyState.getTX_KEY_BANK_STATE()).orElse(""),//tx_key_bank_state
+                        tl1KeyState.map(keyState -> keyState.getRX_KEY_STATE()).orElse(""),//rx_key_state
+                        tl1KeyState.map(keyState -> keyState.getRX_KEY_BANK_STATE()).orElse(""),//rx_key_bank_state
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getMODE()).orElse(""),//bypass_mode
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getACTION()).orElse(""),//bypass_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getCURRENT_ACTION()).orElse(""),//bypass_current_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPEER_MODE()).orElse(""),//bypass_peer_mode
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPEER_ACTION()).orElse(""),//bypass_peer_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPEER_CURRENT_ACTION()).orElse("")//bypass_peer_current_action
+                );
+
+                return otnCmSession;
+            });
+
+        otnCmSessionStream.forEach(otnCmSessionRepository::save);
+    }
+
+    public void OtnSyncCmQkdLink() throws Exception {
+//        Stream<OtnCmQkdLink> otnCmQkdLinkStream =
+    }
 }
