@@ -803,7 +803,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                tl1CmPortRepository.save(new Tl1CmPort(fields));
+                tl1CmPortRepository.save(new Tl1CmPort(fields,syncDate));
             }
         }
     }

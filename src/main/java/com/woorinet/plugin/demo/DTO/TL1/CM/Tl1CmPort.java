@@ -25,6 +25,7 @@ public class Tl1CmPort {
     String unitType;
     String signal;
     String vlanId;
+    String syncDate;
 
     public Tl1CmPort() {
     }
@@ -38,13 +39,14 @@ public class Tl1CmPort {
         this.vlanId = vlanId;
     }
 
-    public Tl1CmPort(String[] fields) {
+    public Tl1CmPort(String[] fields, String syncDate) {
         this.tid = fields[0];
         this.subnetwork = fields[1];
         this.aid = fields[2];
         this.unitType = fields[3];
         this.signal = fields[4];
         this.vlanId = fields[5];
+        this.syncDate = syncDate;
     }
 
     @Override
