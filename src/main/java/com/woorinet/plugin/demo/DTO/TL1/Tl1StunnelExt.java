@@ -17,195 +17,261 @@ import javax.persistence.Table;
 public class Tl1StunnelExt {
     @Id
     @GeneratedValue
-    int STUNNEL_EXT_ID;
-    String TID_ID;
-    String TID;
-    String SUBNET_ID;
-    String SUBNET;
-    String NAME;
-    String DESCR;
-    String TU_ID;
-    String PROTECTION;
-    String ACTIVE_PATH_STATUS;
-    String ING_SUBNET;
-    String ING_TID;
-    String ING_TID_ID;
-    String ING_LSRID;
-    String EGR_SUBNET;
-    String EGR_TID;
-    String EGR_TID_ID;
-    String EGR_LSRID;
-    String ROLE;
-    String DIRECTION;
-    String FROM_SUBNET;
-    String FROM_TID_ID;
-    String FROM_TID;
-    String FROM_PORT;
-    String FROM_IN_LABEL;
-    String FROM_OUT_LABEL;
-    String TO_SUBNET;
-    String TO_TID_ID;
-    String TO_TID;
-    String TO_PORT;
-    String TO_IN_LABEL;
-    String TO_OUT_LABEL;
-    String QMAP_ID;
-    String PHB_ID;
-    String EXP;
-    String USE_BW;
-    String AUTO_BW;
-    String CIR;
-    String PIR;
-    String CIR6;
-    String PIR6;
-    String CIR5;
-    String PIR5;
-    String CIR4;
-    String PIR4;
-    String CIR3;
-    String PIR3;
-    String CIR2;
-    String PIR2;
-    String CIR1;
-    String PIR1;
-    String OAM_ID;
-    String PROT_ID;
-    String COUNTER;
-    String LM_COUNTER;
-    String POLL_RATE;
-    String REPORT;
-    String NO_PACKET;
-    String CREATE_DATE;
-    String MODIFI_DATE;
+    int stunnelExtId;
+    String tidId;
+    String tid;
+    String subnetId;
+    String subnet;
+    String name;
+    String descr;
+    String tuId;
+    String protection;
+    String activePathStatus;
+    String ingSubnet;
+    String ingTid;
+    String ingTidId;
+    String ingLsrid;
+    String egrSubnet;
+    String egrTid;
+    String egrTidId;
+    String egrLsrid;
+    String role;
+    String direction;
+    String fromSubnet;
+    String fromTidId;
+    String fromTid;
+    String fromPort;
+    String fromInLabel;
+    String fromOutLabel;
+    String toSubnet;
+    String toTidId;
+    String toTid;
+    String toPort;
+    String toInLabel;
+    String toOutLabel;
+    String qmapId;
+    String phbId;
+    String exp;
+    String useBw;
+    String autoBw;
+    String cir;
+    String pir;
+    String cir6;
+    String pir6;
+    String cir5;
+    String pir5;
+    String cir4;
+    String pir4;
+    String cir3;
+    String pir3;
+    String cir2;
+    String pir2;
+    String cir1;
+    String pir1;
+    String oamId;
+    String protId;
+    String counter;
+    String lmCounter;
+    String pollRate;
+    String report;
+    String noPacket;
+    String createDate;
+    String modifiDate;
+    String syncDate;
 
     public Tl1StunnelExt() {
 
     }
 
-    public Tl1StunnelExt(String[] fields) {
-        this.TID_ID = fields[0];
-        this.TID = fields[1];
-        this.SUBNET_ID = fields[2];
-        this.SUBNET = fields[3];
-        this.NAME = fields[4];
-        this.DESCR = fields[5];
-        this.TU_ID = fields[6];
-        this.PROTECTION = fields[7];
-        this.ACTIVE_PATH_STATUS = fields[8];
-        this.ING_SUBNET = fields[9];
-        this.ING_TID = fields[10];
-        this.ING_TID_ID = fields[11];
-        this.ING_LSRID = fields[12];
-        this.EGR_SUBNET = fields[13];
-        this.EGR_TID = fields[14];
-        this.EGR_TID_ID = fields[15];
-        this.EGR_LSRID = fields[16];
-        this.ROLE = fields[17];
-        this.DIRECTION = fields[18];
-        this.FROM_SUBNET = fields[19];
-        this.FROM_TID_ID = fields[20];
-        this.FROM_TID = fields[21];
-        this.FROM_PORT = fields[22];
-        this.FROM_IN_LABEL = fields[23];
-        this.FROM_OUT_LABEL = fields[24];
-        this.TO_SUBNET = fields[25];
-        this.TO_TID_ID = fields[26];
-        this.TO_TID = fields[27];
-        this.TO_PORT = fields[28];
-        this.TO_IN_LABEL = fields[29];
-        this.TO_OUT_LABEL = fields[30];
-        this.QMAP_ID = fields[31];
-        this.PHB_ID = fields[32];
-        this.EXP = fields[33];
-        this.USE_BW = fields[34];
-        this.AUTO_BW = fields[35];
-        this.CIR = fields[36];
-        this.PIR = fields[37];
-        this.CIR6 = fields[38];
-        this.PIR6 = fields[39];
-        this.CIR5 = fields[40];
-        this.PIR5 = fields[41];
-        this.CIR4 = fields[42];
-        this.PIR4 = fields[43];
-        this.CIR3 = fields[44];
-        this.PIR3 = fields[45];
-        this.CIR2 = fields[46];
-        this.PIR2 = fields[47];
-        this.CIR1 = fields[48];
-        this.PIR1 = fields[49];
-        this.OAM_ID = fields[50];
-        this.PROT_ID = fields[51];
-        this.COUNTER = fields[52];
-        this.LM_COUNTER = fields[53];
-        this.POLL_RATE = fields[54];
-        this.REPORT = fields[55];
-        this.NO_PACKET = fields[56];
-        this.CREATE_DATE = fields[57];
-        this.MODIFI_DATE = fields[58];
+    public Tl1StunnelExt(String[] fields, String syncDate) {
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.subnetId = fields[2];
+        this.subnet = fields[3];
+        this.name = fields[4];
+        this.descr = fields[5];
+        this.tuId = fields[6];
+        this.protection = fields[7];
+        this.activePathStatus = fields[8];
+        this.ingSubnet = fields[9];
+        this.ingTid = fields[10];
+        this.ingTidId = fields[11];
+        this.ingLsrid = fields[12];
+        this.egrSubnet = fields[13];
+        this.egrTid = fields[14];
+        this.egrTidId = fields[15];
+        this.egrLsrid = fields[16];
+        this.role = fields[17];
+        this.direction = fields[18];
+        this.fromSubnet = fields[19];
+        this.fromTidId = fields[20];
+        this.fromTid = fields[21];
+        this.fromPort = fields[22];
+        this.fromInLabel = fields[23];
+        this.fromOutLabel = fields[24];
+        this.toSubnet = fields[25];
+        this.toTidId = fields[26];
+        this.toTid = fields[27];
+        this.toPort = fields[28];
+        this.toInLabel = fields[29];
+        this.toOutLabel = fields[30];
+        this.qmapId = fields[31];
+        this.phbId = fields[32];
+        this.exp = fields[33];
+        this.useBw = fields[34];
+        this.autoBw = fields[35];
+        this.cir = fields[36];
+        this.pir = fields[37];
+        this.cir6 = fields[38];
+        this.pir6 = fields[39];
+        this.cir5 = fields[40];
+        this.pir5 = fields[41];
+        this.cir4 = fields[42];
+        this.pir4 = fields[43];
+        this.cir3 = fields[44];
+        this.pir3 = fields[45];
+        this.cir2 = fields[46];
+        this.pir2 = fields[47];
+        this.cir1 = fields[48];
+        this.pir1 = fields[49];
+        this.oamId = fields[50];
+        this.protId = fields[51];
+        this.counter = fields[52];
+        this.lmCounter = fields[53];
+        this.pollRate = fields[54];
+        this.report = fields[55];
+        this.noPacket = fields[56];
+        this.createDate = fields[57];
+        this.modifiDate = fields[58];
+        this.syncDate = syncDate;
+    }
+
+    public Tl1StunnelExt(String tidId, String tid, String subnetId, String subnet, String name, String descr, String tuId, String protection, String activePathStatus, String ingSubnet, String ingTid, String ingTidId, String ingLsrid, String egrSubnet, String egrTid, String egrTidId, String egrLsrid, String role, String direction, String fromSubnet, String fromTidId, String fromTid, String fromPort, String fromInLabel, String fromOutLabel, String toSubnet, String toTidId, String toTid, String toPort, String toInLabel, String toOutLabel, String qmapId, String phbId, String exp, String useBw, String autoBw, String cir, String pir, String cir6, String pir6, String cir5, String pir5, String cir4, String pir4, String cir3, String pir3, String cir2, String pir2, String cir1, String pir1, String oamId, String protId, String counter, String lmCounter, String pollRate, String report, String noPacket, String createDate, String modifiDate, String syncDate) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.subnetId = subnetId;
+        this.subnet = subnet;
+        this.name = name;
+        this.descr = descr;
+        this.tuId = tuId;
+        this.protection = protection;
+        this.activePathStatus = activePathStatus;
+        this.ingSubnet = ingSubnet;
+        this.ingTid = ingTid;
+        this.ingTidId = ingTidId;
+        this.ingLsrid = ingLsrid;
+        this.egrSubnet = egrSubnet;
+        this.egrTid = egrTid;
+        this.egrTidId = egrTidId;
+        this.egrLsrid = egrLsrid;
+        this.role = role;
+        this.direction = direction;
+        this.fromSubnet = fromSubnet;
+        this.fromTidId = fromTidId;
+        this.fromTid = fromTid;
+        this.fromPort = fromPort;
+        this.fromInLabel = fromInLabel;
+        this.fromOutLabel = fromOutLabel;
+        this.toSubnet = toSubnet;
+        this.toTidId = toTidId;
+        this.toTid = toTid;
+        this.toPort = toPort;
+        this.toInLabel = toInLabel;
+        this.toOutLabel = toOutLabel;
+        this.qmapId = qmapId;
+        this.phbId = phbId;
+        this.exp = exp;
+        this.useBw = useBw;
+        this.autoBw = autoBw;
+        this.cir = cir;
+        this.pir = pir;
+        this.cir6 = cir6;
+        this.pir6 = pir6;
+        this.cir5 = cir5;
+        this.pir5 = pir5;
+        this.cir4 = cir4;
+        this.pir4 = pir4;
+        this.cir3 = cir3;
+        this.pir3 = pir3;
+        this.cir2 = cir2;
+        this.pir2 = pir2;
+        this.cir1 = cir1;
+        this.pir1 = pir1;
+        this.oamId = oamId;
+        this.protId = protId;
+        this.counter = counter;
+        this.lmCounter = lmCounter;
+        this.pollRate = pollRate;
+        this.report = report;
+        this.noPacket = noPacket;
+        this.createDate = createDate;
+        this.modifiDate = modifiDate;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "STUNNEL_EXT{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", DESCR='" + DESCR + '\'' +
-                ", TU_ID='" + TU_ID + '\'' +
-                ", PROTECTION='" + PROTECTION + '\'' +
-                ", ACTIVE_PATH_STATUS='" + ACTIVE_PATH_STATUS + '\'' +
-                ", ING_SUBNET='" + ING_SUBNET + '\'' +
-                ", ING_TID='" + ING_TID + '\'' +
-                ", ING_TID_ID='" + ING_TID_ID + '\'' +
-                ", ING_LSRID='" + ING_LSRID + '\'' +
-                ", EGR_SUBNET='" + EGR_SUBNET + '\'' +
-                ", EGR_TID='" + EGR_TID + '\'' +
-                ", EGR_TID_ID='" + EGR_TID_ID + '\'' +
-                ", EGR_LSRID='" + EGR_LSRID + '\'' +
-                ", ROLE='" + ROLE + '\'' +
-                ", DIRECTION='" + DIRECTION + '\'' +
-                ", FROM_SUBNET='" + FROM_SUBNET + '\'' +
-                ", FROM_TID_ID='" + FROM_TID_ID + '\'' +
-                ", FROM_TID='" + FROM_TID + '\'' +
-                ", FROM_PORT='" + FROM_PORT + '\'' +
-                ", FROM_IN_LABEL='" + FROM_IN_LABEL + '\'' +
-                ", FROM_OUT_LABEL='" + FROM_OUT_LABEL + '\'' +
-                ", TO_SUBNET='" + TO_SUBNET + '\'' +
-                ", TO_TID_ID='" + TO_TID_ID + '\'' +
-                ", TO_TID='" + TO_TID + '\'' +
-                ", TO_PORT='" + TO_PORT + '\'' +
-                ", TO_IN_LABEL='" + TO_IN_LABEL + '\'' +
-                ", TO_OUT_LABEL='" + TO_OUT_LABEL + '\'' +
-                ", QMAP_ID='" + QMAP_ID + '\'' +
-                ", PHB_ID='" + PHB_ID + '\'' +
-                ", EXP='" + EXP + '\'' +
-                ", USE_BW='" + USE_BW + '\'' +
-                ", AUTO_BW='" + AUTO_BW + '\'' +
-                ", CIR='" + CIR + '\'' +
-                ", PIR='" + PIR + '\'' +
-                ", CIR6='" + CIR6 + '\'' +
-                ", PIR6='" + PIR6 + '\'' +
-                ", CIR5='" + CIR5 + '\'' +
-                ", PIR5='" + PIR5 + '\'' +
-                ", CIR4='" + CIR4 + '\'' +
-                ", PIR4='" + PIR4 + '\'' +
-                ", CIR3='" + CIR3 + '\'' +
-                ", PIR3='" + PIR3 + '\'' +
-                ", CIR2='" + CIR2 + '\'' +
-                ", PIR2='" + PIR2 + '\'' +
-                ", CIR1='" + CIR1 + '\'' +
-                ", PIR1='" + PIR1 + '\'' +
-                ", OAM_ID='" + OAM_ID + '\'' +
-                ", PROT_ID='" + PROT_ID + '\'' +
-                ", COUNTER='" + COUNTER + '\'' +
-                ", LM_COUNTER='" + LM_COUNTER + '\'' +
-                ", POLL_RATE='" + POLL_RATE + '\'' +
-                ", REPORT='" + REPORT + '\'' +
-                ", NO_PACKET='" + NO_PACKET + '\'' +
-                ", CREATE_DATE='" + CREATE_DATE + '\'' +
-                ", MODIFI_DATE='" + MODIFI_DATE + '\'' +
+        return "Tl1StunnelExt{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", name='" + name + '\'' +
+                ", descr='" + descr + '\'' +
+                ", tuId='" + tuId + '\'' +
+                ", protection='" + protection + '\'' +
+                ", activePathStatus='" + activePathStatus + '\'' +
+                ", ingSubnet='" + ingSubnet + '\'' +
+                ", ingTid='" + ingTid + '\'' +
+                ", ingTidId='" + ingTidId + '\'' +
+                ", ingLsrid='" + ingLsrid + '\'' +
+                ", egrSubnet='" + egrSubnet + '\'' +
+                ", egrTid='" + egrTid + '\'' +
+                ", egrTidId='" + egrTidId + '\'' +
+                ", egrLsrid='" + egrLsrid + '\'' +
+                ", role='" + role + '\'' +
+                ", direction='" + direction + '\'' +
+                ", fromSubnet='" + fromSubnet + '\'' +
+                ", fromTidId='" + fromTidId + '\'' +
+                ", fromTid='" + fromTid + '\'' +
+                ", fromPort='" + fromPort + '\'' +
+                ", fromInLabel='" + fromInLabel + '\'' +
+                ", fromOutLabel='" + fromOutLabel + '\'' +
+                ", toSubnet='" + toSubnet + '\'' +
+                ", toTidId='" + toTidId + '\'' +
+                ", toTid='" + toTid + '\'' +
+                ", toPort='" + toPort + '\'' +
+                ", toInLabel='" + toInLabel + '\'' +
+                ", toOutLabel='" + toOutLabel + '\'' +
+                ", qmapId='" + qmapId + '\'' +
+                ", phbId='" + phbId + '\'' +
+                ", exp='" + exp + '\'' +
+                ", useBw='" + useBw + '\'' +
+                ", autoBw='" + autoBw + '\'' +
+                ", cir='" + cir + '\'' +
+                ", pir='" + pir + '\'' +
+                ", cir6='" + cir6 + '\'' +
+                ", pir6='" + pir6 + '\'' +
+                ", cir5='" + cir5 + '\'' +
+                ", pir5='" + pir5 + '\'' +
+                ", cir4='" + cir4 + '\'' +
+                ", pir4='" + pir4 + '\'' +
+                ", cir3='" + cir3 + '\'' +
+                ", pir3='" + pir3 + '\'' +
+                ", cir2='" + cir2 + '\'' +
+                ", pir2='" + pir2 + '\'' +
+                ", cir1='" + cir1 + '\'' +
+                ", pir1='" + pir1 + '\'' +
+                ", oamId='" + oamId + '\'' +
+                ", protId='" + protId + '\'' +
+                ", counter='" + counter + '\'' +
+                ", lmCounter='" + lmCounter + '\'' +
+                ", pollRate='" + pollRate + '\'' +
+                ", report='" + report + '\'' +
+                ", noPacket='" + noPacket + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", modifiDate='" + modifiDate + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
