@@ -194,7 +194,7 @@ public class OtnManager {
 
     private void makeHashMap() {
         for(Tl1Node tl1Node : tl1NodeList) {
-            tl1NodeHashMap.put(tl1Node.getTID(), tl1Node);
+            tl1NodeHashMap.put(tl1Node.getTid(), tl1Node);
         }
         for(Tl1SystemInfo tl1SystemInfo : tl1SystemInfoList) {
             tl1SystemInfoHashMap.put(tl1SystemInfo.getTID(), tl1SystemInfo);
@@ -309,26 +309,26 @@ public class OtnManager {
     private void OtnSyncNodeList() throws Exception {
         Stream<OtnNode> sdnNodeStream = tl1NodeList
             .stream()
-            .filter(tl1NodeState -> tl1NodeState.getNODE_TYPE().equals("otn"))
+            .filter(tl1NodeState -> tl1NodeState.getNodeType().equals("otn"))
             .map(tl1NodeState -> {
-                Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1NodeState.getTID());
-                Tl1Inventory tl1Inventory = tl1InventoryHashMap.get(tl1NodeState.getTID());
+                Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1NodeState.getTid());
+                Tl1Inventory tl1Inventory = tl1InventoryHashMap.get(tl1NodeState.getTid());
 
                 OtnNode otnNode = new OtnNode(
                         200009, // ems_id
-                        tl1SystemInfo==null? tl1NodeState.getNODE_TYPE() + separator + tl1NodeState.getTID(): tl1SystemInfo.getVENDOR() + separator + tl1NodeState.getNODE_TYPE() + separator + tl1NodeState.getTID(), // ne_id
-                        tl1NodeState.getTID(), // ne_name
+                        tl1SystemInfo==null? tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(): tl1SystemInfo.getVENDOR() + separator + tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(), // ne_id
+                        tl1NodeState.getTid(), // ne_name
                         "", //ne_type
-                        tl1NodeState.getSYSTEM_TYPE(), // ne_model
-                        tl1NodeState.getNODE_STATUS().equals("normal") ? tl1NodeState.getNODE_STATUS() : "broken", // ne_status
-                        tl1NodeState.getSOFTWARE(), // sw_ver
-                        tl1NodeState.getIP_ADDR(), // ip_addr
+                        tl1NodeState.getSystemType(), // ne_model
+                        tl1NodeState.getNodeStatus().equals("normal") ? tl1NodeState.getNodeStatus() : "broken", // ne_status
+                        tl1NodeState.getSoftware(), // sw_ver
+                        tl1NodeState.getIpAddr(), // ip_addr
                         tl1SystemInfo==null? "":tl1SystemInfo.getVENDOR(), // vendor
                         tl1Inventory==null ? "" : tl1Inventory.getSERIAL_NUM(), // serial_num
-                        tl1NodeState.getNODE_TYPE() // sys_type
+                        tl1NodeState.getNodeType() // sys_type
                 );
 
-                sdnNodeHashMap.put(tl1NodeState.getTID(), otnNode);
+                sdnNodeHashMap.put(tl1NodeState.getTid(), otnNode);
                 return otnNode;
             });
         sdnNodeStream.forEach(otnNodeRepository::save);
@@ -341,7 +341,7 @@ public class OtnManager {
                 Tl1Node tl1Node = tl1NodeHashMap.get(tl1OduNodeConnector.getTID());
                 OtnNode otnNode = sdnNodeHashMap.get(tl1OduNodeConnector.getTID());
                 Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduNodeConnector.getTID()+"/"+ tl1OduNodeConnector.getAID());
-                Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1Node.getTID());
+                Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1Node.getTid());
 
                 String connectId = tl1SystemInfo.getVENDOR() +
                         separator +

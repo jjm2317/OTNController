@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Tl1Manager {
+    String syncDate;
     int CTAG;
 
     List<Tl1Node> tl1NodeList;
@@ -81,7 +82,9 @@ public class Tl1Manager {
     List<String> pmPortFilepathList;
     List<String> pmOpticTemperatureFilepathList;
 
-    public Tl1Manager(int CTAG,
+    public Tl1Manager(
+                      String syncDate,
+                      int CTAG,
                       String ip,
                       int port,
                       Tl1NodeRepository tl1NodeRepository,
@@ -128,6 +131,7 @@ public class Tl1Manager {
                       Tl1CmProgramInfoRepository tl1CmProgramInfoRepository,
                       Tl1QkdInfoRepository tl1QkdInfoRepository
                       ) throws IOException {
+        this.syncDate = syncDate;
         this.CTAG = CTAG;
         this.tl1NodeList = new ArrayList<>();
         this.serviceList = new ArrayList<>();
@@ -459,7 +463,7 @@ public class Tl1Manager {
         String cmd = "RTRV-NET:::[" + CTAG + "];";
         ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
         for (String[] fields: fieldsList) {
-            Tl1Node tl1Node = new Tl1Node(fields);
+            Tl1Node tl1Node = new Tl1Node(fields, syncDate);
             tl1NodeRepository.save(tl1Node);
             tl1NodeList.add(tl1Node);
         }
@@ -467,7 +471,7 @@ public class Tl1Manager {
 
     public void Tl1SyncSystemInfo() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-SYS:" + tl1Node.getTID() + ":::[" + CTAG + "];";
+            String cmd = "RTRV-SYS:" + tl1Node.getTid() + ":::[" + CTAG + "];";
             Map<String, String> fields = ConvertResponse2(ExecuteCmd(cmd));
             Tl1SystemInfo info = new Tl1SystemInfo(
                     fields.get("TID") == null ? "" : fields.get("TID"),
@@ -483,7 +487,7 @@ public class Tl1Manager {
 
     public void Tl1SyncSlot() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-SLOT:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-SLOT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1SlotRepository.save(new Tl1Slot(fields));
@@ -493,7 +497,7 @@ public class Tl1Manager {
 
     public void Tl1SyncEthPort() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-ETH-PORT:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-ETH-PORT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1EthPortRepository.save(new Tl1EthPort(fields));
@@ -503,7 +507,7 @@ public class Tl1Manager {
 
     public void Tl1SyncNodeConnector() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-NODE-CONNECTOR:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-NODE-CONNECTOR:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 Tl1NodeConnector tl1NodeConnector = new Tl1NodeConnector(fields);
@@ -515,7 +519,7 @@ public class Tl1Manager {
 
     public void Tl1SyncCesNodeConnector() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-CES-NODE-CONNECTOR:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-CES-NODE-CONNECTOR:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1CesNodeConnectorRepository.save(new Tl1CesNodeConnector(fields));
@@ -525,8 +529,8 @@ public class Tl1Manager {
 
     public void Tl1SyncOduNodeConnector() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            if (!tl1Node.getNODE_TYPE().equals("otn")) continue;
-            String cmd = "RTRV-ODU-NODE-CONNECTOR:" + tl1Node.getTID() + "::" + CTAG + ";";
+            if (!tl1Node.getNodeType().equals("otn")) continue;
+            String cmd = "RTRV-ODU-NODE-CONNECTOR:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 Tl1OduNodeConnector tl1OduNodeConnector = new Tl1OduNodeConnector(fields);
@@ -538,7 +542,7 @@ public class Tl1Manager {
 
     public void Tl1SyncMplsIf() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-MPLS-IF:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-MPLS-IF:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1MplsIfRepository.save(new Tl1MplsIf(fields));
@@ -548,7 +552,7 @@ public class Tl1Manager {
 
     public void Tl1SyncOduMplsIf() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-ODU-MPLS-IF:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-ODU-MPLS-IF:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 Tl1OduMplsIf tl1OduMplsIf = new Tl1OduMplsIf(fields);
@@ -560,7 +564,7 @@ public class Tl1Manager {
 
     public void Tl1SyncSTunnel() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-STUNNEL:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-STUNNEL:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1StunnelRepository.save(new Tl1Stunnel(fields));
@@ -570,7 +574,7 @@ public class Tl1Manager {
 
     public void Tl1SyncSTunnelExt() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-STUNNEL-EXT:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-STUNNEL-EXT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1StunnelExtRepository.save(new Tl1StunnelExt(fields));
@@ -580,7 +584,7 @@ public class Tl1Manager {
 
     public void Tl1SyncSTunnelTransit() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-STUNNEL-TRANSIT:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-STUNNEL-TRANSIT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1StunnelTransitRepository.save(new Tl1StunnelTransit(fields));
@@ -590,7 +594,7 @@ public class Tl1Manager {
 
     public void Tl1SyncTunnelProt() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-TUNNEL-PROT:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-TUNNEL-PROT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1TunnelPortRepository.save(new Tl1TunnelPort(fields));
@@ -600,7 +604,7 @@ public class Tl1Manager {
 
     public void Tl1SyncSpw() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-SPW:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-SPW:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1SpwRepository.save(new Tl1Spw(fields));
@@ -610,7 +614,7 @@ public class Tl1Manager {
 
     public void Tl1SyncMSpw() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-MSPW:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-MSPW:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1MspwRepository.save(new Tl1Mspw(fields));
@@ -620,7 +624,7 @@ public class Tl1Manager {
 
     public void Tl1SyncMplsAc() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-MPLS-AC:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-MPLS-AC:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 Tl1MplsAc tl1MplsAc = new Tl1MplsAc(fields);
@@ -632,7 +636,7 @@ public class Tl1Manager {
 
     public void Tl1SyncAccessIf() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-ACCESS-IF:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-ACCESS-IF:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1AccessIfRepository.save(new Tl1AccessIf(fields));
@@ -642,7 +646,7 @@ public class Tl1Manager {
 
     public void Tl1SyncService() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-SERVICE:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-SERVICE:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 Tl1Service tl1Service = new Tl1Service(fields);
@@ -684,7 +688,7 @@ public class Tl1Manager {
 
     public void Tl1SyncOdu() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-ODU:" + tl1Node.getTID() + "::" + CTAG + ";";
+            String cmd = "RTRV-ODU:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1OduRepository.save(new Tl1Odu(fields));
@@ -694,7 +698,7 @@ public class Tl1Manager {
 
     public void Tl1SyncCesPort() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-CES-PORT:" + tl1Node.getTID() + ";";
+            String cmd = "RTRV-CES-PORT:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1CesPortRepository.save(new Tl1CesPort(fields));
@@ -704,7 +708,7 @@ public class Tl1Manager {
 
     public void Tl1SyncCesPw() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-CES-PW:" + tl1Node.getTID() + ";";
+            String cmd = "RTRV-CES-PW:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1CesPwRepository.save(new Tl1CesPw(fields));
@@ -714,7 +718,7 @@ public class Tl1Manager {
 
     public void Tl1SyncL2Lacp() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-L2-LACP:" + tl1Node.getTID() + ";";
+            String cmd = "RTRV-L2-LACP:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 tl1L2LacpRepository.save(new Tl1L2Lacp(fields));
@@ -724,7 +728,7 @@ public class Tl1Manager {
 
     public void Tl1SyncOPTICPOWER() throws Exception {
         for(Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-OPTIC-POWER:" + tl1Node.getTID() + ";";
+            String cmd = "RTRV-OPTIC-POWER:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
                 System.out.println(fields);
@@ -734,7 +738,7 @@ public class Tl1Manager {
     }
     public void TL1SyncInventory() throws  Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            String cmd = "RTRV-INVENTORY:" + tl1Node.getTID() +";";
+            String cmd = "RTRV-INVENTORY:" + tl1Node.getTid() +";";
             System.out.println(cmd);
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
@@ -746,8 +750,8 @@ public class Tl1Manager {
 
     public void TL1SyncSessState() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals("otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals("otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-SESS-STATE:" + TID + ":" + SLOT_INDEX + ";";
 
@@ -761,8 +765,8 @@ public class Tl1Manager {
 
     public void TL1SyncKeyState() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals( "otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals( "otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-KEY-STATE:" + TID + ":" + SLOT_INDEX + ";";
 
@@ -776,8 +780,8 @@ public class Tl1Manager {
 
     public void TL1SyncModuleInfo() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals( "otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals( "otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-MODULE-INFO:" + TID + ":" + SLOT_INDEX + ";";
 
@@ -791,8 +795,8 @@ public class Tl1Manager {
 
     public void TL1SyncCmPort() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals( "otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals( "otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-CM-PORT:" + TID + ":" + SLOT_INDEX + ";";
 
@@ -806,8 +810,8 @@ public class Tl1Manager {
 
     public void TL1SyncBypassInfo() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals("otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals("otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-BYPASS-INFO:" + TID + ":" + SLOT_INDEX + ";";
 
@@ -821,8 +825,8 @@ public class Tl1Manager {
 
     public void TL1SyncCryptoMode() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals("otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals("otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-CRYPTO-MODE:" + TID + ":" + SLOT_INDEX + ";";
 
@@ -836,8 +840,8 @@ public class Tl1Manager {
 
     public void TL1SyncCmProgramInfo() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals("otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals("otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-CM-PROGRAM-INFO:" + TID + ":" + SLOT_INDEX + ";";
 
@@ -851,8 +855,8 @@ public class Tl1Manager {
 
     public void TL1SyncQkdInfo() throws Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
-            if(!tl1Node.getNODE_TYPE().equals("otn")) continue;
-            String TID = tl1Node.getTID();
+            if(!tl1Node.getNodeType().equals("otn")) continue;
+            String TID = tl1Node.getTid();
             String SLOT_INDEX = getSlotIndexByTID(tl1OduNodeConnectorList, TID);
             String cmd = "RTRV-QKD-INFO:" + TID + ":" + SLOT_INDEX + ";";
 

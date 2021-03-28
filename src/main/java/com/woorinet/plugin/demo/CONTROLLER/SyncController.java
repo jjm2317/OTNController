@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -114,10 +115,11 @@ public class SyncController {
 
 
     @GetMapping("/tl1")
-    String synchronization() {
+    String synchronization(@RequestParam String syncDate) {
         int CTAG = 100;
         try {
             Tl1Manager manager = new Tl1Manager(
+                    syncDate,
                     CTAG,
                     "222.117.54.175",
                     19011,

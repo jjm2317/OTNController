@@ -18,69 +18,73 @@ import javax.persistence.Table;
 public class Tl1Node {
     @Id
     @GeneratedValue
-    int NODE_ID;
-    String TID_ID;
-    String TID;
-    String NODE_TYPE;
-    String IP_ADDR;
-    String MANUFACTURE;
-    String HARDWARE;
-    String SOFTWARE;
-    String SERIAL_NUMBER;
-    String NODE_STATUS;
-    String SUBNET;
-    String SUBNET_ID;
-    String SYSTEM_TYPE;
+    int nodeId;
+    String tidId;
+    String tid;
+    String nodeType;
+    String ipAddr;
+    String manufacture;
+    String hardware;
+    String software;
+    String serialNumber;
+    String nodeStatus;
+    String subnet;
+    String subnetId;
+    String systemType;
+    String syncDate;
 
     public Tl1Node() {
 
     }
 
-    public Tl1Node(String TID_ID, String TID, String NODE_TYPE, String IP_ADDR, String MANUFACTURE, String HARDWARE, String SOFTWARE, String SERIAL_NUMBER, String NODE_STATUS, String SUBNET, String SUBNET_ID, String SYSTEM_TYPE) {
-        this.TID_ID = TID_ID;
-        this.TID = TID;
-        this.NODE_TYPE = NODE_TYPE;
-        this.IP_ADDR = IP_ADDR;
-        this.MANUFACTURE = MANUFACTURE;
-        this.HARDWARE = HARDWARE;
-        this.SOFTWARE = SOFTWARE;
-        this.SERIAL_NUMBER = SERIAL_NUMBER;
-        this.NODE_STATUS = NODE_STATUS;
-        this.SUBNET = SUBNET;
-        this.SUBNET_ID = SUBNET_ID;
-        this.SYSTEM_TYPE = SYSTEM_TYPE;
+    public Tl1Node(String tidId, String tid, String nodeType, String ipAddr, String manufacture, String hardware, String software, String serialNumber, String nodeStatus, String subnet, String subnetId, String systemType, String syncDate) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.nodeType = nodeType;
+        this.ipAddr = ipAddr;
+        this.manufacture = manufacture;
+        this.hardware = hardware;
+        this.software = software;
+        this.serialNumber = serialNumber;
+        this.nodeStatus = nodeStatus;
+        this.subnet = subnet;
+        this.subnetId = subnetId;
+        this.systemType = systemType;
+        this.syncDate = syncDate;
     }
 
-    public Tl1Node(String[] fields) {
-        TID_ID = fields[0];
-        TID = fields[1];
-        NODE_TYPE = fields[2];
-        IP_ADDR = fields[3];
-        MANUFACTURE = fields[4];
-        HARDWARE = fields[5];
-        SOFTWARE = fields[6];
-        SERIAL_NUMBER = fields[7];
-        NODE_STATUS = fields[8];
-        SUBNET = fields[9];
-        SUBNET_ID = fields[10];
-        SYSTEM_TYPE = fields[11];
+    public Tl1Node(String[] fields, String syncDate) {
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.nodeType = fields[2];
+        this.ipAddr = fields[3];
+        this.manufacture = fields[4];
+        this.hardware = fields[5];
+        this.software = fields[6];
+        this.serialNumber = fields[7];
+        this.nodeStatus = fields[8];
+        this.subnet = fields[9];
+        this.subnetId = fields[10];
+        this.systemType = fields[11];
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "Node{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", NODE_TYPE='" + NODE_TYPE + '\'' +
-                ", IP_ADDR='" + IP_ADDR + '\'' +
-                ", MANUFACTURE='" + MANUFACTURE + '\'' +
-                ", HARDWARE='" + HARDWARE + '\'' +
-                ", SOFTWARE='" + SOFTWARE + '\'' +
-                ", SERIAL_NUMBER='" + SERIAL_NUMBER + '\'' +
-                ", NODE_STATUS='" + NODE_STATUS + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SYSTEM_TYPE='" + SYSTEM_TYPE + '\'' +
+        return "Tl1Node{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", nodeType='" + nodeType + '\'' +
+                ", ipAddr='" + ipAddr + '\'' +
+                ", manufacture='" + manufacture + '\'' +
+                ", hardware='" + hardware + '\'' +
+                ", software='" + software + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", nodeStatus='" + nodeStatus + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", systemType='" + systemType + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
