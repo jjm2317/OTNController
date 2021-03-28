@@ -54,6 +54,7 @@ public class OtnManager {
     List<Tl1CmProgramInfo> tl1CmProgramInfoList;
     List<Tl1SessState> tl1SessStateList;
     List<Tl1KeyState> tl1KeyStateList;
+    List<Tl1QkdInfo> tl1QkdInfoList;
     List<Tl1PmPw> tl1PmPwList;
     List<Tl1PmTunnel> tl1PmTunnelList;
     List<Tl1PmTemperature> tl1PmTemperatureList;
@@ -127,6 +128,7 @@ public class OtnManager {
                       List<Tl1CmProgramInfo> tl1CmProgramInfoList,
                       List<Tl1SessState> tl1SessStateList,
                       List<Tl1KeyState> tl1KeyStateList,
+                      List<Tl1QkdInfo> tl1QkdInfoList,
                       List<Tl1PmPw> tl1PmPwList,
                       List<Tl1PmTunnel> tl1PmTunnelList,
                       List<Tl1PmTemperature> tl1PmTemperatureList,
@@ -178,6 +180,7 @@ public class OtnManager {
         this.tl1CmProgramInfoList = tl1CmProgramInfoList;
         this.tl1SessStateList = tl1SessStateList;
         this.tl1KeyStateList = tl1KeyStateList;
+        this.tl1QkdInfoList = tl1QkdInfoList;
         this.tl1PmPwList = tl1PmPwList;
         this.tl1PmTunnelList = tl1PmTunnelList;
         this.tl1PmTemperatureList = tl1PmTemperatureList;

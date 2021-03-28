@@ -239,6 +239,7 @@ public class SyncController {
             List<Tl1CmProgramInfo> tl1CmProgramInfoList = tl1CmProgramInfoRepository.findAll();
             List<Tl1SessState> tl1SessStateList = tl1SessStateRepository.findAll();
             List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
+            List<Tl1QkdInfo> tl1QkdInfoList = tl1QkdInfoRepository.findAll();
 
             List<Tl1PmPw> tl1PmPwList = tl1PmPwRepository.findAll();
             List<Tl1PmTunnel> tl1PmTunnelList = tl1PmTunnelRepository.findAll();
@@ -289,6 +290,7 @@ public class SyncController {
                     tl1CmProgramInfoList,
                     tl1SessStateList,
                     tl1KeyStateList,
+                    tl1QkdInfoList,
                     tl1PmPwList,
                     tl1PmTunnelList,
                     tl1PmTemperatureList,
