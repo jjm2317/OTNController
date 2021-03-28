@@ -265,7 +265,7 @@ public class OtnManager {
         }
 
         Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStateList.stream();
-        tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAID(), keystate));
+        tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAid(), keystate));
         for (Map.Entry<String, Tl1KeyState> entry : tl1KeyStateHashMap.entrySet()) {
             System.out.println(entry.getKey()+" : "+entry.getValue());
         }
@@ -959,7 +959,7 @@ public class OtnManager {
         Stream<OtnCmSession> otnCmSessionStream = tl1SessStateList.stream()
             .map(tl1SessState -> {
                 Optional<Tl1KeyState> tl1KeyState= tl1KeyStateList.stream()
-                    .filter(keyState -> keyState.getAID().equals(tl1SessState.getAID())).findAny();
+                    .filter(keyState -> keyState.getAid().equals(tl1SessState.getAID())).findAny();
 
                 //AID(EMS_1000_B-OPN1000-S03-P1)에서 3번째 값만 추출, 구분자는 '-'
                 String slot = tl1SessState.getAID().split("-")[2];
@@ -985,10 +985,10 @@ public class OtnManager {
                         tl1SessState.getDST_LID(),//dst_lid
                         tl1SessState.getCURRENT_TX_KEY_SRC_MODE(),//current_tx_key_src_mode
                         tl1SessState.getCURRENT_RX_KEY_SRC_MODE(),//current_rx_key_src_mode
-                        tl1KeyState.map(keyState -> keyState.getTX_KEY_STATE()).orElse(""),//tx_key_state
-                        tl1KeyState.map(keyState -> keyState.getTX_KEY_BANK_STATE()).orElse(""),//tx_key_bank_state
-                        tl1KeyState.map(keyState -> keyState.getRX_KEY_STATE()).orElse(""),//rx_key_state
-                        tl1KeyState.map(keyState -> keyState.getRX_KEY_BANK_STATE()).orElse(""),//rx_key_bank_state
+                        tl1KeyState.map(keyState -> keyState.getTxKeyState()).orElse(""),//tx_key_state
+                        tl1KeyState.map(keyState -> keyState.getTxKeyBankState()).orElse(""),//tx_key_bank_state
+                        tl1KeyState.map(keyState -> keyState.getRxKeyState()).orElse(""),//rx_key_state
+                        tl1KeyState.map(keyState -> keyState.getRxKeyBankState()).orElse(""),//rx_key_bank_state
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getMode()).orElse(""),//bypass_mode
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getAction()).orElse(""),//bypass_action
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getCurrentAction()).orElse(""),//bypass_current_action

@@ -773,7 +773,7 @@ public class Tl1Manager {
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
                 System.out.println(fields);
-                tl1KeyStateRepository.save(new Tl1KeyState(fields));
+                tl1KeyStateRepository.save(new Tl1KeyState(fields,syncDate));
             }
         }
     }

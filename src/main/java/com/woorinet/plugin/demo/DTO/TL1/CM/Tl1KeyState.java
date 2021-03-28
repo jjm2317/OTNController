@@ -18,48 +18,50 @@ import javax.persistence.Table;
 public class Tl1KeyState {
     @Id
     @GeneratedValue
-    int KEY_STATE_ID;
-    String TID;
-    String SUBNETWORK;
-    String AID;
-    String TX_KEY_STATE;
-    String TX_KEY_BANK_STATE;
-    String RX_KEY_STATE;
-    String RX_KEY_BANK_STATE;
+    int keyStateId;
+    String tid;
+    String subnetwork;
+    String aid;
+    String txKeyState;
+    String txKeyBankState;
+    String rxKeyState;
+    String rxKeyBankState;
+    String syncDate;
 
     public Tl1KeyState() {
     }
 
-    public Tl1KeyState(String TID, String SUBNETWORK, String AID, String TX_KEY_STATE, String TX_KEY_BANK_STATE, String RX_KEY_STATE, String RX_KEY_BANK_STATE) {
-        this.TID = TID;
-        this.SUBNETWORK = SUBNETWORK;
-        this.AID = AID;
-        this.TX_KEY_STATE = TX_KEY_STATE;
-        this.TX_KEY_BANK_STATE = TX_KEY_BANK_STATE;
-        this.RX_KEY_STATE = RX_KEY_STATE;
-        this.RX_KEY_BANK_STATE = RX_KEY_BANK_STATE;
+    public Tl1KeyState(String tid, String subnetwork, String aid, String txKeyState, String txKeyBankState, String rxKeyState, String rxKeyBankState) {
+        this.tid = tid;
+        this.subnetwork = subnetwork;
+        this.aid = aid;
+        this.txKeyState = txKeyState;
+        this.txKeyBankState = txKeyBankState;
+        this.rxKeyState = rxKeyState;
+        this.rxKeyBankState = rxKeyBankState;
     }
 
-    public Tl1KeyState(String[] fields) {
-        this.TID = fields[0];
-        this.SUBNETWORK = fields[1];
-        this.AID = fields[2];
-        this.TX_KEY_STATE = fields[3];
-        this.TX_KEY_BANK_STATE = fields[4];
-        this.RX_KEY_STATE = fields[5];
-        this.RX_KEY_BANK_STATE = fields[6];
+    public Tl1KeyState(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.subnetwork = fields[1];
+        this.aid = fields[2];
+        this.txKeyState = fields[3];
+        this.txKeyBankState = fields[4];
+        this.rxKeyState = fields[5];
+        this.rxKeyBankState = fields[6];
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "KEY_STATE{" +
-                "TID='" + TID + '\'' +
-                ", SUBNETWORK='" + SUBNETWORK + '\'' +
-                ", AID='" + AID + '\'' +
-                ", TX_KEY_STATE='" + TX_KEY_STATE + '\'' +
-                ", TX_KEY_BANK_STATE='" + TX_KEY_BANK_STATE + '\'' +
-                ", RX_KEY_STATE='" + RX_KEY_STATE + '\'' +
-                ", RX_KEY_BANK_STATE='" + RX_KEY_BANK_STATE + '\'' +
+        return "Tl1KeyState{" +
+                "tid='" + tid + '\'' +
+                ", subnetwork='" + subnetwork + '\'' +
+                ", aid='" + aid + '\'' +
+                ", txKeyState='" + txKeyState + '\'' +
+                ", txKeyBankState='" + txKeyBankState + '\'' +
+                ", rxKeyState='" + rxKeyState + '\'' +
+                ", rxKeyBankState='" + rxKeyBankState + '\'' +
                 '}';
     }
 }
