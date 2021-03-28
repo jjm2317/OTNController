@@ -273,7 +273,7 @@ public class Tl1Manager {
             try{
                 ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
                 for(String[] fields : fieldsList) {
-                    tl1PmAcRepository.save(new Tl1PmAc(fields));
+                    tl1PmAcRepository.save(new Tl1PmAc(fields,syncDate));
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();

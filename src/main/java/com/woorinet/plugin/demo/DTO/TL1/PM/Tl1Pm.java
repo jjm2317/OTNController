@@ -37,7 +37,7 @@ public class Tl1Pm {
     public Tl1Pm() {
     }
 
-    public Tl1Pm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date) {
+    public Tl1Pm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
