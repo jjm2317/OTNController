@@ -59,12 +59,13 @@ public class Tl1PmPort {
     String inLossRatio;
     String outLossRatio;
     String date;
+    String syncDate;
 
     public Tl1PmPort() {
 
     }
 
-    public Tl1PmPort(String tid, String systemType, String slot, String port, String time, String inOctets, String inOkPackets, String inUnicastPackets, String inNonUnicastPackets, String inDiscardPackets, String inErrorPackets, String inBroadcastPackets, String inMulticastPackets, String inPackets64Octets, String inPackets65To127Octets, String inPackets128To255Octets, String inPackets256To511Octets, String inPackets512To1023Octets, String inPackets1024To1518Octets, String inPackets1519ToMaxOctets, String inPausePackets, String inAlignmentErrors, String inFcsErrors, String inSymbolErrors, String outOctets, String outOkPackets, String outUnicastPackets, String outNonUnicastPackets, String outDiscardPackets, String outErrorPackets, String outBroadcastPackets, String outMulticastPackets, String outPausePackets, String inRate, String outRate, String inNoPktSec, String outNoPktSec, String inLossRatio, String outLossRatio, String date) {
+    public Tl1PmPort(String tid, String systemType, String slot, String port, String time, String inOctets, String inOkPackets, String inUnicastPackets, String inNonUnicastPackets, String inDiscardPackets, String inErrorPackets, String inBroadcastPackets, String inMulticastPackets, String inPackets64Octets, String inPackets65To127Octets, String inPackets128To255Octets, String inPackets256To511Octets, String inPackets512To1023Octets, String inPackets1024To1518Octets, String inPackets1519ToMaxOctets, String inPausePackets, String inAlignmentErrors, String inFcsErrors, String inSymbolErrors, String outOctets, String outOkPackets, String outUnicastPackets, String outNonUnicastPackets, String outDiscardPackets, String outErrorPackets, String outBroadcastPackets, String outMulticastPackets, String outPausePackets, String inRate, String outRate, String inNoPktSec, String outNoPktSec, String inLossRatio, String outLossRatio, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -105,9 +106,10 @@ public class Tl1PmPort {
         this.inLossRatio = inLossRatio;
         this.outLossRatio = outLossRatio;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
-    public Tl1PmPort(String []fields) {
+    public Tl1PmPort(String []fields, String syncDate) {
         this.tid = fields[0];
         this.systemType = fields[1];
         this.slot = fields[2];
@@ -148,6 +150,7 @@ public class Tl1PmPort {
         this.inLossRatio = fields[37];
         this.outLossRatio = fields[38];
         this.date = fields[39];
+        this.syncDate = syncDate;
     }
 
     @Override
@@ -193,6 +196,7 @@ public class Tl1PmPort {
                 ", inLossRatio='" + inLossRatio + '\'' +
                 ", outLossRatio='" + outLossRatio + '\'' +
                 ", date='" + date + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

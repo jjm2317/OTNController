@@ -312,7 +312,7 @@ public class Tl1Manager {
             try{
                 ArrayList<String[]> fieldsList = convertTxtFileResponse(e);
                 for(String[] fields : fieldsList) {
-                    tl1PmPortRepository.save(new Tl1PmPort(fields));
+                    tl1PmPortRepository.save(new Tl1PmPort(fields, syncDate));
                 }
             } catch (Exception exception) {
                 exception.printStackTrace();
