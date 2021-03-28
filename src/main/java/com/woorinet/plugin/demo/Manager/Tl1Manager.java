@@ -522,7 +522,7 @@ public class Tl1Manager {
             String cmd = "RTRV-CES-NODE-CONNECTOR:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1CesNodeConnectorRepository.save(new Tl1CesNodeConnector(fields));
+                tl1CesNodeConnectorRepository.save(new Tl1CesNodeConnector(fields, syncDate));
             }
         }
     }
