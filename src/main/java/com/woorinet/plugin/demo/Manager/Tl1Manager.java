@@ -617,7 +617,7 @@ public class Tl1Manager {
             String cmd = "RTRV-MSPW:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1MspwRepository.save(new Tl1Mspw(fields));
+                tl1MspwRepository.save(new Tl1Mspw(fields, syncDate));
             }
         }
     }
