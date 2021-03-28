@@ -33,6 +33,7 @@ public class Tl1QkdInfo {
     String keySize;
     String kmsStatus;
     String vendor;
+    String syncDate;
 
     public Tl1QkdInfo() {
     }
@@ -55,7 +56,7 @@ public class Tl1QkdInfo {
         this.vendor = vendor;
     }
 
-    public Tl1QkdInfo(String[] fields) {
+    public Tl1QkdInfo(String[] fields, String syncDate) {
         this.tid = fields[0];
         this.subnet = fields[1];
         this.aid = fields[2];
@@ -71,6 +72,7 @@ public class Tl1QkdInfo {
         this.keySize = fields[12];
         this.kmsStatus = fields[13];
         this.vendor = fields[14];
+        this.syncDate = syncDate;
     }
 
     @Override
