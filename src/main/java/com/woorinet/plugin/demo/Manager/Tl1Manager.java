@@ -500,7 +500,7 @@ public class Tl1Manager {
             String cmd = "RTRV-ETH-PORT:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                tl1EthPortRepository.save(new Tl1EthPort(fields));
+                tl1EthPortRepository.save(new Tl1EthPort(fields, syncDate));
             }
         }
     }

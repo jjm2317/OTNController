@@ -17,125 +17,129 @@ import javax.persistence.Table;
 public class Tl1EthPort {
     @Id
     @GeneratedValue
-    int ETH_PORT_ID;
-    String TID;
-    String AID;
-    String NAME;
-    String DESCR;
-    String STATE;
-    String SPEED;
-    String DUPLEX;
-    String AUTO_NEGO;
-    String TX_FX;
-    String PAUSE_TX;
-    String PAUSE_RX;
-    String MAX_FRAME;
-    String LOOPBACK;
-    String MAX_LEARNING_MAC;
-    String ETH_PTM;
-    String PORT_SHUTDOWN;
-    String TPID_PROF_ID;
-    String LINK_STATUS;
-    String STP_STATE;
-    String TX_STATUS;
-    String COUNTER;
-    String POLL_RATE;
-    String PREPORT_PM;
-    String MOUNITE_NO_PKT;
-    String SD_ENABLE;
-    String SD_TH_COUNT;
+    int ethPortId;
+    String tid;
+    String aid;
+    String name;
+    String descr;
+    String state;
+    String speed;
+    String duplex;
+    String autoNego;
+    String txFx;
+    String pauseTx;
+    String pauseRx;
+    String maxFrame;
+    String loopback;
+    String maxLearningMac;
+    String ethPtm;
+    String portShutdown;
+    String tpidProfId;
+    String linkStatus;
+    String stpState;
+    String txStatus;
+    String counter;
+    String pollRate;
+    String preportPm;
+    String mouniteNoPkt;
+    String sdEnable;
+    String sdThCount;
+    String syncDate;
 
     public Tl1EthPort() {
 
     }
 
-    public Tl1EthPort(String TID, String AID, String NAME, String DESCR, String STATE, String SPEED, String DUPLEX, String AUTO_NEGO, String TX_FX, String PAUSE_TX, String PAUSE_RX, String MAX_FRAME, String LOOPBACK, String MAX_LEARNING_MAC, String ETH_PTM, String PORT_SHUTDOWN, String TPID_PROF_ID, String LINK_STATUS, String STP_STATE, String TX_STATUS, String COUNTER, String POLL_RATE, String PREPORT_PM, String MOUNITE_NO_PKT, String SD_ENABLE, String SD_TH_COUNT) {
-        this.TID = TID;
-        this.AID = AID;
-        this.NAME = NAME;
-        this.DESCR = DESCR;
-        this.STATE = STATE;
-        this.SPEED = SPEED;
-        this.DUPLEX = DUPLEX;
-        this.AUTO_NEGO = AUTO_NEGO;
-        this.TX_FX = TX_FX;
-        this.PAUSE_TX = PAUSE_TX;
-        this.PAUSE_RX = PAUSE_RX;
-        this.MAX_FRAME = MAX_FRAME;
-        this.LOOPBACK = LOOPBACK;
-        this.MAX_LEARNING_MAC = MAX_LEARNING_MAC;
-        this.ETH_PTM = ETH_PTM;
-        this.PORT_SHUTDOWN = PORT_SHUTDOWN;
-        this.TPID_PROF_ID = TPID_PROF_ID;
-        this.LINK_STATUS = LINK_STATUS;
-        this.STP_STATE = STP_STATE;
-        this.TX_STATUS = TX_STATUS;
-        this.COUNTER = COUNTER;
-        this.POLL_RATE = POLL_RATE;
-        this.PREPORT_PM = PREPORT_PM;
-        this.MOUNITE_NO_PKT = MOUNITE_NO_PKT;
-        this.SD_ENABLE = SD_ENABLE;
-        this.SD_TH_COUNT = SD_TH_COUNT;
+    public Tl1EthPort(String tid, String aid, String name, String descr, String state, String speed, String duplex, String autoNego, String txFx, String pauseTx, String pauseRx, String maxFrame, String loopback, String maxLearningMac, String ethPtm, String portShutdown, String tpidProfId, String linkStatus, String stpState, String txStatus, String counter, String pollRate, String preportPm, String mouniteNoPkt, String sdEnable, String sdThCount, String syncDate) {
+        this.tid = tid;
+        this.aid = aid;
+        this.name = name;
+        this.descr = descr;
+        this.state = state;
+        this.speed = speed;
+        this.duplex = duplex;
+        this.autoNego = autoNego;
+        this.txFx = txFx;
+        this.pauseTx = pauseTx;
+        this.pauseRx = pauseRx;
+        this.maxFrame = maxFrame;
+        this.loopback = loopback;
+        this.maxLearningMac = maxLearningMac;
+        this.ethPtm = ethPtm;
+        this.portShutdown = portShutdown;
+        this.tpidProfId = tpidProfId;
+        this.linkStatus = linkStatus;
+        this.stpState = stpState;
+        this.txStatus = txStatus;
+        this.counter = counter;
+        this.pollRate = pollRate;
+        this.preportPm = preportPm;
+        this.mouniteNoPkt = mouniteNoPkt;
+        this.sdEnable = sdEnable;
+        this.sdThCount = sdThCount;
+        this.syncDate = syncDate;
     }
 
-    public Tl1EthPort(String[] fields) {
-        this.TID = fields[0];
-        this.AID = fields[1];
-        this.NAME = fields[2];
-        this.DESCR = fields[3];
-        this.STATE = fields[4];
-        this.SPEED = fields[5];
-        this.DUPLEX = fields[6];
-        this.AUTO_NEGO = fields[7];
-        this.TX_FX = fields[8];
-        this.PAUSE_TX = fields[9];
-        this.PAUSE_RX = fields[10];
-        this.MAX_FRAME = fields[11];
-        this.LOOPBACK = fields[11];
-        this.MAX_LEARNING_MAC = fields[12];
-        this.ETH_PTM = fields[13];
-        this.PORT_SHUTDOWN = fields[14];
-        this.TPID_PROF_ID = fields[15];
-        this.LINK_STATUS = fields[16];
-        this.STP_STATE = fields[17];
-        this.TX_STATUS = fields[18];
-        this.COUNTER = fields[19];
-        this.POLL_RATE = fields[20];
-        this.PREPORT_PM = fields[21];
-        this.MOUNITE_NO_PKT = fields[22];
-        this.SD_ENABLE = fields[23];
-        this.SD_TH_COUNT = fields[24];
+    public Tl1EthPort(String[] fields, String syncDate) {
+        this.tid = fields[0];
+        this.aid = fields[1];
+        this.name = fields[2];
+        this.descr = fields[3];
+        this.state = fields[4];
+        this.speed = fields[5];
+        this.duplex = fields[6];
+        this.autoNego = fields[7];
+        this.txFx = fields[8];
+        this.pauseTx = fields[9];
+        this.pauseRx = fields[10];
+        this.maxFrame = fields[11];
+        this.loopback = fields[11];
+        this.maxLearningMac = fields[12];
+        this.ethPtm = fields[13];
+        this.portShutdown = fields[14];
+        this.tpidProfId = fields[15];
+        this.linkStatus = fields[16];
+        this.stpState = fields[17];
+        this.txStatus = fields[18];
+        this.counter = fields[19];
+        this.pollRate = fields[20];
+        this.preportPm = fields[21];
+        this.mouniteNoPkt = fields[22];
+        this.sdEnable = fields[23];
+        this.sdThCount = fields[24];
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "EthPort{" +
-                "TID='" + TID + '\'' +
-                ", AID='" + AID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", DESCR='" + DESCR + '\'' +
-                ", STATE='" + STATE + '\'' +
-                ", SPEED='" + SPEED + '\'' +
-                ", DUPLEX='" + DUPLEX + '\'' +
-                ", AUTO_NEGO='" + AUTO_NEGO + '\'' +
-                ", TX_FX='" + TX_FX + '\'' +
-                ", PAUSE_TX='" + PAUSE_TX + '\'' +
-                ", PAUSE_RX='" + PAUSE_RX + '\'' +
-                ", MAX_FRAME='" + MAX_FRAME + '\'' +
-                ", LOOPBACK='" + LOOPBACK + '\'' +
-                ", MAX_LEARNING_MAC='" + MAX_LEARNING_MAC + '\'' +
-                ", ETH_PTM='" + ETH_PTM + '\'' +
-                ", PORT_SHUTDOWN='" + PORT_SHUTDOWN + '\'' +
-                ", TPID_PROF_ID='" + TPID_PROF_ID + '\'' +
-                ", LINK_STATUS='" + LINK_STATUS + '\'' +
-                ", STP_STATE='" + STP_STATE + '\'' +
-                ", TX_STATUS='" + TX_STATUS + '\'' +
-                ", COUNTER='" + COUNTER + '\'' +
-                ", POLL_RATE='" + POLL_RATE + '\'' +
-                ", PREPORT_PM='" + PREPORT_PM + '\'' +
-                ", MOUNITE_NO_PKT='" + MOUNITE_NO_PKT + '\'' +
-                ", SD_ENABLE='" + SD_ENABLE + '\'' +
-                ", SD_TH_COUNT='" + SD_TH_COUNT + '\'' +
+        return "Tl1EthPort{" +
+                "tid='" + tid + '\'' +
+                ", aid='" + aid + '\'' +
+                ", name='" + name + '\'' +
+                ", descr='" + descr + '\'' +
+                ", state='" + state + '\'' +
+                ", speed='" + speed + '\'' +
+                ", duplex='" + duplex + '\'' +
+                ", autoNego='" + autoNego + '\'' +
+                ", txFx='" + txFx + '\'' +
+                ", pauseTx='" + pauseTx + '\'' +
+                ", pauseRx='" + pauseRx + '\'' +
+                ", maxFrame='" + maxFrame + '\'' +
+                ", loopback='" + loopback + '\'' +
+                ", maxLearningMac='" + maxLearningMac + '\'' +
+                ", ethPtm='" + ethPtm + '\'' +
+                ", portShutdown='" + portShutdown + '\'' +
+                ", tpidProfId='" + tpidProfId + '\'' +
+                ", linkStatus='" + linkStatus + '\'' +
+                ", stpState='" + stpState + '\'' +
+                ", txStatus='" + txStatus + '\'' +
+                ", counter='" + counter + '\'' +
+                ", pollRate='" + pollRate + '\'' +
+                ", preportPm='" + preportPm + '\'' +
+                ", mouniteNoPkt='" + mouniteNoPkt + '\'' +
+                ", sdEnable='" + sdEnable + '\'' +
+                ", sdThCount='" + sdThCount + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }
