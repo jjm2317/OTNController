@@ -17,117 +17,122 @@ import javax.persistence.Table;
 public class Tl1OduNodeConnector {
     @Id
     @GeneratedValue
-    int ODU_NODE_CONNECTOR_ID;
-    String TID_ID;
-    String TID;
-    String AID;
-    String SUBNET_ID;
-    String SUBNET;
-    String LOCAL_ID;
-    String REQUEST_ID;
-    String NAME;
-    String NUMBER;
-    String PORT_TYPE;
-    String PORT_ROLE;
-    String PORT_STATUS;
-    String SHELF_TYPE;
-    String SHELF_INDEX;
-    String SLOT_TYPE;
-    String SLOT_INDEX;
-    String SUB_SLOT_TYPE;
-    String SUB_SLOT_INDEX;
-    String PORT_TYPE2;
-    String PORT_INDEX;
-    String MAC_ADDR;
-    String SLOT_SERVICE;
-    String MAX_BW;
-    String RES_BW;
+    int oduNodeConnectorId;
+    String tidId;
+    String tid;
+    String aid;
+    String subnetId;
+    String subnet;
+    String localId;
+    String requestId;
+    String name;
+    String number;
+    String portType;
+    String portRole;
+    String portStatus;
+    String shelfType;
+    String shelfIndex;
+    String slotType;
+    String slotIndex;
+    String subSlotType;
+    String subSlotIndex;
+    String portType2;
+    String portIndex;
+    String macAddr;
+    String slotService;
+    String maxBw;
+    String resBw;
+    String syncDate;
 
     public Tl1OduNodeConnector() {
 
     }
 
-    public Tl1OduNodeConnector(String TID_ID, String TID, String AID, String SUBNET_ID, String SUBNET, String LOCAL_ID, String REQUEST_ID, String NAME, String NUMBER, String PORT_TYPE, String PORT_ROLE, String PORT_STATUS, String SHELF_TYPE, String SHELF_INDEX, String SLOT_TYPE, String SLOT_INDEX, String SUB_SLOT_TYPE, String SUB_SLOT_INDEX, String PORT_TYPE2, String PORT_INDEX, String MAC_ADDR, String SLOT_SERVICE, String MAX_BW, String RES_BW) {
-        this.TID_ID = TID_ID;
-        this.TID = TID;
-        this.AID = AID;
-        this.SUBNET_ID = SUBNET_ID;
-        this.SUBNET = SUBNET;
-        this.LOCAL_ID = LOCAL_ID;
-        this.REQUEST_ID = REQUEST_ID;
-        this.NAME = NAME;
-        this.NUMBER = NUMBER;
-        this.PORT_TYPE = PORT_TYPE;
-        this.PORT_ROLE = PORT_ROLE;
-        this.PORT_STATUS = PORT_STATUS;
-        this.SHELF_TYPE = SHELF_TYPE;
-        this.SHELF_INDEX = SHELF_INDEX;
-        this.SLOT_TYPE = SLOT_TYPE;
-        this.SLOT_INDEX = SLOT_INDEX;
-        this.SUB_SLOT_TYPE = SUB_SLOT_TYPE;
-        this.SUB_SLOT_INDEX = SUB_SLOT_INDEX;
-        this.PORT_TYPE2 = PORT_TYPE2;
-        this.PORT_INDEX = PORT_INDEX;
-        this.MAC_ADDR = MAC_ADDR;
-        this.SLOT_SERVICE = SLOT_SERVICE;
-        this.MAX_BW = MAX_BW;
-        this.RES_BW = RES_BW;
+
+    public Tl1OduNodeConnector(String[] fields, String syncDate) {
+        this.tidId = fields[0];
+        this.tid = fields[1];
+        this.aid = fields[2];
+        this.subnetId = fields[3];
+        this.subnet = fields[4];
+        this.localId = fields[5];
+        this.requestId = fields[6];
+        this.name = fields[7];
+        this.number = fields[8];
+        this.portType = fields[9];
+        this.portRole = fields[10];
+        this.portStatus = fields[11];
+        this.shelfType = fields[12];
+        this.shelfIndex = fields[13];
+        this.slotType = fields[14];
+        this.slotIndex = fields[15];
+        this.subSlotType = fields[16];
+        this.subSlotIndex = fields[17];
+        this.portType2 = fields[18];
+        this.portIndex = fields[19];
+        this.macAddr = fields[20];
+        this.slotService = fields[21];
+        this.maxBw = fields[22];
+        this.resBw = fields[23];
+        this.syncDate = syncDate;
     }
 
-    public Tl1OduNodeConnector(String[] fields) {
-        this.TID_ID = fields[0];
-        this.TID = fields[1];
-        this.AID = fields[2];
-        this.SUBNET_ID = fields[3];
-        this.SUBNET = fields[4];
-        this.LOCAL_ID = fields[5];
-        this.REQUEST_ID = fields[6];
-        this.NAME = fields[7];
-        this.NUMBER = fields[8];
-        this.PORT_TYPE = fields[9];
-        this.PORT_ROLE = fields[10];
-        this.PORT_STATUS = fields[11];
-        this.SHELF_TYPE = fields[12];
-        this.SHELF_INDEX = fields[13];
-        this.SLOT_TYPE = fields[14];
-        this.SLOT_INDEX = fields[15];
-        this.SUB_SLOT_TYPE = fields[16];
-        this.SUB_SLOT_INDEX = fields[17];
-        this.PORT_TYPE2 = fields[18];
-        this.PORT_INDEX = fields[19];
-        this.MAC_ADDR = fields[20];
-        this.SLOT_SERVICE = fields[21];
-        this.MAX_BW = fields[22];
-        this.RES_BW = fields[23];
+    public Tl1OduNodeConnector(String tidId, String tid, String aid, String subnetId, String subnet, String localId, String requestId, String name, String number, String portType, String portRole, String portStatus, String shelfType, String shelfIndex, String slotType, String slotIndex, String subSlotType, String subSlotIndex, String portType2, String portIndex, String macAddr, String slotService, String maxBw, String resBw, String syncDate) {
+        this.tidId = tidId;
+        this.tid = tid;
+        this.aid = aid;
+        this.subnetId = subnetId;
+        this.subnet = subnet;
+        this.localId = localId;
+        this.requestId = requestId;
+        this.name = name;
+        this.number = number;
+        this.portType = portType;
+        this.portRole = portRole;
+        this.portStatus = portStatus;
+        this.shelfType = shelfType;
+        this.shelfIndex = shelfIndex;
+        this.slotType = slotType;
+        this.slotIndex = slotIndex;
+        this.subSlotType = subSlotType;
+        this.subSlotIndex = subSlotIndex;
+        this.portType2 = portType2;
+        this.portIndex = portIndex;
+        this.macAddr = macAddr;
+        this.slotService = slotService;
+        this.maxBw = maxBw;
+        this.resBw = resBw;
+        this.syncDate = syncDate;
     }
 
     @Override
     public String toString() {
-        return "OduNodeConnector{" +
-                "TID_ID='" + TID_ID + '\'' +
-                ", TID='" + TID + '\'' +
-                ", AID='" + AID + '\'' +
-                ", SUBNET_ID='" + SUBNET_ID + '\'' +
-                ", SUBNET='" + SUBNET + '\'' +
-                ", LOCAL_ID='" + LOCAL_ID + '\'' +
-                ", REQUEST_ID='" + REQUEST_ID + '\'' +
-                ", NAME='" + NAME + '\'' +
-                ", NUMBER='" + NUMBER + '\'' +
-                ", PORT_TYPE='" + PORT_TYPE + '\'' +
-                ", PORT_ROLE='" + PORT_ROLE + '\'' +
-                ", PORT_STATUS='" + PORT_STATUS + '\'' +
-                ", SHELF_TYPE='" + SHELF_TYPE + '\'' +
-                ", SHELF_INDEX='" + SHELF_INDEX + '\'' +
-                ", SLOT_TYPE='" + SLOT_TYPE + '\'' +
-                ", SLOT_INDEX='" + SLOT_INDEX + '\'' +
-                ", SUB_SLOT_TYPE='" + SUB_SLOT_TYPE + '\'' +
-                ", SUB_SLOT_INDEX='" + SUB_SLOT_INDEX + '\'' +
-                ", PORT_TYPE2='" + PORT_TYPE2 + '\'' +
-                ", PORT_INDEX='" + PORT_INDEX + '\'' +
-                ", MAC_ADDR='" + MAC_ADDR + '\'' +
-                ", SLOT_SERVICE='" + SLOT_SERVICE + '\'' +
-                ", MAX_BW='" + MAX_BW + '\'' +
-                ", RES_BW='" + RES_BW + '\'' +
+        return "Tl1OduNodeConnector{" +
+                "tidId='" + tidId + '\'' +
+                ", tid='" + tid + '\'' +
+                ", aid='" + aid + '\'' +
+                ", subnetId='" + subnetId + '\'' +
+                ", subnet='" + subnet + '\'' +
+                ", localId='" + localId + '\'' +
+                ", requestId='" + requestId + '\'' +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", portType='" + portType + '\'' +
+                ", portRole='" + portRole + '\'' +
+                ", portStatus='" + portStatus + '\'' +
+                ", shelfType='" + shelfType + '\'' +
+                ", shelfIndex='" + shelfIndex + '\'' +
+                ", slotType='" + slotType + '\'' +
+                ", slotIndex='" + slotIndex + '\'' +
+                ", subSlotType='" + subSlotType + '\'' +
+                ", subSlotIndex='" + subSlotIndex + '\'' +
+                ", portType2='" + portType2 + '\'' +
+                ", portIndex='" + portIndex + '\'' +
+                ", macAddr='" + macAddr + '\'' +
+                ", slotService='" + slotService + '\'' +
+                ", maxBw='" + maxBw + '\'' +
+                ", resBw='" + resBw + '\'' +
+                ", syncDate='" + syncDate + '\'' +
                 '}';
     }
 }

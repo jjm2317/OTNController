@@ -533,7 +533,7 @@ public class Tl1Manager {
             String cmd = "RTRV-ODU-NODE-CONNECTOR:" + tl1Node.getTid() + "::" + CTAG + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                Tl1OduNodeConnector tl1OduNodeConnector = new Tl1OduNodeConnector(fields);
+                Tl1OduNodeConnector tl1OduNodeConnector = new Tl1OduNodeConnector(fields,syncDate);
                 tl1OduNodeConnectorRepository.save(tl1OduNodeConnector);
                 tl1OduNodeConnectorList.add(tl1OduNodeConnector);
             }
@@ -871,9 +871,9 @@ public class Tl1Manager {
     public String getSlotIndexByTID(List<Tl1OduNodeConnector> tl1OduNodeConnectorList, String TID) {
         String result = "";
         for(Tl1OduNodeConnector tl1OduNodeConnector : tl1OduNodeConnectorList) {
-            if(!tl1OduNodeConnector.getTID().equals(TID)) continue;
-            if(!tl1OduNodeConnector.getSLOT_TYPE().equals("O208CLU") && !tl1OduNodeConnector.getSLOT_TYPE().equals("O401CLU")) continue;
-            result = tl1OduNodeConnector.getSLOT_INDEX();
+            if(!tl1OduNodeConnector.getTid().equals(TID)) continue;
+            if(!tl1OduNodeConnector.getSlotType().equals("O208CLU") && !tl1OduNodeConnector.getSlotType().equals("O401CLU")) continue;
+            result = tl1OduNodeConnector.getSlotIndex();
             return result;
         }
         return result;
