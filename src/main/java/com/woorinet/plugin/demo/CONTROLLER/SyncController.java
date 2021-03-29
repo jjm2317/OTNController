@@ -219,9 +219,9 @@ public class SyncController {
     private OtnCmQkdLinkRepository otnCmQkdLinkRepository;
 
     @GetMapping("/otn")
-    String convertTL1() {
+    String convertTL1(@RequestParam String syncDate) {
         try {
-            List<Tl1Node> tl1NodeList = tl1NodeRepository.findAll();
+            List<Tl1Node> tl1NodeList = tl1NodeRepository.findTl1NodeBySyncDate(syncDate);
             List<Tl1SystemInfo> tl1SystemInfoList = tl1SystemInfoRepository.findAll();
             List<Tl1OduNodeConnector> tl1OduNodeConnectorList = tl1OduNodeConnectorRepository.findAll();
             List<Tl1Odu> tl1OduList = tl1OduRepository.findAll();
