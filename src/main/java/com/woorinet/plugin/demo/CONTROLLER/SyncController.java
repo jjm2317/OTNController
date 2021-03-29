@@ -224,32 +224,32 @@ public class SyncController {
     String convertTL1(@RequestParam String syncDate) {
         try {
             List<Tl1Node> tl1NodeList = tl1NodeRepository.findTl1NodeBySyncDate(syncDate);
-            List<Tl1SystemInfo> tl1SystemInfoList = tl1SystemInfoRepository.findAll();
-            List<Tl1OduNodeConnector> tl1OduNodeConnectorList = tl1OduNodeConnectorRepository.findAll();
-            List<Tl1Odu> tl1OduList = tl1OduRepository.findAll();
-            List<Tl1OduMplsIf> tl1OduMplsIfList = tl1OduMplsIfRepository.findAll();
-            List<Tl1OpticPower> tl1OpticPowerList = tl1OpticPowerRepository.findAll();
-            List<Tl1Service> tl1ServiceList = tl1ServiceRepository.findAll();
-            List<Tl1AccessIf> tl1AccessIfList = tl1AccessIfRepository.findAll();
-            List<Tl1ServiceExt> tl1ServiceExtList = tl1ServiceExtRepository.findAll();
-            List<Tl1MplsIf> tl1MplsIfList = tl1MplsIfRepository.findAll();
-            List<Tl1Inventory> tl1InventorieList = tl1InventoryRepository.findAll();
-            List<Tl1CmPort> tl1CmPortList = tl1CmPortRepository.findAll();
-            List<Tl1ModuleInfo> tl1ModuleInfoList = tl1ModuleInfoRepository.findAll();
-            List<Tl1BypassInfo> tl1BypassInfoList = tl1BypassInfoRepository.findAll();
-            List<Tl1CmProgramInfo> tl1CmProgramInfoList = tl1CmProgramInfoRepository.findAll();
-            List<Tl1SessState> tl1SessStateList = tl1SessStateRepository.findAll();
-            List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findAll();
-            List<Tl1QkdInfo> tl1QkdInfoList = tl1QkdInfoRepository.findAll();
+            List<Tl1SystemInfo> tl1SystemInfoList = tl1SystemInfoRepository.findTl1SystemInfoBySyncDate(syncDate);
+            List<Tl1OduNodeConnector> tl1OduNodeConnectorList = tl1OduNodeConnectorRepository.findTl1OduNodeConnectorBySyncDate(syncDate);
+            List<Tl1Odu> tl1OduList = tl1OduRepository.findTl1OduBySyncDate(syncDate);
+            List<Tl1OduMplsIf> tl1OduMplsIfList = tl1OduMplsIfRepository.findTl1OduMplsIfBySyncDate(syncDate);
+            List<Tl1OpticPower> tl1OpticPowerList = tl1OpticPowerRepository.findTl1OpticPowerBySyncDate(syncDate);
+            List<Tl1Service> tl1ServiceList = tl1ServiceRepository.findTl1ServiceBySyncDate(syncDate);
+            List<Tl1AccessIf> tl1AccessIfList = tl1AccessIfRepository.findTl1AccessIfBySyncDate(syncDate);
+            List<Tl1ServiceExt> tl1ServiceExtList = tl1ServiceExtRepository.findTl1ServiceExtBySyncDate(syncDate);
+            List<Tl1MplsIf> tl1MplsIfList = tl1MplsIfRepository.findTl1MplsIfBySyncDate(syncDate);
+            List<Tl1Inventory> tl1InventorieList = tl1InventoryRepository.findTl1InventoryBySyncDate(syncDate);
+            List<Tl1CmPort> tl1CmPortList = tl1CmPortRepository.findTl1CmPortBySyncDate(syncDate);
+            List<Tl1ModuleInfo> tl1ModuleInfoList = tl1ModuleInfoRepository.findTl1ModuleInfoBySyncDate(syncDate);
+            List<Tl1BypassInfo> tl1BypassInfoList = tl1BypassInfoRepository.findTl1BypassInfoBySyncDate(syncDate);
+            List<Tl1CmProgramInfo> tl1CmProgramInfoList = tl1CmProgramInfoRepository.findTl1CmProgramInfoBySyncDate(syncDate);
+            List<Tl1SessState> tl1SessStateList = tl1SessStateRepository.findTl1SessStateBySyncDate(syncDate);
+            List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findTl1KeyStateBySyncDate(syncDate);
+            List<Tl1QkdInfo> tl1QkdInfoList = tl1QkdInfoRepository.findTl1QkdInfoBySyncDate(syncDate);
 
-            List<Tl1PmPw> tl1PmPwList = tl1PmPwRepository.findAll();
-            List<Tl1PmTunnel> tl1PmTunnelList = tl1PmTunnelRepository.findAll();
-            List<Tl1PmTemperature> tl1PmTemperatureList = tl1PmTemperatureRepository.findAll();
-            List<Tl1PmAc> tl1PmAcList = tl1PmAcRepository.findAll();
-            List<Tl1PmOptic> tl1PmOpticList = tl1PmOpticRepository.findAll();
-            List<Tl1Pm> tl1PmList = tl1PmRepository.findAll();
-            List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findAll();
-            List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList = tl1PmOpticTemperatureRepository.findAll();
+            List<Tl1PmPw> tl1PmPwList = tl1PmPwRepository.findTl1PmPwBySyncDate(syncDate);
+            List<Tl1PmTunnel> tl1PmTunnelList = tl1PmTunnelRepository.findTl1PmTunnelBySyncDate(syncDate);
+            List<Tl1PmTemperature> tl1PmTemperatureList = tl1PmTemperatureRepository.findTl1PmTemperatureBySyncDate(syncDate);
+            List<Tl1PmAc> tl1PmAcList = tl1PmAcRepository.findTl1PmAcBySyncDate(syncDate);
+            List<Tl1PmOptic> tl1PmOpticList = tl1PmOpticRepository.findTl1PmOpticBySyncDate(syncDate);
+            List<Tl1Pm> tl1PmList = tl1PmRepository.findTl1PmBySyncDate(syncDate);
+            List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findTl1PmPortBySyncDate(syncDate);
+            List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList = tl1PmOpticTemperatureRepository.findTl1PmOpticTemperatureBySyncDate(syncDate);
             OtnManager manager = new OtnManager(
                     otnNodeRepository,
                     otnConnectorRepository,
