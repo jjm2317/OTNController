@@ -13,6 +13,8 @@ import com.woorinet.plugin.demo.Repository.OTN.*;
 import com.woorinet.plugin.demo.Repository.OTN.PM.*;
 import com.woorinet.plugin.demo.Repository.QKD.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
+import com.woorinet.plugin.demo.Repository.TL1.CM.*;
+import com.woorinet.plugin.demo.Repository.TL1.PM.*;
 import com.woorinet.plugin.demo.Repository.TN2.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

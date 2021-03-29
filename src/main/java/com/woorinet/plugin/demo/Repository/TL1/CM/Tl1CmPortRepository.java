@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.Repository.TL1;
+package com.woorinet.plugin.demo.Repository.TL1.CM;
 
 import com.woorinet.plugin.demo.DTO.TL1.CM.Tl1CmPort;
 import org.springframework.data.jpa.repository.JpaRepository;
