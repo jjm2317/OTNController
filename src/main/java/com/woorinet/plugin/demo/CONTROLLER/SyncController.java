@@ -12,19 +12,19 @@ import com.woorinet.plugin.demo.Manager.Tl1Manager;
 import com.woorinet.plugin.demo.Repository.OTN.*;
 import com.woorinet.plugin.demo.Repository.OTN.PM.*;
 import com.woorinet.plugin.demo.Repository.QKD.*;
-import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.Repository.TL1.CM.*;
 import com.woorinet.plugin.demo.Repository.TL1.PM.*;
+import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.Repository.TN2.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(value = "/sync")
 public class SyncController {
     @Autowired
@@ -236,12 +236,11 @@ public class SyncController {
             List<Tl1Inventory> tl1InventorieList = tl1InventoryRepository.findTl1InventoryBySyncDate(syncDate);
             List<Tl1CmPort> tl1CmPortList = tl1CmPortRepository.findTl1CmPortBySyncDate(syncDate);
             List<Tl1ModuleInfo> tl1ModuleInfoList = tl1ModuleInfoRepository.findTl1ModuleInfoBySyncDate(syncDate);
-            List<Tl1BypassInfo> tl1BypassInfoList = tl1BypassInfoRepository.findTl1BypassInfoBySyncDate(syncDate);
+            List<Tl1BypassInfo> tl1BypassInfoList = tl1BypassInfoRepository.findTl1bypassInfoBySyncDate(syncDate);
             List<Tl1CmProgramInfo> tl1CmProgramInfoList = tl1CmProgramInfoRepository.findTl1CmProgramInfoBySyncDate(syncDate);
             List<Tl1SessState> tl1SessStateList = tl1SessStateRepository.findTl1SessStateBySyncDate(syncDate);
             List<Tl1KeyState> tl1KeyStateList = tl1KeyStateRepository.findTl1KeyStateBySyncDate(syncDate);
             List<Tl1QkdInfo> tl1QkdInfoList = tl1QkdInfoRepository.findTl1QkdInfoBySyncDate(syncDate);
-
             List<Tl1PmPw> tl1PmPwList = tl1PmPwRepository.findTl1PmPwBySyncDate(syncDate);
             List<Tl1PmTunnel> tl1PmTunnelList = tl1PmTunnelRepository.findTl1PmTunnelBySyncDate(syncDate);
             List<Tl1PmTemperature> tl1PmTemperatureList = tl1PmTemperatureRepository.findTl1PmTemperatureBySyncDate(syncDate);

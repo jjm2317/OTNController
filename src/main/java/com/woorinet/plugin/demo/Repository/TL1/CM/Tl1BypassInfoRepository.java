@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface Tl1BypassInfoRepository extends JpaRepository<Tl1BypassInfo, Integer> {
-    List<Tl1BypassInfo> findTl1BypassInfoBySyncDate(String syncDate);
+    List<Tl1BypassInfo> findTl1bypassInfoBySyncDate(String syncDate);
 }
