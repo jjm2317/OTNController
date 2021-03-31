@@ -31,12 +31,13 @@ public class OtnNode {
     String vendor;
     String serialNum;
     String sysType;
+    String syncDate;
 
     public OtnNode() {
 
     }
 
-    public OtnNode(int emsId, String neId, String neName, String neType, String neModel, String neStatus, String swVer, String ipAddr, String vendor, String serialNum, String sysType) {
+    public OtnNode(int emsId, String neId, String neName, String neType, String neModel, String neStatus, String swVer, String ipAddr, String vendor, String serialNum, String sysType, String syncDate) {
         this.emsId = emsId;
         this.neId = neId;
         this.neName = neName;
@@ -48,6 +49,7 @@ public class OtnNode {
         this.vendor = vendor;
         this.serialNum = serialNum;
         this.sysType = sysType;
+        this.syncDate = syncDate;
     }
 
     @Override

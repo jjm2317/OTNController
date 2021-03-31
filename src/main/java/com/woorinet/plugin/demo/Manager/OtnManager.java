@@ -90,7 +90,11 @@ public class OtnManager {
     HashMap<String, OtnLink> sdnLinkHashMap = new HashMap<>();
     HashMap<String, OtnService> sdnServiceHashMapForPath = new HashMap<>();
 
-    public OtnManager(OtnNodeRepository otnNodeRepository,
+    String syncDate;
+
+    public OtnManager(
+            String syncDate,
+            OtnNodeRepository otnNodeRepository,
                       OtnConnectorRepository otnConnectorRepository,
                       OtnLinkRepository otnLinkRepository,
                       OtnServiceRepository otnServiceRepository,
@@ -139,6 +143,7 @@ public class OtnManager {
                       List<Tl1PmPort> tl1PmPortList,
                       List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList
     ) throws Exception{
+        this.syncDate = syncDate;
         this.otnNodeRepository = otnNodeRepository;
         this.otnConnectorRepository = otnConnectorRepository;
         this.otnLinkRepository = otnLinkRepository;
@@ -325,7 +330,8 @@ public class OtnManager {
                         tl1NodeState.getIpAddr(), // ip_addr
                         tl1SystemInfo==null? "":tl1SystemInfo.getVendor(), // vendor
                         tl1Inventory==null ? "" : tl1Inventory.getSerialNum(), // serial_num
-                        tl1NodeState.getNodeType() // sys_type
+                        tl1NodeState.getNodeType(), // sys_type
+                        syncDate
                 );
 
                 sdnNodeHashMap.put(tl1NodeState.getTid(), otnNode);
@@ -382,7 +388,8 @@ public class OtnManager {
                         tl1OpticPower == null ? "" : tl1OpticPower.getPartNumber(), // module_name
                         tl1OpticPower == null ? "" : "", // connect_pec
                         tl1OpticPower == null ? "" : tl1OpticPower.getSerial(), // connect_serial
-                        tl1OpticPower == null ? "" : tl1OpticPower.getUnitType() // unit_type
+                        tl1OpticPower == null ? "" : tl1OpticPower.getUnitType(), // unit_type
+                        syncDate
                 );
                 sdnConnectorHashMap.put(tl1OduNodeConnector.getTid() + '/' + tl1OduNodeConnector.getAid(), otnConnector);
                 return otnConnector;
@@ -448,7 +455,8 @@ public class OtnManager {
                         availableBandwidth/32, // available_odu3s
                         availableBandwidth/80, // available_odu4s
                         availableBandwidth/160, // available_odu4cns
-                        -1 // available_oduflexs
+                        -1, // available_oduflexs
+                        syncDate
                 );
 
                 sdnLinkHashMap.put(tl1OduMplsIf.getSrcTid() + '/' + tl1OduMplsIf.getSrcPort() + '-' + tl1OduMplsIf.getDstTid() + '/' + tl1OduMplsIf.getDstPort(), otnLink);
@@ -493,7 +501,8 @@ public class OtnManager {
                         "", // latency
                         tl1OpticPower == null ? "" : tl1OpticPower.getTxWavelength(), // wavelength
                         tl1OduHead.getActivePathStatus(), // active_path
-                        tl1OduHead.getCreationDate() // creation_date
+                        tl1OduHead.getCreationDate(), // creation_date
+                        syncDate
                 );
                 sdnServiceHashMapForPath.put(otnService.getServiceName(), otnService);
                 return otnService;
@@ -536,7 +545,8 @@ public class OtnManager {
                         "", // working_path
                         "", // protection_path
                         "", // service_mapping
-                        tl1Odu.getCreationDate() // creation_date
+                        tl1Odu.getCreationDate(), // creation_date
+                        syncDate
                 );
 
                 return otnTunnel;
@@ -580,6 +590,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
             { // TRANSIT_TO <--> TAIL
@@ -596,6 +607,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
         }
@@ -635,6 +647,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
             { // TRANSIT_TO <--> TAIL
@@ -651,6 +664,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
         }
@@ -673,7 +687,8 @@ public class OtnManager {
                         "", // const_type
                         "PROTECTION TYPE", // const_name
                         tl1Odu_head.getProtType(), // const_value
-                        "" // const_operator
+                        "", // const_operator
+                        syncDate
                 );
 
                 return otnConstraint;
@@ -700,7 +715,8 @@ public class OtnManager {
                         tl1Odu.getService(), // accessif_type
                         tl1MplsIf.getOperationStatus(), // accessif_status
                         "", // service_ref
-                        "" // node_connector_ref
+                        "", // node_connector_ref
+                        syncDate
                 );
 
                 return otnAccessIf;
@@ -725,7 +741,8 @@ public class OtnManager {
                        tl1PmPw.getEgrPackets(),
                        tl1PmPw.getEgrBytes(),
                        tl1PmPw.getEgrRate(),
-                       tl1PmPw.getDate()
+                       tl1PmPw.getDate(),
+                       syncDate
                );
                return otnPmPw;
             });
@@ -748,7 +765,8 @@ public class OtnManager {
                        tl1PmTunnel.getEgrPackets(),
                        tl1PmTunnel.getEgrBytes(),
                        tl1PmTunnel.getEgrRate(),
-                       tl1PmTunnel.getDate()
+                       tl1PmTunnel.getDate(),
+                       syncDate
                );
                return otnPmTunnel;
             });
@@ -766,7 +784,8 @@ public class OtnManager {
                        tl1PmTemperature.getMax(),
                        tl1PmTemperature.getMin(),
                        tl1PmTemperature.getAverage(),
-                       tl1PmTemperature.getDate()
+                       tl1PmTemperature.getDate(),
+                       syncDate
                        );
                return otnPmTemperature;
             });
@@ -789,7 +808,8 @@ public class OtnManager {
                        tl1PmAc.getEgrPackets(),
                        tl1PmAc.getEgrBytes(),
                        tl1PmAc.getEgrRate(),
-                       tl1PmAc.getDate()
+                       tl1PmAc.getDate(),
+                       syncDate
                );
                return otnPmAc;
             });
@@ -811,7 +831,8 @@ public class OtnManager {
                        tl1PmOptic.getTxMinPower(),
                        tl1PmOptic.getTxMaxPower(),
                        tl1PmOptic.getTxAvgPower(),
-                       tl1PmOptic.getDate()
+                       tl1PmOptic.getDate(),
+                       syncDate
                );
                return otnPmOptic;
             });
@@ -835,7 +856,8 @@ public class OtnManager {
                    tl1Pm.getInDiscardPackets(),
                    tl1Pm.getOutErrorPackets(),
                    tl1Pm.getOutDiscardPackets(),
-                   tl1Pm.getDate()
+                   tl1Pm.getDate(),
+                       syncDate
                );
                return otnPm;
             });
@@ -872,7 +894,8 @@ public class OtnManager {
                     tl1PmPort.getOutRate(),
                     tl1PmPort.getInLossRatio(),
                     tl1PmPort.getOutLossRatio(),
-                    tl1PmPort.getDate()
+                    tl1PmPort.getDate(),
+                    syncDate
             );
 
             return otnPmPort;
@@ -890,7 +913,8 @@ public class OtnManager {
                        tl1PmOpticTemperature.getMax(),
                        tl1PmOpticTemperature.getMin(),
                        tl1PmOpticTemperature.getAverage(),
-                       tl1PmOpticTemperature.getDate()
+                       tl1PmOpticTemperature.getDate(),
+                       syncDate
                );
                return otnPmOpticTemperature;
             });
@@ -915,7 +939,8 @@ public class OtnManager {
                     tl1CmProgramInfo.getCpldVersion(),//cpld_version
                     tl1CmProgramInfo.getCpldVersionDate(),//cpld_version_date,
                     tl1CmProgramInfo.getCpldSize(),//cpld_size
-                    tl1CmProgramInfo.getHwVersion()//hw_version
+                    tl1CmProgramInfo.getHwVersion(),//hw_version
+                        syncDate
                 );
 
                 return otnCmInventory;
@@ -945,8 +970,8 @@ public class OtnManager {
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPmidContext()).orElse(""),//pmidContext
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOperationState()).orElse(""),//operationState
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOperationStateReason()).orElse(""),//operationStateReason
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getCryptoMode()).orElse("")//cryptoMode
-
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getCryptoMode()).orElse(""),//cryptoMode
+                        syncDate
                 );
 
                 return otnCmLink;
@@ -994,7 +1019,8 @@ public class OtnManager {
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getCurrentAction()).orElse(""),//bypass_current_action
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerMode()).orElse(""),//bypass_peer_mode
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerAction()).orElse(""),//bypass_peer_action
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerCurrentAction()).orElse("")//bypass_peer_current_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerCurrentAction()).orElse(""),//bypass_peer_current_action
+                        syncDate
                 );
 
                 return otnCmSession;
@@ -1019,7 +1045,8 @@ public class OtnManager {
                         tl1QkdInfo.getKeyIntfGateway(),//key_intf_gateway
                         tl1QkdInfo.getKeySize(),//key_key_size(byte)
                         tl1QkdInfo.getKmsStatus(),//kms_status
-                        tl1QkdInfo.getVendor()//vendor
+                        tl1QkdInfo.getVendor(),//vendor
+                        syncDate
                 );
 
                 return otnCmQkdLink;

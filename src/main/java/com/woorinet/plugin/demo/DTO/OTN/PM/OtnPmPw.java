@@ -34,6 +34,7 @@ public class OtnPmPw {
     String egrBytes;
     String egrRate;
     String date;
+    String syncDate;
 
     public OtnPmPw() {
 
@@ -58,7 +59,7 @@ public class OtnPmPw {
                 '}';
     }
 
-    public OtnPmPw(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
+    public OtnPmPw(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -72,5 +73,6 @@ public class OtnPmPw {
         this.egrBytes = egrBytes;
         this.egrRate = egrRate;
         this.date = date;
+        this.syncDate = syncDate;
     }
 }

@@ -35,11 +35,12 @@ public class OtnPm {
     String outErrorPackets;
     String outDiscardPackets;
     String date;
+    String syncDate;
 
     public OtnPm(){
 
     }
-    public OtnPm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date) {
+    public OtnPm(String tid, String systemType, String slot, String port, String signal, String time, String inErrorPackets, String es, String ses, String uas, String inDiscardPackets, String outErrorPackets, String outDiscardPackets, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -54,6 +55,7 @@ public class OtnPm {
         this.outErrorPackets = outErrorPackets;
         this.outDiscardPackets = outDiscardPackets;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
     @Override

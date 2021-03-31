@@ -29,6 +29,7 @@ public class OtnPmOpticTemperature {
     String min;
     String average;
     String date;
+    String syncDate;
 
     public OtnPmOpticTemperature() {
     }
@@ -47,7 +48,7 @@ public class OtnPmOpticTemperature {
                 '}';
     }
 
-    public OtnPmOpticTemperature(String tid, String systemType, String slot, String time, String max, String min, String average, String date) {
+    public OtnPmOpticTemperature(String tid, String systemType, String slot, String time, String max, String min, String average, String date,String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -56,5 +57,6 @@ public class OtnPmOpticTemperature {
         this.min = min;
         this.average = average;
         this.date = date;
+        this.syncDate = syncDate;
     }
 }

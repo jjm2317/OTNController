@@ -41,12 +41,13 @@ public class OtnConnector {
     String connectPec;
     String connectSerial;
     String unitType;
+    String syncDate;
 
     public OtnConnector() {
 
     }
 
-    public OtnConnector(int emsId, String connectId, String connectName, String connectType, String neId, String neName, String rackId, String shelfId, String slotId, String subslotId, String portId, String connectStatus, String connectRole, String connectIdle, String connectLlcf, String connectLambda, String moduleName, String connectPec, String connectSerial, String unitType) {
+    public OtnConnector(int emsId, String connectId, String connectName, String connectType, String neId, String neName, String rackId, String shelfId, String slotId, String subslotId, String portId, String connectStatus, String connectRole, String connectIdle, String connectLlcf, String connectLambda, String moduleName, String connectPec, String connectSerial, String unitType, String syncDate) {
         this.emsId = emsId;
         this.connectId = connectId;
         this.connectName = connectName;
@@ -67,6 +68,7 @@ public class OtnConnector {
         this.connectPec = connectPec;
         this.connectSerial = connectSerial;
         this.unitType = unitType;
+        this.syncDate = syncDate;
     }
 
     @Override

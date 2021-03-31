@@ -46,11 +46,12 @@ public class OtnCmSession {
     String bypassPeerMode;
     String bypassPeerAction;
     String bypassPeerCurrentAction;
+    String syncDate;
 
     public OtnCmSession() {
     }
 
-    public OtnCmSession(String tid, String slot, String port, String localIp, String remoteIp, String kspMode, String deadTime, String keyLifeTime, String keySrcMode, String keyFailover, String retryReqInterval, String sessionState, String dstLid, String currentTxKeySrcMode, String currentRxKeySrcMode, String txKeyState, String txKeyBankState, String rxKeyState, String rxKeyBankState, String bypassMode, String bypassAction, String bypassCurrentAction, String bypassPeerMode, String bypassPeerAction, String bypassPeerCurrentAction) {
+    public OtnCmSession(String tid, String slot, String port, String localIp, String remoteIp, String kspMode, String deadTime, String keyLifeTime, String keySrcMode, String keyFailover, String retryReqInterval, String sessionState, String dstLid, String currentTxKeySrcMode, String currentRxKeySrcMode, String txKeyState, String txKeyBankState, String rxKeyState, String rxKeyBankState, String bypassMode, String bypassAction, String bypassCurrentAction, String bypassPeerMode, String bypassPeerAction, String bypassPeerCurrentAction, String syncDate) {
         this.tid = tid;
         this.slot = slot;
         this.port = port;
@@ -76,6 +77,7 @@ public class OtnCmSession {
         this.bypassPeerMode = bypassPeerMode;
         this.bypassPeerAction = bypassPeerAction;
         this.bypassPeerCurrentAction = bypassPeerCurrentAction;
+        this.syncDate = syncDate;
     }
 
     @Override

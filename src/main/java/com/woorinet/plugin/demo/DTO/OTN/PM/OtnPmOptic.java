@@ -33,11 +33,12 @@ public class OtnPmOptic {
     String txMaxPower;
     String txAvgPower;
     String date;
+    String syncDate;
 
     public OtnPmOptic() {
     }
 
-    public OtnPmOptic(String tid, String systemType, String slot, String port, String pmType, String rxMinPower, String rxMaxPower, String rxAvgPower, String txMinPower, String txMaxPower, String txAvgPower, String date) {
+    public OtnPmOptic(String tid, String systemType, String slot, String port, String pmType, String rxMinPower, String rxMaxPower, String rxAvgPower, String txMinPower, String txMaxPower, String txAvgPower, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -50,6 +51,7 @@ public class OtnPmOptic {
         this.txMaxPower = txMaxPower;
         this.txAvgPower = txAvgPower;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
     @Override

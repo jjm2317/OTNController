@@ -31,12 +31,13 @@ public class OtnConstraint {
     String constName;
     String constValue;
     String constOperator;
+    String syncDate;
 
     public OtnConstraint() {
 
     }
 
-    public OtnConstraint(int emsId, String serviceId, String constId, String constType, String constName, String constValue, String constOperator) {
+    public OtnConstraint(int emsId, String serviceId, String constId, String constType, String constName, String constValue, String constOperator, String syncDate) {
         this.emsId = emsId;
         this.serviceId = serviceId;
         this.constId = constId;
@@ -44,6 +45,7 @@ public class OtnConstraint {
         this.constName = constName;
         this.constValue = constValue;
         this.constOperator = constOperator;
+        this.syncDate = syncDate;
     }
 
     @Override

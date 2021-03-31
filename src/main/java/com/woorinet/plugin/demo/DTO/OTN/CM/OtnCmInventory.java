@@ -36,11 +36,12 @@ public class OtnCmInventory {
     String cpldVersionDate;
     String cpldSize;
     String hwVersion;
+    String syncDate;
 
     public OtnCmInventory() {
     }
 
-    public OtnCmInventory(String tid, String slot, String unitType, String pkgVersion, String pkgFilename, String pkgVersionDate, String pkgSize, String fpgaVersion, String fpgaVersionDate, String fpgaSize, String cpldVersion, String cpldVersionDate, String cpldSize, String hwVersion) {
+    public OtnCmInventory(String tid, String slot, String unitType, String pkgVersion, String pkgFilename, String pkgVersionDate, String pkgSize, String fpgaVersion, String fpgaVersionDate, String fpgaSize, String cpldVersion, String cpldVersionDate, String cpldSize, String hwVersion, String syncDate) {
         this.tid = tid;
         this.slot = slot;
         this.unitType = unitType;
@@ -55,6 +56,7 @@ public class OtnCmInventory {
         this.cpldVersionDate = cpldVersionDate;
         this.cpldSize = cpldSize;
         this.hwVersion = hwVersion;
+        this.syncDate = syncDate;
     }
 
     @Override

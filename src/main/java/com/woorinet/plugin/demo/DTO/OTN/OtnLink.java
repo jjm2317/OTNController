@@ -57,11 +57,13 @@ public class OtnLink {
     int availableOdu4s;
     int availableOdu4cns;
     int availableOduflexs;
+    String syncDate;
+
     public OtnLink() {
 
     }
 
-    public OtnLink(int emsId, int dstEmsId, String linkId, String linkNm, String srcNeId, String srcNeName, String srcNodeConnectorId, String dstNeId, String dstNeName, String dstNodeConnectorId, String linkType, String linkStatus, String linkCategory, String highOrderTunnel, String latency, String distance, String srlg, String ovpn, String timeslot, String lambda, int maximumOdu0s, int maximumOdu1s, int maximumOdu2s, int maximumOdu2es, int maximumOdu3s, int maximumOdu4s, int maximumOdu4cns, int maximumOduflexs, int availableOdu0s, int availableOdu1s, int availableOdu2s, int availableOdu2es, int availableOdu3s, int availableOdu4s, int availableOdu4cns, int availableOduflexs) {
+    public OtnLink(int emsId, int dstEmsId, String linkId, String linkNm, String srcNeId, String srcNeName, String srcNodeConnectorId, String dstNeId, String dstNeName, String dstNodeConnectorId, String linkType, String linkStatus, String linkCategory, String highOrderTunnel, String latency, String distance, String srlg, String ovpn, String timeslot, String lambda, int maximumOdu0s, int maximumOdu1s, int maximumOdu2s, int maximumOdu2es, int maximumOdu3s, int maximumOdu4s, int maximumOdu4cns, int maximumOduflexs, int availableOdu0s, int availableOdu1s, int availableOdu2s, int availableOdu2es, int availableOdu3s, int availableOdu4s, int availableOdu4cns, int availableOduflexs, String syncDate) {
         this.emsId = emsId;
         this.dstEmsId = dstEmsId;
         this.linkId = linkId;
@@ -98,5 +100,6 @@ public class OtnLink {
         this.availableOdu4s = availableOdu4s;
         this.availableOdu4cns = availableOdu4cns;
         this.availableOduflexs = availableOduflexs;
+        this.syncDate = syncDate;
     }
 }
