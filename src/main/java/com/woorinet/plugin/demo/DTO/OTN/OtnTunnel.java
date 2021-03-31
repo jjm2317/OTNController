@@ -49,11 +49,12 @@ public class OtnTunnel {
     String protectionPath;
     String serviceMapping;
     String creationDate;
+    String syncDate;
 
     public OtnTunnel() {
     }
 
-    public OtnTunnel(int emsId, String tunnelId, String srcNeId, String srcNeName, String dstNeId, String dstNeName, String rateType, String multipleRate, String localId, String requestId, String tunnelName, String tunnelType, String tunnelStatus, String configurationAction, String configurationResultType, String tunnelOamEnabler, String deploymentEnabler, String deploymentStatus, String activePath, String srcNodeRef, String dstNodeRef, String serviceRef, String accessifRef, String protectionType, String workingPath, String protectionPath, String serviceMapping, String creationDate) {
+    public OtnTunnel(int emsId, String tunnelId, String srcNeId, String srcNeName, String dstNeId, String dstNeName, String rateType, String multipleRate, String localId, String requestId, String tunnelName, String tunnelType, String tunnelStatus, String configurationAction, String configurationResultType, String tunnelOamEnabler, String deploymentEnabler, String deploymentStatus, String activePath, String srcNodeRef, String dstNodeRef, String serviceRef, String accessifRef, String protectionType, String workingPath, String protectionPath, String serviceMapping, String creationDate, String syncDate) {
         this.emsId = emsId;
         this.tunnelId = tunnelId;
         this.srcNeId = srcNeId;
@@ -82,6 +83,7 @@ public class OtnTunnel {
         this.protectionPath = protectionPath;
         this.serviceMapping = serviceMapping;
         this.creationDate = creationDate;
+        this.syncDate = syncDate;
     }
 
     @Override

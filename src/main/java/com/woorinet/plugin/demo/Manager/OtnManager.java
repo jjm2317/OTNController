@@ -545,7 +545,8 @@ public class OtnManager {
                         "", // working_path
                         "", // protection_path
                         "", // service_mapping
-                        tl1Odu.getCreationDate() // creation_date
+                        tl1Odu.getCreationDate(), // creation_date
+                        syncDate
                 );
 
                 return otnTunnel;
