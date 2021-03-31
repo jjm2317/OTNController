@@ -840,7 +840,8 @@ public class OtnManager {
                    tl1Pm.getInDiscardPackets(),
                    tl1Pm.getOutErrorPackets(),
                    tl1Pm.getOutDiscardPackets(),
-                   tl1Pm.getDate()
+                   tl1Pm.getDate(),
+                       syncDate
                );
                return otnPm;
             });
