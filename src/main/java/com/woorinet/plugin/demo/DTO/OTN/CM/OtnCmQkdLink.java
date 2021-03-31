@@ -35,11 +35,12 @@ public class OtnCmQkdLink {
     String keySize;
     String kmsStatus;
     String vendor;
+    String syncDate;
 
     public OtnCmQkdLink() {
     }
 
-    public OtnCmQkdLink(String tid, String slot, String port, String server, String serverPort, String masterSaeId, String slaveSaeId, String keyIntfIp, String keyIntfNetmask, String keyIntfGateway, String keySize, String kmsStatus, String vendor) {
+    public OtnCmQkdLink(String tid, String slot, String port, String server, String serverPort, String masterSaeId, String slaveSaeId, String keyIntfIp, String keyIntfNetmask, String keyIntfGateway, String keySize, String kmsStatus, String vendor, String syncDate) {
         this.tid = tid;
         this.slot = slot;
         this.port = port;
@@ -53,6 +54,7 @@ public class OtnCmQkdLink {
         this.keySize = keySize;
         this.kmsStatus = kmsStatus;
         this.vendor = vendor;
+        this.syncDate = syncDate;
     }
 
     @Override

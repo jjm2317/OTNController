@@ -1025,7 +1025,8 @@ public class OtnManager {
                         tl1QkdInfo.getKeyIntfGateway(),//key_intf_gateway
                         tl1QkdInfo.getKeySize(),//key_key_size(byte)
                         tl1QkdInfo.getKmsStatus(),//kms_status
-                        tl1QkdInfo.getVendor()//vendor
+                        tl1QkdInfo.getVendor(),//vendor
+                        syncDate
                 );
 
                 return otnCmQkdLink;
