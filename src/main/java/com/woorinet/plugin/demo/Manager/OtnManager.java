@@ -588,6 +588,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
             { // TRANSIT_TO <--> TAIL
@@ -604,6 +605,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
         }
@@ -643,6 +645,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
             { // TRANSIT_TO <--> TAIL
@@ -659,6 +662,7 @@ public class OtnManager {
                 otnPath.setInstanceType("link");
                 otnPath.setInstanceRef(otnLink.getLinkId());
                 otnPath.setRefType("");
+                otnPath.setSyncDate(syncDate);
                 otnPathRepository.save(otnPath);
             }
         }

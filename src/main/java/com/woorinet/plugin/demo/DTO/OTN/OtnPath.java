@@ -32,12 +32,13 @@ public class OtnPath {
     String instanceType;
     String instanceRef;
     String refType;
+    String syncDate;
 
     public OtnPath() {
 
     }
 
-    public OtnPath(int emsId, String serviceId, String pathType, String connectionIdx, String connectionType, String directionType, String tpType, String instanceType, String instanceRef, String refType) {
+    public OtnPath(int emsId, String serviceId, String pathType, String connectionIdx, String connectionType, String directionType, String tpType, String instanceType, String instanceRef, String refType,String syncDate) {
         this.emsId = emsId;
         this.serviceId = serviceId;
         this.pathType = pathType;
@@ -48,6 +49,7 @@ public class OtnPath {
         this.instanceType = instanceType;
         this.instanceRef = instanceRef;
         this.refType = refType;
+        this.syncDate = syncDate;
     }
 
     @Override
