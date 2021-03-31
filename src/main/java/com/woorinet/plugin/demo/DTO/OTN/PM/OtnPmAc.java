@@ -34,11 +34,12 @@ public class OtnPmAc {
     String egrBytes;
     String egrRate;
     String date;
+    String syncDate;
 
     public OtnPmAc() {
     }
 
-    public OtnPmAc(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date) {
+    public OtnPmAc(String tid, String systemType, String slot, String port, String time, String name, String ingPackets, String ingBytes, String ingRate, String egrPackets, String egrBytes, String egrRate, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -52,6 +53,7 @@ public class OtnPmAc {
         this.egrBytes = egrBytes;
         this.egrRate = egrRate;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
     @Override

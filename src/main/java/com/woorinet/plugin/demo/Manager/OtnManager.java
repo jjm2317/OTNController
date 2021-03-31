@@ -794,7 +794,8 @@ public class OtnManager {
                        tl1PmAc.getEgrPackets(),
                        tl1PmAc.getEgrBytes(),
                        tl1PmAc.getEgrRate(),
-                       tl1PmAc.getDate()
+                       tl1PmAc.getDate(),
+                       syncDate
                );
                return otnPmAc;
             });
