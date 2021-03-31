@@ -1000,7 +1000,8 @@ public class OtnManager {
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getCurrentAction()).orElse(""),//bypass_current_action
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerMode()).orElse(""),//bypass_peer_mode
                         tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerAction()).orElse(""),//bypass_peer_action
-                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerCurrentAction()).orElse("")//bypass_peer_current_action
+                        tl1BypassInfo.map(bypassInfo -> bypassInfo.getPeerCurrentAction()).orElse(""),//bypass_peer_current_action
+                        syncDate
                 );
 
                 return otnCmSession;
