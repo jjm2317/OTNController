@@ -330,7 +330,8 @@ public class OtnManager {
                         tl1NodeState.getIpAddr(), // ip_addr
                         tl1SystemInfo==null? "":tl1SystemInfo.getVendor(), // vendor
                         tl1Inventory==null ? "" : tl1Inventory.getSerialNum(), // serial_num
-                        tl1NodeState.getNodeType() // sys_type
+                        tl1NodeState.getNodeType(), // sys_type
+                        syncDate
                 );
 
                 sdnNodeHashMap.put(tl1NodeState.getTid(), otnNode);
