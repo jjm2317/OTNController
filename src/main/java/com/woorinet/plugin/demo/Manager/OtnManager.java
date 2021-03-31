@@ -898,7 +898,8 @@ public class OtnManager {
                        tl1PmOpticTemperature.getMax(),
                        tl1PmOpticTemperature.getMin(),
                        tl1PmOpticTemperature.getAverage(),
-                       tl1PmOpticTemperature.getDate()
+                       tl1PmOpticTemperature.getDate(),
+                       syncDate
                );
                return otnPmOpticTemperature;
             });
