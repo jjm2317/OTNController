@@ -501,7 +501,8 @@ public class OtnManager {
                         "", // latency
                         tl1OpticPower == null ? "" : tl1OpticPower.getTxWavelength(), // wavelength
                         tl1OduHead.getActivePathStatus(), // active_path
-                        tl1OduHead.getCreationDate() // creation_date
+                        tl1OduHead.getCreationDate(), // creation_date
+                        syncDate
                 );
                 sdnServiceHashMapForPath.put(otnService.getServiceName(), otnService);
                 return otnService;

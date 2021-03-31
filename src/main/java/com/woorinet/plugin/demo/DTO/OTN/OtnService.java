@@ -41,10 +41,12 @@ public class OtnService {
     String wavelength;
     String activePath;
     String creationDate;
+    String syncDate;
+
     public OtnService() {
     }
 
-    public OtnService(int emsId, String serviceId, String srcNeId, String srcNeName, String srcConnectorId, String srcAccessifType, String dstNeId, String dstNeName, String dstConnectorId, String dstAccessifType, String serviceType, String serviceName, String networkType, String serviceStatus, String rateType, String serviceRate, String latency, String wavelength, String activePath, String creationDate) {
+    public OtnService(int emsId, String serviceId, String srcNeId, String srcNeName, String srcConnectorId, String srcAccessifType, String dstNeId, String dstNeName, String dstConnectorId, String dstAccessifType, String serviceType, String serviceName, String networkType, String serviceStatus, String rateType, String serviceRate, String latency, String wavelength, String activePath, String creationDate, String syncDate) {
         this.emsId = emsId;
         this.serviceId = serviceId;
         this.srcNeId = srcNeId;
@@ -65,6 +67,7 @@ public class OtnService {
         this.wavelength = wavelength;
         this.activePath = activePath;
         this.creationDate = creationDate;
+        this.syncDate = syncDate;
     }
 
     @Override
