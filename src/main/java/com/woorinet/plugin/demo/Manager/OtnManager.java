@@ -679,7 +679,8 @@ public class OtnManager {
                         "", // const_type
                         "PROTECTION TYPE", // const_name
                         tl1Odu_head.getProtType(), // const_value
-                        "" // const_operator
+                        "", // const_operator
+                        syncDate
                 );
 
                 return otnConstraint;
