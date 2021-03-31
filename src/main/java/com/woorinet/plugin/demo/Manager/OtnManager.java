@@ -817,7 +817,8 @@ public class OtnManager {
                        tl1PmOptic.getTxMinPower(),
                        tl1PmOptic.getTxMaxPower(),
                        tl1PmOptic.getTxAvgPower(),
-                       tl1PmOptic.getDate()
+                       tl1PmOptic.getDate(),
+                       syncDate
                );
                return otnPmOptic;
             });
