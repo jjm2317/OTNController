@@ -34,11 +34,12 @@ public class OtnCmLink {
     String operationState;
     String operationStateReason;
     String cryptoMode;
+    String syncDate;
 
     public OtnCmLink() {
     }
 
-    public OtnCmLink(String tid, String slot, String port, String unitType, String signal, String mid, String midContext, String pmid, String pmidContext, String operationState, String operationStateReason, String cryptoMode) {
+    public OtnCmLink(String tid, String slot, String port, String unitType, String signal, String mid, String midContext, String pmid, String pmidContext, String operationState, String operationStateReason, String cryptoMode, String syncDate) {
         this.tid = tid;
         this.slot = slot;
         this.port = port;
@@ -51,6 +52,7 @@ public class OtnCmLink {
         this.operationState = operationState;
         this.operationStateReason = operationStateReason;
         this.cryptoMode = cryptoMode;
+        this.syncDate = syncDate;
     }
 
     @Override

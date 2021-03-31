@@ -951,8 +951,8 @@ public class OtnManager {
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getPmidContext()).orElse(""),//pmidContext
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOperationState()).orElse(""),//operationState
                         tl1ModuleInfo.map(moduleInfo -> moduleInfo.getOperationStateReason()).orElse(""),//operationStateReason
-                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getCryptoMode()).orElse("")//cryptoMode
-
+                        tl1ModuleInfo.map(moduleInfo -> moduleInfo.getCryptoMode()).orElse(""),//cryptoMode
+                        syncDate
                 );
 
                 return otnCmLink;
