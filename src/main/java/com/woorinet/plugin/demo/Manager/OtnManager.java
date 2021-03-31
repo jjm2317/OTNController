@@ -772,7 +772,8 @@ public class OtnManager {
                        tl1PmTemperature.getMax(),
                        tl1PmTemperature.getMin(),
                        tl1PmTemperature.getAverage(),
-                       tl1PmTemperature.getDate()
+                       tl1PmTemperature.getDate(),
+                       syncDate
                        );
                return otnPmTemperature;
             });
