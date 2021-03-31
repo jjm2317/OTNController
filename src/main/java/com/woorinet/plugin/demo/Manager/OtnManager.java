@@ -454,7 +454,8 @@ public class OtnManager {
                         availableBandwidth/32, // available_odu3s
                         availableBandwidth/80, // available_odu4s
                         availableBandwidth/160, // available_odu4cns
-                        -1 // available_oduflexs
+                        -1, // available_oduflexs
+                        syncDate
                 );
 
                 sdnLinkHashMap.put(tl1OduMplsIf.getSrcTid() + '/' + tl1OduMplsIf.getSrcPort() + '-' + tl1OduMplsIf.getDstTid() + '/' + tl1OduMplsIf.getDstPort(), otnLink);
