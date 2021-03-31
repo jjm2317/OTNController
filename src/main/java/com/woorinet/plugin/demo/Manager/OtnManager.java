@@ -387,7 +387,8 @@ public class OtnManager {
                         tl1OpticPower == null ? "" : tl1OpticPower.getPartNumber(), // module_name
                         tl1OpticPower == null ? "" : "", // connect_pec
                         tl1OpticPower == null ? "" : tl1OpticPower.getSerial(), // connect_serial
-                        tl1OpticPower == null ? "" : tl1OpticPower.getUnitType() // unit_type
+                        tl1OpticPower == null ? "" : tl1OpticPower.getUnitType(), // unit_type
+                        syncDate
                 );
                 sdnConnectorHashMap.put(tl1OduNodeConnector.getTid() + '/' + tl1OduNodeConnector.getAid(), otnConnector);
                 return otnConnector;
