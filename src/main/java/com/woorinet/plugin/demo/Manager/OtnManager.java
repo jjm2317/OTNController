@@ -880,7 +880,8 @@ public class OtnManager {
                     tl1PmPort.getOutRate(),
                     tl1PmPort.getInLossRatio(),
                     tl1PmPort.getOutLossRatio(),
-                    tl1PmPort.getDate()
+                    tl1PmPort.getDate(),
+                    syncDate
             );
 
             return otnPmPort;

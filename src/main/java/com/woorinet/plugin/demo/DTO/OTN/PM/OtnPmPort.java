@@ -48,12 +48,13 @@ public class OtnPmPort {
     String inLossRatio;
     String outLossRatio;
     String date;
+    String syncDate;
 
     public OtnPmPort() {
 
     }
 
-    public OtnPmPort(String tid, String systemType, String slot, String port, String time, String inOctets, String inOkPackets, String inDiscardPackets, String inErrorPackets, String inPausePackets, String inAlignmentErrors, String inFcsErrors, String inSymbolErrors, String outOctets, String outOkPackets, String outUnicastPackets, String outNonUnicastPackets, String outDiscardPackets, String outErrorPackets, String outBroadcastPackets, String outMulticastPackets, String outPausePackets, String inRate, String outRate, String inLossRatio, String outLossRatio, String date) {
+    public OtnPmPort(String tid, String systemType, String slot, String port, String time, String inOctets, String inOkPackets, String inDiscardPackets, String inErrorPackets, String inPausePackets, String inAlignmentErrors, String inFcsErrors, String inSymbolErrors, String outOctets, String outOkPackets, String outUnicastPackets, String outNonUnicastPackets, String outDiscardPackets, String outErrorPackets, String outBroadcastPackets, String outMulticastPackets, String outPausePackets, String inRate, String outRate, String inLossRatio, String outLossRatio, String date, String syncDate) {
         this.tid = tid;
         this.systemType = systemType;
         this.slot = slot;
@@ -81,6 +82,7 @@ public class OtnPmPort {
         this.inLossRatio = inLossRatio;
         this.outLossRatio = outLossRatio;
         this.date = date;
+        this.syncDate = syncDate;
     }
 
     @Override
