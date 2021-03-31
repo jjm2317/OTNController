@@ -754,7 +754,8 @@ public class OtnManager {
                        tl1PmTunnel.getEgrPackets(),
                        tl1PmTunnel.getEgrBytes(),
                        tl1PmTunnel.getEgrRate(),
-                       tl1PmTunnel.getDate()
+                       tl1PmTunnel.getDate(),
+                       syncDate
                );
                return otnPmTunnel;
             });
