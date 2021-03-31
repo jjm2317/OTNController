@@ -30,12 +30,13 @@ public class OtnAccessIf {
     String accessifStatus;
     String serviceRef;
     String nodeConnectorRef;
+    String syncDate;
 
     public OtnAccessIf() {
 
     }
 
-    public OtnAccessIf(int emsId, String accessifId, String accessifName, String neId, String connectorId, String accessifType, String accessifStatus, String serviceRef, String nodeConnectorRef) {
+    public OtnAccessIf(int emsId, String accessifId, String accessifName, String neId, String connectorId, String accessifType, String accessifStatus, String serviceRef, String nodeConnectorRef, String syncDate) {
         this.emsId = emsId;
         this.accessifId = accessifId;
         this.accessifName = accessifName;
@@ -45,6 +46,7 @@ public class OtnAccessIf {
         this.accessifStatus = accessifStatus;
         this.serviceRef = serviceRef;
         this.nodeConnectorRef = nodeConnectorRef;
+        this.syncDate = syncDate;
     }
 
     @Override

@@ -705,7 +705,8 @@ public class OtnManager {
                         tl1Odu.getService(), // accessif_type
                         tl1MplsIf.getOperationStatus(), // accessif_status
                         "", // service_ref
-                        "" // node_connector_ref
+                        "", // node_connector_ref
+                        syncDate
                 );
 
                 return otnAccessIf;
