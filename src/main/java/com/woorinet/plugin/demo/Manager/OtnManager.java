@@ -90,7 +90,11 @@ public class OtnManager {
     HashMap<String, OtnLink> sdnLinkHashMap = new HashMap<>();
     HashMap<String, OtnService> sdnServiceHashMapForPath = new HashMap<>();
 
-    public OtnManager(OtnNodeRepository otnNodeRepository,
+    String syncDate;
+
+    public OtnManager(
+            String syncDate,
+            OtnNodeRepository otnNodeRepository,
                       OtnConnectorRepository otnConnectorRepository,
                       OtnLinkRepository otnLinkRepository,
                       OtnServiceRepository otnServiceRepository,
@@ -139,6 +143,7 @@ public class OtnManager {
                       List<Tl1PmPort> tl1PmPortList,
                       List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList
     ) throws Exception{
+        this.syncDate = syncDate;
         this.otnNodeRepository = otnNodeRepository;
         this.otnConnectorRepository = otnConnectorRepository;
         this.otnLinkRepository = otnLinkRepository;
@@ -915,7 +920,8 @@ public class OtnManager {
                     tl1CmProgramInfo.getCpldVersion(),//cpld_version
                     tl1CmProgramInfo.getCpldVersionDate(),//cpld_version_date,
                     tl1CmProgramInfo.getCpldSize(),//cpld_size
-                    tl1CmProgramInfo.getHwVersion()//hw_version
+                    tl1CmProgramInfo.getHwVersion(),//hw_version
+                        syncDate
                 );
 
                 return otnCmInventory;

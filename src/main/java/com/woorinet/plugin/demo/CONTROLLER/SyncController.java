@@ -250,6 +250,7 @@ public class SyncController {
             List<Tl1PmPort> tl1PmPortList = tl1PmPortRepository.findTl1PmPortBySyncDate(syncDate);
             List<Tl1PmOpticTemperature> tl1PmOpticTemperatureList = tl1PmOpticTemperatureRepository.findTl1PmOpticTemperatureBySyncDate(syncDate);
             OtnManager manager = new OtnManager(
+                    syncDate,
                     otnNodeRepository,
                     otnConnectorRepository,
                     otnLinkRepository,
