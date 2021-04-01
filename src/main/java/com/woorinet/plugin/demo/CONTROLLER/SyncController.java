@@ -18,7 +18,6 @@ import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.Repository.TN2.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -124,7 +123,7 @@ public class SyncController {
     @GetMapping("/tl1")
     public String getTL1(@RequestParam(required = false) String syncDate) {
         if(syncDate == null || syncDate == "") {
-            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd/HH:00");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date time = new Date();
             syncDate = timeFormat.format(time);
         }
@@ -233,7 +232,7 @@ public class SyncController {
     @GetMapping("/otn")
     public String convertTL1(@RequestParam(required = false) String syncDate) {
         if(syncDate == null || syncDate == "") {
-            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd/HH:00");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date time = new Date();
             syncDate = timeFormat.format(time);
         }
