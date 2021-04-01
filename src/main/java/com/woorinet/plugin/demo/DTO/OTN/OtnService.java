@@ -19,9 +19,10 @@ import javax.persistence.Table;
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OtnService {
-    int emsId;
     @Id
-    @Generated
+    @GeneratedValue
+    String id;
+    int emsId;
     String serviceId;
     String srcNeId;
     String srcNeName;

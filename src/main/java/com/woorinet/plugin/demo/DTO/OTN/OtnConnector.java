@@ -4,11 +4,11 @@ package com.woorinet.plugin.demo.DTO.OTN;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,9 +19,10 @@ import javax.persistence.Table;
 @Table(name="otn_connector")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class OtnConnector {
-    int emsId;
     @Id
-    @Generated
+    @GeneratedValue
+    String id;
+    int emsId;
     String connectId;
     String connectName;
     String connectType;
