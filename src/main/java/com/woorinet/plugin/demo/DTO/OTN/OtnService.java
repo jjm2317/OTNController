@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class OtnService {
     @Id
     @GeneratedValue
-    String id;
+    int id;
     int emsId;
     String serviceId;
     String srcNeId;

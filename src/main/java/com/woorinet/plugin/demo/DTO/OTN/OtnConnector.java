@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class OtnConnector {
     @Id
     @GeneratedValue
-    String id;
+    int id;
     int emsId;
     String connectId;
     String connectName;

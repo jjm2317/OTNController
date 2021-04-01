@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class OtnNode {
     @Id
     @GeneratedValue
-    String id;
+    int id;
     int emsId;
     String neId;
     String neName;

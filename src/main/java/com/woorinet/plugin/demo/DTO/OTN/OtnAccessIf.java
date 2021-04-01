@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class OtnAccessIf {
     @Id
     @GeneratedValue
-    String id;
+    int id;
     int emsId;
     String accessifId;
     String accessifName;

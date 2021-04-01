@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class OtnLink {
     @Id
     @GeneratedValue
-    String id;
+    int id;
     int emsId;
     int dstEmsId;
     String linkId;
