@@ -20,7 +20,7 @@ public class SyncScheduler {
     //@Scheduled(cron = "0 0 3 * * *") // 매일 새벽3시에 돌아가게끔
     @Scheduled(fixedDelay = 1000 * 3600 * 2) // 1초 * 3600 * 2 = 2시간에 한번씩 프로그램 돌
     public void alert() {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd_HH:00");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd_HH");
         Date time = new Date();
         String syncDate = timeFormat.format(time);
 
