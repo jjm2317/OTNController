@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -117,7 +119,12 @@ public class SyncController {
 
 
     @GetMapping("/tl1")
-    String synchronization(@RequestParam String syncDate) {
+    String synchronization(@RequestParam(required = false) String syncDate) {
+        if(syncDate == null || syncDate == "") {
+            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd/HH:00");
+            Date time = new Date();
+            syncDate = timeFormat.format(time);
+        }
         int CTAG = 100;
         try {
             Tl1Manager manager = new Tl1Manager(
@@ -221,7 +228,12 @@ public class SyncController {
     private OtnCmQkdLinkRepository otnCmQkdLinkRepository;
 
     @GetMapping("/otn")
-    String convertTL1(@RequestParam String syncDate) {
+    String convertTL1(@RequestParam(required = false) String syncDate) {
+        if(syncDate == null || syncDate == "") {
+            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd/HH:00");
+            Date time = new Date();
+            syncDate = timeFormat.format(time);
+        }
         try {
             List<Tl1Node> tl1NodeList = tl1NodeRepository.findTl1NodeBySyncDate(syncDate);
             List<Tl1SystemInfo> tl1SystemInfoList = tl1SystemInfoRepository.findTl1SystemInfoBySyncDate(syncDate);

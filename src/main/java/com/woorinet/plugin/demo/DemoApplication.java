@@ -38,7 +38,6 @@ public class DemoApplication {
 		/*
 		스프링 부트가 실행되고 있는 동안에는 계속해서 Event 데이터를 받아서 DB에 저장 하고 있다.
 		*/
-
 		try {
 			String ip = "222.117.54.175";
 			int port = 19012;
