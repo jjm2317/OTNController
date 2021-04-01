@@ -17,6 +17,8 @@ import com.woorinet.plugin.demo.Repository.TL1.PM.*;
 import com.woorinet.plugin.demo.Repository.TL1.*;
 import com.woorinet.plugin.demo.Repository.TN2.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/sync")
+@Component
 public class SyncController {
     @Autowired
     private Tl1NodeRepository tl1NodeRepository;
@@ -119,7 +122,7 @@ public class SyncController {
 
 
     @GetMapping("/tl1")
-    String synchronization(@RequestParam(required = false) String syncDate) {
+    public String getTL1(@RequestParam(required = false) String syncDate) {
         if(syncDate == null || syncDate == "") {
             SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd/HH:00");
             Date time = new Date();
@@ -228,7 +231,7 @@ public class SyncController {
     private OtnCmQkdLinkRepository otnCmQkdLinkRepository;
 
     @GetMapping("/otn")
-    String convertTL1(@RequestParam(required = false) String syncDate) {
+    public String convertTL1(@RequestParam(required = false) String syncDate) {
         if(syncDate == null || syncDate == "") {
             SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd/HH:00");
             Date time = new Date();
