@@ -123,7 +123,7 @@ public class SyncController {
     @GetMapping("/tl1")
     public String getTL1(@RequestParam(required = false) String syncDate) {
         if(syncDate == null || syncDate == "") {
-            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd_HH:00");
             Date time = new Date();
             syncDate = timeFormat.format(time);
         }
@@ -232,7 +232,7 @@ public class SyncController {
     @GetMapping("/otn")
     public String convertTL1(@RequestParam(required = false) String syncDate) {
         if(syncDate == null || syncDate == "") {
-            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd_HH:00");
             Date time = new Date();
             syncDate = timeFormat.format(time);
         }
