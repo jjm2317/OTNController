@@ -414,10 +414,13 @@ public class OtnManager {
                 int maximumBandwidth = Integer.parseInt(tl1OduMplsIf.getMaximumBandwidth());
                 int availableBandwidth = Integer.parseInt(tl1OduMplsIf.getAvailableBandwidth());
 
-                System.out.println(tl1OduMplsIf.getDstTid()+ '/' + tl1OduMplsIf.getDstPort() + " test...... ");
-                String linkId = srcTl1SystemInfo.getVendor() + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
+                String srcVendor = "";
+                String dstVendor = "";
+                if (srcTl1SystemInfo != null)  srcVendor = srcTl1SystemInfo.getVendor();
+                if (dstTl1SystemInfo != null )  dstVendor = dstTl1SystemInfo.getVendor();
+                String linkId = srcVendor + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
                         srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId()
-                        + ":" + dstTl1SystemInfo.getVendor() + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
+                        + ":" + dstVendor + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
                         dstOtnConnector.getShelfId() + separator + dstOtnConnector.getSlotId() + separator + dstOtnConnector.getPortId();
 
                 OtnLink otnLink = new OtnLink(
