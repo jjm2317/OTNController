@@ -1,7 +1,7 @@
 package com.woorinet.plugin.demo.CONTROLLER;
 
-import com.woorinet.plugin.demo.CONFIG.JwtTokenUtil;
-import com.woorinet.plugin.demo.CONFIG.JwtUserDetailsService;
+import com.woorinet.plugin.demo.CONFIG.JWT.JwtTokenUtil;
+import com.woorinet.plugin.demo.CONFIG.JWT.JwtUserDetailsService;
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalMember;
 import lombok.AllArgsConstructor;
 import lombok.Data;

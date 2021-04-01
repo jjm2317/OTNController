@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.CONFIG;
+package com.woorinet.plugin.demo.CONFIG.SWAGGER;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

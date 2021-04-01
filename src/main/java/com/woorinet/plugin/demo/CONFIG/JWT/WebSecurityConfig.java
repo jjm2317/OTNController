@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.CONFIG;
+package com.woorinet.plugin.demo.CONFIG.JWT;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

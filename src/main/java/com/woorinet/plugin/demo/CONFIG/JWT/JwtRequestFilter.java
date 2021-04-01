@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.CONFIG;
+package com.woorinet.plugin.demo.CONFIG.JWT;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.woorinet.plugin.demo.CONFIG;
+package com.woorinet.plugin.demo.CONFIG.JWT;
 
 import com.woorinet.plugin.demo.DTO.PORTAL.PortalMember;
 import com.woorinet.plugin.demo.ROLE.PORTAL.PortalRole;
