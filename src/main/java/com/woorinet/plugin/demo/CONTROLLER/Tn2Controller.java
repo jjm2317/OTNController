@@ -36,7 +36,7 @@ public class Tn2Controller {
     @GetMapping(value = "/linkbook/list")
     @ResponseBody
     public ResponseEntity selectLinkbookList() {
-        if(portalLinkbookRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalLinkbookRepository.findAll() == null) return ResponseEntity.badRequest().build();
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
@@ -135,7 +135,7 @@ public class Tn2Controller {
     @GetMapping(value = "/linkmng/list")
     @ResponseBody
     public ResponseEntity selectLinkmngList() {
-        if(portalLinkmngRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalLinkmngRepository.findAll() == null) return ResponseEntity.badRequest().build();
 
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
@@ -193,7 +193,7 @@ public class Tn2Controller {
     @GetMapping(value = "/trunkusage/list")
     @ResponseBody
     public ResponseEntity selectTrunkUsageList() {
-        if(portalTrunkUsageRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalTrunkUsageRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(portalTrunkUsageRepository.findAll());
     }
 
@@ -201,7 +201,7 @@ public class Tn2Controller {
     @GetMapping(value = "/inventory/list")
     @ResponseBody
     public ResponseEntity selectStatsInventory() {
-        if(portalStatsInventoryRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalStatsInventoryRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
@@ -267,7 +267,7 @@ public class Tn2Controller {
     @GetMapping(value = "/stats/node/list")
     @ResponseBody
     public ResponseEntity selectStatsNode() {
-        if(portalStatsNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalStatsNodeRepository.findAll() == null) return ResponseEntity.badRequest().build();
         PortalStatsNode portalStatsNode = portalStatsNodeRepository.findAll().get(0);
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = new JSONObject();
@@ -290,7 +290,7 @@ public class Tn2Controller {
     @GetMapping(value = "/stats/supplies/list")
     @ResponseBody
     public ResponseEntity selectStatsSupplies() {
-        if(portalStatsSuppliesRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(portalStatsSuppliesRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(portalStatsSuppliesRepository.findAll());
     }
 }

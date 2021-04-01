@@ -38,7 +38,7 @@ public class QkdController {
     @GetMapping(value = "/node")
     @ResponseBody
     public ResponseEntity selectNodeList() {
-        if(qkdNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdNodeRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
@@ -82,7 +82,7 @@ public class QkdController {
     @GetMapping(value = "/service")
     @ResponseBody
     public ResponseEntity selectServiceList() {
-        if(qkdServiceRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdServiceRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
@@ -116,7 +116,7 @@ public class QkdController {
     @GetMapping(value = "/link")
     @ResponseBody
     public ResponseEntity selectQkdLinkList() {
-        if(qkdLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdLinkRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
 
@@ -151,7 +151,7 @@ public class QkdController {
     @GetMapping(value = "/path")
     @ResponseBody
     public ResponseEntity selectQkdPathList() {
-        if(qkdPathRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdPathRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
 
@@ -186,7 +186,7 @@ public class QkdController {
     @GetMapping(value = "/provider_node")
     @ResponseBody
     public ResponseEntity selectQkdProviderNodeList() {
-        if(qkdProviderNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdProviderNodeRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
 
@@ -231,7 +231,7 @@ public class QkdController {
     @GetMapping(value = "/provider_link")
     @ResponseBody
     public ResponseEntity selectQkdProviderLinkList() {
-        if(qkdProviderLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdProviderLinkRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
 
@@ -264,7 +264,7 @@ public class QkdController {
     @GetMapping(value = "/app_node")
     @ResponseBody
     public ResponseEntity selectQkdAppNodeList() {
-        if(qkdAppNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdAppNodeRepository.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
 
@@ -307,7 +307,7 @@ public class QkdController {
     @GetMapping(value = "/app_link")
     @ResponseBody
     public ResponseEntity selectQkdAppLinkList() {
-        if(qkdAppLinkRepositroy.findAll() == null) return ResponseEntity.notFound().build();
+        if(qkdAppLinkRepositroy.findAll() == null) return ResponseEntity.badRequest().build();
         JSONArray jsonArray = new JSONArray();
         JSONParser parser = new JSONParser();
 

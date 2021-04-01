@@ -34,7 +34,7 @@ public class OtnController {
     @GetMapping(value = "/node/list")
     @ResponseBody
     public ResponseEntity selectNodeList() {
-        if(otnNodeRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnNodeRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnNodeRepository.findAll());
     }
 
@@ -42,7 +42,7 @@ public class OtnController {
     @GetMapping(value = "/node")
     @ResponseBody
     public ResponseEntity selectNode(@RequestParam String neId) {
-        if(otnNodeRepository.findOtnNodeByNeId(neId) == null)  return ResponseEntity.notFound().build();
+        if(otnNodeRepository.findOtnNodeByNeId(neId) == null)  return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnNodeRepository.findOtnNodeByNeId(neId));
     }
 
@@ -50,7 +50,7 @@ public class OtnController {
     @GetMapping(value = "/connector/list")
     @ResponseBody
     public ResponseEntity selectConnectorList() {
-        if(otnConnectorRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnConnectorRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnConnectorRepository.findAll());
     }
 
@@ -58,7 +58,7 @@ public class OtnController {
     @GetMapping(value = "/connector")
     @ResponseBody
     public ResponseEntity selectConnector(@RequestParam String connectId) {
-        if(otnConnectorRepository.findOtnConnectorByConnectId(connectId) == null) return ResponseEntity.notFound().build();
+        if(otnConnectorRepository.findOtnConnectorByConnectId(connectId) == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnConnectorRepository.findOtnConnectorByConnectId(connectId));
     }
 
@@ -66,7 +66,7 @@ public class OtnController {
     @GetMapping(value = "/link/list")
     @ResponseBody
     public ResponseEntity selectLinkList() {
-        if(otnLinkRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnLinkRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnLinkRepository.findAll());
     }
 
@@ -74,7 +74,7 @@ public class OtnController {
     @GetMapping(value = "/link")
     @ResponseBody
     public ResponseEntity selectLink(@RequestParam String linkId) {
-        if(otnLinkRepository.findOtnLinkByLinkId(linkId) == null) return ResponseEntity.notFound().build();
+        if(otnLinkRepository.findOtnLinkByLinkId(linkId) == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnLinkRepository.findOtnLinkByLinkId(linkId));
     }
 
@@ -82,7 +82,7 @@ public class OtnController {
     @GetMapping(value = "/tunnel/list")
     @ResponseBody
     public ResponseEntity selectTunnelList() {
-        if(otnTunnelRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnTunnelRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnTunnelRepository.findAll());
     }
 
@@ -90,7 +90,7 @@ public class OtnController {
     @GetMapping(value = "/tunnel")
     @ResponseBody
     public ResponseEntity selectTunnel(@RequestParam String tunnelId) {
-        if(otnTunnelRepository.findOtnTunnelByTunnelId(tunnelId) == null) return ResponseEntity.notFound().build();
+        if(otnTunnelRepository.findOtnTunnelByTunnelId(tunnelId) == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnTunnelRepository.findOtnTunnelByTunnelId(tunnelId));
     }
 
@@ -98,7 +98,7 @@ public class OtnController {
     @GetMapping(value = "/service/list")
     @ResponseBody
     public ResponseEntity selectServiceList() {
-        if(otnServiceRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnServiceRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnServiceRepository.findAll());
     }
 
@@ -106,7 +106,7 @@ public class OtnController {
     @GetMapping(value = "/service")
     @ResponseBody
     public ResponseEntity selectService(@RequestParam String serviceId) {
-        if(otnServiceRepository.findOtnServiceByServiceId(serviceId) == null) return ResponseEntity.notFound().build();
+        if(otnServiceRepository.findOtnServiceByServiceId(serviceId) == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnServiceRepository.findOtnServiceByServiceId(serviceId));
     }
 
@@ -114,7 +114,7 @@ public class OtnController {
     @GetMapping(value = "/path/list")
     @ResponseBody
     public ResponseEntity selectPathList() {
-        if(otnPathRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnPathRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnPathRepository.findAll());
     }
 
@@ -123,10 +123,10 @@ public class OtnController {
     @ResponseBody
     public ResponseEntity selectPath(@RequestParam(required = false, defaultValue = "0") int id , @RequestParam(required = false) String serviceId) {
         if (id != 0) {
-            if (otnPathRepository.findOtnPathById(id) == null) return ResponseEntity.notFound().build();
+            if (otnPathRepository.findOtnPathById(id) == null) return ResponseEntity.badRequest().build();
             return ResponseEntity.ok(otnPathRepository.findOtnPathById(id));
         }
-        if (otnPathRepository.findOtnPathByServiceId(serviceId) == null)  return ResponseEntity.notFound().build();
+        if (otnPathRepository.findOtnPathByServiceId(serviceId) == null)  return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnPathRepository.findOtnPathByServiceId(serviceId));
     }
 
@@ -134,7 +134,7 @@ public class OtnController {
     @GetMapping(value = "/constraint/list")
     @ResponseBody
     public ResponseEntity selectConstraintList() {
-        if(otnConstraintRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnConstraintRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnConstraintRepository.findAll());
     }
 
@@ -143,10 +143,10 @@ public class OtnController {
     @ResponseBody
     public ResponseEntity selectConstraint(@RequestParam(required = false, defaultValue = "0") int id, @RequestParam(required = false) String serviceId) {
         if(id != 0) {
-            if (otnConstraintRepository.findOtnConstraintById(id) == null) return ResponseEntity.notFound().build();
+            if (otnConstraintRepository.findOtnConstraintById(id) == null) return ResponseEntity.badRequest().build();
             return ResponseEntity.ok(otnConstraintRepository.findOtnConstraintById(id));
         }
-        if(otnConstraintRepository.findSdnConstraintByServiceId(serviceId) == null) return ResponseEntity.notFound().build();
+        if(otnConstraintRepository.findSdnConstraintByServiceId(serviceId) == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnConstraintRepository.findSdnConstraintByServiceId(serviceId));
     }
 
@@ -154,7 +154,7 @@ public class OtnController {
     @GetMapping(value = "/accessif/list")
     @ResponseBody
     public ResponseEntity selectAccessIfList() {
-        if(otnAccessIfRepository.findAll() == null) return ResponseEntity.notFound().build();
+        if(otnAccessIfRepository.findAll() == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnAccessIfRepository.findAll());
     }
 
@@ -162,7 +162,7 @@ public class OtnController {
     @GetMapping(value = "/accessif")
     @ResponseBody
     public ResponseEntity selectAccessIf(@RequestParam String accessifId) {
-        if(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId) == null) return ResponseEntity.notFound().build();
+        if(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId) == null) return ResponseEntity.badRequest().build();
         return ResponseEntity.ok(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId));
     }
 
