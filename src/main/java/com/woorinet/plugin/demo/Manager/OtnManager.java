@@ -414,6 +414,7 @@ public class OtnManager {
                 int maximumBandwidth = Integer.parseInt(tl1OduMplsIf.getMaximumBandwidth());
                 int availableBandwidth = Integer.parseInt(tl1OduMplsIf.getAvailableBandwidth());
 
+                System.out.println(tl1OduMplsIf.getDstTid()+ '/' + tl1OduMplsIf.getDstPort() + " test...... ");
                 String linkId = srcTl1SystemInfo.getVendor() + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
                         srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId()
                         + ":" + dstTl1SystemInfo.getVendor() + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
