@@ -17,7 +17,7 @@ public class SyncScheduler {
     SyncController syncController;
     private static Logger logger = LoggerFactory.getLogger(SyncScheduler.class);
 
-    @Scheduled(cron = "0 0 3 * * *") // 1초 * 3600 * 24 = 1일에 한번씩
+    @Scheduled(cron = "0 0 3 * * *") // 매일 새벽3시에 돌아가게끔
     public void alert() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd/HH:00");
         Date time = new Date();
