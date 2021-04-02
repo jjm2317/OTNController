@@ -166,9 +166,5 @@ public class OtnController {
         return ResponseEntity.ok(otnAccessIfRepository.findOtnAccessIfByAccessifId(accessifId));
     }
 
-    @GetMapping(value = "/test")
-    public void test() {
-        System.out.println(otnConnectorRepository.findUnitTypes() + "...test" );
-    }
 }
 

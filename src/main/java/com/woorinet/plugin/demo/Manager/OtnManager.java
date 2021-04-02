@@ -271,9 +271,6 @@ public class OtnManager {
 
         Stream<Tl1KeyState> tl1KeyStateStream = tl1KeyStateList.stream();
         tl1KeyStateStream.forEach(keystate -> tl1KeyStateHashMap.put(keystate.getAid(), keystate));
-        for (Map.Entry<String, Tl1KeyState> entry : tl1KeyStateHashMap.entrySet()) {
-            System.out.println(entry.getKey()+" : "+entry.getValue());
-        }
     }
 
     public void OtnSyncStart() throws Exception {
@@ -1009,7 +1006,6 @@ public class OtnManager {
                 Optional<Tl1BypassInfo> tl1BypassInfo = tl1BypassInfoList.stream()
                     .filter(bypassInfo -> bypassInfo.getTid().equals(tl1SessState.getTid())
                             && bypassInfo.getAid().equals(slot + "-" + port)).findAny();
-                System.out.println(tl1KeyState + slot + port + tl1BypassInfo + ",....test");
                 OtnCmSession otnCmSession = new OtnCmSession(
                         tl1SessState.getTid(),//tid
                         slot,//slot

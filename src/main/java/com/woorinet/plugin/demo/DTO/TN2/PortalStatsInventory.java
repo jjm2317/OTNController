@@ -103,7 +103,6 @@ public class PortalStatsInventory {
 
             String[] result = {mapper.writerWithDefaultPrettyPrinter().writeValueAsString(firstRemarks), mapper.writerWithDefaultPrettyPrinter().writeValueAsString(secondRemarks)};
             this.remarksList = Arrays.toString(result);
-            System.out.println(this.remarksList);
         } catch (Exception e) {
             e.printStackTrace();
         }

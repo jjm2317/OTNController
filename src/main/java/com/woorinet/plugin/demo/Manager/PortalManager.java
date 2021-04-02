@@ -263,7 +263,6 @@ public class PortalManager {
             });
 
         portalLinkmngStream.forEach(item -> {
-            System.out.println(item);
             portalLinkmngRepository.save(item);
         });
     }
@@ -323,7 +322,6 @@ public class PortalManager {
         );
         String[] mountingStatusFields = {"", "", "", ""};
         portalStatsNode.setMountingStatus(portalStatsNode.getMountingStatusRef(mountingStatusFields));
-        System.out.println(portalStatsNode.getMountingStatus() + "....test");
         portalStatsNodeRepository.save(portalStatsNode);
     }
 

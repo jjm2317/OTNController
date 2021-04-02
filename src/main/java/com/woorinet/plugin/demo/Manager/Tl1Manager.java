@@ -734,7 +734,6 @@ public class Tl1Manager {
             String cmd = "RTRV-OPTIC-POWER:" + tl1Node.getTid() + ";";
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields : fieldsList) {
-                System.out.println(fields);
                 tl1OpticPowerRepository.save(new Tl1OpticPower(fields, syncDate));
             }
         }
@@ -742,10 +741,8 @@ public class Tl1Manager {
     public void TL1SyncInventory() throws  Exception {
         for (Tl1Node tl1Node : tl1NodeList) {
             String cmd = "RTRV-INVENTORY:" + tl1Node.getTid() +";";
-            System.out.println(cmd);
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
                 tl1InventoryRepository.save(new Tl1Inventory(fields,syncDate));
             }
         }
@@ -760,7 +757,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1SessStateRepository.save(new Tl1SessState(fields, syncDate));
             }
         }
@@ -775,7 +772,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1KeyStateRepository.save(new Tl1KeyState(fields,syncDate));
             }
         }
@@ -790,7 +787,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1ModuleInfoRepository.save(new Tl1ModuleInfo(fields,syncDate));
             }
         }
@@ -805,7 +802,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1CmPortRepository.save(new Tl1CmPort(fields,syncDate));
             }
         }
@@ -820,7 +817,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1BypassInfoRepository.save(new Tl1BypassInfo(fields, syncDate));
             }
         }
@@ -835,7 +832,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1CryptoModeRepository.save(new Tl1CryptoMode(fields,syncDate));
             }
         }
@@ -850,7 +847,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1CmProgramInfoRepository.save(new Tl1CmProgramInfo(fields,syncDate));
             }
         }
@@ -865,7 +862,7 @@ public class Tl1Manager {
 
             ArrayList<String[]> fieldsList = ConvertResponse(ExecuteCmd(cmd));
             for (String[] fields: fieldsList) {
-                System.out.println(fields);
+
                 tl1QkdInfoRepository.save(new Tl1QkdInfo(fields, syncDate));
             }
         }
@@ -899,7 +896,6 @@ public class Tl1Manager {
 
         byteBuffer = charset.encode(cmd);
         socketChannel.write(byteBuffer);
-        System.out.println("Send Data: " + cmd);
         byteBuffer.flip();
         byteBuffer = ByteBuffer.allocate(1024);
         String bufferStr = "";
@@ -924,10 +920,8 @@ public class Tl1Manager {
         for (String line: convData1) {
             if (line.startsWith("   TL1ADAPTER")) {
                 // Filter TL1ADAPTER
-                System.out.println("TL1ADAPTER");
             } else if (line.startsWith("M")) {
                 // Filter Response info
-                System.out.println("INFO: " + line);
             } else if (line.contains("/*") && line.contains("*/")) {
                 // Filter comment
                 line = line.replace("/*", "");
@@ -936,18 +930,15 @@ public class Tl1Manager {
                 String[] columns = line.split(",");
                 for (String column: columns ) {
                     keyList.add(column.trim());
-                    System.out.println("column: " + column.trim());
                 }
             }else if (line.contains("\"")) {
                 //Filter Data
                 line = line.replace("\"", "");
-                System.out.println(line);
 
                 String[] fields = line.split(",");
                 for (int j=0; j<fields.length; j++) {
                     fields[j] = fields[j].trim();
                 }
-                System.out.println("line: " + fields.length);
                 result.add(fields);
             }
         }
@@ -960,7 +951,6 @@ public class Tl1Manager {
         if(!hasDate) return result;
 
         //Fix result : num of key list  != num of value list (caused by DATE value)
-        System.out.println("datevalue start");
         for( int r=0 ;r< result.size(); r++ ) {
             String []rowValue = result.get(r);
 
@@ -995,10 +985,8 @@ public class Tl1Manager {
         for (String line: convData1) {
             if (line.startsWith("   TL1ADAPTER")) {
                 // Filter TL1ADAPTER
-                System.out.println("TL1ADAPTER");
             } else if (line.startsWith("M")) {
                 // Filter Response info
-                System.out.println("INFO: " + line);
             } else if (line.contains("/*") && line.contains("*/")) {
                 // Filter comment
                 line = line.replace("/*", "");
@@ -1006,12 +994,10 @@ public class Tl1Manager {
 
                 String[] columns = line.split(",");
                 for (String column : columns) {
-                    System.out.println("column: " + column.trim());
                 }
             } else if (line.contains("\"")) {
                 //Filter Data
                 line = line.replace("\"", "");
-                System.out.println(line);
 
                 String[] values = line.split("=");
                 result.put(values[0].trim(), values[1].trim());

@@ -69,7 +69,6 @@ public class DemoApplication {
 						Tl1EventAlm tl1EventAlm = new Tl1EventAlm(fields);
 						tl1EventAlmRepository.save(tl1EventAlm);
 					}
-					System.out.println(result);
 				}
 
 			}

@@ -103,7 +103,6 @@ public class QkdManager {
                 })
                 .block();
 
-        System.out.println("response: " + response);
 
     }
 
