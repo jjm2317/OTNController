@@ -369,80 +369,113 @@ public class Tl1Manager {
     }
     public void TL1SyncStart() throws IOException {
         try {
-            //TL1 로그인
+            String tl1 = "TL1";
             Tl1Login("admin", "admin");
-            //Node DB연동
+            System.out.println(tl1+" Node sync start");
             Tl1SyncNodeList();
+            System.out.println(tl1+" Node sync end");
+            System.out.println(tl1+" OduNodeConnector sync start");
             Tl1SyncOduNodeConnector();
+            System.out.println(tl1+" OduNodeConnector sync end");
+            System.out.println(tl1+" CmProgramInfo sync start");
             TL1SyncCmProgramInfo();
-            //SystemInfo DB연동
+            System.out.println(tl1+" CmProgramInfo sync end");
+            System.out.println(tl1+" SystemInfo sync start");
             Tl1SyncSystemInfo();
-            //Slot DB연동
+            System.out.println(tl1+" SystemInfo sync end");
+            System.out.println(tl1+" Slot sync start");
             Tl1SyncSlot();
-            //EthPort DB연동
+            System.out.println(tl1+" Slot sync end");
+            System.out.println(tl1+" EthPort sync start");
             Tl1SyncEthPort();
-            //NodeConnector DB연동
+            System.out.println(tl1+" EthPort sync end");
+            System.out.println(tl1+" NodeConnector sync start");
             Tl1SyncNodeConnector();
-            //CesNodeConnector DB연동
+            System.out.println(tl1+" NodeConnector sync end");
+            System.out.println(tl1+" CesNodeConnector sync start");
             Tl1SyncCesNodeConnector();
-            //OduNodeConnector DB연동
+            System.out.println(tl1+" CesNodeConnector sync end");
+            System.out.println(tl1+" OduNodeConnector sync start");
             Tl1SyncOduNodeConnector();
-            //MPLS_IF DB연동
+            System.out.println(tl1+" OduNodeConnector sync end");
+            System.out.println(tl1+" MplsIf sync start");
             Tl1SyncMplsIf();
-            //ODU_MPLS_IF DB연동
+            System.out.println(tl1+" MplsIf sync end");
+            System.out.println(tl1+" OduMplsIf sync start");
             Tl1SyncOduMplsIf();
-            //STUNNEL DB연동
+            System.out.println(tl1+" OduMplsIf sync end");
+            System.out.println(tl1+" STunnel sync start");
             Tl1SyncSTunnel();
-            //STUNNEL_EXT DB연동
+            System.out.println(tl1+" STunnel sync end");
+            System.out.println(tl1+" STunnelExt sync start");
             Tl1SyncSTunnelExt();
-            //STUNNEL_TRANSIT DB연동
-            //Tl1SyncSTunnelTransit();
-            //TUNNEL_PROT DB연동
-            Tl1SyncTunnelProt();
-            //SPW DB연동
+            System.out.println(tl1+" STunnelExt sync end");
+            System.out.println(tl1+" Spw sync start");
             Tl1SyncSpw();
-            //MSPW DB연동
+            System.out.println(tl1+" Spw sync end");
+            System.out.println(tl1+" MSpw sync start");
             Tl1SyncMSpw();
-            //MPLS_AC DB연동
+            System.out.println(tl1+" MSpw sync end");
+            System.out.println(tl1+" MplsAc sync start");
             Tl1SyncMplsAc();
-            //ACCESS_IF DB연동
+            System.out.println(tl1+" MplsAc sync end");
+            System.out.println(tl1+" AccessIf sync start");
             Tl1SyncAccessIf();
-            //SERVICE DB연동
+            System.out.println(tl1+" AccessIf sync end");
+            System.out.println(tl1+" Service sync start");
             Tl1SyncService();
-            //SERVICE_EXT DB연동
+            System.out.println(tl1+" Service sync end");
+            System.out.println(tl1+" ServiceExt sync start");
             Tl1SyncServiceExt();
-            //SERVICE_TUNNEL DB연동
+            System.out.println(tl1+" ServiceExt sync end");
+            System.out.println(tl1+" ServiceTunnel sync start");
             Tl1SyncServiceTunnel();
-            //SERVICE_MSPW DB연동
+            System.out.println(tl1+" ServiceTunnel sync end");
+            System.out.println(tl1+" ServiceMspw sync start");
             Tl1SyncServiceMspw();
-            //ODU DB연동
+            System.out.println(tl1+" ServiceMspw sync end");
+            System.out.println(tl1+" Odu sync start");
             Tl1SyncOdu();
-            //CES_PORT DB연동
+            System.out.println(tl1+" Odu sync end");
+            System.out.println(tl1+" CesPort sync start");
             Tl1SyncCesPort();
-            //CES_PW DB연동
+            System.out.println(tl1+" CesPort sync end");
+            System.out.println(tl1+" CesPw sync start");
             Tl1SyncCesPw();
-            //L2Lacp DB연동
+            System.out.println(tl1+" CesPw sync end");
+            System.out.println(tl1+" L2Lacp sync start");
             Tl1SyncL2Lacp();
-            //OPTIC-POWER DB연동
+            System.out.println(tl1+" L2Lacp sync end");
+            System.out.println(tl1+" OpticPower sync start");
             Tl1SyncOPTICPOWER();
-            //INVENTORY DB연동
+            System.out.println(tl1+" OpticPower sync end");
+            System.out.println(tl1+" Inventory sync start");
             TL1SyncInventory();
-            //SESS_STATE DB연동
+            System.out.println(tl1+" Inventory sync end");
+            System.out.println(tl1+" SessState sync start");
             TL1SyncSessState();
-            //KEY_STATE DB연동
+            System.out.println(tl1+" SessState sync end");
+            System.out.println(tl1+" KeyState sync start");
             TL1SyncKeyState();
-            //MODULE_INFO DB연동
+            System.out.println(tl1+" KeyState sync end");
+            System.out.println(tl1+" ModuleInfo sync start");
             TL1SyncModuleInfo();
-            //CM_PORT DB연동
+            System.out.println(tl1+" ModuleInfo sync end");
+            System.out.println(tl1+" CmPort sync start");
             TL1SyncCmPort();
-            //BYPASS_INFO DB연동
+            System.out.println(tl1+" CmPort sync end");
+            System.out.println(tl1+" BypassInfo sync start");
             TL1SyncBypassInfo();
-            //CRYPTO_MODE DB연동
+            System.out.println(tl1+" BypassInfo sync end");
+            System.out.println(tl1+" CryptoMode sync start");
             TL1SyncCryptoMode();
-            //CM_PROGRAM_INFO DB연동
+            System.out.println(tl1+" CryptoMode sync end");
+            System.out.println(tl1+" CmProgramInfo sync start");
             TL1SyncCmProgramInfo();
-            // QKD_INFO DB연동
+            System.out.println(tl1+" CmProgramInfo sync end");
+            System.out.println(tl1+" QkdInfo sync start");
             TL1SyncQkdInfo();
+            System.out.println(tl1+" QkdInfo sync end");
             //TL1 로그아웃
             Tl1Logout("admin");
         } catch (Exception e) {
