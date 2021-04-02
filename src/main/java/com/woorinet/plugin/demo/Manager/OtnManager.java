@@ -434,10 +434,10 @@ public class OtnManager {
                         tl1OduMplsIf.getName(), // link_nm
                         srcOtnNode.getNeId(), // src_ne_id
                         srcOtnNode.getNeName(), // src_ne_name
-                        srcOtnConnector.getConnectId(), // src_node_connector_id
+                        srcOtnConnector == null ? "":srcOtnConnector.getConnectId(), // src_node_connector_id
                         dstOtnNode.getNeId(), // dst_ne_id
                         dstOtnNode.getNeName(), // dst_ne_name
-                        dstOtnConnector.getConnectId(), // dst_node_connector_id
+                        dstOtnConnector == null ? "":dstOtnConnector.getConnectId(), // dst_node_connector_id
                         tl1OduMplsIf.getLinkType(), // link_type
                         tl1OduNodeConnector.getPortStatus(), // link_status
                         "", // link_category
