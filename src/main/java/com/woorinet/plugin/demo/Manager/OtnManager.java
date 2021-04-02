@@ -16,6 +16,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class OtnManager {
+    String syncName = "";
     OtnNodeRepository otnNodeRepository;
     OtnConnectorRepository otnConnectorRepository;
     OtnLinkRepository otnLinkRepository;
@@ -167,6 +168,7 @@ public class OtnManager {
 
 
         this.separator = ".";
+        this.syncName = "Otn";
         this.tl1NodeList = tl1NodeList;
         this.tl1SystemInfoList = tl1SystemInfoList;
         this.tl1OduNodeConnectorList = tl1OduNodeConnectorList;
@@ -274,38 +276,66 @@ public class OtnManager {
     }
 
     public void OtnSyncStart() throws Exception {
+        System.out.println(syncName + " PmPw start");
         OTNSyncPmPw();
+        System.out.println(syncName + " PmPw end");
+        System.out.println(syncName + " PmTunnel start");
         OTNSyncPmTunnel();
+        System.out.println(syncName + " PmTunnel end");
+        System.out.println(syncName + " PmTemperature start");
         OTNSyncPmTemperature();
+        System.out.println(syncName + " PmTemperature end");
+        System.out.println(syncName + " PmAc start");
         OTNSyncPmAc();
+        System.out.println(syncName + " PmAc end");
+        System.out.println(syncName + " PmOptic start");
         OTNSyncPmOptic();
+        System.out.println(syncName + " PmOptic end");
+        System.out.println(syncName + " Pm start");
         OTNSyncPm();
+        System.out.println(syncName + " Pm end");
+        System.out.println(syncName + " PmPort start");
         OTNSyncPmPort();
+        System.out.println(syncName + " PmPort end");
+        System.out.println(syncName + " PmOpticTemperature start");
         OTNSyncPmOpticTemperature();
-        // Node 데이터 업데이트
+        System.out.println(syncName + " PmOpticTemperature end");
+        System.out.println(syncName + " Node start");
         OtnSyncNodeList();
-        // Connector 데이터 업데이트
+        System.out.println(syncName + " Node end");
+        System.out.println(syncName + " Connector start");
         OtnSyncConnectorList();
-        // Link 데이터 업데이트
+        System.out.println(syncName + " Connector end");
+        System.out.println(syncName + " Link start");
         OtnSyncLinkList();
-        // Tunnel 데이터 업데이트
+        System.out.println(syncName + " Link end");
+        System.out.println(syncName + " Tunnel start");
         OtnSyncTunnelList();
-        // Service 데이터 업데이트
+        System.out.println(syncName + " Tunnel end");
+        System.out.println(syncName + " Service start");
         OtnSyncServiceList();
-        // Path 데이터 업데이트
+        System.out.println(syncName + " Service end");
+        System.out.println(syncName + " Path start");
         OtnSyncPathList();
-        // Constraint 데이터 업데이트
+        System.out.println(syncName + " Path end");
+        System.out.println(syncName + " Constraint start");
         OtnSyncConstraint();
-        // AccessIf 데이터 업데이트
+        System.out.println(syncName + " Constraint end");
+        System.out.println(syncName + " AccessIf start");
         OtnSyncAccess_if();
-        // cmInventory 데이터 업데이트
+        System.out.println(syncName + " AccessIf end");
+        System.out.println(syncName + " CmInventory start");
         OtnSyncCmInventory();
-        // cmLink 데이터 업데이트
+        System.out.println(syncName + " CmInventory end");
+        System.out.println(syncName + " CmLink start");
         OtnSyncCmLink();
-        // cmSession 데이터 업데이트
+        System.out.println(syncName + " CmLink end");
+        System.out.println(syncName + " CmSession start");
         OtnSyncCmSession();
-        // cmQkdLink 데이터 업데이트
+        System.out.println(syncName + " CmSession end");
+        System.out.println(syncName + " CmQkdLink start");
         OtnSyncCmQkdLink();
+        System.out.println(syncName + " CmQkdLink end");
     }
 
     private void OtnSyncNodeList() throws Exception {

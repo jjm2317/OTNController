@@ -177,8 +177,10 @@ public class SyncController {
                     tl1CryptoModeRepository,
                     tl1CmProgramInfoRepository,
                     tl1QkdInfoRepository);
+            System.out.println("TL1 sync start");
             manager.Tl1PmWithFtpSyncStart();
             manager.TL1SyncStart();
+            System.out.println("TL1 sync end");
             manager.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -313,8 +315,10 @@ public class SyncController {
                     tl1PmPortList,
                     tl1PmOpticTemperatureList
             );
+            System.out.println("Otn Sync start");
             // Sync 시작
             manager.OtnSyncStart();
+            System.out.println("Otn Sync end");
         } catch (Exception e) {
             e.printStackTrace();
             return "sdn synchronization fail";
