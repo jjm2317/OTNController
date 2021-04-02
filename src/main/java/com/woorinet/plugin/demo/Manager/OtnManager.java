@@ -416,12 +416,16 @@ public class OtnManager {
 
                 String srcVendor = "";
                 String dstVendor = "";
+                String srcShelfSlotPort = "";
+                String dstShelfSlotPort = "";
                 if (srcTl1SystemInfo != null)  srcVendor = srcTl1SystemInfo.getVendor();
                 if (dstTl1SystemInfo != null )  dstVendor = dstTl1SystemInfo.getVendor();
+                if (srcOtnConnector != null) srcShelfSlotPort = srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId();
+                if (dstOtnConnector != null) dstShelfSlotPort = dstOtnConnector.getShelfId() + separator + dstOtnConnector.getSlotId() + separator + dstOtnConnector.getPortId();
                 String linkId = srcVendor + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
-                        srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId()
+                        srcShelfSlotPort
                         + ":" + dstVendor + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
-                        dstOtnConnector.getShelfId() + separator + dstOtnConnector.getSlotId() + separator + dstOtnConnector.getPortId();
+                        dstShelfSlotPort;
 
                 OtnLink otnLink = new OtnLink(
                         200009, // ems_id
