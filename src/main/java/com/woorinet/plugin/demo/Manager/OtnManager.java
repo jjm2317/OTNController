@@ -443,11 +443,11 @@ public class OtnManager {
                         "", // link_category
                         "", // high_order_tunnel
                         "", // latency
-                        tl1OpticPower.getDistance(), // distance
+                        tl1OpticPower == null ? "":tl1OpticPower.getDistance(), // distance
                         "", // srlg
                         "", // ovpn
                         tl1Odu==null? "": tl1Odu.getTsmap(), // timeslot
-                        tl1OpticPower.getTxWavelength(), // lambda
+                        tl1OpticPower == null ? "":tl1OpticPower.getTxWavelength(), // lambda
                         maximumBandwidth, // maximum_odu0s
                         maximumBandwidth/2, // maximum_odu1s
                         maximumBandwidth/8, // maximum_odu2s
