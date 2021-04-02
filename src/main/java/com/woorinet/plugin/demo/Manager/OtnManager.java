@@ -430,23 +430,23 @@ public class OtnManager {
                 if (dstTl1SystemInfo != null )  dstVendor = dstTl1SystemInfo.getVendor();
                 if (srcOtnConnector != null) srcShelfSlotPort = srcOtnConnector.getShelfId() + separator + srcOtnConnector.getSlotId() + separator + srcOtnConnector.getPortId();
                 if (dstOtnConnector != null) dstShelfSlotPort = dstOtnConnector.getShelfId() + separator + dstOtnConnector.getSlotId() + separator + dstOtnConnector.getPortId();
-                String linkId = srcVendor + separator + srcOtnNode.getSysType() + separator + srcOtnNode.getNeName() + separator +
+                String linkId = srcVendor + separator + srcOtnNode == null ? "": srcOtnNode.getSysType() + separator + srcOtnNode == null ? "" :srcOtnNode.getNeName() + separator +
                         srcShelfSlotPort
-                        + ":" + dstVendor + separator + dstOtnNode.getSysType() + separator + dstOtnNode.getNeName() + separator +
+                        + ":" + dstVendor + separator + dstOtnNode == null ? "":dstOtnNode.getSysType() + separator + dstOtnNode == null ? "":dstOtnNode.getNeName() + separator +
                         dstShelfSlotPort;
 
                 OtnLink otnLink = new OtnLink(
                         200009, // ems_id
                         200009, // dst_ems_id
                         linkId, // link_id
-                        tl1OduMplsIf.getName(), // link_nm
-                        srcOtnNode.getNeId(), // src_ne_id
-                        srcOtnNode.getNeName(), // src_ne_name
+                        tl1OduMplsIf ==null ? "" : tl1OduMplsIf.getName(), // link_nm
+                        srcOtnNode == null ? "" :srcOtnNode.getNeId(), // src_ne_id
+                        srcOtnNode == null ? "" :srcOtnNode.getNeName(), // src_ne_name
                         srcOtnConnector == null ? "":srcOtnConnector.getConnectId(), // src_node_connector_id
-                        dstOtnNode.getNeId(), // dst_ne_id
-                        dstOtnNode.getNeName(), // dst_ne_name
+                        dstOtnNode == null ? "" :dstOtnNode.getNeId(), // dst_ne_id
+                        dstOtnNode == null ? "" :dstOtnNode.getNeName(), // dst_ne_name
                         dstOtnConnector == null ? "":dstOtnConnector.getConnectId(), // dst_node_connector_id
-                        tl1OduMplsIf.getLinkType(), // link_type
+                        tl1OduMplsIf == null ? "" : tl1OduMplsIf.getLinkType(), // link_type
                         tl1OduNodeConnector.getPortStatus(), // link_status
                         "", // link_category
                         "", // high_order_tunnel
