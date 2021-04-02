@@ -321,7 +321,7 @@ public class OtnManager {
 
                 OtnNode otnNode = new OtnNode(
                         200009, // ems_id
-                        tl1SystemInfo==null? tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(): tl1SystemInfo.getVendor() + separator + tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(), // ne_id
+                        tl1SystemInfo==null? separator + tl1NodeState.getNodeType() + separator + tl1NodeState.getTid() : tl1SystemInfo.getVendor() + separator + tl1NodeState.getNodeType() + separator + tl1NodeState.getTid(), // ne_id
                         tl1NodeState.getTid(), // ne_name
                         "", //ne_type
                         tl1NodeState.getSystemType(), // ne_model
