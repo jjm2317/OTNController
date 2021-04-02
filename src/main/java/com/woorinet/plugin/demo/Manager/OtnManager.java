@@ -349,17 +349,25 @@ public class OtnManager {
                 Tl1OpticPower tl1OpticPower = tl1OpticPowerHashMap.get(tl1OduNodeConnector.getTid()+"/"+ tl1OduNodeConnector.getAid());
                 Tl1SystemInfo tl1SystemInfo = tl1SystemInfoHashMap.get(tl1Node.getTid());
 
-                String connectId = tl1SystemInfo.getVendor() +
+                String neId = otnNode == null ? "" : otnNode.getNeId();
+                String vendor = tl1SystemInfo == null ? "": tl1SystemInfo.getVendor();
+                String sysType = otnNode == null ? "" : otnNode.getSysType();
+                String neName = otnNode == null ? "" : otnNode.getNeName();
+                String shelfIndex = tl1OduNodeConnector == null ? "" : tl1OduNodeConnector.getShelfIndex();
+                String slotIndex = tl1OduNodeConnector == null ? "" : tl1OduNodeConnector.getSlotIndex();
+                String portIndex = tl1OduNodeConnector == null ? "" : tl1OduNodeConnector.getPortIndex();
+                String portRole = tl1OduNodeConnector == null ? "" : tl1OduNodeConnector.getPortRole();
+                String connectId = vendor +
                         separator +
-                        otnNode.getSysType() +
+                        sysType +
                         separator +
-                        otnNode.getNeName() +
+                        neName +
                         separator +
-                        tl1OduNodeConnector.getShelfIndex() +
+                        shelfIndex +
                         separator +
-                        tl1OduNodeConnector.getSlotIndex() +
+                        slotIndex +
                         separator +
-                        tl1OduNodeConnector.getPortIndex();
+                        portIndex;
                 String connectType = "";
                 if (tl1OpticPower != null) {
                     if (tl1OpticPower.getPartNumber().equals("TR-PX13L-NG2")) connectType = "sfp+";
@@ -373,15 +381,15 @@ public class OtnManager {
                         connectId, // connect_id
                         "", // connect_name
                         tl1OpticPower == null ? "" : connectType, // connect_type
-                        otnNode.getNeId(), // ne_id
-                        otnNode.getNeName(), // ne_name
+                        neId, // ne_id
+                        neName, // ne_name
                         "", // rack_id
-                        tl1OduNodeConnector.getShelfIndex(), // shelf_id
-                        tl1OduNodeConnector.getSlotIndex(), // slot_id
+                        shelfIndex, // shelf_id
+                        slotIndex, // slot_id
                         "", // subslot_id
-                        tl1OduNodeConnector.getPortIndex(), // port_id
+                        portIndex, // port_id
                         tl1OduNodeConnector.getPortStatus().equals("ACT") ? "up" : "down", // connect_status
-                        tl1OduNodeConnector.getPortRole(), // connect_role
+                        portRole, // connect_role
                         tl1OpticPower == null ? "idle" : "occupied", // connect_idle
                         tl1OpticPower == null ? "" : "", // connect_llcf
                         tl1OpticPower == null ? "" : tl1OpticPower.getTxWavelength(), // connect_lambda
