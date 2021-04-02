@@ -207,22 +207,41 @@ public class Tl1Manager {
             String user = "ftpuser";
             String pass = "ftp-123456";
             FTP ftp = FTP.openFTP(host, port, user, pass);
+            String tl1 = "TL1";
 
             String localPath = "./ftp";
             File localPathFile = new File(localPath);
 
 
             localPathFile.mkdirs();
+            System.out.println(tl1+" Ftp down start");
             ftpDownAllFiles(ftp, localPath);
+            System.out.println(tl1+" Ftp down end");
 
+            System.out.println(tl1+" PmPw sync start");
             Tl1SyncPmPw();
+            System.out.println(tl1+" PmPw sync end");
+            System.out.println(tl1+" PmTunnel sync start");
             Tl1SyncPmTunnel();
+            System.out.println(tl1+" PmTunnel sync end");
+            System.out.println(tl1+" PmTemperature sync start");
             Tl1SyncPmTemperature();
+            System.out.println(tl1+" PmTemperature sync end");
+            System.out.println(tl1+" PmAc sync start");
             Tl1SyncPmAc();
+            System.out.println(tl1+" PmAc sync end");
+            System.out.println(tl1+" PmOptic sync start");
             Tl1SyncPmOptic();
+            System.out.println(tl1+" PmOptic sync end");
+            System.out.println(tl1+" Pm sync start");
             Tl1SyncPm();
+            System.out.println(tl1+" Pm sync end");
+            System.out.println(tl1+" PmPort sync start");
             Tl1SyncPmPort();
+            System.out.println(tl1+" PmPort sync end");
+            System.out.println(tl1+" PmOpticTemperature sync start");
             Tl1SyncPmOpticTemperature();
+            System.out.println(tl1+" PmOpticTemperature sync end");
 
             rmLocalFtpFolder(localPathFile);
             ftp.close();
